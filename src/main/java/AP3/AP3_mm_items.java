@@ -796,11 +796,11 @@ class AP3_mm_items extends AP3_GUI{
             if (!NBC.equals(t)) {
                 _t++;
                 _p++; EX += _t + "\t" + "Check > Item Name was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Item Name Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Local Menu Item Name Updated to " + t, false, ParentTest.createNode("Check > Item Name was Updated in Local Menu"), new Date());
+                Log_Html_Result("PASS", "Local Menu Item Name Updated to " + t, false, ParentTest.createNode(_t + ". " + "Check > Item Name was Updated in Local Menu"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check > Item Name was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Item Name Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";   
-                Log_Html_Result("FAIL", "Local Menu Item Name Not Updated to " + t, true, ParentTest.createNode("Check > Item Name was Updated in Local Menu"), new Date());
+                Log_Html_Result("FAIL", "Local Menu Item Name Not Updated to " + t, true, ParentTest.createNode(_t + ". " + "Check > Item Name was Updated in Local Menu"), new Date());
             }
             // get price and check if it changed
             Element_By_Path_Text("Get Price in Local Menu", "xpath", "//tr[1]/td[5]", ParentTest, "no_jira");
@@ -808,11 +808,11 @@ class AP3_mm_items extends AP3_GUI{
             if (!PBC.equals(t)) {
                 _t++;
                 _p++; EX += _t + "\t" + "Check > Price was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Price Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";          
-                Log_Html_Result("PASS", "Local Menu Price Updated to " + t, false, ParentTest.createNode("Check > Price was Updated in Local Menu"), new Date());
+                Log_Html_Result("PASS", "Local Menu Price Updated to " + t, false, ParentTest.createNode(_t + ". " + "Check > Price was Updated in Local Menu"), new Date());
             } else {
                  _t++;
                  _f++; EX += _t + "\t" + "Check > Price was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Price Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";         
-                 Log_Html_Result("FAIL", "Local Menu Price Not Updated to " + t, true, ParentTest.createNode("Check > Price was Updated in Local Menu"), new Date());
+                 Log_Html_Result("FAIL", "Local Menu Price Not Updated to " + t, true, ParentTest.createNode(_t + ". " + "Check > Price was Updated in Local Menu"), new Date());
             }
             // get calories and check if it changed
             Element_By_Path_Text("Get Calories in Local Menu", "xpath", "//tr[1]/td[8]", ParentTest, "no_jira");
@@ -820,11 +820,11 @@ class AP3_mm_items extends AP3_GUI{
             if (!CBC.equals(t)) {
                 _t++;
                 _p++; EX += _t + "\t" + "Check > Calories was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Calories Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";          
-                Log_Html_Result("PASS", "Local Menu Calories Updated to " + t, false, ParentTest.createNode("Check > Calories was Updated in Local Menu"), new Date());
+                Log_Html_Result("PASS", "Local Menu Calories Updated to " + t, false, ParentTest.createNode(_t + ". " + "Check > Calories was Updated in Local Menu"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check > Calories was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Calories Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";    
-                Log_Html_Result("FAIL", "Local Menu Calories Not Updated to " + t, true, ParentTest.createNode("Check > Calories was Updated in Local Menu"), new Date());
+                Log_Html_Result("FAIL", "Local Menu Calories Not Updated to " + t, true, ParentTest.createNode(_t + ". " + "Check > Calories was Updated in Local Menu"), new Date());
             }
             // get units and check if it changed
             Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
@@ -834,11 +834,11 @@ class AP3_mm_items extends AP3_GUI{
             if (!UBC.equals(t)) {
                 _t++;
                 _p++; EX += _t + "\t" + "Check > Units was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Units Updated" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Local Menu Units Updated to " + t, false, ParentTest.createNode("Check > Units was Updated in Local Menu"), new Date());
+                Log_Html_Result("PASS", "Local Menu Units Updated to " + t, false, ParentTest.createNode(_t + ". " + "Check > Units was Updated in Local Menu"), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Check > Units was Updated in Local Menu" + "\t" + "-" + "\t" + "Local Menu Units Updated" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";    
-                Log_Html_Result("FAIL", "Local Menu Units Not Updated to " + t, true, ParentTest.createNode("Check > Units was Updated in Local Menu"), new Date());
+                Log_Html_Result("FAIL", "Local Menu Units Not Updated to " + t, true, ParentTest.createNode(_t + ". " + "Check > Units was Updated in Local Menu"), new Date());
             }
             EX += " - " + "\t" + " === Changes in Global Menu Item Reflect on Local Menu Item" + "\t" + " ===== " + "\t" + " == Changes in Global Menu Item Reflect on Local Menu Item End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n"; 
             // </editor-fold> 
@@ -1098,7 +1098,7 @@ class AP3_mm_items extends AP3_GUI{
             if(L0.size()==6 || (L0.size()%6==0)) {
                 _t++;
                 _p++; EX += _t + "\t" + "Price,Calories,PLU,Item Enabled,Chit,Tax tags" + "\t" + "Disabled" + "\t" + " - " + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Disabled", false, ParentTest.createNode("Price,Calories,PLU,Item Enabled,Chit,Tax tags are disabled"), new Date());
+                Log_Html_Result("PASS", "Disabled", false, ParentTest.createNode(_t + ". " + "Price,Calories,PLU,Item Enabled,Chit,Tax tags are disabled"), new Date());
             }
 
             EX += " - " + "\t" + " === Check new modifier no longer exists in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";

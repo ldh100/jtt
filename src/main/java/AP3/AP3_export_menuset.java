@@ -559,13 +559,13 @@ class AP3_export_menuset extends AP3_GUI{
         if(t.equals("No data available")){
             _t++;
             _p++; EX += _t + "\t" + "No Global Modifiers Group Found" + "\t" + t + "\t"  + "\t" + "Pass" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
-            Log_Html_Result("Pass", "No data available", true, ParentTest.createNode("Global Modifiers are present")); 
+            Log_Html_Result("Pass", "No data available", true, ParentTest.createNode(_t + ". " + "Global Modifiers are present")); 
         }
         else{
             Element_By_Path_Text("Get Modifier Name", "xpath", "//table/tbody/tr[1]/td[2]", ParentTest, "no_jira");
             _t++;
             _f++; EX += _t + "\t" + "Global Modifiers Group Present" + "\t" + t + "\t" + "\t" + "Fail" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode("Global Modifiers are present"));
+            Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode(_t + ". " + "Global Modifiers are present"));
             return;            
             }
         
@@ -641,7 +641,7 @@ class AP3_export_menuset extends AP3_GUI{
             } else {//Print Pass the ids are unique
                 _t++;
                 _f++; EX += _t + "\t" + "Global Modifiers Group Present" + "\t" + t + "\t" + "\t" + "Fail" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode("Global Modifiers are present"));
+                Log_Html_Result("FAIL", "Global Modifier Group Present", true, ParentTest.createNode(_t + ". " + "Global Modifiers are present"));
             }
         
             }
@@ -889,7 +889,7 @@ class AP3_export_menuset extends AP3_GUI{
             } else {//Print Pass the ids are unique
                 _t++;
                 _f++; EX += _t + "\t" + "The new Modifiere was not auto assigned" + "\t" + t + "\t" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "The new Modifiere was not auto assigned", true, ParentTest.createNode("The new Modifiere was not auto assigned"));
+                Log_Html_Result("FAIL", "The new Modifiere was not auto assigned", true, ParentTest.createNode(_t + ". " + "The new Modifiere was not auto assigned"));
             }
         
         
@@ -1357,7 +1357,7 @@ class AP3_export_menuset extends AP3_GUI{
             _f++;
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1370,15 +1370,15 @@ class AP3_export_menuset extends AP3_GUI{
                     if(menu.getJSONObject("is").getBoolean("disabled") && flag == 1) {
                         _t++;
                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("MenuSet is disabled"), new Date());
+                        Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "MenuSet is disabled"), new Date());
                      }  else if(!menu.getJSONObject("is").getBoolean("disabled") && flag == 2) {
                         _t++;
                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("MenuSet is enabled"), new Date());
+                        Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "MenuSet is enabled"), new Date());
                      } else {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + " - " + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("Unexpected MenuSet Enabled/Disabled status"), new Date());
+                        Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "Unexpected MenuSet Enabled/Disabled status"), new Date());
                      }  
                  }        
             } 
@@ -1397,7 +1397,7 @@ class AP3_export_menuset extends AP3_GUI{
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + Menu_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }               
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1408,15 +1408,15 @@ class AP3_export_menuset extends AP3_GUI{
                 if(json.getJSONObject("is").getBoolean("disabled") && flag == 1) {
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + " -"  + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode("MenuSet is disabled"), new Date());
+                    Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "MenuSet is disabled"), new Date());
                 } else if(!json.getJSONObject("is").getBoolean("disabled") && flag == 2) {
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode("MenuSet is enabled"), new Date());
+                    Log_Html_Result("PASS", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "MenuSet is enabled"), new Date());
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Test Failed" + "\t" + " -"  + "\t" + "Found opposite values" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode("Unexpected MenuSet Enabled/Disabled status"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + Menu_ID , false, ParentTest.createNode(_t + ". " + "Unexpected MenuSet Enabled/Disabled status"), new Date());
                 }                                              
             }                                      
         }   

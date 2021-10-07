@@ -1714,7 +1714,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }        
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1724,12 +1724,12 @@ if(true) return;
                 _t++;
                 _p++; 
                 EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "CDL" + "\t" + "CDL" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Type of KDS (CDL )Found-as expected", false, ParentTest.createNode("Type of KDS (CDL) Found-as expected"), new Date());                   
+                Log_Html_Result("PASS", "Type of KDS (CDL )Found-as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (CDL) Found-as expected"), new Date());                   
             } else {//Fail expected false. but Cdl true & has kds is false
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Type of KDS Not Found as expected" + "\t" + "CDL" + "\t" + "Not CDL" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (CDL) - Not Found but expected", true, ParentTest.createNode("Type of KDS (CDL) - Not Found but expected"), new Date());
+                Log_Html_Result("FAIL", "Type of KDS (CDL) - Not Found but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (CDL) - Not Found but expected"), new Date());
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("nextep")) {
@@ -1737,12 +1737,12 @@ if(true) return;
                 _t++;
                 _p++; 
                 EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Nextep" + "\t" + "Nextep" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Type of KDS (Nextep) - Found -as expected", false, ParentTest.createNode("Type of KDS (Nextep) - Found as expected"), new Date());
+                Log_Html_Result("PASS", "Type of KDS (Nextep) - Found -as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Nextep) - Found as expected"), new Date());
             } else {//FAIL   Has kds and nextep is true.
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Nextep" + "\t" + "Not Nextep" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (Nextep) - Not Found but expected", true, ParentTest.createNode("Type of KDS (Nextep) - Not Found but expected"), new Date()); 
+                Log_Html_Result("FAIL", "Type of KDS (Nextep) - Not Found but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (Nextep) - Not Found but expected"), new Date()); 
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("volante") ) {
@@ -1750,12 +1750,12 @@ if(true) return;
                 _t++;
                 _p++; 
                 EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Volante" + "\t" + "Volante" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Type of KDS (Volante) - Found -as expected", false, ParentTest.createNode("Type of KDS (Volante) - Found as expected"), new Date());
+                Log_Html_Result("PASS", "Type of KDS (Volante) - Found -as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Volante) - Found as expected"), new Date());
             } else {//FAIL   Has kds and volante is true.
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Volante" + "\t" + "Not Volante" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (Volante) - Not Found but expected", true, ParentTest.createNode("Type of KDS (Volante) - Not Found but expected"), new Date()); 
+                Log_Html_Result("FAIL", "Type of KDS (Volante) - Not Found but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (Volante) - Not Found but expected"), new Date()); 
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("agilysys")) {
@@ -1763,11 +1763,11 @@ if(true) return;
                 _t++;
                 _p++; 
                 EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Agilysys" + "\t" + "Agilysys" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Type of KDS (Agilysys) - Found -as expected", false, ParentTest.createNode("Type of KDS (Agilysys) - Found as expected"), new Date());
+                Log_Html_Result("PASS", "Type of KDS (Agilysys) - Found -as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Agilysys) - Found as expected"), new Date());
             } else {//FAIL   Has kds and agilysys is true.
                 _t++;
                 _f++; EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Agilysys" + "\t" + "Not Agilysys" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (Agilysys) - Not Found -but expected", true, ParentTest.createNode("Type of KDS (Agilysys) - Not Found but expected"), new Date());                 
+                Log_Html_Result("FAIL", "Type of KDS (Agilysys) - Not Found -but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (Agilysys) - Not Found but expected"), new Date());                 
             }
         }
          
@@ -1780,14 +1780,14 @@ if(true) return;
             if(meta.getBoolean("hidden"))  { 
                 _t++;
                 _p++; EX += _t + "\t" + "Brand is hidden" + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Brand is hidden", false, ParentTest.createNode("Brand is hidden"), new Date());   
+                Log_Html_Result("PASS", "Brand is hidden", false, ParentTest.createNode(_t + ". " + "Brand is hidden"), new Date());   
             } else  { 
                 check = true; 
             }   
         }else if(!meta.has("hidden") || check) { // Print Brand is visible.
             _t++;
             _p++; EX += _t + "\t" + "Brand is visible" + "\t" + "-" + "\t" + "Brand is Visible" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-             Log_Html_Result("PASS", "Brand is visible", false, ParentTest.createNode("Brand is visible"), new Date());           
+             Log_Html_Result("PASS", "Brand is visible", false, ParentTest.createNode(_t + ". " + "Brand is visible"), new Date());           
         }
        
         /*                      Verify if scan and go is supported 
@@ -1796,20 +1796,20 @@ if(true) return;
         if(!meta.getBoolean("scan_and_go_supported") && flag==1) { //print pass scan and go not supported 
             _t++;
             _p++; EX += _t + "\t" + "Scan & Go Not enabled - expected" + "\t" + "Scan & Go Not Enabled" + "\t" + "Scan & Go Not Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Scan & Go Not enabled - expected", false, ParentTest.createNode("Scan & Go Not enabled - expected"), new Date());
+            Log_Html_Result("PASS", "Scan & Go Not enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
         } else if(!meta.getBoolean("scan_and_go_supported") && flag==2)  { //Print Fail (expected scan and go supported   but not supported )
             _t++;
             _f++; EX += _t + "\t" + "Scan & Go enabled - Expected" + "\t" + "Scan & Go - Not enabled" + "\t" + "Scan & Go - enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Scan & Go enabled - expected", true, ParentTest.createNode("Scan & Go Not enabled - expected"), new Date());
+            Log_Html_Result("FAIL", "Scan & Go enabled - expected", true, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
         
         } else if(meta.getBoolean("scan_and_go_supported") && flag==1) { // Print Fail (expected scan and go not supported but supported)
             _t++;
             _f++; EX += _t + "\t" + "Scan & Go Not enabled - Expected" + "\t" + "Scan & Go - enabled" + "\t" + "Scan & Go - Not enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Scan & Go Not enabled - expected", true, ParentTest.createNode("Scan & Go Not enabled - expected"), new Date());
+            Log_Html_Result("FAIL", "Scan & Go Not enabled - expected", true, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
         } else if(meta.getBoolean("scan_and_go_supported")  && flag==2)  { //Print pass scan and go supported
             _t++;
             _p++; EX += _t + "\t" + "Scan & Go Enabled - expected" + "\t" + "Scan & Go - enabled" + "\t" + "Scan & Go - enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Scan & Go Enabled - expected", false, ParentTest.createNode("Scan & Go Enabled - expected"), new Date());
+            Log_Html_Result("PASS", "Scan & Go Enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Enabled - expected"), new Date());
         }
         
          /*                     Verify if Web Order Enabled is supported 
@@ -1819,20 +1819,20 @@ if(true) return;
         if(meta.getBoolean("web_order_enabled") && flag ==1) {// Print Pass Web Ordering enabled
             _t++;
             _p++; EX += _t + "\t" + "Web Ordering Enabled - expected" + "\t" + "Web Ordering - enabled" + "\t" + "Web Ordering - enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Web Ordering Enabled - expected", false, ParentTest.createNode("Web Ordering Enabled - expected"), new Date());
+            Log_Html_Result("PASS", "Web Ordering Enabled - expected", false, ParentTest.createNode(_t + ". " + "Web Ordering Enabled - expected"), new Date());
        
         }  else if(meta.getBoolean("web_order_enabled") && flag ==2) { // Print Fail Web ordering enabled expected to be disabled
             _t++;
             _f++; EX += _t + "\t" + "Web Ordering Not Enabled - expected" + "\t" + "Web Ordering - enabled" + "\t" + "Web Ordering - Not enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Web Ordering Not Enabled - expected", true, ParentTest.createNode("Web Ordering Not Enabled - expected"), new Date());
+            Log_Html_Result("FAIL", "Web Ordering Not Enabled - expected", true, ParentTest.createNode(_t + ". " + "Web Ordering Not Enabled - expected"), new Date());
         } else if(!meta.getBoolean("web_order_enabled") && flag ==2)  { // Print Pass Web ordering disabled 
             _t++;
             _p++; EX += _t + "\t" + "Web Ordering Disabled - expected" + "\t" + "Web Ordering - disabled" + "\t" + "Web Ordering - disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Web Ordering Disabled - expected", false, ParentTest.createNode("Web Ordering Disabled - expected"), new Date());
+            Log_Html_Result("PASS", "Web Ordering Disabled - expected", false, ParentTest.createNode(_t + ". " + "Web Ordering Disabled - expected"), new Date());
         } else if(!meta.getBoolean("web_order_enabled") && flag ==1) {// Print Fail Web ordering disabled expected to be enabled
             _t++;
             _f++; EX += _t + "\t" + "Web Ordering Enabled - expected" + "\t" + "Web Ordering - disabled" + "\t" + "Web Ordering - enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Web Ordering Enabled - expected", true, ParentTest.createNode("Web Ordering Enabled - expected"), new Date());       
+            Log_Html_Result("FAIL", "Web Ordering Enabled - expected", true, ParentTest.createNode(_t + ". " + "Web Ordering Enabled - expected"), new Date());       
         }
         
         /*                     Verify if Brand Image  is saved  
@@ -1843,12 +1843,12 @@ if(true) return;
             if(meta.getString("logo").contains("https://images"))  {
                 _t++;
                 _p++; EX += _t + "\t" + "Brand Image Saved - expected" + "\t" + "Brand Image Saved" + "\t" + "Brand Image Saved" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Brand Image Saved - expected", false, ParentTest.createNode("Brand Image Saved - expected"), new Date());
+                Log_Html_Result("PASS", "Brand Image Saved - expected", false, ParentTest.createNode(_t + ". " + "Brand Image Saved - expected"), new Date());
             }
          } else if(flag == 1 && meta.getString("logo").isEmpty()) {
             _t++;
             _f++; EX += _t + "\t" + "Brand Image not saved - not expected" + "\t" + "Brand Image not available" + "\t" + "Brand Image available" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Brand Image not available -Not expected", true, ParentTest.createNode("Brand Image not available -Not expected"), new Date());       
+            Log_Html_Result("FAIL", "Brand Image not available -Not expected", true, ParentTest.createNode(_t + ". " + "Brand Image not available -Not expected"), new Date());       
          } 
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location Brand API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
     } catch (Exception ex){}   // =============================================  
@@ -1863,7 +1863,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1872,25 +1872,25 @@ if(true) return;
         if(digital_wallet.isEmpty() && flag == 1) { // Print pass  Expected result Apple pay and google wallet are not excluded.
             _t++;
             _p++; EX += _t + "\t" + "No digital wallet exclusions - expected" + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "No digital wallet exclusions - as expected", false, ParentTest.createNode("No digital wallet exclusions - as expected"), new Date());  
+            Log_Html_Result("PASS", "No digital wallet exclusions - as expected", false, ParentTest.createNode(_t + ". " + "No digital wallet exclusions - as expected"), new Date());  
        } else if(digital_wallet.isEmpty() && flag ==2) {// Print fail   expected Apple pay and google pay are  excluded  ,  But not excluded.        
             _t++;
             _f++; EX += _t + "\t" + "Digital wallet exclusions Not Enabled-  not expected" + "\t" + "Digital wallet exclusions Not Enabled" + "\t" + "Digital wallet exclusions Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Digital wallet exclusions Enabled - expected", true, ParentTest.createNode("Digital wallet exclusions Enabled - expected"), new Date());
+            Log_Html_Result("FAIL", "Digital wallet exclusions Enabled - expected", true, ParentTest.createNode(_t + ". " + "Digital wallet exclusions Enabled - expected"), new Date());
        } else if(!digital_wallet.isEmpty() && flag == 2)     {
            for(int l=0;l<digital_wallet.length();l++) {
                if(digital_wallet.getString(l).equals("applewallet") || digital_wallet.getString(l).equals("googlewallet")) { //Print Pass Expected  is excluded
                     _t++;
                     _p++; 
                     EX += _t + "\t" + "Digital wallet exclusions - expected" + "\t" + digital_wallet.getString(l)+" is excluded" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "Digital wallet exclusions - expected", false, ParentTest.createNode("Digital wallet exclusions - expected"), new Date());
+                    Log_Html_Result("PASS", "Digital wallet exclusions - expected", false, ParentTest.createNode(_t + ". " + "Digital wallet exclusions - expected"), new Date());
                }
            }
         } else if(!digital_wallet.isEmpty() && flag == 1)   {//Print Fail  expected : All payments to be accepted , but digital wallet excluded. 
             _t++;
             _f++; 
             EX += _t + "\t" + "Digital wallet exclusions Enabled-  not expected" + "\t" + "Digital wallet exclusions Enabled" + "\t" + "Digital wallet exclusions Not Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Digital wallet exclusions Enabled - expected", true, ParentTest.createNode("Digital wallet exclusions Enabled - expected"), new Date());
+            Log_Html_Result("FAIL", "Digital wallet exclusions Enabled - expected", true, ParentTest.createNode(_t + ". " + "Digital wallet exclusions Enabled - expected"), new Date());
 
         }
          
@@ -1899,22 +1899,22 @@ if(true) return;
                 _t++;
                 _p++; 
                 EX += _t + "\t" + "Tax rate set to 12% - Expected" + "\t" + "Tax Rate - 12%" + "\t" + "Tax Rate - 12%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Tax rate set to 12% - Expected", false, ParentTest.createNode("Tax rate set to 12% - Expected"), new Date());     
+                Log_Html_Result("PASS", "Tax rate set to 12% - Expected", false, ParentTest.createNode(_t + ". " + "Tax rate set to 12% - Expected"), new Date());     
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Tax rate not 12% - not expected" + "\t" + "Tax Rate not 12%" + "\t" + "Tax Rate - 12%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Tax rate not 12% - not expected", true, ParentTest.createNode("Tax rate not 12% - not expected"), new Date());
+                Log_Html_Result("FAIL", "Tax rate not 12% - not expected", true, ParentTest.createNode(_t + ". " + "Tax rate not 12% - not expected"), new Date());
             }    
         }
         if(flag == 1) {
            if(!json.has("tax_rate"))  {
                 _t++;
                 _p++; EX += _t + "\t" + "Tax rate set to Location tax " + "\t" + "Tax Rate field empty" + "\t" + "Tax Rate field empty" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Tax rate set to Location tax - Tax Rate field empty", false, ParentTest.createNode("Tax rate set to Location tax"), new Date()); 
+                Log_Html_Result("PASS", "Tax rate set to Location tax - Tax Rate field empty", false, ParentTest.createNode(_t + ". " + "Tax rate set to Location tax"), new Date()); 
            } else  {
                 _t++;
                 _f++; EX += _t + "\t" + "Tax rate field not empty - not expected" + "\t" + "Tax Rate - "+json.getNumber("tax_rate") + "\t" + "Tax Rate - Location tax rate" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Tax rate field not empty - not expected : "+json.getNumber("tax_rate"), true, ParentTest.createNode("Digital wallet exclusions Enabled - expected"), new Date()); 
+                Log_Html_Result("FAIL", "Tax rate field not empty - not expected : "+json.getNumber("tax_rate"), true, ParentTest.createNode(_t + ". " + "Digital wallet exclusions Enabled - expected"), new Date()); 
            }
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Private config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
@@ -1930,7 +1930,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/public/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1940,36 +1940,36 @@ if(true) return;
         if (!json.getBoolean("get_phone_number") && flag == 1) {// Print pass expected not to request phone number
             _t++;
             _p++; EX += _t + "\t" + "Request phone number Not Enabled-expected" + "\t" + "Request phone number disabled" + "\t" + "Request phone number disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Request phone number disabled-expected", false, ParentTest.createNode("Request phone number disabled-expected"), new Date());
+            Log_Html_Result("PASS", "Request phone number disabled-expected", false, ParentTest.createNode(_t + ". " + "Request phone number disabled-expected"), new Date());
                
         }
         else if(json.getBoolean("get_phone_number") && flag == 1) { //Print Fail  not expected to request phone number
             _t++;
             _f++; EX += _t + "\t" + "Request phone number enabled-  not expected" + "\t" + "Request phone number enabled" + "\t" + "Request phone number disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Request phone number enabled-  not expected", true, ParentTest.createNode("Request phone number enabled-  not expected"), new Date());
+            Log_Html_Result("FAIL", "Request phone number enabled-  not expected", true, ParentTest.createNode(_t + ". " + "Request phone number enabled-  not expected"), new Date());
         }
         else if (json.getBoolean("get_phone_number") && flag == 2) { // Print pass expected to request phone number
             _t++;
             _p++; EX += _t + "\t" + "Request phone number Enabled-expected" + "\t" + "Request phone number Enabled" + "\t" + "Request phone number Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-             Log_Html_Result("PASS", "Request phone number Enabled-expected", false, ParentTest.createNode("Digital wallet exclusions - expected"), new Date());  
+             Log_Html_Result("PASS", "Request phone number Enabled-expected", false, ParentTest.createNode(_t + ". " + "Digital wallet exclusions - expected"), new Date());  
         }
         else if (!json.getBoolean("get_phone_number") && flag == 2) { // Print Fail expected to request phone number  but set to NO.
             _t++;
             _f++; EX += _t + "\t" + "Request phone number Not enabled-  not expected" + "\t" + "Request phone number disabled" + "\t" + "Request phone number Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Request phone number Not enabled-  not expected", true, ParentTest.createNode("Request phone number Not enabled-  not expected"), new Date());
+            Log_Html_Result("FAIL", "Request phone number Not enabled-  not expected", true, ParentTest.createNode(_t + ". " + "Request phone number Not enabled-  not expected"), new Date());
         }
 
         // Meal plan verification
         if(json.has("mealplan") && flag == 1)  {//Print PASS  meal plans expected and visible :   
             _t++;
             _p++; EX += _t + "\t" + "Meal Plan Enabled-expected" + "\t" + "Meal Plan Enabled" + "\t" + "Meal PLan Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-      Log_Html_Result("PASS", "Meal Plan Enabled-expected", false, ParentTest.createNode("Meal Plan Enabled-expected"), new Date());
+      Log_Html_Result("PASS", "Meal Plan Enabled-expected", false, ParentTest.createNode(_t + ". " + "Meal Plan Enabled-expected"), new Date());
                
         }
         else if(!json.has("mealplan") && flag == 2) { //Print Pass  No meal plan enabled
             _t++;
             _p++; EX += _t + "\t" + "Meal Plan Disabled-expected" + "\t" + "Meal Plan Disabled" + "\t" + "Meal PLan Disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-       Log_Html_Result("PASS", "Meal Plan Disabled-expected", false, ParentTest.createNode("Meal Plan Disabled-expected"), new Date());
+       Log_Html_Result("PASS", "Meal Plan Disabled-expected", false, ParentTest.createNode(_t + ". " + "Meal Plan Disabled-expected"), new Date());
                
         }
 
@@ -1978,12 +1978,12 @@ if(true) return;
            if (json.getBoolean("show_single_timeslot"))  {  // Print pass expected result 
                 _t++;
                 _p++; EX += _t + "\t" + "Show Single timeslot Enabled-expected" + "\t" + "Show Single timeslot Enabled" + "\t" + "Show Single timeslot Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Show Single timeslot Enabled-expected", false, ParentTest.createNode("Show Single timeslot Enabled-expected"), new Date());     
+                Log_Html_Result("PASS", "Show Single timeslot Enabled-expected", false, ParentTest.createNode(_t + ". " + "Show Single timeslot Enabled-expected"), new Date());     
            } else if (!json.getBoolean("show_single_timeslot")) { // Print Fail expected to be enabled but not enabled.
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Show Single timeslot - Disabled -  not expected" + "\t" + "Show Single timeslot - Disabled" + "\t" + "Show Single timeslot - Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Show Single timeslot - Disabled -  not expected", true, ParentTest.createNode("Show Single timeslot - Disabled -  not expected"), new Date());
+                Log_Html_Result("FAIL", "Show Single timeslot - Disabled -  not expected", true, ParentTest.createNode(_t + ". " + "Show Single timeslot - Disabled -  not expected"), new Date());
             }
          }
         
@@ -1993,12 +1993,12 @@ if(true) return;
                 _t++;
                 _p++; 
                 EX += _t + "\t" + "Allow delivery instruction - Enabled-expected" + "\t" + "Allow delivery instruction - Enabled" + "\t" + "Allow delivery instruction - Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Allow delivery instruction - Enabled-expected", false, ParentTest.createNode("Allow delivery instruction - Enabled-expected"), new Date());
+                Log_Html_Result("PASS", "Allow delivery instruction - Enabled-expected", false, ParentTest.createNode(_t + ". " + "Allow delivery instruction - Enabled-expected"), new Date());
             } else if (!json.getBoolean("show_instructions"))  { // Print Fail expected to be enabled but not enabled.
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Allow delivery instruction? - Disabled -  not expected" + "\t" + "Allow delivery instruction? - Disabled" + "\t" + "Allow delivery instruction? - Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Allow delivery instruction? - Disabled -  not expected", true, ParentTest.createNode("Allow delivery instruction? - Disabled -  not expected"), new Date());
+                Log_Html_Result("FAIL", "Allow delivery instruction? - Disabled -  not expected", true, ParentTest.createNode(_t + ". " + "Allow delivery instruction? - Disabled -  not expected"), new Date());
             }
         }
         
@@ -2007,12 +2007,12 @@ if(true) return;
             if (json.getBoolean("runner_app_enabled")) {  // Print pass expected result 
                 _t++;
                 _p++; EX += _t + "\t" + "Bolter Delivery App Enabled-expected" + "\t" + "Bolter Delivery App - Enabled" + "\t" + "Bolter Delivery App - Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Bolter Delivery App Enabled-expected", false, ParentTest.createNode("Bolter Delivery App Enabled-expected"), new Date());
+                Log_Html_Result("PASS", "Bolter Delivery App Enabled-expected", false, ParentTest.createNode(_t + ". " + "Bolter Delivery App Enabled-expected"), new Date());
             } else if (!json.getBoolean("runner_app_enabled"))  { // Print Fail expected to be enabled but not enabled.
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Bolter Delivery App - Disabled -  not expected" + "\t" + "Bolter Delivery App - Disabled" + "\t" + "Bolter Delivery App - Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Bolter Delivery App - Disabled -  not expected", true, ParentTest.createNode("Bolter Delivery App - Disabled -  not expected"), new Date());
+                Log_Html_Result("FAIL", "Bolter Delivery App - Disabled -  not expected", true, ParentTest.createNode(_t + ". " + "Bolter Delivery App - Disabled -  not expected"), new Date());
             }
         }
         
@@ -2021,11 +2021,11 @@ if(true) return;
             if(json.getJSONObject("logos").getString("print").contains("https://images")) {
                 _t++;
                 _p++; EX += _t + "\t" + "KDS Receipt Image Saved - expected" + "\t" + "KDS Image Saved" + "\t" + "KDS Image Saved" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "KDS Receipt Image Saved - expected", false, ParentTest.createNode("KDS Receipt Image Saved - expected"), new Date());  
+                Log_Html_Result("PASS", "KDS Receipt Image Saved - expected", false, ParentTest.createNode(_t + ". " + "KDS Receipt Image Saved - expected"), new Date());  
             } else if(json.getJSONObject("logos").getString("print").isEmpty()) {
                 _t++;
                 _f++; EX += _t + "\t" + "KDS Receipt Image Not Saved - Not expected" + "\t" + "KDS Image Saved" + "\t" + "KDS Image Not Saved" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "KDS Receipt Image Not Saved - Not expected", true, ParentTest.createNode("KDS Receipt Image Not Saved - Not expected"), new Date());
+                Log_Html_Result("FAIL", "KDS Receipt Image Not Saved - Not expected", true, ParentTest.createNode(_t + ". " + "KDS Receipt Image Not Saved - Not expected"), new Date());
             }
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Public config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
@@ -2043,7 +2043,7 @@ if(true) return;
         } else {
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -2067,7 +2067,7 @@ if(true) return;
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + Menu_ID[k] + "?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/" + Menu_ID[k] + "?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", false, ParentTest.createNode("API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/" + Menu_ID[k] + "?nocache=true&extended=true&_query=%7Bid,label,is,groups%7Bid,label,is%7D%7D&show_unlinked=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }
                 JSONObject json1 = new JSONObject(API_Response_Body);
@@ -2081,17 +2081,17 @@ if(true) return;
                         if(category_obj.getJSONObject("is").getBoolean("linked")) {
                             _t++;
                             _p++; EX += _t + "\t" + "Active Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                             Log_Html_Result("PASS", "Active Category set - "+category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode("Active category "), new Date());       
+                             Log_Html_Result("PASS", "Active Category set - "+category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Active category "), new Date());       
                         } else if(!category_obj.getJSONObject("is").getBoolean("linked"))  {
                             _t++;
                             _p++;EX += _t + "\t" + "Deleted Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("PASS", "Deleted Category set - "+category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode("Deleted Category"), new Date());
+                            Log_Html_Result("PASS", "Deleted Category set - "+category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Deleted Category"), new Date());
                         }
                     }
                 } else if(!json1.getJSONObject("is").getBoolean("linked"))  {
                     _t++;
                     _p++;EX += _t + "\t" + "Deleted Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "Deleted Menu set - "+json1.getJSONObject("label").getString("en"), false, ParentTest.createNode("Deleted Menu Set"), new Date());
+                    Log_Html_Result("PASS", "Deleted Menu set - "+json1.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Deleted Menu Set"), new Date());
                 }
             }
         }
@@ -2120,7 +2120,7 @@ if(true) return;
         } else {
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/multigroup/" + Mgroup_ID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/multigroup/" + Mgroup_ID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/multigroup/" + Mgroup_ID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -2136,17 +2136,17 @@ if(true) return;
                         if(sectorName.contentEquals(SECTOR)) { 
                             _t++;
                             _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Sector : "+sectorName + "\t" + SECTOR + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("PASS", "Found-as expected: " + sectorName + " Expected: " + SECTOR, false, ParentTest.createNode("Verify sector name"), new Date());
+                            Log_Html_Result("PASS", "Found-as expected: " + sectorName + " Expected: " + SECTOR, false, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
                
                         } else {
                             _t++;
                             _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Sector : "+sectorName + "\t" + SECTOR + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("FAIL", "Not Found. Actual : " + sectorName + " Expected: " + SECTOR, true, ParentTest.createNode("Verify sector name"), new Date());
+                            Log_Html_Result("FAIL", "Not Found. Actual : " + sectorName + " Expected: " + SECTOR, true, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
                         }   
                     } else {
                         _t++;
                         _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "No Sector" + "\t" + "-" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        Log_Html_Result("FAIL", "No Sector Found. Expected: " + SECTOR, true, ParentTest.createNode("Verify sector name"), new Date());     
+                        Log_Html_Result("FAIL", "No Sector Found. Expected: " + SECTOR, true, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());     
                     }
                 }
             }  
@@ -2164,7 +2164,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + S_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + S_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + S_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -2176,18 +2176,18 @@ if(true) return;
             if(meta.getString("app_name").contentEquals("Boost")) {      // Explicitly Boost since its hardcoded in the code. Else we can use appId field from JTT.    
                     _t++;
                     _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "App Name : "+meta.getString("app_name") + "\t" + "Boost" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                   Log_Html_Result("PASS", "Found-as expected" + "\t" + "App Name : "+meta.getString("app_name"), false, ParentTest.createNode("Verify App name"), new Date());
+                   Log_Html_Result("PASS", "Found-as expected" + "\t" + "App Name : "+meta.getString("app_name"), false, ParentTest.createNode(_t + ". " + "Verify App name"), new Date());
                       
             } else {
                 _t++;   
                 _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "App Name : "+meta.getString("app_name") + "\t" + "Boost" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Not Found- expected" + "\t" + "App Name : "+meta.getString("app_name")+ "Expected : Boost", true, ParentTest.createNode("Verify App name"), new Date());
+                Log_Html_Result("FAIL", "Not Found- expected" + "\t" + "App Name : "+meta.getString("app_name")+ "Expected : Boost", true, ParentTest.createNode(_t + ". " + "Verify App name"), new Date());
        
             }   
         }else{
             _t++;
             _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "No App Name field found" + "\t" + "-" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-         Log_Html_Result("FAIL", "Not Found. No App Name field found", true, ParentTest.createNode("Verify App name"), new Date());
+         Log_Html_Result("FAIL", "Not Found. No App Name field found", true, ParentTest.createNode(_t + ". " + "Verify App name"), new Date());
                      
         }
          
@@ -2196,12 +2196,12 @@ if(true) return;
         if(sector_name.equalsIgnoreCase(SECTOR)) { // ======================== ????
             _t++;  
             _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Sector : " + sector_name + "\t" + SECTOR + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-           Log_Html_Result("PASS", "Found-as expected : "+ sector_name + " Expected: " + SECTOR, false, ParentTest.createNode("Verify sector name"), new Date());
+           Log_Html_Result("PASS", "Found-as expected : "+ sector_name + " Expected: " + SECTOR, false, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
                
         } else {
             _t++;   
             _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Sector : " + sector_name + "\t" + SECTOR + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-           Log_Html_Result("FAIL", "Not Found. Actual : " + sector_name + " Expected: " + SECTOR, true, ParentTest.createNode("Verify sector name"), new Date());
+           Log_Html_Result("FAIL", "Not Found. Actual : " + sector_name + " Expected: " + SECTOR, true, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
                      
         }   
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Location Group API Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";  
@@ -2217,7 +2217,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/public/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         String Public_response_Before = API_Response_Body;
@@ -2228,7 +2228,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         String Private_response_Before = API_Response_Body;
@@ -2239,7 +2239,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         String Brand_response_Before = API_Response_Body;
@@ -2256,7 +2256,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/public/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/public/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         String Public_response_After = API_Response_Body;
@@ -2267,7 +2267,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/config/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         String Private_response_After = API_Response_Body;
@@ -2278,7 +2278,7 @@ if(true) return;
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         String Brand_response_After = API_Response_Body;
@@ -2286,34 +2286,34 @@ if(true) return;
         if(Public_response_Before.equals(Public_response_After)) { // Print Pass 
             _t++;
             _p++; EX += _t + "\t" + "Public Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Public Api call response equal after Refresh", false, ParentTest.createNode("Verify Public config - after refresh"), new Date());             
+            Log_Html_Result("PASS", "Public Api call response equal after Refresh", false, ParentTest.createNode(_t + ". " + "Verify Public config - after refresh"), new Date());             
         } else {
            _t++;
            _f++; 
            EX += _t + "\t" + "Public Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Public Api call response is different after Refresh", true, ParentTest.createNode("Verify Public config - after refresh"), new Date());
+            Log_Html_Result("FAIL", "Public Api call response is different after Refresh", true, ParentTest.createNode(_t + ". " + "Verify Public config - after refresh"), new Date());
         }
         
         if(Private_response_Before.equals(Private_response_After))  { // Print Pass 
             _t++;
             _p++; 
             EX += _t + "\t" + "Private Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Private Api call response equal after Refresh", false, ParentTest.createNode("Verify Private config - after refresh"), new Date());
+            Log_Html_Result("PASS", "Private Api call response equal after Refresh", false, ParentTest.createNode(_t + ". " + "Verify Private config - after refresh"), new Date());
         } else {
             _t++;
             _f++; 
             EX += _t + "\t" + "Private Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Private Api call response different after Refresh", true, ParentTest.createNode("Verify Private config - after refresh"), new Date());  
+            Log_Html_Result("FAIL", "Private Api call response different after Refresh", true, ParentTest.createNode(_t + ". " + "Verify Private config - after refresh"), new Date());  
         }
         
         if(Brand_response_Before.equals(Brand_response_After))  { // Print Pass 
             _t++;
             _p++; EX += _t + "\t" + "Brand Api call response equal after Refresh" + "\t" + "API Response equal" + "\t" + "API response equal" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Brand Api call response equal after Refresh", false, ParentTest.createNode("Verify Brand config - after refresh"), new Date());
+            Log_Html_Result("PASS", "Brand Api call response equal after Refresh", false, ParentTest.createNode(_t + ". " + "Verify Brand config - after refresh"), new Date());
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Brand Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Brand Api call response different after Refresh", true, ParentTest.createNode("Verify Brand config - after refresh"), new Date());
+            Log_Html_Result("FAIL", "Brand Api call response different after Refresh", true, ParentTest.createNode(_t + ". " + "Verify Brand config - after refresh"), new Date());
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh END ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
     } catch (Exception ex){}   // =============================================  

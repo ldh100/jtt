@@ -647,7 +647,7 @@ class AP3_brand_config extends AP3_GUI {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                         //print fail if found incorrect menus that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + MenuName, true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + MenuName, true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                         }                             
                         }
                     }
@@ -669,7 +669,7 @@ class AP3_brand_config extends AP3_GUI {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus Categories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                         //print fail if found incorrect menus categories that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                         }
                     
                     System.out.println(L2.get(k).getAttribute("textContent") +" : " + (Categories_EnabledList.get(k)));                                                                               
@@ -705,7 +705,7 @@ class AP3_brand_config extends AP3_GUI {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus Categories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                         //print fail if found incorrect menus categories that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"));                        
+                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"));                        
                         }
                     
                     System.out.println(L2.get(k+1).getAttribute("textContent") +" : " + (Categories_EnabledList.get(k)));                                                                               
@@ -895,7 +895,7 @@ class AP3_brand_config extends AP3_GUI {
             _t++;
             _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled in scheduled Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             //print fail if found incorrect menus categories that are'nt from global menu
-            Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode("Menus is not disabled in Scheduled menu"), new Date());                        
+            Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode(_t + ". " + "Menus is not disabled in Scheduled menu"), new Date());                        
         }
         Thread.sleep(1000);
             
@@ -926,7 +926,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled in scheduled Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode("Menus is not disabled in Scheduled menu"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode(_t + ". " + "Menus is not disabled in Scheduled menu"), new Date());                        
                 }
                                                                                                                    
                 Thread.sleep(1000);
@@ -1356,7 +1356,7 @@ class AP3_brand_config extends AP3_GUI {
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1476,7 +1476,7 @@ class AP3_brand_config extends AP3_GUI {
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + Menu_ID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/"+ Menu_ID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/"+ Menu_ID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         } 
          //List<String> Categories_DisabledList= new ArrayList<>(); 
@@ -1571,7 +1571,7 @@ class AP3_brand_config extends AP3_GUI {
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }               
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1716,12 +1716,12 @@ class AP3_brand_config extends AP3_GUI {
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed: Menuset is disabled" + "\t" + L0.get(k).getAttribute("textContent") + "\t" + Menuset_DisabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                     //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
-                    Log_Html_Result("PASS", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                    Log_Html_Result("PASS", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                    Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                    Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                 }
             }
             Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
@@ -1756,7 +1756,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                 }
                     
                 System.out.println(L0.get(k).getAttribute("textContent") +" : " + (Menuset_EnabledList.get(k)));                                                                               
@@ -1880,7 +1880,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not available" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + t, true, ParentTest.createNode("Menus not enabled and available to add"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + t, true, ParentTest.createNode(_t + ". " + "Menus not enabled and available to add"), new Date());                        
                 }
                                                                                                                    
                 Thread.sleep(1000);
@@ -1945,7 +1945,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + L0.get(k).getAttribute("textContent") + "\t" + "Menu Category is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menu Cateogry was not removed from Brand Config"), new Date());                        
                 }
                     
                 System.out.println(L0.get(2).getAttribute("textContent") +" : " + (Categories_DisabledList.get(1)));                                                                               
@@ -1997,7 +1997,7 @@ class AP3_brand_config extends AP3_GUI {
 //                _t++;
 //                _f++; EX += _t + "\t" + "Test Failed" + "\t" + L0.get(i).getAttribute("textContent") + "\t" + "Menu Category is not correct" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
 //                    //print fail if found incorrect menus categories that are'nt from global menu
-//                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuSet  > " + L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"));                        
+//                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuSet  > " + L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menu Cateogry was not removed from Brand Config"));                        
 //                }                    
 //                } 
 //            EX += " - " + "\t" + " === " + "\t" + " ===== Category disabled in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";    
@@ -2022,7 +2022,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + L2.get(i).getAttribute("textContent") + "\t" + "Menu Category is not correct" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(i).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menu Cateogry was not removed from Brand Config"), new Date());                        
                 }                    
                 } 
         EX += " - " + "\t" + " === " + "\t" + " ===== Category disabled in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
