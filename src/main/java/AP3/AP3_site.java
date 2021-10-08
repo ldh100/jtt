@@ -1494,7 +1494,7 @@ class AP3_site extends AP3_GUI{
         //Click on Location Name column label to sort in ascending order
         Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-//        Thread.sleep(500);
+        Thread.sleep(500);
 //        String first_loc_in_record = "";
 //        if (loc_name_before_clone.contains("-X")) {
 //            int indx = loc_name_before_clone.indexOf("-X");
