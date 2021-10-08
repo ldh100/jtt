@@ -1483,26 +1483,28 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         List_L1("Get List of Locations - All", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
+            
         //Click on Location Name column label to sort in decending order
         Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class, 'column sortable')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        Wait_For_Element_By_Path_Presence("Check Sort > 'Descending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(), 'Sort-filter')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
+        
+//        Wait_For_Element_By_Path_Presence("Check Sort > 'Descending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(), 'Sort-filter')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
         //Click on Location Name column label to sort in ascending order
         Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
-        String first_loc_in_record = "";
-        if (loc_name_before_clone.contains("-X")) {
-            int indx = loc_name_before_clone.indexOf("-X");
-            first_loc_in_record = loc_name_before_clone.substring(0, indx - 1);
-            Wait_For_Element_By_Path_Presence("Check Sort > 'Ascending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'" + first_loc_in_record + "')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        } else {
-            Wait_For_Element_By_Path_Presence("Check Sort > 'Ascending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'" + loc_name_before_clone + "')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        }        
+//        Thread.sleep(500);
+//        String first_loc_in_record = "";
+//        if (loc_name_before_clone.contains("-X")) {
+//            int indx = loc_name_before_clone.indexOf("-X");
+//            first_loc_in_record = loc_name_before_clone.substring(0, indx - 1);
+//            Wait_For_Element_By_Path_Presence("Check Sort > 'Ascending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'" + first_loc_in_record + "')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//        } else {
+//            Wait_For_Element_By_Path_Presence("Check Sort > 'Ascending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'" + loc_name_before_clone + "')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//        }        
         //filter locations (only by name)
         Move_to_Element_By_Path("Move to 'Search Locations' field", "xpath", "//*[@aria-label='Search Locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1524,7 +1526,7 @@ class AP3_site extends AP3_GUI{
                     Log_Html_Result("PASS", "location " + (i+1) + " was filtered correctly", false, ParentTest.createNode(_t + ". " + "Check > Edited location"), new Date());
                 } else {
                     _t++;
-                    _f++; EX += _t + "\t" + "Check > Filtered correctly" + "\t" + "-" + "\t" + "location "+(i+1)+" was not filtered correctly" + "\t" + "FAIL" + "\t" 
+                    _f++; EX += _t + "\t" + "Check > Filtered correctly" + "\t" + "-" + "\t" + "location " +(i+1) + " was not filtered correctly" + "\t" + "FAIL" + "\t" 
                                 + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
                     Log_Html_Result("FAIL", "location " + (i+1) + " was not filtered correctly", true, ParentTest.createNode(_t + ". " + "Check > Filtered crrectly"), new Date());
                 }
