@@ -2,9 +2,6 @@ package AP3;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.Keys;
 
@@ -468,17 +465,17 @@ class AP3_site extends AP3_GUI{
   
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
         //get delivery destinations(drop-off locations) from API 
-        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-        if(t.startsWith("{")){
-            API_Response_Body = t;               
-        }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }        
-        JSONObject json = new JSONObject(API_Response_Body);
-        JSONArray delivery_destinations = json.getJSONArray("delivery_destinations");
+//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
+//        if(t.startsWith("{")){
+//            API_Response_Body = t;               
+//        }else{
+//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//            return;
+//        }        
+//        JSONObject json = new JSONObject(API_Response_Body);
+//        JSONArray delivery_destinations = json.getJSONArray("delivery_destinations");
 
         Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -552,46 +549,46 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
 
         //get country value from API for chosen site
-        Call_API("Call /location/group/'SiteID'", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
-        if(t.startsWith("{")){
-            API_Response_Body = t;               
-        }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }
-        json = new JSONObject(API_Response_Body);
-        JSONObject address = json.getJSONObject("address");
-        String country = address.getString("country");
-
-        Element_By_Path_Attribute("Get default value of 'Country' field", "xpath", "(//input[@aria-label='Country'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        if (country.equals("US")) {
-            if (t.equals("United States")) {
-                _t++;
-                _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-            }     
-        } else if (country.equals("CA")) {
-            if (t.equals("Canada")) {
-                _t++;
-                _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-            }
-        }
+//        Call_API("Call /location/group/'SiteID'", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
+//        if(t.startsWith("{")){
+//            API_Response_Body = t;               
+//        }else{
+//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//            return;
+//        }
+//        json = new JSONObject(API_Response_Body);
+//        JSONObject address = json.getJSONObject("address");
+//        String country = address.getString("country");
+//
+//        Element_By_Path_Attribute("Get default value of 'Country' field", "xpath", "(//input[@aria-label='Country'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        if (country.equals("US")) {
+//            if (t.equals("United States")) {
+//                _t++;
+//                _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
+//            } else {
+//                _t++;
+//                _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
+//            }     
+//        } else if (country.equals("CA")) {
+//            if (t.equals("Canada")) {
+//                _t++;
+//                _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
+//            } else {
+//                _t++;
+//                _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
+//            }
+//        }
 
         Element_By_Path_Click("Click > 'Country' field", "xpath", "(//input[@aria-label='Country'])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -623,7 +620,7 @@ class AP3_site extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'City is required' message", "xpath", "//*[contains(text(),'City is required')]", ParentTest, "no_jira");
             if (FAIL) { return;}
 
-        if (country.equals("US")) {
+        if (COUNTRY.toUpperCase().startsWith("US")) {
             Element_By_Path_Click("Click > 'Zip Code' field", "xpath", "(//input[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Wait_For_Element_By_Path_Presence("Check > 'Zip Code' field is focused", "xpath", "(//input[@aria-label='Zip Code'])[1]/ancestor::div[contains(@class,'v-input--is-focused')]", ParentTest, "no_jira");
@@ -759,7 +756,7 @@ class AP3_site extends AP3_GUI{
                 Log_Html_Result("FAIL", String.valueOf(t.toLowerCase().contains("123")), true, ParentTest.createNode(_t + ". " + "Check value of suggestion contains partial address"), new Date());
             }
         }
-        if (country.equals("CA")) {
+        if (COUNTRY.toUpperCase().startsWith("CA")) {
             Element_By_Path_Input_Select_Clear("Clear > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_By_Path_Text_Enter("Type > Partial address", "xpath", "(//*[@aria-label='Address'])[1]", "3 dund", false, ParentTest, "no_jira");
@@ -792,7 +789,7 @@ class AP3_site extends AP3_GUI{
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
             Log_Html_Result("FAIL", String.valueOf(!t.contains("")), true, ParentTest.createNode(_t + ". " + "Check 'City' was auto-filled"), new Date());
         }
-        if (country.equals("US")) {
+        if (COUNTRY.toUpperCase().startsWith("US")) {
             Element_By_Path_Attribute("Get auto-filled value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
             if (FAIL) { return;}
             if (!t.equals("")) {
@@ -888,29 +885,29 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
 
         //get delivery destinations(drop-off locations) from API 
-        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-        if(t.startsWith("{")){
-            API_Response_Body = t;               
-        }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }        
-        json = new JSONObject(API_Response_Body);
-        delivery_destinations = json.getJSONArray("delivery_destinations");
-        
-        if (delivery_destinations.length() == L2.size()) {
-            _t++;
-            _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "(5MAX shown on table, if expected is > 5)" + "\t" + "PASS" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-        } else {
-            _t++;
-            _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "FAIL" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-        }
+//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
+//        if(t.startsWith("{")){
+//            API_Response_Body = t;               
+//        }else{
+//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//            return;
+//        }        
+//        json = new JSONObject(API_Response_Body);
+//        delivery_destinations = json.getJSONArray("delivery_destinations");
+//        
+//        if (delivery_destinations.length() == L2.size()) {
+//            _t++;
+//            _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "(5MAX shown on table, if expected is > 5)" + "\t" + "PASS" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
+//        } else {
+//            _t++;
+//            _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "FAIL" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
+//        }
         // test Address auto-fill - End
         // </editor-fold>
 
@@ -944,7 +941,7 @@ class AP3_site extends AP3_GUI{
         String city_before_clone = t;
         String stateprovince_before_clone = "";
         String postalzip_before_clone = "";
-        if (country.equals("US")) {
+        if (COUNTRY.toUpperCase().startsWith("US")) {
             Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
                 if (FAIL) { return;}
             stateprovince_before_clone = t;
@@ -1020,29 +1017,30 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
 
         //get delivery destinations(drop-off locations) from API 
-        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-        if(t.startsWith("{")){
-            API_Response_Body = t;               
-        }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }        
-        json = new JSONObject(API_Response_Body);
-        delivery_destinations = json.getJSONArray("delivery_destinations");
-
-        if (delivery_destinations.length() == L2.size()) {
-            _t++;
-            _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "PASS" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-        } else {
-            _t++;
-            _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "FAIL" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-        }
+//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
+//        if(t.startsWith("{")){
+//            API_Response_Body = t;               
+//        }else{
+//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//            return;
+//        }        
+//        json = new JSONObject(API_Response_Body);
+//        delivery_destinations = json.getJSONArray("delivery_destinations");
+//
+//        if (delivery_destinations.length() == L2.size()) {
+//            _t++;
+//            _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "PASS" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
+//        } else {
+//            _t++;
+//            _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "FAIL" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
+//        }
+        
         //test Edit location
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1103,7 +1101,7 @@ class AP3_site extends AP3_GUI{
         String stateprovince_after_edit = "";
         String postalzip_before_edit = "";
         String postalzip_after_edit = "";
-        if (country.equals("US")) {
+        if (COUNTRY.toUpperCase().startsWith("US")) {
             Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
                 if (FAIL) { return;}
             stateprovince_before_edit = t;
@@ -1341,45 +1339,45 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
 
         //get delivery destinations(drop-off locations) from API 
-        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-        if(t.startsWith("{")){
-            API_Response_Body = t;        
-        }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }        
-        json = new JSONObject(API_Response_Body);
-        delivery_destinations = json.getJSONArray("delivery_destinations");
-
-        for (int i = 0; i < delivery_destinations.length(); i++) {
-            JSONObject location = delivery_destinations.getJSONObject(i);
-            String loc_name_from_api = location.getString("name");
-            if (loc_name_from_api.equals(loc_name_after_edit)) {
-                String loc_info_from_api = location.getString("information");
-                Boolean foodlocker_status_from_api = location.getBoolean("foodlocker");
-                JSONObject ADDRESS = location.getJSONObject("address");
-                String address_from_api = ADDRESS.getString("address");
-                String city_from_api = ADDRESS.getString("city");
-                String stateprovince_from_api = ADDRESS.getString("state");
-                String postalzip_from_api = ADDRESS.getString("zip");
-                if (!foodlocker_status_from_api) {
-                    if (addr_after_edit.equals(address_from_api) && city_after_edit.equals(city_from_api) && (stateprovince_from_api.equals("IL") || stateprovince_from_api.equals("AB"))
-                            && postalzip_after_edit.equals(postalzip_from_api) && loc_info_after_edit.equals(loc_info_from_api)) {
-                        _t++;
-                        _p++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was edited correctly" + "\t" + "PASS" + "\t" 
-                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "location was edited correctly", false, ParentTest.createNode(_t + ". " + "Check > Edited location"), new Date());
-                    } else {
-                        _t++;
-                        _f++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was not edited correctly" + "\t" + "FAIL" + "\t" 
-                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "location was not edited correctly", false, ParentTest.createNode(_t + ". " + "Check > Edited location"), new Date());
-                    }
-                } 
-            }
-        }              
+//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
+//        if(t.startsWith("{")){
+//            API_Response_Body = t;        
+//        }else{
+//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//            return;
+//        }        
+//        json = new JSONObject(API_Response_Body);
+//        delivery_destinations = json.getJSONArray("delivery_destinations");
+//
+//        for (int i = 0; i < delivery_destinations.length(); i++) {
+//            JSONObject location = delivery_destinations.getJSONObject(i);
+//            String loc_name_from_api = location.getString("name");
+//            if (loc_name_from_api.equals(loc_name_after_edit)) {
+//                String loc_info_from_api = location.getString("information");
+//                Boolean foodlocker_status_from_api = location.getBoolean("foodlocker");
+//                JSONObject ADDRESS = location.getJSONObject("address");
+//                String address_from_api = ADDRESS.getString("address");
+//                String city_from_api = ADDRESS.getString("city");
+//                String stateprovince_from_api = ADDRESS.getString("state");
+//                String postalzip_from_api = ADDRESS.getString("zip");
+//                if (!foodlocker_status_from_api) {
+//                    if (addr_after_edit.equals(address_from_api) && city_after_edit.equals(city_from_api) && (stateprovince_from_api.equals("IL") || stateprovince_from_api.equals("AB"))
+//                            && postalzip_after_edit.equals(postalzip_from_api) && loc_info_after_edit.equals(loc_info_from_api)) {
+//                        _t++;
+//                        _p++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was edited correctly" + "\t" + "PASS" + "\t" 
+//                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                        Log_Html_Result("PASS", "location was edited correctly", false, ParentTest.createNode(_t + ". " + "Check > Edited location"), new Date());
+//                    } else {
+//                        _t++;
+//                        _f++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was not edited correctly" + "\t" + "FAIL" + "\t" 
+//                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                        Log_Html_Result("FAIL", "location was not edited correctly", false, ParentTest.createNode(_t + ". " + "Check > Edited location"), new Date());
+//                    }
+//                } 
+//            }
+//        }              
         // test duplicate/edit location - End
         // </editor-fold>   
             
@@ -1537,13 +1535,14 @@ class AP3_site extends AP3_GUI{
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
             Log_Html_Result("FAIL", "locations failed to filter", true, ParentTest.createNode(_t + ". " + "Check List was Filtered"), new Date());
         }
-        Element_By_Path_Input_Select_Clear("Clear > 'Search Locations' field", "xpath", "//*[@aria-label='Search Locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(1000);
+//        Element_By_Path_Input_Select_Clear("Clear > 'Search Locations' field", "xpath", "//*[@aria-label='Search Locations']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(1000);
+//        Kepp filtered - only new Location for delete them below
         // </editor-fold>  
         
         // <editor-fold defaultstate="collapsed" desc="Delete New_ID Locations">
-        List_L1("Get List of Locations - All after clear filter", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
+        List_L1("Get List of Locations - after filter test", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}        
         for (int i = (L1.size() - 1); i >= 0; i--) {
             Element_Text("Get Location " + i, L1.get(i), ParentTest, "no_jira");
@@ -1583,32 +1582,32 @@ class AP3_site extends AP3_GUI{
         //get delivery destinations(drop-off locations) from API 
         List_L1("Get List of Locations - All", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-        if(t.startsWith("{")){
-            API_Response_Body = t;               
-        }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-                                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }        
-        json = new JSONObject(API_Response_Body);
-        delivery_destinations = json.getJSONArray("delivery_destinations");
-        int num_of_locs_after_delete = delivery_destinations.length();
-
-        if (num_of_locs_after_delete == L1.size()) {
-            _t++;
-            _p++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + " - " + "\t" + "Before: " + L1.size() + " After: " + num_of_locs_after_delete + "\t" + "PASS" + "\t" 
-                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Before: " + L1.size() + " After: " + num_of_locs_after_delete, false, 
-                    ParentTest.createNode(_t + ". " + "Check > number of locations after a delete"), new Date());
-        } else {
-            _t++;
-            _f++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + " - " + "\t" + "Before: " + L1.size() + " After: " + num_of_locs_after_delete + "\t" + "FAIL" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Before: " + L1.size() + " After: " + num_of_locs_after_delete, false, 
-                    ParentTest.createNode(_t + ". " + "Check > number of locations after a delete"), new Date());
-        }
+//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
+//        if(t.startsWith("{")){
+//            API_Response_Body = t;               
+//        }else{
+//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//                                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//            return;
+//        }        
+//        json = new JSONObject(API_Response_Body);
+//        delivery_destinations = json.getJSONArray("delivery_destinations");
+//        int num_of_locs_after_delete = delivery_destinations.length();
+//
+//        if (num_of_locs_after_delete == L1.size()) {
+//            _t++;
+//            _p++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + " - " + "\t" + "Before: " + L1.size() + " After: " + num_of_locs_after_delete + "\t" + "PASS" + "\t" 
+//                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", "Before: " + L1.size() + " After: " + num_of_locs_after_delete, false, 
+//                    ParentTest.createNode(_t + ". " + "Check > number of locations after a delete"), new Date());
+//        } else {
+//            _t++;
+//            _f++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + " - " + "\t" + "Before: " + L1.size() + " After: " + num_of_locs_after_delete + "\t" + "FAIL" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", "Before: " + L1.size() + " After: " + num_of_locs_after_delete, false, 
+//                    ParentTest.createNode(_t + ". " + "Check > number of locations after a delete"), new Date());
+//        }
         // </editor-fold>
         
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";

@@ -718,9 +718,6 @@ class AP3_brand_config extends AP3_GUI {
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }
 */                  
-                    
-                  
-       
                     break;
                     
                 case "Integration Type":
