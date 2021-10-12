@@ -1050,8 +1050,8 @@ Thread.sleep(5000);
 //            if (FAIL) { return;}
 //            Element_By_Path_Text_Enter("Search for Cloned promo", "css","input[aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
 //            if (FAIL) { return;}
-            Find_Text("Find 'Automation Test promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
+//            Find_Text("Find 'Automation Test promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
             Element_By_Path_Text("Promo Name", "xpath", "//tbody/tr[2]/td[1]/span[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}  
             Element_By_Path_Text("Type of promo", "xpath", "//tbody/tr[2]/td[2]/span[1]", ParentTest, "no_jira");
@@ -1079,7 +1079,7 @@ Thread.sleep(5000);
             Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
                 if (FAIL) { return;}       
 Thread.sleep(5000);
-            Element_By_Path_Text_Enter("Search for Cloned promo", "xpath","//input[@aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Search for Cloned promo", "xpath","//input[@aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
                 if (FAIL) { return;}  
              
             Find_Text("Find 'Cloned Automation Test promo'", "Automation Test Promo", true, ParentTest, "no_jira"); 
@@ -1147,7 +1147,7 @@ Thread.sleep(5000);
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         API_Body_Contains("Promo API - find company ID", API_Response_Body, CompanyID, true, ParentTest, "no_jira");    
@@ -1189,19 +1189,19 @@ Thread.sleep(5000);
                     _t++;
                     if(fpromo_amount == 0.50)  { 
                         _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Discount Amount: "+fpromo_amount + "\t" + "0.50" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Discount Amount: "+fpromo_amount, false, ParentTest.createNode("Discount Amount : Found-as expected"), new Date());
+                        Log_Html_Result("PASS", "Discount Amount: "+fpromo_amount, false, ParentTest.createNode(_t + ". " + "Discount Amount : Found-as expected"), new Date());
                     } else {
                         _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Discount Amount: "+fpromo_amount + "\t" + "0.50" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Discount Amount: "+fpromo_amount  , true, ParentTest.createNode("Discount Amount : Not Found - expected"), new Date()); 
+                        Log_Html_Result("FAIL", "Discount Amount: "+fpromo_amount  , true, ParentTest.createNode(_t + ". " + "Discount Amount : Not Found - expected"), new Date()); 
                     }
                 }  else if(discount.has("percent_off")) {
                     int promo_amount = discount.getInt("percent_off");           //getString("amount_off");
                     if(promo_amount == 50) { 
                         _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Percent off : "+promo_amount + "\t" + "50%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Percent off : "+promo_amount, false, ParentTest.createNode("Percent off : Found-as expected"), new Date());
+                        Log_Html_Result("PASS", "Percent off : "+promo_amount, false, ParentTest.createNode(_t + ". " + "Percent off : Found-as expected"), new Date());
                     } else {
                         _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Percent off : "+promo_amount + "\t" + "50%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Percent off : "+promo_amount  , true, ParentTest.createNode("Percent off : Not Found - expected"), new Date());
+                        Log_Html_Result("FAIL", "Percent off : "+promo_amount  , true, ParentTest.createNode(_t + ". " + "Percent off : Not Found - expected"), new Date());
                     }
                 }//End of percent off
        }//End of for
@@ -1218,7 +1218,7 @@ Thread.sleep(5000);
             }else{
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                 return;
             }
             if(Promo_action.equalsIgnoreCase("Original")||Promo_action.equalsIgnoreCase("Edited")|| Promo_action.equalsIgnoreCase("cloned"))  { 
@@ -1237,7 +1237,7 @@ Thread.sleep(5000);
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?status=active&nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?status=active&nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?status=active&nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }                
                 API_Body_Contains("Promo Location API - find Promo ID", API_Response_Body, P_ID, true, ParentTest, "no_jira");
@@ -1250,7 +1250,7 @@ Thread.sleep(5000);
                 }else{
                     EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode("API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }    
                 API_Body_Contains("Promo Location API - find Promo ID", API_Response_Body,P_ID,  false, ParentTest, "no_jira");

@@ -440,7 +440,7 @@ class AP3_announcements extends AP3_GUI{
             }else{
                 EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/announcement/" + A_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/announcement/" + A_ID, false, ParentTest.createNode("API Responce Error"), new Date());
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/announcement/" + A_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             }
             API_Body_Contains("Announcement API - find Site ID", API_Response_Body, SiteID, true, ParentTest, "no_jira");    
             API_Body_Contains("Announcement API - find App", API_Response_Body, app, true, ParentTest, "no_jira"); 
@@ -476,7 +476,7 @@ class AP3_announcements extends AP3_GUI{
                 _t++; 
                 _w++;
                 EX += _t + "\t" + "Enable Announcement - not possible" + "\t" + "No Position available" + "\t" + t + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\r\n";    
-                Log_Html_Result("WARN", "No Position available", true, ParentTest.createNode("Enable Announcement - not possible"), new Date());
+                Log_Html_Result("WARN", "No Position available", true, ParentTest.createNode(_t + ". " + "Enable Announcement - not possible"), new Date());
             }else{
                 Element_By_Path_Click("Announcement Status Dropdown Open", "css", "[aria-label='Status']", ParentTest, "no_jira");
                     if (FAIL) { return; }
