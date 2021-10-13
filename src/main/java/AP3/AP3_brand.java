@@ -201,9 +201,6 @@ class AP3_brand extends AP3_GUI{
                 }
             }
         }            
-
-//        Element_Child_Click("Click Brand " + BRAND + " Name", L2.get(T_Index), "xpath", ".//td[@class='clickable']", ParentTest, "no_jira"); 
-//            if (FAIL) { return;} 
         Element_Child_List_L2("Stations List Column Cout", L2.get(T_Index), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
             if (FAIL) { return;} 
         Element_Click("Click Brand '" + BRAND + "' row", L2.get(0), ParentTest, Ver);
@@ -248,7 +245,7 @@ class AP3_brand extends AP3_GUI{
                     Find_Text("Find 'Delivery Fee' text", "Delivery Fee", true,ParentTest, "no_jira"); 
                         if (FAIL) { return; }
                     break; 
-                case "Pickup Details":         // Service / Pickup
+                case "Pickup Details":   
                     Text_Found("Is Pickup Enabled?", "Pickup is not enabled", ParentTest, "no_jira"); 
                     if(t.equals("Not Found")){                    
                         Find_Text("Find 'Timeslot Length' text", "Timeslot Length", true,ParentTest, "no_jira");                      
