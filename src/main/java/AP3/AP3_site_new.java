@@ -941,29 +941,22 @@ if(true) return;
                 case "Payment ID":  
                     
                     break;
-                case "Meal Plan":  
-                         //By default Site should have meal plan active
-                       Element_E1_Find("Find Meal Plan", "id", "toc-mealplan", ParentTest, "no_jira"); 
+                case "Meal Plan":    //By default Site should have meal plan active
+                    Element_E1_Find("Find Meal Plan", "id", "toc-mealplan", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
-                       Element_Child_List_L1("Find 'Would you like to activate meal plan' options", e1, "xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
+                    Element_Child_List_L1("Find 'Would you like to activate meal plan' options", e1, "xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
-                       Element_Click("Click 'Activate Meal PLan' - Yes", L1.get(0), ParentTest, "no_jira");
+                    Element_Click("Click 'Activate Meal PLan' - Yes", L1.get(0), ParentTest, "no_jira");
                         if (FAIL) { return;}      
-                            
-                       
                     break;
                 case "Loyalty Program":  
                     
                     break;
                 case "Payment Method Exclusion":   
                     Find_Text("Find 'Payment exclusions ..Credit card..'", "Credit Card", true,ParentTest, "no_jira"); 
-                        if (FAIL) { return; } 
                     Find_Text("Find 'Payment exclusions ..Apple Wallet..'", "Apple Wallet", true,ParentTest, "no_jira"); 
-                        if (FAIL) { return; } 
                     Find_Text("Find 'Payment exclusions ..Google Wallet..'", "Google Wallet", true,ParentTest, "no_jira"); 
-                        if (FAIL) { return; } 
                     Find_Text("Find 'Payment exclusions ..Meal Plans..'", "Meal Plans", true,ParentTest, "no_jira"); 
-                        if (FAIL) { return; }
                     break;
                 case "Web Ordering":  
                     Element_E1_Find("Find Web Ordering", "id", "web-order", ParentTest, "no_jira"); 

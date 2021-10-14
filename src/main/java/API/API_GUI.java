@@ -3307,6 +3307,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         // =================  Mobile User, Meal Plan, Payment, ShoppingCart, Order ===================
         if (true) {
+            FAIL = false;
             SCOPE += "Mobile User ";
             EX += " - " + "\t" + "Mobile User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Mobile User");

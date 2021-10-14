@@ -22,6 +22,13 @@ class notification extends API_GUI {
 
     protected void run() {
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Resent Updates===========================
+        
+         // Test Scenario 0: Get all notification with start/end as in AP3
+        Date _ee = new DateTime(new Date()).toDate();
+        String _EE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(_ee);         
+        JOB_Api_Call("AP3 Recent Updates - end 10 days ago", "GET",
+                BaseAPI + "/notification?realm=cdl&target=admin_panel&start=1970-01-01T00:00:00.000Z&end=" + _EE, Auth, "", 200, ParentTest, "no_jira");
+               
         Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
         String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
         Date _e = new DateTime(new Date()).minusDays(10).toDate();
@@ -72,13 +79,15 @@ class notification extends API_GUI {
         JOB_Api_Call("AP3 add new notification - Negative flow with past release date", "POST", BaseAPI + "/notification/", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
-        // <editor-fold defaultstate="collapsed" desc=" GET all Notification">
+        // <editor-fold defaultstate="collapsed" desc="GET Notification">
+        
+
         // Test Scenario 1: Positive get all notification 
         JOB_Api_Call("AP3 Recent Updates - end 10 days ago", "GET",
                 BaseAPI + "/notification?realm=cdl&target=admin_panel&end=" + _E, Auth, "", 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Positive get all notification 
-        JOB_Api_Call("AP3 Recent Updates - no end date", "GET",
+        JOB_Api_Call("AP3 Recent Updates - no start/end date", "GET",
                 BaseAPI + "/notification?realm=cdl&target=admin_panel", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             NOTIFICATION_IDS = new ArrayList<>();
@@ -98,7 +107,7 @@ class notification extends API_GUI {
         // <editor-fold defaultstate="collapsed" desc=" PATCH Notification">This method will send PUT request to update notification title and text
         // Test Scenario 1: Positive flow for patch notification by ID
         BODY = "{\"text\":\"This is text for update notification\","
-                + "\"title\":\"Test title- edited " + _E + "\","
+                + "\"title\":\"Test title - edited " + _E + "\","
                 + "\"realm\":\"cdl\","
                 + "\"target\":\"admin_panel\"}";
         JOB_Api_Call("AP3 Update Notification Title and Text", "PATCH",

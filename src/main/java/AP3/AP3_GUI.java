@@ -1947,8 +1947,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_roles: "))  _roles.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: "))  _all_data.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));     
-                
+                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));    //  
+                if(l.contains("_notifications: "))  _notifications.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_sales_report_hidden: "))  _sales_report_hidden.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_orders_report_hidden: "))  _orders_report_hidden.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_brand_closure: "))  _brand_closure.setSelected(Boolean.parseBoolean(value)); 
@@ -3996,12 +3996,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             t = "Found";
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator - Text: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             t = "Not Found";
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Not Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator - Text: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         _p++;
         sw1.reset();
