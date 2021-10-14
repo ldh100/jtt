@@ -135,12 +135,29 @@ class DL_Accountmanager extends DL_GUI {
                 if (FAIL) {
                     return;
                 }
-            for (int j = 1; j < Memberlist.size(); j++) {
+            for (int j = 1; j <= Memberlist.size(); j++) {
                 Thread.sleep(5000);
                 CreateNewFilter(Oldfilter, Newfilter);
                 
                 Thread.sleep(5000);
-                
+                Wait_For_Element_By_Path_Presence("Wait for Metric card", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+                }
+                Thread.sleep(5000);
+                List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]//p", ParentTest, "no_jira");
+                if (FAIL) {
+                    return;
+                }
+
+                for (int k = 0; k < L1.size(); k++) {
+                    System.out.println(L1.get(k).getText());
+                    Element_Text("Metric Values", L1.get(k), ParentTest, "no_jira");
+                }
+                if(j==Memberlist.size())
+                {
+                  break;  
+                }
                 Wait_For_Element_By_Path_Presence("Wait for Chevron", "xpath", "//span[contains(text(),'keyboard_arrow_down')]", ParentTest, "no_jira");
                 if (FAIL) {
                     return;
@@ -192,21 +209,9 @@ class DL_Accountmanager extends DL_GUI {
                     return;
 
                 }
-                Wait_For_Element_By_Path_Presence("Wait for Metric card", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]", ParentTest, "no_jira");
-                if (FAIL) {
-                    return;
-                }
-                Thread.sleep(5000);
-                List_L1("Loaded Metrics Cards Count", "xpath", "//div[contains(@class, 'MuiPaper-root MuiCard-root')]//p", ParentTest, "no_jira");
-                if (FAIL) {
-                    return;
-                }
-
-                for (int k = 0; k < L1.size(); k++) {
-                    System.out.println(L1.get(k).getText());
-                    Element_Text("Metric Values", L1.get(k), ParentTest, "no_jira");
-                }
+                
                 Oldfilter = Newfilter;
+                
                 Newfilter = Memberlist.get(j).replaceAll("[',./()&]+", "");
                 
             }
