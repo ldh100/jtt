@@ -104,9 +104,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _login = new javax.swing.JCheckBox();
         _all_data = new javax.swing.JCheckBox();
         _site_new = new javax.swing.JCheckBox();
-        _site = new javax.swing.JCheckBox();
-        _brand = new javax.swing.JCheckBox();
-        _orders = new javax.swing.JCheckBox();
+        _concepts = new javax.swing.JCheckBox();
+        _concept_groups = new javax.swing.JCheckBox();
+        _posid_ranges = new javax.swing.JCheckBox();
         _resent_updates = new javax.swing.JCheckBox();
         _announcements = new javax.swing.JCheckBox();
         _promo = new javax.swing.JCheckBox();
@@ -123,8 +123,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         lblSITES12 = new javax.swing.JLabel();
         _sales_analytics = new javax.swing.JCheckBox();
         _notifications = new javax.swing.JCheckBox();
-        txtDH_Id = new javax.swing.JTextField();
-        lblSITES15 = new javax.swing.JLabel();
         txtComp = new javax.swing.JTextField();
         txtSector = new javax.swing.JTextField();
         _bulk_apply = new javax.swing.JCheckBox();
@@ -198,11 +196,11 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblSITES.setText("Sites");
+        lblSITES.setText("List No be Defined");
         lblSITES.setAlignmentX(0.5F);
         getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
 
-        lblBRANDS.setText("Selected Site - Brands");
+        lblBRANDS.setText("List To be Defined");
         lblBRANDS.setName("lblBRANDS"); // NOI18N
         getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 4, 268, -1));
 
@@ -213,7 +211,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         _login.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _login.setSelected(true);
-        _login.setText("Admin Login");
+        _login.setText("User Login");
         _login.setEnabled(false);
         _login.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -227,60 +225,66 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         _site_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _site_new.setText("New Site (not in Prod)");
+        _site_new.setEnabled(false);
         _site_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _site_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _site_new.setRequestFocusEnabled(false);
 
-        _site.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _site.setText("Sites");
-        _site.setContentAreaFilled(false);
-        _site.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _site.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _concepts.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _concepts.setText("Concepts");
+        _concepts.setContentAreaFilled(false);
+        _concepts.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _concepts.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        _brand.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _brand.setText("Brand");
-        _brand.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _brand.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _brand.setRequestFocusEnabled(false);
+        _concept_groups.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _concept_groups.setText("Concept Groups");
+        _concept_groups.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _concept_groups.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _concept_groups.setRequestFocusEnabled(false);
 
-        _orders.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _orders.setText("Orders");
-        _orders.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _orders.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _orders.setRequestFocusEnabled(false);
+        _posid_ranges.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _posid_ranges.setText("POSID Ranges");
+        _posid_ranges.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _posid_ranges.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _posid_ranges.setRequestFocusEnabled(false);
 
         _resent_updates.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _resent_updates.setText("Recent Updates");
+        _resent_updates.setEnabled(false);
         _resent_updates.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _resent_updates.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _resent_updates.setRequestFocusEnabled(false);
 
         _announcements.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _announcements.setText("Announcements");
+        _announcements.setEnabled(false);
         _announcements.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _announcements.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _announcements.setRequestFocusEnabled(false);
 
         _promo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _promo.setText("Promo Management");
+        _promo.setEnabled(false);
         _promo.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _promo.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _promo.setRequestFocusEnabled(false);
 
         _sales_reporting.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_reporting.setText("Sales Reporting");
+        _sales_reporting.setEnabled(false);
         _sales_reporting.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_reporting.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_reporting.setRequestFocusEnabled(false);
 
         _menu_manager.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _menu_manager.setText("Menu Manager");
+        _menu_manager.setEnabled(false);
         _menu_manager.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _menu_manager.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _menu_manager.setRequestFocusEnabled(false);
 
         _users.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _users.setText("Users");
+        _users.setText("User Management");
         _users.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _users.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _users.setRequestFocusEnabled(false);
@@ -293,30 +297,35 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _logout.setText("User Feedback & Logout");
+        _logout.setEnabled(false);
         _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setRequestFocusEnabled(false);
 
         _roles.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _roles.setText("Roles Permissions");
+        _roles.setEnabled(false);
         _roles.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _roles.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _roles.setRequestFocusEnabled(false);
 
         _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand_new.setText("Add Brand (not in Prod)");
+        _brand_new.setEnabled(false);
         _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _brand_new.setRequestFocusEnabled(false);
 
         _smart_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _smart_analytics.setText("Smart Analytics");
+        _smart_analytics.setEnabled(false);
         _smart_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _smart_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _smart_analytics.setRequestFocusEnabled(false);
 
         _group_management.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _group_management.setText("Group Management");
+        _group_management.setEnabled(false);
         _group_management.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _group_management.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _group_management.setRequestFocusEnabled(false);
@@ -325,31 +334,27 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES8.setText("Group/Sector:");
         lblSITES8.setAlignmentX(0.5F);
+        lblSITES8.setEnabled(false);
 
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES12.setText("Company/Global Menu:");
         lblSITES12.setAlignmentX(0.5F);
+        lblSITES12.setEnabled(false);
 
         _sales_analytics.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _sales_analytics.setText("Sales Analytics");
+        _sales_analytics.setEnabled(false);
         _sales_analytics.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _sales_analytics.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _sales_analytics.setRequestFocusEnabled(false);
 
         _notifications.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _notifications.setText("Notifications");
+        _notifications.setEnabled(false);
         _notifications.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _notifications.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _notifications.setRequestFocusEnabled(false);
-
-        txtDH_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtDH_Id.setText("Fails, no test");
-
-        lblSITES15.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        lblSITES15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSITES15.setText("> Import DH Menu Id:");
-        lblSITES15.setAlignmentX(0.5F);
 
         txtComp.setEditable(false);
         txtComp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -361,6 +366,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
 
         _bulk_apply.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _bulk_apply.setText("Bulk Apply");
+        _bulk_apply.setEnabled(false);
         _bulk_apply.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _bulk_apply.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _bulk_apply.setRequestFocusEnabled(false);
@@ -386,15 +392,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtComp, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(_menu_manager, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                                .addGap(297, 297, 297))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(134, 134, 134)
-                                .addComponent(lblSITES15)
-                                .addGap(1, 1, 1)
-                                .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(_menu_manager, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                            .addGap(297, 297, 297)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -407,11 +407,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                                 .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(_orders, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(_brand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(_concepts, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                    .addComponent(_posid_ranges, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                    .addComponent(_concept_groups, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(_group_management, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -431,10 +430,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                                         .addComponent(_all_data, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(_site_new, javax.swing.GroupLayout.Alignment.TRAILING))))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(_roles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(_users, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 0, 0))
         );
         jPanel1Layout.setVerticalGroup(
@@ -444,12 +443,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
-                        .addComponent(_site, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_concepts, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
-                        .addComponent(_brand, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_concept_groups, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_orders, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_posid_ranges, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(_resent_updates, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(2, 2, 2)
                         .addComponent(_announcements, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -483,12 +482,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2)
                 .addComponent(_bulk_apply, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDH_Id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES15))
-                .addGap(4, 4, 4)
+                .addGap(34, 34, 34)
+                .addComponent(_menu_manager, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSITES8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSITES12))
@@ -498,7 +494,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     .addComponent(txtSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _brand, _group_management, _login, _orders, _promo, _resent_updates, _sales_reporting, _site});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {_announcements, _concept_groups, _concepts, _group_management, _login, _posid_ranges, _promo, _resent_updates, _sales_reporting});
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 140, 424, 256));
 
@@ -771,9 +767,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     private ExtentSparkReporter HtmlReporter;
     protected ExtentReports HtmlReport;
     protected ExtentTest ParentTest;
-    
-    protected boolean ALL_DATA = false;
-    protected boolean NO_DATA = false;
+   
     
     protected boolean FAIL = false;
     
@@ -836,17 +830,19 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     
     protected boolean _Login = true;
     protected boolean _Invalid_entries = false;
-
+    protected boolean _Posid_ranges = false;
+    protected boolean _Concept_groups = false; 
+    
     protected boolean _Mobile_view = false;
-    protected boolean _Site = false;
+    protected boolean _Concepts = false;
     protected boolean _Site_new = false;
+
     protected boolean _Brand_new = false;
-    protected boolean _Brand = false;
     protected boolean _Group_management = false;
     protected boolean _Menu_manager = false;
     protected boolean _Bulk_apply = false;
 
-    protected boolean _Orders = false;
+
     protected boolean _Sales_reporting = false;
     protected boolean _Users = false;
     protected boolean _Resent_updates = false;
@@ -916,11 +912,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         if (wdLastRow == DV1.getSelectedRow() || DV1.getRowCount() == 0) {
            return;
         }
-        SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-        SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        COUNTRY = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 2));
-        wdLastRow = DV1.getSelectedRow(); 
-        GUI_Get_Brands();
+ 
     }//GEN-LAST:event_DV1MouseClicked
     private void C360_AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_C360_AncestorAdded
         jPanel1.addComponentListener(new ComponentListener() {
@@ -952,16 +944,13 @@ public class C360_GUI extends javax.swing.JInternalFrame {
            return;
         }
         d2LastRow = DV2.getSelectedRow(); 
-        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        Location = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
-        GUI_Get_Brand_Sector();
+
     }//GEN-LAST:event_DV2MouseClicked
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(!Load && evt.getStateChange() == 1) {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             this.setTitle("C360 Automation Manager >>> Changing Application,  please wait...");
             app = cmbApp.getSelectedItem().toString();
-            GUI_Get_Sites();
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
@@ -1059,7 +1048,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             url = "http://cafe360.compassdigital.org/";
         }    
         
-        Get_AP3_TKN();
         GUI_Load_CONFIG(); 
         
         if (CONFIG) {
@@ -1069,477 +1057,9 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         app = cmbApp.getSelectedItem().toString();
         //GUI_Get_Sectors(); // load 1st to be ready for selection by BrandSector
-        GUI_Get_Sites();
+        //GUI_Get_Sites();
     }
 
-    private void Get_AP3_TKN(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
-        try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
-            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM [dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
-            rs.next();
-            AP3_TKN = rs.getString(1);
-            conn.close();
-        } catch (SQLException ex) {
-            txtLog.append( "= AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    private void GUI_Get_Sites() {
-        
-if(true){
-    return;
-}       
-        wdLastRow = -1;
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Sites ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        _t++; sw1.start(); 
-        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
-        appId = A.Func.App_ID(cmbApp.getSelectedItem().toString(), env);
-
-        String[] SitesColumnsName = {"Site","Platform","Country","Id"}; 
-        DefaultTableModel SitesModel = new DefaultTableModel();
-        SitesModel.setColumnIdentifiers(SitesColumnsName);
-        DV1.setModel(SitesModel);
-        
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
-        DV1.setRowSorter(sorter);
-        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-        sorter.setSortKeys(sortKeys);  
-        sorter.setSortable(0, false); 
-               
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/multigroup/" + appId);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + response.getStatusLine().getStatusCode() + " - " + response.getStatusLine().getReasonPhrase());
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-            
-            String site;
-            String country;
-            String id;
-            JSONObject addresses;
-            JSONObject meta;
-
-            JSONArray Groups = json.getJSONArray("groups");
-            for (int i = 0; i < Groups.length(); i++) {
-                site = "";
-                country = "null";
-                id = "null";
-                addresses = null;
-                meta = null;
-                platform = "DH";
-                JSONObject object = Groups.getJSONObject(i);
-                if(object.has("name")){
-                    site = object.getString("name");   
-                } 
-                if(object.has("id")){
-                    id = object.getString("id");
-                } 
-                if(object.has("meta")){
-                    meta = object.getJSONObject("meta");
-                    if (meta.has("migrated") && meta.getBoolean("migrated")){
-                        platform = "CDL migrated";
-                    }
-                }              
-                if (id.length() > 50) {
-                    platform = "CDL";
-                } 
-
-                if(object.has("address")){
-                    addresses = object.getJSONObject("address");
-                }  
-                if(addresses != null && addresses.has("country")){
-                    country = addresses.getString("country");   
-                }
-                SitesModel.addRow(new Object[]{site, platform, country, id});
-            }
-            DV1.setModel(SitesModel);
-            DV1.setDefaultEditor(Object.class, null);
-            DV1.getColumnModel().getColumn(0).setPreferredWidth(250);
-            DV1.getColumnModel().getColumn(1).setPreferredWidth(70);
-            DV1.getColumnModel().getColumn(2).setPreferredWidth(50);
-            DV1.getColumnModel().getColumn(3).setPreferredWidth(400);
-            
-            sorter.setSortable(0, true); 
-            sorter.sort(); 
-   
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());      
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-            }
-        }
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-        
-        if (DV1.getRowCount() > 0) {
-            DV1.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(SITE.trim())) {
-                for(int row = 0; row < DV1.getRowCount(); row++) {
-                    if(DV1.getValueAt(row, 0).equals(SITE)){
-                        DV1.changeSelection(row, 0, false, false);
-                        break;
-                    }
-                }
-            } 
-//            DV1.repaint();
-            SITE = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
-            SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-            GUI_Get_Brands();
-        }
-        lblSITES.setText(app + " Sites (" + DV1.getRowCount() + " found)");
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-    }
-    private void GUI_Get_Brands() {
-        d2LastRow = -1;
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Brands ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        _t++; sw1.start(); 
-        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
-     
-        String[] BrandsColumnsName = {"Station","Location","Brand Id", "Unit ID"}; 
-        DefaultTableModel BrandsModel = new DefaultTableModel();
-        BrandsModel.setColumnIdentifiers(BrandsColumnsName);
-        DV2.setModel(BrandsModel);
-        
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV2.getModel());
-        DV2.setRowSorter(sorter);
-        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-        sorter.setSortKeys(sortKeys);  
-        sorter.setSortable(0, false);         
-        
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?extended=true&nocache=1"); 
-            //HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3)); 
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-            JSONArray Loc = json.getJSONArray("locations");
-            JSONArray brands = null;
-            
-            String brand;
-            String location;
-            String id;
-            String unit_id;
-            if (Location != null) {
-                for (Object l : Loc) {
-                    brand = "";
-                    location = "";
-                    id = "";
-                    unit_id = "";
-                    JSONObject loc = (JSONObject) l;
-                    if (loc.has("brands")) {
-                        brands = loc.getJSONArray("brands");
-                        for (Object b : brands) {
-                            JSONObject br = (JSONObject) b;
-                            brand = br.getString("name");                            
-                            if (!br.isNull("location_description")) {
-                                location = br.getString("location_description");
-                            }
-                            id = br.getString("id");
-                            unit_id = loc.getString("id");
-                            BrandsModel.addRow(new Object[]{brand, location, id, unit_id});
-                        }
-                    }
-                }
-            }
-            DV2.setModel(BrandsModel);    
-            DV2.setDefaultEditor(Object.class, null);
-            DV2.getColumnModel().getColumn(0).setPreferredWidth(140);
-            DV2.getColumnModel().getColumn(1).setPreferredWidth(140);
-            DV2.getColumnModel().getColumn(2).setPreferredWidth(80);
-            
-            sorter.setSortable(0, true); 
-            sorter.sort(); 
-            
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n"); 
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());     
-        }         
-        finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");   
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-   
-        if (DV2.getRowCount() > 0) {
-            DV2.changeSelection(0, 0, false, false);
-            if (CONFIG && !"".equals(BRAND.trim()))
-            {
-                for(int row = 0; row < DV2.getRowCount(); row++) {
-                    if(DV2.getValueAt(row, 0).equals(BRAND)){
-                        DV2.changeSelection(row, 0, false, false);
-                        break;
-                    } 
-                }
-            }
-            BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-            Location = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
-        } else {
-            BrandID = "null";
-            Location = "";
-        }
-        d2LastRow = DV2.getSelectedRow();
-        SiteID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 3));
-        lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        
-        GUI_Get_Brand_Sector();
-    }
-
-    private void GUI_Get_Sectors() {  
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Groups/Sector ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        SECTORS = new ArrayList<>();
-        SECTOR_IDS = new ArrayList<>();
-        
-        Load = true;
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        _t++; sw1.start(); 
-        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
-     
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-            JSONArray Sectors = json.getJSONArray("sectors");           
-            for (int i = 0; i < Sectors.length(); i++) {
-                SECTORS.add(Sectors.getJSONObject(i).getString("name"));
-                SECTOR_IDS.add(Sectors.getJSONObject(i).getString("id"));
-            }
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        } finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            }
-        } 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        Load = false;  
-    }
-    private void GUI_Get_Brand_Sector() {  
-        txtLog.append("- Get Brand's Group/Sector" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        if(DV2.getRowCount() < 1){
-            txtLog.append("==== No Brands" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            return;
-        }
-        BrandID = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 2));
-        SectorID = "";
-        CompanyID = "";
-        int SectorIndex = -1;
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            if(sw1.isRunning()){
-                sw1.reset();
-            }
-            sw1.start();        
-     
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1"); 
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            JSONObject json = new JSONObject(httpclient.execute(httpget, responseHandler));        
-            if(json.has("sector")){
-                SectorID = json.getString("sector");
-                if(!SectorID.isEmpty()){
-                    for (int i = 0; i < SECTOR_IDS.size(); i++) {
-                        if(SECTOR_IDS.get(i).equals(SectorID)){
-                            SectorIndex = i;
-                        }
-                    }
-                }   
-            } else{
-                txtLog.append("- Sector ID not Found in this Brand API" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-            if(json.has("company")){
-                CompanyID = json.getString("company");
-            } else{
-                txtLog.append("- Company ID not Found in this Brand API" + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        } finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            }
-        } 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset(); 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));       
-        
-        if(!SectorID.equals("")){
-            txtSector.setText(SECTORS.get(SectorIndex));
-        }else{
-            txtSector.setText("Not Found");
-            txtComp.setText("Not Found");
-        }
-        if(!"".equals(CompanyID)){
-            GUI_Get_Companies();    // Load Brans Companies List after Brand's Gropu/Sector selected
-            GUI_Get_Brand_Company(); // after Brand's Gropu/Sector selected            
-        }
-    } 
- 
-    private void GUI_Get_Companies() {  
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        txtLog.append("- Load Sector/Companies(Menus) ..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-        try { 
-            COMPANIES = new ArrayList<>();
-            COMP_IDS = new ArrayList<>();
-            if(sw1.isRunning()){
-                sw1.reset();
-            }
-            sw1.start();        
-     
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector/" + SectorID + "?expanded=false");
-            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            String responseBody = httpclient.execute(httpget, responseHandler);
-            JSONObject json = new JSONObject(responseBody);
-            JSONArray Coimpanies = json.getJSONArray("companies");           
-            String C_NAME = "";
-            for (int i = 0; i < Coimpanies.length(); i++) {
-                C_NAME = Coimpanies.getJSONObject(i).getString("name");
-                if(!C_NAME.isEmpty()) {
-                    COMPANIES.add(C_NAME);
-                    COMP_IDS.add(Coimpanies.getJSONObject(i).getString("id"));
-                }
-            }
-        } catch (IOException | JSONException ex) {
-            txtLog.append("- GetCompanies: " + ex.getMessage() + "\r\n");  
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-        } finally {
-            try {
-                httpclient.close();
-            } catch (IOException ex) {
-                txtLog.append("- GetCompanies: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());    
-                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            }
-        } 
-        txtLog.append("== " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec ==" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        sw1.reset();
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
-    }
-    private void GUI_Get_Brand_Company(){ // after Brand's Group/Sector slected
-        txtLog.append("- Get Brand's Company/Clobal Menu" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        int CompanyIndex = -1;
-        if(!CompanyID.isEmpty()){
-            for (int i = 0; i < COMP_IDS.size(); i++) {
-                if(COMP_IDS.get(i).equals(CompanyID)){
-                    CompanyIndex = i;
-                }
-            }
-        }  
-        if(!CompanyID.equals("")){
-            txtComp.setText(COMPANIES.get(CompanyIndex));
-        }else{
-            txtComp.setText("Not Found");
-            txtLog.append("- Company ID not Found in this Brand API" + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        }
-    }
-    
     protected void Current_Log_Update(boolean GUI, String Text){
         if(GUI){
             txtLog.append(Text);
@@ -1729,7 +1249,6 @@ if(true){
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("DH_MENU_ID: ")) txtDH_Id.setText(value);
                 
                 if(l.contains("nWaitElement: ")) nWaitElement.setValue(Double.parseDouble(value));
                 if(l.contains("nWaitLoad: ")) nWaitLoad.setValue(Double.parseDouble(value));
@@ -1740,15 +1259,15 @@ if(true){
                 
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_mobile_view: ")) _mobile_view.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_site: "))  _site.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_concepts: "))  _concepts.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_site_new: "))  _site_new.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_brand_new: "))  _brand_new.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_brand: "))  _brand.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_concept_groups: "))  _concept_groups.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_group_management: "))  _group_management.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_menu_manager: "))  _menu_manager.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_bulk_apply: "))  _bulk_apply.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_ivalid_entries: "))  _invalid_entries.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_orders: "))  _orders.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_posid_ranges: "))  _posid_ranges.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_sales_reporting: "))  _sales_reporting.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_users: "))  _users.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_resent_updates: "))  _resent_updates.setSelected(Boolean.parseBoolean(value));
@@ -1795,7 +1314,6 @@ if(true){
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
             C += "COUNTRY: " + COUNTRY + "\r\n";
-            C += "DH_MENU_ID: " + txtDH_Id.getText() + "\r\n";
             
             C += "nWaitElement: " + nWaitElement.getValue() + "\r\n";
             C += "nWaitLoad: " + nWaitLoad.getValue() + "\r\n";
@@ -1806,15 +1324,15 @@ if(true){
             
             C += "_headless: " + _headless.isSelected() + "\r\n";  
             C += "_mobile_view: " + _mobile_view.isSelected() + "\r\n";
-            C += "_site: " + _site.isSelected() + "\r\n";
+            C += "_concepts: " + _concepts.isSelected() + "\r\n";
             C += "_site_new: " + _site_new.isSelected() + "\r\n";
             C += "_brand_new: " + _brand_new.isSelected() + "\r\n";
-            C += "_brand: " + _brand.isSelected() + "\r\n";
+            C += "_concept_groups: " + _concept_groups.isSelected() + "\r\n";
             C += "_group_management: " + _group_management.isSelected() + "\r\n";
             C += "_menu_manager: " + _menu_manager.isSelected() + "\r\n";
             C += "_bulk_apply: " + _bulk_apply.isSelected() + "\r\n";
             C += "_ivalid_entries: " + _invalid_entries.isSelected() + "\r\n";
-            C += "_orders: " + _orders.isSelected() + "\r\n";
+            C += "_posid_ranges: " + _posid_ranges.isSelected() + "\r\n";
             C += "_sales_reporting: " + _sales_reporting.isSelected() + "\r\n";
             C += "_users: " + _users.isSelected() + "\r\n";
             C += "_resent_updates: " + _resent_updates.isSelected() + "\r\n";
@@ -1871,6 +1389,7 @@ if(true){
         Slack_Channel = txtSlackCh.getText();
         _Slack = _slack.isSelected();
         _Mobile_view = _mobile_view.isSelected();
+        
         try{    
             run_start = Instant.now();
             Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -1896,8 +1415,13 @@ if(true){
             USER_NAME = txtUSER_NAME.getText();
             USER_PW = new String(txtUSER_PW.getPassword()); 
 
-            ALL_DATA = _all_data.isSelected();
-            DH_MENU_ID = txtDH_Id.getText(); // like NWEJgN87Q3Sw46JaQ1Q, length > 18
+            _All_data = _all_data.isSelected();
+            _Users = _users.isSelected();
+            _Invalid_entries = _invalid_entries.isSelected();
+            _Concepts = _concepts.isSelected();
+            _Concept_groups = _concept_groups.isSelected();
+            _Posid_ranges = _posid_ranges.isSelected();
+
             
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
@@ -2013,15 +1537,17 @@ if(true){
                 if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
                 if(l.contains("_ivalid_entries: ")) _Invalid_entries = Boolean.parseBoolean(value);
-                if(l.contains("_site: ")) _Site = Boolean.parseBoolean(value);
+                if(l.contains("_concepts: ")) _Concepts = Boolean.parseBoolean(value);
+                if(l.contains("_concept_groups: ")) _Concept_groups = Boolean.parseBoolean(value);
+                if(l.contains("_posid_ranges: ")) _Posid_ranges = Boolean.parseBoolean(value);
+                if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value); 
+                
                 if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
                 if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand: ")) _Brand = Boolean.parseBoolean(value);
                 if(l.contains("_group_management: ")) _Group_management = Boolean.parseBoolean(value);
                 if(l.contains("_menu_manager: ")) _Menu_manager = Boolean.parseBoolean(value);
                 if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
- 
-                if(l.contains("_orders: ")) _Orders = Boolean.parseBoolean(value);
+
                 if(l.contains("_sales_reporting: ")) _Sales_reporting = Boolean.parseBoolean(value);
                 if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
                 if(l.contains("_resent_updates: ")) _Resent_updates = Boolean.parseBoolean(value);
@@ -2029,7 +1555,6 @@ if(true){
                 if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
                 if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
                 if(l.contains("_roles: ")) _Roles = Boolean.parseBoolean(value);
-                if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value);
                 if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
             }            
             CONFIG = true;
@@ -2474,13 +1999,13 @@ if(true){
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
             Login_OK = BR.Login_OK;
-            ParentTest.getModel().setName("Login: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Login/Navigation Tree: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());            
         }
         if(!Login_OK){
             return;
         }
-        if(true){
+        if(_Users){
             SCOPE += "User Management, ";
             ParentTest = HtmlReport.createTest("User Management"); 
             user_management BR = new C360.user_management(C360_GUI.this);
@@ -2489,15 +2014,33 @@ if(true){
             ParentTest.getModel().setName("Users: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }
-        if(true){
-            SCOPE += "Item Catalog";
-            ParentTest = HtmlReport.createTest("Item Catalog"); 
-            item_catalog BR = new C360.item_catalog(C360_GUI.this);
+        if(_Concepts){
+            SCOPE += "Concepts, ";
+            ParentTest = HtmlReport.createTest("Concepts"); 
+            concepts BR = new C360.concepts(C360_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
-            ParentTest.getModel().setName("Item Catalog: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Concepts: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
-        }        
+        }      
+        if(_Concept_groups){
+            SCOPE += "Concept Groups, ";
+            ParentTest = HtmlReport.createTest("Concept Groups"); 
+            concepts_groups BR = new C360.concepts_groups(C360_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
+            ParentTest.getModel().setName("Concept Groups: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        } 
+        if(_Posid_ranges){
+            SCOPE += "POSID ranges, ";
+            ParentTest = HtmlReport.createTest("POSID ranges"); 
+            posid_ranges BR = new C360.posid_ranges(C360_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
+            ParentTest.getModel().setName("POSID ranges: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }         
     }
 
     // <editor-fold defaultstate="collapsed" desc="Driver Actions > Log Step Result">  
@@ -4822,51 +4365,51 @@ if(true){
         } 
         sw1.reset();
     }
-    protected void List_Child_E1_By_Path(String NAME, List<WebElement> L, int I, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void List_Child_E1_By_Path(String NAME, WebElement E, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
         _t++; sw1.start(); 
-        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
  
         FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
-                    e1 = L.get(I).findElement(By.xpath(PATH));
+                    e1 = E.findElement(By.xpath(PATH));
                     break;
                 case "css":
-                    e1 = L.get(I).findElement(By.cssSelector(PATH));
+                    e1 = E.findElement(By.cssSelector(PATH));
                     break;
                 case "className":
-                    e1 = L.get(I).findElement(By.className(PATH));
+                    e1 = E.findElement(By.className(PATH));
                     break;
                 case "id":
-                    e1 = L.get(I).findElement(By.id(PATH));
+                    e1 = E.findElement(By.id(PATH));
                     break;
                 case "tagName":
-                    e1 = L.get(I).findElement(By.tagName(PATH));
+                    e1 = E.findElement(By.tagName(PATH));
                     break;
                 case "name":
-                    e1 = L.get(I).findElement(By.name(PATH));
+                    e1 = E.findElement(By.name(PATH));
                     break;
                 case "linkText":
-                    e1 = L.get(I).findElement(By.linkText(PATH));
+                    e1 = E.findElement(By.linkText(PATH));
                     break;
                 case "partialLinkText":
-                    e1 = L.get(I).findElement(By.partialLinkText(PATH));
+                    e1 = E.findElement(By.partialLinkText(PATH));
                     break;
                 default:
                     break;
             }
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + "List index " + I + " > " + PATH + "\t" + "element found" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "PAssed Element " + " > " + PATH + "\t" + "element found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "List index " + I + " > " + PATH + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element " + " > " + PATH + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -5451,6 +4994,7 @@ if(true){
                 _f++; 
                 EX += _t + "\t == " + NAME + "\t" + "Wrong From - To Format" + "\t" + from_to + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                                                    
+                Log_Html_Result("FAIL", "Wrong From - To Format", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -5928,9 +5472,10 @@ if(true){
     private javax.swing.JTable DV2;
     private javax.swing.JCheckBox _all_data;
     private javax.swing.JCheckBox _announcements;
-    private javax.swing.JCheckBox _brand;
     private javax.swing.JCheckBox _brand_new;
     private javax.swing.JCheckBox _bulk_apply;
+    private javax.swing.JCheckBox _concept_groups;
+    private javax.swing.JCheckBox _concepts;
     private javax.swing.JCheckBox _group_management;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _invalid_entries;
@@ -5939,14 +5484,13 @@ if(true){
     private javax.swing.JCheckBox _menu_manager;
     private javax.swing.JCheckBox _mobile_view;
     private javax.swing.JCheckBox _notifications;
-    private javax.swing.JCheckBox _orders;
     private javax.swing.JCheckBox _password;
+    private javax.swing.JCheckBox _posid_ranges;
     private javax.swing.JCheckBox _promo;
     private javax.swing.JCheckBox _resent_updates;
     private javax.swing.JCheckBox _roles;
     private javax.swing.JCheckBox _sales_analytics;
     private javax.swing.JCheckBox _sales_reporting;
-    private javax.swing.JCheckBox _site;
     private javax.swing.JCheckBox _site_new;
     private javax.swing.JCheckBox _slack;
     private javax.swing.JCheckBox _smart_analytics;
@@ -5972,7 +5516,6 @@ if(true){
     private javax.swing.JLabel lblSITES12;
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES14;
-    private javax.swing.JLabel lblSITES15;
     private javax.swing.JLabel lblSITES16;
     private javax.swing.JLabel lblSITES4;
     private javax.swing.JLabel lblSITES5;
@@ -5981,7 +5524,6 @@ if(true){
     private javax.swing.JSpinner nWaitElement;
     private javax.swing.JSpinner nWaitLoad;
     private javax.swing.JTextField txtComp;
-    private javax.swing.JTextField txtDH_Id;
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtSector;
     private javax.swing.JTextField txtSlackCh;
