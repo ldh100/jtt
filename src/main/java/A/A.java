@@ -1420,7 +1420,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         }
-        Jobs.Jobs jobs = new Jobs.Jobs();
+        Jobs.Jobs_GUI jobs = new Jobs.Jobs_GUI();
         this.DesktopPane.add(jobs);
         int Y;
         int X;

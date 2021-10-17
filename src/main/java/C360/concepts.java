@@ -44,7 +44,7 @@ class concepts extends C360_GUI{
              if (FAIL) { return;}                     
         Element_Child_List_L1("Table Rows", e1, "tagName", "tr", ParentTest, "no_jira");
             for (int i = 0; i < L1.size(); i++) {
-                Element_Text("Table Row " + (i + 1), L1.get(i), ParentTest, "no_jira"); 
+                Element_Text("Get Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira"); 
                 if(!_All_data) { break;}
             }
             

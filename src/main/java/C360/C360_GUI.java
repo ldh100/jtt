@@ -1390,7 +1390,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         Slack_Channel = txtSlackCh.getText();
         _Slack = _slack.isSelected();
         _Mobile_view = _mobile_view.isSelected();
-        
+        _Headless = _headless.isSelected();
+           
         try{    
             run_start = Instant.now();
             Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -1422,7 +1423,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             _Concepts = _concepts.isSelected();
             _Concept_groups = _concept_groups.isSelected();
             _Posid_ranges = _posid_ranges.isSelected();
-
+ 
             
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
