@@ -192,6 +192,7 @@ public class Orders extends javax.swing.JInternalFrame {
         lblSITES4.setAlignmentX(0.5F);
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_ID.setText("App_User@?.?");
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -200,6 +201,7 @@ public class Orders extends javax.swing.JInternalFrame {
         lblSITES6.setAlignmentX(0.5F);
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_PW.setText("password");
 
         btnOR_User.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N

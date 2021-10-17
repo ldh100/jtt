@@ -88,7 +88,6 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         for (int i = 0; i < L0.size(); i++) {
             Element_Text("Sites Data Row Text", L0.get(i), ParentTest, "no_jira");             
-            if (FAIL) { return;}
         }        
         List_L1("Sortable Columns Count", "css", "[role='columnheader']", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -162,11 +161,9 @@ class AP3_site extends AP3_GUI{
             if (_All_data)  {
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Text("Sites Data Row Text", L0.get(i), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
                 } 
             } else {
-                    Element_Text("Sites Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
-                    if (FAIL) { return;}        
+                Element_Text("Sites Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");                   
             }       
         Element_Click("Country Sort Click", L1.get(1), ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -179,11 +176,9 @@ class AP3_site extends AP3_GUI{
             if (_All_data)  {
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Text("Sites Data Row Text", L0.get(i), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
                 } 
             } else {
-                Element_Text("Sites Data Row Text", L0.get(L0.size() - 1), ParentTest, "no_jira");             
-                if (FAIL) { return;}        
+                Element_Text("Sites Data Row Text", L0.get(L0.size() - 1), ParentTest, "no_jira");                  
             }
         Element_Click("Country Sort Click", L1.get(1), ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -196,11 +191,9 @@ class AP3_site extends AP3_GUI{
             if (_All_data)  {
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Text("Sites Data Row Text", L0.get(i), ParentTest, "no_jira");             
-                    if (FAIL) { return;}
                 } 
             } else {
-                    Element_Text("Sites Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
-                    if (FAIL) { return;}        
+                Element_Text("Sites Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");              
             }       
         Element_Click("City Sort Click", L1.get(2), ParentTest, "no_jira"); 
             if (FAIL) { return;} 

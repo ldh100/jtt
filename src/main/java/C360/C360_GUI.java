@@ -735,6 +735,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 424, 96));
 
         txtUSER_NAME.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtUSER_NAME.setForeground(new java.awt.Color(255, 0, 51));
         txtUSER_NAME.setText("C360.UserName");
         getContentPane().add(txtUSER_NAME, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 292, 148, -1));
 

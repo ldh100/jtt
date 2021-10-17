@@ -134,9 +134,7 @@ class AP3_notifications extends AP3_GUI{
         List_L2("List of Breadcrumb Items", "xpath", "//a[contains(@class,'v-breadcrumbs__item')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Text("AP3 Notification Management", L2.get(0), ParentTest, "no_jira");
-            if (FAIL) { return;}
         Element_Text("Create New In App Notification", L2.get(1), ParentTest, "no_jira");
-            if (FAIL) { return;}
         List_L1("List of Notification Cofiguration Sections", "xpath", "//div[contains(@class,'v-card-content')]/parent::div/parent::div", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Child_Text("Notification Name", L1.get(0), "xpath", "//div[contains(text(),'Notification Name')]", ParentTest, "no_jira");

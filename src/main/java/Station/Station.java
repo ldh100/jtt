@@ -90,7 +90,6 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES6 = new javax.swing.JLabel();
         txtMobile_PW = new javax.swing.JTextField();
         lblSITES7 = new javax.swing.JLabel();
-        txtPROMO = new javax.swing.JTextField();
         lblBDOFF = new javax.swing.JLabel();
         btnDOrder = new javax.swing.JButton();
         btnPOrder = new javax.swing.JButton();
@@ -98,6 +97,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtMSG = new javax.swing.JTextField();
         lblSITES8 = new javax.swing.JLabel();
         btnSCart = new javax.swing.JButton();
+        cmbPROMO = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -110,12 +110,12 @@ public class Station extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(850, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -387,6 +387,7 @@ public class Station extends javax.swing.JInternalFrame {
         getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 364, 108, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_ID.setText("App_User@?.?");
         getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 379, 176, 20));
 
@@ -397,6 +398,7 @@ public class Station extends javax.swing.JInternalFrame {
         getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 400, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_PW.setText("password");
         getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 416, 176, 20));
 
@@ -405,10 +407,6 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES7.setText("Your custom text in Order 'PickupName'");
         lblSITES7.setAlignmentX(0.5F);
         getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 440, 240, -1));
-
-        txtPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtPROMO.setText("None");
-        getContentPane().add(txtPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 380, 136, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -462,6 +460,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 448, 136, 22));
+
+        cmbPROMO.setEditable(true);
+        cmbPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbPROMO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "compassunlimited", "boostper8", "promo100" }));
+        getContentPane().add(cmbPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 380, 136, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1804,11 +1807,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }  
         
-        if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){
-            txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Pickup Shopping Cart ...."+ "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Pickup ShoppingCart1", 
-            requestParams.put("code", txtPROMO.getText());
+        if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...."+ "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
+            requestParams.put("code", cmbPROMO.getSelectedItem().toString());
             requestParams.put("email", Mobile_User_ID);
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/promo", Auth, BODY);        
@@ -1916,11 +1919,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } 
         
-        if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){   
-            txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Delivery Shopping Cart ...."+ "\r\n");
+        if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...."+ "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
-            requestParams.put("code", txtPROMO.getText());
+            requestParams.put("code", cmbPROMO.getSelectedItem().toString());
             requestParams.put("email", Mobile_User_ID);
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/promo", Auth, BODY);        
@@ -2173,18 +2176,7 @@ public class Station extends javax.swing.JInternalFrame {
         ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date = new Date();
-        date.setTime(date.getTime() + 20000); // now + 20 sec
-        String requested_date = dateFormat.format(date);
 
-        JSONObject is = new JSONObject(); 
-        is.put("in_progress", true);
-        is.put("ready", true);     
-        requestParams.put("is", is); 
-        requestParams.put("requested_date", requested_date); 
-        
-        BODY = requestParams.toString();
-        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY);        
         if(json != null){
             try {
                 Order_Delivery_ID = json.getString("id");
@@ -2264,6 +2256,7 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbLoc;
+    private javax.swing.JComboBox<String> cmbPROMO;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2287,7 +2280,6 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMSG;
     private javax.swing.JTextField txtMobile_ID;
     private javax.swing.JTextField txtMobile_PW;
-    private javax.swing.JTextField txtPROMO;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }
