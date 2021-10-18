@@ -1,6 +1,6 @@
 package C360;
-class user_management extends C360_GUI{
-    protected user_management(C360_GUI a) {
+class users extends C360_GUI{
+    protected users(C360_GUI a) {
         USER_NAME = a.USER_NAME;
         USER_PW = a.USER_PW;
         url = a.url;
@@ -9,6 +9,7 @@ class user_management extends C360_GUI{
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
         _All_data = a._All_data;        
+        New_ID = a.New_ID;
     }
     protected void run() {   
     try { 

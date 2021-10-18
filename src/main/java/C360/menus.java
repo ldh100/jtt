@@ -1,6 +1,6 @@
 package C360;
-class posid_ranges extends C360_GUI{
-    protected posid_ranges(C360_GUI a) {
+class menus extends C360_GUI{
+    protected menus(C360_GUI a) {
         USER_NAME = a.USER_NAME;
         USER_PW = a.USER_PW;
         url = a.url;
@@ -8,7 +8,7 @@ class posid_ranges extends C360_GUI{
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
-        _All_data = a._All_data;        
+        _All_data = a._All_data; 
         New_ID = a.New_ID;
     }
     protected void run() {   
@@ -28,8 +28,8 @@ class posid_ranges extends C360_GUI{
         Element_Child_Click("Click/Expand 'Item Catalog", L0.get(T_Index), "xpath", ".//button[@class='p-tree-toggler p-link']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Child_List_L1("'Item Catalog' navigation nodes", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
-        Find_Text("Find Navigation node 'POSID Ranges'", "POSID Ranges", true, ParentTest, "no_jira");    
-        Element_By_Path_Click("Click > 'POSID Ranges'", "xpath", "//a[@label='POSID Ranges']/ancestor::span[@class='p-treenode-label']", ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'Menus'", "POSID Ranges", true, ParentTest, "no_jira");    
+        Element_By_Path_Click("Click > 'Menus'", "xpath", "//a[@label='Menus']/ancestor::span[@class='p-treenode-label']", ParentTest, "no_jira"); 
              if (FAIL) { return;}           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                   
              if (FAIL) { return;}                     
@@ -51,7 +51,7 @@ class posid_ranges extends C360_GUI{
                 if(!_All_data) { break;}
             }
             
-        Element_By_Path_Text("Find 'New POSID Range' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
+        Element_By_Path_Text("Find 'New Menu' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
         Element_By_Path_Click("Click 'New POSID Range' button", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
              if (FAIL) { return;}
         Thread.sleep(500);        

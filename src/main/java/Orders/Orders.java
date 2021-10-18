@@ -59,6 +59,9 @@ public class Orders extends javax.swing.JInternalFrame {
         btnOR_Site = new javax.swing.JButton();
         btnOR_Brand = new javax.swing.JButton();
         btnCart = new javax.swing.JButton();
+        cmbDAYS = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         DV_Sites = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -74,12 +77,12 @@ public class Orders extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -232,7 +235,7 @@ public class Orders extends javax.swing.JInternalFrame {
         });
 
         btnCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnCart.setText("Selected Cart & Order");
+        btnCart.setText(" ^ Print Selected Cart & Order");
         btnCart.setEnabled(false);
         btnCart.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCart.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -241,54 +244,76 @@ public class Orders extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbDAYS.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbDAYS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7", "14", "30", "60", "120" }));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("Last");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel2.setText("days");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtMobile_ID)
+                    .addComponent(txtMobile_PW)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES6))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtMobile_ID, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMobile_PW, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSITES6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(cmbDAYS, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(16, 16, 16)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnOR_User, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(16, 16, 16)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(btnOR_User, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(9, 49, Short.MAX_VALUE)
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbDAYS, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSITES4)
                         .addGap(2, 2, 2)
                         .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,9 +323,7 @@ public class Orders extends javax.swing.JInternalFrame {
                         .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(0, 42, Short.MAX_VALUE)
                         .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -515,15 +538,16 @@ public class Orders extends javax.swing.JInternalFrame {
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
         
+        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
         
         Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
         //Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
         
         Load_Orders("SITE");      
         // &_query=%7Borders%7BALL%7D%7D"
-        lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
+        lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last " +  cmbDAYS.getSelectedItem().toString() + " days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -535,15 +559,16 @@ public class Orders extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_TKN;
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
-        
-        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+
+        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        long m1 = System.currentTimeMillis() + (1*24*3600*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (Days_Back*24*3600*1000);  // Now - Days_Back days > default 7
         
         Api_Call("GET",  BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
         
         Load_Orders("BRAND");
         
-        lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
+        lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last " +  cmbDAYS.getSelectedItem().toString() + " days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " > " + BRAND + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -902,8 +927,9 @@ public class Orders extends javax.swing.JInternalFrame {
             return;
         }
                
+        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
         
         txtLog.append("\r\n- Get Mobile User Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -916,7 +942,7 @@ public class Orders extends javax.swing.JInternalFrame {
         //Api_Call("GET",  BaseAPI + "/order/customer/" + Mobile_User_ID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
         
         Load_Orders("USER");
-        lblOrders.setText(env + ": Mobile User " + txtMobile_ID.getText() + "  >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
+        lblOrders.setText(env + ": Mobile User " + txtMobile_ID.getText() + "  >>>  Last " +  cmbDAYS.getSelectedItem().toString() + " days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + txtMobile_ID.getText() + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }   
@@ -1160,7 +1186,10 @@ public class Orders extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnOR_User;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
+    private javax.swing.JComboBox<String> cmbDAYS;
     private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

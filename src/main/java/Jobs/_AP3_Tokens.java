@@ -48,7 +48,7 @@ public class _AP3_Tokens {
                     _update.executeUpdate();  
                 } catch (SQLException ex) {
                     _f++;
-                    Log += "  > " + ex.getMessage();
+                    Log += "SQL > " + ex.getMessage();
                 }
             }
             JOB_Api_Call("https://api.compassdigital.org/staging/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH); //  ST       
@@ -58,7 +58,7 @@ public class _AP3_Tokens {
                     _update.executeUpdate(); 
                 } catch (SQLException ex) {
                     _f++;
-                    Log += "  > " + ex.getMessage();
+                    Log += "SQL > " + ex.getMessage();
                 }                    
             }
             JOB_Api_Call("https://api.compassdigital.org/v1/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH);     //  PR       
@@ -68,7 +68,7 @@ public class _AP3_Tokens {
                     _update.executeUpdate();
                 } catch (SQLException ex) {
                     _f++;
-                    Log += "  > " + ex.getMessage();
+                    Log += "SQL > " + ex.getMessage();
                 } 
             }
 
@@ -96,18 +96,18 @@ public class _AP3_Tokens {
                 JSONObject json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     _f++;
-                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " Error: " + json.getString("error") + ". ";
+                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: " + json.getString("error") + ". ";
                 }else{
                     TKN = json.getString("token");
-                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " > TKN: " + TKN;
+                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> TKN: " + TKN;
                 }
             }else{
                 _f++;
-                Log += "\r\n" + "=== API Endpoint: " + EndPoint + " Error: Responce is Not JSON";
+                Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: Responce is Not JSON";
             }
         } catch (Exception ex) {
             _f++;
-            Log += "\r\n" + "API Call Error: " + ex.getMessage().trim();
+            Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: " + ex.getMessage().trim();
         }
     }
 

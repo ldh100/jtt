@@ -9,6 +9,7 @@ class concepts_groups extends C360_GUI{
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
         _All_data = a._All_data;
+        New_ID = a.New_ID;
     }
     protected void run() {   
     try { 
