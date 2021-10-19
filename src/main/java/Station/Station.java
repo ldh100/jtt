@@ -1268,9 +1268,10 @@ public class Station extends javax.swing.JInternalFrame {
             String label = "";
             String price = "?";
             String id = "?";
+            String Taxes = "";
 
             JArray_ITEMS = new JSONArray();
-            String[] ColumnsNames = {"Category", "Item", "Price", "Qty", "hidden","disabled","item_id", "cat_id"}; 
+            String[] ColumnsNames = {"Category", "Item", "Price", "Qty", "hidden","disabled","item_id", "cat_id", "Taxes"}; 
             boolean[] isEditable = {false,false,false,true,false,false};
             DefaultTableModel Model = new DefaultTableModel(){
                 @Override
@@ -1348,7 +1349,14 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 id = "not found";
                             }
-                            Model.addRow(new Object[]{c_name, label, price, "1", hidden, disabled, id, c_id}); 
+                            Taxes = " ";
+                            if(Item.has("meta") && Item.getJSONObject("meta").has("taxes")){
+                               JSONArray taxes = Item.getJSONObject("meta").getJSONArray("taxes");
+                               for (Object tax : taxes) {
+                                   Taxes += tax.toString() + ", ";                                       
+                               }
+                           }                        
+                            Model.addRow(new Object[]{c_name, label, price, "1", hidden, disabled, id, c_id, Taxes}); 
                         }   
                     }
                     DV_Items.setModel(Model);    
@@ -1357,6 +1365,11 @@ public class Station extends javax.swing.JInternalFrame {
                     DV_Items.getColumnModel().getColumn(1).setPreferredWidth(150);
                     DV_Items.getColumnModel().getColumn(2).setPreferredWidth(40);
                     DV_Items.getColumnModel().getColumn(3).setPreferredWidth(30);
+                    DV_Items.getColumnModel().getColumn(4).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(5).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(6).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(7).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(8).setPreferredWidth(140);
                     DV_Items.changeSelection(0, 0, false, false);
                     MenuLastRow = 0;
                 }
@@ -1386,8 +1399,10 @@ public class Station extends javax.swing.JInternalFrame {
             String id = "?";
             String GroupID = "?";
             String GroupName = "?";
+            String TaxPrice = " ";
+            String Taxes = " ";
             
-            String[] ColumnsName = {"Item", "Modifier", "Price", "GroupName", "id", "GroupID"}; 
+            String[] ColumnsName = {"Item", "Modifier", "Price", "GroupName", "id", "GroupID", "TaxPrice", "Taxes"}; 
             DefaultTableModel Model = new DefaultTableModel();
             Model.setColumnIdentifiers(ColumnsName);
             DV_Mods.setModel(Model); 
@@ -1450,7 +1465,19 @@ public class Station extends javax.swing.JInternalFrame {
                                 }else{
                                     price = "Not Found";
                                 }
-                                Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, GroupName, id, GroupID});  
+                                if(OItem.has("meta") && OItem.getJSONObject("meta").has("taxable_price") && OItem.getJSONObject("meta").getJSONObject("taxable_price").has("amount")){
+                                    TaxPrice = "$" + OItem.getJSONObject("meta").getJSONObject("taxable_price").getNumber("amount").toString();
+                                }else{
+                                    TaxPrice = " ";
+                                }
+                                Taxes = " ";
+                                if(OItem.has("meta") && OItem.getJSONObject("meta").has("taxes")){
+                                    JSONArray taxes = OItem.getJSONObject("meta").getJSONArray("taxes");
+                                    for (Object tax : taxes) {
+                                        Taxes += tax.toString() + ", ";                                       
+                                    }
+                                }          
+                                Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, GroupName, id, GroupID, TaxPrice, Taxes});  
                             }
                         }
                     }
@@ -1461,9 +1488,11 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Mods.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV_Mods.getColumnModel().getColumn(1).setPreferredWidth(160);
             DV_Mods.getColumnModel().getColumn(2).setPreferredWidth(40);
-            DV_Mods.getColumnModel().getColumn(3).setPreferredWidth(130);
-            DV_Mods.getColumnModel().getColumn(4).setPreferredWidth(100);
-            DV_Mods.getColumnModel().getColumn(5).setPreferredWidth(100);  
+            DV_Mods.getColumnModel().getColumn(3).setPreferredWidth(120);
+            DV_Mods.getColumnModel().getColumn(4).setPreferredWidth(40);
+            DV_Mods.getColumnModel().getColumn(5).setPreferredWidth(50);  
+            DV_Mods.getColumnModel().getColumn(6).setPreferredWidth(60);              
+            DV_Mods.getColumnModel().getColumn(7).setPreferredWidth(300);  
         }
         catch(Exception ex){
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
