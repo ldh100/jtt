@@ -231,7 +231,7 @@ public class Orders extends javax.swing.JInternalFrame {
         });
 
         btnCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnCart.setText(" ^ Print Selected Cart & Order");
+        btnCart.setText(" ^ Print Selected Order > SCart & Order JSON");
         btnCart.setEnabled(false);
         btnCart.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCart.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -256,46 +256,47 @@ public class Orders extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtMobile_ID)
-                    .addComponent(txtMobile_PW)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES6))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMobile_ID)
+                            .addComponent(txtMobile_PW)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES6))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(16, 16, 16)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnOR_User, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnCart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(cmbDAYS, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11))
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addGap(8, 8, 8)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(16, 16, 16)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(btnOR_User, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(11, 11, 11)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -986,8 +987,9 @@ public class Orders extends javax.swing.JInternalFrame {
         String _Promo = "None";
         String _Name = "?";
         String _Payment = "?";
-
-        String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "PickupName", "Promo", "Payment", "Service","SCartID", "OrderID", "Modified_Date"}; 
+        String _Amount = "?";
+        
+        String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "Amount", "PickupName", "Promo", "Payment", "Service","SCartID", "OrderID", "Modified_Date"}; 
         DefaultTableModel dm = new DefaultTableModel();
         dm.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(dm);
@@ -1010,31 +1012,21 @@ public class Orders extends javax.swing.JInternalFrame {
                 if (!OR.isEmpty()) {
                     for (int i = 0; i < OR.length(); i++) {
                         JSONObject or = OR.getJSONObject(i);
-//                        JSONObject is = or.getJSONObject("is");
-//                        STAT = "";
-//                        if (is.getBoolean("accepted")) {
-//                            STAT = "  Accepted ";
-//                        }
-//                        if (is.getBoolean("in_progress")) {
-//                            STAT = "  In_Progress ";
-//                        }
-//                        if (is.getBoolean("ready")) {
-//                            STAT = "  Ready ";
-//                        }
-//    "payment": {
-//        "credit_card": {
-//            "last4": "4444",
-//            "card_type": "Mastercard"
-//        },
-//        "token": "RE0p0ege2AtlPppvg1ZXC98doLmD2esrOlyq14vOUWQBAEZkEGCoaeRwYB0MueqA5MGDDA"
-//    },
+                        if(or.has("meta") && or.getJSONObject("meta").has("transaction") && or.getJSONObject("meta").getJSONObject("transaction").has("amount")){
+                            _Amount = or.getJSONObject("meta").getJSONObject("transaction").getNumber("amount").toString();
+                        }
+
                         if(or.has("payment") && or.getJSONObject("payment").has("credit_card") && 
                            or.getJSONObject("payment").getJSONObject("credit_card").has("card_type")){
                             _Payment = or.getJSONObject("payment").getJSONObject("credit_card").getString("card_type") +
                                 " x" + or.getJSONObject("payment").getJSONObject("credit_card").getString("last4");
                         } 
-                        
-                        
+                        if(or.has("payment") && or.getJSONObject("payment").has("digital_wallet_pay")){
+                            _Payment = or.getJSONObject("payment").getString("digital_wallet_pay");
+                        }                        
+                        if(or.has("mealplan") && or.getJSONObject("mealplan").has("name")){
+                            _Payment = "MPlan " + or.getJSONObject("mealplan").getString("name");
+                        }                         
                         if(or.has("meta") && or.getJSONObject("meta").has("promo")){
                             _Promo = or.getJSONObject("meta").getJSONObject("promo").getString("code");
                         }
@@ -1047,6 +1039,7 @@ public class Orders extends javax.swing.JInternalFrame {
                         dm.addRow(new Object[]{env, app, _Site,
                             or.getJSONObject("details").getString("destination"),
                             Date_Requested.format(LOC_formatter),
+                            _Amount,
                             _Name,
                             _Promo,                  
                             _Payment, 
@@ -1062,16 +1055,17 @@ public class Orders extends javax.swing.JInternalFrame {
                 DV1.setDefaultEditor(Object.class, null);
                 DV1.getColumnModel().getColumn(0).setPreferredWidth(35); // Env
                 DV1.getColumnModel().getColumn(1).setPreferredWidth(50); // App
-                DV1.getColumnModel().getColumn(2).setPreferredWidth(150); // Site
-                DV1.getColumnModel().getColumn(3).setPreferredWidth(130); // Destination       
+                DV1.getColumnModel().getColumn(2).setPreferredWidth(120); // Site
+                DV1.getColumnModel().getColumn(3).setPreferredWidth(120); // Destination       
                 DV1.getColumnModel().getColumn(4).setPreferredWidth(95);  // req date
-                DV1.getColumnModel().getColumn(5).setPreferredWidth(160); // name           
-                DV1.getColumnModel().getColumn(7).setPreferredWidth(90); // payment
-                DV1.getColumnModel().getColumn(6).setPreferredWidth(70); // service
-                DV1.getColumnModel().getColumn(8).setPreferredWidth(50);  
-                DV1.getColumnModel().getColumn(9).setPreferredWidth(50); 
-                DV1.getColumnModel().getColumn(10).setPreferredWidth(60); 
-                DV1.getColumnModel().getColumn(11).setPreferredWidth(150); 
+                DV1.getColumnModel().getColumn(5).setPreferredWidth(50);  // Amount
+                DV1.getColumnModel().getColumn(6).setPreferredWidth(130); // name           
+                DV1.getColumnModel().getColumn(7).setPreferredWidth(100); // payment
+                DV1.getColumnModel().getColumn(8).setPreferredWidth(70); // service
+                DV1.getColumnModel().getColumn(9).setPreferredWidth(50);  
+                DV1.getColumnModel().getColumn(10).setPreferredWidth(50); 
+                DV1.getColumnModel().getColumn(11).setPreferredWidth(60); 
+                DV1.getColumnModel().getColumn(12).setPreferredWidth(150); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
                 sorter.setSortable(10, true); 
@@ -1096,7 +1090,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String CartID = "";
         Auth = "Bearer " + AP3_TKN;
         try {
-            CartID = DV1.getValueAt(DV1.getSelectedRow(), 9).toString();
+            CartID = DV1.getValueAt(DV1.getSelectedRow(), 10).toString();
             Api_Call(BaseAPI + "/shoppingcart/" + CartID, "");
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4) + "\r\n";
             if(json.has("brand")){
@@ -1118,7 +1112,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String OrderID = "";
 
         try {
-            OrderID = DV1.getValueAt(DV1.getSelectedRow(), 10).toString();
+            OrderID = DV1.getValueAt(DV1.getSelectedRow(), 11).toString();
             Api_Call(BaseAPI + "/order/" + OrderID, Auth);
             J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4) + "\r\n";
         } catch (Exception ex) {
