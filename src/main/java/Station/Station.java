@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Station;
 
 import com.google.common.base.Stopwatch;
@@ -45,8 +40,13 @@ import org.json.JSONObject;
 //promo100-  100%
 //promo100up2- 100%
 //comsonetime- flat 5 dollars
-//compassunlimited- 5 dollars    
-/* 
+//compassunlimited- 5 dollars  
+
+/*  Prod
+        cdltaut98
+        b-boost
+        t-thrive
+
     Production Site for BC 
     https://adminpanel.compassdigital.org/#/sites/Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d/site/PpzmrEBrveH1kX3Zrk3ytzrrB0O1XpSk3m973O9Xcw46vkWyKPtl8JGR17m2TEoDLA2YAETGOo/
     
@@ -1369,7 +1369,7 @@ public class Station extends javax.swing.JInternalFrame {
                     DV_Items.getColumnModel().getColumn(5).setPreferredWidth(40);
                     DV_Items.getColumnModel().getColumn(6).setPreferredWidth(40);
                     DV_Items.getColumnModel().getColumn(7).setPreferredWidth(40);
-                    DV_Items.getColumnModel().getColumn(8).setPreferredWidth(140);
+                    DV_Items.getColumnModel().getColumn(8).setPreferredWidth(300);
                     DV_Items.changeSelection(0, 0, false, false);
                     MenuLastRow = 0;
                 }
@@ -1615,7 +1615,8 @@ public class Station extends javax.swing.JInternalFrame {
                 if(env.equals("PR")){
                     txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
+                    Validate_Place_Order();
                     return;
                 }else{                 
                     EXACT();
@@ -1642,6 +1643,7 @@ public class Station extends javax.swing.JInternalFrame {
                 if(env.equals("PR")){
                     txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }else{                
@@ -1672,6 +1674,7 @@ public class Station extends javax.swing.JInternalFrame {
                     txtLog.append("\r\n=== Place Order In Production is Not Supported. \r\n=== Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    Validate_Place_Order();
                     return;
                 }else{                
                     FP();
@@ -1699,6 +1702,7 @@ public class Station extends javax.swing.JInternalFrame {
                     txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());                    
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    Validate_Place_Order();
                     return;
                 }else{
                     FP();
@@ -1794,7 +1798,7 @@ public class Station extends javax.swing.JInternalFrame {
                 int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[Item_Index],3).toString());
                 jItem.put("quantity", q);
 
-                if(SelectedMods.length >0){
+                if(SelectedMods.length > 0){
                     for(int Mod_Index = 0; Mod_Index < SelectedMods.length; Mod_Index++){
                         if(DV_Items.getValueAt(SelectedItems[Item_Index],1).equals(DV_Mods.getValueAt(SelectedMods[Mod_Index],0))){
                             JSONObject jOption = new JSONObject(); 

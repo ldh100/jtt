@@ -8,7 +8,7 @@ import org.json.JSONObject;
  * For 'Manipulate Global Modifiers' test cases use Site: Ap3 Automation, Brand: Starbucks (App: Thrive)
  * Manually check that the Global Modifier group 'Modifier Manipulation Test Group' with Label in App set to 'MMTG' exists
  * If it doesn't exist, create it manually and add one modifier with Name: existing1, Price: $1, Calories: 100, PLU:111
- * and set any required Chit # to 1, save and publish
+ * and set any required Sequence On Ticket to 1, save and publish
  * Then go to Global Menu and add this Modifier Group to second item in 'Lunch' -> 'Beverages Lunch' menu set,
  * save and publish
  */
@@ -333,12 +333,12 @@ class AP3_menu_manager extends AP3_GUI{
                     Element_Text_Enter("PLU: (" + i + ") Enter", L0.get(i), "60010" + Integer.toString(i*2), ParentTest, "no_jira");             
                     if (FAIL) { return;}
                 }  
-            List_L0("Chit # Count", "css", "[aria-label='']", ParentTest, "no_jira");             
+            List_L0("Sequence On Ticket Count", "css", "[aria-label='Sequence On Ticket']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
                 for (int i = 0; i < L0.size(); i++) {
-                    Element_Click("Chit # (" + i + ") Click", L0.get(i), ParentTest, "no_jira");             
+                    Element_Click("Sequence On Ticket (" + i + ") Click", L0.get(i), ParentTest, "no_jira");             
                         if (FAIL) { return;}
-                    Element_Text_Enter("Chit # (" + i + ") Enter", L0.get(i), Integer.toString(i+2), ParentTest, "no_jira");             
+                    Element_Text_Enter("Sequence On Ticket (" + i + ") Enter", L0.get(i), Integer.toString(i+2), ParentTest, "no_jira");             
                         if (FAIL) { return;}
                 }   
             Element_By_Path_Click("Tax Tags dropdown Click Open", "css", "[aria-label='Tax Tags']", ParentTest, "no_jira");
@@ -884,7 +884,7 @@ class AP3_menu_manager extends AP3_GUI{
             Thread.sleep(500); 
             Element_By_Path_Text_Select_Copy("Label In App", "css", "[aria-label='Label In App']", ParentTest, "no_jira"); 
                 if (FAIL) { return;}          
-            Element_By_Path_Text_Select_Copy("Group Chit #", "css", "[aria-label='']", ParentTest, "no_jira"); 
+            Element_By_Path_Text_Select_Copy("Group Sequence On Ticket", "css", "[aria-label='Sequence On Ticket']", ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
             List_L2("Modifiers Count", "xpath", "//*[@class='layout modifier row wrap align-center']", ParentTest, "no_jira");             
                 if (FAIL) { return;}   

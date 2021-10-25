@@ -527,7 +527,16 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 JobName = DV1.getValueAt(i, 0).toString();
                 String CONFIG = DV1.getValueAt(i, 6).toString();
                 try{
-                    if(JobName.startsWith("API")){              
+                    if(JobName.equals("Tokens_AP3")){              
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Tokens_AP3(JobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
+                        
+                    } else if(JobName.startsWith("API")){              
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_API(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");

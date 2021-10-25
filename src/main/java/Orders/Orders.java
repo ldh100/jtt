@@ -231,7 +231,7 @@ public class Orders extends javax.swing.JInternalFrame {
         });
 
         btnCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnCart.setText(" ^ Print Selected Order > SCart & Order JSON");
+        btnCart.setText(" ^ Selected Order > Print SCart & Order JSON");
         btnCart.setEnabled(false);
         btnCart.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCart.addMouseListener(new java.awt.event.MouseAdapter() {

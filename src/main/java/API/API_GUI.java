@@ -1781,7 +1781,6 @@ public class API_GUI extends javax.swing.JInternalFrame {
         cmbApp.addItem("JJKitchen");
         cmbApp.addItem("Nourish");
         cmbApp.addItem("Rogers");
-        cmbApp.addItem("StandardCognition");
         cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
 
