@@ -3131,6 +3131,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             MENU_IDS = BR.MENU_IDS;
             BRAND_TIMESLOTS = BR.BRAND_TIMESLOTS;
             MENU_TIMESLOTS = BR.MENU_TIMESLOTS;
+            DELIEVEY_TIMESLOTS = BR.DELIEVEY_TIMESLOTS;
             if (MENU_IDS.size() < 1) {
                 EX += " - " + "\t" + "Brand: " + BRAND + "\t" + "No Menu(s)" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
@@ -3187,17 +3188,23 @@ public class API_GUI extends javax.swing.JInternalFrame {
             CATEGORIES_IDS = BR.CATEGORIES_IDS;
             ITEMS_IDS = BR.ITEMS_IDS;
 
-            if (MENU_TIMESLOTS.size() < 1) {
+            if (MENU_TIMESLOTS.isEmpty()) {
+                _t++;
+                _w++;
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Timeslots" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "No Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Timeslots"), new Date());
                 FAIL = true;
-            } else if (CATEGORIES_IDS.size() < 1) {
+            } else if (CATEGORIES_IDS.isEmpty()) {
+                _t++;
+                _w++;
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Categories" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "No Categories", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Categories"), new Date());
-                FAIL = true;
-            } else if (ITEMS_IDS.size() < 1) {
+//FAIL = true;
+            } else if (ITEMS_IDS.isEmpty()) {
+                _t++;
+                _w++;
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Items" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "No Items", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Items"), new Date());

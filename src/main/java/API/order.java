@@ -34,6 +34,7 @@ class order extends API_GUI{
         ITEMS_IDS = a.ITEMS_IDS;
         MENU_TIMESLOTS = a.MENU_TIMESLOTS;
         BRAND_TIMESLOTS = a.BRAND_TIMESLOTS;
+        DELIEVEY_TIMESLOTS = a.DELIEVEY_TIMESLOTS;        
         DELIEVERY_DESTINATIONS = a.DELIEVERY_DESTINATIONS;
         
         ShoppingCart_Delivery_ID = a.ShoppingCart_Delivery_ID;
@@ -45,8 +46,11 @@ class order extends API_GUI{
     }
     JSONObject requestParams = null;
     String AAA = "";
+    String Requested_Date = "";
+    Date requested_date;
+    
     protected void run() {  
-        if (env != "PR") {
+        if (!"PR".equals(env)) {
             PLACE_ORDERS();
         }
         
@@ -95,9 +99,9 @@ class order extends API_GUI{
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        //Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1)) *1000L);
-        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
-        String Requested_Date = sdf.format(requested_date);        
+        requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1)) *1000L);
+        //requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
+        Requested_Date = sdf.format(requested_date);        
 
         requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
         requestParams.put("location_brand", BrandID);
@@ -269,6 +273,9 @@ class order extends API_GUI{
         }         
         
         Auth = "Bearer " + Mobile_User_TKN;
+        requested_date = new Date(Long.parseLong(DELIEVEY_TIMESLOTS.get(DELIEVEY_TIMESLOTS.size() - 1)) *1000L);
+        //requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
+        Requested_Date = sdf.format(requested_date); 
         BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
                 "\"location_brand\":\"" + BrandID + "\"," + 
                 "\"customer\":\"" + Mobile_User_ID + "\"," +  

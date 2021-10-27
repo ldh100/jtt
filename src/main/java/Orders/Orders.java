@@ -1102,9 +1102,8 @@ public class Orders extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
 
-        txtLog.append("== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/shoppingcart/" + CartID + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        sw1.reset();
 
         J += "\r\n==== Order" + "\r\n";
         txtLog.append("- Order..." + "\r\n");
@@ -1120,7 +1119,7 @@ public class Orders extends javax.swing.JInternalFrame {
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("== " + BaseAPI + "/order/" + OrderID + " > " + "\r\n== " + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/order/" + OrderID + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         String R = A.Func.SHOW_FILE(J, "json");
