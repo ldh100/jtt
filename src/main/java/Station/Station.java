@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Station;
 
 import com.google.common.base.Stopwatch;
@@ -45,8 +40,13 @@ import org.json.JSONObject;
 //promo100-  100%
 //promo100up2- 100%
 //comsonetime- flat 5 dollars
-//compassunlimited- 5 dollars    
-/* 
+//compassunlimited- 5 dollars  
+
+/*  Prod
+        cdltaut98
+        b-boost
+        t-thrive
+
     Production Site for BC 
     https://adminpanel.compassdigital.org/#/sites/Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d/site/PpzmrEBrveH1kX3Zrk3ytzrrB0O1XpSk3m973O9Xcw46vkWyKPtl8JGR17m2TEoDLA2YAETGOo/
     
@@ -90,7 +90,6 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES6 = new javax.swing.JLabel();
         txtMobile_PW = new javax.swing.JTextField();
         lblSITES7 = new javax.swing.JLabel();
-        txtPROMO = new javax.swing.JTextField();
         lblBDOFF = new javax.swing.JLabel();
         btnDOrder = new javax.swing.JButton();
         btnPOrder = new javax.swing.JButton();
@@ -98,6 +97,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtMSG = new javax.swing.JTextField();
         lblSITES8 = new javax.swing.JLabel();
         btnSCart = new javax.swing.JButton();
+        cmbPROMO = new javax.swing.JComboBox<>();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -110,12 +110,12 @@ public class Station extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(850, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -387,6 +387,7 @@ public class Station extends javax.swing.JInternalFrame {
         getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 364, 108, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_ID.setText("App_User@?.?");
         getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 379, 176, 20));
 
@@ -397,6 +398,7 @@ public class Station extends javax.swing.JInternalFrame {
         getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 400, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_PW.setText("password");
         getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 416, 176, 20));
 
@@ -405,10 +407,6 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES7.setText("Your custom text in Order 'PickupName'");
         lblSITES7.setAlignmentX(0.5F);
         getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 440, 240, -1));
-
-        txtPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtPROMO.setText("None");
-        getContentPane().add(txtPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 380, 136, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -462,6 +460,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 448, 136, 22));
+
+        cmbPROMO.setEditable(true);
+        cmbPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbPROMO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "compassunlimited", "boostper8", "promo100" }));
+        getContentPane().add(cmbPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 380, 136, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1265,9 +1268,10 @@ public class Station extends javax.swing.JInternalFrame {
             String label = "";
             String price = "?";
             String id = "?";
+            String Taxes = "";
 
             JArray_ITEMS = new JSONArray();
-            String[] ColumnsNames = {"Category", "Item", "Price", "Qty", "hidden","disabled","item_id", "cat_id"}; 
+            String[] ColumnsNames = {"Category", "Item", "Price", "Qty", "hidden","disabled","item_id", "cat_id", "Taxes"}; 
             boolean[] isEditable = {false,false,false,true,false,false};
             DefaultTableModel Model = new DefaultTableModel(){
                 @Override
@@ -1345,7 +1349,14 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 id = "not found";
                             }
-                            Model.addRow(new Object[]{c_name, label, price, "1", hidden, disabled, id, c_id}); 
+                            Taxes = " ";
+                            if(Item.has("meta") && Item.getJSONObject("meta").has("taxes")){
+                               JSONArray taxes = Item.getJSONObject("meta").getJSONArray("taxes");
+                               for (Object tax : taxes) {
+                                   Taxes += tax.toString() + ", ";                                       
+                               }
+                           }                        
+                            Model.addRow(new Object[]{c_name, label, price, "1", hidden, disabled, id, c_id, Taxes}); 
                         }   
                     }
                     DV_Items.setModel(Model);    
@@ -1354,6 +1365,11 @@ public class Station extends javax.swing.JInternalFrame {
                     DV_Items.getColumnModel().getColumn(1).setPreferredWidth(150);
                     DV_Items.getColumnModel().getColumn(2).setPreferredWidth(40);
                     DV_Items.getColumnModel().getColumn(3).setPreferredWidth(30);
+                    DV_Items.getColumnModel().getColumn(4).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(5).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(6).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(7).setPreferredWidth(40);
+                    DV_Items.getColumnModel().getColumn(8).setPreferredWidth(300);
                     DV_Items.changeSelection(0, 0, false, false);
                     MenuLastRow = 0;
                 }
@@ -1383,8 +1399,10 @@ public class Station extends javax.swing.JInternalFrame {
             String id = "?";
             String GroupID = "?";
             String GroupName = "?";
+            String TaxPrice = " ";
+            String Taxes = " ";
             
-            String[] ColumnsName = {"Item", "Modifier", "Price", "GroupName", "id", "GroupID"}; 
+            String[] ColumnsName = {"Item", "Modifier", "Price", "GroupName", "id", "GroupID", "TaxPrice", "Taxes"}; 
             DefaultTableModel Model = new DefaultTableModel();
             Model.setColumnIdentifiers(ColumnsName);
             DV_Mods.setModel(Model); 
@@ -1447,7 +1465,19 @@ public class Station extends javax.swing.JInternalFrame {
                                 }else{
                                     price = "Not Found";
                                 }
-                                Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, GroupName, id, GroupID});  
+                                if(OItem.has("meta") && OItem.getJSONObject("meta").has("taxable_price") && OItem.getJSONObject("meta").getJSONObject("taxable_price").has("amount")){
+                                    TaxPrice = "$" + OItem.getJSONObject("meta").getJSONObject("taxable_price").getNumber("amount").toString();
+                                }else{
+                                    TaxPrice = " ";
+                                }
+                                Taxes = " ";
+                                if(OItem.has("meta") && OItem.getJSONObject("meta").has("taxes")){
+                                    JSONArray taxes = OItem.getJSONObject("meta").getJSONArray("taxes");
+                                    for (Object tax : taxes) {
+                                        Taxes += tax.toString() + ", ";                                       
+                                    }
+                                }          
+                                Model.addRow(new Object[]{item.getJSONObject("label").getString("en"), label, price, GroupName, id, GroupID, TaxPrice, Taxes});  
                             }
                         }
                     }
@@ -1458,9 +1488,11 @@ public class Station extends javax.swing.JInternalFrame {
             DV_Mods.getColumnModel().getColumn(0).setPreferredWidth(140);
             DV_Mods.getColumnModel().getColumn(1).setPreferredWidth(160);
             DV_Mods.getColumnModel().getColumn(2).setPreferredWidth(40);
-            DV_Mods.getColumnModel().getColumn(3).setPreferredWidth(130);
-            DV_Mods.getColumnModel().getColumn(4).setPreferredWidth(100);
-            DV_Mods.getColumnModel().getColumn(5).setPreferredWidth(100);  
+            DV_Mods.getColumnModel().getColumn(3).setPreferredWidth(120);
+            DV_Mods.getColumnModel().getColumn(4).setPreferredWidth(40);
+            DV_Mods.getColumnModel().getColumn(5).setPreferredWidth(50);  
+            DV_Mods.getColumnModel().getColumn(6).setPreferredWidth(60);              
+            DV_Mods.getColumnModel().getColumn(7).setPreferredWidth(300);  
         }
         catch(Exception ex){
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
@@ -1583,7 +1615,8 @@ public class Station extends javax.swing.JInternalFrame {
                 if(env.equals("PR")){
                     txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
+                    Validate_Place_Order();
                     return;
                 }else{                 
                     EXACT();
@@ -1610,6 +1643,7 @@ public class Station extends javax.swing.JInternalFrame {
                 if(env.equals("PR")){
                     txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
+                    Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }else{                
@@ -1640,6 +1674,7 @@ public class Station extends javax.swing.JInternalFrame {
                     txtLog.append("\r\n=== Place Order In Production is Not Supported. \r\n=== Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    Validate_Place_Order();
                     return;
                 }else{                
                     FP();
@@ -1667,6 +1702,7 @@ public class Station extends javax.swing.JInternalFrame {
                     txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());                    
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    Validate_Place_Order();
                     return;
                 }else{
                     FP();
@@ -1762,7 +1798,7 @@ public class Station extends javax.swing.JInternalFrame {
                 int q = Integer.parseInt(DV_Items.getValueAt(SelectedItems[Item_Index],3).toString());
                 jItem.put("quantity", q);
 
-                if(SelectedMods.length >0){
+                if(SelectedMods.length > 0){
                     for(int Mod_Index = 0; Mod_Index < SelectedMods.length; Mod_Index++){
                         if(DV_Items.getValueAt(SelectedItems[Item_Index],1).equals(DV_Mods.getValueAt(SelectedMods[Mod_Index],0))){
                             JSONObject jOption = new JSONObject(); 
@@ -1804,11 +1840,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }  
         
-        if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){
-            txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Pickup Shopping Cart ...."+ "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Pickup ShoppingCart1", 
-            requestParams.put("code", txtPROMO.getText());
+        if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...."+ "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
+            requestParams.put("code", cmbPROMO.getSelectedItem().toString());
             requestParams.put("email", Mobile_User_ID);
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/promo", Auth, BODY);        
@@ -1916,11 +1952,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } 
         
-        if(!txtPROMO.getText().isEmpty() && !txtPROMO.getText().toLowerCase().equals("none")){   
-            txtLog.append("\r\n- " + "Add Promo " + txtPROMO.getText() + " to Delivery Shopping Cart ...."+ "\r\n");
+        if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...."+ "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
-            requestParams.put("code", txtPROMO.getText());
+            requestParams.put("code", cmbPROMO.getSelectedItem().toString());
             requestParams.put("email", Mobile_User_ID);
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/promo", Auth, BODY);        
@@ -2173,18 +2209,7 @@ public class Station extends javax.swing.JInternalFrame {
         ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date = new Date();
-        date.setTime(date.getTime() + 20000); // now + 20 sec
-        String requested_date = dateFormat.format(date);
 
-        JSONObject is = new JSONObject(); 
-        is.put("in_progress", true);
-        is.put("ready", true);     
-        requestParams.put("is", is); 
-        requestParams.put("requested_date", requested_date); 
-        
-        BODY = requestParams.toString();
-        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY);        
         if(json != null){
             try {
                 Order_Delivery_ID = json.getString("id");
@@ -2264,6 +2289,7 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbLoc;
+    private javax.swing.JComboBox<String> cmbPROMO;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -2287,7 +2313,6 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtMSG;
     private javax.swing.JTextField txtMobile_ID;
     private javax.swing.JTextField txtMobile_PW;
-    private javax.swing.JTextField txtPROMO;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
 }

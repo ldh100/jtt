@@ -1,10 +1,5 @@
 package AP3;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -52,7 +47,6 @@ class AP3_mm_import extends AP3_GUI{
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
-        
      } 
     
     protected void run() { 
@@ -68,6 +62,7 @@ class AP3_mm_import extends AP3_GUI{
             Thread.sleep(5000);
             String dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
             String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
+            //String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now() + "*.zip";    // Lunch - 2021-06-15.zip
             //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
             File_Find("Find Global mod export Zip File", dest_dir, ModGrpPath, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -110,7 +105,7 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }            
             Find_Text("Find Import Successfully Message", "Global modifiers successfully imported locally. Please verify before publishing.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
@@ -127,7 +122,7 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Thread.sleep(1000);
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
@@ -167,7 +162,7 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Successfully Message", "Global modifiers successfully imported locally. Please verify before publishing.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
@@ -210,7 +205,7 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
@@ -243,20 +238,20 @@ class AP3_mm_import extends AP3_GUI{
                 if (FAIL) { return;}          
             File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-            ModGrpPath = GL_MENU.trim()+"-global-modifier-groups.xlsx";
+            ModGrpPath = GL_MENU.trim() + "-global-modifier-groups.xlsx";
             convertPLUExcel(dest_dir,ModGrpPath,"Modifier Groups");            
             valueToWrite = new String[] {"","Test: Missing Record type","Missing Record type","","5","9","8","TRUE","","","","","","","",""};
-            writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
+            writeExcel(dest_dir, ModGrpPath, "Modifier Groups", valueToWrite);
             valueToWrite = new String[] {"","","","","","","","","","Item Missing Record Type","5","9","89","598","TRUE","[\"Prepared\"]"};
-            writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
+            writeExcel(dest_dir, ModGrpPath, "Modifier Groups", valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
                 Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
@@ -264,12 +259,12 @@ class AP3_mm_import extends AP3_GUI{
                     return;
                 } 
             for (int i = 0; i < L0.size(); i++) {
-                Element_Attribute("Errors List : (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
+                Element_Attribute("Errors List: (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
                     if (FAIL) { return;}
                 if(L0.get(i).getAttribute("textContent").contains("Invalid \"Record Type\". Should be \"Modifier Group\" or \"Modifier\".")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Invalid Record Type. Should be Modifier Group or Modifier."),new Date());                       
+                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Invalid Record Type. Should be Modifier Group or Modifier."),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -289,8 +284,7 @@ class AP3_mm_import extends AP3_GUI{
              if (FAIL) { return;}
             Thread.sleep(5000);
             dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
-            //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
+            ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    
             File_Find("Find Global mod export Zip File", dest_dir, ModGrpPath, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
@@ -299,11 +293,11 @@ class AP3_mm_import extends AP3_GUI{
             File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
             ModGrpPath = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir,ModGrpPath,"Modifier Groups");            
+            convertPLUExcel(dest_dir, ModGrpPath, "Modifier Groups");            
             valueToWrite = new String[] {"Modifier Group","","Missing Enabled","Missing Enabled","0","1","89","","","","","","","","",""};
-            writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
+            writeExcel(dest_dir, ModGrpPath, "Modifier Groups", valueToWrite);
             valueToWrite = new String[] {"Modifier","","","","","","","","","DS Mod Missing True","5","20","89","890","","[\"Prepared\"]"};
-            writeExcel(dest_dir,ModGrpPath,"Modifier Groups",valueToWrite);
+            writeExcel(dest_dir, ModGrpPath, "Modifier Groups", valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ModGrpPath, false, ParentTest, "no_jira"); 
@@ -311,7 +305,7 @@ class AP3_mm_import extends AP3_GUI{
             }else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
@@ -324,7 +318,7 @@ class AP3_mm_import extends AP3_GUI{
                 if(L0.get(0).getAttribute("textContent").contains("\"Modifier Group Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(0).getAttribute("textContent"), true, ParentTest.createNode(" \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
+                    Log_Html_Result("PASS", L0.get(0).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + " \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -332,7 +326,7 @@ class AP3_mm_import extends AP3_GUI{
                 if(L0.get(1).getAttribute("textContent").contains("\"Modifier Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(1).getAttribute("textContent"), true, ParentTest.createNode(" \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
+                    Log_Html_Result("PASS", L0.get(1).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + " \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -375,7 +369,7 @@ class AP3_mm_import extends AP3_GUI{
                 }else
                 { _t++; 
                   _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                  Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
                 }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
            // Element_By_Path_Text("Close Import error dialog box", "xpath", "//div[contains(text(),'Close')]", ParentTest, "no_jira");
@@ -414,7 +408,7 @@ class AP3_mm_import extends AP3_GUI{
             } else { 
                 _t++; 
                 _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ModGrpPath + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode("File to upload does not exist"),new Date());
+                Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
@@ -428,7 +422,7 @@ class AP3_mm_import extends AP3_GUI{
                 if(L0.get(i).getAttribute("textContent").contains("Modifier \"Price\" must be a number from 0 to 200.")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Modifier \"Price\" must be a number from 0 to 200."),new Date());                       
+                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Modifier \"Price\" must be a number from 0 to 200."),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";

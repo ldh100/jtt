@@ -723,10 +723,12 @@ public class An_GUI extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 428, 416, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_ID.setText("cdl.test.xtt@gmail.com");
         getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 376, 188, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_PW.setText("Password1");
         getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 376, 92, -1));
 
@@ -833,6 +835,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(452, 400, 76, -1));
 
         txtBolter_Id.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtBolter_Id.setForeground(new java.awt.Color(204, 0, 51));
         txtBolter_Id.setText("cdl.test.xtt+rn@gmail.com");
         getContentPane().add(txtBolter_Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 396, 188, -1));
 
@@ -843,6 +846,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 400, -1, -1));
 
         txtBolter_Pw.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtBolter_Pw.setForeground(new java.awt.Color(204, 0, 51));
         txtBolter_Pw.setText("Password1");
         getContentPane().add(txtBolter_Pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 396, 92, -1));
 

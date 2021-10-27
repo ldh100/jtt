@@ -8,7 +8,7 @@ import org.json.JSONObject;
  * For 'Manipulate Global Modifiers' test cases use Site: Ap3 Automation, Brand: Starbucks (App: Thrive)
  * Manually check that the Global Modifier group 'Modifier Manipulation Test Group' with Label in App set to 'MMTG' exists
  * If it doesn't exist, create it manually and add one modifier with Name: existing1, Price: $1, Calories: 100, PLU:111
- * and set any required Chit # to 1, save and publish
+ * and set any required Sequence On Ticket to 1, save and publish
  * Then go to Global Menu and add this Modifier Group to second item in 'Lunch' -> 'Beverages Lunch' menu set,
  * save and publish
  */
@@ -333,12 +333,12 @@ class AP3_menu_manager extends AP3_GUI{
                     Element_Text_Enter("PLU: (" + i + ") Enter", L0.get(i), "60010" + Integer.toString(i*2), ParentTest, "no_jira");             
                     if (FAIL) { return;}
                 }  
-            List_L0("Chit # Count", "css", "[aria-label='']", ParentTest, "no_jira");             
+            List_L0("Sequence On Ticket Count", "css", "[aria-label='Sequence On Ticket']", ParentTest, "no_jira");             
                 if (FAIL) { return;}
                 for (int i = 0; i < L0.size(); i++) {
-                    Element_Click("Chit # (" + i + ") Click", L0.get(i), ParentTest, "no_jira");             
+                    Element_Click("Sequence On Ticket (" + i + ") Click", L0.get(i), ParentTest, "no_jira");             
                         if (FAIL) { return;}
-                    Element_Text_Enter("Chit # (" + i + ") Enter", L0.get(i), Integer.toString(i+2), ParentTest, "no_jira");             
+                    Element_Text_Enter("Sequence On Ticket (" + i + ") Enter", L0.get(i), Integer.toString(i+2), ParentTest, "no_jira");             
                         if (FAIL) { return;}
                 }   
             Element_By_Path_Click("Tax Tags dropdown Click Open", "css", "[aria-label='Tax Tags']", ParentTest, "no_jira");
@@ -402,7 +402,7 @@ class AP3_menu_manager extends AP3_GUI{
             if(mod_items.isEmpty()) {
                 _t++;
                 _p++; EX += _t + "\t" + "No Modifier items exists" + "\t" + "-" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "No Modifier items exists", false, ParentTest.createNode("No Modifier items exists" + "WARN"), new Date());
+                Log_Html_Result("WARN", "No Modifier items exists", false, ParentTest.createNode(_t + ". " + "No Modifier items exists" + "WARN"), new Date());
             } else {
                 for (int i = 0; i < mod_items.length(); i++) {
                     JSONObject mod_item = mod_items.getJSONObject(i);
@@ -454,7 +454,7 @@ class AP3_menu_manager extends AP3_GUI{
                 _t++;
                 _f++; 
                 EX += _t + "\t" + "Original Modifier does not exist" + "\t" + "-" + "\t" + "" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Original Modifier does not exist", false, ParentTest.createNode("Original Modifier does not exist"), new Date());
+                Log_Html_Result("FAIL", "Original Modifier does not exist", false, ParentTest.createNode(_t + ". " + "Original Modifier does not exist"), new Date());
              }
             //</editor-fold> 
                 
@@ -478,11 +478,11 @@ class AP3_menu_manager extends AP3_GUI{
 //                _t++;
 //                _p++; 
 //                EX += _t + "\t" + "In-App Label Name's are same" + "\t" + label + "\t" + "Label " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                Log_Html_Result("PASS", "In-App Label Name's are same", false, ParentTest.createNode("Label " + New_ID), new Date());
+//                Log_Html_Result("PASS", "In-App Label Name's are same", false, ParentTest.createNode(_t + ". " + "Label " + New_ID), new Date());
 //            } else {  
 //                _t++;
 //                _f++; EX += _t + "\t" + "In-App Label Name's are different" + "\t" + label + "\t" + "Label  "+ New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                Log_Html_Result("FAIL", "In-App Label Name's are different", false, ParentTest.createNode("Label " + New_ID), new Date());
+//                Log_Html_Result("FAIL", "In-App Label Name's are different", false, ParentTest.createNode(_t + ". " + "Label " + New_ID), new Date());
 //            }
 //
 //            if(json1.has("max") && !json1.has("min")) {
@@ -505,14 +505,14 @@ class AP3_menu_manager extends AP3_GUI{
 //                    _t++;
 //                    _p++; 
 //                    EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 0 "+ New_ID + "\t" + "Mod 0 " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                    Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode("Mod 0 " + New_ID + "\t" + "Mod 0 " + New_ID), new Date());
+//                    Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode(_t + ". " + "Mod 0 " + New_ID + "\t" + "Mod 0 " + New_ID), new Date());
 //                     
 //                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
 //                        if(modifier_item.getJSONObject("meta").getInt("sort_number")==2) {//Print pass
 //                            _t++;
 //                            _p++;  
 //                            EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 2" + "\t" + "Chit#: 2" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: 2"), new Date());
+//                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode(_t + ". " + "Chit#: 2" + " > " + "Chit#: 2"), new Date());
 //                        } else {//Print fail
 //                            _t++;
 //                            _f++;  
@@ -523,54 +523,54 @@ class AP3_menu_manager extends AP3_GUI{
 //                        _t++;
 //                        _f++;  
 //                        EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) different", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: null"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) different", false, ParentTest.createNode(_t + ". " + "Chit#: 2" + " > " + "Chit#: null"), new Date());
 //                    }
 //
 //                    if(modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0).equals("Prepared")) {
 //                        _t++;
 //                        _p++; 
 //                        EX += _t + "\t" + "Tax Tags are same" + "\t" + "Tax Tag : Prepared" + "\t" + "Tax Tag : Prepared" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "Tax Tags are same", false, ParentTest.createNode("Tax Tag : Prepared" + " > " + "Tax Tag : Prepared"), new Date());
+//                        Log_Html_Result("PASS", "Tax Tags are same", false, ParentTest.createNode(_t + ". " + "Tax Tag : Prepared" + " > " + "Tax Tag : Prepared"), new Date());
 //                    } else {
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "Tax Tags are different" + "\t" + "Tax Tag : " + modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + "\t" + "Tax Tag : Prepared" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "Tax Tags are different", false, ParentTest.createNode("Tax Tag : " + modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + " > " + "Tax Tag : Prepared"), new Date());
+//                        Log_Html_Result("PASS", "Tax Tags are different", false, ParentTest.createNode(_t + ". " + "Tax Tag : " + modifier_item.getJSONObject("meta").getJSONArray("taxes").getString(0) + " > " + "Tax Tag : Prepared"), new Date());
 //                    }
 //
 //                    if(modifier_item.getJSONObject("price").getDouble("amount")== 2.25)  {
 //                        _t++;//Print pass
 //                        _p++; 
 //                        EX += _t + "\t" + "Modifier price are same" + "\t" + "Price : 2.25" + "\t" + "Price : 2.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode("Price : 2.25" + " > " + "Price : 2.25"), new Date());
+//                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode(_t + ". " + "Price : 2.25" + " > " + "Price : 2.25"), new Date());
 //                    } else {//Print Fail
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "Modifier price are different" + "\t" + "Price : " + modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price : 2.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode("Price : " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price : 2.25"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode(_t + ". " + "Price : " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price : 2.25"), new Date());
 //                    }
 //
 //                    if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 100) {
 //                        _t++;
 //                        _p++; 
 //                        EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories : 100" + "\t" + "Calories : 100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode("Calories : 100" + "\t" + "Calories : 100"), new Date());
+//                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode(_t + ". " + "Calories : 100" + "\t" + "Calories : 100"), new Date());
 //                    } else {//Print Fail
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories : " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories : 100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode("Calories : " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories : 100"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode(_t + ". " + "Calories : " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories : 100"), new Date());
 //                    }
 //
 //                    if(modifier_item.getJSONObject("meta").getString("plu").equals("600100")) {//Print pass
 //                        _t++;
 //                        _p++; EX += _t + "\t" + "PLU's are same" + "\t" + "PLU : 600100" + "\t" + "PLU : 600100" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode("PLU : 600100" + "\t" + "PLU : 600100" ), new Date());
+//                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode(_t + ". " + "PLU : 600100" + "\t" + "PLU : 600100" ), new Date());
 //                    } else  {
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "PLU's are different" + "\t" + "PLU : " + modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU : 600100" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("PLU : " + modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU : 600100"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode(_t + ". " + "PLU : " + modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU : 600100"), new Date());
 //                    }
 //                    flag = false;
 //                } else if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 1 " + New_ID)) {//For both Mod 1 and Mod 1 copy
@@ -578,65 +578,65 @@ class AP3_menu_manager extends AP3_GUI{
 //                        _t++;
 //                        _p++; 
 //                        EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 1 " + New_ID + "\t" + "Mod 1 " + New_ID + " copy" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode("Mod 1 " + New_ID + " > " + "Mod 1 " + New_ID + " copy"), new Date());
+//                        Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode(_t + ". " + "Mod 1 " + New_ID + " > " + "Mod 1 " + New_ID + " copy"), new Date());
 //                    } else {
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "Modifier Name is different" + "\t" + "Mod 1 " + New_ID + "\t" + "Mod 1 " + New_ID + " copy" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier Name is different", false, ParentTest.createNode("Mod 1 " + New_ID + " >" + "Mod 1 " + New_ID + " copy"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier Name is different", false, ParentTest.createNode(_t + ". " + "Mod 1 " + New_ID + " >" + "Mod 1 " + New_ID + " copy"), new Date());
 //                    }
 //                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
 //                        if(modifier_item.getJSONObject("meta").getInt("sort_number") == 3) {//Print pass
 //                            _t++;
 //                            _p++; 
 //                            EX += _t + "\t" + "Modifier Sort number (Chit#) same" + "\t" + "Chit#: 3" + "\t" + "Chit#: 3" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: 2" + " > " + "Chit#: 2"), new Date());
+//                            Log_Html_Result("PASS", "Modifier Sort number (Chit#) same", false, ParentTest.createNode(_t + ". " + "Chit#: 2" + " > " + "Chit#: 2"), new Date());
 //                        } else {//Print fail
 //                            _t++;
 //                            _f++; 
 //                            EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                            Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3"), new Date());
+//                            Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode(_t + ". " + "Chit#: " + modifier_item.getJSONObject("meta").getInt("sort_number") + "\t" + "Chit#: 3"), new Date());
 //                        }
 //                    } else{
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "Modifier Sort number (Chit#) different" + "\t" + "Chit#: 2" + "\t" + "Chit#: null" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode("Modifier Sort number (Chit#) different" + " > " + "Chit#: null"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier Sort number (Chit#) same", false, ParentTest.createNode(_t + ". " + "Modifier Sort number (Chit#) different" + " > " + "Chit#: null"), new Date());
 //                    }
 //                    if(modifier_item.getJSONObject("price").getDouble("amount")== 3.25) {//Print pass
 //                        _t++;
 //                        _p++; 
 //                        EX += _t + "\t" + "Modifier price are same" + "\t" + "Price: 3.25" + "\t" + "Price: 3.25" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode("Price: 3.25" + " > " + "Price: 3.25"), new Date());
+//                        Log_Html_Result("PASS", "Modifier price are same", false, ParentTest.createNode(_t + ". " + "Price: 3.25" + " > " + "Price: 3.25"), new Date());
 //                    } else {//Print Fail
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "Modifier price are different" + "\t" + "Price: " + modifier_item.getJSONObject("price").getDouble("amount") + "\t" + "Price: 3.25" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode("Price: " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price: 3.25"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier price are different", false, ParentTest.createNode(_t + ". " + "Price: " + modifier_item.getJSONObject("price").getDouble("amount") + " > " + "Price: 3.25"), new Date());
 //                    }
 //
 //                    if(modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") == 102) {//Print pass
 //                        _t++;
 //                        _p++; 
 //                        EX += _t + "\t" + "Modifier Calories are same" + "\t" + "Calories: 102" + "\t" + "Calories: 102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode("Calories: 102" + " > " + "Calories: 102"), new Date());
+//                        Log_Html_Result("PASS", "Modifier Calories are same", false, ParentTest.createNode(_t + ". " + "Calories: 102" + " > " + "Calories: 102"), new Date());
 //                    } else {//Print Fail
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "Modifier Calories are different" + "\t" + "Calories: " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + "\t" + "Calories: 102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode("Calories: " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories: 102"), new Date());
+//                        Log_Html_Result("FAIL", "Modifier Calories are different", false, ParentTest.createNode(_t + ". " + "Calories: " + modifier_item.getJSONObject("nutrition").getJSONObject("calories").getInt("amount") + " > " + "Calories: 102"), new Date());
 //                    }
 //
 //                    if(modifier_item.getJSONObject("meta").getString("plu").equals("600102")) {//Print pass
 //                        _t++;
 //                        _p++; 
 //                        EX += _t + "\t" + "PLU's are same" + "\t" + "PLU: 600102" + "\t" + "PLU: 600102" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode("PLU: 600102" + " > " + "PLU: 600102"), new Date());
+//                        Log_Html_Result("PASS", "PLU's are same", false, ParentTest.createNode(_t + ". " + "PLU: 600102" + " > " + "PLU: 600102"), new Date());
 //                    } else {//Print Fail
 //                        _t++;
 //                        _f++; 
 //                        EX += _t + "\t" + "PLU's are different" + "\t" + "PLU: " + modifier_item.getJSONObject("meta").getString("plu") + "\t" + "PLU: 600102" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "PLU's are different", false, ParentTest.createNode("PLU: " + modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU: 600102"), new Date());
+//                        Log_Html_Result("FAIL", "PLU's are different", false, ParentTest.createNode(_t + ". " + "PLU: " + modifier_item.getJSONObject("meta").getString("plu") + " > " + "PLU: 600102"), new Date());
 //                    }
 //                    flag = false;
 //                } else if(flag) { // Print fail unidentifed modifier
@@ -873,7 +873,7 @@ class AP3_menu_manager extends AP3_GUI{
                 _t++; 
                 _f++;
                 EX += " - " + "\t" + "Copy Modifier Group" + "\t" + "Copied after Publish"+ "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode("Not Found"), new Date());
+                Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode(_t + ". " + "Not Found"), new Date());
                 return;
             }
             // ======================== New Group Copy ^^^^ End
@@ -884,7 +884,7 @@ class AP3_menu_manager extends AP3_GUI{
             Thread.sleep(500); 
             Element_By_Path_Text_Select_Copy("Label In App", "css", "[aria-label='Label In App']", ParentTest, "no_jira"); 
                 if (FAIL) { return;}          
-            Element_By_Path_Text_Select_Copy("Group Chit #", "css", "[aria-label='']", ParentTest, "no_jira"); 
+            Element_By_Path_Text_Select_Copy("Group Sequence On Ticket", "css", "[aria-label='Sequence On Ticket']", ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
             List_L2("Modifiers Count", "xpath", "//*[@class='layout modifier row wrap align-center']", ParentTest, "no_jira");             
                 if (FAIL) { return;}   
@@ -918,7 +918,7 @@ class AP3_menu_manager extends AP3_GUI{
            _t++; 
            _f++;
            EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-           Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode("Not Found: FAIL"), new Date());
+           Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode(_t + ". " + "Not Found: FAIL"), new Date());
            return;
         }
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";

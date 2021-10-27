@@ -647,7 +647,7 @@ class AP3_brand_config extends AP3_GUI {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                         //print fail if found incorrect menus that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + MenuName, true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + MenuName, true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                         }                             
                         }
                     }
@@ -669,7 +669,7 @@ class AP3_brand_config extends AP3_GUI {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus Categories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                         //print fail if found incorrect menus categories that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                         }
                     
                     System.out.println(L2.get(k).getAttribute("textContent") +" : " + (Categories_EnabledList.get(k)));                                                                               
@@ -705,7 +705,7 @@ class AP3_brand_config extends AP3_GUI {
                         _t++;
                         _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus Categories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                         //print fail if found incorrect menus categories that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"));                        
+                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"));                        
                         }
                     
                     System.out.println(L2.get(k+1).getAttribute("textContent") +" : " + (Categories_EnabledList.get(k)));                                                                               
@@ -718,9 +718,6 @@ class AP3_brand_config extends AP3_GUI {
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                     }
 */                  
-                    
-                  
-       
                     break;
                     
                 case "Integration Type":
@@ -842,20 +839,19 @@ class AP3_brand_config extends AP3_GUI {
                 if (FAIL) { return;}   
              
             Element_Click("Click Category 'Disable'", L1.get(T_Index), ParentTest, "no_jira");
-                if (FAIL) { return;}    
-              
+                if (FAIL) { return;}           
             Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
                 if (FAIL) { return;} 
-                            Thread.sleep(500);
+            Thread.sleep(500);
             Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}                       
-                        Thread.sleep(500);
+            Thread.sleep(500);
             Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}   
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent", ParentTest,"no_jira"); 
-            if (FAIL) { return;}    
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent", ParentTest,"no_jira"); 
+                if (FAIL) { return;}    
                 
             Thread.sleep(3000); 
             Refresh("Refresh", ParentTest, "no_jira");
@@ -878,43 +874,27 @@ class AP3_brand_config extends AP3_GUI {
         //stationName="Add Station 907290928";
         Navigate_to_URL("Navigate to Site", url + "#/sites/"+appId+"/site/"+SiteID, ParentTest, "no_jira");
         Wait_For_Element_By_Path_Presence("Wait for brand name to load..", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
- 
+            if (FAIL) { return; }
         Element_By_Path_Click("Brand Name Click", "xpath", "//td[contains(text(), '" + stationName + "')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
+            if (FAIL) { return; }
         Thread.sleep(500);
-
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }
-
+            if (FAIL) { return; }
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }        
-       
-        
+            if (FAIL) { return; }        
         Element_By_Path_Attribute("Check if Menu is disabled in 'Schedule your menu'", "xpath", "//div[@class='v-input v-input--selection-controls v-input--checkbox v-input--hide-details v-input--is-disabled theme--light']//div[@class='v-input--selection-controls__input']//input[@role='checkbox']", "disabled", ParentTest, "no_jira");
-        if (FAIL) { return;}
-        System.out.println(t);
-        
+            if (FAIL) { return;}       
         if(t.equals("true")){
-                _t++;
-                _p++; EX += _t + "\t" + "Test Passed: Menuset is disabled in scheduled Menu" + "\t" + t + "\t" + "true" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
-                } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled in scheduled Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode("Menus is not disabled in Scheduled menu"), new Date());                        
-                }
-                                                                                                                   
-                Thread.sleep(1000);
+            _t++;
+            _p++; EX += _t + "\t" + "Test Passed: Menuset is disabled in scheduled Menu" + "\t" + t + "\t" + "true" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+        } else {
+            _t++;
+            _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled in scheduled Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            //print fail if found incorrect menus categories that are'nt from global menu
+            Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode(_t + ". " + "Menus is not disabled in Scheduled menu"), new Date());                        
+        }
+        Thread.sleep(1000);
             
 // if the menu is scheduled it will become inactive: End                  
         
@@ -943,7 +923,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled in scheduled Menu" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode("Menus is not disabled in Scheduled menu"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Menu is not disabled in scheduled Menu  > " + t, true, ParentTest.createNode(_t + ". " + "Menus is not disabled in Scheduled menu"), new Date());                        
                 }
                                                                                                                    
                 Thread.sleep(1000);
@@ -1036,7 +1016,7 @@ class AP3_brand_config extends AP3_GUI {
                  Thread.sleep(500);
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             Thread.sleep(3000); 
             Refresh("Refresh",ParentTest, "no_jira");
@@ -1142,7 +1122,7 @@ class AP3_brand_config extends AP3_GUI {
                  Thread.sleep(500);
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             Thread.sleep(3000); 
             Refresh("Refresh",ParentTest, "no_jira");
@@ -1240,7 +1220,7 @@ class AP3_brand_config extends AP3_GUI {
                  Thread.sleep(500);
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             Thread.sleep(3000); 
             Refresh("Refresh",ParentTest, "no_jira");
@@ -1346,7 +1326,7 @@ class AP3_brand_config extends AP3_GUI {
                  Thread.sleep(500);
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             Thread.sleep(3000); 
             Refresh("Refresh",ParentTest, "no_jira");
@@ -1373,7 +1353,7 @@ class AP3_brand_config extends AP3_GUI {
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1493,7 +1473,7 @@ class AP3_brand_config extends AP3_GUI {
         }else{
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/" + Menu_ID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/"+ Menu_ID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/"+ Menu_ID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         } 
          //List<String> Categories_DisabledList= new ArrayList<>(); 
@@ -1582,14 +1562,13 @@ class AP3_brand_config extends AP3_GUI {
     
     public  void Call_GlobalMenuSet_API_Enabled_Disabled(String Menu_ID, String MenuSetName) {
     try {    
-
         Call_API("Call GlobalMenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
         }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/"+CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/menu/company/" + CompanyID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/"+CompanyID , false, ParentTest.createNode("API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/menu/company/" + CompanyID , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }               
         JSONObject json = new JSONObject(API_Response_Body);
@@ -1601,14 +1580,14 @@ class AP3_brand_config extends AP3_GUI {
                     if(json.getJSONObject("is").getBoolean("disabled")) {
                         Menuset_DisabledList.add( json.getJSONObject("label").getString("en"));
                         System.out.println(  "Menuset Disabled: "+ json.getJSONObject("label").getString("en"));
-                         _t++;
-                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        _t++;
+                        _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                         //print pass menu set is disabled
                     } else if(!json.getJSONObject("is").getBoolean("disabled")) {
-                        Menuset_EnabledList.add(( json.getJSONObject("label").getString("en")));
+                        Menuset_EnabledList.add(json.getJSONObject("label").getString("en"));
                         System.out.println(  "Menuset Enabled: "+ json.getJSONObject("label").getString("en"));
-                         _t++;
-                         _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                        _t++;
+                        _p++; EX += _t + "\t" + "Test Passed" + "\t" + ( json.getJSONObject("label").getString("en")) + "\t" + "MenuSet is enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                         //print pass menu set is enabled
                     } else {
                         _t++;
@@ -1724,42 +1703,30 @@ class AP3_brand_config extends AP3_GUI {
         EX += "\n - " + "\t" + " ===Begin====" + "\t" + " ===== " + "\t" + " == Upon making the menu disabled in the global menu, check if the menu is disabled in the brand config ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
       
         List_L0("Count total assigned menus", "xpath", "//div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma v-select__selection--disabled']", ParentTest, "no_jira");
-        if (FAIL) {
-            return;
-        }        
-        
+            if (FAIL) { return; }        
         // //div[@class='layout row nowrap']//div[@class='flex xs10']//div[@class='v-select__selection v-select__selection--comma v-select__selection--disabled']        
         System.out.println(L0.size());
         if(L0.size()>0){
-        for ( int k = 0; k < L0.size(); k++){                 
-            Element_Attribute("Disabled Menu (Index " + k + ") Name", L0.get(k), "textContent", ParentTest, "no_jira");                                                    
-            if(L0.get(k).getAttribute("textContent").equals(Menuset_DisabledList.get(k))){
-                _t++;
-                _p++; EX += _t + "\t" + "Test Passed: Menuset is disabled" + "\t" + L0.get(k).getAttribute("textContent") + "\t" + Menuset_DisabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+            for ( int k = 0; k < L0.size(); k++){                 
+                Element_Attribute("Disabled Menu (Index " + k + ") Name", L0.get(k), "textContent", ParentTest, "no_jira");                                                    
+                if(L0.get(k).getAttribute("textContent").equals(Menuset_DisabledList.get(k))){
+                    _t++;
+                    _p++; EX += _t + "\t" + "Test Passed: Menuset is disabled" + "\t" + L0.get(k).getAttribute("textContent") + "\t" + Menuset_DisabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                     //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                    Log_Html_Result("PASS", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                 } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _t++;
+                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                    Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                 }
-                    
-                System.out.println(L0.get(k).getAttribute("textContent") +" : " + (Menuset_DisabledList.get(k)));                                                                               
-                    //Thread.sleep(500);
-                }
-
+            }
             Wait_For_Element_By_Path_Presence("Wait for breadscrumbs to be visible ", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
-
+                if (FAIL) { return;  }
             Element_By_Path_Click("Click navigate back to Station Index page", "xpath", "//form[@class='v-form settings']//div//a[@class='v-breadcrumbs__item'][normalize-space()='" + SITE + "']", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
-            
-            }
-        } catch (Exception ex){}   // =============================================  
+            if (FAIL) { return; }           
+        }
+    } catch (Exception ex){}   // =============================================  
     } 
     // </editor-fold>
     
@@ -1786,7 +1753,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menus don't match Global Menu"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
                 }
                     
                 System.out.println(L0.get(k).getAttribute("textContent") +" : " + (Menuset_EnabledList.get(k)));                                                                               
@@ -1910,7 +1877,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Menus is not available" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + t, true, ParentTest.createNode("Menus not enabled and available to add"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + t, true, ParentTest.createNode(_t + ". " + "Menus not enabled and available to add"), new Date());                        
                 }
                                                                                                                    
                 Thread.sleep(1000);
@@ -1975,7 +1942,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + L0.get(k).getAttribute("textContent") + "\t" + "Menu Category is not disabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L0.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menu Cateogry was not removed from Brand Config"), new Date());                        
                 }
                     
                 System.out.println(L0.get(2).getAttribute("textContent") +" : " + (Categories_DisabledList.get(1)));                                                                               
@@ -2027,7 +1994,7 @@ class AP3_brand_config extends AP3_GUI {
 //                _t++;
 //                _f++; EX += _t + "\t" + "Test Failed" + "\t" + L0.get(i).getAttribute("textContent") + "\t" + "Menu Category is not correct" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
 //                    //print fail if found incorrect menus categories that are'nt from global menu
-//                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuSet  > " + L0.get(i).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"));                        
+//                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuSet  > " + L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menu Cateogry was not removed from Brand Config"));                        
 //                }                    
 //                } 
 //            EX += " - " + "\t" + " === " + "\t" + " ===== Category disabled in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";    
@@ -2052,7 +2019,7 @@ class AP3_brand_config extends AP3_GUI {
                 _t++;
                 _f++; EX += _t + "\t" + "Test Failed" + "\t" + L2.get(i).getAttribute("textContent") + "\t" + "Menu Category is not correct" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     //print fail if found incorrect menus categories that are'nt from global menu
-                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(i).getAttribute("textContent"), true, ParentTest.createNode("Menu Cateogry was not removed from Brand Config"), new Date());                        
+                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menu Cateogry was not removed from Brand Config"), new Date());                        
                 }                    
                 } 
         EX += " - " + "\t" + " === " + "\t" + " ===== Category disabled in Global and Verify in Local" + "\t" + " ==  >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -2421,7 +2388,7 @@ class AP3_brand_config extends AP3_GUI {
         Element_By_Path_Click("Click '+ Sign", "xpath", "(//div[@class='flex xs12 list-item list-item-large']//div[@class='v-btn__content'])[3]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
             
-        Wait_For_Element_By_Path_Presence("Wait for 'Category Chit #' Presence", "css", "[aria-label='Chit #']", ParentTest, Ver);
+        Wait_For_Element_By_Path_Presence("Wait for 'Category Sequence On Ticket' Presence", "css", "[aria-label='Sequence On Ticket']", ParentTest, Ver);
             if (FAIL) { return;}            
         Element_By_Path_Click("Click 'New Category Name'", "css", "[aria-label='Enter Category Name']", ParentTest, "no_jira");
             if (FAIL) { return;}            
@@ -2439,7 +2406,7 @@ class AP3_brand_config extends AP3_GUI {
                  Thread.sleep(500);
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Element_By_Path_Attribute("Menu-d", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
+            Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
             if (FAIL) { return;}  
             Thread.sleep(3000); 
             Refresh("Refresh",ParentTest, "no_jira");

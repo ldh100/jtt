@@ -124,6 +124,7 @@ public class A extends javax.swing.JFrame {
         Menu_WO = new javax.swing.JMenu();
         Menu_FW = new javax.swing.JMenu();
         Menu_DL = new javax.swing.JMenu();
+        Menu_SL = new javax.swing.JMenu();
         MenuStation = new javax.swing.JMenu();
         Menu_OR = new javax.swing.JMenu();
         Menu_API = new javax.swing.JMenu();
@@ -159,7 +160,7 @@ public class A extends javax.swing.JFrame {
         );
 
         Menu_Tools.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Menu_Tools.setText("Tools");
+        Menu_Tools.setText("Links");
         Menu_Tools.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_Tools.setName("Menu_Tools"); // NOI18N
 
@@ -240,7 +241,6 @@ public class A extends javax.swing.JFrame {
         Menu_DL_.add(Menu_DL_DE);
 
         Menu_DL_ST.setText("- Staging (https://staging.member.distilr.io)");
-        Menu_DL_ST.setBorderPainted(false);
         Menu_DL_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_DL_ST.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -457,6 +457,18 @@ public class A extends javax.swing.JFrame {
         });
         MenuBar.add(Menu_DL);
 
+        Menu_SL.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Menu_SL.setText("SL");
+        Menu_SL.setToolTipText("Supplier Automation Manager");
+        Menu_SL.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_SL.setName("FW"); // NOI18N
+        Menu_SL.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_SLMouseClicked(evt);
+            }
+        });
+        MenuBar.add(Menu_SL);
+
         MenuStation.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         MenuStation.setText("Station");
         MenuStation.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -580,6 +592,7 @@ public class A extends javax.swing.JFrame {
         Menu_AP3.setToolTipText("Ap3 Automation Manager");
         Menu_FW.setToolTipText("Food Works Automation"); 
         Menu_DL.setToolTipText("Distiller Automation");
+        Menu_SL.setToolTipText("Supplier Automation");
         Menu_API.setToolTipText("Configutation / AP3 API(s)"); 
         MenuReports.setToolTipText("All xTT and JTT reports"); 
         MenuStation.setToolTipText("Site > Brand > Menus(s) difinitions"); 
@@ -934,6 +947,24 @@ public class A extends javax.swing.JFrame {
             Menu_Env.setVisible(true);
         }
     }//GEN-LAST:event_Menu_EnvMouseClicked
+
+    private void Menu_SLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_SLMouseClicked
+        // TODO add your handling code here:
+        if(!Menu_SL.isEnabled()){
+            return;
+        }
+        Menu_SL.setEnabled(false);
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try {
+            Open_SL();
+        } catch (PropertyVetoException ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DesktopPane.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
+        Menu_SL.setEnabled(true); 
+    }//GEN-LAST:event_Menu_SLMouseClicked
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
@@ -1239,10 +1270,10 @@ public class A extends javax.swing.JFrame {
         dl.setSelected(true);
         F_COUNT++;
     }
-    private void Open_Station() throws PropertyVetoException {
+    private void Open_SL() throws PropertyVetoException {
         final JInternalFrame[] frames = DesktopPane.getAllFrames();
         for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("Station")) {
+            if (frame.getName().equals("SL")) {
                 try {
                     frame.setSelected(true);
                     if (frame.isIcon()) {
@@ -1257,6 +1288,39 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         }
+        SL.SL_GUI dl = new SL.SL_GUI();
+        this.DesktopPane.add(dl);
+        int Y;
+        int X;
+        if(F_COUNT > 4) {
+            Y = F_COUNT;
+            X = F_COUNT - 5;
+        }else{
+            Y = X = F_COUNT;
+        }
+        dl.setLocation(X*20, Y*20);
+        dl.show();
+        dl.setSelected(true);
+        F_COUNT++;
+    }
+    private void Open_Station() throws PropertyVetoException {
+//        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+//        for (JInternalFrame frame : frames) {
+//            if (frame.getName().equals("Station")) {
+//                try {
+//                    frame.setSelected(true);
+//                    if (frame.isIcon()) {
+//                        frame.setIcon(false);
+//                    }
+//                    frame.setSelected(true);
+//                }catch (PropertyVetoException ex) {
+//                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                frame.requestFocus();
+//                frame.toFront();
+//                return;
+//            }
+//        }
         Station.Station dl = new Station.Station();
         this.DesktopPane.add(dl);
         int Y;
@@ -1356,7 +1420,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         }
-        Jobs.Jobs jobs = new Jobs.Jobs();
+        Jobs.Jobs_GUI jobs = new Jobs.Jobs_GUI();
         this.DesktopPane.add(jobs);
         int Y;
         int X;
@@ -1626,6 +1690,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_JIRA;
     private javax.swing.JMenu Menu_JOBS;
     private javax.swing.JMenu Menu_OR;
+    private javax.swing.JMenu Menu_SL;
     private javax.swing.JMenu Menu_Swagger;
     private javax.swing.JMenu Menu_Tools;
     private javax.swing.JMenu Menu_UI_Viewer;

@@ -373,12 +373,12 @@ Thread.sleep(1000);
                 _t++;
                 _p++;
                 EX += _t + "\t" + "Genrerate Sales Report for hidden stations" + "\t" + "\t" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Generate Sales Report for hidden stations", false, ParentTest.createNode("Not able find report for hidden stations"), new Date());
+                Log_Html_Result("PASS", "Generate Sales Report for hidden stations", false, ParentTest.createNode(_t + ". " + "Not able find report for hidden stations"), new Date());
             } else {
                 _t++;
                 _f++;
                 EX += _t + "\t" + "No Sales Report found for hidden stations" + "\t" + "\t" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "No Sales Report found for hidden stations", false, ParentTest.createNode("Not able find report for hidden stations"), new Date());
+                Log_Html_Result("PASS", "No Sales Report found for hidden stations", false, ParentTest.createNode(_t + ". " + "Not able find report for hidden stations"), new Date());
             }
             EX += " END " + "\t" + " === ^ Sales Report for hidden stations" + "\t" + " ===== " + "\t" + " == ^ Sales Reporting for hidden stations End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         } catch (Exception ex) {

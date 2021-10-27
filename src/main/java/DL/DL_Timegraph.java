@@ -38,13 +38,16 @@ public class DL_Timegraph extends DL_GUI {
     long DA = 0L;
 
     public void getTimegraphdata(String id, String reference_point, String time_window) throws IOException {
-        String Auth = "AT-1071-aZ0PaI2TvtRqt-0Xhxanx1b4yTW35sH9";
+        String Auth = "AT-58988-k2Kzu5SKjvYPixrNFbZn7cLevQxRSbIV";
+                       
 
         JSONObject BODY = new JSONObject();
         BODY.put("id", id);
         BODY.put("type", "graph");
         BODY.put("reference_point", reference_point);
+        
         BODY.put("time_window", time_window);
+        System.out.println(BODY.toString());
         JOB_Api_Call("Timegraph Post Method ", "POST", BaseAPI + "/metrics", Auth, BODY.toString(), 200, ParentTest, "no_jira");
         System.out.println("Result" + json);
         System.out.println("Result" + json.get("body-json"));

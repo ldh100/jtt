@@ -1,5 +1,6 @@
-package DL;
+package SL;
 
+import SL.*;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -17,11 +18,14 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Stopwatch;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.sun.xml.bind.v2.runtime.output.Encoded;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
@@ -109,10 +113,18 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 
-public class DL_GUI extends javax.swing.JInternalFrame {
+public class SL_GUI extends javax.swing.JInternalFrame {
 
     
-    public DL_GUI() {
+
+   
+
+   
+
+    
+
+    
+    public SL_GUI() {
         initComponents();
     }
 
@@ -174,10 +186,10 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Distiller Automation Manager >>> loading, please wait ... ... ... ...");
+        setTitle("Supplier Automation Manager >>> loading, please wait ... ... ... ...");
         setMaximumSize(new java.awt.Dimension(858, 527));
         setMinimumSize(new java.awt.Dimension(858, 527));
-        setName("DL"); // NOI18N
+        setName("SL"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -937,6 +949,12 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected String Variants = "";
     protected String CompareTo="";
     protected String BaseAPI = "";
+    protected String Callback_URL="";
+    protected String Auth_URL="";
+    protected String AccessToken_URL="";
+    protected String Client_ID="";
+     protected String redirect_uri;
+     protected String accessToken;
     protected JSONObject json;
     
     // </editor-fold>
@@ -965,23 +983,38 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         GUI_Load_Env();
         Load = false;
         CONFIG = false;   
-        this.setTitle("Distiller Automation Manager");
+        this.setTitle("Supplier Automation Manager");
     }
 
     private void GUI_Load_Env(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             env = "ST";
-            url = "https://staging.member.distilr.io";
+            url = "https://staging.supplier.distilr.io";
             BaseAPI = "https://stagingapi.member.distilr.io";
+            Callback_URL = "";
+            Auth_URL = "";
+            AccessToken_URL="";
+            Client_ID="";
+            
+            
             
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             env = "DE";
-            url = "https://dev.member.distilr.io";
+            url = "https://dev.supplier.distilr.io";
             BaseAPI = "https://devapi.member.distilr.io";
+            Callback_URL = "https://dev.member.distilr.io";
+            Auth_URL = "https://ssodev.compassmanager.com/";
+            AccessToken_URL="https://ssodev.compassmanager.com/oauth2.0/accessToken";
+            redirect_uri="https://dev.member.distilr.io/login";
+            Client_ID="FMP Distilr DEV";
         } else{
             env = "PR";
-            url = "https://mpower.distilr.io/";
+            url = "https://mpower.supplier.io/";
             BaseAPI = "https://api.mpower.distilr.io";
+            Callback_URL = "";
+            Auth_URL = "";
+            AccessToken_URL="";
+            Client_ID="";
         }
         
         GUI_Load_CONFIG();
@@ -990,7 +1023,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         GetMetrics();
         GetVariants();
         Get_S3_DL_Credentials();
-        Get_S3_data(AWS_credentials);
+        //Get_S3_data(AWS_credentials);
 
     }
     private void Get_S3_DL_Credentials(){
@@ -1351,8 +1384,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }
-        //String[] lines = C.split(System.getProperty("line.separator"));  
-        String[] lines = C.split("\n");  
+        String[] lines = C.split(System.getProperty("line.separator"));  
         String value;            
         try{       
             for (String l : lines) {
@@ -1813,7 +1845,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
-        HtmlReport.setSystemInfo("App Version", "Distiller" + " " + "Version - TBD"); 
+        HtmlReport.setSystemInfo("App Version", "Supplier" + " " + "Version - TBD"); 
         HtmlReport.setSystemInfo("Browser", BROWSER);        
         HtmlReport.setSystemInfo("Machine", A.A.WsID);
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
@@ -2008,7 +2040,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "Distiller " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
+                EX = "Supplier " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
                     " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
                     ", Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
@@ -2115,248 +2147,248 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         btnRun.setEnabled(true);
     }
     private void Execute() throws Exception {
-        if (_Sanity) { 
-            ParentTest = HtmlReport.createTest("Sanity"); 
-            SCOPE += "Sanity";                  
-  
-            DL_UserID = txtAdmin_ID.getText();
-            DL_UserPW = txtAdmin_PW.getText();
-            EX += " - " + "\t" + " === Sanity Test " + "\t" + " ===== " + "\t" + " == Sanity Test Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
-            DL_sanity BR = new DL_sanity(DL_GUI.this);
-            BR.run(DL_UserID, DL_UserPW ); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Sanity Test " + "\t" + " ===== " + "\t" + " == ^ Sanity Test End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-
-            return; // Do Not execute any Other Scope if Testing Sanity
-        }        
-
-        
-        if (_Users) { 
-            SCOPE += "QA Users";
-            DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
-            String QA_USER = "";    // Next QA User from S3 DV_QA table
-            Boolean IsMember=false;
-            Boolean IsMemberSwitch=false;
-            for (int i = 630; i < 690; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
-                System.out.println(i);
-           // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
-                if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
-                    continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
-                }  
-                IsMemberSwitch=false;
-                ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
-                QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if (i == 1) {
-                    Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
-                    if (t.equalsIgnoreCase("Not Found")) {
-                        IsMember = false;
-                    } else {
-                        IsMember = true;
-                        SelectMember(DV_QA.getValueAt(i, 5).toString());
-                        IsMemberSwitch=true;
-                    }
-                }
-                System.out.println(DV_QA.getValueAt(i, 5).toString());
-                if (!QA_USER.equals(DL_UserID)) {  // ======  Clear Cookies and Login with New QA User ===========
-                    DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
-                    EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
-                    Clear_Cookies_Restart_Driver(BROWSER, ParentTest, "no_jira");
-                    if (!FAIL) {
-                        DL_login BR = new DL_login(DL_GUI.this);
-                        BR.run(DL_UserID, DL_UserPW, false); // ======================================
-                        EX += BR.EX;
-                        _t += BR._t;
-                        _p += BR._p;
-                        _f += BR._f;
-                        _w += BR._w;
-                        _i += BR._i;
-                        F += BR.F;
-                        r_time += BR.r_time;
-                        Login_OK = BR.Login_OK;
-                        Wait_For_Element_By_Path_Presence("Wait for Member to display", "xpath", "//h1[contains(text(),'My Members')]", ParentTest, "no_jira");
-                        Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
-                        if (t.equalsIgnoreCase("Not Found")) {
-                            IsMember = false;
-                        } else {
-                            IsMember = true;
-                            SelectMember(DV_QA.getValueAt(i, 5).toString());
-                            IsMemberSwitch=true;
-                        }
-                    } else {
-                        Login_OK = false;
-                    }
-                }
-                if (!Login_OK) {
-                    continue;      // Go to next Test
-                }
-                if(!IsMemberSwitch && IsMember)
-                {
-                    SwitchMember(DV_QA.getValueAt(i, 5).toString());
-                    
-                }
-                EX += " - " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + QA_USER + "\t" + " == Users " + " - Test# " + (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                
-                DL_qa_user BR = new DL_qa_user(DL_GUI.this);
-                BR.run(  // ====== pass QA User Test # 'i + 1' Data from QA Data Table build from S3 QA file =========================
-                    DL_UserID, 
-                    DV_QA.getValueAt(i, 2).toString(),     
-                    DV_QA.getValueAt(i, 3).toString(), 
-                    DV_QA.getValueAt(i, 4).toString(), 
-                    DV_QA.getValueAt(i, 6).toString(), 
-                    DV_QA.getValueAt(i, 7).toString(), 
-                    DV_QA.getValueAt(i, 8).toString(),
-                    DV_QA.getValueAt(i, 9).toString(), 
-                    DV_QA.getValueAt(i, 10).toString(),
-                    IsMember
-                );
-                EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
-                EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";             
-            }   
-
-            return; // Do Not execute any Other Scope if Testing QA Users S3 list
-        }   
-        
-        
-        if (true) { // _login.isSelected() ALWAYS TRUE
-            if(_Invalid_login){
-                ParentTest = HtmlReport.createTest("Valid/Invalid Login"); 
-                SCOPE += "Valid/Invalid Login";                  
-            } else{
-                ParentTest = HtmlReport.createTest("Login"); 
-                SCOPE += "Login";                
-            }
-            DL_UserID = txtAdmin_ID.getText();
-            DL_UserPW = txtAdmin_PW.getText();
-            EX += " - " + "\t" + " === Login(s) " + "\t" + " ===== " + "\t" + " == Login(s) Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
-            DL_login BR = new DL_login(DL_GUI.this);
-            BR.run(DL_UserID, DL_UserPW, _invalid_login.isSelected()); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Login(s) " + "\t" + " ===== " + "\t" + " == ^ Login(s) End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }
-        
-        if(!Login_OK){
-            return; // Cannot proceed with this User - Bad Login
-        }
-            
-        if (_Metrics_selection) { 
-            ParentTest = HtmlReport.createTest("Metrics Selection"); 
-            SCOPE += ", Metrics Selection"; 
-            EX += " - " + "\t" + " === Metrics Selection" + "\t" + " ===== " + "\t" + " == Metrics Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_metrics_selection BR = new DL_metrics_selection(DL_GUI.this);
-            BR.run(); // ============================================================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }  
-        if (_Metric_data ) { 
-            String CompareTo = "";
-            SCOPE += ", Metrics Secondary Data"; 
-            for (int i = 0; i < 3; i++) {
-                if(i == 0)  CompareTo = "Compared to last year";
-                if(i == 1)  CompareTo = "Compared to last month";
-                if(i == 2)  CompareTo = "Compared to last week";
-                for (int j = 0; j < 3; j++) {
-                if(j == 0)  Variants = "Total";
-                if(j == 1)  Variants = "Distributor only";
-                if(j == 2)  Variants = "Manufacturer only";
-                ParentTest = HtmlReport.createTest("Metrics - " + CompareTo); 
-                EX += " - " + "\t" + " === Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == Secondary Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                DL_metric_data BR = new DL_metric_data(DL_GUI.this);
-                BR.run(CompareTo, Variants); // ============================================================================            
-                EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-                EX += " - " + "\t" + " === ^ Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == ^ Secondary Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            }    
-            }
-        }
-        
-
-
-        if (_Insights) { 
-            ParentTest = HtmlReport.createTest("Insights");                         
-            SCOPE += ", Insights";
-            EX += " - " + "\t" + " === Insights" + "\t" + " ===== " + "\t" + " == Insights Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_insights BR = new DL_insights(DL_GUI.this);
-            BR.run(); // ============================================================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Insights" + "\t" + " ===== " + "\t" + " == ^ Insights End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }
-        
-        if (_Drilldown) { 
-            ParentTest = HtmlReport.createTest("Drilldown");                         
-            SCOPE += ", Drilldown";
-            EX += " - " + "\t" + " === Drilldown" + "\t" + " ===== " + "\t" + " == Drilldown Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_drilldown BR = new DL_drilldown(DL_GUI.this);
-            BR.run(); // ============================================================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Drilldown" + "\t" + " ===== " + "\t" + " == ^ Drilldown End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }
-
-        if (_Logout) { 
-            ParentTest = HtmlReport.createTest("LogOut");                         
-            SCOPE += ", LogOut";
-            EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_logout BR = new DL_logout(DL_GUI.this);
-            BR.run(); // ============================================================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }
-        if (_Password) { 
-            ParentTest = HtmlReport.createTest("Forgot PW");                                     
-            SCOPE += ", Forgot PW";  
-            EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_password BR = new DL_password(DL_GUI.this);
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            BR.run(); // ============================================================================
-            EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        }    
-       if (_Account_manager) { 
-            ParentTest = HtmlReport.createTest("Account Manager");                                     
-            SCOPE += ", Account Manager";  
-            EX += " - " + "\t" + " === Account Manager" + "\t" + " ===== " + "\t" + " == Account Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            DL_Accountmanager BR = new DL_Accountmanager(DL_GUI.this);
-            BR.run();
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            // ============================================================================
-            EX += " - " + "\t" + " === ^ Account Manager" + "\t" + " ===== " + "\t" + " == ^ Account ManagerEnd" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-        } 
-       if (_timegraph) { 
-           
-            ParentTest = HtmlReport.createTest("Timegraph");                                     
-            SCOPE += ", Timegraph";  
-            EX += " - " + "\t" + " === Timegraph" + "\t" + " ===== " + "\t" + " == Timegraph Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            String CompareTo = "";
-            String reference_point = "";
-            SCOPE += ", timegraph"; 
-            for (int i = 0; i < 3; i++) {
-                if(i == 0) { CompareTo = "Compared to last year";
-                reference_point= "last_year";
-                }
-                if(i == 1) 
-                {CompareTo = "Compared to last month";
-                 reference_point= "last_month";
-                }
-                if(i == 2) 
-                {CompareTo = "Compared to last week";
-                 reference_point= "last_week";
-                }
-                            DL_Timegraph BR = new DL_Timegraph(DL_GUI.this);
-            BR.run(reference_point,CompareTo);
-                        EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            // ============================================================================
-         
-            }
-   EX += " - " + "\t" + " === ^ Timegraph" + "\t" + " ===== " + "\t" + " == ^ Timegraph End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Thread.sleep(1500);
-
-        } 
-    }
+//        if (_Sanity) { 
+//            ParentTest = HtmlReport.createTest("Sanity"); 
+//            SCOPE += "Sanity";                  
+//  
+//            DL_UserID = txtAdmin_ID.getText();
+//            DL_UserPW = txtAdmin_PW.getText();
+//            EX += " - " + "\t" + " === Sanity Test " + "\t" + " ===== " + "\t" + " == Sanity Test Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
+//            DL_sanity BR = new DL_sanity(SL_GUI.this);
+//            BR.run(DL_UserID, DL_UserPW ); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            EX += " - " + "\t" + " === ^ Sanity Test " + "\t" + " ===== " + "\t" + " == ^ Sanity Test End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//
+//            return; // Do Not execute any Other Scope if Testing Sanity
+//        }        
+//
+//        
+//        if (_Users) { 
+//            SCOPE += "QA Users";
+//            DL_UserID = "";         // Clear DL_User from GUI to force Clear_Cookies > Restart_Driver and Re-Login
+//            String QA_USER = "";    // Next QA User from S3 DV_QA table
+//            Boolean IsMember=false;
+//            Boolean IsMemberSwitch=false;
+//            for (int i = 330; i < 360; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+//                System.out.println(i);
+//           // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
+//                if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
+//                    continue;      // Do Not proceed with User having Invalid Credentials or Locked Account
+//                }  
+//                IsMemberSwitch=false;
+//                ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
+//                QA_USER = DV_QA.getValueAt(i, 1).toString();
+//                if (i == 1) {
+//                    Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
+//                    if (t.equalsIgnoreCase("Not Found")) {
+//                        IsMember = false;
+//                    } else {
+//                        IsMember = true;
+//                        SelectMember(DV_QA.getValueAt(i, 5).toString());
+//                        IsMemberSwitch=true;
+//                    }
+//                }
+//                System.out.println(DV_QA.getValueAt(i, 5).toString());
+//                if (!QA_USER.equals(DL_UserID)) {  // ======  Clear Cookies and Login with New QA User ===========
+//                    DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
+//                    EX += " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " " + "\r\n";
+//                    Clear_Cookies_Restart_Driver(BROWSER, ParentTest, "no_jira");
+//                    if (!FAIL) {
+//                        DL_login BR = new DL_login(SL_GUI.this);
+//                        BR.run(DL_UserID, DL_UserPW, false); // ======================================
+//                        EX += BR.EX;
+//                        _t += BR._t;
+//                        _p += BR._p;
+//                        _f += BR._f;
+//                        _w += BR._w;
+//                        _i += BR._i;
+//                        F += BR.F;
+//                        r_time += BR.r_time;
+//                        Login_OK = BR.Login_OK;
+//                        Wait_For_Element_By_Path_Presence("Wait for Member to display", "xpath", "//h1[contains(text(),'My Members')]", ParentTest, "no_jira");
+//                        Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
+//                        if (t.equalsIgnoreCase("Not Found")) {
+//                            IsMember = false;
+//                        } else {
+//                            IsMember = true;
+//                            SelectMember(DV_QA.getValueAt(i, 5).toString());
+//                            IsMemberSwitch=true;
+//                        }
+//                    } else {
+//                        Login_OK = false;
+//                    }
+//                }
+//                if (!Login_OK) {
+//                    continue;      // Go to next Test
+//                }
+//                if(!IsMemberSwitch && IsMember)
+//                {
+//                    SwitchMember(DV_QA.getValueAt(i, 5).toString());
+//                    
+//                }
+//                EX += " - " + "\t" + " " + "\t" + " " + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//                EX += " - " + "\t" + " === QA Users - Data Validation" + "\t" + "User: " + QA_USER + "\t" + " == Users " + " - Test# " + (i+1) + " Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//                
+//                DL_qa_user BR = new DL_qa_user(SL_GUI.this);
+//                BR.run(  // ====== pass QA User Test # 'i + 1' Data from QA Data Table build from S3 QA file =========================
+//                    DL_UserID, 
+//                    DV_QA.getValueAt(i, 2).toString(),     
+//                    DV_QA.getValueAt(i, 3).toString(), 
+//                    DV_QA.getValueAt(i, 4).toString(), 
+//                    DV_QA.getValueAt(i, 6).toString(), 
+//                    DV_QA.getValueAt(i, 7).toString(), 
+//                    DV_QA.getValueAt(i, 8).toString(),
+//                    DV_QA.getValueAt(i, 9).toString(), 
+//                    DV_QA.getValueAt(i, 10).toString(),
+//                    IsMember
+//                );
+//                EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; // DL_UserID = BR.DL_UserID;
+//                EX += " - " + "\t" + " === ^ QA Users - Data Validation" + "\t" + "User: " + DV_QA.getValueAt(i, 1).toString() + "\t" + " == ^ User " + " - Test# "+ (i+1) + " End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";             
+//            }   
+//
+//            return; // Do Not execute any Other Scope if Testing QA Users S3 list
+//        }   
+//        
+//        
+//        if (true) { // _login.isSelected() ALWAYS TRUE
+//            if(_Invalid_login){
+//                ParentTest = HtmlReport.createTest("Valid/Invalid Login"); 
+//                SCOPE += "Valid/Invalid Login";                  
+//            } else{
+//                ParentTest = HtmlReport.createTest("Login"); 
+//                SCOPE += "Login";                
+//            }
+//            DL_UserID = txtAdmin_ID.getText();
+//            DL_UserPW = txtAdmin_PW.getText();
+//            EX += " - " + "\t" + " === Login(s) " + "\t" + " ===== " + "\t" + " == Login(s) Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";      
+//            DL_login BR = new DL_login(SL_GUI.this);
+//            BR.run(DL_UserID, DL_UserPW, _invalid_login.isSelected()); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            EX += " - " + "\t" + " === ^ Login(s) " + "\t" + " ===== " + "\t" + " == ^ Login(s) End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//        }
+//        
+//        if(!Login_OK){
+//            return; // Cannot proceed with this User - Bad Login
+//        }
+//            
+//        if (_Metrics_selection) { 
+//            ParentTest = HtmlReport.createTest("Metrics Selection"); 
+//            SCOPE += ", Metrics Selection"; 
+//            EX += " - " + "\t" + " === Metrics Selection" + "\t" + " ===== " + "\t" + " == Metrics Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            DL_metrics_selection BR = new DL_metrics_selection(SL_GUI.this);
+//            BR.run(); // ============================================================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            EX += " - " + "\t" + " === ^ Metrics Selection" + "\t" + " ===== " + "\t" + " == ^ Metrics Selection End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//        }  
+//        if (_Metric_data ) { 
+//            String CompareTo = "";
+//            SCOPE += ", Metrics Secondary Data"; 
+//            for (int i = 0; i < 3; i++) {
+//                if(i == 0)  CompareTo = "Compared to last year";
+//                if(i == 1)  CompareTo = "Compared to last month";
+//                if(i == 2)  CompareTo = "Compared to last week";
+//                for (int j = 0; j < 3; j++) {
+//                if(j == 0)  Variants = "Total";
+//                if(j == 1)  Variants = "Distributor only";
+//                if(j == 2)  Variants = "Manufacturer only";
+//                ParentTest = HtmlReport.createTest("Metrics - " + CompareTo); 
+//                EX += " - " + "\t" + " === Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == Secondary Metrics Data Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//                DL_metric_data BR = new DL_metric_data(SL_GUI.this);
+//                BR.run(CompareTo, Variants); // ============================================================================            
+//                EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//                EX += " - " + "\t" + " === ^ Secondary Metrics  - " + CompareTo + "\t" + " ===== " + "\t" + " == ^ Secondary Metrics Data End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            }    
+//            }
+//        }
+//        
+//
+//
+//        if (_Insights) { 
+//            ParentTest = HtmlReport.createTest("Insights");                         
+//            SCOPE += ", Insights";
+//            EX += " - " + "\t" + " === Insights" + "\t" + " ===== " + "\t" + " == Insights Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            DL_insights BR = new DL_insights(SL_GUI.this);
+//            BR.run(); // ============================================================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            EX += " - " + "\t" + " === ^ Insights" + "\t" + " ===== " + "\t" + " == ^ Insights End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//        }
+//        
+//        if (_Drilldown) { 
+//            ParentTest = HtmlReport.createTest("Drilldown");                         
+//            SCOPE += ", Drilldown";
+//            EX += " - " + "\t" + " === Drilldown" + "\t" + " ===== " + "\t" + " == Drilldown Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            DL_drilldown BR = new DL_drilldown(SL_GUI.this);
+//            BR.run(); // ============================================================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            EX += " - " + "\t" + " === ^ Drilldown" + "\t" + " ===== " + "\t" + " == ^ Drilldown End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//        }
+//
+//        if (_Logout) { 
+//            ParentTest = HtmlReport.createTest("LogOut");                         
+//            SCOPE += ", LogOut";
+//            EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            DL_logout BR = new DL_logout(SL_GUI.this);
+//            BR.run(); // ============================================================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//        }
+//        if (_Password) { 
+//            ParentTest = HtmlReport.createTest("Forgot PW");                                     
+//            SCOPE += ", Forgot PW";  
+//            EX += " - " + "\t" + " === Forgot PW" + "\t" + " ===== " + "\t" + " == Forgot PW Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            DL_password BR = new DL_password(SL_GUI.this);
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            BR.run(); // ============================================================================
+//            EX += " - " + "\t" + " === ^ Forgot PW" + "\t" + " ===== " + "\t" + " == ^ Forgot PW End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//        }    
+//       if (_Account_manager) { 
+//            ParentTest = HtmlReport.createTest("Account Manager");                                     
+//            SCOPE += ", Account Manager";  
+//            EX += " - " + "\t" + " === Account Manager" + "\t" + " ===== " + "\t" + " == Account Manager Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            DL_Accountmanager BR = new DL_Accountmanager(SL_GUI.this);
+//            BR.run();
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            // ============================================================================
+//            EX += " - " + "\t" + " === ^ Account Manager" + "\t" + " ===== " + "\t" + " == ^ Account ManagerEnd" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//        } 
+//       if (_timegraph) { 
+//           
+//            ParentTest = HtmlReport.createTest("Timegraph");                                     
+//            SCOPE += ", Timegraph";  
+//            EX += " - " + "\t" + " === Timegraph" + "\t" + " ===== " + "\t" + " == Timegraph Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            String CompareTo = "";
+//            String reference_point = "";
+//            SCOPE += ", timegraph"; 
+//            for (int i = 0; i < 3; i++) {
+//                if(i == 0) { CompareTo = "Compared to last year";
+//                reference_point= "last_year";
+//                }
+//                if(i == 1) 
+//                {CompareTo = "Compared to last month";
+//                 reference_point= "last_month";
+//                }
+//                if(i == 2) 
+//                {CompareTo = "Compared to last week";
+//                 reference_point= "last_week";
+//                }
+//                            DL_Timegraph BR = new DL_Timegraph(SL_GUI.this);
+//            BR.run(reference_point,CompareTo);
+//                        EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+//            // ============================================================================
+//         
+//            }
+//   EX += " - " + "\t" + " === ^ Timegraph" + "\t" + " ===== " + "\t" + " == ^ Timegraph End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            Thread.sleep(1500);
+//
+//        } 
+   }
     private void BW1_Done(boolean GUI) throws Exception{
         DD = Duration.between(run_start, Instant.now());
              
@@ -2395,7 +2427,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
         }
         
-        Current_Log_Update(GUI, "= Distiller" + " v: " + "?" + ", Environment: " + env + "\r\n");
+        Current_Log_Update(GUI, "= Supplier" + " v: " + "?" + ", Environment: " + env + "\r\n");
         Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "= Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
@@ -2405,7 +2437,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
 
-        HtmlReporter.config().setReportName("Distiller" + ", Env: " + env + 
+        HtmlReporter.config().setReportName("Supplier" + ", Env: " + env + 
             ", Steps: " + (_p + _f +_w + _i) + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
             ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                         ", Avg: " + A.A.df.format(t_avg) +
@@ -2417,7 +2449,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
-            String MSG = "Distiller " + env + " Excel Automation report - " + Report_Date +
+            String MSG = "Supplier " + env + " Excel Automation report - " + Report_Date +
                 "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
                 "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
                 "Scope: " + SCOPE + "\r\n" +
@@ -5006,7 +5038,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Day_Schedule(String NAME, List<WebElement> L, int I, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Day_Snedule(String NAME, List<WebElement> L, int I, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -5978,7 +6010,14 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         t = "";
          _t++; 
 	try {
-            double Val = (var1 - var2) / var2 * 100;
+            double Val=0;
+            if (var2==0) {
+                Val=100.00;
+            }
+            else
+            {
+             Val = (var1 - var2) / var2 * 100;
+            }
             NumberFormat formatter = new DecimalFormat("#0.00");
             double actVal = new Double(formatter.format(Val));
 
@@ -6034,6 +6073,127 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Log_Html_Result("FAIL", "Error: " + err + "<br />" + t, true, ParentTest.createNode(NAME));
 	}  
     }
+//      protected void Get_AccessToken(String NAME, String EndPoint, String UserID, String UserPW, int ExpStatus, ExtentTest ParentTest, String JIRA) throws IOException {
+//        FAIL = false;
+//        String Result = "?";
+//        int status = 0;
+//        String R_Time = "";
+//        String ErrorMsg = "";
+//        json = null;
+//        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
+//        RequestSpecification request;
+//        request = RestAssured.given();
+////        if (!AUTH.isEmpty()) {
+////            request.header("auth-header", AUTH);
+////        }
+//       
+//         
+//        request.header("Content-Type", "application/json");
+//        request.header("Accept", "application/json");
+//        request.header("authorization","Basic "+new String(Base64.getEncoder().encode((UserID+":"+UserPW).getBytes())));
+//        try {
+//            int i = 1;
+////for (i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
+//            if (sw1.isRunning()) {
+//                sw1.reset();
+//            }
+//            _t++;
+//            sw1.start();
+//            
+//            Response response = null;
+////            request.queryParam("Callback URL", Callback_URL);
+////            request.queryParam("Auth URL",Auth_URL );
+////            request.header("auth-header", "Bearer" + accessToken); 
+////            request.contentType(ContentType.URLENC);
+////            request.formParam("response_type", "code");
+////            request.queryParam("Client ID",Client_ID);
+////            request.queryParam("Client Secret", "8BC7qCTQApkbAhByhusqY6geDm3nFDgK");
+////            request.queryParam("scope", "offline_access");
+//////            request.post("/oauth2/authorize");
+//           
+////                  String token= RestAssured.given().param("grant_type","Client Credentials"+new String(Base64.getEncoder().encode((UserID+":"+UserPW).getBytes())) ).auth()
+////                           
+////                           .preemptive()
+////                           .basic(Client_ID, "8BC7qCTQApkbAhByhusqY6geDm3nFDgK")
+////                           .when()
+////                           .post("/oauth2/authorize")
+////                           .then()
+////                           .extract()
+////                           .path("access_token")
+////                           ;
+//                   
+//           // request.queryParam("redirect_uri", redirect_uri);
+//           // request.queryParam("Access Token URL", AccessToken_URL);
+//                       response= RestAssured.given()
+//                        //.header("authorization", "Client Credentials" + new String(Base64.getEncoder().encode((UserID+":"+UserPW).getBytes())))
+//                        //.formParam("grant_type", "Client Credentials")
+//                        .formParam("Auth URL",Auth_URL )
+//                        .formParam("response_type", "code")
+//                        .formParam("client_id", Client_ID)
+//                       // .formParam("Client Secret", "8BC7qCTQApkbAhByhusqY6geDm3nFDgK")
+//                        .formParam("client_name", "CasOAuthClient")
+//                        .queryParam("redirect_uri", Callback_URL)
+//                       // .queryParam("scope", "offline_access")
+//                        .post("/oauth2.0/callbackAuthorize")
+//                        .then()
+//                        .statusCode(200)
+//                        .extract()
+//                        .response();
+//               //.contentType(ContentType.URLENC)
+//                    
+//                   response = request.get(EndPoint);
+////                   System.out.println("token "+response);
+//                  // System.out.println("Response json "+new ObjectMapper().writeValueAsString(response));
+//             System.out.println("Response json path"+response.jsonPath().prettify());
+////            
+//            Result = response.getStatusLine();
+//            status = response.getStatusCode();
+//            System.out.println("Response as String"+response.asPrettyString());
+//            System.out.println("Result"+Result);
+//            System.out.println("status"+status);
+//            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+//                
+//                json = new JSONObject(response.asString());
+//                System.out.println(json);
+//                if (json.has("error")) {
+//                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+//                }
+//            }
+//            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+//            if (status == ExpStatus) {
+//                _p++;
+//
+//                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
+//                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+//              
+//                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+//                   
+//            } else {
+//                _f++;
+//                FAIL = true;
+//                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
+//                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+//             
+//                Log_Html_Result("FAIL", "Error: " + ErrorMsg + "<br />" + t, true, ParentTest.createNode(NAME));
+//            }
+//
+//
+//        } catch (Exception ex) {
+//            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+//            _f++;
+//            FAIL = true;
+//            err = ex.getMessage().trim();
+//            if (err.contains("\n")) {
+//                (err = err.substring(0, err.indexOf("\n"))).trim();
+//            }
+//            EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
+//                    + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+//
+//            Log_Html_Result("FAIL", "Error: " + err + "<br />" + t, true, ParentTest.createNode(NAME));
+//        }
+//        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+//        sw1.reset();
+//    }
 
     // </editor-fold>
     
