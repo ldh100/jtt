@@ -559,7 +559,7 @@ class AP3_brand_new extends AP3_GUI {
                         String loc_name = t.trim();
                         Element_By_Path_Click("Click > 'Choose Drop-off...' link", "xpath", "//p[contains(text(),'"+loc_name+"')]/ancestor::div[contains(@class,'list-content')]/preceding-sibling::div", ParentTest, "no_jira");
                             if (FAIL) { return;}
-                        Wait_For_Element_By_Path_Presence("Check 'Locations Selected' List", "xpath", "//p[text()='Locations Selected (1)']/parent::div//p[contains(text(),'"+loc_name+"')]", ParentTest, "no_jira");
+                        Wait_For_Element_By_Path_Presence("Check 'Locations Selected' List", "xpath", "//p[text()='Locations Selected (1)']/parent::div//p[contains(text(),'" + loc_name + "')]", ParentTest, "no_jira");
                             if (FAIL) { return;}
                         Move_to_Element_By_Path("Move > 'Continue' button", "xpath", "//div[contains(text(),'continue')]/parent::button", ParentTest, "no_jira");
                             if (FAIL) { return;}

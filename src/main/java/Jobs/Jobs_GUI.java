@@ -24,7 +24,7 @@ import javax.swing.table.TableRowSorter;
  * @author Oleg.Spozito
  */
 
-public class Jobs extends javax.swing.JInternalFrame {
+public class Jobs_GUI extends javax.swing.JInternalFrame {
 
 //<editor-fold defaultstate="collapsed" desc="Cron Pattern Samples">
 //    5 * * * *
@@ -71,7 +71,7 @@ public class Jobs extends javax.swing.JInternalFrame {
 //    This pattern causes a task to be launched every day at 05:00, 10:08 and 17:22.
 //</editor-fold>
     
-    public Jobs() {
+    public Jobs_GUI() {
         initComponents();
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -527,7 +527,16 @@ public class Jobs extends javax.swing.JInternalFrame {
                 JobName = DV1.getValueAt(i, 0).toString();
                 String CONFIG = DV1.getValueAt(i, 6).toString();
                 try{
-                    if(JobName.startsWith("API")){              
+                    if(JobName.equals("Tokens_AP3")){              
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Tokens_AP3(JobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
+                        
+                    } else if(JobName.startsWith("API")){              
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_API(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -659,7 +668,6 @@ public class Jobs extends javax.swing.JInternalFrame {
                         " [Host] = '" + A.A.WsID + "'" + 
                         ", [Cron] = 'Running'" +
                         ", [UserID] = '" + A.A.UserID + "'" +
-
                     " WHERE [Job_Name] = '" + job + "'");
                 int row = _update.executeUpdate();
                 conn.close();
@@ -677,7 +685,12 @@ public class Jobs extends javax.swing.JInternalFrame {
     private void Run_Selected_Job(String Job, String config){
         JobName = txtJob_Name.getText();
         r_type = "ad-hoc";
-        if(JobName.startsWith("API")){
+        txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        
+        if(JobName.equals("Tokens_AP3")){
+            Tokens_AP3(JobName, config);
+        } else if(JobName.startsWith("API")){
             Job_API(JobName, config);
         } else if(JobName.startsWith("AP3")){
             Job_AP3(JobName, config);        
@@ -694,11 +707,15 @@ public class Jobs extends javax.swing.JInternalFrame {
         } else if(JobName.startsWith("iOS")){
             //Job_iOS(config);
         }  
-        txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
 
-    //<editor-fold defaultstate="collapsed" desc="Jobs > Job Name, Config">
+    //<editor-fold defaultstate="collapsed" desc="Jobs_GUI > Job Name, Config">
+    private void Tokens_AP3(String job, String config){
+        _AP3_Tokens _Job = new _AP3_Tokens();
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        _Job.AP3_Tokens(job, r_type, config);
+        txtLog.append("= Please Check Report" + "\r\n");
+    }    
     private void Job_AP3(String job, String config){
         AP3.AP3_GUI _Job = new AP3.AP3_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
@@ -745,7 +762,7 @@ public class Jobs extends javax.swing.JInternalFrame {
         }
     }
     //</editor-fold>
-
+    
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;

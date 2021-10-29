@@ -34,6 +34,7 @@ class order extends API_GUI{
         ITEMS_IDS = a.ITEMS_IDS;
         MENU_TIMESLOTS = a.MENU_TIMESLOTS;
         BRAND_TIMESLOTS = a.BRAND_TIMESLOTS;
+        DELIEVEY_TIMESLOTS = a.DELIEVEY_TIMESLOTS;        
         DELIEVERY_DESTINATIONS = a.DELIEVERY_DESTINATIONS;
         
         ShoppingCart_Delivery_ID = a.ShoppingCart_Delivery_ID;
@@ -45,8 +46,11 @@ class order extends API_GUI{
     }
     JSONObject requestParams = null;
     String AAA = "";
+    String Requested_Date = "";
+    Date requested_date;
+    
     protected void run() {  
-        if (env != "PR") {
+        if (!"PR".equals(env)) {
             PLACE_ORDERS();
         }
         
@@ -95,9 +99,9 @@ class order extends API_GUI{
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        //Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1)) *1000L);
-        Date requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
-        String Requested_Date = sdf.format(requested_date);        
+        requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(BRAND_TIMESLOTS.size() - 1)) *1000L);
+        //requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
+        Requested_Date = sdf.format(requested_date);        
 
         requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
         requestParams.put("location_brand", BrandID);
@@ -109,7 +113,8 @@ class order extends API_GUI{
         JSONObject payment = new JSONObject();
         payment.put("token", EXACT_Payment_TKN);
         requestParams.put("payment", payment); 
-        BODY = requestParams.toString();        
+        BODY = requestParams.toString();  
+        
         JOB_Api_Call("Place Pickup Order", "POST", 
             BaseAPI + "/order?lang=en", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null && json.has("id")){
@@ -127,10 +132,13 @@ class order extends API_GUI{
             BaseAPI + "/order/" + Order_Pickup_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
             AAA = json.toString(4);  // Check actual update
-        }        
-        requestParams = new JSONObject();       //  Mobile User Pickup Order Issue =================  
-        JSONArray items = new JSONArray();   
-        JSONObject item_1 = new JSONObject();
+        }   
+
+        JSONArray items;   
+        JSONObject item_1;        
+        requestParams = new JSONObject();       //  Mobile User Pickup Order Issue DISPUTE =================  
+        items = new JSONArray();   
+        item_1 = new JSONObject();
             item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
             item_1.put("_index", Item_Index);
             item_1.put("quantity", 1);
@@ -141,17 +149,96 @@ class order extends API_GUI{
             item_1.put("_loyalty", new JSONObject().put("amount", 0));
             item_1.put("meta", new JSONObject());
             item_1.put("options", new JSONArray());
-            item_1.put("reason", "Test Item reason");  
+            item_1.put("reason", "Test type DISPUTE");  
         items.put(item_1);
         requestParams.put("type", "DISPUTE");  
         requestParams.put("items", items); 
         requestParams.put("reason", "Test Order Issue DISPUTE"); 
         BODY = requestParams.toString();
-        JOB_Api_Call("Pickup Order - Issue/Dispute", "POST", 
+        
+        JOB_Api_Call("Pickup Order - Issue/DISPUTE", "POST", 
             BaseAPI + "/order/" + Order_Pickup_ID + "/issue", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
         } 
+        
+        requestParams = new JSONObject();       //  Mobile User Pickup Order Issue LATE =================  
+        items = new JSONArray();   
+        item_1 = new JSONObject();
+            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
+            item_1.put("_index", Item_Index);
+            item_1.put("quantity", 1);
+            item_1.put("unit", 1);    
+            item_1.put("price", new JSONObject().put("amount", 0.05));
+            item_1.put("_subtotal", new JSONObject().put("amount", 2.0));
+            item_1.put("_promo", new JSONObject().put("amount", 0));
+            item_1.put("_loyalty", new JSONObject().put("amount", 0));
+            item_1.put("meta", new JSONObject());
+            item_1.put("options", new JSONArray());
+            item_1.put("reason", "Test type LATE");  
+        items.put(item_1);
+        requestParams.put("type", "LATE");  
+        requestParams.put("items", items); 
+        requestParams.put("reason", "Test Order Issue LATE"); 
+        BODY = requestParams.toString();
+        
+        JOB_Api_Call("Pickup Order - Issue/LATE", "POST", 
+            BaseAPI + "/order/" + Order_Pickup_ID + "/issue", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        } 
+
+        requestParams = new JSONObject();       //  Mobile User Pickup Order Issue SEE_KITCHEN =================  
+        items = new JSONArray();   
+        item_1 = new JSONObject();
+            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
+            item_1.put("_index", Item_Index);
+            item_1.put("quantity", 1);
+            item_1.put("unit", 1);    
+            item_1.put("price", new JSONObject().put("amount", 0.05));
+            item_1.put("_subtotal", new JSONObject().put("amount", 2.0));
+            item_1.put("_promo", new JSONObject().put("amount", 0));
+            item_1.put("_loyalty", new JSONObject().put("amount", 0));
+            item_1.put("meta", new JSONObject());
+            item_1.put("options", new JSONArray());
+            item_1.put("reason", "Test type SEE_KITCHEN");  
+        items.put(item_1);
+        requestParams.put("type", "SEE_KITCHEN");  
+        requestParams.put("items", items); 
+        requestParams.put("reason", "Test Order Issue SEE_KITCHEN"); 
+        BODY = requestParams.toString();
+        
+        JOB_Api_Call("Pickup Order - Issue/SEE_KITCHEN", "POST", 
+            BaseAPI + "/order/" + Order_Pickup_ID + "/issue", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }    
+        
+        requestParams = new JSONObject();       //  Mobile User Pickup Order Issue DELIVERY_ISSUE =================  
+        items = new JSONArray();   
+        item_1 = new JSONObject();
+            item_1.put("id", ITEMS_IDS.get(ITEMS_IDS.size() - 1)); 
+            item_1.put("_index", Item_Index);
+            item_1.put("quantity", 1);
+            item_1.put("unit", 1);    
+            item_1.put("price", new JSONObject().put("amount", 0.05));
+            item_1.put("_subtotal", new JSONObject().put("amount", 2.0));
+            item_1.put("_promo", new JSONObject().put("amount", 0));
+            item_1.put("_loyalty", new JSONObject().put("amount", 0));
+            item_1.put("meta", new JSONObject());
+            item_1.put("options", new JSONArray());
+            item_1.put("reason", "Test Item DELIVERY_ISSUE");  
+        items.put(item_1);
+        requestParams.put("type", "DELIVERY_ISSUE");  
+        requestParams.put("items", items); 
+        requestParams.put("reason", "Test type DELIVERY_ISSUE"); 
+        BODY = requestParams.toString();
+        
+        JOB_Api_Call("Pickup Order - Issue/DELIVERY_ISSUE", "POST", 
+            BaseAPI + "/order/" + Order_Pickup_ID + "/issue", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }        
         
         Realm = A.Func.Realm_ID("AP3", env);
         String Fresh_TKN = "";
@@ -178,6 +265,7 @@ class order extends API_GUI{
         requestParams.put("refunds", refunds); 
         requestParams.put("reason", "Test Order Refund"); 
         BODY = requestParams.toString();
+        
         JOB_Api_Call("Pickup Order - Refund", "PATCH", 
             BaseAPI + "/order/" + Order_Pickup_ID + "/refund", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
@@ -185,6 +273,9 @@ class order extends API_GUI{
         }         
         
         Auth = "Bearer " + Mobile_User_TKN;
+        requested_date = new Date(Long.parseLong(DELIEVEY_TIMESLOTS.get(DELIEVEY_TIMESLOTS.size() - 1)) *1000L);
+        //requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
+        Requested_Date = sdf.format(requested_date); 
         BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
                 "\"location_brand\":\"" + BrandID + "\"," + 
                 "\"customer\":\"" + Mobile_User_ID + "\"," +  
@@ -199,7 +290,8 @@ class order extends API_GUI{
                     "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
                 "\"requested_date\":\"" + Requested_Date + "\"," +
                 "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
-                "\"}";        
+                "\"}";   
+        
         JOB_Api_Call("Place Delivery Order", "POST", 
             BaseAPI + "/order", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null && json.has("id")){
@@ -214,6 +306,7 @@ class order extends API_GUI{
         //is.put("out_for_delivery", true);        
         requestParams.put("is", isD); 
         BODY = requestParams.toString();
+        
         JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           

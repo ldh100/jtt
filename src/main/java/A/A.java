@@ -160,7 +160,7 @@ public class A extends javax.swing.JFrame {
         );
 
         Menu_Tools.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Menu_Tools.setText("Tools");
+        Menu_Tools.setText("Links");
         Menu_Tools.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_Tools.setName("Menu_Tools"); // NOI18N
 
@@ -1304,23 +1304,23 @@ public class A extends javax.swing.JFrame {
         F_COUNT++;
     }
     private void Open_Station() throws PropertyVetoException {
-        final JInternalFrame[] frames = DesktopPane.getAllFrames();
-        for (JInternalFrame frame : frames) {
-            if (frame.getName().equals("Station")) {
-                try {
-                    frame.setSelected(true);
-                    if (frame.isIcon()) {
-                        frame.setIcon(false);
-                    }
-                    frame.setSelected(true);
-                }catch (PropertyVetoException ex) {
-                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                frame.requestFocus();
-                frame.toFront();
-                return;
-            }
-        }
+//        final JInternalFrame[] frames = DesktopPane.getAllFrames();
+//        for (JInternalFrame frame : frames) {
+//            if (frame.getName().equals("Station")) {
+//                try {
+//                    frame.setSelected(true);
+//                    if (frame.isIcon()) {
+//                        frame.setIcon(false);
+//                    }
+//                    frame.setSelected(true);
+//                }catch (PropertyVetoException ex) {
+//                    // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                frame.requestFocus();
+//                frame.toFront();
+//                return;
+//            }
+//        }
         Station.Station dl = new Station.Station();
         this.DesktopPane.add(dl);
         int Y;
@@ -1420,7 +1420,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         }
-        Jobs.Jobs jobs = new Jobs.Jobs();
+        Jobs.Jobs_GUI jobs = new Jobs.Jobs_GUI();
         this.DesktopPane.add(jobs);
         int Y;
         int X;

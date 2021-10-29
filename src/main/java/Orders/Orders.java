@@ -59,6 +59,9 @@ public class Orders extends javax.swing.JInternalFrame {
         btnOR_Site = new javax.swing.JButton();
         btnOR_Brand = new javax.swing.JButton();
         btnCart = new javax.swing.JButton();
+        cmbDAYS = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         DV_Sites = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -67,19 +70,21 @@ public class Orders extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
+        setResizable(true);
         setTitle("Orders >>> loading, please wait ... ... ... ...");
+        setMaximumSize(new java.awt.Dimension(860, 32532));
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("ORDER"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -99,11 +104,9 @@ public class Orders extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblOrders.setText("Orders");
         lblOrders.setAlignmentX(0.5F);
-        getContentPane().add(lblOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 8, 780, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -128,8 +131,6 @@ public class Orders extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 24, 848, 228));
-
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -138,8 +139,6 @@ public class Orders extends javax.swing.JInternalFrame {
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 416, 424, 88));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -192,6 +191,7 @@ public class Orders extends javax.swing.JInternalFrame {
         lblSITES4.setAlignmentX(0.5F);
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_ID.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_ID.setText("App_User@?.?");
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -200,6 +200,7 @@ public class Orders extends javax.swing.JInternalFrame {
         lblSITES6.setAlignmentX(0.5F);
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMobile_PW.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_PW.setText("password");
 
         btnOR_User.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -230,7 +231,7 @@ public class Orders extends javax.swing.JInternalFrame {
         });
 
         btnCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnCart.setText("Selected Cart & Order");
+        btnCart.setText(" ^ Selected Order > Print SCart & Order JSON");
         btnCart.setEnabled(false);
         btnCart.setMargin(new java.awt.Insets(2, 2, 2, 2));
         btnCart.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,23 +240,31 @@ public class Orders extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbDAYS.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        cmbDAYS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7", "14", "30", "60", "120" }));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel1.setText("Last");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel2.setText("days");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtMobile_ID, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtMobile_PW, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMobile_ID)
+                            .addComponent(txtMobile_PW)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSITES6))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,15 +287,30 @@ public class Orders extends javax.swing.JInternalFrame {
                                     .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnCart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(cmbDAYS, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(9, 49, Short.MAX_VALUE)
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbDAYS, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSITES4)
                         .addGap(2, 2, 2)
                         .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,9 +320,7 @@ public class Orders extends javax.swing.JInternalFrame {
                         .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(btnCart, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(0, 42, Short.MAX_VALUE)
                         .addComponent(btnOR_Site, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnOR_Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,8 +338,6 @@ public class Orders extends javax.swing.JInternalFrame {
                             .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
-
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 348, 420, 156));
 
         DV_Sites.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV_Sites.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -342,8 +362,6 @@ public class Orders extends javax.swing.JInternalFrame {
         });
         jScrollPane4.setViewportView(DV_Sites);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 256, 424, 160));
-
         DV_Brands.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Brands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -367,7 +385,45 @@ public class Orders extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV_Brands);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 256, 420, 88));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(lblOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(lblOrders)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(3, 3, 3))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -513,15 +569,16 @@ public class Orders extends javax.swing.JInternalFrame {
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
         
+        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
         
-        Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        Api_Call(BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth);
         //Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
         
         Load_Orders("SITE");      
         // &_query=%7Borders%7BALL%7D%7D"
-        lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
+        lblOrders.setText(env + ": Site '" + SITE + "'   >>>  Last " +  cmbDAYS.getSelectedItem().toString() + " days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());         
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -533,15 +590,16 @@ public class Orders extends javax.swing.JInternalFrame {
         Auth = "Bearer " + AP3_TKN;
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
+
+        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        long m1 = System.currentTimeMillis() + (1*24*3600*1000);  // Now + 1 day to include future 'requested date'
+        long m7 = System.currentTimeMillis() - (Days_Back*24*3600*1000);  // Now - Days_Back days > default 7
         
-        long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
-        
-        Api_Call("GET",  BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        Api_Call(BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth);
         
         Load_Orders("BRAND");
         
-        lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
+        lblOrders.setText(env + ": Site '" + SITE + "', Brand '" + BRAND + "'   >>>  Last " +  cmbDAYS.getSelectedItem().toString() + " days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + SITE + " > " + BRAND + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -696,7 +754,7 @@ public class Orders extends javax.swing.JInternalFrame {
         sorter.setSortable(0, false);         
                  
         try { 
-            Api_Call("GET", BaseAPI + "/location/multigroup/" + appId, "", "");
+            Api_Call(BaseAPI + "/location/multigroup/" + appId, "");
             String site;
             String country;
             String id;
@@ -797,7 +855,7 @@ public class Orders extends javax.swing.JInternalFrame {
         sorter.setSortable(0, false);                  
         
         try {
-            Api_Call("GET", BaseAPI + "/location/group/" + DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3) + "?extended=true&nocache=1", "", "");
+            Api_Call(BaseAPI + "/location/group/" + DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3) + "?extended=true&nocache=1", "");
             
             JSONArray Location = json.getJSONArray("locations");
             JSONArray brands = null;
@@ -885,7 +943,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String Realm = A.Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);      
         
         // ============ Mobile User Authentication =====================================
-        Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
+        Api_Call(BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth);
 
         Mobile_User_ID = json.getString("user");
         Mobile_User_TKN = json.getString("token");
@@ -900,8 +958,9 @@ public class Orders extends javax.swing.JInternalFrame {
             return;
         }
                
+        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*7*1000);  // Now - 7 days
+        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
         
         txtLog.append("\r\n- Get Mobile User Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -910,11 +969,11 @@ public class Orders extends javax.swing.JInternalFrame {
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
         
-        Api_Call("GET",  BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth, "");
+        Api_Call(BaseAPI + "/order/customer/" + Mobile_User_ID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth);
         //Api_Call("GET",  BaseAPI + "/order/customer/" + Mobile_User_ID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
         
         Load_Orders("USER");
-        lblOrders.setText(env + ": Mobile User " + txtMobile_ID.getText() + "  >>>  Last 7 days Orders: " + DV1.getRowCount() + " found");
+        lblOrders.setText(env + ": Mobile User " + txtMobile_ID.getText() + "  >>>  Last " +  cmbDAYS.getSelectedItem().toString() + " days Orders: " + DV1.getRowCount() + " found");
         txtLog.append(env + " > " + cmbApp.getSelectedItem().toString() + " > " + txtMobile_ID.getText() + " - " + DV1.getRowCount() + " found" + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }   
@@ -927,8 +986,10 @@ public class Orders extends javax.swing.JInternalFrame {
         btnCart.setEnabled(false);
         String _Promo = "None";
         String _Name = "?";
-
-        String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "PickupName", "Promo", "Service", "SCartID", "OrderID", "Modified_Date"}; 
+        String _Payment = "?";
+        String _Amount = "?";
+        
+        String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "Amount", "PickupName", "Promo", "Payment", "Service","SCartID", "OrderID", "Modified_Date"}; 
         DefaultTableModel dm = new DefaultTableModel();
         dm.setColumnIdentifiers(SitesColumnsName);
         DV1.setModel(dm);
@@ -951,18 +1012,21 @@ public class Orders extends javax.swing.JInternalFrame {
                 if (!OR.isEmpty()) {
                     for (int i = 0; i < OR.length(); i++) {
                         JSONObject or = OR.getJSONObject(i);
-//                        JSONObject is = or.getJSONObject("is");
-//                        STAT = "";
-//                        if (is.getBoolean("accepted")) {
-//                            STAT = "  Accepted ";
-//                        }
-//                        if (is.getBoolean("in_progress")) {
-//                            STAT = "  In_Progress ";
-//                        }
-//                        if (is.getBoolean("ready")) {
-//                            STAT = "  Ready ";
-//                        }
-                        _Promo = "None";
+                        if(or.has("meta") && or.getJSONObject("meta").has("transaction") && or.getJSONObject("meta").getJSONObject("transaction").has("amount")){
+                            _Amount = or.getJSONObject("meta").getJSONObject("transaction").getNumber("amount").toString();
+                        }
+
+                        if(or.has("payment") && or.getJSONObject("payment").has("credit_card") && 
+                           or.getJSONObject("payment").getJSONObject("credit_card").has("card_type")){
+                            _Payment = or.getJSONObject("payment").getJSONObject("credit_card").getString("card_type") +
+                                " x" + or.getJSONObject("payment").getJSONObject("credit_card").getString("last4");
+                        } 
+                        if(or.has("payment") && or.getJSONObject("payment").has("digital_wallet_pay")){
+                            _Payment = or.getJSONObject("payment").getString("digital_wallet_pay");
+                        }                        
+                        if(or.has("mealplan") && or.getJSONObject("mealplan").has("name")){
+                            _Payment = "MPlan " + or.getJSONObject("mealplan").getString("name");
+                        }                         
                         if(or.has("meta") && or.getJSONObject("meta").has("promo")){
                             _Promo = or.getJSONObject("meta").getJSONObject("promo").getString("code");
                         }
@@ -975,8 +1039,10 @@ public class Orders extends javax.swing.JInternalFrame {
                         dm.addRow(new Object[]{env, app, _Site,
                             or.getJSONObject("details").getString("destination"),
                             Date_Requested.format(LOC_formatter),
+                            _Amount,
                             _Name,
-                            _Promo,
+                            _Promo,                  
+                            _Payment, 
                             or.getJSONObject("details").getString("order_type"),
                             or.getString("shoppingcart"),
                             or.getString("id"),
@@ -987,17 +1053,19 @@ public class Orders extends javax.swing.JInternalFrame {
                 DV1.setModel(dm);
 
                 DV1.setDefaultEditor(Object.class, null);
-                DV1.getColumnModel().getColumn(0).setPreferredWidth(40);
-                DV1.getColumnModel().getColumn(1).setPreferredWidth(60);
-                DV1.getColumnModel().getColumn(2).setPreferredWidth(160);
-                DV1.getColumnModel().getColumn(3).setPreferredWidth(140);        
+                DV1.getColumnModel().getColumn(0).setPreferredWidth(35); // Env
+                DV1.getColumnModel().getColumn(1).setPreferredWidth(50); // App
+                DV1.getColumnModel().getColumn(2).setPreferredWidth(120); // Site
+                DV1.getColumnModel().getColumn(3).setPreferredWidth(120); // Destination       
                 DV1.getColumnModel().getColumn(4).setPreferredWidth(95);  // req date
-                DV1.getColumnModel().getColumn(5).setPreferredWidth(160); // name           
-                DV1.getColumnModel().getColumn(6).setPreferredWidth(110); // service
-                DV1.getColumnModel().getColumn(7).setPreferredWidth(50); 
-                DV1.getColumnModel().getColumn(8).setPreferredWidth(50); 
-                DV1.getColumnModel().getColumn(9).setPreferredWidth(60); 
-                DV1.getColumnModel().getColumn(10).setPreferredWidth(150); 
+                DV1.getColumnModel().getColumn(5).setPreferredWidth(50);  // Amount
+                DV1.getColumnModel().getColumn(6).setPreferredWidth(130); // name           
+                DV1.getColumnModel().getColumn(7).setPreferredWidth(100); // payment
+                DV1.getColumnModel().getColumn(8).setPreferredWidth(70); // service
+                DV1.getColumnModel().getColumn(9).setPreferredWidth(50);  
+                DV1.getColumnModel().getColumn(10).setPreferredWidth(50); 
+                DV1.getColumnModel().getColumn(11).setPreferredWidth(60); 
+                DV1.getColumnModel().getColumn(12).setPreferredWidth(150); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
                 sorter.setSortable(10, true); 
@@ -1022,8 +1090,8 @@ public class Orders extends javax.swing.JInternalFrame {
         String CartID = "";
         Auth = "Bearer " + AP3_TKN;
         try {
-            CartID = DV1.getValueAt(DV1.getSelectedRow(), 8).toString();
-            Api_Call("GET", BaseAPI + "/shoppingcart/" + CartID, "", "");
+            CartID = DV1.getValueAt(DV1.getSelectedRow(), 10).toString();
+            Api_Call(BaseAPI + "/shoppingcart/" + CartID, "");
             J += BaseAPI + "/shoppingcart/" + CartID + "\r\n" + json.toString(4) + "\r\n";
             if(json.has("brand")){
                 SC_Brand_ID = json.getString("brand");
@@ -1034,9 +1102,8 @@ public class Orders extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
 
-        txtLog.append("== " + BaseAPI + "/shoppingcart/" + CartID + " > " + "\r\n== " + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/shoppingcart/" + CartID + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        sw1.reset();
 
         J += "\r\n==== Order" + "\r\n";
         txtLog.append("- Order..." + "\r\n");
@@ -1044,18 +1111,16 @@ public class Orders extends javax.swing.JInternalFrame {
         String OrderID = "";
 
         try {
-            OrderID = DV1.getValueAt(DV1.getSelectedRow(), 9).toString();
-            Api_Call("GET", BaseAPI + "/order/" + OrderID, Auth, "");
+            OrderID = DV1.getValueAt(DV1.getSelectedRow(), 11).toString();
+            Api_Call(BaseAPI + "/order/" + OrderID, Auth);
             J += BaseAPI + "/order/" + OrderID + "\r\n" + json.toString(4) + "\r\n";
         } catch (Exception ex) {
             J += BaseAPI + "/order/" + OrderID + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-        txtLog.append("== " + BaseAPI + "/order/" + OrderID + " > " + "\r\n== " + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec ==" + "\r\n");
+        txtLog.append("== " + BaseAPI + "/order/" + OrderID + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-
-
 
         String R = A.Func.SHOW_FILE(J, "json");
         if (!R.equals("OK")) {
@@ -1064,20 +1129,20 @@ public class Orders extends javax.swing.JInternalFrame {
         }
         
         if(DV1.getValueAt(DV1.getSelectedRow(), 2).toString().trim().equals("?")){
-            Api_Call("GET", BaseAPI + "/location/brand/" + SC_Brand_ID, Auth, "");    
-                if(json.has("group")){
-                    SC_Site_ID = json.getString("group");
-                    Api_Call("GET", BaseAPI + "/location/group/" + SC_Site_ID, Auth, "");                 
-                    if(json.has("name")){
-                        String SC_Site = json.getString("name");
-                        DV1.setValueAt(SC_Site, DV1.getSelectedRow(), 2);
-                    } 
-                }      
+            Api_Call(BaseAPI + "/location/brand/" + SC_Brand_ID, Auth);    
+            if(json.has("group")){
+                SC_Site_ID = json.getString("group");
+                Api_Call(BaseAPI + "/location/group/" + SC_Site_ID, Auth);                 
+                if(json.has("name")){
+                    String SC_Site = json.getString("name");
+                    DV1.setValueAt(SC_Site, DV1.getSelectedRow(), 2);
+                } 
+            }      
         }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
-    protected void Api_Call(String Method, String EndPoint, String AUTH, String BODY) {
+    protected void Api_Call(String EndPoint, String AUTH) {
         json = null;
         RequestSpecification request;
         request = RestAssured.given();
@@ -1094,35 +1159,7 @@ public class Orders extends javax.swing.JInternalFrame {
         try {
             sw1.start();
             Response response = null;
-            switch (Method) {
-                case "GET":
-                    if (BODY.equals("Bolter")) {
-                        request.header("From", "Bolter/1.0");
-                    }
-                    response = request.get(EndPoint);
-                    break;
-                case "POST":
-                    request.body(BODY);
-                    response = request.post(EndPoint);
-                    break;
-                case "PATCH":
-                    request.body(BODY);
-                    response = request.patch(EndPoint);
-                    break;
-                case "DELETE":
-                    request.body(BODY);
-                    response = request.delete(EndPoint);
-                    break;
-                case "PUT":
-                    request.body(BODY);
-                    response = request.put(EndPoint);
-                    break;
-                case "OPTIONS":
-                    response = request.options(EndPoint);
-                    break;
-                default:
-                    break;
-            }
+            response = request.get(EndPoint); // only get for Orders
             Result = response.getStatusLine();
             status = response.getStatusCode();
             if (status != 200) {
@@ -1134,7 +1171,6 @@ public class Orders extends javax.swing.JInternalFrame {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     txtLog.append("Error: " + json.getString("error") + "\r\n");
-
                 }
             }
         } catch (Exception ex) {
@@ -1158,7 +1194,10 @@ public class Orders extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnOR_User;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JComboBox<String> cmbApp;
+    private javax.swing.JComboBox<String> cmbDAYS;
     private javax.swing.JComboBox<String> cmbEnv;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

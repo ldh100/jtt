@@ -61,7 +61,7 @@ class AP3_images extends AP3_GUI{
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                     Thread.sleep(500);
-                Element_By_Path_Click("Click > Edit Global menu on '"+GL_MENU+"' Brand", "xpath", "//*[text()='"+GL_MENU+"']/ancestor::tr//button", ParentTest, "no_jira");
+                Element_By_Path_Click("Click > Edit Global menu on '" + GL_MENU + "' Brand", "xpath", "//*[text()='" + GL_MENU + "']/ancestor::tr//button", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Wait_For_Element_By_Path_Presence("Check > 'Edit Global Menu Brand Name' dialog is open", "xpath", "//div[contains(text(),'Allow Images in Global Menu')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
@@ -537,7 +537,7 @@ class AP3_images extends AP3_GUI{
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                     Thread.sleep(500);  
-                Element_By_Path_Click("Click > Edit Global menu on '"+GL_MENU+"' Brand", "xpath", "//*[text()='"+GL_MENU+"']/ancestor::tr//button", ParentTest, "no_jira");
+                Element_By_Path_Click("Click > Edit Global menu on '" + GL_MENU + "' Brand", "xpath", "//*[text()='" + GL_MENU + "']/ancestor::tr//button", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Wait_For_Element_By_Path_Presence("Check > 'Edit Global Menu Brand Name' dialog is open", "xpath", "//div[contains(text(),'Allow Images in Global Menu')]", ParentTest, "no_jira");
                 if (FAIL) { return;}

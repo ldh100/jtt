@@ -8,7 +8,7 @@ import org.json.JSONObject;
  * For 'Manipulate Global Modifiers' test cases use Site: Ap3 Automation, Brand: Starbucks (App: Thrive)
  * Manually check that the Global Modifier group 'Modifier Manipulation Test Group' with Label in App set to 'MMTG' exists
  * If it doesn't exist, create it manually and add one modifier with Name: existing1, Price: $1, Calories: 100, PLU:111
- * and set any required Chit # to 1, save and publish
+ * and set any required Sequence On Ticket to 1, save and publish
  * Then go to Global Menu and add this Modifier Group to second item in 'Lunch' -> 'Beverages Lunch' menu set,
  * save and publish
  */
@@ -314,11 +314,11 @@ class AP3_mm_items extends AP3_GUI{
         Thread.sleep(500); 
         To_Bottom("Scroll to page Bottom", ParentTest, "no_jira"); 
         Thread.sleep(500);
-        Wait_For_Element_By_Path_Presence("Wait for 'Category Chit #' Presence", "css", "[aria-label='Chit #']", ParentTest, Ver);
+        Wait_For_Element_By_Path_Presence("Wait for 'Category Sequence On Ticket' Presence", "css", "[aria-label='Sequence On Ticket']", ParentTest, Ver);
             if (FAIL) { return;}    
-        Element_By_Path_Click("Click 'New Category Chit #'", "css", "[aria-label='Chit #']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'New Category Sequence On Ticket'", "css", "[aria-label='Sequence On Ticket']", ParentTest, "no_jira");
             if (FAIL) { return;}            
-        Element_By_Path_Text_Enter("Enter Category Chit #", "css", "[aria-label='Chit #']", "3", false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Enter Category Sequence On Ticket", "css", "[aria-label='Sequence On Ticket']", "3", false, ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'New Category Name'", "css", "[aria-label='Enter Category Name']", ParentTest, "no_jira");
             if (FAIL) { return;}            

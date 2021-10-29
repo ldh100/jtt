@@ -1947,8 +1947,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_roles: "))  _roles.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_all_data: "))  _all_data.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));     
-                
+                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));    //  
+                if(l.contains("_notifications: "))  _notifications.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_sales_report_hidden: "))  _sales_report_hidden.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_orders_report_hidden: "))  _orders_report_hidden.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_brand_closure: "))  _brand_closure.setSelected(Boolean.parseBoolean(value)); 

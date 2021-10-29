@@ -2388,7 +2388,7 @@ class AP3_brand_config extends AP3_GUI {
         Element_By_Path_Click("Click '+ Sign", "xpath", "(//div[@class='flex xs12 list-item list-item-large']//div[@class='v-btn__content'])[3]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
             
-        Wait_For_Element_By_Path_Presence("Wait for 'Category Chit #' Presence", "css", "[aria-label='Chit #']", ParentTest, Ver);
+        Wait_For_Element_By_Path_Presence("Wait for 'Category Sequence On Ticket' Presence", "css", "[aria-label='Sequence On Ticket']", ParentTest, Ver);
             if (FAIL) { return;}            
         Element_By_Path_Click("Click 'New Category Name'", "css", "[aria-label='Enter Category Name']", ParentTest, "no_jira");
             if (FAIL) { return;}            

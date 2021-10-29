@@ -26,7 +26,6 @@ class locations extends API_GUI {
     private String New_DropOff_LocationID = "";
     private String New_BrandID = "";
     private String New_Business_UnitID = "";
-    private String brandBodyResponse = "";
     private String New_SecotorID = "";
     private String New_CompanyID = "";
     private Date release_date = new DateTime(new Date()).plusHours(4).plusMinutes(1).toDate();
@@ -118,7 +117,6 @@ class locations extends API_GUI {
                     JSONObject menu = MENUS.getJSONObject(i);
                     MENU_IDS.add(menu.getString("id"));
                 }
-
                 if (json.has("sector")) {
                     SectorID = json.getString("sector");
                 }
@@ -126,7 +124,7 @@ class locations extends API_GUI {
                     CompanyID = json.getString("company");
                 }
             } catch (Exception ex) {
-                //
+                AAA = ex.getMessage();
             }
         }
         Auth = "Bearer " + AP3_TKN;  // ===============    AP3 Sector ===========================

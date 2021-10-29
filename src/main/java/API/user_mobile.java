@@ -151,7 +151,7 @@ class user_mobile extends API_GUI{
                 try {
                     if(json.has("id")) New_User_ID = json.getString("id"); 
                 } catch (Exception ex){
-                    String AAAA = ex.getMessage();
+                    AAA = ex.getMessage();
                 }
             } 
         }    
