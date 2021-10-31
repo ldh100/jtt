@@ -711,7 +711,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
 
     //<editor-fold defaultstate="collapsed" desc="Jobs_GUI > Job Name, Config">
     private void Tokens_AP3(String job, String config){
-        _AP3_Tokens _Job = new _AP3_Tokens();
+        AP3_Tokens _Job = new AP3_Tokens();
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         _Job.AP3_Tokens(job, r_type, config);
         txtLog.append("= Please Check Report" + "\r\n");

@@ -7,6 +7,31 @@ import java.util.TimeZone;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/* Email for DISPUTE
+So this functionality was developed long time ago for Frictionless.
+It either sends an email specified in location_brand(Station)’s private config, or to
+frictionlesssupport@mailsac.com
+
+Tokariev, Sviatoslav
+So to send to custom email, you need to update https://api.compassdigital.org/dev/config/$ORDER_BRAND_ID$
+{dispute_email: 'keyur.patel@compassdigital.io', ...rest of private config}
+or the email will go to
+frictionlesssupport@mailsac.com
+
+Patel, Keyur
+So all email for dispute will got to ”
+frictionlesssupport@mailsac.com" right ?
+Dev , staging and prod
+
+Tokariev, Sviatoslav
+yes
+https://mailsac.com/inbox/frictionlesssupport@mailsac.com
+Free hosted email for your domain with no signup, disposable email, forwarding, webhooks, REST and websockets APIs for developers.
+Tokariev, Sviatoslav
+I guess the functionality was never official ( it’s not even configured in AP3)
+I just migrated it from orders to email service
+*/
+
 class order extends API_GUI{
     protected order(API_GUI a) {
         app = a.app;
@@ -50,7 +75,7 @@ class order extends API_GUI{
     Date requested_date;
     
     protected void run() {  
-        if (!"PR".equals(env)) {
+        if (!env.equals("PR")) {
             PLACE_ORDERS();
         }
         
@@ -106,7 +131,7 @@ class order extends API_GUI{
         requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
         requestParams.put("location_brand", BrandID);
         requestParams.put("customer", Mobile_User_ID);
-        requestParams.put("pickup_name", "JTT API Test Pickup");
+        requestParams.put("pickup_name", env + " JTT API Test Pickup");
         requestParams.put("pickup", Requested_Date);
         requestParams.put("requested_date", Requested_Date);
         requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
@@ -284,7 +309,7 @@ class order extends API_GUI{
                     "\"destination\":\"" + DELIEVERY_DESTINATIONS.get(0) + "\"," +
                     "\"duration\":\"" + "00:05:00" + "\"," +
                     "\"instructions\":\"" + "Discard this Order" + "\"," +
-                    "\"name\":\"" + "JTT API Test Delivery" + "\"," +
+                    "\"name\":\"" + env + " JTT API Test Delivery" + "\"," +
                     "\"order_type\":\"delivery\"}," + 
                 "\"payment\":" + 
                     "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +

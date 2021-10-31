@@ -12,7 +12,6 @@ class partner extends API_GUI{
         SiteID = a.SiteID;
         BrandID = a.BrandID;
         UnitID = a.UnitID;
-        // UnitNum ???????
         ParentTest = a.ParentTest;
     }
     String AAA = "";
@@ -39,6 +38,14 @@ class partner extends API_GUI{
             BaseAPI + "/partner/coolr/" + CoolrID + "/images", "", "", 200, ParentTest, "no_jira"); 
         if(json != null){
             AAA = json.toString(4);
-        }         
+        }      
+        // https://api.compassdigital.org/dev/partner/standardcognition/menu  POST Create new Menu
+//        body 
+//        {
+//        "company":"PpzmrEBrveHRB9NLLoAet3dwyv1kl2tRB2rayqrNSe1dD5ev97HlXlOWPR95UQoZwMdMk7HEa1aDj",
+//        "sector":"QDaXdWJdvktvLG5qXwYOhwWgGE6LNJC9aXDReBJdHjWlq50lGgFZyXzJ6mLmsvYw17zkjXtDeGQM",
+//        "location_brand":"q1BjvDevYgCBWBAN4o5zceB90zX7rpcEB3Pa1Jm3uN7rmryElOtG3LvOQDels97L7PaB8qIQdN",
+//        "s3_link": "cdl-partner-menu-frictionless/dev/5001.json"
+//        }
     }
 }

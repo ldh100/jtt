@@ -59,7 +59,7 @@ class locations extends API_GUI {
                     }
                 }
             } catch (Exception ex) {
-                //
+                AAA = ex.getMessage();
             }
         }
 
