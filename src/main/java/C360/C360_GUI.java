@@ -1520,17 +1520,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
                 if(l.contains("_mobile_view: ")) _Mobile_view = Boolean.parseBoolean(value);
-                
-                if(l.contains("GROUP: ")) SECTOR = value;
-                if(l.contains("GL_MENU: ")) GL_MENU = value;
-                if(l.contains("SITE: ")) SITE = value;
-                if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("DH_MENU_ID: ")) DH_MENU_ID = value;
-                
+
                 if(l.contains("USER_NAME: ")) USER_NAME = value;
-                if(l.contains("USER_PW: ")) USER_PW = value;
-
-
+                if(l.contains("USER_PW: ")) USER_PW = new String(Base64.getDecoder().decode(value)); 
+             
                 if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
                 if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
@@ -1539,21 +1532,12 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_concept_groups: ")) _Concept_groups = Boolean.parseBoolean(value);
                 if(l.contains("_posid_ranges: ")) _Posid_ranges = Boolean.parseBoolean(value);
                 if(l.contains("_all_data: ")) _All_data = Boolean.parseBoolean(value); 
-                
-                if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
-                if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
-                if(l.contains("_group_management: ")) _Group_management = Boolean.parseBoolean(value);
-                if(l.contains("_menu_manager: ")) _Menu_manager = Boolean.parseBoolean(value);
-                if(l.contains("_bulk_apply: ")) _Bulk_apply = Boolean.parseBoolean(value);
-
-                if(l.contains("_sales_reporting: ")) _Sales_reporting = Boolean.parseBoolean(value);
-                if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
-                if(l.contains("_resent_updates: ")) _Resent_updates = Boolean.parseBoolean(value);
-                if(l.contains("_announcements: "))  _Announcements = Boolean.parseBoolean(value);
-                if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
                 if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
                 if(l.contains("_roles: ")) _Roles = Boolean.parseBoolean(value);
-                if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
+                if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value); 
+                
+                if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
+
             }            
             CONFIG = true;
             
