@@ -15,14 +15,19 @@ class partner extends API_GUI{
         ParentTest = a.ParentTest;
     }
     String AAA = "";
+    String CoolrID = "";
     protected void run() { 
-        String CoolrID = "";
+        
         JOB_Api_Call("Partner Standardcognition Locations", "GET", 
             BaseAPI + "/partner/standardcognition/locations", "", "", 200, ParentTest, "no_jira"); 
         if(json != null){
             AAA = json.toString(4);
         } 
-        
+        JOB_Api_Call("Partner Standardcognition Stores", "GET", 
+            BaseAPI + "/partner/standardcognition/stores", "", "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            AAA = json.toString(4);
+        }         
         JOB_Api_Call("Partner Coolr Locations", "GET", 
             BaseAPI + "/partner/coolr/locations", "", "", 200, ParentTest, "no_jira"); 
         if(json != null){

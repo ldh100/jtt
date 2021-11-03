@@ -2661,59 +2661,26 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
-                if (l.contains("env: ")) {
-                    env = value;
-                }
-                if (l.contains("app: ")) {
-                    app = value;
-                }
-                if (l.contains("url: ")) {
-                    url = value;
-                }
+                if (l.contains("env: ")) { env = value; }
+                if (l.contains("app: ")) {  app = value; }
+                if (l.contains("url: ")) { url = value; }
 
-                if (l.contains("SlackCh: ")) {
-                    Slack_Channel = value;
-                }
-                if (l.contains("_slack: ")) {
-                    _Slack = Boolean.parseBoolean(value);
-                }
-                if (l.contains("_zip_report: ")) {
-                    Zip_Report = Boolean.parseBoolean(value);
-                }
+                if (l.contains("SlackCh: ")) { Slack_Channel = value; }
+                if (l.contains("_slack: ")) {  _Slack = Boolean.parseBoolean(value); }
+                if (l.contains("_zip_report: ")) { Zip_Report = Boolean.parseBoolean(value); }
 
-                if (l.contains("SECTOR: ")) {
-                    SECTOR = value;
-                }
-                if (l.contains("GL_MENU: ")) {
-                    GL_MENU = value;
-                }
-                if (l.contains("SITE: ")) {
-                    SITE = value;
-                }
-                if (l.contains("BRAND: ")) {
-                    BRAND = value;
-                }
-                if (l.contains("MOBILE_ID: ")) {
-                    MOBILE_ID = value;
-                }
-                if (l.contains("MOBILE_PW: ")) {
-                    MOBILE_PW = value;
-                }
-                if (l.contains("ADMIN_ID: ")) {
-                    ADMIN_ID = value;
-                }
-                if (l.contains("ADMIN_PW: ")) {
-                    ADMIN_PW = value;
-                }
-                if (l.contains("RUNNER_ID: ")) {
-                    RUNNER_ID = value;
-                }
-                if (l.contains("RUNNER_PW: ")) {
-                    RUNNER_PW = value;
-                }
-                if (l.contains("Market_Brand_ID: ")) {
-                    Market_Brand_ID = value;
-                }
+                if (l.contains("SECTOR: ")) { SECTOR = value; }
+                if (l.contains("GL_MENU: ")) { GL_MENU = value; }
+                if (l.contains("SITE: ")) { SITE = value; }
+                if (l.contains("BRAND: ")) { BRAND = value; }
+                
+                if (l.contains("MOBILE_ID: ")) { MOBILE_ID = value; }
+                if (l.contains("MOBILE_PW: ")) { MOBILE_PW = value; }
+                if (l.contains("ADMIN_ID: ")) { ADMIN_ID = value; }
+                if (l.contains("ADMIN_PW: ")) { ADMIN_PW = value; }
+                if (l.contains("RUNNER_ID: ")) { RUNNER_ID = value; }
+                if (l.contains("RUNNER_PW: ")) { RUNNER_PW = value; }
+                if (l.contains("Market_Brand_ID: ")) { Market_Brand_ID = value; }
             }
             CONFIG = true;
             switch (env) {

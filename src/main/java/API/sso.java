@@ -22,21 +22,21 @@ class sso extends API_GUI{
                 DL_Redirect_URL = "//dev.member.distilr.io/login";
                 
                 C360_Clien_ID = "Cafe 360 DEV";
-                C360_Redirect_URL = "//dev.cafe360.compassdigital.org";
+                C360_Redirect_URL = "https://dev.cafe360.compassdigital.org/home";
                 break;
             case "ST":
                 DL_Clien_ID = "FMP Distilr Test";
                 DL_Redirect_URL = "//staging.member.distilr.io/login";
                 
                 C360_Clien_ID = "Cafe 360 Test";
-                C360_Redirect_URL = "//staging.cafe360.compassdigital.org";
+                C360_Redirect_URL = "https://staging.cafe360.compassdigital.org/home";
                 break;
             case "PR":
                 DL_Clien_ID = "FMP Distilr Prod";
                 DL_Redirect_URL = "//member.distilr.io/login";
                 
                 C360_Clien_ID = "Cafe 360 Prod";
-                C360_Redirect_URL = "//cafe360.compassdigital.org";
+                C360_Redirect_URL = "https://cafe360.compassdigital.org/home";
                 break; 
         }
 
@@ -50,7 +50,7 @@ class sso extends API_GUI{
        
         JOB_Api_Call("C360 SSO OAuth Login Redirect", "GET",      
             "https://ssodev.compassmanager.com/oauth2.0/authorize?client_id=" + C360_Clien_ID +
-                     "&response_type=code&redirect_uri=" + C360_Redirect_URL, Auth, "", 200, ParentTest, "no_jira");
+                     "&response_type=code&redirect_uri=" + C360_Redirect_URL +"&response_type=code", Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
         }

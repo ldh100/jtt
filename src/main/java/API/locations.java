@@ -180,38 +180,39 @@ class locations extends API_GUI {
                 AAA = ex.getMessage();
             }
         }        
-        if (env != "PR") {
-//            groupAPIs();
-//            locationAPIs();
-//            brandAPIs();
-//            sectorAPIs();
-//            companyAPIs();
+        if (!env.equals("PR")) {
+            Group_APIs();
+            Location_APIs();
+            Brand_APIs();
+            Sector_APIs();
+            Company_APIs();
         }
 
     }
 
-    protected void groupAPIs() {
-        //<editor-fold defaultstate="collapsed" desc="POST New Group/Site">
+    protected void Group_APIs() {
+        //<editor-fold defaultstate="collapsed" desc="POST New Group/Site with Delivery Drop-Off Locations">
         // Test Scenario 1: Positive flow to post site
         BODY = "{\"address\":{"
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "},"
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "},"
                 + "\"label\":{"
-                + "\"en\":\"Demo\""
+                    + "\"en\":\"Demo\""
                 + "},"
                 + "\"meta\":{"
-                + "\"sector_name\":\"Canteen\""
+                    + "\"sector_name\":\"Canteen\""
                 + "},"
                 + "\"name\":\"This is test for AP3 API Automaion - " + RELEASE_DATE + " (Can be Delete)\"}";
-        JOB_Api_Call("Location - POST new group/site", "POST", BaseAPI + "/location/group", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST new group/site", "POST", 
+                BaseAPI + "/location/group", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 New_SiteID = json.getString("id");
@@ -223,12 +224,13 @@ class locations extends API_GUI {
         BODY = "{"
                 + "\"id\":\"" + AppID + "\","
                 + "\"groups\":["
-                + "{"
-                + "\"id\":\"" + New_SiteID + "\""
-                + "}"
+                    + "{"
+                        + "\"id\":\"" + New_SiteID + "\""
+                    + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Location - PATCH add multigroup to newly created group/site", "PATCH", BaseAPI + "/location/multigroup/" + AppID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH add multigroup to newly created group/site", "PATCH", 
+                BaseAPI + "/location/multigroup/" + AppID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Positive flow to Add Drop-off location to newly created group/site.
         BODY = "{"
@@ -236,18 +238,19 @@ class locations extends API_GUI {
                 + "\"foodlocker\":false,"
                 + "\"information\":\"This is foodlocker values\","
                 + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "}"
                 + "}";
-        JOB_Api_Call("Location - POST add drop-off location to newly created group/site " + New_SiteID + " ", "POST", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST add drop-off location to newly created group/site", "POST", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
         BODY = "{"
@@ -255,18 +258,19 @@ class locations extends API_GUI {
                 + "\"foodlocker\":false,"
                 + "\"information\":\"This is foodlocker values\","
                 + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "}"
                 + "}";
-        JOB_Api_Call("Location - POST Negative flow to add duplicate drop-off location to newly created group/site " + New_SiteID + " ", "POST", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Negative flow to add duplicate drop-off location to newly created group/site", "POST", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 5: Positive flow to Add Drop-off location with foodlocker = true.
         BODY = "{"
@@ -274,18 +278,19 @@ class locations extends API_GUI {
                 + "\"foodlocker\":true,"
                 + "\"information\":\"\","
                 + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "}"
                 + "}";
-        JOB_Api_Call("Location - POST add drop-off location to newly created group/site with Foodlocker = true " + New_SiteID + " ", "POST", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST add drop-off location to newly created group/site with Foodlocker=true", "POST", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 New_DropOff_LocationID = json.getString("id");
@@ -309,20 +314,22 @@ class locations extends API_GUI {
                 + "\"en\":\"Demo\""
                 + "},"
                 + "\"meta\":{"
-                + "\"sector_name\":\"Canteen\""
+                    + "\"sector_name\":\"Canteen\""
                 + "},"
                 + "\"name\":\"\"}";
-        JOB_Api_Call("Location - POST Negative flow for group/site without Name", "POST", BaseAPI + "/location/group", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Negative flow for group/site without Name", "POST", 
+                BaseAPI + "/location/group", Auth, BODY, 400, ParentTest, "no_jira");
         // Test Scenario 7: Negative flow to update site without Group/Site id
         BODY = "{"
                 + "\"id\":\"" + AppID + "\","
                 + "\"groups\":["
-                + "{"
-                + "\"id\":\"\""
-                + "}"
+                    + "{"
+                        + "\"id\":\"\""
+                    + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Location - PATCH add multigroup without passing valid group/site id", "PATCH", BaseAPI + "/location/multigroup/" + AppID, Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH add multigroup without passing valid group/site id", "PATCH", 
+                BaseAPI + "/location/multigroup/" + AppID, Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 8: Negative flow to Add Drop-off location to without Name
         BODY = "{"
@@ -330,18 +337,19 @@ class locations extends API_GUI {
                 + "\"foodlocker\":false,"
                 + "\"information\":\"\","
                 + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "}"
                 + "}";
-        JOB_Api_Call("Location - POST Negative drop-off location without valid Name" + New_SiteID + " ", "POST", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Negative drop-off location without valid Name", "POST", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 9: Negative flow to Add Drop-off location to without foodlocker
         BODY = "{"
@@ -349,71 +357,75 @@ class locations extends API_GUI {
                 + "\"foodlocker\":null,"
                 + "\"information\":\"\","
                 + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "}"
                 + "}";
-        JOB_Api_Call("Location - POST Negative drop-off location with null folldlocker value" + New_SiteID + " ", "POST", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Negative drop-off location with null folldlocker value", "POST", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
-        //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Group/Site">
+        //<editor-fold defaultstate="collapsed" desc="PUT > Update Newly created Group/Site">
         // Test Scenario 1: Positive flow to Update/Patch Newly created Group/Site
         BODY = "{\"address\":{"
-                + "\"state\":\"BC\","
-                + "\"zip\":\"V9R 2C3\","
-                + "\"country\":\"CA\","
-                + "\"address\":\"8 Pamela Ct\","
-                + "\"city\":\"Vancouver\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
+                    + "\"state\":\"BC\","
+                    + "\"zip\":\"V9R 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"address\":\"8 Pamela Ct\","
+                    + "\"city\":\"Vancouver\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                    + "}"
                 + "},"
                 + "\"label\":{"
-                + "\"en\":\"This is test for PATCH/Update on AP3 API Automaion \""
+                    + "\"en\":\"This is test for PATCH/Update on AP3 API Automaion \""
                 + "},"
                 + "\"meta\":{"
-                + "\"sector_name\":\"Canteen\""
+                    + "\"sector_name\":\"Canteen\""
                 + "},"
                 + "\"name\":\"This is test for PATCH/Update on AP3 API Automaion - " + RELEASE_DATE + " (Can be Delete)\"}";
-        JOB_Api_Call("Location - PATCH update newly added group/site", "PATCH", BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH update newly added group/site", "PATCH", 
+                BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Positive flow to Update Multigroup to newly created group/site.
         BODY = "{"
                 + "\"id\":\"Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6\","
                 + "\"groups\":["
-                + "{"
-                + "\"id\":\"" + New_SiteID + "\""
-                + "}"
-                + "]"
+                        + "{"
+                            + "\"id\":\"" + New_SiteID + "\""
+                        + "}"
+                    + "]"
                 + "}";
-        JOB_Api_Call("Location - PATCH add multigroup(Thrive) to newly created group/site with multigroup(Boost)", "PATCH", BaseAPI + "/location/multigroup/Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH add multigroup(Thrive) to newly created group/site with multigroup(Boost)", "PATCH", 
+                BaseAPI + "/location/multigroup/Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6", Auth, BODY, 200, ParentTest, "no_jira");
 
-        // Test Scenario 3: Positive flow to Update/Patch Drop-off location under newly created group/site.
+        // Test Scenario 3: Positive flow to Update > Patch Drop-off location under newly created group/site.
         BODY = "{"
                 + "\"name\":\"This is updated Dropp-off location name\","
                 + "\"foodlocker\":true,"
                 + "\"information\":\"\","
                 + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "}"
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "}"
                 + "}";
-        JOB_Api_Call("Location - PATCH update drop-off location to newly created group/site " + New_SiteID + " ", "PATCH", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH update drop-off location to newly created group/site", "PATCH", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 4: Positive flow to Update Drop-off location with foodlocker = false.
         BODY = "{"
@@ -421,63 +433,69 @@ class locations extends API_GUI {
                 + "\"foodlocker\":false,"
                 + "\"information\":\"\","
                 + "\"address\":{"
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                    + "}"
                 + "}"
-                + "}"
-                + "}";
-        JOB_Api_Call("Location - PATCH  update drop-off location to newly created group/site with Foodlocker = false" + New_SiteID + " ", "PATCH", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
+             + "}";
+        JOB_Api_Call("Location - PATCH  update drop-off location to newly created group/site with Foodlocker=false", "PATCH", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 5: Negative flow to update site without Name
         BODY = "{\"address\":{"
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                    + "}"
                 + "},"
                 + "\"label\":{"
-                + "\"en\":\"Demo\""
+                    + "\"en\":\"Demo\""
                 + "},"
                 + "\"meta\":{"
-                + "\"sector_name\":\"Canteen\""
+                    + "\"sector_name\":\"Canteen\""
                 + "},"
                 + "\"name\":\"\"}";
-        JOB_Api_Call("Location - PATCH Negative flow to update group/site without Name", "PATCH", BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH Negative flow to update group/site without Name", "PATCH", 
+                BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET by ID's">
         // Test Scenario 1: Get newly created group/site by Id.
-        JOB_Api_Call("Location - Get newly created group/site by Id " + New_SiteID + " ", "GET", BaseAPI + "/location/group/" + New_SiteID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - Get newly created group/site by ID", "GET", 
+                BaseAPI + "/location/group/" + New_SiteID, Auth, "", 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Get multigroup for newly created site by Id.
-        JOB_Api_Call("Location - Get multigroup for newly created site by Id :- " + New_SiteID + " ", "GET", BaseAPI + "/location/multigroup/" + AppID + "/user/" + AP3_User_ID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - Get multigroup for newly created site by ID", "GET", 
+                BaseAPI + "/location/multigroup/" + AppID + "/user/" + AP3_User_ID, Auth, "", 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Get multigroups by Id.
-        JOB_Api_Call("Location - Get multigroups by Id :- " + New_SiteID + " ", "GET", BaseAPI + "/location/multigroup/" + AppID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - Get multigroups by ID", "GET", 
+                BaseAPI + "/location/multigroup/" + AppID, Auth, "", 200, ParentTest, "no_jira");
 
-        // Test Scenario 4: Getdrop-off location by group id.
-        JOB_Api_Call("Location - Get newly created drop-off location by Id :-" + New_SiteID + " ", "GET", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, "", 200, ParentTest, "no_jira");
+        // Test Scenario 4: Get drop-off location by group id.
+        JOB_Api_Call("Location - Get newly created drop-off location by ID", "GET", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
-        JOB_Api_Call("Location - DELETE drop-off location under newly created group/site " + New_SiteID + " ", "DELETE", BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - DELETE drop-off location under newly created group/site", "DELETE", 
+                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 
-    protected void locationAPIs() {
-
+    protected void Location_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST Business Unit/Location">
         // Test Scenario 1: Positive flow to Add new Business Unit 
         BODY = "{"
@@ -506,7 +524,8 @@ class locations extends API_GUI {
                 + "\"app_name\":\"" + app + "\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - POST new Busines Unit", "POST", BaseAPI + "/location", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST new Busines Unit", "POST", 
+                BaseAPI + "/location", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 New_Business_UnitID = json.getString("id");
@@ -523,7 +542,8 @@ class locations extends API_GUI {
                 + "}"
                 + "]"
                 + "}";
-        JOB_Api_Call("Location - PATCH/Update Busines Unit under newly create group/site : " + New_SiteID + " ", "PATCH", BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH/Update Busines Unit under newly create group/site", "PATCH", 
+                BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Negative flow to Add new Business Unit without name
         BODY = "{"
@@ -552,7 +572,8 @@ class locations extends API_GUI {
                 + "\"app_name\":\"" + app + "\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - POST negative flow to add new Busines Unit without name", "POST", BaseAPI + "/location", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST negative flow to add new Busines Unit without name", "POST", 
+                BaseAPI + "/location", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT/Update newly created Business Unit">
@@ -579,12 +600,12 @@ class locations extends API_GUI {
 
         //<editor-fold defaultstate="collapsed" desc="Get Business unit by ID">
         // Test Scenario 1: Positive flow to get newly added Business Unit by id
-        JOB_Api_Call("Location - GET new Busines Unit details by ID", "GET", BaseAPI + "/location/" + New_Business_UnitID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - GET new Busines Unit details by ID", "GET", 
+                BaseAPI + "/location/" + New_Business_UnitID, Auth, BODY, 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 
-    protected void brandAPIs() {
-
+    protected void Brand_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST Brand/Station under newly created Business Unit">
         // Test Scenario 1: Positive flow to Add new Brand/Station under newly created Business Unit
         BODY = "{"
@@ -651,7 +672,8 @@ class locations extends API_GUI {
                 + "},"
                 + "\"sector\":\"" + SectorID + "\""
                 + "}";
-        JOB_Api_Call("Location - POST Positive flow to Add new Brand/Station under newly created Business Unit", "POST", BaseAPI + "/location/brand", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Positive flow to Add new Brand/Station under newly created Business Unit", "POST", 
+                BaseAPI + "/location/brand", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 New_BrandID = json.getString("id");
@@ -673,7 +695,8 @@ class locations extends API_GUI {
                 + "\"show_single_timeslot\":false,"
                 + "\"runner_app_enabled\":false"
                 + "}";
-        JOB_Api_Call("Location - POST Positive flow to Add public config to new Brand/Station", "POST", BaseAPI + "/config/public/" + New_BrandID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Positive flow to Add public config to new Brand/Station", "POST", 
+                BaseAPI + "/config/public/" + New_BrandID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Positive flow to Add config/Payment_ID to new Brand/Station
         BODY = "{"
@@ -710,7 +733,8 @@ class locations extends API_GUI {
                 + "]"
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - POST Positive flow to Add public Config/Payment_ID to new Brand/Station", "POST", BaseAPI + "/config/" + New_BrandID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Positive flow to Add public Config/Payment_ID to new Brand/Station", "POST", 
+                BaseAPI + "/config/" + New_BrandID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 4: Negative flow to Add new Brand/Station without Brand/Station name
         BODY = "{"
@@ -777,7 +801,8 @@ class locations extends API_GUI {
                 + "},"
                 + "\"sector\":\"" + SectorID + "\""
                 + "}";
-        JOB_Api_Call("Location - POST Negative flow to Add new Brand/Station without Brand/Station name", "POST", BaseAPI + "/location/brand", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Negative flow to Add new Brand/Station without Brand/Station name", "POST", 
+                BaseAPI + "/location/brand", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 5: Negative flow to Add new Brand/Station without Company ID
         BODY = "{"
@@ -844,10 +869,11 @@ class locations extends API_GUI {
                 + "},"
                 + "\"sector\":\"" + SectorID + "\""
                 + "}";
-        JOB_Api_Call("Location - POST Negative flow to Add new Brand/Station without Company Id", "POST", BaseAPI + "/location/brand", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST Negative flow to Add new Brand/Station without Company Id", "POST", 
+                BaseAPI + "/location/brand", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
-        //<editor-fold defaultstate="collapsed" desc="PUT/Update newly created Brand/Station">
+        //<editor-fold defaultstate="collapsed" desc="PUT > Update newly created Brand/Station">
         // Test Scenario 1: Positive flow to update newly added Brand/Station
         BODY = "{"
                 + "\"address\":{"
@@ -913,7 +939,8 @@ class locations extends API_GUI {
                 + "},"
                 + "\"sector\":\"" + SectorID + "\""
                 + "}";
-        JOB_Api_Call("Location - PATCH Positive flow to update newly added Brand/Station", "PATCH", BaseAPI + "/location/brand/" + New_BrandID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH Positive flow to update newly added Brand/Station", "PATCH", 
+                BaseAPI + "/location/brand/" + New_BrandID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Negative flow to update new Brand/Station without Brand/Station name
         BODY = "{"
@@ -980,24 +1007,26 @@ class locations extends API_GUI {
                 + "},"
                 + "\"sector\":\"" + SectorID + "\""
                 + "}";
-        JOB_Api_Call("Location - PATCH Negative flow to update Brand/Station without name", "PATCH", BaseAPI + "/location/brand/" + New_BrandID, Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH Negative flow to update Brand/Station without name", "PATCH", 
+                BaseAPI + "/location/brand/" + New_BrandID, Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Get Brand/Station by ID">
         // Test Scenario 1: Positive flow to get newly added Brand/Station bt ID
-        JOB_Api_Call("Location - GET Brand/Station details by ID", "GET", BaseAPI + "/location/brand/" + New_BrandID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - GET Brand/Station details by ID", "GET", 
+                BaseAPI + "/location/brand/" + New_BrandID, Auth, "", 200, ParentTest, "no_jira");
 
         //</editor-fold>
     }
 
-    protected void sectorAPIs() {
-
+    protected void Sector_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST  New Sector/Group">
         // Test Scenario 1: Positive flow to post new Sector/group
         BODY = "{"
                 + "\"name\":\"This is API Test for Group" + RELEASE_DATE_SECONDS + "/CA\""
                 + "}";
-        JOB_Api_Call("Location - POST New Sector/Group", "POST", BaseAPI + "/location/sector", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST New Sector/Group", "POST", 
+                BaseAPI + "/location/sector", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 New_SecotorID = json.getString("id");
@@ -1008,7 +1037,8 @@ class locations extends API_GUI {
         BODY = "{"
                 + "\"name\":\"\""
                 + "}";
-        JOB_Api_Call("Location - POST negative flow to create Sector/Group without Name", "POST", BaseAPI + "/location/sector", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST negative flow to create Sector/Group without Name", "POST", 
+                BaseAPI + "/location/sector", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Sector/Group">
@@ -1018,7 +1048,8 @@ class locations extends API_GUI {
                 + "\"name\":\"This is API Test for Group" + RELEASE_DATE_SECONDS + "/CA\","
                 + "\"country\":\"CA\""
                 + "}";
-        JOB_Api_Call("Location - PATCH update Sector/Group", "PATCH", BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH update Sector/Group", "PATCH", 
+                BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Negative flow to Update/Patch Newly created Sector/Group without name
         BODY = "{"
@@ -1026,18 +1057,18 @@ class locations extends API_GUI {
                 + "\"name\":\"\","
                 + "\"country\":\"CA\""
                 + "}";
-        JOB_Api_Call("Location - PATCH negative flow to update Sector/Group without name", "PATCH", BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH negative flow to update Sector/Group without name", "PATCH", 
+                BaseAPI + "/location/sector/" + New_SecotorID, Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
-        //<editor-fold defaultstate="collapsed" desc="GET  Newly created Sector/Group by ID">
+        //<editor-fold defaultstate="collapsed" desc="GET Newly created Sector/Group by ID">
         // Test Scenario 1: Positive flow to Get Newly created Sector/Group by ID
-        JOB_Api_Call("Location - Get newly created Sector/Group by Id", "GET", BaseAPI + "/location/sector/" + New_SecotorID, Auth, "", 200, ParentTest, "no_jira");
-
+        JOB_Api_Call("Location - Get newly created Sector/Group by Id", "GET", 
+                BaseAPI + "/location/sector/" + New_SecotorID, Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 
-    protected void companyAPIs() {
-
+    protected void Company_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST  New Company/Global Menu">
         // Test Scenario 1: Positive flow to post new Company/Global Menu
         BODY = "{"
@@ -1050,7 +1081,8 @@ class locations extends API_GUI {
                 + "\"jde_category\":\"D72zJqPJQ5h9DQzqk3w6TgEpeK6kjvs3AZRJjkQYt3QLEzN\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - POST New Company/Global Menu", "POST", BaseAPI + "/location/company", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST New Company/Global Menu", "POST", 
+                BaseAPI + "/location/company", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 New_CompanyID = json.getString("id");
@@ -1068,7 +1100,8 @@ class locations extends API_GUI {
                 + "\"jde_category\":\"D72zJqPJQ5h9DQzqk3w6TgEpeK6kjvs3AZRJjkQYt3QLEzN\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - POST negative flow to add Company/Global Menu without Sector ID", "POST", BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST negative flow to add Company/Global Menu without Sector ID", "POST", 
+                BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
         // Test Scenario 3: Negative flow to post new Company/Global Menu with empty name
         BODY = "{"
                 + "\"sector\":\"" + New_SecotorID + "\","
@@ -1080,7 +1113,8 @@ class locations extends API_GUI {
                 + "\"jde_category\":\"D72zJqPJQ5h9DQzqk3w6TgEpeK6kjvs3AZRJjkQYt3QLEzN\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - POST negative flow to add Company/Global Menu with empty name", "POST", BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - POST negative flow to add Company/Global Menu with empty name", "POST", 
+                BaseAPI + "/location/company", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT/Update  Newly created Company/Global Menu">
@@ -1095,7 +1129,8 @@ class locations extends API_GUI {
                 + "\"jde_category\":\"zjYX7Pd7p0UjpDQNvq53FReEQA4awKsQEAG3d8D7Ty88dyJZaqIDJW7JvrOPuPrwGWDNye\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - PATCH update newly added Company/Global Menu", "PATCH", BaseAPI + "/location/company/" + New_CompanyID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH update newly added Company/Global Menu", "PATCH", 
+                BaseAPI + "/location/company/" + New_CompanyID, Auth, BODY, 200, ParentTest, "no_jira");
         // Test Scenario 2: Negative flow to PATCH update Company/Global Menu with empty name
         BODY = "{"
                 + "\"sector\":\"" + New_SecotorID + "\","
@@ -1107,12 +1142,14 @@ class locations extends API_GUI {
                 + "\"jde_category\":\"D72zJqPJQ5h9DQzqk3w6TgEpeK6kjvs3AZRJjkQYt3QLEzN\""
                 + "}"
                 + "}";
-        JOB_Api_Call("Location - PATCH negative flow to update Company/Global Menu with empty name", "PATCH", BaseAPI + "/location/company/" + New_CompanyID, Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH negative flow to update Company/Global Menu with empty name", "PATCH", 
+                BaseAPI + "/location/company/" + New_CompanyID, Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="GET  Newly created Company/Global Menu">
         // Test Scenario 1: Positive flow to Get Newly created Company/Global Menu by ID
-        JOB_Api_Call("Location - Get newly created Sector/Group by Id", "GET", BaseAPI + "/location/company/" + New_CompanyID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - Get newly created Sector/Group by Id", "GET", 
+                BaseAPI + "/location/company/" + New_CompanyID, Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
     }
 }

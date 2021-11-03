@@ -61,6 +61,10 @@ class file extends API_GUI{
             BaseAPI + "/file", Auth, BODY, 400, ParentTest, "no_jira"); 
         if(json != null){
             AAA = json.toString(4);
+        }   
+        
+        if (!env.equals("PR")) {
+            // Uplod file
         }        
     }
 }
