@@ -37,7 +37,8 @@ class promo extends API_GUI {
 
     protected void run() {
         Auth = "Bearer " + AP3_TKN;  // ===============  AP3 promo ==============================
-        JOB_Api_Call("Promo > /promo/company/'CompanyID'/location/group/'SiteID'", "GET", BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promo > /promo/company/'CompanyID'/location/group/'SiteID'", "GET", 
+                BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         PROMOTION_IDS.clear();
         PROMO_VOUCHER_IDS.clear();
         promoVoucherAPIs();
@@ -61,7 +62,8 @@ class promo extends API_GUI {
                 + "\"active\":false,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion Voucher - POST add new promo voucher with AMOUNT type", "POST", BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion Voucher - POST add new promo voucher with AMOUNT type", "POST", 
+                BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 // Promo_Voucher_Id = json.getString("id");
@@ -86,7 +88,8 @@ class promo extends API_GUI {
                 + "\"active\":false,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion Voucher - POST add new promo voucher  with PERCENTAGE type", "POST", BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion Voucher - POST add new promo voucher  with PERCENTAGE type", "POST", 
+                BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
 
@@ -109,7 +112,8 @@ class promo extends API_GUI {
                 + "\"active\":false,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion Voucher - POST Negative flow to add promo voucher without code", "POST", BaseAPI + "/promo/voucher", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion Voucher - POST Negative flow to add promo voucher without code", "POST", 
+                BaseAPI + "/promo/voucher", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 4: Negative flow to POST promo voucher without promo type
         BODY = "{"
@@ -126,7 +130,8 @@ class promo extends API_GUI {
                 + "\"active\":false,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion Voucher - POST Negative flow to add promo voucher without valid type", "POST", BaseAPI + "/promo/voucher", Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion Voucher - POST Negative flow to add promo voucher without valid type", "POST", 
+                BaseAPI + "/promo/voucher", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="PUT promo voucher">
@@ -145,7 +150,8 @@ class promo extends API_GUI {
                 + "\"active\":true,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion Voucher - PUT/Update nelwly added promo voucher", "PUT", BaseAPI + "/promo/voucher/" + PROMO_VOUCHER_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion Voucher - PUT/Update nelwly added promo voucher", "PUT", 
+                BaseAPI + "/promo/voucher/" + PROMO_VOUCHER_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Negative flow to update newly created promo voucher without valid code
         BODY = "{"
@@ -162,7 +168,8 @@ class promo extends API_GUI {
                 + "\"active\":true,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion Voucher - PUT/Update nelwly added promo voucher without code", "PUT", BaseAPI + "/promo/voucher/" + PROMO_VOUCHER_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion Voucher - PUT/Update nelwly added promo voucher without code", "PUT", 
+                BaseAPI + "/promo/voucher/" + PROMO_VOUCHER_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 3: Negative flow to update newly created promo voucher without valid type
         BODY = "{"
@@ -179,14 +186,16 @@ class promo extends API_GUI {
                 + "\"active\":true,"
                 + "\"app\":\"" + app + "\""
                 + "}";
-        JOB_Api_Call("Promotion Voucher - PUT/Update nelwly added promo voucher without type", "PUT", BaseAPI + "/promo/voucher" + PROMO_VOUCHER_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion Voucher - PUT/Update nelwly added promo voucher without type", "PUT", 
+                BaseAPI + "/promo/voucher" + PROMO_VOUCHER_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="DELETE promo voucher">
         // Test Scenario 1: Positive flow to DELETE newly created promo voucher
         if (PROMO_VOUCHER_IDS != null) {
             for (int i = 0; i < PROMO_VOUCHER_IDS.size(); i++) {
-                JOB_Api_Call("Promotion Voucher - DELETE newly added promo voucher : " + PROMO_VOUCHER_IDS.get(i) + "", "DELETE", BaseAPI + "/promo/voucher/" + PROMO_VOUCHER_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+                JOB_Api_Call("Promotion Voucher - DELETE newly added promo voucher : " + PROMO_VOUCHER_IDS.get(i) + "", "DELETE", 
+                        BaseAPI + "/promo/voucher/" + PROMO_VOUCHER_IDS.get(i), Auth, BODY, 200, ParentTest, "no_jira");
             }
         }
         //</editor-fold>
@@ -278,10 +287,10 @@ class promo extends API_GUI {
                     + "}"
                     + "}"
                     + "}";
-            JOB_Api_Call("Promotion - POST Positive flow to add new promotion - Limited Time Offer (amount_off)", "POST", BaseAPI + "/promo", Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - POST Positive flow to add new promotion - Limited Time Offer (amount_off)", "POST", 
+                    BaseAPI + "/promo", Auth, BODY, 200, ParentTest, "no_jira");
             if (json != null) {
                 try {
-
                     PROMOTION_IDS.add(json.getString("id"));
                 } catch (Exception ex) {
                 }
@@ -378,10 +387,10 @@ class promo extends API_GUI {
                         + "}"
                         + "}"
                         + "}";
-                JOB_Api_Call("Promotion - POST Positive flow to POST/ADD new promotion - BOGO", "POST", BaseAPI + "/promo", Auth, BODY, 200, ParentTest, "no_jira");
+                JOB_Api_Call("Promotion - POST Positive flow to POST/ADD new promotion - BOGO", "POST", 
+                        BaseAPI + "/promo", Auth, BODY, 200, ParentTest, "no_jira");
                 if (json != null) {
                     try {
-
                         PROMOTION_IDS.add(json.getString("id"));
                     } catch (Exception ex) {
                     }
@@ -478,7 +487,8 @@ class promo extends API_GUI {
                         + "}"
                         + "}"
                         + "}";
-                JOB_Api_Call("Promotion - POST Positive flow to POST/ADD new promotion - Bundle", "POST", BaseAPI + "/promo", Auth, BODY, 200, ParentTest, "no_jira");
+                JOB_Api_Call("Promotion - POST Positive flow to POST/ADD new promotion - Bundle", "POST", 
+                        BaseAPI + "/promo", Auth, BODY, 200, ParentTest, "no_jira");
                 if (json != null) {
                     try {
 
@@ -574,7 +584,8 @@ class promo extends API_GUI {
                     + "}"
                     + "}"
                     + "}";
-            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid promo label", "POST", BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid promo label", "POST", 
+                    BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
 
             // Test Scenario 5: Negative flow to POST/ADD new promotion without valid Multipgroup/APP Id
             BODY = "{"
@@ -659,7 +670,8 @@ class promo extends API_GUI {
                     + "}"
                     + "}"
                     + "}";
-            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid Multipgroup/APP Id", "POST", BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid Multipgroup/APP Id", "POST", 
+                    BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
 
             // Test Scenario 6: Negative flow to POST/ADD new promotion without valid Company/Group Id
             BODY = "{"
@@ -744,7 +756,8 @@ class promo extends API_GUI {
                     + "}"
                     + "}"
                     + "}";
-            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid Company/Group Id", "POST", BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid Company/Group Id", "POST", 
+                    BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
 
             // Test Scenario 7: Negative flow to POST/ADD new promotion without valid Secror/Site Id
             BODY = "{"
@@ -829,7 +842,8 @@ class promo extends API_GUI {
                     + "}"
                     + "}"
                     + "}";
-            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid Secror/Site Id", "POST", BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - POST Negative flow to POST/ADD new promotion without valid Secror/Site Id", "POST", 
+                    BaseAPI + "/promo", Auth, BODY, 400, ParentTest, "no_jira");
         } else {
             EX += " - " + "\t" + "Promotions - Error while creating promotion, as no Item ID found to add promotion.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least one Item required to create promotion" + "\t" + "No Item ID found" + "\t" + " - "
                     + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
@@ -928,7 +942,8 @@ class promo extends API_GUI {
                     + "},"
                     + "\"type\":\"lto\""
                     + "}";
-            JOB_Api_Call("Promotion - PUT Positive flow to update & PAUSE newly added promotion", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - PUT Positive flow to update & PAUSE newly added promotion", "PUT", 
+                    BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
 
             // Test Scenario 2: Positive flow to update newly added promotion - Limited Time Offer (Percent_off)
             BODY = "{"
@@ -1023,7 +1038,8 @@ class promo extends API_GUI {
                     + "},"
                     + "\"type\":\"lto\""
                     + "}";
-            JOB_Api_Call("Promotion - PUT Positive flow to update newly added promotion - Limited Time Offer (Percent_off)", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - PUT Positive flow to update newly added promotion - Limited Time Offer (Percent_off)", "PUT", 
+                    BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
 
             // Test Scenario 3: Positive flow to update newly added promotion - BOGO
             if (ITEMS_IDS.size() > 1) {
@@ -1106,20 +1122,20 @@ class promo extends API_GUI {
                         + "\"amount_off\":1,"
                         + "\"percent_off\":null"
                         + "}"
-                        + "},"
-                        + "{"
-                        + "\"id\":\"" + ITEMS_IDS.get(2) + "\","
-                        + "\"quantity\":1,"
-                        + "\"price\":{"
-                        + "\"amount\":5"
-                        + "},"
-                        + "\"label\":{"
-                        + "\"en\":\"French vanilla\""
-                        + "},"
-                        + "\"discount\":{"
-                        + "\"amount_off\":null,"
-                        + "\"percent_off\":1"
-                        + "}"
+//                        + "},"
+//                        + "{"
+//                        + "\"id\":\"" + ITEMS_IDS.get(2) + "\"," //    <<<<<<<<<<<<<<<<   ????
+//                        + "\"quantity\":1,"
+//                        + "\"price\":{"
+//                        + "\"amount\":5"
+//                        + "},"
+//                        + "\"label\":{"
+//                        + "\"en\":\"French vanilla\""
+//                        + "},"
+//                        + "\"discount\":{"
+//                        + "\"amount_off\":null,"
+//                        + "\"percent_off\":1"
+//                        + "}"
                         + "}"
                         + "]"
                         + "},"
@@ -1137,7 +1153,8 @@ class promo extends API_GUI {
                         + "},"
                         + "\"type\":\"bogo\""
                         + "}";
-                JOB_Api_Call("Promotion - Positive flow to update newly added promotion - BOGO", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(1), Auth, BODY, 200, ParentTest, "no_jira");
+                JOB_Api_Call("Promotion - Positive flow to update newly added promotion - BOGO", "PUT", 
+                        BaseAPI + "/promo/" + PROMOTION_IDS.get(1), Auth, BODY, 200, ParentTest, "no_jira");
                 // Test Scenario 4: Positive flow to update newly added - Bundle
                 BODY = "{"
                         + "\"id\":\"" + PROMOTION_IDS.get(2) + "\","
@@ -1236,7 +1253,8 @@ class promo extends API_GUI {
                         + "},"
                         + "\"type\":\"bundle\""
                         + "}";
-                JOB_Api_Call("Promotion - PUT Positive flow to update newly added - Bundle", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(2), Auth, BODY, 200, ParentTest, "no_jira");
+                JOB_Api_Call("Promotion - PUT Positive flow to update newly added - Bundle", "PUT", 
+                        BaseAPI + "/promo/" + PROMOTION_IDS.get(2), Auth, BODY, 200, ParentTest, "no_jira");
             } else {
                 EX += " - " + "\t" + "Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least two Items required  to create BOGO/Bundle promotions" + "\t" + "Found only -->" + ITEMS_IDS.size() + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
@@ -1331,7 +1349,8 @@ class promo extends API_GUI {
                     + "},"
                     + "\"type\":\"lto\""
                     + "}";
-            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid promo label", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid promo label", "PUT", 
+                    BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
 
             // Test Scenario 6: Negative flow to update newly added promotion without valid Multipgroup/APP Id
             BODY = "{"
@@ -1421,7 +1440,8 @@ class promo extends API_GUI {
                     + "},"
                     + "\"type\":\"lto\""
                     + "}";
-            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid Multipgroup/APP Id", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid Multipgroup/APP Id", "PUT", 
+                    BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
 
             // Test Scenario 7: Negative flow to update newly added promotion without valid Company/Group Id
             BODY = "{"
@@ -1511,7 +1531,8 @@ class promo extends API_GUI {
                     + "},"
                     + "\"type\":\"lto\""
                     + "}";
-            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid Company/Group Id", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid Company/Group Id", "PUT", 
+                    BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
 
             // Test Scenario 8: Negative flow to update newly added promotion without valid Sector/Site Id
             BODY = "{"
@@ -1601,7 +1622,8 @@ class promo extends API_GUI {
                     + "},"
                     + "\"type\":\"lto\""
                     + "}";
-            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid Sector/Site Id", "PUT", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
+            JOB_Api_Call("Promotion - PUT Negative flow to update newly added promotion without valid Sector/Site Id", "PUT", 
+                    BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 400, ParentTest, "no_jira");
         } else {
             EX += " - " + "\t" + "Promotions - Error while creating promotion, as no Item ID found to add promotion.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least one Item required to create promotion" + "\t" + "No Item ID found" + "\t" + " - "
                     + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
@@ -1612,7 +1634,8 @@ class promo extends API_GUI {
 
         //<editor-fold defaultstate="collapsed" desc="GET promotions">
         // Test Scenario 1: Positive flow to GET promotions by ID
-        JOB_Api_Call("Promotion - GET Positive flow to GET promotions by ID", "GET", BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Promotion - GET Positive flow to GET promotions by ID", "GET", 
+                BaseAPI + "/promo/" + PROMOTION_IDS.get(0), Auth, BODY, 200, ParentTest, "no_jira");
 
         //Test Scenario 2:Positive flow Get all promotions within company for a location group
         //JOB_Api_Call("Promotion - GET Positive flow Get all promotions within company for a location group", "GET", BaseAPI + "/promo/company" + CompanyID + "/location/group/" + SiteID, Auth, BODY, 200, ParentTest, "no_jira");
@@ -1622,7 +1645,8 @@ class promo extends API_GUI {
         // Test Scenario 1: Positive flow to DELETE newly created promotions
         if (PROMOTION_IDS != null) {
             for (int i = 0; i < PROMOTION_IDS.size(); i++) {
-                JOB_Api_Call("Promotion - Delete newly created promotion by ID : - " + PROMOTION_IDS.get(i), "DELETE", BaseAPI + "/promo/" + PROMOTION_IDS.get(i), Auth, "", 200, ParentTest, "no_jira");
+                JOB_Api_Call("Promotion - Delete newly created promotion by ID : - " + PROMOTION_IDS.get(i), "DELETE", 
+                        BaseAPI + "/promo/" + PROMOTION_IDS.get(i), Auth, "", 200, ParentTest, "no_jira");
             }
         }
         //</editor-fold>

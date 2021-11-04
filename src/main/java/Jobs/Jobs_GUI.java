@@ -323,6 +323,12 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         }
         String Job = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0));
         String config = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 6));
+        
+        // === to get HTML report saved locally and prevent Send to Slack if JOB Run ad-hoc ===
+        if(config.contains("_slack: true")){
+            config = config.replace("_slack: true", "_slack: false");
+        }
+        // ============================ ^^^^^^^^ ==============================================
         Run_Selected_Job(Job, config);  
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnStartCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStartCronMouseClicked
@@ -711,7 +717,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
 
     //<editor-fold defaultstate="collapsed" desc="Jobs_GUI > Job Name, Config">
     private void Tokens_AP3(String job, String config){
-        _AP3_Tokens _Job = new _AP3_Tokens();
+        AP3_Tokens _Job = new AP3_Tokens();
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         _Job.AP3_Tokens(job, r_type, config);
         txtLog.append("= Please Check Report" + "\r\n");

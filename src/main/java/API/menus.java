@@ -25,7 +25,7 @@ class menus extends API_GUI{
     private List<String> GlobalModGroup_Items_IDS = new ArrayList<>(); 
     private List<String> GL_MENU_IDS = new ArrayList<>(); 
     
-    String AAAA = "";
+    String AAA = "";
     protected void run() {             
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
@@ -36,7 +36,7 @@ class menus extends API_GUI{
                     // GL_MENU_ID <<<<  parent_id ???
 //                } 
 //            } catch (Exception ex) {
-//                AAAA = ex.getMessage();
+//                AAA = ex.getMessage();
 //            }
 //        }
 //Request URL: https://api.compassdigital.org/dev/menu/rrgl37yB8LtgOE9rO2RvUojopzLEP5uqJ1DwNMgdsY2Qg6yl8LUKWOzLMA4eT5Wj7ZG?_query=%7Bid,date,meta%7D
@@ -56,7 +56,7 @@ class menus extends API_GUI{
                     }
                 } 
             } catch (Exception ex) {
-                AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
         
@@ -74,7 +74,8 @@ class menus extends API_GUI{
                         CATEGORIES_IDS.add(groups.getJSONObject(i).getString("id"));
                     }
                 }
-                JSONObject g = groups.getJSONObject(groups.length() - 1);
+                //JSONObject g = groups.getJSONObject(groups.length() - 1);
+                JSONObject g = groups.getJSONObject(0);                
                 if (g.has("items")) {
                     JSONArray items = g.getJSONArray("items");
                     for (int i = 0; i < items.length(); i++) {
@@ -82,19 +83,17 @@ class menus extends API_GUI{
                     }                    
                 }
             } catch (Exception ex) {
-                AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }         
         }
         
-
-
         String menu_id = "";
         GL_MENU_IDS = new ArrayList<>();       
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
             BaseAPI + "/menu/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {  
-            AAAA = json.toString(4);
+            AAA = json.toString(4);
             try {
                 if (json.has("menus")) {
                     JSONArray menus = json.getJSONArray("menus");
@@ -106,7 +105,7 @@ class menus extends API_GUI{
                     }
                 } 
             } catch (Exception ex) {
-                AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
     //</editor-fold>      
@@ -121,7 +120,7 @@ class menus extends API_GUI{
         JOB_Api_Call("Global Menu - Lock Editing", "PATCH", 
                 BaseAPI + "/menu/" + menu_id, Auth, BODY, 200, ParentTest, "no_jira");    // + "?_query=%7Bid,date,meta%7D"
         if (json != null) {  
-            AAAA = json.toString(4);
+            AAA = json.toString(4);
         }   
         // Test Scenario 2: Positive flow to check when not clicked on Edit in AP3 if the user value is null : Done
         BODY = "{"
@@ -131,7 +130,7 @@ class menus extends API_GUI{
         JOB_Api_Call("Menu - Global Menu - UnLock Editing", "PATCH", 
                 BaseAPI + "/menu/" + menu_id, Auth, BODY, 200, ParentTest, "no_jira"); // + "?_query=%7Bid,date,meta%7D"
         if (json != null) {  
-            AAAA = json.toString(4);       
+            AAA = json.toString(4);       
         }           
     //</editor-fold>        
         
@@ -181,7 +180,7 @@ class menus extends API_GUI{
 //            }
 //        }
 //        catch (Exception ex) {
-//            AAAA = ex.getMessage();
+//            AAA = ex.getMessage();
 //        }
     } 
         
@@ -218,12 +217,12 @@ class menus extends API_GUI{
             + "\"id\":\"\""
             + "}";
         JOB_Api_Call(" Menu - Create a new individual Menu", "POST", 
-            BaseAPI + "/menu/", Auth, BODY , 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/", Auth, BODY, 200, ParentTest, "no_jira");
             if (json != null) {
             try {
                 New_Menu_ID = json.getString("id");
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
+                //
             }
         }
             
@@ -260,7 +259,7 @@ class menus extends API_GUI{
                 + "\"id\":\"" + New_Menu_ID + "\""
                 + "}";
         JOB_Api_Call(" Menu - Modify the new individual Menu", "PUT", 
-            BaseAPI + "/menu/" + New_Menu_ID, Auth, BODY , 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/" + New_Menu_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
         // Test Scenario 2: Positive flow to Update/Patch a menu with new Name
         // Covered in Scenario 1
@@ -268,7 +267,7 @@ class menus extends API_GUI{
         //GET/menu/{id}/export: Export a menu set to a zip file
         // Test Scenario 1: Positive flow to export a menu file 
         JOB_Api_Call(" Menu - Modify the new individual Menu", "GET", 
-            BaseAPI + "/menu/" + New_Menu_ID + "/export", Auth, "" , 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/" + New_Menu_ID + "/export", Auth, "", 200, ParentTest, "no_jira");
         
         //PATCH/menu/{id} : Update a menu
         // Test Scenario 1: Positive flow to check when clicked on Edit in AP3 if the user is locked to edit : Done
@@ -282,12 +281,11 @@ class menus extends API_GUI{
         
         // Test Scenario 2: Positive flow to delete a Menu
         JOB_Api_Call(" Menu - Create a new individual Menu", "DELETE", 
-            BaseAPI + "/menu/" + New_Menu_ID, Auth, "" , 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/" + New_Menu_ID, Auth, "", 200, ParentTest, "no_jira");
 
     //</editor-fold>        
        
-       
-    // " Menu Item"   
+
     //<editor-fold defaultstate="collapsed" desc=" Menu item  (*Does not work*) "> 
 
     //POST//menu/item : Post/Create a new menu item : 
@@ -317,7 +315,6 @@ class menus extends API_GUI{
     //</editor-fold>  
 
     //<editor-fold defaultstate="collapsed" desc=" Modifier Group "> 
-
     //POST/menu/modifier/group : Create a new Menu Modifier Group   
     // Test Scenario 1: Negative flow to update a Modifier Group without Unique Name
     BODY = "{"
@@ -380,7 +377,7 @@ class menus extends API_GUI{
             + "\"company\":\"" + CompanyID + "\""
                 + "}";
         JOB_Api_Call(" Modifier Group - Positive flow to create a Global Modifier Group by Unique Name", "POST", 
-            BaseAPI + "/menu/modifier/group" , Auth, BODY , 400, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 2: Positive flow to Create a Modifier Group with Name        
         BODY ="{"
@@ -443,7 +440,7 @@ class menus extends API_GUI{
                 + "\"company\":\"" + CompanyID + "\""
                 + "}";
         JOB_Api_Call(" Modifier Group - Negative flow to create a Global Modifier Group without Unique Name", "POST", 
-            BaseAPI + "/menu/modifier/group" , Auth, BODY , 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
                 New_GlobalMod_ID = json.getString("id");
@@ -455,11 +452,11 @@ class menus extends API_GUI{
         //GET/menu/modifier/group{id} : Get a Modifier Group =========================================================
         // Test Scenario 1: Negative flow to get a Modifier Group without ID
         JOB_Api_Call(" Global Modifier Group - GET a Modifier Group by /'ModifierGroupID'", "GET", 
-            BaseAPI + "/menu/modifier/group/" , Auth, "", 503, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/", Auth, "", 503, ParentTest, "no_jira");
         
         // Test Scenario 2: Positive flow to Get a Modifier Group by ID
         JOB_Api_Call(" Global Modifier Group - GET a Modifier Group by /'ModifierGroupID'", "GET", 
-            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID , Auth, "", 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID, Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {           
             try {
               if (json.has("items")) {
@@ -551,18 +548,18 @@ class menus extends API_GUI{
                 + "}";
         // Test Scenario 1: Positive flow to Create a Modifier Group with Name
         JOB_Api_Call(" Modifier Group - Positive flow to update a Global Modifier Group without Unique Name", "PUT", 
-            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID , Auth, BODY , 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID, Auth, BODY, 200, ParentTest, "no_jira");
         
         // Test Scenario 2: Negative flow to update a Modifier Group without ID
         JOB_Api_Call(" Modifier Group - Negative flow to update a Global Modifier Group without Unique Name", "PUT", 
-            BaseAPI + "/menu/modifier/group/" , Auth, BODY , 400, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/", Auth, BODY, 400, ParentTest, "no_jira");
         
    
         
         //GET/menu/modifier/group/company{company_id} : Get a Modifier Group that belongs to company    
         // Test Scenario 1: Negative flow to get a Modifier Group of a company without ID
         JOB_Api_Call(" Modifier Group - Negative flow to get a Modifier Group of a company without /'CompanyID'", "GET", 
-            BaseAPI + "/menu/modifier/group/company/" , Auth, "", 400, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/company/", Auth, "", 400, ParentTest, "no_jira");
         
         // Test Scenario 2: Positive flow to get a Modifier Group of a company by ID
         JOB_Api_Call(" Modifier Group - Positive flow to get a Modifier Group of a company by/'CompanyID'", "GET", 
@@ -575,20 +572,18 @@ class menus extends API_GUI{
         
         // Test Scenario 2: Positive flow to get a Modifier Group of a company by ID/export
         JOB_Api_Call(" Modifier Group - Negative flow to Export a Modifier Group file of a company without /'CompanyID'", "GET", 
-            BaseAPI + "/menu/modifier/group/company/"+ CompanyID + "/export" , Auth, "", 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/company/" + CompanyID + "/export", Auth, "", 200, ParentTest, "no_jira");
         
         //DELETE/menu/modifier/group{id} : Delete a Modifier Group        
         // Test Scenario 1: Negative flow to delete a Modifier Group without ID 
         JOB_Api_Call(" Modifier Group - Negative flow to delete a Modifier Group without/ 'GroupID'", "DELETE", 
-            BaseAPI + "/menu/modifier/group/" , Auth, "" , 400, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/", Auth, "" , 400, ParentTest, "no_jira");
         
         // Test Scenario 2: Positive flow to delete a Modifier Group by ID
         JOB_Api_Call(" Modifier Group - Positive flow to delete a Modifier Group by/ 'GroupID'", "DELETE", 
-            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID , Auth, "" , 200, ParentTest, "no_jira");
+            BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID, Auth, "", 200, ParentTest, "no_jira");
         
         //</editor-fold>
 
-       
-      
     }
 }

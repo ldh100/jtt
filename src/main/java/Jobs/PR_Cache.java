@@ -13,10 +13,9 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
-import java.util.concurrent.TimeUnit;
 import org.json.JSONObject;
 
-public class _AP3_Tokens {
+public class PR_Cache {
     private final Stopwatch sw1 = Stopwatch.createUnstarted();
     private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
     private final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -27,12 +26,12 @@ public class _AP3_Tokens {
     private String Summary = "?"; 
     private Instant run_start;
     private Duration DD;
-    private String Log = "GET AP3 Admin User Tokens: ";
+    private String Log = "PR_Cache: ";
     private String ADMIN_ID = "oleg.spozito@compassdigital.io";
     private String ADMIN_PW = "Password1"; 
     private String TKN = "";
 
-    protected void AP3_Tokens(String job, String run_type, String config){
+    protected void PR_Cache(String job, String run_type, String config){
         r_type = run_type;
         run_start = Instant.now();
         try {
@@ -83,6 +82,7 @@ public class _AP3_Tokens {
             conn.close();                    
         } catch (SQLException ex) {}
     }
+    
     protected void JOB_Api_Call(String EndPoint, String AUTH) {
         RequestSpecification request;
         request = RestAssured.given();
@@ -110,7 +110,6 @@ public class _AP3_Tokens {
             Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: " + ex.getMessage().trim();
         }
     }
-
     private void LOG_START() {
         try {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] ("
@@ -190,8 +189,8 @@ public class _AP3_Tokens {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "AP3_Tokens");
-            _insert.setString(4, ".../user/auth?realm=");
+            _insert.setString(3, "PR_Cache");
+            _insert.setString(4, "?");
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
             _insert.setString(7, "0");
@@ -202,7 +201,7 @@ public class _AP3_Tokens {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, "DE, ST, PR");
+            _insert.setString(15, "PR");
             _insert.setString(16, "=== Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -250,11 +249,11 @@ public class _AP3_Tokens {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'AP3_Tokens"+ "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'PR_Cache"+ "' AND [Status] = 'Running'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "AP3_Tokens");
-            _update.setString(4, ".../user/auth?realm=");
+            _update.setString(3, "PR_Cache");
+            _update.setString(4, "?");
             _update.setString(5, Summary); 
             _update.setInt(6, 3);
             _update.setDouble(7, 0);
@@ -265,7 +264,7 @@ public class _AP3_Tokens {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, "DE, ST, PR");
+            _update.setString(15, "PR");
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + "N/A");
             _update.setString(18, "None");
