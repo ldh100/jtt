@@ -64,12 +64,14 @@ class task extends API_GUI{
 //        if(json != null){
 //            AAA = json.toString(4);
 //        }
-        
-        JOB_Api_Call("task/order > 'OrderID' (no _query)", "GET",  
-            BaseAPI + "/task/order/" + Order_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            AAA = json.toString(4);
-        }        
+        if(!env.equals("PR")){
+            JOB_Api_Call("task/order > 'OrderID' (no _query)", "GET",  
+                BaseAPI + "/task/order/" + Order_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");
+            if(json != null){
+                AAA = json.toString(4);
+            }             
+        }
+       
         // PATCH /dev/task/4MjmBjLDNJCDdk97LvwGiYBp6lLkpjtway9oza93cpJokXkpzgc4BGWLAEkAc4kL1dWz3WiwdDJ6p
 
     }

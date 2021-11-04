@@ -21,15 +21,16 @@ class calendar extends API_GUI {
 
     protected void run() {
         String Closure_ID = "";
+        String AAA = "";
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 calendar ===========================
 
         JOB_Api_Call("Calendar > /'BrandID'/ CDL compatible format for next 7 days", "GET",
                 BaseAPI + "/calendar/" + BrandID + "/cdl", Auth, "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call("Calendar > /'BrandID'", "OPTIONS",
+        JOB_Api_Call("Calendar > /'BrandID' OPTIONS", "OPTIONS",
                 BaseAPI + "/calendar/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
-        JOB_Api_Call("Calendar > /'BrandID'", "GET",
+        JOB_Api_Call("Calendar > /'BrandID' GET", "GET",
                 BaseAPI + "/calendar/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 
         LocalTime midnight = LocalTime.MIDNIGHT; // New Closure", "PUT", 
@@ -61,7 +62,7 @@ class calendar extends API_GUI {
             try {
                 Closure_ID = json.getString("id");
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
 
@@ -72,7 +73,7 @@ class calendar extends API_GUI {
             try {
                 Closure_ID = json.getString("id");
             } catch (Exception ex) {
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }
         JOB_Api_Call("Calendar > /'BrandID'/ Synchronization", "POST",

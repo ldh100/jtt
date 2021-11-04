@@ -95,8 +95,8 @@ class user_mobile extends API_GUI{
             BaseAPI + "/user/zendesk", Auth, "", 200, ParentTest, "no_jira");         
 
         if(env.equals("DE")){                                  // not in Staging, Production yet
-            JOB_Api_Call("Mobile User Send Email Verification", "POST",   //  Mobile User Email Verification ================
-                BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 200, ParentTest, "no_jira");  
+            JOB_Api_Call("Mobile User Send Email Verification", "POST",   //  200 > Email Sent, 409 > Already Verified, conflict ================
+                BaseAPI + "/user/" + Mobile_User_ID + "/verification?realm=" + Realm, Auth, "", 409, ParentTest, "no_jira");  
             if(json != null){
                 AAA = json.toString(4);
             }  

@@ -1524,6 +1524,8 @@ public class A extends javax.swing.JFrame {
             }
         }).start();
     }
+    //</editor-fold> 
+    
     private void Get_TKN_KEYS(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         ResultSet rs;
@@ -1575,8 +1577,6 @@ public class A extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     
-    //</editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="Project Variables Declarations">
     //public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql.database.windows.net:1433;database=cdlqadb;user=xttadmin;password=Sp515s10#a;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     public static final String QA_BD_CON_STRING = "jdbc:sqlserver://dev-digitalhospitality-sql-cdlqadb.cmrngnuvohvf.us-east-1.rds.amazonaws.com:1433;database=cdlqadb;user=admin;password=KcKqdYF5cEDYhJxc;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";

@@ -50,6 +50,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
+import okio.ByteString;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -688,22 +689,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
     protected String Order_Pickup_ID = "";
     protected String Promo_Voucher_Id = "";
     protected String Promo_Voucher_Code = "";
-    protected List<String> BolterBrandIDS;
+    
+    protected List<String> BolterBrandIDS = new ArrayList<>();
+    protected List<String> SECTOR_IDS = new ArrayList<>();
+    protected List<String> COMP_IDS = new ArrayList<>();
+    protected List<String> MENU_IDS = new ArrayList<>();
+    protected List<String> ORDER_IDS = new ArrayList<>();
+    protected List<String> SCART_IDS = new ArrayList<>();
+    protected List<String> CATEGORIES_IDS = new ArrayList<>();
+    protected List<String> ITEMS_IDS = new ArrayList<>();
+    protected List<String> BRAND_TIMESLOTS = new ArrayList<>();
+    protected List<String> MENU_TIMESLOTS = new ArrayList<>();
+    protected List<String> DELIEVEY_TIMESLOTS = new ArrayList<>();
+    protected List<String> DELIEVERY_DESTINATIONS = new ArrayList<>();
 
-    protected List<String> SECTOR_IDS;
-    protected List<String> COMP_IDS;
-    protected List<String> MENU_IDS;
-    protected List<String> ORDER_IDS;
-    protected List<String> SCART_IDS;
-    protected List<String> CATEGORIES_IDS;
-    protected List<String> ITEMS_IDS;
-    protected List<String> BRAND_TIMESLOTS;
-    protected List<String> MENU_TIMESLOTS;
-    protected List<String> DELIEVEY_TIMESLOTS;
-    protected List<String> DELIEVERY_DESTINATIONS;
-
-    protected List<String> NOTIFICATION_IDS;
-    protected List<String> ANNOUNCEMENT_IDS;
+    protected List<String> NOTIFICATION_IDS = new ArrayList<>();
+    protected List<String> ANNOUNCEMENT_IDS = new ArrayList<>();
 
     protected boolean refund = true;
     protected String Site_PProvider = "exact";
@@ -2015,7 +2016,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             String responseBody = httpclient.execute(httpget, responseHandler);
             json = new JSONObject(responseBody);
             JSONArray Location = json.getJSONArray("locations");
-            JSONArray brands = null;
+            JSONArray brands = new JSONArray();
 
             String brand;
             String location;
@@ -2660,59 +2661,26 @@ public class API_GUI extends javax.swing.JInternalFrame {
         try {
             for (String l : lines) {
                 value = l.substring(l.indexOf(" ")).trim();
-                if (l.contains("env: ")) {
-                    env = value;
-                }
-                if (l.contains("app: ")) {
-                    app = value;
-                }
-                if (l.contains("url: ")) {
-                    url = value;
-                }
+                if (l.contains("env: ")) { env = value; }
+                if (l.contains("app: ")) {  app = value; }
+                if (l.contains("url: ")) { url = value; }
 
-                if (l.contains("SlackCh: ")) {
-                    Slack_Channel = value;
-                }
-                if (l.contains("_slack: ")) {
-                    _Slack = Boolean.parseBoolean(value);
-                }
-                if (l.contains("_zip_report: ")) {
-                    Zip_Report = Boolean.parseBoolean(value);
-                }
+                if (l.contains("SlackCh: ")) { Slack_Channel = value; }
+                if (l.contains("_slack: ")) {  _Slack = Boolean.parseBoolean(value); }
+                if (l.contains("_zip_report: ")) { Zip_Report = Boolean.parseBoolean(value); }
 
-                if (l.contains("SECTOR: ")) {
-                    SECTOR = value;
-                }
-                if (l.contains("GL_MENU: ")) {
-                    GL_MENU = value;
-                }
-                if (l.contains("SITE: ")) {
-                    SITE = value;
-                }
-                if (l.contains("BRAND: ")) {
-                    BRAND = value;
-                }
-                if (l.contains("MOBILE_ID: ")) {
-                    MOBILE_ID = value;
-                }
-                if (l.contains("MOBILE_PW: ")) {
-                    MOBILE_PW = value;
-                }
-                if (l.contains("ADMIN_ID: ")) {
-                    ADMIN_ID = value;
-                }
-                if (l.contains("ADMIN_PW: ")) {
-                    ADMIN_PW = value;
-                }
-                if (l.contains("RUNNER_ID: ")) {
-                    RUNNER_ID = value;
-                }
-                if (l.contains("RUNNER_PW: ")) {
-                    RUNNER_PW = value;
-                }
-                if (l.contains("Market_Brand_ID: ")) {
-                    Market_Brand_ID = value;
-                }
+                if (l.contains("SECTOR: ")) { SECTOR = value; }
+                if (l.contains("GL_MENU: ")) { GL_MENU = value; }
+                if (l.contains("SITE: ")) { SITE = value; }
+                if (l.contains("BRAND: ")) { BRAND = value; }
+                
+                if (l.contains("MOBILE_ID: ")) { MOBILE_ID = value; }
+                if (l.contains("MOBILE_PW: ")) { MOBILE_PW = value; }
+                if (l.contains("ADMIN_ID: ")) { ADMIN_ID = value; }
+                if (l.contains("ADMIN_PW: ")) { ADMIN_PW = value; }
+                if (l.contains("RUNNER_ID: ")) { RUNNER_ID = value; }
+                if (l.contains("RUNNER_PW: ")) { RUNNER_PW = value; }
+                if (l.contains("Market_Brand_ID: ")) { Market_Brand_ID = value; }
             }
             CONFIG = true;
             switch (env) {
@@ -3084,6 +3052,26 @@ public class API_GUI extends javax.swing.JInternalFrame {
     //</editor-fold>    
 
     private void Execute() throws Exception {
+        
+//        if (true) {
+//            SCOPE += "SSO ";
+//            EX += " - " + "\t" + "SSO" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            ParentTest = HtmlReport.createTest("SSO");
+//            sso BR = new API.sso(API_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX;
+//            _t += BR._t;
+//            _p += BR._p;
+//            _f += BR._f;
+//            _w += BR._w;
+//            _i += BR._i;
+//            r_time += BR.r_time;
+//            ParentTest.getModel().setName("SSO - Tot: " + BR._t + ", Failed: " + BR._f);
+//            ParentTest.getModel().setEndTime(new Date());
+//        }     
+//        if (true) { return;}
+        // =========================================================
+        
         if (true) {
             SCOPE += "AP3 User ";
             EX += " - " + "\t" + "AP3 User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3505,8 +3493,24 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setEndTime(new Date());
         }
         if (true) {
+            SCOPE += "File ";
+            EX += " - " + "\t" + "File" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("File");
+            file BR = new API.file(API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("File - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }        
+        if (true) {
             SCOPE += "Voucherify ";
-            EX += " - " + "\t" + "Logouts" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + "Voucherify" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Voucherify");
             voucherify BR = new API.voucherify(API_GUI.this);
             BR.run(); // ======================================
@@ -3520,6 +3524,22 @@ public class API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Voucherify - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
+//        if (true) {
+//            SCOPE += "SSO ";
+//            EX += " - " + "\t" + "SSO" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            ParentTest = HtmlReport.createTest("SSO");
+//            sso BR = new API.sso(API_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX;
+//            _t += BR._t;
+//            _p += BR._p;
+//            _f += BR._f;
+//            _w += BR._w;
+//            _i += BR._i;
+//            r_time += BR.r_time;
+//            ParentTest.getModel().setName("SSO - Tot: " + BR._t + ", Failed: " + BR._f);
+//            ParentTest.getModel().setEndTime(new Date());
+//        }        
     }
 
     protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
@@ -3619,6 +3639,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
     }
 
     protected void JOB_WS_Call(String NAME, String EndPoint, ExtentTest ParentTest, String JIRA) {
+        // https://blog.devgenius.io/how-to-test-a-web-socket-api-java-ac69b4b0fe35
         FAIL = false;
         String Result = "?";
         int status = 0;
@@ -3631,13 +3652,52 @@ public class API_GUI extends javax.swing.JInternalFrame {
             }
             _t++;
             sw1.start();
+            
+            
+//            WebSocket ws0 = new WebSocket() {
+//                @Override
+//                public Request request() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public long queueSize() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public boolean send(String text) {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public boolean send(ByteString bytes) {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public boolean close(int code, String reason) {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//
+//                @Override
+//                public void cancel() {
+//                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//                }
+//            };
+//            ws0.send("Ping");
+//            
+//            ws0.close(0, "Test");
 
+            
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder().url(EndPoint).build();
             WebSocketListener listener = new WebSocketListener() {
             };
             WebSocket ws = client.newWebSocket(request, listener);
+            
             listener.onOpen(ws, null);
+            listener.onMessage(ws, "Got Message");
             ws.close(0, "Test");
 
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
