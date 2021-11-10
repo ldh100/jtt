@@ -115,7 +115,7 @@ public class Swagger extends javax.swing.JInternalFrame {
 
         jList_Tragets.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jList_Tragets.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "announcement", "calendar", "config", "datalake", "file", "kds", "location", "logger", "loyalty", "mealplan", "menu", "message", "notification", "order", "partner", "payment", "promo", "report", "shoppingcart", "task", "user", "vote" };
+            String[] strings = { "announcement", "calendar", "config", "datalake", "file", "kds", "location", "logger", "loyalty", "mealplan", "menu", "message", "notification", "order", "partner", "payment", "promo", "report", "shoppingcart", "task", "user", "vendor", "vote" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });

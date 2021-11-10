@@ -32,6 +32,7 @@ class payment extends API_GUI {
     List<String> Payment_Tokens_FP = new ArrayList<>();
     String AAA = "";
     protected void run() {
+
         //<editor-fold defaultstate="collapsed" desc="EXACT">
         Auth = "Bearer " + Mobile_User_TKN;
         JOB_Api_Call("Mobile User EXACT Payment Method(s)", "GET",
@@ -64,25 +65,27 @@ class payment extends API_GUI {
 
         Auth = "Bearer " + Mobile_User_TKN;
         requestParams = new JSONObject();
+        JSONObject options = new JSONObject();
         if (env.equals("PR")) {
             requestParams.put("cardholder_name", A.A.C1_Name);
             requestParams.put("cc_expiry", A.A.C1_Exp);
             requestParams.put("cc_number", A.A.C1_Num);       // Mastercard
             requestParams.put("cc_verification_str2", A.A.C1_Cvv);
             requestParams.put("postal_code", A.A.C1_Zip);
+            options.put("exact_gateway_id", "A39014-01"); //exact_gateway_id);           <<< BCIT
+            options.put("exact_gateway_password", "b2XTVsc4"); //exact_gateway_password);
         } else {
             requestParams.put("cardholder_name", "JTT API Automation");
             requestParams.put("cc_expiry", "1224");
             requestParams.put("cc_number", "5555555555554444"); // Mastercard
             requestParams.put("cc_verification_str2", "123");
             requestParams.put("postal_code", "L3L3C4");
+            options.put("exact_gateway_id", exact_gateway_id);
+            options.put("exact_gateway_password", exact_gateway_password);
         }
-        JSONObject options = new JSONObject();
-        options.put("exact_gateway_id", exact_gateway_id);
-        options.put("exact_gateway_password", exact_gateway_password);
         requestParams.put("options", options);
+        
         BODY = requestParams.toString();
-
         JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST",
                 BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null && json.has("token")) {
@@ -132,7 +135,6 @@ class payment extends API_GUI {
         }        
         
         Auth = "Bearer " + Access_TKN;          // ??? What if No FP Payments for this User, above failed? How to generaete 1st one? DEBUG
-        //Auth = "Bearer " + Mobile_User_TKN;     // ???
         requestParams = new JSONObject();
         if (env.equals("PR")) {
             requestParams.put("nameOnCard", A.A.C1_Name);
@@ -140,7 +142,7 @@ class payment extends API_GUI {
             requestParams.put("isPreferred", true);
             requestParams.put("cardNumber", A.A.C1_Num); 
             requestParams.put("expiryYear", "20" + A.A.C1_Exp.substring(2));
-            requestParams.put("expiryMonth", A.A.C1_Exp.substring(0,1));
+            requestParams.put("expiryMonth", A.A.C1_Exp.substring(0,2));
             requestParams.put("CVV", A.A.C1_Cvv);
             requestParams.put("cvvVerificationRequired", true);
             JSONObject billingAddress = new JSONObject();

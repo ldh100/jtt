@@ -23,11 +23,15 @@ class partner extends API_GUI{
         if(json != null){
             AAA = json.toString(4);
         } 
-        JOB_Api_Call("Partner Standardcognition Stores", "GET", 
-            BaseAPI + "/partner/standardcognition/stores", "", "", 200, ParentTest, "no_jira"); 
-        if(json != null){
-            AAA = json.toString(4);
-        }         
+        
+        if (!env.equals("PR")) {
+            JOB_Api_Call("Partner Standardcognition Stores", "GET", 
+                BaseAPI + "/partner/standardcognition/stores", "", "", 200, ParentTest, "no_jira"); 
+            if(json != null){
+                AAA = json.toString(4);
+            }    
+        }
+        
         JOB_Api_Call("Partner Coolr Locations", "GET", 
             BaseAPI + "/partner/coolr/locations", "", "", 200, ParentTest, "no_jira"); 
         if(json != null){
@@ -39,6 +43,7 @@ class partner extends API_GUI{
                 AAA = ex.getMessage();
             }
         }
+        
         JOB_Api_Call("Partner 1st Coolr Images", "GET", 
             BaseAPI + "/partner/coolr/" + CoolrID + "/images", "", "", 200, ParentTest, "no_jira"); 
         if(json != null){
