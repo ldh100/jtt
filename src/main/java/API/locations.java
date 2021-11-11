@@ -3,6 +3,7 @@ package API;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,7 +33,7 @@ class locations extends API_GUI {
     private String RELEASE_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(release_date);
     private String RELEASE_DATE_SECONDS = new SimpleDateFormat("SSS").format(release_date);
     private String AAA = "";
-    
+    JSONObject requestParams = null;
     protected void run() {
 
         Auth = "Bearer " + AP3_TKN;  // =============== AP3 Sectors > Company ID ================
@@ -43,6 +44,9 @@ class locations extends API_GUI {
         AppID = A.Func.App_ID(app, env);
         JOB_Api_Call("Location > /multigroup/", "GET",
                 BaseAPI + "/location/multigroup/", Auth, "", 200, ParentTest, "no_jira");
+        
+//        List<String> EXEPTIONS = new ArrayList<>();
+//        String EXEPTION = EXEPTIONS.get(5);
 
         Auth = "";                       // =============== AP3 App Sites ===========================
         AppID = A.Func.App_ID(app, env);
@@ -217,6 +221,7 @@ class locations extends API_GUI {
             try {
                 New_SiteID = json.getString("id");
             } catch (Exception ex) {
+                AAA = ex.getMessage();
             }
         }
 
@@ -300,18 +305,18 @@ class locations extends API_GUI {
 
         // Test Scenario 6: Negative flow to post site without Name
         BODY = "{\"address\":{"
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
+                    + "\"state\":\"ON\","
+                    + "\"zip\":\"M9V 2C3\","
+                    + "\"country\":\"CA\","
+                    + "\"address\":\"6 Pamela Ct\","
+                    + "\"city\":\"Toronto\","
+                    + "\"coordinates\":{"
+                        + "\"latitude\":43.7435015,"
+                        + "\"longitude\":-79.5924087"
+                    + "}"
                 + "},"
                 + "\"label\":{"
-                + "\"en\":\"Demo\""
+                    + "\"en\":\"Demo\""
                 + "},"
                 + "\"meta\":{"
                     + "\"sector_name\":\"Canteen\""
@@ -391,7 +396,7 @@ class locations extends API_GUI {
                 + "\"meta\":{"
                     + "\"sector_name\":\"Canteen\""
                 + "},"
-                + "\"name\":\"This is test for PATCH/Update on AP3 API Automaion - " + RELEASE_DATE + " (Can be Delete)\"}";
+                + "\"name\":\"This is test for PATCH/Update on AP3 API Automaion - " + RELEASE_DATE + " (Can be Deleted)\"}";
         JOB_Api_Call("Location - PATCH update newly added group/site", "PATCH", 
                 BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 200, ParentTest, "no_jira");
 
@@ -490,8 +495,19 @@ class locations extends API_GUI {
 
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
-        JOB_Api_Call("Location - DELETE drop-off location under newly created group/site", "DELETE", 
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, "", 200, ParentTest, "no_jira");
+        if(env.equals("DE")){
+            requestParams = new JSONObject();
+            JSONArray IDS = new JSONArray();  
+            IDS.put(New_DropOff_LocationID);
+            requestParams.put("delivery_destination_ids", IDS);
+
+            BODY = requestParams.toString();
+            JOB_Api_Call("Location - DELETE drop-off location under newly created group/site", "DELETE", 
+                    BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");     
+        }else{
+            JOB_Api_Call("Location - DELETE drop-off location under newly created group/site", "DELETE", 
+                    BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, "", 200, ParentTest, "no_jira");   
+        }
         //</editor-fold>
     }
 

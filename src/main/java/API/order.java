@@ -274,7 +274,7 @@ class order extends API_GUI{
             try {
                 if(json.has("token")) Fresh_TKN = json.getString("token");  
             } catch (Exception ex){
-                String AAAA = ex.getMessage();
+                AAA = ex.getMessage();
             }
         }    
         Auth = "Bearer " + Fresh_TKN;

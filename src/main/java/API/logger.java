@@ -1,15 +1,12 @@
 package API;
+/*
+Tokariev, Sviatoslav
+long time ago we used it in right corner of AP3 to notify when brand was closed or opened ( Holiday closure). 
+We removed that functionality from AP3 thus that API is not used as far as I am aware of
+*/
 
 class logger extends API_GUI{
     protected logger(API_GUI a) {
-        app = a.app;
-        env = a.env;
-        BaseAPI = a.BaseAPI;
-        AP3_TKN = a.AP3_TKN;
-        SiteID = a.SiteID;
-        BrandID = a.BrandID;
-        UnitID = a.UnitID;
-        ParentTest = a.ParentTest;
     }
     protected void run() {                                                          
         //  

@@ -996,7 +996,7 @@ public class Orders extends javax.swing.JInternalFrame {
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
         ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(10, SortOrder.DESCENDING));
+        sortKeys.add(new RowSorter.SortKey(12, SortOrder.DESCENDING));
         sorter.setSortKeys(sortKeys);      
         DV1.setRowSorter(sorter);
         
@@ -1059,23 +1059,22 @@ public class Orders extends javax.swing.JInternalFrame {
                 DV1.getColumnModel().getColumn(3).setPreferredWidth(120); // Destination       
                 DV1.getColumnModel().getColumn(4).setPreferredWidth(95);  // req date
                 DV1.getColumnModel().getColumn(5).setPreferredWidth(50);  // Amount
-                DV1.getColumnModel().getColumn(6).setPreferredWidth(130); // name           
-                DV1.getColumnModel().getColumn(7).setPreferredWidth(100); // payment
-                DV1.getColumnModel().getColumn(8).setPreferredWidth(70); // service
-                DV1.getColumnModel().getColumn(9).setPreferredWidth(50);  
-                DV1.getColumnModel().getColumn(10).setPreferredWidth(50); 
-                DV1.getColumnModel().getColumn(11).setPreferredWidth(60); 
-                DV1.getColumnModel().getColumn(12).setPreferredWidth(150); 
+                DV1.getColumnModel().getColumn(6).setPreferredWidth(130); // Pickup name           
+                DV1.getColumnModel().getColumn(7).setPreferredWidth(100); // Promo
+                DV1.getColumnModel().getColumn(8).setPreferredWidth(70); // payment
+                DV1.getColumnModel().getColumn(9).setPreferredWidth(50);  // service
+                DV1.getColumnModel().getColumn(10).setPreferredWidth(50); // SCard ID
+                DV1.getColumnModel().getColumn(11).setPreferredWidth(60); // Order ID
+                DV1.getColumnModel().getColumn(12).setPreferredWidth(150); // Modfied Date UTC
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
-                sorter.setSortable(10, true); 
+                sorter.setSortable(12, true); 
                 sorter.sort(); 
                 
             } catch (Exception ex) {
                 txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");   
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-            } 
-            
+            }    
         }    
     }
 

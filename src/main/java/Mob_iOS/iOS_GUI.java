@@ -2582,7 +2582,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
                     " WHERE [app] = 'Android_" + app + "_" + env + "' "
-                            + "AND [Status] = 'Running'"
+                            + "AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "' "
                             + "AND [env] = '" + device + " id:" + devID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));

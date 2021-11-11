@@ -1848,7 +1848,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
             _update.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
             _update.setString(3, "AP3_" + env);

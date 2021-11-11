@@ -1,8 +1,5 @@
 package API;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 class vendor extends API_GUI{
     protected vendor(API_GUI a) {
         app = a.app;

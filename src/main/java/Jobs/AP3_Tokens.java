@@ -249,7 +249,7 @@ public class AP3_Tokens {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'AP3_Tokens"+ "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'AP3_Tokens"+ "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "AP3_Tokens");

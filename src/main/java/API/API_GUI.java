@@ -2786,7 +2786,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'API_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'API_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "API_" + env);
@@ -2801,7 +2801,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _update.setString(12, r_type);
             _update.setString(13, A.A.UserID);
             _update.setString(14, A.A.WsID);
-            _update.setString(15, "N/A");
+            _update.setString(15, env);
             _update.setString(16, LOG);
             _update.setString(17, "Scope: " + "All");
             _update.setString(18, EX);
@@ -2906,7 +2906,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             _insert.setString(12, r_type);
             _insert.setString(13, A.A.UserID);
             _insert.setString(14, A.A.WsID);
-            _insert.setString(15, "N/A");
+            _insert.setString(15, env);
             _insert.setString(16, "=== Job is running... ===\r\n" + "");
             _insert.setString(17, "Running");
             _insert.setString(18, "None");
@@ -2923,49 +2923,9 @@ public class API_GUI extends javax.swing.JInternalFrame {
         BW1 = new SwingWorker() {
             @Override
             protected String doInBackground() throws Exception {
-
                 Extent_Report_Config();
                 NewID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                Execute();// ======================================================================= 
-
-                DD = Duration.between(run_start, Instant.now());
-                Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-                Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
-                
-                if (!"".equals(r_time.trim())) {
-                    double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
-                    if (am0.length > 0) {
-                        Arrays.sort(am0);
-                        double total = 0;
-                        for (int i = 0; i < am0.length; i++) {
-                            total = total + am0[i];
-                        }
-                        t_calls = am0.length;
-                        t_min = am0[0] / (double) 1000;
-                        t_avg = (total / am0.length) / (double) 1000;
-                        t_max = am0[am0.length - 1] / (double) 1000;
-                        p_50 = A.Func.p50(am0) / (double) 1000;
-                        p_90 = A.Func.p90(am0) / (double) 1000;
-
-                        t_rep += " Response (sec) > Min: " + A.A.df.format(t_min)
-                                + ", Avg: " + A.A.df.format(t_avg)
-                                + ", Max: " + A.A.df.format(t_max)
-                                + ", p50: " + A.A.df.format(p_50)
-                                + ", p90: " + A.A.df.format(p_90);
-                    }
-                    Current_Log_Update(GUI, t_rep + "\r\n");
-                }               
-
-                EX = "API " + env + ". "
-                        + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
-                        + ". " + t_rep
-                        + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
-                        + "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
-                        + EX;
-
-                Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");
-
-                BW1_Done(GUI); // ================================================================================
+                Execute(); // ======================================================================= 
 
                 if (_f > 0) {
                     return "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter) + " with " + _f + " FAIL(s)";
@@ -2977,31 +2937,68 @@ public class API_GUI extends javax.swing.JInternalFrame {
             @Override
             protected void done() {
                 try {
+                    Summary = "";
                     String statusMsg = (String) get();
                     txtLog.append("" + statusMsg + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
-
                     BW1 = null;
                 } catch (InterruptedException | ExecutionException ex) {
-                    Current_Log_Update(GUI, "- BW1 ERROR: " + ex.getMessage() + "\r\n");
-                    BW1_FAIL_LOG_UPDATE(ex.getMessage());
+                    Current_Log_Update(GUI, "- Execution ERROR: " + ex.getMessage() + "\r\n");
+                    Summary = " Execution Error: " + ex.getMessage();
+                    Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
+                    _t++;
+                    _f++;
+                    EX += " - " + "\t" + "=== Fatal Execution Error ==="+ "\t" + " >>> " + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - "
+                        + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira"+ "\r\n";
+                    Log_Html_Result("FAIL", ex.getMessage(), ParentTest.createNode("Fatal Execution Error"), API_SRART);                    
+                    
                 }
+                BW1_Done(GUI); // ================================================================================ 
             }
         };
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         BW1.execute();
     }
 
-    private void BW1_FAIL_LOG_UPDATE(String Error) {
-        Summary = "BW1 - Failed: " + Error;
+    private void BW1_Done(boolean GUI) {       
         DD = Duration.between(run_start, Instant.now());
-        LOG_UPDATE("- BW1 ERROR: " + Error);
-    }
+        Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
+        Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
 
-    private void BW1_Done(boolean GUI) throws Exception {
-        DD = Duration.between(run_start, Instant.now());
+        if (!"".equals(r_time.trim())) {
+            double[] am0 = Arrays.stream(r_time.split(";")).mapToDouble(Double::parseDouble).toArray();
+            if (am0.length > 0) {
+                Arrays.sort(am0);
+                double total = 0;
+                for (int i = 0; i < am0.length; i++) {
+                    total = total + am0[i];
+                }
+                t_calls = am0.length;
+                t_min = am0[0] / (double) 1000;
+                t_avg = (total / am0.length) / (double) 1000;
+                t_max = am0[am0.length - 1] / (double) 1000;
+                p_50 = A.Func.p50(am0) / (double) 1000;
+                p_90 = A.Func.p90(am0) / (double) 1000;
+
+                t_rep += " Response (sec) > Min: " + A.A.df.format(t_min)
+                        + ", Avg: " + A.A.df.format(t_avg)
+                        + ", Max: " + A.A.df.format(t_max)
+                        + ", p50: " + A.A.df.format(p_50)
+                        + ", p90: " + A.A.df.format(p_90);
+            }
+            Current_Log_Update(GUI, t_rep + "\r\n");
+        }               
+
+        EX = "API " + env + ". "
+                + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
+                + ". " + t_rep
+                + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
+                + "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
+                + EX;
+
+        Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");        
+        
         Last_EX = EX;       
-        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i;
+        Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i + Summary;
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "= API(s) " + ", Environment: " + env + "\r\n");
 
@@ -3009,6 +3006,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
         LOG_UPDATE(Log); // ========================================================
+        
         HtmlReporter.config().setReportName("API(s)" + ", Env: " + env
                 + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
                 + ". Resp(sec) - Min: " + A.A.df.format(t_min)
@@ -3021,7 +3019,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 
         if (_Slack && !Slack_Channel.equals("N/A")) {
             Report(false);
-            String MSG = "API_" + env + " Excel Automation report - " + Report_Date
+            String MSG = "API_" + env + " Automation report - " + Report_Date
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
@@ -3031,6 +3029,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             if (ef.exists() && !ef.isDirectory()) {
                 ef.delete();
             }
+            
             String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
             String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
             if (Zip_Report) {
@@ -3090,9 +3089,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             AP3_User_ID = BR.AP3_User_ID;
             AP3_TKN = BR.AP3_TKN;
         }
-//        if(true){
-//            return;
-//        }
+
         if (!FAIL) {
             SCOPE += "Locations ";
             EX += " - " + "\t" + "Locations" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
