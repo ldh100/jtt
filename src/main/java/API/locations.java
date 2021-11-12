@@ -377,7 +377,7 @@ class locations extends API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
-        //<editor-fold defaultstate="collapsed" desc="PUT > Update Newly created Group/Site">
+        //<editor-fold defaultstate="collapsed" desc="PUT / PATCH > Update Newly created Group/Site">
         // Test Scenario 1: Positive flow to Update/Patch Newly created Group/Site
         BODY = "{\"address\":{"
                     + "\"state\":\"BC\","
@@ -413,64 +413,118 @@ class locations extends API_GUI {
                 BaseAPI + "/location/multigroup/Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6", Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Positive flow to Update > Patch Drop-off location under newly created group/site.
-        BODY = "{"
-                + "\"name\":\"This is updated Dropp-off location name\","
-                + "\"foodlocker\":true,"
-                + "\"information\":\"\","
-                + "\"address\":{"
-                    + "\"address\":\"6 Pamela Ct\","
-                    + "\"city\":\"Toronto\","
-                    + "\"state\":\"ON\","
-                    + "\"zip\":\"M9V 2C3\","
-                    + "\"country\":\"CA\","
-                    + "\"coordinates\":{"
-                        + "\"latitude\":43.7435015,"
-                        + "\"longitude\":-79.5924087"
+        if(env.equals("DE")){
+            BODY = "{"
+                    + "\"delivery_destinations\":["
+                        + "{"    
+                            + "\"id\":\"" + New_DropOff_LocationID + "\","
+                            + "\"name\":\"This is updated Dropp-off location name\","
+                            + "\"foodlocker\":true,"
+                            + "\"address\":{"
+                                + "\"address\":\"6 Pamela Ct\","
+                                + "\"city\":\"Toronto\","
+                                + "\"state\":\"ON\","
+                                + "\"zip\":\"M9V 2C3\","
+                                + "\"country\":\"CA\","
+                                + "\"coordinates\":{"
+                                    + "\"latitude\":43.7435015,"
+                                    + "\"longitude\":-79.5924087"
+                                    + "}"
+                                + "},"
+                            + "\"information\":\"Test Info\""                  
+                        + "}"
+                    + "]"                
+                + "}";
+            JOB_Api_Call("Location - PATCH update drop-off location to newly created group/site", "PATCH", 
+                    BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
+
+            // Test Scenario 4: Positive flow to Update Drop-off location with foodlocker = false.
+            BODY = "{"
+                + "\"delivery_destinations\":["
+                        + "{"    
+                            + "\"id\":\"" + New_DropOff_LocationID + "\","
+                            + "\"name\":\"Drop-off location with foodlocker=false\","
+                            + "\"foodlocker\":false,"
+                            + "\"address\":{"
+                                + "\"address\":\"6 Pamela Ct\","
+                                + "\"city\":\"Toronto\","
+                                + "\"state\":\"ON\","
+                                + "\"zip\":\"M9V 2C3\","
+                                + "\"country\":\"CA\","
+                                + "\"coordinates\":{"
+                                    + "\"latitude\":43.7435015,"
+                                    + "\"longitude\":-79.5924087"
+                                    + "}"
+                                + "},"
+                            + "\"information\":\"Test Info\""                  
+                        + "}"
+                    + "]"                
+                + "}";           
+            
+            JOB_Api_Call("Location - PATCH  update drop-off location to newly created group/site with Foodlocker=false", "PATCH", 
+                    BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
+        } else{
+            BODY = "{"
+                    + "\"name\":\"This is updated Dropp-off location name\","
+                    + "\"foodlocker\":true,"
+                    + "\"information\":\"\","
+                    + "\"address\":{"
+                        + "\"address\":\"6 Pamela Ct\","
+                        + "\"city\":\"Toronto\","
+                        + "\"state\":\"ON\","
+                        + "\"zip\":\"M9V 2C3\","
+                        + "\"country\":\"CA\","
+                        + "\"coordinates\":{"
+                            + "\"latitude\":43.7435015,"
+                            + "\"longitude\":-79.5924087"
+                            + "}"
+                        + "}"
+                   + "}";
+           JOB_Api_Call("Location - PATCH update drop-off location to newly created group/site", "PATCH", 
+                   BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
+
+           // Test Scenario 4: Positive flow to Update Drop-off location with foodlocker = false.
+           BODY = "{"
+                    + "\"name\":\"Drop-off location with foodlocker=false\","
+                    + "\"foodlocker\":false,"
+                    + "\"information\":\"\","
+                    + "\"address\":{"
+                        + "\"address\":\"6 Pamela Ct\","
+                        + "\"city\":\"Toronto\","
+                        + "\"state\":\"ON\","
+                        + "\"zip\":\"M9V 2C3\","
+                        + "\"country\":\"CA\","
+                        + "\"coordinates\":{"
+                            + "\"latitude\":43.7435015,"
+                            + "\"longitude\":-79.5924087"
                         + "}"
                     + "}"
                 + "}";
-        JOB_Api_Call("Location - PATCH update drop-off location to newly created group/site", "PATCH", 
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
-
-        // Test Scenario 4: Positive flow to Update Drop-off location with foodlocker = false.
-        BODY = "{"
-                + "\"name\":\"Drop-off location with foodlocker=false\","
-                + "\"foodlocker\":false,"
-                + "\"information\":\"\","
-                + "\"address\":{"
-                    + "\"address\":\"6 Pamela Ct\","
-                    + "\"city\":\"Toronto\","
-                    + "\"state\":\"ON\","
-                    + "\"zip\":\"M9V 2C3\","
-                    + "\"country\":\"CA\","
-                    + "\"coordinates\":{"
-                        + "\"latitude\":43.7435015,"
-                        + "\"longitude\":-79.5924087"
-                    + "}"
-                + "}"
-             + "}";
-        JOB_Api_Call("Location - PATCH  update drop-off location to newly created group/site with Foodlocker=false", "PATCH", 
-                BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
+           JOB_Api_Call("Location - PATCH  update drop-off location to newly created group/site with Foodlocker=false", "PATCH", 
+                   BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + New_DropOff_LocationID, Auth, BODY, 200, ParentTest, "no_jira");
+           }  
 
         // Test Scenario 5: Negative flow to update site without Name
-        BODY = "{\"address\":{"
-                    + "\"state\":\"ON\","
-                    + "\"zip\":\"M9V 2C3\","
-                    + "\"country\":\"CA\","
-                    + "\"address\":\"6 Pamela Ct\","
-                    + "\"city\":\"Toronto\","
-                    + "\"coordinates\":{"
-                        + "\"latitude\":43.7435015,"
-                        + "\"longitude\":-79.5924087"
-                    + "}"
-                + "},"
-                + "\"label\":{"
-                    + "\"en\":\"Demo\""
-                + "},"
-                + "\"meta\":{"
-                    + "\"sector_name\":\"Canteen\""
-                + "},"
-                + "\"name\":\"\"}";
+        BODY = "{" +
+                    "\"address\":{"
+                        + "\"state\":\"ON\","
+                        + "\"zip\":\"M9V 2C3\","
+                        + "\"country\":\"CA\","
+                        + "\"address\":\"6 Pamela Ct\","
+                        + "\"city\":\"Toronto\","
+                        + "\"coordinates\":{"
+                            + "\"latitude\":43.7435015,"
+                            + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "},"
+                    + "\"label\":{"
+                        + "\"en\":\"Demo\""
+                    + "},"
+                    + "\"meta\":{"
+                        + "\"sector_name\":\"Canteen\""
+                    + "},"
+                    + "\"name\":\"\""
+                + "}";
         JOB_Api_Call("Location - PATCH Negative flow to update group/site without Name", "PATCH", 
                 BaseAPI + "/location/group/" + New_SiteID, Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
@@ -563,30 +617,30 @@ class locations extends API_GUI {
 
         // Test Scenario 3: Negative flow to Add new Business Unit without name
         BODY = "{"
-                + "\"name\":\"\","
-                + "\"label\":{"
-                + "\"en\":\"This is API test to add Business Unit under  newly created group/site\""
-                + "},"
-                + "\"brands\":["
-                + "],"
-                + "\"address\":{"
-                + "\"state\":\"ON\","
-                + "\"zip\":\"M9V 2C3\","
-                + "\"country\":\"CA\","
-                + "\"address\":\"6 Pamela Ct\","
-                + "\"city\":\"Toronto\","
-                + "\"coordinates\":{"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087"
-                + "}"
-                + "},"
-                + "\"latitude\":43.7435015,"
-                + "\"longitude\":-79.5924087,"
-                + "\"meta\":{"
-                + "\"unit\":1112 " + RELEASE_DATE_SECONDS + ","
-                + "\"unit_id\":1112 " + RELEASE_DATE_SECONDS + ","
-                + "\"app_name\":\"" + app + "\""
-                + "}"
+                    + "\"name\":\"\","
+                    + "\"label\":{"
+                    + "\"en\":\"This is API test to add Business Unit under  newly created group/site\""
+                    + "},"
+                    + "\"brands\":["
+                    + "],"
+                    + "\"address\":{"
+                        + "\"state\":\"ON\","
+                        + "\"zip\":\"M9V 2C3\","
+                        + "\"country\":\"CA\","
+                        + "\"address\":\"6 Pamela Ct\","
+                        + "\"city\":\"Toronto\","
+                        + "\"coordinates\":{"
+                            + "\"latitude\":43.7435015,"
+                            + "\"longitude\":-79.5924087"
+                        + "}"
+                    + "},"
+                    + "\"latitude\":43.7435015,"
+                    + "\"longitude\":-79.5924087,"
+                    + "\"meta\":{"
+                        + "\"unit\":1112 " + RELEASE_DATE_SECONDS + ","
+                        + "\"unit_id\":1112 " + RELEASE_DATE_SECONDS + ","
+                        + "\"app_name\":\"" + app + "\""
+                    + "}"
                 + "}";
         JOB_Api_Call("Location - POST negative flow to add new Busines Unit without name", "POST", 
                 BaseAPI + "/location", Auth, BODY, 400, ParentTest, "no_jira");
