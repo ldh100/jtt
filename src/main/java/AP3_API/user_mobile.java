@@ -1,9 +1,9 @@
-package API;
+package AP3_API;
 
 import java.util.Base64;
 
-class user_mobile extends API_GUI{
-    protected user_mobile(API_GUI a) {
+class user_mobile extends AP3_API_GUI{
+    protected user_mobile(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

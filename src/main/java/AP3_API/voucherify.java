@@ -1,7 +1,7 @@
-package API;
+package AP3_API;
 
-class voucherify extends API_GUI{
-    protected voucherify(API_GUI a) {
+class voucherify extends AP3_API_GUI{
+    protected voucherify(AP3_API_GUI a) {
         ParentTest = a.ParentTest;
     }
     String AAA = "";

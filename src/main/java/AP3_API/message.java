@@ -1,7 +1,7 @@
-package API;
+package AP3_API;
 
-class loyalty extends API_GUI{
-    protected loyalty(API_GUI a) {
+class message extends AP3_API_GUI{
+    protected message(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
@@ -12,7 +12,7 @@ class loyalty extends API_GUI{
         // UnitNum ???????
         ParentTest = a.ParentTest;
     }
-    protected void run() {                                                         
+    protected void run() {                                                          
         //  
 
     }

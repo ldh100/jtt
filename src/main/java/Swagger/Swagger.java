@@ -180,7 +180,7 @@ public class Swagger extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jList_TragetsValueChanged
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
-        cmbEnv.setSelectedIndex(1);
+        cmbEnv.setSelectedIndex(0);
         jList_Tragets.setSelectedValue("config", true);
     }//GEN-LAST:event_formAncestorAdded
 

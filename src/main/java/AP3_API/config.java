@@ -1,12 +1,12 @@
-package API;
+package AP3_API;
 
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class config extends API_GUI {
+class config extends AP3_API_GUI {
 
-    protected config(API_GUI a) {
+    protected config(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

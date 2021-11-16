@@ -732,7 +732,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         }
     }
     private void Job_API(String job, String config){
-        API.API_GUI _Job = new API.API_GUI();
+        AP3_API.AP3_API_GUI _Job = new AP3_API.AP3_API_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());

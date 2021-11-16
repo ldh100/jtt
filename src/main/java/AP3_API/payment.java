@@ -1,13 +1,13 @@
-package API;
+package AP3_API;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class payment extends API_GUI {
+class payment extends AP3_API_GUI {
 
-    protected payment(API_GUI a) {
+    protected payment(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

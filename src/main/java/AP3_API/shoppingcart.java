@@ -1,10 +1,10 @@
-package API;
+package AP3_API;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class shoppingcart extends API_GUI{
-    protected shoppingcart(API_GUI a) {
+class shoppingcart extends AP3_API_GUI{
+    protected shoppingcart(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

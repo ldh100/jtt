@@ -1,10 +1,10 @@
-package API;
+package AP3_API;
 
 import java.util.ArrayList;
 
-class announcement extends API_GUI {
+class announcement extends AP3_API_GUI {
 
-    protected announcement(API_GUI a) {
+    protected announcement(AP3_API_GUI a) {
         app = a.app;
         AppID = a.AppID;
         env = a.env;

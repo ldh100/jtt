@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class notification extends API_GUI {
+class notification extends AP3_API_GUI {
 
-    protected notification(API_GUI a) {
+    protected notification(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

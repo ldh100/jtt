@@ -1,12 +1,12 @@
-package API;
+package AP3_API;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class menus extends API_GUI{
-    protected menus(API_GUI a) {
+class menus extends AP3_API_GUI{
+    protected menus(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

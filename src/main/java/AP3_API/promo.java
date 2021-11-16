@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import static A.A.FAIL;
 import static A.A._f;
@@ -9,9 +9,9 @@ import java.util.Date;
 import java.util.List;
 import org.joda.time.DateTime;
 
-class promo extends API_GUI {
+class promo extends AP3_API_GUI {
 
-    protected promo(API_GUI a) {
+    protected promo(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         AppID = a.AppID;

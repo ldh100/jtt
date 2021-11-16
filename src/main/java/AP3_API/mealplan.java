@@ -1,10 +1,10 @@
-package API;
+package AP3_API;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class mealplan extends API_GUI{
-    protected mealplan(API_GUI a) {
+class mealplan extends AP3_API_GUI{
+    protected mealplan(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

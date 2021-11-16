@@ -1,12 +1,12 @@
-package API;
+package AP3_API;
 
 import java.util.ArrayList;
 import java.util.Base64;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class user_bolter extends API_GUI{
-    protected user_bolter(API_GUI a) {
+class user_bolter extends AP3_API_GUI{
+    protected user_bolter(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

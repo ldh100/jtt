@@ -1,10 +1,10 @@
-package API;
+package AP3_API;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class partner extends API_GUI{
-    protected partner(API_GUI a) {
+class partner extends AP3_API_GUI{
+    protected partner(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

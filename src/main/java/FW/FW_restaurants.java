@@ -99,8 +99,7 @@ public class FW_restaurants {
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("List Markets", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
           if (FAIL) { return;}
            for (int i = 0; i < L0.size(); i++) {
-	       _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
-	                if (FAIL) { return;}
+	       _t++; TWeb.Element_Text("Market Name (" + i + ")", L0.get(i),  "no_jira"); 
 	                if(t.trim().equals("Cdl test 1")){ 
 	                    L0.get(i).click();
                         }
@@ -111,7 +110,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Partner Type dropdown", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
          for (int i = 0; i < L0.size(); i++) {
-	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
+	    _t++; TWeb.Element_Text("Partner Type (" + i + ")", L0.get(i),  "no_jira"); 
 	                if (FAIL) { return;}
 	                if(t.trim().equals("Restaurant")){ 
 	                    L0.get(i).click();
@@ -125,7 +124,7 @@ public class FW_restaurants {
      _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of *Restaurant Partner dropdown", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
          for (int i = 0; i < L0.size(); i++) {
-	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
+	    _t++; TWeb.Element_Text("Restaurant Name (" + i + ")", L0.get(i),  "no_jira"); 
 	                if (FAIL) { return;}
 	                if(t.trim().equals("Athe Gmail Raj")){ 
 	                    L0.get(i).click();
@@ -225,21 +224,17 @@ public class FW_restaurants {
     // A.A.CWD + File.separator + "FilesToUpload"; 
     // Check for Target file starting with prefix "FW_" exists
     // if Yes
-    File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"FW_login_image.jpg");
-      if(tmp.exists())
-      {
-       _t++; TWeb.Element_By_Path_Text_Enter("Upload  Image", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"FW_login_image.jpg", false, "no_jira"); 
-        if (FAIL) { return;}
-      }
-      else
-      {
-       _t++; 
-       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-
-      }  
+    File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_brand_image.jpg");
+    if(tmp.exists()) {
+        _t++; TWeb.Element_By_Path_Text_Enter("Upload Image file", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_brand_image.jpg", false, "no_jira"); 
+            if (FAIL) { return;}
+    } else {
+        _t++; 
+        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+    }  
 
       Thread.sleep(4000);
-//    //  
+ 
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Done button", "xpath", "//button//span[contains(.,'Done')]", "no_jira"); 
       if (FAIL) { return;}  
       Thread.sleep(5000);

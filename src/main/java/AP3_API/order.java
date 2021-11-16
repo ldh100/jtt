@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import java.text.SimpleDateFormat;
 import java.util.Base64;
@@ -32,8 +32,8 @@ I guess the functionality was never official ( it’s not even configured in AP3
 I just migrated it from orders to email service
 */
 
-class order extends API_GUI{
-    protected order(API_GUI a) {
+class order extends AP3_API_GUI{
+    protected order(AP3_API_GUI a) {
         app = a.app;
         AppID = a.AppID;
         env = a.env;

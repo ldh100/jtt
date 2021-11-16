@@ -1,7 +1,7 @@
-package API;
+package AP3_API;
 
-class logouts extends API_GUI{
-    protected logouts(API_GUI a) {
+class logouts extends AP3_API_GUI{
+    protected logouts(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

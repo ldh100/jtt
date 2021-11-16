@@ -1,7 +1,7 @@
-package API;
+package AP3_API;
 
-class vendor extends API_GUI{
-    protected vendor(API_GUI a) {
+class vendor extends AP3_API_GUI{
+    protected vendor(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

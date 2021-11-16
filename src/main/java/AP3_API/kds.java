@@ -1,9 +1,9 @@
-package API;
+package AP3_API;
 
 import org.json.JSONObject;
 
-class kds extends API_GUI{
-    protected kds(API_GUI a) {
+class kds extends AP3_API_GUI{
+    protected kds(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

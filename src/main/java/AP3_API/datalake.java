@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -11,8 +11,8 @@ and then whatever entity is being searched for can be specified in the query of 
     "query": "SELECT * FROM datalake.orders WHERE date_created >= '2021-09-07T12:00:02.000Z' LIMIT 1000"
 }
 */
-class datalake extends API_GUI{
-    protected datalake(API_GUI a) {
+class datalake extends AP3_API_GUI{
+    protected datalake(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

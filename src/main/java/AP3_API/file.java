@@ -1,10 +1,10 @@
-package API;
+package AP3_API;
 
 import java.util.Base64;
 import org.json.JSONObject;
 
-class file extends API_GUI{
-    protected file(API_GUI a) {
+class file extends AP3_API_GUI{
+    protected file(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

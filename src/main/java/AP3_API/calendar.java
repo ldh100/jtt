@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -6,9 +6,9 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import org.json.JSONObject;
 
-class calendar extends API_GUI {
+class calendar extends AP3_API_GUI {
 
-    protected calendar(API_GUI a) {
+    protected calendar(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

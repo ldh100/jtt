@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -9,8 +9,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-class task extends API_GUI{
-    protected task(API_GUI a) {
+class task extends AP3_API_GUI{
+    protected task(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;

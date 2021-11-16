@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class locations extends API_GUI {
+class locations extends AP3_API_GUI {
 
-    protected locations(API_GUI a) {
+    protected locations(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;
@@ -22,6 +22,7 @@ class locations extends API_GUI {
         ParentTest = a.ParentTest;
         CompanyID = a.CompanyID;
         SectorID = a.SectorID;
+        Market_Brand_ID = a.Market_Brand_ID;
     }
     private String New_SiteID = "";
     private String New_DropOff_LocationID = "";
@@ -1087,6 +1088,28 @@ class locations extends API_GUI {
                 BaseAPI + "/location/brand/" + New_BrandID, Auth, "", 200, ParentTest, "no_jira");
 
         //</editor-fold>
+
+        //<editor-fold defaultstate="collapsed" desc="Brand / Document Food Works Brand Only">
+        List<String> DOCS_IDS = new ArrayList<>();
+        if(env.equals("DE")){
+            JOB_Api_Call("Location - GET Brand Attached Documents", "GET", 
+                    BaseAPI + "/location/brand/" + BrandID + "/documents", Auth, "", 200, ParentTest, "no_jira");
+        }
+        if (json != null) {
+            try {
+                if (json.has("documents")) {
+                    JSONArray docs = json.getJSONArray("documents");
+                    for (int i = 0; i < docs.length(); i++) {
+                        JSONObject doc = docs.getJSONObject(i);
+                        DOCS_IDS.add(doc.getNumber("id").toString());
+                    }
+                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        //</editor-fold>
+        
     }
 
     protected void Sector_APIs() {

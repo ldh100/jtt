@@ -1,4 +1,4 @@
-package API;
+package AP3_API;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -50,7 +50,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
-import okio.ByteString;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -63,9 +62,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class API_GUI extends javax.swing.JInternalFrame {
+public class AP3_API_GUI extends javax.swing.JInternalFrame {
 
-    public API_GUI() {
+    public AP3_API_GUI() {
         initComponents();
     }
 
@@ -1239,7 +1238,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             from = ((Date) StartFormat.parse(From)).getTime();
             to = from + (60 * 60 * 24 * 1000) - 2;
         } catch (ParseException ex) {
-            // Logger.getLogger(API_GUI.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            // Logger.getLogger(AP3_API_GUI.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
         }
 
         if (sw1.isRunning()) {
@@ -3056,7 +3055,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 //            SCOPE += "SSO ";
 //            EX += " - " + "\t" + "SSO" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 //            ParentTest = HtmlReport.createTest("SSO");
-//            sso BR = new API.sso(API_GUI.this);
+//            sso BR = new API.sso(AP3_API_GUI.this);
 //            BR.run(); // ======================================
 //            EX += BR.EX;
 //            _t += BR._t;
@@ -3075,7 +3074,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "AP3 User ";
             EX += " - " + "\t" + "AP3 User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("AP3 User");
-            user_ap3 BR = new API.user_ap3(API_GUI.this);
+            user_ap3 BR = new AP3_API.user_ap3(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3094,7 +3093,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Locations ";
             EX += " - " + "\t" + "Locations" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Locations");
-            locations BR = new API.locations(API_GUI.this);
+            locations BR = new AP3_API.locations(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3128,7 +3127,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Config ";
             EX += " - " + "\t" + "Config" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Config");
-            config BR = new API.config(API_GUI.this);
+            config BR = new AP3_API.config(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3158,7 +3157,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Menus ";
             EX += " - " + "\t" + "Menus" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Global/Local Menus");
-            menus BR = new API.menus(API_GUI.this);
+            menus BR = new AP3_API.menus(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3201,7 +3200,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Promo ";
             EX += " - " + "\t" + "Promo" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Promo");
-            promo BR = new API.promo(API_GUI.this);
+            promo BR = new AP3_API.promo(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3218,7 +3217,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Calendar ";
             EX += " - " + "\t" + "Calendar" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Calendar");
-            calendar BR = new API.calendar(API_GUI.this);
+            calendar BR = new AP3_API.calendar(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3234,7 +3233,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Reports ";
             EX += " - " + "\t" + "Reports" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Reports");
-            reports BR = new API.reports(API_GUI.this);
+            reports BR = new AP3_API.reports(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3250,7 +3249,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Announcement ";
             EX += " - " + "\t" + "Announcement" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Announcement");
-            announcement BR = new API.announcement(API_GUI.this);
+            announcement BR = new AP3_API.announcement(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3266,7 +3265,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Notification ";
             EX += " - " + "\t" + "Notification" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Recent Updates/Notifications");
-            notification BR = new API.notification(API_GUI.this);
+            notification BR = new AP3_API.notification(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3283,7 +3282,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Partner ";
             EX += " - " + "\t" + "Partner" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Partner");
-            partner BR = new API.partner(API_GUI.this);
+            partner BR = new AP3_API.partner(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3302,7 +3301,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Mobile User ";
             EX += " - " + "\t" + "Mobile User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Mobile User");
-            user_mobile BR = new API.user_mobile(API_GUI.this);
+            user_mobile BR = new AP3_API.user_mobile(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3325,7 +3324,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Payment ";
             EX += " - " + "\t" + "Payment" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Payment");
-            payment BR = new API.payment(API_GUI.this);
+            payment BR = new AP3_API.payment(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3350,7 +3349,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "ShoppingCart ";
             EX += " - " + "\t" + "ShoppingCart" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("ShoppingCart");
-            shoppingcart BR = new API.shoppingcart(API_GUI.this);
+            shoppingcart BR = new AP3_API.shoppingcart(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3370,7 +3369,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Order ";
             EX += " - " + "\t" + "Order" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Order");
-            order BR = new API.order(API_GUI.this);
+            order BR = new AP3_API.order(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3388,7 +3387,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Datalake "; 
             EX += " - " + "\t" + "Datalake" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Datalake");
-            datalake BR = new API.datalake(API_GUI.this);
+            datalake BR = new AP3_API.datalake(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3405,7 +3404,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Meal Plan "; 
             EX += " - " + "\t" + "Meal Plan" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Meal Plan");
-            mealplan BR = new API.mealplan(API_GUI.this);
+            mealplan BR = new AP3_API.mealplan(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3423,7 +3422,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Bolter ";
             EX += " - " + "\t" + "Bolter" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Bolter");
-            user_bolter BR = new API.user_bolter(API_GUI.this);
+            user_bolter BR = new AP3_API.user_bolter(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3444,7 +3443,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Task ";
             EX += " - " + "\t" + "Task" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Task");
-            task BR = new API.task(API_GUI.this);
+            task BR = new AP3_API.task(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3460,7 +3459,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "KDS ";
             EX += " - " + "\t" + "KDS " + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("KDS");
-            kds BR = new API.kds(API_GUI.this);
+            kds BR = new AP3_API.kds(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3477,7 +3476,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Logouts ";
             EX += " - " + "\t" + "Logouts" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Logouts");
-            logouts BR = new API.logouts(API_GUI.this);
+            logouts BR = new AP3_API.logouts(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3493,7 +3492,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "File ";
             EX += " - " + "\t" + "File" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("File");
-            file BR = new API.file(API_GUI.this);
+            file BR = new AP3_API.file(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3509,7 +3508,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Voucherify ";
             EX += " - " + "\t" + "Voucherify" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Voucherify");
-            voucherify BR = new API.voucherify(API_GUI.this);
+            voucherify BR = new AP3_API.voucherify(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;
@@ -3525,7 +3524,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
 //            SCOPE += "SSO ";
 //            EX += " - " + "\t" + "SSO" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 //            ParentTest = HtmlReport.createTest("SSO");
-//            sso BR = new API.sso(API_GUI.this);
+//            sso BR = new API.sso(AP3_API_GUI.this);
 //            BR.run(); // ======================================
 //            EX += BR.EX;
 //            _t += BR._t;
@@ -3541,7 +3540,7 @@ public class API_GUI extends javax.swing.JInternalFrame {
             SCOPE += "Vendor ";
             EX += " - " + "\t" + "Vendor" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Vendor");
-            vendor BR = new API.vendor(API_GUI.this);
+            vendor BR = new AP3_API.vendor(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX;
             _t += BR._t;

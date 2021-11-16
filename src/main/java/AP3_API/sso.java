@@ -1,7 +1,7 @@
-package API;
+package AP3_API;
 
-class sso extends API_GUI{
-    protected sso(API_GUI a) {
+class sso extends AP3_API_GUI{
+    protected sso(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;       
