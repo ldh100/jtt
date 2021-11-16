@@ -542,15 +542,24 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         Job_Count++;
                         Set_Cron_Status_Running(JobName);
                         
-                    } else if(JobName.startsWith("API")){              
+                    } else if(JobName.startsWith("AP3_API")){              
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_API(JobName,CONFIG);
+                            Job_AP3_API(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
                         Set_Cron_Status_Running(JobName);
                         
+                    } else if(JobName.startsWith("FW_API")){              
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Job_FW_API(JobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
+                     
                     } else if(JobName.startsWith("AP3")){
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_AP3(JobName,CONFIG);
@@ -696,8 +705,10 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         
         if(JobName.equals("Tokens_AP3")){
             Tokens_AP3(JobName, config);
-        } else if(JobName.startsWith("API")){
-            Job_API(JobName, config);
+        } else if(JobName.startsWith("AP3_API")){
+            Job_AP3_API(JobName, config);
+        } else if(JobName.startsWith("FW_API")){
+            Job_FW_API(JobName, config);
         } else if(JobName.startsWith("AP3")){
             Job_AP3(JobName, config);        
         } else if(JobName.startsWith("DL")){
@@ -731,7 +742,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             LOG_FAILURE(RES);
         }
     }
-    private void Job_API(String job, String config){
+    private void Job_AP3_API(String job, String config){
         AP3_API.AP3_API_GUI _Job = new AP3_API.AP3_API_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
@@ -740,6 +751,15 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             LOG_FAILURE(RES);
         }
     }
+    private void Job_FW_API(String job, String config){
+        FW_API.FW_API_main _Job = new FW_API.FW_API_main();
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILURE(RES);
+        }
+    }    
     private void Job_Android(String job, String config){
         Mob_Android.An_GUI _Job = new Mob_Android.An_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);

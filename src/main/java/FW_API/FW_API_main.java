@@ -134,7 +134,7 @@ public class FW_API_main {
     protected void Extent_Report_Config() throws IOException {
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "API_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "FW_API_" + env + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
 
@@ -149,7 +149,6 @@ public class FW_API_main {
         //HtmlReporter.config().setTheme(Theme.DARK);               
         HtmlReporter.config().setTheme(Theme.STANDARD);
     }
-
     protected void Log_Html_Result(String RES, String Test_Description, ExtentTest Test, Date API_Start) {
         switch (RES) {
             case "PASS":
@@ -229,14 +228,15 @@ public class FW_API_main {
                 if (l.contains("SlackCh: ")) { Slack_Channel = value; }
                 if (l.contains("_slack: ")) {  _Slack = Boolean.parseBoolean(value); }
                 if (l.contains("_zip_report: ")) { Zip_Report = Boolean.parseBoolean(value); }
-
+                
+                if (l.contains("FW_ADMIN_ID: ")) { FW_ADMIN_ID = value; }
+                if (l.contains("FW_ADMIN_PW: ")) { FW_ADMIN_PW = value; } 
+                
                 if (l.contains("RESTAURANT: ")) { RESTAURANT = value; }
                 if (l.contains("RestID: ")) { RestID = value; }
                 if (l.contains("UNIT: ")) { UNIT = value; }
                 if (l.contains("UnitID: ")) { UnitID = value; }
-                
-                if (l.contains("FW_ADMIN_ID: ")) { FW_ADMIN_ID = value; }
-                if (l.contains("FW_ADMIN_PW: ")) { FW_ADMIN_PW = value; }
+
 
             }
             CONFIG = true;
@@ -268,7 +268,6 @@ public class FW_API_main {
         Log += Text;
     }
 
-  
     private void LOG_UPDATE(String LOG) {
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _update = conn.prepareStatement("UPDATE [dbo].[aw_result] SET "
@@ -333,7 +332,6 @@ public class FW_API_main {
             //
         }
     }
-
     private void LOG_START() {
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] ("
@@ -442,7 +440,8 @@ public class FW_API_main {
             protected String doInBackground() throws Exception {
                 Extent_Report_Config();
                 NewID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-//Execute(); // ======================================================================= 
+                
+                Execute(); // ======================================================================= 
 
                 if (_f > 0) {
                     return "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter) + " with " + _f + " FAIL(s)";
@@ -621,8 +620,8 @@ public class FW_API_main {
 
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
-                if (json.has("error")) {
-                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+                if (json.has("message")) {
+                    ErrorMsg = "Error Message: " + json.getString("message") + ". ";
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
@@ -662,7 +661,7 @@ public class FW_API_main {
     private void Execute() throws Exception {
         if (true) {
             SCOPE += "Login ";
-            EX += " - " + "\t" + "SSO" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + "Login" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Login");
             login BR = new FW_API.login(FW_API_main.this);
             BR.run(); // ======================================

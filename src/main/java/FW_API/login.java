@@ -17,24 +17,29 @@ class login extends FW_API_main{
     protected void run() { 
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + FW_ADMIN_PW).getBytes());
         JOB_Api_Call("FW Admin Authentication - Wrong ID", "GET", 
-            BaseAPI + "/user/auth", Auth, "", 401, ParentTest, "no_jira");
+            BaseAPI + "/auth", Auth, "", 401, ParentTest, "no_jira");
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((FW_ADMIN_ID + ":" + "WrongPW").getBytes());
-        JOB_Api_Call("AP3 Admin Authentication - Wrong PW", "GET", 
-            BaseAPI + "/user/auth", Auth, "", 401, ParentTest, "no_jira");
+        JOB_Api_Call("FW Admin Authentication - Wrong PW", "GET", 
+            BaseAPI + "/auth", Auth, "", 401, ParentTest, "no_jira");
                       
         Auth = "Basic " + Base64.getEncoder().encodeToString((FW_ADMIN_ID + ":" + FW_ADMIN_PW).getBytes());
         JOB_Api_Call("FW User Login", "GET", 
-            BaseAPI + "/user/auth", Auth, "", 401, ParentTest, "no_jira"); 
+            BaseAPI + "/auth", Auth, "", 200, ParentTest, "no_jira"); 
         if(json != null){
             try {
-                if(json.has("user")) FW_User_ID = json.getString("user"); 
+                if(json.has("id")) FW_User_ID = json.getString("id"); 
                 if(json.has("token")) FW_User_TKN = json.getString("token");  
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
+            AAA = "";
         }
     }
+    
+    
+    
+    
     /*
     New User
     https://czb8fru7ij.execute-api.us-east-1.amazonaws.com/dev//users

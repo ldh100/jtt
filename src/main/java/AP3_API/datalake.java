@@ -35,7 +35,6 @@ class datalake extends AP3_API_GUI{
         }
         
         Auth = "Bearer " + AP3_TKN;        
-
         JOB_Api_Call("Datalake SQL > Valid Token", "POST", 
             BaseAPI + "/datalake/sql", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
