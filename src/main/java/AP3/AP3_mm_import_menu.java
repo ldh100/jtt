@@ -17,10 +17,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author roya.jacob
  */
-class AP3_mm_import extends AP3_GUI{
+class AP3_mm_import_menu extends AP3_GUI{
     String API_Response_Body = ""; 
     
-    protected AP3_mm_import (AP3_GUI a) {
+    protected AP3_mm_import_menu (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
         loadTimeout = a.loadTimeout;

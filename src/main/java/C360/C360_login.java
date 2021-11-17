@@ -141,7 +141,7 @@ class C360_login extends C360_GUI{
         }  
         // User Management
         Find_Text("Find Navigation node 'Users'", "Users", true, ParentTest, "no_jira"); 
-        Find_Text("Find Navigation node 'Roles'", "Roles", true, ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'Roles'", "Roles", false, ParentTest, "no_jira"); 
         // Item Catalog       
         Find_Text("Find Navigation node 'Menus'", "Menus", false, ParentTest, "no_jira");
         Find_Text("Find Navigation node 'Concepts'", "Concepts", true, ParentTest, "no_jira"); 

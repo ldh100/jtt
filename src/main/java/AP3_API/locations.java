@@ -1090,24 +1090,24 @@ class locations extends AP3_API_GUI {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Brand / Document Food Works Brand Only">
-        List<String> DOCS_IDS = new ArrayList<>();
-        if(env.equals("DE")){
-            JOB_Api_Call("Location - GET Brand Attached Documents", "GET", 
-                    BaseAPI + "/location/brand/" + BrandID + "/documents", Auth, "", 200, ParentTest, "no_jira");
-        }
-        if (json != null) {
-            try {
-                if (json.has("documents")) {
-                    JSONArray docs = json.getJSONArray("documents");
-                    for (int i = 0; i < docs.length(); i++) {
-                        JSONObject doc = docs.getJSONObject(i);
-                        DOCS_IDS.add(doc.getNumber("id").toString());
-                    }
-                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
-        }
+//        List<String> DOCS_IDS = new ArrayList<>();
+//        if(env.equals("DE")){
+//            JOB_Api_Call("Location - GET Brand Attached Documents", "GET", 
+//                    BaseAPI + "/location/brand/" + BrandID + "/documents", Auth, "", 200, ParentTest, "no_jira");
+//        }
+//        if (json != null) {
+//            try {
+//                if (json.has("documents")) {
+//                    JSONArray docs = json.getJSONArray("documents");
+//                    for (int i = 0; i < docs.length(); i++) {
+//                        JSONObject doc = docs.getJSONObject(i);
+//                        DOCS_IDS.add(doc.getNumber("id").toString());
+//                    }
+//                }
+//            } catch (Exception ex) {
+//                AAA = ex.getMessage();
+//            }
+//        }
         //</editor-fold>
         
     }

@@ -592,6 +592,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
+    protected String JOB_Name = "";   
     protected String Realm = "";
     protected String Auth = "";
     protected String NewID = "";
@@ -2572,7 +2573,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     protected void Extent_Report_Config() throws IOException {
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "API_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + JOB_Name + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
 
@@ -2613,6 +2614,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         run_start = Instant.now();
         Log = "";
         String RES = "";
+        JOB_Name = job_name;
 
         RES = JOB_Load_CONFIG(config);
         if (RES.contains("ERROR")) {
@@ -2735,7 +2737,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length);
             }
-            Report_File = A.Func.fExcel(l, col, Values, "API_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Report_File = A.Func.fExcel(l, col, Values, JOB_Name + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
@@ -2785,10 +2787,10 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'API_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
+                    " WHERE [app] = '" + JOB_Name + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "API_" + env);
+            _update.setString(3, JOB_Name);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -2893,7 +2895,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "API_" + env);
+            _insert.setString(3, JOB_Name);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -2987,7 +2989,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(GUI, t_rep + "\r\n");
         }               
 
-        EX = "API " + env + ". "
+        EX = JOB_Name + ". "
                 + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
                 + ". " + t_rep
                 + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
@@ -3018,7 +3020,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
 
         if (_Slack && !Slack_Channel.equals("N/A")) {
             Report(false);
-            String MSG = "API_" + env + " Automation report - " + Report_Date
+            String MSG = JOB_Name + " Automation report - " + Report_Date
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;

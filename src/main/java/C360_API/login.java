@@ -1,10 +1,10 @@
-package FW_API;
+package C360_API;
 
 import java.util.Base64;
 
 
-class login extends FW_API_main{
-    protected login(FW_API_main a) {
+class login extends C360_API_main{
+    protected login(C360_API_main a) {
         env = a.env;
         BaseAPI = a.BaseAPI;
         FW_ADMIN_ID = a.FW_ADMIN_ID;

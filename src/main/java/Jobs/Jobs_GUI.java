@@ -559,8 +559,18 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         });
                         Job_Count++;
                         Set_Cron_Status_Running(JobName);
+                        
+                    } else if(JobName.startsWith("AP3_PR_Smoke")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Job_AP3(JobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(JobName);
+                                             
                      
-                    } else if(JobName.startsWith("AP3")){
+                    } else if(JobName.startsWith("AP3_FE")){
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_AP3(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -569,7 +579,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         Job_Count++;
                         Set_Cron_Status_Running(JobName);
                         
-                    } else if(JobName.startsWith("DL")){
+                    } else if(JobName.startsWith("DL_FE")){
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_DL(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -578,7 +588,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         Job_Count++;
                         Set_Cron_Status_Running(JobName);
 
-                    } else if(JobName.startsWith("C360")){
+                    } else if(JobName.startsWith("C360_FE")){
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_C360(JobName,CONFIG);
                             txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -587,6 +597,13 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         Job_Count++;
                         Set_Cron_Status_Running(JobName);
                         
+
+                    } else if(JobName.startsWith("FW_FE")){
+                        //Job_FW(JobName,CONFIG);
+                        
+                    } else if(JobName.startsWith("WO_FE")){
+                        //Job_WO(JobName,CONFIG);
+                    // ==========================================================================    
                     } else if(JobName.startsWith("Android")){
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_Android(JobName,CONFIG);
@@ -595,14 +612,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         });
                         Job_Count++;
                         Set_Cron_Status_Running(JobName);
-                    
-                    } else if(JobName.startsWith("FW")){
-                        //Job_FW(JobName,CONFIG);
-                        
-                    } else if(JobName.startsWith("WO")){
-                        //Job_WO(JobName,CONFIG);
-                        
-     
+                         
                     } else if(JobName.startsWith("iOS")){
                         //Job_iOS(config);
                     }                    
