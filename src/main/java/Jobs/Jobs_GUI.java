@@ -530,71 +530,89 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             SCH_PATTERN = DV1.getValueAt(i, 3).toString();
             
             if(!SCH_PATTERN.toLowerCase().contains("no") && Cron_Status.equals("Idle")){
-                JobName = DV1.getValueAt(i, 0).toString();
+                String CronJobName = DV1.getValueAt(i, 0).toString();
                 String CONFIG = DV1.getValueAt(i, 6).toString();
                 try{
-                    if(JobName.equals("Tokens_AP3")){              
+                    if(CronJobName.equals("Tokens_AP3")){              
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Tokens_AP3(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            Tokens_AP3(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);
                         
-                    } else if(JobName.startsWith("API")){              
+                    } else if(CronJobName.startsWith("AP3_API")){              
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_API(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            Job_AP3_API(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);
                         
-                    } else if(JobName.startsWith("AP3")){
+                    } else if(CronJobName.startsWith("FW_API")){              
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_AP3(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            Job_FW_API(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);
                         
-                    } else if(JobName.startsWith("DL")){
+                    } else if(CronJobName.startsWith("AP3_PR_Smoke")){
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_DL(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            Job_AP3(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);
+                                             
+                     
+                    } else if(CronJobName.startsWith("AP3_FE")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Job_AP3(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);
+                        
+                    } else if(CronJobName.startsWith("DL_FE")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Job_DL(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });                       
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);
 
-                    } else if(JobName.startsWith("C360")){
+                    } else if(CronJobName.startsWith("C360_FE")){
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_C360(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            Job_C360(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);   
+
+                    } else if(CronJobName.startsWith("FW_FE")){
+                        //Job_FW(CronJobName,CONFIG);
                         
-                    } else if(JobName.startsWith("Android")){
+                    } else if(CronJobName.startsWith("WO_FE")){
+                        //Job_WO(CronJobName,CONFIG);
+  
+                    } else if(CronJobName.startsWith("Android")){
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_Android(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            Job_Android(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
                             txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
-                    
-                    } else if(JobName.startsWith("FW")){
-                        //Job_FW(JobName,CONFIG);
-                        
-                    } else if(JobName.startsWith("WO")){
-                        //Job_WO(JobName,CONFIG);
-                        
-     
-                    } else if(JobName.startsWith("iOS")){
+                        Set_Cron_Status_Running(CronJobName);
+                         
+                    } else if(CronJobName.startsWith("iOS")){
                         //Job_iOS(config);
                     }                    
 
@@ -604,22 +622,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 }                
             }
         }
-
-//        try{        
-//            Scheduler SCH = new Scheduler();
-//            SCH_PATTERN = "*/5 * * * *";
-//            ProcessTask TASK = new ProcessTask("A_TASK");
-//            String Sch_Task_ID = SCH.schedule(SCH_PATTERN, () -> {
-//                txtLog.append( "= SCH_2 Another 5 minutes ticked away..." + "\r\n");
-//                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-//            });
-//            SCH.start();
-//            txtLog.append( "= Scheduler SCH_2 started started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//        } catch(InvalidPatternException | IllegalStateException ex){
-//            txtLog.append( "= SCH ERROR > " + ex.getMessage() + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
-//        }
         if(Job_Count > 0){
             SCH.start();
             btnStopCron.setEnabled(true);
@@ -689,15 +691,17 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             }
     }
     private void Run_Selected_Job(String Job, String config){
-        JobName = txtJob_Name.getText();
+        JobName = Job;
         r_type = "ad-hoc";
         txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         if(JobName.equals("Tokens_AP3")){
             Tokens_AP3(JobName, config);
-        } else if(JobName.startsWith("API")){
-            Job_API(JobName, config);
+        } else if(JobName.startsWith("AP3_API")){
+            Job_AP3_API(JobName, config);
+        } else if(JobName.startsWith("FW_API")){
+            Job_FW_API(JobName, config);
         } else if(JobName.startsWith("AP3")){
             Job_AP3(JobName, config);        
         } else if(JobName.startsWith("DL")){
@@ -705,7 +709,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         } else if(JobName.startsWith("C360")){
             Job_C360(JobName, config);
         } else if(JobName.startsWith("FW")){
-            //Job_FW(JobName,config);
+            //Job_FW(CronJobName,config);
         } else if(JobName.startsWith("WO")){
             //Job_WO(config);
         } else if(JobName.startsWith("Android")){
@@ -731,8 +735,8 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             LOG_FAILURE(RES);
         }
     }
-    private void Job_API(String job, String config){
-        API.API_GUI _Job = new API.API_GUI();
+    private void Job_AP3_API(String job, String config){
+        AP3_API.AP3_API_GUI _Job = new AP3_API.AP3_API_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -740,6 +744,15 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             LOG_FAILURE(RES);
         }
     }
+    private void Job_FW_API(String job, String config){
+        FW_API.FW_API_main _Job = new FW_API.FW_API_main();
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILURE(RES);
+        }
+    }    
     private void Job_Android(String job, String config){
         Mob_Android.An_GUI _Job = new Mob_Android.An_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);

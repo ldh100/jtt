@@ -428,11 +428,11 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES16.setText("Slack Channel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 4, 72, 16));
+        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 4, 76, 16));
 
         txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSlackCh.setText("#xtt_test");
-        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 0, 192, -1));
+        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 4, 196, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 404, 424, 96));
 
@@ -971,7 +971,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected double LoadTimeOut = 15 * 1000; // milisec 
     
     protected String err = ""; 
-    
+    protected String JOB_Name = "";     
     private SwingWorker BW1;  
     private SwingWorker BW2; 
     private Instant run_start;
@@ -1735,7 +1735,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length); 
             }
-            Excel_Report_Path = A.Func.fExcel(l, col, Values, "AP3_" + env + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            Excel_Report_Path = A.Func.fExcel(l, col, Values, JOB_Name + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
             txtLog.append("= Report Excel file:\r\n" + Excel_Report_Path + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (Exception ex) {
@@ -1754,7 +1754,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             conn.createStatement().execute("DELETE FROM [dbo].[aw_result] " +
-                    "WHERE [app] LIKE 'AP3_" + env + "%' AND [test_type] = 'cron' AND [summary] LIKE '%Failed: 0,%'");
+                    "WHERE [app] LIKE '" + JOB_Name + "%' AND [test_type] = 'cron' AND [summary] LIKE '%Failed: 0,%'");
             conn.close();
         } catch (SQLException ex) {
             txtLog.append("=== Delete 'cron' Report > ERROR: " + ex.getMessage() + "\r\n");
@@ -1804,7 +1804,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-            _insert.setString(3, "AP3_" + env);
+            _insert.setString(3, JOB_Name);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -1848,10 +1848,10 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'AP3_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = '" + JOB_Name + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
             _update.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-            _update.setString(3, "AP3_" + env);
+            _update.setString(3, JOB_Name);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -1892,7 +1892,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             return;
         }
             
-        //String[] lines = C.split(System.getProperty("line.separator"));  
         String[] lines = C.split("\n");  
         String value;
         try{             
@@ -2077,7 +2076,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
-
+        JOB_Name = "AP3_FE_" + env;
 //        try{    
             run_start = Instant.now();
             Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
@@ -2173,15 +2172,11 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             sw1.start();
             LOG_START(); // ========================================================
             BW1_DoWork(true);
-            //BW2_DoWork();  >>>>>>> Moved into BW1_DoWork after Driver started successfully
-//        }catch(Exception ex){
-//            Current_Log_Update(true, "= GUI_Run_Manual ERROR > " + ex.getMessage() + "\r\n");
-//            BW1_FAIL_LOG_UPDATE("= GUI_Run_Manual ERROR > " + ex.getMessage());
-//        }
     }
     public String JOB_Run_Auto(String job_name, String run_type, String config){
         run_start = Instant.now();
         Log  = "";
+        JOB_Name = job_name;
         String RES = "";
 
         RES = JOB_Load_CONFIG(config);
@@ -2537,7 +2532,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "AP3 " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
+                EX = JOB_Name + ", v" + Ver + ", Browser: " + BROWSER + HEADLESS +
                     " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
@@ -2696,7 +2691,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         
         if(!r_type.equals("cron") && _Slack && !Slack_Channel.equals("N/A")){
             Report(false);
-            String MSG = "AP3_" + env + " Excel Automation report - " + Report_Date +  
+            String MSG = JOB_Name + " Excel Automation report - " + Report_Date +  
                 "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
                 "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
                 "Scope: " + SCOPE + "\r\n" +
@@ -2855,14 +2850,23 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setEndTime(new Date()); 
         } 
         if(_MM_import){
-            SCOPE += ", Import Global menu / Modifier";
-            ParentTest = HtmlReport.createTest("Import menuset"); 
-            AP3_mm_import BR = new AP3.AP3_mm_import(AP3_GUI.this);
+            SCOPE += ", Import Global Modifiers";
+            ParentTest = HtmlReport.createTest("Import Global Modifiers"); 
+            AP3_mm_import_mod BR = new AP3.AP3_mm_import_mod(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("Import menuset: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
-        } 
+        }
+//        if(_MM_import){            
+//            SCOPE += ", Import Global Menuset";
+//            ParentTest = HtmlReport.createTest("Import Global Menuset"); 
+//            AP3_mm_import_menu BR = new AP3.AP3_mm_import_menu(AP3_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+//            ParentTest.getModel().setName("Import Global Menuset: " + BR._t + ", Failed: " + BR._f);
+//            ParentTest.getModel().setEndTime(new Date());             
+//        } 
         if(_MM_items){
             SCOPE += ", MM Items Update";
             ParentTest = HtmlReport.createTest("Items Update"); 

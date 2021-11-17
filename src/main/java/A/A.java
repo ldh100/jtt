@@ -1156,7 +1156,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         }
-        API.API_GUI api = new API.API_GUI();
+        AP3_API.AP3_API_GUI api = new AP3_API.AP3_API_GUI();
         DesktopPane.add(api);
         int Y;
         int X;
