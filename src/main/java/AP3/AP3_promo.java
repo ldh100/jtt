@@ -1210,7 +1210,7 @@ Thread.sleep(5000);
     
     private void Promo_Location_API(String P_ID,String Promo_action,String Promo_type) {
     try {    
-        EX += "\n - " + "\t" + " ====START====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";    
+        EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";    
         if(Promo_type.equalsIgnoreCase("bundle")) {
             Call_API("Call/Promo/Location API", "Bearer " + AP3_TKN, BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );  
             if(t.startsWith("{")){

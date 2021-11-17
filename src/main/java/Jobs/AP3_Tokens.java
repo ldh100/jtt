@@ -31,9 +31,27 @@ public class AP3_Tokens {
     private String ADMIN_PW = "Password1"; 
     private String TKN = "";
 
+    private String JOB_Load_CONFIG(String config) {
+        String[] lines = config.split("\n");
+        String value;
+        try {
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if (l.contains("ADMIN_ID: ")) { ADMIN_ID = value; }
+                if (l.contains("ADMIN_PW: ")) { ADMIN_PW = value; } 
+            }
+            return "OK";
+        } catch (Exception ex) {
+            return "ERROR > " + ex.getMessage();
+        }
+    }
+
     protected void AP3_Tokens(String job, String run_type, String config){
         r_type = run_type;
-        run_start = Instant.now();
+        run_start = Instant.now();    
+        String RES = "";
+        RES = JOB_Load_CONFIG(config);
+        
         try {
             conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING);
             LOG_START();
@@ -189,7 +207,7 @@ public class AP3_Tokens {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "AP3_Tokens");
+            _insert.setString(3, "Tokens_AP3");
             _insert.setString(4, ".../user/auth?realm=");
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -249,10 +267,10 @@ public class AP3_Tokens {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'AP3_Tokens"+ "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
+                    " WHERE [app] = 'Tokens_AP3' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "AP3_Tokens");
+            _update.setString(3, "Tokens_AP3");
             _update.setString(4, ".../user/auth?realm=");
             _update.setString(5, Summary); 
             _update.setInt(6, 3);
