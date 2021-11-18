@@ -65,11 +65,7 @@ class AP3_export_menuset extends AP3_GUI{
     } 
     protected void run(){
     try {
-       
-               //AUT-875: As an Admin, I cannot export the menu in EDIT mode
-         selectingGlobalMenu();
-         
-         
+        selectingGlobalMenu();
          
          //<editor-fold defaultstate="collapsed" desc="Check Export is disabled">
         //This block clicks on Export file for the first menuset after entering the global menu
@@ -121,7 +117,6 @@ class AP3_export_menuset extends AP3_GUI{
             if (FAIL) { return;}
          //</editor-fold> 
         
-        //AUT-876: As an Admin, I can export the menu
         Navigate_Back("Navigate Back"," 'global menu' page"," 'View Global Menus of a group' page", ParentTest, "no_jira"); 
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -199,60 +194,36 @@ class AP3_export_menuset extends AP3_GUI{
                 
         Thread.sleep(5000);  // ============ give time to load file
         
-        //AUT-877: As a user, I can verify the fields in the exported excel report
-        
         String destinationDir = System.getProperty("user.home") + File.separator + "Downloads"; 
         MenuSetFile = MenuSetName.trim() + " - " + LocalDate.now() +".zip";    // Lunch - 2021-06-15.zip
 
         File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_jira");
-            //if (FAIL) { return;}   
          
-             File temp=new File(destinationDir+ File.separator + MenuSetFile);
+        File temp = new File(destinationDir+ File.separator + MenuSetFile);
                 System.out.println(temp);
             
-                if (temp.exists()) {
-        File_UnZip("Unzip Report File", destinationDir, MenuSetFile, ParentTest, "no_jira");
-            if (FAIL) { return;}          
-        File_Delete("Delete Report Zip File", destinationDir,MenuSetFile, ParentTest, "no_jira");
-           if (FAIL) { return;}  
-           
+        if (temp.exists()) {
+            File_UnZip("Unzip Report File", destinationDir, MenuSetFile, ParentTest, "no_jira");
+                if (FAIL) { return;}          
+            File_Delete("Delete Report Zip File", destinationDir,MenuSetFile, ParentTest, "no_jira");
+               if (FAIL) { return;}  
+            readExcel(destinationDir, MenuSetName.trim() + ".xlsx",MenuSetName.trim());                   
+            Thread.sleep(3000);
 
-        readExcel(destinationDir, MenuSetName.trim() + ".xlsx",MenuSetName.trim());                   
-        Thread.sleep(3000);
-           
-        File_Delete("Delete File after reading", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");
-            if (FAIL) { return;}                                                                
-    }  
-               
-                
-         
-        //AUT-262 : Disabling a menu set 
-        
-        //selectingGlobalMenu();
-        
-        
+            File_Delete("Delete File after reading", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");
+                if (FAIL) { return;}                                                                
+        }  
+
         Navigate_Back("Navigate Back"," 'global menu' page"," 'View Global Menus of a group' page", ParentTest, "no_jira"); 
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}
         Page_URL("Menu > " + SECTOR + " page URL", ParentTest, "no_jira");
             if (FAIL) { return;}
-//        Find_Text("Button 'Add Global Menu' text", "ADD GLOBAL MENU", true,ParentTest, "no_jira");
-//            if (FAIL) { return;}
         Element_By_Path_Attribute("Page SubTitle", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}
         Find_Text("Find 'Search...' text", "Search Local Menus", true,ParentTest, "no_jira");
             if (FAIL) { return;}
-
-//        Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Menus')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Menus']", GL_MENU, false, ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Thread.sleep(500);
-//
-//        Element_By_Path_Click("Search Menus Click", "xpath", "//div[normalize-space()='View GLobal Menus']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Thread.sleep(500);
-         Element_By_Path_Click("Click  Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click  Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -261,7 +232,6 @@ class AP3_export_menuset extends AP3_GUI{
             if (FAIL) { return;}
             
         int flag = 1;                          
-
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
@@ -272,9 +242,7 @@ class AP3_export_menuset extends AP3_GUI{
         Thread.sleep(500);
         Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest,"no_jira"); 
             if (FAIL) { return;}
-          
-          
-          Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;}
             
         List_L2("Published Menus ID Count", "css", "[menu-id]", ParentTest, "no_jira");   

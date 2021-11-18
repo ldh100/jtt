@@ -259,7 +259,7 @@ class AP3_menu_manager extends AP3_GUI{
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
                     List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
-                        if (FAIL) { return;}  
+                        //if (FAIL) { return;}  
                 }                          
 
             // ================ New Group
@@ -761,7 +761,7 @@ class AP3_menu_manager extends AP3_GUI{
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
                     List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
-                        if (FAIL) { return;}
+                        //if (FAIL) { return;}
                 }                     
             } else{   
                 Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]", ParentTest, "no_jira");        
@@ -809,7 +809,7 @@ class AP3_menu_manager extends AP3_GUI{
                 if (FAIL) { return;} 
             for (int i = 2; i < L0.size(); i++) {
                 List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
-                    if (FAIL) { return;}
+                    //if (FAIL) { return;}
             }             
             List_Child_E1_By_Path("Find 'Copy' Last Group", L0.get((L0.size() - 1)), "xpath", ".//i[@class='v-icon mdi mdi-content-copy theme--light']", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
@@ -821,7 +821,7 @@ class AP3_menu_manager extends AP3_GUI{
             Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
             for (int i = 2; i < L0.size(); i++) {
                 List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
-                    if (FAIL) { return;}
+                    //if (FAIL) { return;}
             }    
             int S = L0.size(); 
             Element_Click("Select Copied Group", L0.get(S-1), ParentTest, "no_jira");
@@ -845,7 +845,7 @@ class AP3_menu_manager extends AP3_GUI{
             Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
             for (int i = 2; i < L0.size(); i++) {
                 List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
-                    if (FAIL) { return;}
+                    //if (FAIL) { return;}
             }  
             if(S == L0.size()){
                 // ======================== Copied  Group Delete >>>> 
@@ -867,13 +867,13 @@ class AP3_menu_manager extends AP3_GUI{
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
                     List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
-                        if (FAIL) { return;}
+                        //if (FAIL) { return;}
                 }                   
             }else{
                 _t++; 
                 _f++;
                 EX += " - " + "\t" + "Copy Modifier Group" + "\t" + "Copied after Publish"+ "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode(_t + ". " + "Not Found"), new Date());
+                Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode(_t + ". " + "Copied after Publish - Not Found"), new Date());
                 return;
             }
             // ======================== New Group Copy ^^^^ End
@@ -917,8 +917,8 @@ class AP3_menu_manager extends AP3_GUI{
         } else {
            _t++; 
            _f++;
-           EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-           Log_Html_Result("FAIL", "Find Menu", false, ParentTest.createNode(_t + ". " + "Not Found: FAIL"), new Date());
+           EX += " - " + "\t" + "Find Modifier Group" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+           Log_Html_Result("FAIL", "Find Modifier Group", false, ParentTest.createNode(_t + ". " + "Modifier Group - Not Found"), new Date());
            return;
         }
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -1020,7 +1020,7 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;} 
             for (int i = 2; i < L1.size(); i++) {
                 List_TR_TDs("Items Row Data", L1.get(i), ParentTest, "no_jira");   
-                    if (FAIL) { return;}  
+                    //if (FAIL) { return;}  
             }  
         Element_Click("UnCheck 'Hide Inactive'", e2, ParentTest, "no_jira");
             if (FAIL) { return;}  // =============================        
@@ -1029,7 +1029,7 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;} 
             for (int i = 2; i < L1.size(); i++) {
                 List_TR_TDs("Items Row Data", L1.get(i), ParentTest, "no_jira");   
-                    if (FAIL) { return;}  
+                    //if (FAIL) { return;}  
             }             
         Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", ParentTest, "no_jira");
             if (FAIL) { return;}

@@ -49,8 +49,6 @@ class AP3_mm_items extends AP3_GUI{
         String MENU_ID = "";      
         int PAGES;
         boolean NO_DATA = false;
-        
-        
 
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}

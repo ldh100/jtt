@@ -72,7 +72,7 @@ class AP3_brand_config extends AP3_GUI {
     try{ 
         
 
-       if(!env.equals("PR"))  {             
+        if(!env.equals("PR"))  {             
        
         Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID +"/brand/company/" + CompanyID , ParentTest, "no_jira");
         

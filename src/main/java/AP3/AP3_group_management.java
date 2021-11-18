@@ -8,7 +8,6 @@ import org.json.JSONObject;
 /*
 Ap3 Group Management
 
-
 The below test is only run in Staging since it involves creation of Global menus.
 AUT - 999 - Group Management-As an Admin, I can assign 'Default JDE Category" to a global menu under Group Management 
 AUT - 1000 - Group Management-Default JDE Category option will be available only for "Canada" groups and will not be available for "United States" Group
