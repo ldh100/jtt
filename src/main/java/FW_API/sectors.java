@@ -24,7 +24,7 @@ class sectors extends FW_API_main{
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
-        }         
+        }          
     }          
 }
 

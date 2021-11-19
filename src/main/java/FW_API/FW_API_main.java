@@ -4,24 +4,33 @@ package FW_API;
 GET  > 
 OTIONS > 
 authorization: Bearer TKN
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners?ownerUserId=c167a46dd6204fef9150481b302263a8 
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/markets
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/sectors
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners?ownerUserId=c167a46dd6204fef9150481b302263a8 W
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/markets W
 
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/settings
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/notifications
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/units
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners/a105369986ff40a9a4a00a669e8d984d
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners/a105369986ff40a9a4a00a669e8d984d/documents
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/sectors W
 
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/users
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/users/a15a9fa433834a5a9bc2f851411688db/access
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/settings W
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/notifications W
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/units W
+
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners W
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners/a105369986ff40a9a4a00a669e8d984d W
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/partners/a105369986ff40a9a4a00a669e8d984d/documents W
+
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/users W
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/users/a15a9fa433834a5a9bc2f851411688db/access W
 
 https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/autoscheduler?marketId=226e96730e3f481faec33cc2f48ec102
 
-https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/files
+https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/files W
+
 https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging/events?startDate=2021-11-11&endDate=2021-11-18
+https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/markets/a842f99d300045fc93b006e531671ab5/events?start=2021-11-01&end=2022-05-31
+https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/units/b7e1de7d6e2b479db712412dc329ad70/events?start=2020-08-01&end=2023-08-27
+
+https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/users/forgotpassword W
+https://app.foodworks.org/img/foodworks-logo.bad073d0.png
+
 */
 //</editor-fold>
 
@@ -92,7 +101,6 @@ public class FW_API_main {
     protected String FW_Admin_ID = "";
     protected String FW_Admin_TKN = "";
 
-
     private String HTML_Report_Path = "";
     private String Report_Date = "";
     private ExtentSparkReporter HtmlReporter;
@@ -117,7 +125,6 @@ public class FW_API_main {
     private final DateTimeFormatter Time_12_formatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
     private final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     private final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    private String SQL = "";
 
     private String url = "";
     protected String app = "FW";
@@ -148,6 +155,9 @@ public class FW_API_main {
     protected List<String> NOTIFICATION_IDS = new ArrayList<>();
     protected String NOTIFICATION = "";
     protected String NotifID = "";
+    
+    protected List<String> CUISINE_TYPES = new ArrayList<>(); 
+    
 
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
@@ -739,8 +749,8 @@ public class FW_API_main {
             units BR = new FW_API.units(FW_API_main.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            SectorID = BR.SectorID;
-            SECTOR = BR.SECTOR;
+            UnitID = BR.UnitID;
+            UNIT = BR.UNIT;
             ParentTest.getModel().setName("Units - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         } 
@@ -751,8 +761,8 @@ public class FW_API_main {
             partners BR = new FW_API.partners(FW_API_main.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            SectorID = BR.SectorID;
-            SECTOR = BR.SECTOR;
+            PartnerID = BR.PartnerID;
+            PARTNER = BR.PARTNER;
             ParentTest.getModel().setName("Partners - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }  
@@ -763,8 +773,8 @@ public class FW_API_main {
             settings BR = new FW_API.settings(FW_API_main.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            SectorID = BR.SectorID;
-            SECTOR = BR.SECTOR;
+            CUISINE_TYPES = BR.CUISINE_TYPES;
+
             ParentTest.getModel().setName("Settings - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }   
@@ -775,12 +785,34 @@ public class FW_API_main {
             notifications BR = new FW_API.notifications(FW_API_main.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            SectorID = BR.SectorID;
-            SECTOR = BR.SECTOR;
+            NOTIFICATION_IDS = BR.NOTIFICATION_IDS;
+            NotifID = BR.NotifID;
+            NOTIFICATION = BR.NOTIFICATION;
             ParentTest.getModel().setName("Notifications - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
+        } 
+        if (true) {
+            SCOPE += "Files ";
+            EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Files");
+            files BR = new FW_API.files(FW_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+
+            ParentTest.getModel().setName("Files - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }         
-        
+        if (true) {
+            SCOPE += "Events ";
+            EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Events");
+            events BR = new FW_API.events(FW_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+
+            ParentTest.getModel().setName("Events - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }        
         if (true) {
             SCOPE += "Users ";
             EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -788,8 +820,8 @@ public class FW_API_main {
             users BR = new FW_API.users(FW_API_main.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
-            SectorID = BR.SectorID;
-            SECTOR = BR.SECTOR;
+            UserID = BR.UserID;
+            USER = BR.USER;
             ParentTest.getModel().setName("Users - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }        

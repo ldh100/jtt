@@ -1,8 +1,6 @@
 package FW_API;
 
 import java.util.ArrayList;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 class partners extends FW_API_main{
     protected partners(FW_API_main a) {
@@ -30,6 +28,25 @@ class partners extends FW_API_main{
                 AAA = ex.getMessage();
             }
         }          
+
+        JOB_Api_Call("Partner by ID", "GET", 
+            BaseAPI + "/partners/" + PartnerID, Auth, "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            try {
+                PARTNER = json.getString("name");                              
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+        } 
+
+        JOB_Api_Call("Partner > Documents", "GET", 
+            BaseAPI + "/partners/" + PartnerID + "/documents", Auth, "", 200, ParentTest, "no_jira"); 
+//        if(json != null){
+//            try {
+//                PARTNER = json.getString("name");                              
+//            } catch (Exception ex){
+//                AAA = ex.getMessage();
+//            }
+//        }
     }
-   
 }

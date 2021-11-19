@@ -12,7 +12,7 @@ class events extends FW_API_main{
     String AAA = "";
     protected void run() { 
         Auth = "Bearer " + FW_Admin_TKN;
-        JOB_Api_Call("All Units", "GET", 
+        JOB_Api_Call("All Events", "GET", 
             BaseAPI + "/events", Auth, "", 200, ParentTest, "no_jira"); 
         if(jsonArray != null){
             try {
@@ -24,7 +24,12 @@ class events extends FW_API_main{
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
-        }         
+        } 
+        String START = "";
+        String END = "";
+        //https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/markets/a842f99d300045fc93b006e531671ab5/events?start=2021-11-01&end=2022-05-31
+
+        //https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/units/b7e1de7d6e2b479db712412dc329ad70/events?start=2020-08-01&end=2023-08-27        
     }          
 }
 

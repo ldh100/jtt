@@ -1,7 +1,9 @@
-package AP3_API;
+package C360_API;
 
-class sso extends AP3_API_GUI{
-    protected sso(AP3_API_GUI a) {
+import C360_API.C360_API_main;
+
+class sso extends C360_API_main{
+    protected sso(C360_API_main a) {
         app = a.app;
         env = a.env;
         BaseAPI = a.BaseAPI;       

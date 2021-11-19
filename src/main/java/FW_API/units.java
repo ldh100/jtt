@@ -24,7 +24,16 @@ class units extends FW_API_main{
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
-        }         
+        }  
+        JOB_Api_Call("Unit by ID", "GET", 
+            BaseAPI + "/units/" + UnitID, Auth, "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            try {
+                UNIT = json.getString("name");                              
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+        }        
     }          
 }
 

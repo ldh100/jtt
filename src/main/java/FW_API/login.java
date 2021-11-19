@@ -1,6 +1,7 @@
 package FW_API;
 
 import java.util.Base64;
+import org.json.JSONObject;
 
 
 class login extends FW_API_main{
@@ -48,7 +49,14 @@ class login extends FW_API_main{
                 AAA = ex.getMessage();
             }
             AAA = "";
-        }          
+        } 
+
+        //BODY = "{\"email\":\"" + FW_ADMIN_ID + "\"}";
+        JSONObject requestParams = new JSONObject();       
+        requestParams.put("email", FW_ADMIN_ID);
+        BODY = requestParams.toString();  
+        JOB_Api_Call("FW User - Send 'Forgot Password' Link", "GET", 
+            BaseAPI + "/users/forgotpassword", Auth, BODY, 200, ParentTest, "no_jira");         
     }
     
     

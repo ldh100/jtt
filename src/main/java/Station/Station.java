@@ -2209,7 +2209,18 @@ public class Station extends javax.swing.JInternalFrame {
         ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 20000); // now + 20 sec
+        String requested_date = dateFormat.format(date);
 
+        JSONObject is = new JSONObject(); 
+        is.put("in_progress", true);
+        is.put("ready", true);     
+        requestParams.put("is", is); 
+        requestParams.put("requested_date", requested_date); 
+        
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
         if(json != null){
             try {
                 Order_Delivery_ID = json.getString("id");
