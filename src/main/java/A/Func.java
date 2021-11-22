@@ -25,6 +25,7 @@ import javax.swing.table.TableCellRenderer;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 
@@ -399,6 +400,8 @@ public class Func {
             reqEntity.addTextBody("initial_comment", MSG); 
             reqEntity.addTextBody("media", "file");
             reqEntity.addBinaryBody("file", file);
+//            reqEntity.addBinaryBody("file", file, ContentType.create("application/vnd.ms-excel"), Path);
+//            reqEntity.addBinaryBody("file", file, ContentType.create("application/zip"), Path);
             
             httpPost.setEntity(reqEntity.build());
             HttpResponse response = httpclient.execute(httpPost);

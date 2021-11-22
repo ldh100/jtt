@@ -3052,26 +3052,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     //</editor-fold>    
 
     private void Execute() throws Exception {
-        
-//        if (true) {
-//            SCOPE += "SSO ";
-//            EX += " - " + "\t" + "SSO" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//            ParentTest = HtmlReport.createTest("SSO");
-//            sso BR = new API.sso(AP3_API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX;
-//            _t += BR._t;
-//            _p += BR._p;
-//            _f += BR._f;
-//            _w += BR._w;
-//            _i += BR._i;
-//            r_time += BR.r_time;
-//            ParentTest.getModel().setName("SSO - Tot: " + BR._t + ", Failed: " + BR._f);
-//            ParentTest.getModel().setEndTime(new Date());
-//        }     
-//        if (true) { return;}
-        // =========================================================
-        
+  
         if (true) {
             SCOPE += "AP3 User ";
             EX += " - " + "\t" + "AP3 User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3295,7 +3276,24 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             r_time += BR.r_time;
             ParentTest.getModel().setName("Partner - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-        }        
+        }   
+        
+        if (!env.equals("PR")) {
+            SCOPE += "Message ";
+            EX += " - " + "\t" + "Message" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Message");
+            message BR = new AP3_API.message(AP3_API_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX;
+            _t += BR._t;
+            _p += BR._p;
+            _f += BR._f;
+            _w += BR._w;
+            _i += BR._i;
+            r_time += BR.r_time;
+            ParentTest.getModel().setName("Message - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }     
 
         // =================  Mobile User, Meal Plan, Payment, ShoppingCart, Order ===================
         if (true) {
