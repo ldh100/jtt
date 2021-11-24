@@ -313,7 +313,7 @@ class AP3_notifications extends AP3_GUI{
                 if (FAIL) { return;}
         } else {
             day = day+1;
-            Element_By_Path_Click("Select A Later Date", "xpath", "//div[contains(@class, 'v-btn__content') and contains(text(),'"+String.valueOf(day)+"')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Select A Later Date", "xpath", "//div[contains(@class, 'v-btn__content') and contains(text(),'" +String.valueOf(day)+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
         }
         Element_By_Path_Click("Click > Cancel Button", "xpath", "//div[contains(text(),'Cancel')]", ParentTest, "no_jira");
@@ -328,7 +328,7 @@ class AP3_notifications extends AP3_GUI{
             if (FAIL) { return;}
         Element_Child_Text("Canceled edit Notification > Notification Status", L2.get(0), "xpath", "//div[contains(text(),'Pending')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_Child_Text("Canceled edit Notification > Date Scheduled", L2.get(0), "xpath", "//span[contains(text(),'"+DATE+"')]", ParentTest, "no_jira");
+        Element_Child_Text("Canceled edit Notification > Date Scheduled", L2.get(0), "xpath", "//span[contains(text(),'" +DATE+ "')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         // </editor-fold>
 

@@ -38,7 +38,6 @@ class DL_qa_user extends DL_GUI {
                 if (FAIL) {
                     return;
                 }
-//        }
 
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                 if (FAIL) {
@@ -225,7 +224,7 @@ class DL_qa_user extends DL_GUI {
 //                        }
                             } else {
                                 if (IsFilterNew) {
-                                    Element_By_Path_Click("Select the dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])"+(Isemptyfilter?"[position()=2]":""), ParentTest, "no_jira");
+                                    Element_By_Path_Click("Select the dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])" +(Isemptyfilter?"[position()=2]":""), ParentTest, "no_jira");
                                 } else {
                                     Element_By_Path_Click("Select the dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");
                                 }
@@ -274,7 +273,7 @@ class DL_qa_user extends DL_GUI {
 
                             if (I_FilterKey.contains("Dropdown")) {
                                 if (IsFilterNew) {
-                                    Element_By_Path_Click("Click on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()="+(Isemptyfilter?"2":"1")+"]", ParentTest, "no_jira");
+                                    Element_By_Path_Click("Click on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=" +(Isemptyfilter?"2":"1")+ "]", ParentTest, "no_jira");
                                 } else {
                                     Element_By_Path_Click("Click on Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=3]", ParentTest, "no_jira");
                                 }
@@ -294,12 +293,12 @@ class DL_qa_user extends DL_GUI {
                                 }
                             } else {
                                 if (IsFilterNew) {
-                                    Wait_For_Element_By_Path_Presence("Wait for dropdown to display", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()="+(Isemptyfilter?"3":"2")+"]", ParentTest, "no_jira");
+                                    Wait_For_Element_By_Path_Presence("Wait for dropdown to display", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=" +(Isemptyfilter?"3":"2")+ "]", ParentTest, "no_jira");
                                     if (FAIL) {
                                         return;
                                     }
 
-                                    Element_By_Path_Click("Open Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()="+(Isemptyfilter?"3":"2")+"]", ParentTest, "no_jira");
+                                    Element_By_Path_Click("Open Item filter dropdown menu", "xpath", "(//div[contains(@class,'indicatorContainer')]/*[name()='svg'])[position()=" +(Isemptyfilter?"3":"2")+ "]", ParentTest, "no_jira");
                                     if (FAIL) {
                                         return;
                                     }

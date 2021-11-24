@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 class AP3_mm_import_menu extends AP3_GUI{
     String API_Response_Body = ""; 
-    
+    String AAA = "";
     protected AP3_mm_import_menu (AP3_GUI a) {
         d1 = a.d1;
         url = a.url;
@@ -47,9 +47,12 @@ class AP3_mm_import_menu extends AP3_GUI{
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
-     } 
-    
+    } 
+    String MenuSetName = "";
+    String ExportFileName = "";
+    String Download_Dir = System.getProperty("user.home") + File.separator + "Downloads";     
     protected void run() { 
+
         try{
             Navigate_to_URL("Navigate to Sector > Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -58,57 +61,66 @@ class AP3_mm_import_menu extends AP3_GUI{
                 if (FAIL) { return;}
             Thread.sleep(500);
             
-            
-        if(true){
-            return;
-        }    
-            Element_By_Path_Click("Click Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
+            List_L0("Get Menus Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(5000);
-            String dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            String ExportFileName = GL_MENU.trim() + " - " + LocalDate.now();    // Lunch - 2021-06-15.zip
-
-            File_Find("Find Global mod export Zip File", dest_dir, ExportFileName, ParentTest, "no_jira"); 
+            for (int i = 0; i < L0.size(); i++) {
+                Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                    if(i == 0) {
+                        MenuSetName = t.trim();
+                    }
+                }
+            Element_Child_List_L2("Find 1st Menu Set - dots", L0.get(0), "tagName", "button", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Element_Click("Added Menu Set 'dots' Click", L2.get(1), ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            Wait_For_Element_By_Path_Presence("Wait for Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            T_Index = -1;
+            for (int i = 0; i < L1.size(); i++) {
+                Element_Text("Menu Edit Option (index " + i + ")", L1.get(i), ParentTest, "no_jira");
+                if(t.contains("Export")){ T_Index = i; }
+            }
+            Element_Click("Click 'Export'", L1.get(T_Index), ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);            
+            ExportFileName = MenuSetName + " - " +  LocalDate.now();
+            
+            File_Find("Find Global Menu Set export Zip File", Download_Dir, ExportFileName, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
-            File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
+            File_UnZip("Unzip Menu Set export file ", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Export Zip File", Download_Dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir,ExportFileName,"Modifier Groups");
-            editModExcel(dest_dir,ExportFileName,"Modifier Groups");
-            String[] valueToWrite = {"Modifier Group","","Auto Mod group " + New_ID, "Automation Label " + New_ID, "0", "1", "2", "TRUE", "", "", "", "", "", "", "", ""};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
-            valueToWrite = new String[] {"Modifier","","","","","","","","","Automation Mod " + New_ID, "5", "20", "1", "600200", "TRUE", "[\"Prepared\"]"};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+                
+                 
+            ExportFileName = MenuSetName + " - MenuSet.xlsx";
+            Excel_Convert_PLU(Download_Dir,ExportFileName,"Menuset");
+     if(true){
+        return;
+    }            Excel_Edit_Menuset(Download_Dir,ExportFileName,"Menuset");
+            
+            String[] valueToWrite = {"Modifier Group", "", "Auto Mod group " + New_ID, "Automation Label " + New_ID, "0", "1", "2", "TRUE", "", "", "", "", "", "", "", ""};
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
+            valueToWrite = new String[] {"Modifier", "", "", "", "", "", "", "", "", "Automation Mod " + New_ID, "5", "20", "1", "600200", "TRUE", "[\"Prepared\"]"};
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
 
 
-            File xlsfile = new File(dest_dir + File.separator + ExportFileName);
+            File xlsfile = new File(Download_Dir + File.separator + ExportFileName);
             if(xlsfile.exists()){
-
-//                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-//                StringSelection str = new StringSelection(dest_dir + File.separator + ExportFileName);
-//                clipboard.setContents(str, null);            
-//                            Element_By_Path_Click("Click Global mod Import ", "xpath", "//div[contains(text(),'Import')]//i", ParentTest, "no_jira");  
-//                                if (FAIL) { return;}
-//                Robot robot = new Robot();
-//                robot.keyPress(KeyEvent.VK_CONTROL);
-//                robot.keyPress(KeyEvent.VK_V);
-//                //driverwait(1);
-//                robot.keyRelease(KeyEvent.VK_CONTROL);
-//                robot.keyRelease(KeyEvent.VK_V);
-//                //driverwait(1);
-//                robot.keyPress(KeyEvent.VK_ENTER);
-//                robot.keyRelease(KeyEvent.VK_ENTER);
-
-            Element_By_Path_Text_Enter("Upload xlsx file", "id", "globalModsImportInput", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-                
+                Element_By_Path_Text_Enter("Upload xlsx file", "id", "menuSetImportInput-p61vE5y3MNFpOz8PWyeJSeOGyBl1jmuQjr69p10wH3d47PY3ZdFAG7m54vqYFNBqN2O", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+                        if (FAIL) { return;}                
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }            
             Find_Text("Find Import Successfully Message", "Global modifiers successfully imported locally. Please verify before publishing.", true, ParentTest, "no_jira");
@@ -121,11 +133,11 @@ class AP3_mm_import_menu extends AP3_GUI{
 
             // Again importing the same file to validate errors
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@id='globalModsImportInput'][@type='file'][@accept='.xlsx']", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@id='globalModsImportInput'][@type='file'][@accept='.xlsx']", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Thread.sleep(1000);
@@ -133,7 +145,7 @@ class AP3_mm_import_menu extends AP3_GUI{
            // Element_By_Path_Text("Close Import error dialog box", "xpath", "//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
-            File_Delete("Delete xls file", dest_dir, ExportFileName, ParentTest, "no_jira");                
+            File_Delete("Delete xls file", Download_Dir, ExportFileName, ParentTest, "no_jira");                
             Thread.sleep(5000);
 
 
@@ -143,29 +155,29 @@ class AP3_mm_import_menu extends AP3_GUI{
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
              if (FAIL) { return;}
             Thread.sleep(5000);
-            dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
-            //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
-            File_Find("Find Global mod export Zip File", dest_dir, ExportFileName, ParentTest, "no_jira"); 
+            Download_Dir = System.getProperty("user.home") + File.separator + "Downloads"; 
+            ExportFileName = GL_MENU.trim() + " - " + LocalDate.now();    // Lunch - 2021-06-15.zip
+            //ModGrpPath = "Starbucks - 2021-08-06";
+            File_Find("Find Global mod export Zip File", Download_Dir, ExportFileName, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
-            File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
+            File_UnZip("Unzip global mod export file ", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Report Zip File", Download_Dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-            ExportFileName = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir,ExportFileName,"Modifier Groups");
+            ExportFileName = GL_MENU.trim()+ " - MenuSet.xlsx";
+            Excel_Convert_PLU(Download_Dir,ExportFileName,"Modifier Groups");
             valueToWrite = new String[] {"Modifier Group","","DS Mod group " +New_ID,"DS Auto Label " + New_ID,"0","1","89","TRUE","","","","","","","",""};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             valueToWrite = new String[] {"Modifier","","","","","","","","","DS Mod " + New_ID,"5","20","89","890","TRUE","[\"Prepared\"]"};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//input[@type='file']", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//input[@type='file']", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Successfully Message", "Global modifiers successfully imported locally. Please verify before publishing.", true, ParentTest, "no_jira");
@@ -175,7 +187,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
                 if (FAIL) { return;}
             Thread.sleep(1000);
-            File_Delete("Delete xls file", dest_dir, ExportFileName, ParentTest, "no_jira");                
+            File_Delete("Delete xls file", Download_Dir, ExportFileName, ParentTest, "no_jira");                
             Thread.sleep(5000);
 
             //Import Excel to a modifier group Negative Scenarios:                 
@@ -186,29 +198,29 @@ class AP3_mm_import_menu extends AP3_GUI{
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(5000);
-            dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
-            //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
-            File_Find("Find Global mod export Zip File", dest_dir, ExportFileName, ParentTest, "no_jira"); 
+            Download_Dir = System.getProperty("user.home") + File.separator + "Downloads"; 
+            ExportFileName = GL_MENU.trim() + " - " + LocalDate.now();    // Lunch - 2021-06-15.zip
+            //ModGrpPath = "Starbucks - 2021-08-06";
+            File_Find("Find Global mod export Zip File", Download_Dir, ExportFileName, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
-            File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
+            File_UnZip("Unzip global mod export file ", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Report Zip File", Download_Dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-            ExportFileName = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir,ExportFileName,"Modifier Groups");            
+            ExportFileName = GL_MENU.trim()+ " - MenuSet.xlsx";
+            Excel_Convert_PLU(Download_Dir,ExportFileName,"Modifier Groups");            
             valueToWrite = new String[] {"Modifier Group","","","","0","1","89","TRUE","","","","","","","",""};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             valueToWrite = new String[] {"Modifier","","","","","","","","","","5","20","89","890","TRUE","[\"Prepared\"]"};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
@@ -223,7 +235,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(1000);
-            File_Delete("Delete xls file", dest_dir, ExportFileName, ParentTest, "no_jira");                
+            File_Delete("Delete xls file", Download_Dir, ExportFileName, ParentTest, "no_jira");                
             Thread.sleep(5000);
 
             //2) Import file with missing recored type
@@ -232,29 +244,29 @@ class AP3_mm_import_menu extends AP3_GUI{
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(5000);
-            dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
-            //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
-            File_Find("Find Global mod export Zip File", dest_dir, ExportFileName, ParentTest, "no_jira"); 
+            Download_Dir = System.getProperty("user.home") + File.separator + "Downloads"; 
+            ExportFileName = GL_MENU.trim() + " - " + LocalDate.now();    // Lunch - 2021-06-15.zip
+            //ModGrpPath = "Starbucks - 2021-08-06";
+            File_Find("Find Global mod export Zip File", Download_Dir, ExportFileName, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
-            File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
+            File_UnZip("Unzip global mod export file ", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Report Zip File", Download_Dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir,ExportFileName,"Modifier Groups");            
+            ExportFileName = GL_MENU.trim() + " - MenuSet.xlsx";
+            Excel_Convert_PLU(Download_Dir,ExportFileName,"Modifier Groups");            
             valueToWrite = new String[] {"","Test: Missing Record type","Missing Record type","","5","9","8","TRUE","","","","","","","",""};
-            writeExcel(dest_dir, ExportFileName, "Modifier Groups", valueToWrite);
+            writeExcel(Download_Dir, ExportFileName, "Modifier Groups", valueToWrite);
             valueToWrite = new String[] {"","","","","","","","","","Item Missing Record Type","5","9","89","598","TRUE","[\"Prepared\"]"};
-            writeExcel(dest_dir, ExportFileName, "Modifier Groups", valueToWrite);
+            writeExcel(Download_Dir, ExportFileName, "Modifier Groups", valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
@@ -267,18 +279,18 @@ class AP3_mm_import_menu extends AP3_GUI{
                     if (FAIL) { return;}
                 if(L0.get(i).getAttribute("textContent").contains("Invalid \"Record Type\". Should be \"Modifier Group\" or \"Modifier\".")){
                     _t++;
-                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + " = " + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                     Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Invalid Record Type. Should be Modifier Group or Modifier."),new Date());                       
                 } else {
                    _t++;
-                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + " = " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             }
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(1000);
-            File_Delete("Delete xls file", dest_dir, ExportFileName, ParentTest, "no_jira");                
+            File_Delete("Delete xls file", Download_Dir, ExportFileName, ParentTest, "no_jira");                
             Thread.sleep(5000);
 
             //3) Import file with Empty Modifier Group Enabled and Empty Modifier Enabled
@@ -287,28 +299,28 @@ class AP3_mm_import_menu extends AP3_GUI{
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
              if (FAIL) { return;}
             Thread.sleep(5000);
-            dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    
-            File_Find("Find Global mod export Zip File", dest_dir, ExportFileName, ParentTest, "no_jira"); 
+            Download_Dir = System.getProperty("user.home") + File.separator + "Downloads"; 
+            ExportFileName = GL_MENU.trim() + " - " + LocalDate.now();    
+            File_Find("Find Global mod export Zip File", Download_Dir, ExportFileName, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
-            File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
+            File_UnZip("Unzip global mod export file ", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Report Zip File", Download_Dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-            ExportFileName = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir, ExportFileName, "Modifier Groups");            
+            ExportFileName = GL_MENU.trim()+ " - MenuSet.xlsx";
+            Excel_Convert_PLU(Download_Dir, ExportFileName, "Modifier Groups");            
             valueToWrite = new String[] {"Modifier Group","","Missing Enabled","Missing Enabled","0","1","89","","","","","","","","",""};
-            writeExcel(dest_dir, ExportFileName, "Modifier Groups", valueToWrite);
+            writeExcel(Download_Dir, ExportFileName, "Modifier Groups", valueToWrite);
             valueToWrite = new String[] {"Modifier","","","","","","","","","DS Mod Missing True","5","20","89","890","","[\"Prepared\"]"};
-            writeExcel(dest_dir, ExportFileName, "Modifier Groups", valueToWrite);
+            writeExcel(Download_Dir, ExportFileName, "Modifier Groups", valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-               Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+               Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
                  if (FAIL) { return;}
             }else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
@@ -321,26 +333,26 @@ class AP3_mm_import_menu extends AP3_GUI{
                     if (FAIL) { return;}
                 if(L0.get(0).getAttribute("textContent").contains("\"Modifier Group Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
-                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + " = " + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                     Log_Html_Result("PASS", L0.get(0).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + " \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
-                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + " = " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
                 if(L0.get(1).getAttribute("textContent").contains("\"Modifier Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
-                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + " = " + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                     Log_Html_Result("PASS", L0.get(1).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + " \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
-                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + " = " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             }
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(1000);
-            File_Delete("Delete xls file", dest_dir, ExportFileName, ParentTest, "no_jira");                
+            File_Delete("Delete xls file", Download_Dir, ExportFileName, ParentTest, "no_jira");                
             Thread.sleep(5000);
 
             /*
@@ -350,36 +362,36 @@ class AP3_mm_import_menu extends AP3_GUI{
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
              if (FAIL) { return;}
             Thread.sleep(5000);
-            dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
-            //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
-            File_Find("Find Global mod export Zip File", dest_dir, ExportFileName, ParentTest, "no_jira"); 
+            Download_Dir = System.getProperty("user.home") + File.separator + "Downloads"; 
+            ExportFileName = GL_MENU.trim() + " - " + LocalDate.now();    // Lunch - 2021-06-15.zip
+            //ModGrpPath = "Starbucks - 2021-08-06";
+            File_Find("Find Global mod export Zip File", Download_Dir, ExportFileName, ParentTest, "no_jira"); 
              if (FAIL) { return;}
              Thread.sleep(3000);
-            File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
+            File_UnZip("Unzip global mod export file ", Download_Dir, t, ParentTest, "no_jira");
              if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Report Zip File", Download_Dir,t, ParentTest, "no_jira");
              if (FAIL) { return;}  
-            ExportFileName = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir,ExportFileName,"Modifier Groups");            
+            ExportFileName = GL_MENU.trim()+ " - MenuSet.xlsx";
+            Excel_Convert_PLU(Download_Dir,ExportFileName,"Modifier Groups");            
             valueToWrite = new String[] {"Modifier Group","","Test Decimals","Test Decimals","0","1","9.1","TRUE","","","","","","","",""};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             valueToWrite = new String[] {"Modifier","","","","","","","","","DS Mod Decimals","5.1","1.20","8.9","8.10","TRUE","[\"Prepared\"]"};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-               Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+               Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
                  if (FAIL) { return;}
                 }else
                 { _t++; 
-                  _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                   Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
                 }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
            // Element_By_Path_Text("Close Import error dialog box", "xpath", "//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
-            File_Delete("Delete xls file", dest_dir, ExportFileName, ParentTest, "no_jira");                
+            File_Delete("Delete xls file", Download_Dir, ExportFileName, ParentTest, "no_jira");                
             Thread.sleep(5000);
             */
 
@@ -389,29 +401,29 @@ class AP3_mm_import_menu extends AP3_GUI{
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(5000);
-            dest_dir = System.getProperty("user.home") + File.separator + "Downloads"; 
-            ExportFileName = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    // Lunch - 2021-06-15.zip
-            //ModGrpPath = "Starbucks-global-modifier-groups-2021-08-06";
-            File_Find("Find Global mod export Zip File", dest_dir, ExportFileName, ParentTest, "no_jira"); 
+            Download_Dir = System.getProperty("user.home") + File.separator + "Downloads"; 
+            ExportFileName = GL_MENU.trim() + " - " + LocalDate.now();    // Lunch - 2021-06-15.zip
+            //ModGrpPath = "Starbucks - 2021-08-06";
+            File_Find("Find Global mod export Zip File", Download_Dir, ExportFileName, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
-            File_UnZip("Unzip global mod export file ", dest_dir, t, ParentTest, "no_jira");
+            File_UnZip("Unzip global mod export file ", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", dest_dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Report Zip File", Download_Dir,t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-            ExportFileName = GL_MENU.trim()+"-global-modifier-groups.xlsx";
-            convertPLUExcel(dest_dir,ExportFileName,"Modifier Groups");            
+            ExportFileName = GL_MENU.trim()+ " - MenuSet.xlsx";
+            Excel_Convert_PLU(Download_Dir,ExportFileName,"Modifier Groups");            
             valueToWrite = new String[] {"Modifier Group","","Test 200","Test Price 200","0","1","9","TRUE","","","","","","","",""};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             valueToWrite = new String[] {"Modifier", "", "", "", "", "", "", "", "", "DS Mod 200", "221", "110", "89", "810", "TRUE", "[\"Prepared\"]"};
-            writeExcel(dest_dir,ExportFileName,"Modifier Groups",valueToWrite);
+            writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
             Thread.sleep(1000);
             if(xlsfile.exists()){
-                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", dest_dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
+                Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + ExportFileName, false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
             } else { 
                 _t++; 
-                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File :" + ExportFileName + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + ExportFileName + "\t" + " = " + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "File to upload does not exist", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"),new Date());
             }
             Find_Text("Find Import Errors", "        There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
@@ -425,17 +437,17 @@ class AP3_mm_import_menu extends AP3_GUI{
                     if (FAIL) { return;}
                 if(L0.get(i).getAttribute("textContent").contains("Modifier \"Price\" must be a number from 0 to 200.")){
                     _t++;
-                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + "-" + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                    _p++; EX += _t + "\t" + "Test Passed" + "\t" + " = " + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
                     Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Modifier \"Price\" must be a number from 0 to 200."),new Date());                       
                 } else {
                    _t++;
-                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   _f++; EX += _t + "\t" + "Test Failed" + "\t" + " = " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
             }
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(1000);
-            File_Delete("Delete xls file", dest_dir, ExportFileName, ParentTest, "no_jira");                
+            File_Delete("Delete xls file", Download_Dir, ExportFileName, ParentTest, "no_jira");                
             Thread.sleep(5000);                                
 
         } catch (Exception ex){
@@ -443,10 +455,10 @@ class AP3_mm_import_menu extends AP3_GUI{
         }
     }//End of run()
     
-    public void convertPLUExcel(String filePath, String fileName, String sheetName) {
+    public void Excel_Convert_PLU(String filePath, String fileName, String sheetName) {
         try{
             EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Modify PLU data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            File file = new File(filePath+"/" + fileName);            //Create an object of File class to open xlsx file
+            File file = new File(filePath+ "/" + fileName);           //Create an object of File class to open xlsx file
             FileInputStream inputStream = new FileInputStream(file);  //Create an object of FileInputStream class to read excel file
             Workbook modifier_Workbook = null;
             String fileExtensionName = fileName.substring(fileName.indexOf("."));
@@ -477,17 +489,17 @@ class AP3_mm_import_menu extends AP3_GUI{
             EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Modify PLU data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
              
         }catch(Exception ex){
-            //
+            AAA = ex.getMessage();
         } 
     }
     
     
-    public void editModExcel(String filePath, String fileName, String sheetName) {
+    public void Excel_Edit_Menuset(String filePath, String fileName, String sheetName) {
         try {
-            EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Update data on Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Update Menu Set Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             File file = new File(filePath + File.separator + fileName);      //Create an object of File class to open xlsx file
             Workbook modifier_Workbook;
-            try (FileInputStream inputStream = new FileInputStream(file) //Create an object of FileInputStream class to read excel file
+            try (FileInputStream inputStream = new FileInputStream(file)    //Create an object of FileInputStream class to read excel file
             ) {
                 modifier_Workbook = null;
                 String fileExtensionName = fileName.substring(fileName.indexOf("."));
@@ -496,13 +508,13 @@ class AP3_mm_import_menu extends AP3_GUI{
                 if(fileExtensionName.equals(".xlsx")) {
                     modifier_Workbook = new XSSFWorkbook(inputStream);        //If it is xlsx file then create object of XSSFWorkbook class
                 } else if(fileExtensionName.equals(".xls")){
-                    modifier_Workbook = new HSSFWorkbook(inputStream);          //If it is xls file then create object of XSSFWorkbook class
+                    modifier_Workbook = new HSSFWorkbook(inputStream);         //If it is xls file then create object of XSSFWorkbook class
                 }   
                 Sheet sheet = modifier_Workbook.getSheet(sheetName);         //Read excel sheet by sheet name    
-                int rowCount = sheet.getLastRowNum()-sheet.getFirstRowNum();      //Get the current count of rows in excel file
-                if(rowCount != 1) {       //If modifier group/modifier exist
+                int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum();    //Get the current count of rows in excel file
+                if(rowCount != 1) {       //If menuset data exist
                     for(int i = sheet.getLastRowNum(); i > 1; i--) {
-                        Row row = sheet.getRow(i);       //Get the  row from the sheet
+                        Row row = sheet.getRow(i);       //Get the row from the sheet
                         Cell cell = row.getCell(0);
                         if(cell.getStringCellValue().equals("Modifier") && flag_modifier != 1) {
                             row.getCell(9).setCellValue("Update Auto Mod " + New_ID);
@@ -533,12 +545,10 @@ class AP3_mm_import_menu extends AP3_GUI{
                     }
                 }
             } 
-            try (FileOutputStream outputStream = new FileOutputStream(file) //Create an object of FileOutputStream class to create write data in excel file
-            ) {
+            try (FileOutputStream outputStream = new FileOutputStream(file)){ //Create an object of FileOutputStream class to create write data in excel file           
                 modifier_Workbook.write(outputStream); //write data in the excel file
             } 
-            EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Update data on Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-             
+            EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Update data on Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";         
         } catch(Exception ex){
             //
         } 
@@ -548,7 +558,7 @@ class AP3_mm_import_menu extends AP3_GUI{
     public void writeExcel(String filePath, String fileName, String sheetName, String[] dataToWrite) {
         try{
           EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Write data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            File file =    new File(filePath+"/" + fileName);           //Create an object of File class to open xlsx file
+            File file =    new File(filePath+ "/" + fileName);           //Create an object of File class to open xlsx file
             Workbook modifier_Workbook;
             try (FileInputStream inputStream = new FileInputStream(file) //Create an object of FileInputStream class to read excel file
             ) {
@@ -580,10 +590,8 @@ class AP3_mm_import_menu extends AP3_GUI{
                     }
                 }
             }
-            try (FileOutputStream outputStream = new FileOutputStream(file) //Create an object of FileOutputStream class to create write data in excel file
-            ) {
+            try (FileOutputStream outputStream = new FileOutputStream(file)) { //Create an object of FileOutputStream class to create write data in excel file           
                 modifier_Workbook.write(outputStream); //write data in the excel file
-                //close output stream
             } //write data in the excel file
             EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Write data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         } catch (Exception ex){

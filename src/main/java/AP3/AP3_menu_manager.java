@@ -459,7 +459,7 @@ class AP3_menu_manager extends AP3_GUI{
             //</editor-fold> 
                 
             //<editor-fold defaultstate="collapsed" desc="Verify modifier API call">  
-//            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+//            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
 //            //API Response is from the previous test of cloned id's
 //
 //            if(json1.has("unique_name")) {
@@ -481,7 +481,7 @@ class AP3_menu_manager extends AP3_GUI{
 //                Log_Html_Result("PASS", "In-App Label Name's are same", false, ParentTest.createNode(_t + ". " + "Label " + New_ID), new Date());
 //            } else {  
 //                _t++;
-//                _f++; EX += _t + "\t" + "In-App Label Name's are different" + "\t" + label + "\t" + "Label  "+ New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                _f++; EX += _t + "\t" + "In-App Label Name's are different" + "\t" + label + "\t" + "Label  " + New_ID + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
 //                Log_Html_Result("FAIL", "In-App Label Name's are different", false, ParentTest.createNode(_t + ". " + "Label " + New_ID), new Date());
 //            }
 //
@@ -504,7 +504,7 @@ class AP3_menu_manager extends AP3_GUI{
 //                if(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Mod 0 " + New_ID)) {
 //                    _t++;
 //                    _p++; 
-//                    EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 0 "+ New_ID + "\t" + "Mod 0 " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                    EX += _t + "\t" + "Modifier Name same" + "\t" + "Mod 0 " + New_ID + "\t" + "Mod 0 " + New_ID + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
 //                    Log_Html_Result("PASS", "Modifier Name same", false, ParentTest.createNode(_t + ". " + "Mod 0 " + New_ID + "\t" + "Mod 0 " + New_ID), new Date());
 //                     
 //                    if(!modifier_item.getJSONObject("meta").isNull("sort_number")){
@@ -645,7 +645,7 @@ class AP3_menu_manager extends AP3_GUI{
 //                    EX += _t + "\t" + "Unidentified Modifier" + "\t" + modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en") + "\t" + "No new modifiers" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
 //                    Log_Html_Result("FAIL", "Unidentified Modifier", false, ParentTest.createNode(modifier_item.getJSONObject("meta").getJSONObject("original_label").getString("en") + " > " + "No new modifiers"), new Date());
 //                }
-//                EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+//                EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Validating modifiers in global menu==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
 //            }
             //</editor-fold> 
            
@@ -872,7 +872,7 @@ class AP3_menu_manager extends AP3_GUI{
             }else{
                 _t++; 
                 _f++;
-                EX += " - " + "\t" + "Copy Modifier Group" + "\t" + "Copied after Publish"+ "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                EX += " - " + "\t" + "Copy Modifier Group" + "\t" + "Copied after Publish" + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
                 Log_Html_Result("FAIL", "Copy Modifier Group", false, ParentTest.createNode(_t + ". " + "Copied after Publish - Not Found"), new Date());
                 return;
             }

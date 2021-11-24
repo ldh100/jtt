@@ -176,7 +176,7 @@ class AP3_group_management extends AP3_GUI{
         for(int i = 0; i < L1.size(); i++) {
             if(L1.get(i).getText().equals("United States")) {
                 i = i + 1;
-                Element_By_Path_Text("Name of US group", "xpath", "//tr["+i+"]//td[1]", ParentTest, "no_jira");
+                Element_By_Path_Text("Name of US group", "xpath", "//tr[" +i+ "]//td[1]", ParentTest, "no_jira");
                 US_group = t;
                 break;
             }
@@ -633,7 +633,7 @@ Thread.sleep(5000);
     private void Verify_Location_API(String JDE_Category) throws Exception {
     try{
         EX += "\n - " + "\t" + " === START ====" + "\t" + " ===== " + "\t" + " == Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" +BrandID+"?nocache=1", true, ParentTest, "no_jira" );
+        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" +BrandID+ "?nocache=1", true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
         } else {
@@ -662,11 +662,11 @@ Thread.sleep(5000);
                 Brand_JDE_name = JDE_categories.getJSONObject(i).getString("name");
                 if(Brand_JDE_name.equals(JDE_Category)) {
                     _t++; _p++;
-                    EX += _t + "\t" + "Same JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: " + JDE_Category + "\t" + "JDE Category assigned to Brand : "+Brand_JDE_name+"\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "JDE Category in GM : " + JDE_Category +"  - JDE Category assigned to Brand : " + Brand_JDE_name, false, ParentTest.createNode(_t + ". " + "Same JDE Category assigned to Brand and GM"), new Date());
+                    EX += _t + "\t" + "Same JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: " + JDE_Category + "\t" + "JDE Category assigned to Brand : " +Brand_JDE_name+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "JDE Category in GM : " + JDE_Category + "  - JDE Category assigned to Brand : " + Brand_JDE_name, false, ParentTest.createNode(_t + ". " + "Same JDE Category assigned to Brand and GM"), new Date());
                 } else {
                     _t++; _f++;
-                    EX += _t + "\t" + "Different JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: "+JDE_Category+ "\t" + "JDE Category assigned to Brand : "+Brand_JDE_name+"\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    EX += _t + "\t" + "Different JDE Category assigned to Brand and GM" + "\t" + "JDE Category in GM: " +JDE_Category+ "\t" + "JDE Category assigned to Brand : " +Brand_JDE_name+ "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("FAIL", "JDE Category in GM : " + JDE_Category + " - JDE Category assigned to Brand : " + Brand_JDE_name, false, ParentTest.createNode(_t + ". " + "Different JDE Category assigned to Brand and GM"), new Date());
                 }
                 break;
@@ -694,13 +694,13 @@ Thread.sleep(5000);
         if(JDE_categories.length()== JDE_count) {
             _t++;
             _p++; 
-            EX += _t + "\t" + "JDE Category count equal in UI dropdown and API" + "\t" + "JDE count API: "+JDE_categories.length() + "\t" + "JDE count UI: "+JDE_count+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "JDE Category count equal in UI dropdown and API : "+JDE_categories.length() , false, ParentTest.createNode(_t + ". " + "JDE Category count verfication"), new Date());
+            EX += _t + "\t" + "JDE Category count equal in UI dropdown and API" + "\t" + "JDE count API: " +JDE_categories.length() + "\t" + "JDE count UI: " +JDE_count+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("PASS", "JDE Category count equal in UI dropdown and API : " +JDE_categories.length() , false, ParentTest.createNode(_t + ". " + "JDE Category count verfication"), new Date());
         } else {
             _t++;
             _f++; 
-            EX += _t + "\t" + "JDE Category count not equal in UI dropdown and API" + "\t" + "JDE count API: "+JDE_categories.length() + "\t" + "JDE count UI: "+JDE_count+ "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "JDE Category count not equal in UI dropdown and API : "+JDE_categories.length() , false, ParentTest.createNode(_t + ". " + "JDE Category count verfication"), new Date());
+            EX += _t + "\t" + "JDE Category count not equal in UI dropdown and API" + "\t" + "JDE count API: " +JDE_categories.length() + "\t" + "JDE count UI: " +JDE_count+ "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("FAIL", "JDE Category count not equal in UI dropdown and API : " +JDE_categories.length() , false, ParentTest.createNode(_t + ". " + "JDE Category count verfication"), new Date());
         }
         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE Count Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
     }catch (Exception ex){}   // =============================================   
@@ -727,7 +727,7 @@ Thread.sleep(5000);
                     JDE_id = JDE_categories.getJSONObject(i).getString("id");
                     _t++;
                     _p++;
-                    EX += _t + "\t" + "JDE Category UI : "+JDE_category + "\t" + "JDE ID: "+JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    EX += _t + "\t" + "JDE Category UI : " +JDE_category + "\t" + "JDE ID: " +JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode(_t + ". " + "JDE Category & ID"), new Date());
                  }
             }
@@ -740,13 +740,13 @@ Thread.sleep(5000);
        try{
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
        
-        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" +G_ID+"?nocache=1", true, ParentTest, "no_jira" );
+        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" +G_ID+ "?nocache=1", true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
         } else {
             EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/sector/" +G_ID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/"+G_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/" +G_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
         }
         JSONObject json = new JSONObject(API_Response_Body);
@@ -755,7 +755,7 @@ Thread.sleep(5000);
         JSONObject company = new JSONObject();
         for(int i = 0; i < JDE_companies.length(); i++) {
             company = JDE_companies.getJSONObject(i);
-            if(company.getString("name").equals("Automation GM "+New_ID) && !(JDE_id.equals("second"))) {
+            if(company.getString("name").equals("Automation GM " +New_ID) && !(JDE_id.equals("second"))) {
                 if(company.getJSONObject("meta").getString("jde_category").equals(JDE_id)) {
                  //Print Pass new created group has JDE category assigned
                     _t++; _p++;
@@ -765,15 +765,15 @@ Thread.sleep(5000);
                     _t++; 
                     _f++;
                     EX += _t + "\t" + "JDE Category not assigned to Global menu" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " +company.getJSONObject("meta").getString("jde_category")  + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: "+company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode(_t + ". " + "JDE Category assigned incorrectly"), new Date());
+                    Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: " +company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode(_t + ". " + "JDE Category assigned incorrectly"), new Date());
                 }
             }
           
-            if(company.getString("name").equals("Automation GM 2 "+New_ID) && JDE_id.equals("second"))  {
+            if(company.getString("name").equals("Automation GM 2 " +New_ID) && JDE_id.equals("second"))  {
                 if(!(company.getJSONObject("meta").has("jde_category")) && (company.has("meta"))) {
                     _t++; 
                     _p++;
-                    EX += _t + "\t" + "Global Menu created without JDE Category" + "\t" + "GM name: Automation GM 2 "+New_ID + "\t" + "-"  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    EX += _t + "\t" + "Global Menu created without JDE Category" + "\t" + "GM name: Automation GM 2 " +New_ID + "\t" + "-"  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("PASS", "Global Menu created without JDE Category ", false, ParentTest.createNode(_t + ". " + "JDE Category optional when Global menu created"), new Date());
                 } 
             }

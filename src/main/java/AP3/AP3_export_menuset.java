@@ -195,7 +195,7 @@ class AP3_export_menuset extends AP3_GUI{
         Thread.sleep(5000);  // ============ give time to load file
         
         String destinationDir = System.getProperty("user.home") + File.separator + "Downloads"; 
-        MenuSetFile = MenuSetName.trim() + " - " + LocalDate.now() +".zip";    // Lunch - 2021-06-15.zip
+        MenuSetFile = MenuSetName.trim() + " - " + LocalDate.now() + ".zip";    // Lunch - 2021-06-15.zip
 
         File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_jira");
          
@@ -257,11 +257,11 @@ class AP3_export_menuset extends AP3_GUI{
             Element_Attribute("Menu setName", L0.get(0), "textContent", ParentTest, "no_jira");      
                 MenuSetName= t.trim();
                 
-            System.out.println("ds:"+MenuSetName);
+            System.out.println("ds:" +MenuSetName);
             
             Element_Attribute("Menu ID", L2.get(0), "menu-id", ParentTest, "no_jira");
              Menu_ID=t;
-             System.out.println("ds:"+Menu_ID);
+             System.out.println("ds:" +Menu_ID);
             
             Element_Child_List_L2("Find Added Menu Set - dots", L0.get(0), "tagName", "button", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -340,7 +340,7 @@ class AP3_export_menuset extends AP3_GUI{
             
             Element_Attribute("Menu ID", L2.get(0), "menu-id",ParentTest, "no_jira");
             Menu_ID = t;
-            System.out.println("ds:"+Menu_ID);            
+            System.out.println("ds:" +Menu_ID);            
             
             Element_Child_List_L2("Find Added Menu Set - dots", L0.get(0), "tagName", "button",ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -454,12 +454,12 @@ class AP3_export_menuset extends AP3_GUI{
 //                
 //                File[] listFiles = new File(destinationDir).listFiles();
 //                System.out.println(destinationDir);
-//               //System.out.println(GL_MENU+"-global-modifier-groups-"+LocalDate.now());
+//               //System.out.println(GL_MENU+ "-global-modifier-groups-" +LocalDate.now());
 //                System.out.println(listFiles.length);
 //                for (File listFile : listFiles) {
 //                  if (listFile.isFile()) {
 //                String GlobalModifierFileName = listFile.getName();
-//                if(GlobalModifierFileName.contains(GL_MENU+"-global-modifier-groups-")){
+//                if(GlobalModifierFileName.contains(GL_MENU+ "-global-modifier-groups-")){
 //                System.out.println("File name: " +GlobalModifierFileName);
 //                }
 //            }
@@ -483,7 +483,7 @@ class AP3_export_menuset extends AP3_GUI{
                     if (FAIL) { return;}          
                 File_Delete("Delete Report Zip File", destinationDir,t, ParentTest, "no_jira");
                     if (FAIL) { return;}  
-                ModGrpPath = GL_MENU.trim()+"-global-modifier-groups.xlsx";
+                ModGrpPath = GL_MENU.trim()+ "-global-modifier-groups.xlsx";
                 
                 readGlobalModExcel( destinationDir, ModGrpPath ,"Modifier Groups");              
 
@@ -976,7 +976,7 @@ class AP3_export_menuset extends AP3_GUI{
     //<editor-fold defaultstate="collapsed" desc="Read Excel">
         //This block reads and gets the cell value of from the exported menuset excel file
     try {              
-        File file =    new File(filePath+"/"+fileName);//Create an object of File class to open xlsx file 
+        File file =    new File(filePath+ "/" +fileName);//Create an object of File class to open xlsx file 
         FileInputStream inputStream = new FileInputStream(file);//Create an object of FileInputStream class to read excel file
         Workbook menusetworkbook = null;
         
@@ -1024,7 +1024,7 @@ class AP3_export_menuset extends AP3_GUI{
         }        
         if(row.getCell(4).getStringCellValue().equals("Category Enabled")){             
             _t++;
-            _p++; EX += _t + "\t" + "Cell 0,4: "+ row.getCell(4).getStringCellValue() + "\t" + row.getCell(4).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
+            _p++; EX += _t + "\t" + "Cell 0,4: " + row.getCell(4).getStringCellValue() + "\t" + row.getCell(4).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                              
         }else { 
             _t++;
             _f++; EX += _t + "\t" + "Cell 0,4: " + row.getCell(4).getStringCellValue() + "\t" + row.getCell(3).getStringCellValue() + "\t" + "Category Enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -1097,7 +1097,7 @@ class AP3_export_menuset extends AP3_GUI{
             _p++; EX += _t + "\t" + "Cell 0,14: " + row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue() + "\t" + "Modifier Group Name" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                
         }else { 
             _t++;
-            _f++; EX += _t + "\t" + "Cell 0,14: "+ row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue()+ "\t" + "Modifier Group Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            _f++; EX += _t + "\t" + "Cell 0,14: " + row.getCell(14).getStringCellValue() + "\t" + row.getCell(14).getStringCellValue()+ "\t" + "Modifier Group Name" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }  
           
     } catch (Exception ex){}   // =============================================  
@@ -1108,7 +1108,7 @@ class AP3_export_menuset extends AP3_GUI{
     //<editor-fold defaultstate="collapsed" desc="Read Global Mod Group Excel">
     //This block reads and gets the cell value of from the exported Global Mod Group excel file
     try {            
-        File file =    new File(filePath+"/"+fileName);             //Create an object of File class to open xlsx file  
+        File file =    new File(filePath+ "/" +fileName);             //Create an object of File class to open xlsx file  
         FileInputStream inputStream = new FileInputStream(file);    //Create an object of FileInputStream class to read excel file
         Workbook menusetworkbook = null;                            //Find the file extension by splitting file name in substring  and getting only extension name
         String fileExtensionName = fileName.substring(fileName.indexOf("."));   //Check condition if the file is xlsx file
@@ -1234,15 +1234,15 @@ class AP3_export_menuset extends AP3_GUI{
             _p++; EX += _t + "\t" + "Cell 0,15: " + row.getCell(14).getStringCellValue() + "\t" + row.getCell(15).getStringCellValue() + "\t" + "Tax Tags" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";                                          
         }else { 
             _t++;
-            _f++; EX += _t + "\t" + "Cell 0,15: "+ row.getCell(14).getStringCellValue() + "\t" + row.getCell(15).getStringCellValue()+ "\t" + "Tax Tags" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            _f++; EX += _t + "\t" + "Cell 0,15: " + row.getCell(14).getStringCellValue() + "\t" + row.getCell(15).getStringCellValue()+ "\t" + "Tax Tags" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }   
     } catch (Exception ex){}   // =============================================  
     }
      //</editor-fold> 
     
-    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
+    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/" +CompanyID
     public  void Call_Company_API(String MenuSetName, int flag) {
-    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/"+CompanyID
+    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/" +CompanyID
     try {            
         Call_API("Call Global Menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
         if(t.startsWith("{")){

@@ -1528,6 +1528,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
                 if(l.contains("_ivalid_entries: ")) _Invalid_entries = Boolean.parseBoolean(value);
+                if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
                 if(l.contains("_concepts: ")) _Concepts = Boolean.parseBoolean(value);
                 if(l.contains("_concept_groups: ")) _Concept_groups = Boolean.parseBoolean(value);
                 if(l.contains("_posid_ranges: ")) _Posid_ranges = Boolean.parseBoolean(value);
@@ -2982,7 +2983,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null && t.trim() != ""){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "Not Found";
             }
@@ -3060,7 +3061,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -3110,7 +3111,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -3260,7 +3261,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -3571,7 +3572,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -3582,7 +3583,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -3606,13 +3607,13 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }   
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -3636,7 +3637,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -3656,7 +3657,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             t = E.getAttribute(VAL);
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " "); 
+                t = t.replaceAll("[ ]+ ", " "); 
             } else {
                 t = "null";
             }
@@ -3699,7 +3700,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -3919,7 +3920,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -4084,7 +4085,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -4417,7 +4418,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -4472,7 +4473,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -4714,7 +4715,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -5214,7 +5215,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -5268,7 +5269,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -5301,7 +5302,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -5320,13 +5321,13 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         try {
             E.sendKeys(Keys.chord(Keys.ENTER)); //select all text in textbox
             _p++;
-            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses"+ "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);

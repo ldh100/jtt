@@ -105,13 +105,13 @@ class DL_metric_data extends DL_GUI {
         CS = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
         Thread.sleep(7000);
       
-        Element_By_Path_Click("Open CUR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var4+"')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+        Element_By_Path_Click("Open CUR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var4+ "')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Thread.sleep(5000);
         Element_By_Path_Click("Select '" + CompareTo + "'", "xpath", "//ul/li[contains(.,'" + CompareTo + "')]", ParentTest, "no_jira");  
             if (FAIL) { return;}
         Thread.sleep(5000);
-         Element_By_Path_Text("Get CUR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var4+"')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+         Element_By_Path_Text("Get CUR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var4+ "')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
 
         CUR = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
@@ -144,21 +144,21 @@ class DL_metric_data extends DL_GUI {
             if (FAIL) { return;}
 
         MER = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
-        Element_By_Path_Click("Open MROR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var5+"')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+        Element_By_Path_Click("Open MROR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var5+ "')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Element_By_Path_Click("Select '" + CompareTo + "'", "xpath", "//ul/li[contains(.,'" + CompareTo + "')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(5000);
-        Element_By_Path_Text("Get MROR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var5+"')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+        Element_By_Path_Text("Get MROR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var5+ "')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
 
         MROR = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
-        Element_By_Path_Click("Open MSOP 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var6+"')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+        Element_By_Path_Click("Open MSOP 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var6+ "')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Element_By_Path_Click("Select '" + CompareTo + "'", "xpath", "//ul/li[contains(.,'" + CompareTo + "')]", ParentTest, "no_jira");  
             if (FAIL) { return;}
         Thread.sleep(5000);
-        Element_By_Path_Text("Get MSOP Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var6+"')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+        Element_By_Path_Text("Get MSOP Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var6+ "')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
 
         MSOP = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
@@ -194,22 +194,22 @@ class DL_metric_data extends DL_GUI {
             if (FAIL) { return;}
 
         CER = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
-        Element_By_Path_Click("Open CROR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var7+"')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+        Element_By_Path_Click("Open CROR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var7+ "')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Element_By_Path_Click("Select '" + CompareTo + "'", "xpath", "//ul/li[contains(.,'" + CompareTo + "')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(5000);
-        Element_By_Path_Text("Get CROR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var7+"')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+        Element_By_Path_Text("Get CROR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var7+ "')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
 
 
         CROR = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
-        Element_By_Path_Click("Open CSOP 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var8+"')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+        Element_By_Path_Click("Open CSOP 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var8+ "')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Element_By_Path_Click("Select '" + CompareTo + "'", "xpath", "//ul/li[contains(.,'" + CompareTo + "')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(5000);
-        Element_By_Path_Text("Get CSOP Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var8+"')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+        Element_By_Path_Text("Get CSOP Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var8+ "')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
 
         CSOP = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
@@ -247,21 +247,21 @@ class DL_metric_data extends DL_GUI {
             if (FAIL) { return;}
 
         PER = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
-        Element_By_Path_Click("Open PROR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var9+"')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+        Element_By_Path_Click("Open PROR 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var9+ "')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Element_By_Path_Click("Select '" + CompareTo + "'", "xpath", "//ul/li[contains(.,'" + CompareTo + "')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Thread.sleep(5000);
-        Element_By_Path_Text("Get PROR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var9+"')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+        Element_By_Path_Text("Get PROR Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var9+ "')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
 
         PROR = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
-        Element_By_Path_Click("Open PSOP 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var10+"')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
+        Element_By_Path_Click("Open PSOP 'Compare to' dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var10+ "')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
         Element_By_Path_Click("Select '" + CompareTo + "'", "xpath", "//ul/li[contains(.,'" + CompareTo + "')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(5000);
-        Element_By_Path_Text("Get PSOP Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'"+Var10+"')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
+        Element_By_Path_Text("Get PSOP Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'" +Var10+ "')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
 
         PSOP = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
@@ -314,7 +314,7 @@ class DL_metric_data extends DL_GUI {
         if(! L1.isEmpty()&& L1.size()==1)
         {
         System.out.println(L1.size());
-        Find_Text("Find Variant '" +  "Total"+ "'", "Total", true, ParentTest, "no_jira");
+        Find_Text("Find Variant '" +  "Total" + "'", "Total", true, ParentTest, "no_jira");
         if (t.equals("Not Found")) {
             return;  
         }

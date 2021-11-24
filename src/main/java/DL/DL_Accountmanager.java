@@ -212,7 +212,7 @@ class DL_Accountmanager extends DL_GUI {
                 
                 Oldfilter = Newfilter;
                 
-                Newfilter = Memberlist.get(j).replaceAll("[',./()&]+", "");
+                Newfilter = Memberlist.get(j).replaceAll("[',./()&]+ ", "");
                 
             }
 

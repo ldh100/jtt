@@ -23,7 +23,7 @@ class WO_place_order extends WO_GUI {
         
        final String ORDERTYPE  =  ISDELIVERYORDER?"Delivery":"Pickup";
 //        try {
-//            System.out.println ("place "+ ORDERTYPE +" orders number");
+//            System.out.println ("place " + ORDERTYPE + " orders number");
 //            int  inputCount =  System.in.read();System.out.println(inputCount);
 //            ORDERCOUNT = inputCount - '0';
 //        } catch (IOException ex) {
@@ -35,11 +35,11 @@ class WO_place_order extends WO_GUI {
         Thread.sleep( 3000);  
         if (DELIVERY ^ PICKUP){
             if (ISDELIVERYORDER & !DELIVERY){
-                _t++; EX += _t + "\t" + "Delivery service is not available for "+SITE + "\t" + " ===== " + "\t" + "Jump out Delivery order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                _t++; EX += _t + "\t" + "Delivery service is not available for " +SITE + "\t" + " ===== " + "\t" + "Jump out Delivery order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     return;
             }
              if (!ISDELIVERYORDER & !PICKUP){
-                _t++; EX += _t + "\t" + "PICKUP service is not available for "+SITE + "\t" + " ===== " + "\t" + "Jump out PICKUP order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                _t++; EX += _t + "\t" + "PICKUP service is not available for " +SITE + "\t" + " ===== " + "\t" + "Jump out PICKUP order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     return;
             }
         }
@@ -80,14 +80,14 @@ class WO_place_order extends WO_GUI {
                     Thread.sleep( 3000);
                 }
                 
-                Element_By_Path_Click("Enter Selected  Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  ParentTest, "no_jira"); 
+                Element_By_Path_Click("Enter Selected  Brand:   " + BRAND ,"xpath", "//strong[text()=' " +BRAND+ " ']",  ParentTest, "no_jira"); 
                 if (FAIL){
-                    _t++; EX += _t + "\t" + "Brand --"+BRAND+" --has no "+ORDERTYPE+" service, quit placing order " + "\t" + " ===== " + "\t" + "Jump out PICKUP order" + "\t" + " Fail " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    _t++; EX += _t + "\t" + "Brand --" +BRAND+ " --has no " +ORDERTYPE+ " service, quit placing order " + "\t" + " ===== " + "\t" + "Jump out PICKUP order" + "\t" + " Fail " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     return;
                 }
                 Wait_For_Element_By_Path_Presence("Wait for Brand Menu page rendering", "xpath", "//div[@class='pt-5']", ParentTest, "no-jira");
-                System.out.println("+++++++++++++++++++++++++++++++++++ Start " + ORDERTYPE + " Order Number " + (ordersCount+1) + " of " + ORDERCOUNT +" +++++++++++++++++++++++++++++++++++");
-                _t++; EX += _t + "\t" + "Start placing "+ORDERTYPE +"  #"+ (ordersCount+1) +" order "+ "\t" + " +++++++++ " + "\t" + "++++++++++ " + "\t" + "  " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                System.out.println(" +++++++++++++++++++++++++++++++++++ Start " + ORDERTYPE + " Order Number " + (ordersCount+1) + " of " + ORDERCOUNT + " +++++++++++++++++++++++++++++++++++ ");
+                _t++; EX += _t + "\t" + "Start placing " +ORDERTYPE + "  #" + (ordersCount+1) + " order " + "\t" + " +++++++++ " + "\t" + " ++++++++++ " + "\t" + "  " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 //Menu screen
                 
                 List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", ParentTest, "no-jira");
@@ -101,7 +101,7 @@ class WO_place_order extends WO_GUI {
    //L0:       L1:items of each catgory         L2:        L3:   Middle Pannel catgory           
                 
                     Element_Text("-First item name in Catgory  ",L1.get(0),ParentTest, "no_jira");
-                    Element_Click("-Click to open first item modal --- "+L1.get(0).getText(),L1.get(0) , ParentTest, "no_jira");
+                    Element_Click("-Click to open first item modal --- " +L1.get(0).getText(),L1.get(0) , ParentTest, "no_jira");
                         if (FAIL) { 
                             return;} 
 
@@ -116,7 +116,7 @@ class WO_place_order extends WO_GUI {
                         Element_By_Path_Click("Close item model ","css", "[class='v-icon notranslate pa-5 close mdi mdi-close theme--light']", ParentTest, "no_jira");
                         Thread.sleep((long) 3000);
                         Navigate_Back("Return to Site Page","Brand page ", "Site page",ParentTest, "no_jira");
-                        //TWeb.Element_By_Path_Click("Return to Site Page", "xpath", "//div[text()=' "+ SITE +" ']", ParentTest, "no_jira");
+                        //TWeb.Element_By_Path_Click("Return to Site Page", "xpath", "//div[text()=' " + SITE + " ']", ParentTest, "no_jira");
                         Thread.sleep((long) 3000);
                         return;
                     }
@@ -177,7 +177,7 @@ class WO_place_order extends WO_GUI {
                                // testEl = testEl.findElement(By.xpath("./following-sibling::div[1]"));
                                 js.executeScript("arguments[0].click();",testEl );
                                 
-                                //WebElement btn = charge.findElement(By.xpath("./..")).findElement(By.cssSelector("[type='"+selectionType+"']"));
+                                //WebElement btn = charge.findElement(By.xpath("./..")).findElement(By.cssSelector("[type='" +selectionType+ "']"));
                                 
                                 
                                 
@@ -221,7 +221,7 @@ class WO_place_order extends WO_GUI {
 
                     pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",true);
                     Thread.sleep(1000);
-                    System.out.println("Place Order Button disabled is "+d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"));
+                    System.out.println("Place Order Button disabled is " +d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"));
 
                     while ("true".equals(d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"))){
                         Refresh("Refresh Page", ParentTest, "no-jira");
@@ -233,11 +233,11 @@ class WO_place_order extends WO_GUI {
                             pickLocation(true);
                             //if (FAIL) continue;
                         }        
-                        System.out.println("Place Order Button disabled is "+d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"));
+                        System.out.println("Place Order Button disabled is " +d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"));
 
 
                         pickPayment(true);
-                        System.out.println("Place Order Button disabled is "+d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled")); 
+                        System.out.println("Place Order Button disabled is " +d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled")); 
                     }
                     Element_By_Path_Click("Click 'PLACE ORDER' button ", "xpath","//p[text()='Place order']/../..", ParentTest, "no-Jira");
                 }
@@ -253,7 +253,7 @@ class WO_place_order extends WO_GUI {
                     pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",false);
 
                     Thread.sleep(1000);
-                    System.out.println("Place button "+d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"));
+                    System.out.println("Place button " +d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"));
                     while ("true".equals(d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"))){
                         Refresh("Refresh Page", ParentTest, "no-jira");
                         Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");
@@ -278,9 +278,9 @@ class WO_place_order extends WO_GUI {
                     if(FAIL){continue;}
                     
                 
-                System.out.println("+++++++++++++++++++++++++++++++++++ " + ORDERTYPE + " Order Nuber  " + (ordersCount+1) + " Complete  +++++++++++++++++++++++++++++++++++");
+                System.out.println(" +++++++++++++++++++++++++++++++++++ " + ORDERTYPE + " Order Nuber  " + (ordersCount+1) + " Complete  +++++++++++++++++++++++++++++++++++ ");
                 System.out.println();
-                _t++; EX += _t + "\t" + "Order #"+ (ordersCount+1) +" is completed "+ "\t" + " +++++++++ " + "\t" + "++++++++++ " + "\t" + "  " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                _t++; EX += _t + "\t" + "Order #" + (ordersCount+1) + " is completed " + "\t" + " +++++++++ " + "\t" + " ++++++++++ " + "\t" + "  " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 
                 
                 
@@ -311,14 +311,14 @@ class WO_place_order extends WO_GUI {
     //Pickup Order work flow
         else{     
             if (!PICKUP){
-                _t++; EX += _t + "\t" + "Pickup  service is not available for "+SITE+"/"+BRAND + "\t" + " ===== " + "\t" + "Jump out Delivery order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                _t++; EX += _t + "\t" + "Pickup  service is not available for " +SITE+ "/" +BRAND + "\t" + " ===== " + "\t" + "Jump out Delivery order" + "\t" + " PASS " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 return;
             }
             if (PICKUP && DELIVERY){
                 Element_By_Path_Click("Click Pickup Tab ", "xpath", "//strong[text()=' Pickup ']", ParentTest, "no_jira");
                     if(FAIL) return;
             }
-            Element_By_Path_Click("Enter Selected  Brand:   "+ BRAND ,"xpath", "//strong[text()=' "+BRAND+" ']",  ParentTest, "no_jira"); 
+            Element_By_Path_Click("Enter Selected  Brand:   " + BRAND ,"xpath", "//strong[text()=' " +BRAND+ " ']",  ParentTest, "no_jira"); 
             List_L2("Menu Category count ", "css", "[role='tab']", ParentTest, "no_jira");
                 
             //List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", ParentTest, "no_jira");
@@ -362,7 +362,7 @@ class WO_place_order extends WO_GUI {
         //List<WebElement> listBox = d1.findElements(By.xpath("(//div[@role='listbox'])"));
         Element_Child_List_L1("Find location list count ", L0.get(L0.size()-1), "css", "[role='option']", ParentTest, "no_jira");
       
-        //System.out.println(" ListBox   "+L1.size());            
+        //System.out.println(" ListBox   " +L1.size());            
         Element_Click("Select last 'Delivery location' from Dropdown", L1.get(L1.size()-1), ParentTest, "no_jira");
         if(FAIL) {return;}
     } catch (Exception ex){}        
@@ -400,10 +400,10 @@ class WO_place_order extends WO_GUI {
 //         List<WebElement> listBox = d1.findElements(By.xpath("(//div[@role='listbox'])"));
 //        _t++ ;TWeb.Element_Child_List_L1("Find Payment card  list count ", listBox.get(listBox.size()-1), "css", "[role='option']", ParentTest, "no_jira");
         //TWeb.List_L0("", "css", "[role='listbox']", url);
-//        System.out.println(" ListBox   "+L1.size());
+//        System.out.println(" ListBox   " +L1.size());
         //Element_E1_Find(app, "xpath", "(//div[@role='listbox'])[3]", url);
         
-        //Element_By_Path_Click("Select lasrt Payment card  from Dropdown", "xpath", "(//div[@role='option'])["+(L1.size())+"]", ParentTest, "no_jira");
+        //Element_By_Path_Click("Select lasrt Payment card  from Dropdown", "xpath", "(//div[@role='option'])[" +(L1.size())+ "]", ParentTest, "no_jira");
 
 //        Element_Click("Select 'Payment' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), ParentTest, "no_jira");
     } catch (Exception ex){}        

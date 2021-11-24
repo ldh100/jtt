@@ -33,7 +33,7 @@ public class FW_config {
         if(FAIL){return;}
         for (int i = 0; i<L1.size(); i++)
         {
-              _t++; TWeb.Element_Attribute("Read sector list("+ i +")Text", L1.get(i), "textContent", "no_jira");
+              _t++; TWeb.Element_Attribute("Read sector list(" + i + ")Text", L1.get(i), "textContent", "no_jira");
               //Thread.sleep(300);
               if(t.contains("abc Sector"))
               {
@@ -71,7 +71,7 @@ public class FW_config {
         
         for (int j=0; j<L0.size(); j++)
         {
-            TWeb.Element_Attribute("Market List ("+ j+ ") text", L0.get(j), "textContent", "no_jira");
+            TWeb.Element_Attribute("Market List (" + j+ ") text", L0.get(j), "textContent", "no_jira");
             if (t.contains("abc market")){
                 System.out.println("Found the Market");
                  TWeb.Element_Click("Click on the sector ", L0.get(j), "no_jira");
@@ -105,7 +105,7 @@ public class FW_config {
         if(FAIL){return;}
         for (int i = 0; i<L1.size(); i++)
         {
-              _t++; TWeb.Element_Attribute("Read Cuisines list("+ i +")Text", L1.get(i), "textContent", "no_jira");
+              _t++; TWeb.Element_Attribute("Read Cuisines list(" + i + ")Text", L1.get(i), "textContent", "no_jira");
              // Thread.sleep(300);
               if(t.contains("abc Cuisines"))
               {

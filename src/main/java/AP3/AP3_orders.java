@@ -103,7 +103,7 @@ class AP3_orders extends AP3_GUI{
         Find_Text("Find 'Order type'", "Order Type", true, ParentTest, "no_jira"); 
             
         String filebrand = BRAND.toLowerCase().replace(" ","-");
-        filebrand = "all-orders-"+filebrand+"-undefined.pdf";
+        filebrand = "all-orders-" +filebrand+ "-undefined.pdf";
         // Should be not here > expected nothing for today  //Once we add placing orders to our script the below export is required.
         Find_Text("Find 'Export' text", "Export", true, ParentTest, "no_jira");      
         Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
@@ -111,7 +111,7 @@ class AP3_orders extends AP3_GUI{
     Thread.sleep(5000);           
         //  Call it later after date range selected, Check PDF > delete,  achnge to CSV > Check > delete 
      
-        File tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ "pickup-orders-undefined.pdf");
+        File tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ "pickup-orders-undefined.pdf");
         if (tmp.exists()) {
             _t++; Thread.sleep((long) sleep);File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
                if (FAIL) { return;}   
@@ -188,7 +188,7 @@ class AP3_orders extends AP3_GUI{
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                    if (FAIL) { return;}      
                 Thread.sleep(3000);
-                tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ "all-orders-undefined.csv");
+                tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ "all-orders-undefined.csv");
                 if (tmp.exists()) {
                     _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "all-orders-undefined.csv",ParentTest, "no_jira");
                             if (FAIL) { return;}   
@@ -262,7 +262,7 @@ class AP3_orders extends AP3_GUI{
                 if (FAIL) { return;} 
          }  
 Thread.sleep(3000);
-        Element_By_Path_Click("Click previous day", "xpath", "//tr/td[contains(number(),"+ prev_date.getDayOfMonth() +")]", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click previous day", "xpath", "//tr/td[contains(number()," + prev_date.getDayOfMonth() + ")]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 Thread.sleep(3000);  
         Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date(s)']", ParentTest, "no_jira"); 
@@ -311,7 +311,7 @@ Thread.sleep(1000);
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
            if (FAIL) { return;}      
         Thread.sleep(3000);
-        tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ filebrand);
+        tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ filebrand);
         if (tmp.exists()) {
           _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", filebrand, ParentTest, "no_jira");
              if (FAIL) { return;}   

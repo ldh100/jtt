@@ -80,13 +80,13 @@ public class FW_restaurants {
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Sections in Add a Restaurant form ", e1,"xpath", "//div/h5", "no_jira");             
              if (FAIL) { return;}                              
         for (int i = 1; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Section---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Section---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
     } 
       _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Labels in Add a Restaurant form ", e1,"xpath", "(//*[contains(@class, 'v-label')])", "no_jira");             
              if (FAIL) { return;}                              
         for (int i = 0; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Label---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Label---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
     }   
       _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the *FW Employee dropdown value ", "xpath", "(//*[contains(@class, 'v-select__selection')])[1]", "no_jira");
@@ -165,7 +165,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Cuisine Type dropdown values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
         for (int i = 64; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Cuisine Type dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Cuisine Type dropdown value---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(66), "no_jira"); 
@@ -179,7 +179,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Associated Delivery Partners", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
         if (FAIL) { return;}
         for (int i = 1; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Associated Delivery Partners dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Associated Delivery Partners dropdown value---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(2), "no_jira"); 
@@ -194,7 +194,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Mobile Operations", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
         if (FAIL) { return;}
         for (int i = 1; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Mobile Operations dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Mobile Operations dropdown value---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(1), "no_jira"); 

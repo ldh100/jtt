@@ -195,7 +195,7 @@ class AP3_brand extends AP3_GUI{
                     API_Response_Body = t;               
                     API_Body_Contains("Location Group API - find Displayed Brand ID", API_Response_Body, BrandID,true, ParentTest, "no_jira"); 
                 }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
                     Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                 }
@@ -458,12 +458,11 @@ class AP3_brand extends AP3_GUI{
                 case "Assign Menus":          
                     break;
                 case "Integration Type": 
+                    Find_Text("Find '...KDS Refunds'", "Allow for KDS Refunds", true, ParentTest, "no_jira");                    
                     break;
                 case "Third Party Integration":
                     Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true, ParentTest, "no_jira");
-                    if (!FAIL) {
-                        //
-                    }                    
+                   
                     break;
                 case "Menu Information":
                     Find_Text("Find 'Calorie Disclaimer'", "Calorie Disclaimer", true, ParentTest, "no_jira");
@@ -475,7 +474,7 @@ class AP3_brand extends AP3_GUI{
                         Find_Text("Find '...Local Menu Images'", "Allow Local Menu Images:", true, ParentTest, "no_jira");
                         Find_Text("Find '...Menu Calories Edits...'", "Allow Local Menu Calories Edits:", true, ParentTest, "no_jira");
                         Find_Text("Find '...App Item Naming'", "Allow In App Item Naming:", true, ParentTest, "no_jira");
-                    }                    
+                        Find_Text("Find '...Special Requests'", "Allow Special Requests:", true, ParentTest, "no_jira");                    }                    
                     break;
                 case "Payment ID":  
                     break;
@@ -498,6 +497,14 @@ class AP3_brand extends AP3_GUI{
                     Element_Click("Click 'Allow Web Ordering' - Yes", L1.get(0), ParentTest, "no_jira"); 
                         if (FAIL) { return;}                   
                     break;
+                case "Frictionless":  
+                    Element_E1_Find("Find Web Ordering", "id", "frictionless-detail", ParentTest, "no_jira"); 
+                        if (FAIL) { return;}
+                    Element_Child_List_L1("Find 'Allow Frictionless' options", e1,"xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    Element_Click("Click 'Allow Frictionless' - Yes", L1.get(0), ParentTest, "no_jira"); 
+                        if (FAIL) { return;}                   
+                    break;                    
                 default:
                 break;
             }

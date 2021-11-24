@@ -47,7 +47,7 @@ class WO_account_settings extends WO_GUI {
 //           break;
 //        }
 //         if ("".equals(paymentType)) 
-//         { //_t++; EX += _t + "no payment type setting "  + "\t" +"=====" + "\t" + "could not find the payment type" + "\t" + "PASS" + "\t" + " - " +"";
+//         { //_t++; EX += _t + "no payment type setting "  + "\t" + "=====" + "\t" + "could not find the payment type" + "\t" + "PASS" + "\t" + " - " + "";
 //             System.out.println("Payment  not found");
 //             return;
 //         } 
@@ -72,8 +72,8 @@ Thread.sleep(5000);
         int n=1;
         while(t.toLowerCase().contains("card ending"))
         {
-            Element_By_Path_Click("Click First row of list "+ n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");               
-            Element_By_Path_Click("Click Deletc betton   "+ n, "xpath", "//span[text()=' Delete ']" ,ParentTest, "no_jira");
+            Element_By_Path_Click("Click First row of list " + n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");               
+            Element_By_Path_Click("Click Deletc betton   " + n, "xpath", "//span[text()=' Delete ']" ,ParentTest, "no_jira");
             Wait_For_Element_By_Path_Presence("wait for alert present","className", "vts__message",ParentTest, "no_jira");
             //Thread.sleep(5000);
             if (FAIL) { return;} 
@@ -107,7 +107,7 @@ Thread.sleep(5000);
             case "freedompay":
                 for (int i = 0; i< NAME.length ; i++){               
                     pi = new PaymentInfo(NAME[i],CARD_NUM[i],EXPIRE_MON[i],EXPIRE_YEAR[i],CVV[i],POSTAL[i]);
-                    _t++; EX += _t + "\t" + "Add CC  "+ i  + "\t" + " ===== " + "\t" + NAME[i] + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    _t++; EX += _t + "\t" + "Add CC  " + i  + "\t" + " ===== " + "\t" + NAME[i] + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     
                     AddCC_FreedomPay(pi);
                     
@@ -126,7 +126,7 @@ Thread.sleep(5000);
             case "exact":     
                  for (int i = 0; i< NAME.length;i++){               
                     pi = new PaymentInfo(NAME[i],CARD_NUM[i],EXPIRE_MON[i],EXPIRE_YEAR[i],CVV[i],POSTAL[i]);
-                    _t++; EX += _t + "\t" + "Add CC (Exact)  "+ i  + "\t" + " ===== " + "\t" + NAME[i] + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+                    _t++; EX += _t + "\t" + "Add CC (Exact)  " + i  + "\t" + " ===== " + "\t" + NAME[i] + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     
                     AddCC_Exact(pi);
                     
@@ -161,7 +161,7 @@ Thread.sleep(5000);
         Element_By_Path_Click("Cursor locate to --Card number field",          "id", "CardNumber",ParentTest, "no_jira");
         Element_By_Path_Text_Enter("Input Card Number ",          "id", "CardNumber",pi.card_num ,false, ParentTest, "no_jira");
 
-        String expiration = pi.expire_month+"/"+ pi.expire_year.substring(2);
+        String expiration = pi.expire_month+ "/" + pi.expire_year.substring(2);
         Element_By_Path_Text("Add card form---Expire Date Label ",  "xpath", "//label[text()='Expiration Date']",ParentTest, "no_jira");  
         Element_By_Path_Click("Cursor locate to --Expire Date field",          "id", "ExpirationDate",ParentTest, "no_jira");
         Element_By_Path_Text_Enter("Input Expire Date ",          "id", "ExpirationDate",expiration ,false, ParentTest, "no_jira");
@@ -190,7 +190,7 @@ Thread.sleep(5000);
         String  errormessages =new String();
         for (String str : ERRMESSAGE){
             _t++; Text_Found("looking for error message", str,ParentTest, "no_jira");
-            errormessages =  t == "Found"?( errormessages.equals("")?str:errormessages+", "+str ):errormessages ;
+            errormessages =  t == "Found"?( errormessages.equals("")?str:errormessages+ ", " +str ):errormessages ;
             
         }
         _t++;_f++; EX += _t + "\t" + "Add CC FAIL " + "\t" + " ===== " + "\t" + errormessages + "\t" + " FAIL " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -285,7 +285,7 @@ Thread.sleep(5000);
 //        // Thread.sleep(5000); 
 //         List<WebElement> ALERTS_1 = d1.findElements(By.cssSelector("[role='alert']"));
 //         
-//         System.out.println (ALERTS_1.get(ALERTS_1.size()-2).getText()+"----------------"+ALERTS_1.get(ALERTS_1.size()-1).getText());
+//         System.out.println (ALERTS_1.get(ALERTS_1.size()-2).getText()+ "----------------" +ALERTS_1.get(ALERTS_1.size()-1).getText());
 //         //WebElement ALERT ;
 //         for (WebElement ALERT : ALERTS_1 ){
 //         System.out.println (ALERT.getAttribute("textContent"));
@@ -306,8 +306,8 @@ Thread.sleep(5000);
             System.out.println("find alert");           
             for (int i =0; i< L0.size() ; i++){
                 L0.get(i).getText()    ;
-                //errormessages = L0.get(i)+ ", "+errormessages;                
-                errormessages = "".equals(errormessages)? L0.get(i).getText(): errormessages +",  "+L0.get(i).getText();
+                //errormessages = L0.get(i)+ ", " +errormessages;                
+                errormessages = "".equals(errormessages)? L0.get(i).getText(): errormessages + ",  " +L0.get(i).getText();
             }
             _t++;_f++; EX += _t + "\t" + "Add CC FAIL " + "\t" + " ===== " + "\t" + "mandatory field requires: " + errormessages+ "\t" + " FAIL " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
            

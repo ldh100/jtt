@@ -83,7 +83,7 @@ class DL_login extends DL_GUI {
         }
         Find_Text("Find 'Invalid credentials'", "Invalid credentials.", false, ParentTest, "no_jira"); 
         if (t.toLowerCase().contains("invalid")) { 
-            EX += _t + "\t" + "Find 'Invalid credentials'" + "\t" + ID + "\t" + "Invalid credentials." + "\t" + "FAIL" + "\t" + " - " +
+            EX += _t + "\t" + "Check for 'Invalid credentials' - unexpected" + "\t" + ID + "\t" + "Invalid credentials." + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" +  "no_jira" + "\r\n";
             F += "Step: " + _t + " > " + ID + " > " + "Invalid credentials." + "\r\n";
             Login_OK = false;

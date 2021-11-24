@@ -5995,7 +5995,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             Log_Html_Result("FAIL", "Error: " + err + "<br />" + t, true, ParentTest.createNode(NAME));
 	}  
     }
-       protected void DollarAmount_Calculation(String NAME, double var1,long var4, ExtentTest ParentTest, String JIRA) throws IOException {
+    protected void DollarAmount_Calculation(String NAME, double var1,long var4, ExtentTest ParentTest, String JIRA) throws IOException {
 	String status; 
         t = "";
          _t++; 
@@ -6006,19 +6006,18 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             float QA_Value = Float.parseFloat(var1+ "");
             
             float FE_Value = (float) 0.00001;
-            FE_Value = Float.parseFloat(var4+ "");
-    if (Math.abs(QA_Value - FE_Value) <= (QA_Value * 0.01)) { // ========= 1% precision =============
-                            Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - "
-                                    + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _p++;
-                        } else {
-                            Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
-                            EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - "
-                                    + "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                            _f++;
-                        }
-            			
+            FE_Value = Float.parseFloat(var4 + "");
+            if (Math.abs(QA_Value - FE_Value) <= (QA_Value * 0.01)) { // ========= 1% precision =============
+                Log_Html_Result("PASS", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, false, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "PASS" + "\t" + " - "
+                        + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                _p++;
+            } else {
+                Log_Html_Result("FAIL", "QA Value: " + QA_Value + " > FE $Value: " + FE_Value, true, ParentTest.createNode("Compare QA_Value and FE_Value"));
+                EX += _t + "\t" + "Compare QA_Value and FE_Value" + "\t" + "QA Value: " + QA_Value + "\t" + "FE $Value: " + FE_Value + "\t" + "FAIL" + "\t" + " - "
+                        + "\t" + " -" + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                _f++;
+            }
         } catch (Exception ex) {
             _f++; err = ex.getMessage().trim(); err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();

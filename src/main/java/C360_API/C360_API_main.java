@@ -425,8 +425,8 @@ public class C360_API_main {
                     Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
                     _t++;
                     _f++;
-                    EX += " - " + "\t" + "=== Fatal Execution Error ==="+ "\t" + " >>> " + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - "
-                        + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira"+ "\r\n";
+                    EX += " - " + "\t" + "=== Fatal Execution Error ===" + "\t" + " >>> " + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - "
+                        + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("FAIL", ex.getMessage(), ParentTest.createNode("Fatal Execution Error"), API_SRART);                    
                     
                 }

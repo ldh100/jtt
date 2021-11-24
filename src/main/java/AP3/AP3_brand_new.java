@@ -557,7 +557,7 @@ class AP3_brand_new extends AP3_GUI {
                         Element_Child_Text("Get name of first location in list", L1.get(0), "xpath", "//div[contains(@class,'list-item')]//p", ParentTest, "no_jira");
                             if (FAIL) { return;}
                         String loc_name = t.trim();
-                        Element_By_Path_Click("Click > 'Choose Drop-off...' link", "xpath", "//p[contains(text(),'"+loc_name+"')]/ancestor::div[contains(@class,'list-content')]/preceding-sibling::div", ParentTest, "no_jira");
+                        Element_By_Path_Click("Click > 'Choose Drop-off...' link", "xpath", "//p[contains(text(),'" +loc_name+ "')]/ancestor::div[contains(@class,'list-content')]/preceding-sibling::div", ParentTest, "no_jira");
                             if (FAIL) { return;}
                         Wait_For_Element_By_Path_Presence("Check 'Locations Selected' List", "xpath", "//p[text()='Locations Selected (1)']/parent::div//p[contains(text(),'" + loc_name + "')]", ParentTest, "no_jira");
                             if (FAIL) { return;}
@@ -652,48 +652,26 @@ class AP3_brand_new extends AP3_GUI {
                         Element_By_Path_Click("Click 'KDS Device Email'", "css", "[aria-label='KDS Device Email']", ParentTest, "no_jira");
                         if (!FAIL) {
                             Element_By_Path_Text_Enter("Enter KDS Device Email", "css", "[aria-label='KDS Device Email']", ADMIN_ID, false, ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
-//                                Element_By_Path_Click("Click 'KDS Admin Passcode'", "xpath", "//*[contains(text(), 'KDS Admin Passcode')]", ParentTest, "no_jira");    
+                                if (FAIL) { return; }   
                             Element_By_Path_Click("Click 'KDS Admin Passcode", "css", "[aria-label='KDS Admin Passcode']", ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
+                                if (FAIL) { return; }  
                             Element_By_Path_Text_Enter("Enter KDS Admin Passcode", "css", "[aria-label='KDS Admin Passcode']", "1459", false, ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
-//                                Element_By_Path_Click("Click 'Station Phone Number'", "xpath", "//label[contains(text(), 'Station Phone Number')]", ParentTest, "no_jira");    
+                                if (FAIL) { return; }  
                             Element_By_Path_Click("Click 'Station Phone Number'", "css", "[aria-label='Station Phone Number']", ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
+                                if (FAIL) { return; }  
                             Element_By_Path_Text_Enter("Enter Station Phone Number", "css", "[aria-label='Station Phone Number']", "9025550321", false, ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
-//                                Element_By_Path_Click("Click 'Message On...'", "xpath", "//*[contains(text(), 'Message On Receipt')]", ParentTest, "no_jira");    
+                                if (FAIL) { return; }  
                             Element_By_Path_Click("Click 'Message On...'", "css", "[aria-label='Message On Receipt (Thanks for Ordering) ']", ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
+                                if (FAIL) { return; }  
                             Element_By_Path_Text_Enter("Enter Message On Receipt", "css", "[aria-label='Message On Receipt (Thanks for Ordering) ']", "Thanks for Auto Ordering", false, ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
+                                if (FAIL) { return; }  
                             Find_Text("Find 'Allow ... Refunds'", "Allow for KDS Refunds", true, ParentTest, "no_jira");
-                            if (FAIL) {
-                                return;
-                            }
                         }
                     }
                     break;
                 case "Third Party Integration":
                     Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true, ParentTest, "no_jira");
-                    if (!FAIL) {
-                        //
-                    }
+
                     break;
                 case "Menu Information":
                     Find_Text("Find 'Calorie Disclaimer'", "Calorie Disclaimer", true, ParentTest, "no_jira");
@@ -719,50 +697,25 @@ class AP3_brand_new extends AP3_GUI {
                     break;
                 case "Payment Method Exclusion":
                     Element_E1_Find("Find Method Exclusion section", "id", "toc-payment-exclusions", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                        if (FAIL) { return; }  
                     Element_Child_List_L1("Find 'Payment Methods' options", e1, "xpath", ".//div[@class='v-input--selection-controls__input']", ParentTest, "no_jira");
                     Find_Text("Find 'Credit Card'", "Credit Card", true, ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
                     Find_Text("Find 'Apple Wallet'", "Apple Wallet", true, ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-                    Find_Text("Find 'Google Wallet'", "Google Wallet", true, ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                    Find_Text("Find 'Google Wallet'", "Google Wallet", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Meal Plans'", "Meal Plans", false, ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
                     Find_Text("Find 'Excluded tenders'", "Excluded tenders", false, ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
                     if (L1.size() > 0) {
                         Element_Click("Check/Exclude last method", L1.get(L1.size() - 1), ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
+                            if (FAIL) { return; }  
                     }
                     break;
                 case "Web Ordering":
                     Element_E1_Find("Find Web Ordering section", "id", "web-order", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                        if (FAIL) { return; }  
                     Element_Child_List_L1("Find 'Allow Web Ordering' options", e1, "xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                        if (FAIL) { return; }  
                     Element_Click("Click 'Allow Web Ordering' - Yes", L1.get(0), ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                        if (FAIL) { return; }  
                     break;
                 default:
                     break;
@@ -911,7 +864,7 @@ class AP3_brand_new extends AP3_GUI {
             Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Global Menus']", GL_MENU, false, ParentTest, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);
-            Element_By_Path_Click("Search Menu Click", "xpath", "//*[contains(text(),'"+GL_MENU+"')]", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Search Menu Click", "xpath", "//*[contains(text(),'" +GL_MENU+ "')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
 
             Find_Text("Fund 'Search...' text", "Search Local Menus", true, ParentTest, "no_jira");
@@ -921,7 +874,7 @@ class AP3_brand_new extends AP3_GUI {
             Element_By_Path_Text_Enter("Enter Global Menu Search", "css", "[aria-label='Search Local Menus']", Location, false, ParentTest, "no_jira");
                 if (FAIL) { return; }
             Thread.sleep(500);
-            Element_By_Path_Click("Search Menus Click", "xpath", "//*[contains(text(), '"+Location+"')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Search Menus Click", "xpath", "//*[contains(text(), '" +Location+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return; }
 
             Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");
@@ -1412,11 +1365,10 @@ class AP3_brand_new extends AP3_GUI {
                 } else {     //Print fail
                     _t++; _f++;
                     EX += _t + "\t" + "JDE Category  assigned to Global menu incorrectly" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " + company.getJSONObject("meta").getString("jde_category")  + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: "+company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode(_t + ". " + "JDE Category assigned incorrectly"), new Date());
+                    Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: " +company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode(_t + ". " + "JDE Category assigned incorrectly"), new Date());
                     flag = false;
                 }
             }
-          
         }   EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
         }catch (Exception ex){}   // =============================================
     }
@@ -1441,7 +1393,7 @@ class AP3_brand_new extends AP3_GUI {
             if(JDE_categories.getJSONObject(i).getString("name").equals(JDE_category))  {
                 if(JDE_id.equals(JDE_categories.getJSONObject(i).getString("id")))  {
                   _t++; _p++;
-                  EX += _t + "\t" + "JDE Category UI : "+JDE_category + "\t" + "JDE UI ID: "+JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                  EX += _t + "\t" + "JDE Category UI : " +JDE_category + "\t" + "JDE UI ID: " +JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                   Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode(_t + ". " + "JDE Category & ID"), new Date());
                 }
             }

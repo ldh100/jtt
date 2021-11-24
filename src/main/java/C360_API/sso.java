@@ -52,7 +52,7 @@ class sso extends C360_API_main{
        
         JOB_Api_Call("C360 SSO OAuth Login Redirect", "GET",      
             "https://ssodev.compassmanager.com/oauth2.0/authorize?client_id=" + C360_Clien_ID +
-                     "&response_type=code&redirect_uri=" + C360_Redirect_URL +"&response_type=code", Auth, "", 200, ParentTest, "no_jira");
+                     "&response_type=code&redirect_uri=" + C360_Redirect_URL + "&response_type=code", Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
         }

@@ -67,7 +67,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr[1]/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -119,7 +119,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Menu Details')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -297,7 +297,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr[1]/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -350,7 +350,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Menu Details')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -523,7 +523,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > First Menu Name", "xpath", "(//div[@class='v-list__tile__title'])[45]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -585,7 +585,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > First Menu Name", "xpath", "(//div[@class='v-list__tile__title'])[46]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU2 = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU2+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU2+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -638,7 +638,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr[1]/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Menu Details')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -689,7 +689,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr[2]/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU2 = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU2+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU2+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Menu Details')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -941,7 +941,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > First Menu Name", "xpath", "(//div[@class='v-list__tile__title'])[45]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1003,7 +1003,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > First Menu Name", "xpath", "(//div[@class='v-list__tile__title'])[46]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU2 = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU2+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU2+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1055,7 +1055,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr[1]/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Menu Details')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1105,7 +1105,7 @@ class AP3_timeslots extends AP3_GUI{
             Element_By_Path_Attribute("Get > Menu Name", "xpath", "(//tbody/tr[2]/td)[1]", "textContent" , ParentTest, "no_jira" );
             if (FAIL) {return;}
             MENU2 = t.trim();
-            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'"+MENU2+"')]", ParentTest, "no_jira" );
+            Element_By_Path_Click("Click > Menu", "xpath", "//*[contains(text(),'" +MENU2+ "')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
             Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Menu Details')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
@@ -1236,7 +1236,7 @@ class AP3_timeslots extends AP3_GUI{
         if(t.startsWith("{")){
             API_Response_Body = t;               
         }else{
-            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
             Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "/timeslots/delivery/menu/" + MenuID + "?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
             return;
@@ -1344,24 +1344,24 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
         Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(@class,'FormStyle')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
-        if (d1.findElement(By.xpath("(//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]")).getAttribute("class").contains("mdi-checkbox-marked")) {
-            Element_By_Path_Click("Deselect > '24 Hour Service' checkbox", "xpath", "(//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]", ParentTest, "no_jira" );
+        if (d1.findElement(By.xpath("(//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]")).getAttribute("class").contains("mdi-checkbox-marked")) {
+            Element_By_Path_Click("Deselect > '24 Hour Service' checkbox", "xpath", "(//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
         }
-        Element_By_Path_Click("Click > 'Opens' input", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", ParentTest, "no_jira" );
+        Element_By_Path_Click("Click > 'Opens' input", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", ParentTest, "no_jira" );
             if (FAIL) {return;}
         Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         Actions actions = new Actions(d1);
         actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).build().perform();
-        Element_By_Path_Text_Enter("Enter '"+pick_up_time_start+"'", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", pick_up_time_start, false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter '" +pick_up_time_start+ "'", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", pick_up_time_start, false, ParentTest, "no_jira" );
             if (FAIL) {return;}
-        Element_By_Path_Click("Click > 'Closes' input", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", ParentTest, "no_jira" );
+        Element_By_Path_Click("Click > 'Closes' input", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).build().perform();    
-        Element_By_Path_Text_Enter("Enter '"+pick_up_time_end+"'", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", pick_up_time_end, false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter '" +pick_up_time_end+ "'", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", pick_up_time_end, false, ParentTest, "no_jira" );
             if (FAIL) {return;}
         /***check if save button is present, if not there was no difference in 
             configuration the save button will not appear, in this case we just
@@ -1413,23 +1413,23 @@ class AP3_timeslots extends AP3_GUI{
             if (FAIL) {return;}
         Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//a[contains(text(), 'Delivery Hours') and contains(@class,'item--active')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
-        if (d1.findElement(By.xpath("(//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]")).getAttribute("class").contains("mdi-checkbox-marked")) {
-            Element_By_Path_Click("Deselect > '24 Hour Service' checkbox", "xpath", "(//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]", ParentTest, "no_jira" );
+        if (d1.findElement(By.xpath("(//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]")).getAttribute("class").contains("mdi-checkbox-marked")) {
+            Element_By_Path_Click("Deselect > '24 Hour Service' checkbox", "xpath", "(//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//i)[4]", ParentTest, "no_jira" );
                 if (FAIL) {return;}
         }
-        Element_By_Path_Click("Click > 'Opens' input", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", ParentTest, "no_jira" );
+        Element_By_Path_Click("Click > 'Opens' input", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", ParentTest, "no_jira" );
             if (FAIL) {return;}
         Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).build().perform();
-        Element_By_Path_Text_Enter("Enter '"+delivery_start+"'", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", delivery_start, false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter '" +delivery_start+ "'", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[@aria-label='Opens']", delivery_start, false, ParentTest, "no_jira" );
             if (FAIL) {return;}
-        Element_By_Path_Click("Click > 'Closes' input", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", ParentTest, "no_jira" );
+        Element_By_Path_Click("Click > 'Closes' input", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira" );
             if (FAIL) {return;}
         actions.sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).sendKeys(Keys.ARROW_LEFT).sendKeys(Keys.BACK_SPACE).build().perform();
-        Element_By_Path_Text_Enter("Enter '"+delivery_end+"'", "xpath", "//p[contains(text(),'"+day+"')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", delivery_end, false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter '" +delivery_end+ "'", "xpath", "//p[contains(text(),'" +day+ "')]//ancestor::div[contains(@class,'FormStyle')]//input[contains(@aria-label,'Closes')]", delivery_end, false, ParentTest, "no_jira" );
             if (FAIL) {return;}
         /***check if save button is present, if not there was no difference in 
             configuration the save button will not appear, in this case we just

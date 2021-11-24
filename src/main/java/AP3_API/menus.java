@@ -161,13 +161,12 @@ class menus extends AP3_API_GUI{
 
     //</editor-fold>       
 
-
     //<editor-fold defaultstate="collapsed" desc="Individual Menu "> 
     // GET/menu/{id} : Get an Individual Menu
     // Test Scenario 1: Positive flow to get a new individual Menu by ID
 
     JOB_Api_Call(" Menu - GET individual Global Menu by /'MenuID'", "GET", 
-        BaseAPI + "/menu/" + GL_MENU_IDS.get(GL_MENU_IDS.size()-1), Auth, "", 200, ParentTest, "no_jira");
+        BaseAPI + "/menu/" + GL_MENU_IDS.get(GL_MENU_IDS.size() - 1), Auth, "", 200, ParentTest, "no_jira");
     if (json != null) { 
 //        JSONArray groups = null;
 //        CATEGORIES_IDS = new ArrayList<>();
@@ -183,6 +182,18 @@ class menus extends AP3_API_GUI{
 //            AAA = ex.getMessage();
 //        }
     } 
+    
+    // https://api.compassdigital.org/v1/menu/a2LAdjyg3BFADGjjLqGXTo0vyKRql5FrZdRGL1OqtKo7PNDPOEsQkYvwwZ5OtkoqQP0/export
+    JOB_Api_Call(" Menu - Export Global Menu Set", "GET", 
+        BaseAPI + "/menu/" + GL_MENU_IDS.get(GL_MENU_IDS.size() - 1) + "/export", Auth, "", 200, ParentTest, "no_jira");
+    if (json != null) { 
+        try {
+            AAA = json.toString(4);
+        }
+        catch (Exception ex) {
+            AAA = ex.getMessage();
+        }
+    }    
         
     // Test Scenario 2: Negative flow to get a new individual Menu without I
     //POST/menu/{id} : Create a new Menu
@@ -284,7 +295,7 @@ class menus extends AP3_API_GUI{
             BaseAPI + "/menu/" + New_Menu_ID, Auth, "", 200, ParentTest, "no_jira");
 
     //</editor-fold>        
-       
+      
 
     //<editor-fold defaultstate="collapsed" desc=" Menu item  (*Does not work*) "> 
 
