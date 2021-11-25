@@ -2142,7 +2142,7 @@ public class Station extends javax.swing.JInternalFrame {
         }
         
         Auth = "Bearer " + Access_TKN;
-        JSONObject requestParams = new JSONObject();
+        requestParams = new JSONObject();
         requestParams.put("nameOnCard", "JTT API Automation");
         requestParams.put("cardNumber", "4111111111111111"); // Visa
         requestParams.put("CVV", "123");

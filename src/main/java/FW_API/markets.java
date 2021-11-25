@@ -28,7 +28,16 @@ class markets extends FW_API_main{
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
-        }          
+        }  
+        JOB_Api_Call("Market <ID> Units", "GET", 
+            BaseAPI + "/markets/" + RestID + "/units", Auth, "", 200, ParentTest, "no_jira"); 
+        if(jsonArray != null){
+            try {
+                //                              
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+        }             
     } 
     
 }

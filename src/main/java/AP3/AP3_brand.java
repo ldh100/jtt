@@ -474,11 +474,14 @@ class AP3_brand extends AP3_GUI{
                         Find_Text("Find '...Local Menu Images'", "Allow Local Menu Images:", true, ParentTest, "no_jira");
                         Find_Text("Find '...Menu Calories Edits...'", "Allow Local Menu Calories Edits:", true, ParentTest, "no_jira");
                         Find_Text("Find '...App Item Naming'", "Allow In App Item Naming:", true, ParentTest, "no_jira");
-                        Find_Text("Find '...Special Requests'", "Allow Special Requests:", true, ParentTest, "no_jira");                    }                    
+                        Find_Text("Find '...Special Requests'", "Allow Special Requests:", true, ParentTest, "no_jira");
+                    }                    
                     break;
-                case "Payment ID":  
+                case "Payment ID":
+                    
                     break;
                 case "Meal Plan":
+                    
                     break;
                 case "Loyalty Program":  // Loyalty is not enabled for this brand
                     Find_Text("Find 'Loyalty is not enabled..'", "Loyalty is not enabled", true,ParentTest, "no_jira");                     
@@ -503,7 +506,21 @@ class AP3_brand extends AP3_GUI{
                     Element_Child_List_L1("Find 'Allow Frictionless' options", e1,"xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
                     Element_Click("Click 'Allow Frictionless' - Yes", L1.get(0), ParentTest, "no_jira"); 
-                        if (FAIL) { return;}                   
+                        if (FAIL) { return;} 
+                    Element_E2_Find("Find 'Select Store' dialog", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']", ParentTest, "no_jira"); 
+                    Find_Text("Find 'Select store' Title", "Select store", true, ParentTest, "no_jira"); 
+                    Element_Child_List_L1("Get 'Select Store' action buttons", e2, "xpath", ".//div[@class='v-btn__content']", ParentTest, "no_jira");
+                        if (FAIL) { return; } 
+                    Element_Text(" Find 'Select Store' > Cancel", L1.get(0), ParentTest, "no_jira"); 
+                    Element_Text(" Find 'Select Store' > OK", L1.get(1), ParentTest, "no_jira"); 
+                    Element_Click("Click 'Cancel'", L1.get(0), ParentTest, "no_jira"); 
+                        if (FAIL) { return;}                      
+//                    
+//                    Element_Child_Click("Open 'Store List' drop-down", e2, "xpath", ".//div[@class='v-select__selections']", ParentTest, "no_jira"); 
+//                        if (FAIL) { return;}     
+//                    List_L0("Get Store List", "xpath", "//table/tbody/tr/td[5]", ParentTest, "no_jira");
+//                        if (FAIL) { return; }
+                  
                     break;                    
                 default:
                 break;

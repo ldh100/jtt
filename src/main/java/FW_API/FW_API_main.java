@@ -634,9 +634,6 @@ public class FW_API_main {
             Response response = null;
             switch (Method) {
                 case "GET":
-                    if (BODY.equals("Bolter")) {
-                        request.header("From", "Bolter/1.0");
-                    }
                     response = request.get(EndPoint);
                     break;
                 case "POST":
@@ -695,7 +692,7 @@ public class FW_API_main {
             FAIL = true;
             err = ex.getMessage().trim();
             if (err.contains("\n")) {
-                (err = err.substring(0, err.indexOf("\n"))).trim();
+                err = err.substring(0, err.indexOf("\n")).trim();
             }
             EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
                     + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -793,7 +790,7 @@ public class FW_API_main {
         } 
         if (true) {
             SCOPE += "Files ";
-            EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + "Files" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Files");
             files BR = new FW_API.files(FW_API_main.this);
             BR.run(); // ======================================
@@ -804,7 +801,7 @@ public class FW_API_main {
         }         
         if (true) {
             SCOPE += "Events ";
-            EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + "Events" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Events");
             events BR = new FW_API.events(FW_API_main.this);
             BR.run(); // ======================================
@@ -812,7 +809,19 @@ public class FW_API_main {
 
             ParentTest.getModel().setName("Events - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
+        }  
+        if (true) {
+            SCOPE += "Autoscheduler ";
+            EX += " - " + "\t" + "Autoscheduler" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Autoscheduler");
+            autoscheduler BR = new FW_API.autoscheduler(FW_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+
+            ParentTest.getModel().setName("Autoscheduler - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
         }        
+        
         if (true) {
             SCOPE += "Users ";
             EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";

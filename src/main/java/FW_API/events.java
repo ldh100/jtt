@@ -1,5 +1,9 @@
 package FW_API;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.joda.time.DateTime;
+
 class events extends FW_API_main{
     protected events(FW_API_main a) {
         env = a.env;
@@ -8,28 +12,45 @@ class events extends FW_API_main{
         ParentTest = a.ParentTest; 
         FW_Admin_ID = a.FW_Admin_ID;
         FW_Admin_TKN = a.FW_Admin_TKN;
+        RestID = a.RestID;
+        UnitID = a.UnitID;        
     }
     String AAA = "";
     protected void run() { 
         Auth = "Bearer " + FW_Admin_TKN;
-        JOB_Api_Call("All Events", "GET", 
-            BaseAPI + "/events", Auth, "", 200, ParentTest, "no_jira"); 
+        JOB_Api_Call("All Events (returns 502 in Prod)", "GET", 
+            BaseAPI + "/events", Auth, "", 502, ParentTest, "no_jira"); 
         if(jsonArray != null){
             try {
-//                UnitID = jsonArray.getJSONObject(0).getString("id");
-//                UNIT = jsonArray.getJSONObject(0).getString("name");
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    UNIT_IDS.add(jsonArray.getJSONObject(i).getString("id"));
-//                }                               
+                //                                              
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
         } 
-        String START = "";
-        String END = "";
-        //https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/markets/a842f99d300045fc93b006e531671ab5/events?start=2021-11-01&end=2022-05-31
-
-        //https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1/units/b7e1de7d6e2b479db712412dc329ad70/events?start=2020-08-01&end=2023-08-27        
+        
+        Date FR = new DateTime(new Date()).minusYears(1).toDate();
+        Date TO = new DateTime(new Date()).plusMonths(6).toDate();
+        String From = new SimpleDateFormat("yyyy-MM-dd").format(FR);
+        String To = new SimpleDateFormat("yyyy-MM-dd").format(TO);
+        
+        JOB_Api_Call("Market <ID> Events from: " + From + " to: " + To, "GET", 
+            BaseAPI + "/markets/" + RestID + "/events?start=" + From + "&end=" + To, Auth, "", 200, ParentTest, "no_jira"); 
+        if(jsonArray != null){
+            try {
+                //                             
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+        }         
+        JOB_Api_Call("Unit <ID> Events from: " + From + " to: " + To, "GET", 
+            BaseAPI + "/units/" + UnitID + "/events?start=" + From + "&end=" + To, Auth, "", 200, ParentTest, "no_jira"); 
+        if(jsonArray != null){
+            try {
+                //                             
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+        }        
     }          
 }
 

@@ -55,7 +55,7 @@ class login extends FW_API_main{
         JSONObject requestParams = new JSONObject();       
         requestParams.put("email", FW_ADMIN_ID);
         BODY = requestParams.toString();  
-        JOB_Api_Call("FW User - Send 'Forgot Password' Link", "GET", 
+        JOB_Api_Call("FW User - Send 'Forgot Password' Link", "POST", 
             BaseAPI + "/users/forgotpassword", Auth, BODY, 200, ParentTest, "no_jira");         
     }
     

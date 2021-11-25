@@ -119,11 +119,11 @@ class user_mobile extends AP3_API_GUI{
             BaseAPI + "/user/forgotpassword?realm=" + Realm, Auth, BODY, 200, ParentTest, "no_jira");          
 
         BODY = "{\"name\":" +                                    //  New Mobile User > Email Exists  =================
-               "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
-            "\"email\":\"" + Mobile_User_ID + "\"," +
-            "\"phone\":" + "1" + NewID + "," +
-            "\"realm\":\"" + Realm + "\"," +
-            "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
+                    "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
+                "\"email\":\"" + Mobile_User_ID + "\"," +
+                "\"phone\":" + "1" + NewID + "," +
+                "\"realm\":\"" + Realm + "\"," +
+                "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
         JOB_Api_Call("Mobile Create New User > Email Already Exists", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
         

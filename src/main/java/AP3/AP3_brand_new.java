@@ -318,8 +318,12 @@ class AP3_brand_new extends AP3_GUI {
                         Element_Click("Select " + GL_MENU, L1.get(T_Index), ParentTest, "no_jira");
                             if (FAIL) { return; }
                     } else {
+                        _t++;
                         _f++;
                         EX += " - " + "\t" + SECTOR + " Global Menu List" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + GL_MENU + " Not found";
+                        Log_Html_Result("FAIL", SECTOR + " Global Menu " + " > " + GL_MENU, 
+                                false, ParentTest.createNode(_t + ". " + "Not Found"), new Date());
+
                         EX += "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                         return;
                     }
@@ -610,7 +614,7 @@ class AP3_brand_new extends AP3_GUI {
                             if (FAIL) { return; }
                         Thread.sleep(500);
                     } else {
-
+                        _t++;
                         _f++;
                         F += "Step: " + _t + " > " + "Add Station > Assign Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Import" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -684,6 +688,7 @@ class AP3_brand_new extends AP3_GUI {
                         Find_Text("Find '...Local Menu Images'", "Allow Local Menu Images:", true, ParentTest, "no_jira");
                         Find_Text("Find '...Menu Calories Edits...'", "Allow Local Menu Calories Edits:", true, ParentTest, "no_jira");
                         Find_Text("Find '...App Item Naming'", "Allow In App Item Naming:", true, ParentTest, "no_jira");
+                        Find_Text("Find '...Special Requests'", "Allow Special Requests:", true, ParentTest, "no_jira");
                     }
                     break;
                 case "Payment ID":
@@ -693,7 +698,7 @@ class AP3_brand_new extends AP3_GUI {
 
                     break;
                 case "Loyalty Program":
-
+                    Find_Text("Find 'Loyalty is not enabled..'", "Loyalty is not enabled", true,ParentTest, "no_jira");
                     break;
                 case "Payment Method Exclusion":
                     Element_E1_Find("Find Method Exclusion section", "id", "toc-payment-exclusions", ParentTest, "no_jira");
@@ -717,6 +722,29 @@ class AP3_brand_new extends AP3_GUI {
                     Element_Click("Click 'Allow Web Ordering' - Yes", L1.get(0), ParentTest, "no_jira");
                         if (FAIL) { return; }  
                     break;
+                case "Frictionless":
+                    Element_E1_Find("Find Web Ordering section", "id", "frictionless-detail", ParentTest, "no_jira");
+                        if (FAIL) { return; }  
+                    Element_Child_List_L1("Find 'Allow Frictionless' options", e1,"xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    //Select Store > dropdown > CANCEl, OK 
+                    Element_Click("Click 'Allow Frictionless' - Yes", L1.get(0), ParentTest, "no_jira"); 
+                        if (FAIL) { return;} 
+                    Element_E2_Find("Find 'Select Store' dialog", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']", ParentTest, "no_jira"); 
+                    Find_Text("Find 'Select store' Title", "Select store", true, ParentTest, "no_jira"); 
+                    Element_Child_List_L1("Get 'Select Store' action buttons", e2, "xpath", ".//div[@class='v-btn__content']", ParentTest, "no_jira");
+                        if (FAIL) { return; } 
+                    Element_Text(" Find 'Select Store' > Cancel", L1.get(0), ParentTest, "no_jira"); 
+                    Element_Text(" Find 'Select Store' > OK", L1.get(1), ParentTest, "no_jira"); 
+                    Element_Click("Click 'Cancel'", L1.get(0), ParentTest, "no_jira"); 
+                        if (FAIL) { return;}                      
+//                    
+//                    Element_Child_Click("Open 'Store List' drop-down", e2, "xpath", ".//div[@class='v-select__selections']", ParentTest, "no_jira"); 
+//                        if (FAIL) { return;}     
+//                    List_L0("Get Store List", "xpath", "//table/tbody/tr/td[5]", ParentTest, "no_jira");
+//                        if (FAIL) { return; }
+
+                    break; 
                 default:
                     break;
             }
@@ -1178,6 +1206,7 @@ class AP3_brand_new extends AP3_GUI {
                 if ("Found".equals(t)) {
                     _f++;
                     EX += _t + "\t" + "Navigate Back after Publish OK" + "\t" + "MM 'Sector' page" + "\t" + "Dialog 'Leave without publishing?'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+
                     F += "Step: " + _t + " > " + "Dialog 'Leave without publishing?' after Published OK" + "\r\n";
                     Find_Text("Find 'Leave...' note", "Changes will be lost if you do not publish.", true, ParentTest, "no_jira");
                         if (FAIL) { return;  }
@@ -1196,7 +1225,7 @@ class AP3_brand_new extends AP3_GUI {
         List_L0("Get Menu Column", "xpath", "//table/tbody/tr/td[5]", ParentTest, "no_jira");
             if (FAIL) { return;  }
         for (int i = 0; i < L0.size(); i++) {
-            if (!t.contains("UNAVAILABLE")) {
+            if (!t.toUpperCase().contains("UNAVAILABLE")) {
                 Actions actions = new Actions(d1);
                 actions.contextClick(L0.get(i)).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
                 Close_Current_Tab_switch_To_1st("Switch to new tab", ParentTest, "no_jira");
@@ -1253,8 +1282,9 @@ class AP3_brand_new extends AP3_GUI {
             }
         }
         // </editor-fold> 
-
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        // =============================================  
+    }   
     } 
 
     // <editor-fold defaultstate="collapsed" desc="Removing and re-adding the global menus in the brand configuration AUT-293">
@@ -1329,77 +1359,81 @@ class AP3_brand_new extends AP3_GUI {
             _f++;
             EX += _t + "\t" + "Removing and re-adding the global menus in the brand configuration" + "\t" + "Original Assigned menus" + countAssignedMenuBeforeRemove + "\t" + "After removing Assigned menu: " + countAssignedMenuAfterRemove + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
         }
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        // =============================================  
+    }   
     } 
     // </editor-fold> 
 
     private void Verify_Sector_JDE_API() throws Exception {
-       try{
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-       
-        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + SectorID + "?nocache=1", true, ParentTest, "no_jira" );
-        if(t.startsWith("{")){
-            API_Response_Body = t;               
-        }else{
-            EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/sector/" + SectorID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/" + SectorID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }
-        
-        JSONObject json = new JSONObject(API_Response_Body);
-        JSONArray JDE_companies = new JSONArray();
-        JDE_companies = json.getJSONArray("companies");
-        JSONObject company = new JSONObject();
-        for(int i = 0;i<JDE_companies.length();i++) {
-            company = JDE_companies.getJSONObject(i);
-            if(company.getString("name").equals(GL_MENU)) {
-                if(company.getJSONObject("meta").has("jde_category")) {
-                 //Print Pass new created brand has JDE category auto assigned
-                    JDE_id = company.getJSONObject("meta").getString("jde_category");
-                    _t++; _p++;
-                    EX += _t + "\t" + "JDE Category auto assigned to global menu" + "\t" + "-" + "\t" + "JDE API ID: " + company.getJSONObject("meta").getString("jde_category")  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "JDE Category auto assigned to global menu : " + JDE_id, false, ParentTest.createNode(_t + ". " + "JDE Category assigned correctly"), new Date());
-                    flag = true;
-                    break;
-                } else {     //Print fail
-                    _t++; _f++;
-                    EX += _t + "\t" + "JDE Category  assigned to Global menu incorrectly" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " + company.getJSONObject("meta").getString("jde_category")  + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: " +company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode(_t + ". " + "JDE Category assigned incorrectly"), new Date());
-                    flag = false;
-                }
+        try{
+            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+
+            Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + SectorID + "?nocache=1", true, ParentTest, "no_jira" );
+            if(t.startsWith("{")){
+                API_Response_Body = t;               
+            }else{
+                EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/location/sector/" + SectorID  + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/sector/" + SectorID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+                return;
             }
-        }   EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-        }catch (Exception ex){}   // =============================================
+
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray JDE_companies = new JSONArray();
+            JDE_companies = json.getJSONArray("companies");
+            JSONObject company = new JSONObject();
+            for(int i = 0;i<JDE_companies.length();i++) {
+                company = JDE_companies.getJSONObject(i);
+                if(company.getString("name").equals(GL_MENU)) {
+                    if(company.getJSONObject("meta").has("jde_category")) {
+                     //Print Pass new created brand has JDE category auto assigned
+                        JDE_id = company.getJSONObject("meta").getString("jde_category");
+                        _t++; _p++;
+                        EX += _t + "\t" + "JDE Category auto assigned to global menu" + "\t" + "-" + "\t" + "JDE API ID: " + company.getJSONObject("meta").getString("jde_category")  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "JDE Category auto assigned to global menu : " + JDE_id, false, ParentTest.createNode(_t + ". " + "JDE Category assigned correctly"), new Date());
+                        flag = true;
+                        break;
+                    } else {     //Print fail
+                        _t++; _f++;
+                        EX += _t + "\t" + "JDE Category  assigned to Global menu incorrectly" + "\t" + "JDE ID: " + JDE_id + "\t" + "JDE API ID: " + company.getJSONObject("meta").getString("jde_category")  + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "JDE Category assigned to global menu incorrectly: " +company.getJSONObject("meta").getString("jde_category") , false, ParentTest.createNode(_t + ". " + "JDE Category assigned incorrectly"), new Date());
+                        flag = false;
+                    }
+                }
+            }   EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+            }catch (Exception ex){}   // =============================================
     }
 
     private void Verify_JDE_API(String JDE_category) throws Exception {
         try {
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-        Call_API("Call /JDE/ API ", "Bearer " + AP3_TKN, BaseAPI + "/config/jde-configuration", true, ParentTest, "no_jira" );
-        if(t.startsWith("{")){
-            API_Response_Body = t;               
-        } else {
-            EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-            return;
-        }
-        
-        JSONObject json = new JSONObject(API_Response_Body);
-        JSONArray JDE_categories = new JSONArray();
-        JDE_categories = json.getJSONArray("jde_categories");
-        for(int i = 0; i < JDE_categories.length(); i++) {
-            if(JDE_categories.getJSONObject(i).getString("name").equals(JDE_category))  {
-                if(JDE_id.equals(JDE_categories.getJSONObject(i).getString("id")))  {
-                  _t++; _p++;
-                  EX += _t + "\t" + "JDE Category UI : " +JDE_category + "\t" + "JDE UI ID: " +JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                  Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode(_t + ". " + "JDE Category & ID"), new Date());
+            EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+            Call_API("Call /JDE/ API ", "Bearer " + AP3_TKN, BaseAPI + "/config/jde-configuration", true, ParentTest, "no_jira" );
+            if(t.startsWith("{")){
+                API_Response_Body = t;               
+            } else {
+                EX += _t + "\t == " + "API Response Error" + "\t" + BaseAPI + "/config/jde-configuration" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/config/jde-configuration", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+                return;
+            }
+
+            JSONObject json = new JSONObject(API_Response_Body);
+            JSONArray JDE_categories = new JSONArray();
+            JDE_categories = json.getJSONArray("jde_categories");
+            for(int i = 0; i < JDE_categories.length(); i++) {
+                if(JDE_categories.getJSONObject(i).getString("name").equals(JDE_category))  {
+                    if(JDE_id.equals(JDE_categories.getJSONObject(i).getString("id")))  {
+                      _t++; _p++;
+                      EX += _t + "\t" + "JDE Category UI : " +JDE_category + "\t" + "JDE UI ID: " +JDE_id  + "\t" + "JDE Category API: " +JDE_category+ "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                      Log_Html_Result("PASS", "JDE Category and ID : " +JDE_id, false, ParentTest.createNode(_t + ". " + "JDE Category & ID"), new Date());
+                    }
                 }
             }
-        }
-        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
-        } catch (Exception ex){}   // =============================================   
+            EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
+        } catch (Exception ex){
+            // =============================================  
+        }    
     }            
 } 
 
