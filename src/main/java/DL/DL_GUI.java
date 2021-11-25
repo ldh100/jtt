@@ -5840,7 +5840,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
     protected void SecondaryMetric_Calculation(String NAME, double var1, double var2, double var3, ExtentTest ParentTest, String JIRA) throws IOException {
 	String status; 
         t = "";
-         _t++; 
+        _t++; 
 	try {
             double val = (double) var1 / var2 * 100;
             double actVal = Math.round(val * 100.0) / 100.0;

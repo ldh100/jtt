@@ -234,7 +234,6 @@ class DL_sanity extends DL_GUI {
         Element_By_Path_Text("Get CER Value", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Earned Revenue')]/..//div[2]/div[1]/p", ParentTest, "no_jira");              
             if (FAIL) { return;}
  
-       // System.out.println(get_Text(t));
         CER = Double.parseDouble(t.replace("$", "").replace(",", "").replace("%", "").replace("(", "").replace(")", ""));
         Element_By_Path_Click("Select CROR dropdown", "xpath", "//div[starts-with(@class,'MuiCardContent-root jss')]//*[contains(.,'Customer Rate of Return')]/../..//div[starts-with(@class,'MuiSelect-root MuiSelect-select')]", ParentTest, "no_jira");  
             if (FAIL) { return;} 
@@ -341,9 +340,8 @@ class DL_sanity extends DL_GUI {
         List_L0("Get Selected Metrics Count", "xpath", "//span[contains(@class, ' Mui-checked ')]", ParentTest, "no_jira");              
             if (FAIL) { return;}  
             for (int j = 0; j < L0.size(); j++) { 
-              Thread.sleep(500);  
-       
-                Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), ParentTest, "no_jira"); 
+               Thread.sleep(500);  
+               Element_Click("Un-Check Selected Metrics " + (j + 1), L0.get(j), ParentTest, "no_jira"); 
             }   
     } catch (Exception ex){}   // =============================================  
     }
