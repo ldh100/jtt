@@ -22,9 +22,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -381,7 +383,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES11.setText("Browser:");
         lblSITES11.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 72, 16));
+        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 24, 72, 16));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -2850,15 +2852,15 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setEndTime(new Date()); 
         } 
         if(_MM_import){
-//            SCOPE += ", Import Global Modifiers";
-//            ParentTest = HtmlReport.createTest("Import Global Modifiers"); 
-//            AP3_mm_import_mod BR = new AP3.AP3_mm_import_mod(AP3_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-//            ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
-//            ParentTest.getModel().setEndTime(new Date()); 
-//        }
-//        if(_MM_import){            
+            SCOPE += ", Import Global Modifiers";
+            ParentTest = HtmlReport.createTest("Import Global Modifiers"); 
+            AP3_mm_import_mod BR = new AP3.AP3_mm_import_mod(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+            ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }
+        if(_MM_import){            
             SCOPE += ", Import Global Menuset";
             ParentTest = HtmlReport.createTest("Import Global Menuset"); 
             AP3_mm_import_menu BR = new AP3.AP3_mm_import_menu(AP3_GUI.this);
@@ -6389,12 +6391,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             if (xx.exists()) {
                 xx.delete();     
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _w++; 
-                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "WARN" + "\t" + "File not found" +
+                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "WARN" + "\t" + "File not found" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
@@ -6405,6 +6407,30 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+        } 
+        sw1.reset();
+    } 
+    protected void File_Copy(String NAME, String SOURCE, String TARGET, ExtentTest ParentTest, String JIRA) throws Exception {
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
+ 
+        FAIL = false;
+        try {
+            Files.copy(Paths.get(SOURCE), Paths.get(TARGET), StandardCopyOption.COPY_ATTRIBUTES);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + SOURCE + "\t" + TARGET + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Target: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + SOURCE + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Target: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     } 

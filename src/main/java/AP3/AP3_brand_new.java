@@ -219,7 +219,9 @@ class AP3_brand_new extends AP3_GUI {
             if (FAIL) { return;  }
         List_L2("Add Station setup Group Count", "xpath", "//div[starts-with(@id, 'toc-')]", ParentTest, "no_jira");
             if (FAIL) { return; }
-       
+        if(L0.size() != L2.size()){
+            //
+        }       
         for (int i = 0; i < L0.size(); i++) { // ========================================================================================
             Element_Attribute(" === Station setup Navigation >>>", L0.get(i), "textContent", ParentTest, "no_jira");
                 if (FAIL) { return; }
@@ -273,7 +275,7 @@ class AP3_brand_new extends AP3_GUI {
                     } else {
                         return;
                     }
-                    Element_Click("Click '" + t + "'", L0.get(i), ParentTest, "no_jira");    // === invisible DEBUG
+                    Element_Click("Click '" + t + "'", L0.get(i), ParentTest, "no_jira");    
                         if (FAIL) { return; }
                     // ========================================= Group Selection ^^^^
 
@@ -723,7 +725,7 @@ class AP3_brand_new extends AP3_GUI {
                         if (FAIL) { return; }  
                     break;
                 case "Frictionless":
-                    Element_E1_Find("Find Web Ordering section", "id", "frictionless-detail", ParentTest, "no_jira");
+                    Element_E1_Find("Find Find 'Frictionless detail' section", "id", "frictionless-detail", ParentTest, "no_jira");
                         if (FAIL) { return; }  
                     Element_Child_List_L1("Find 'Allow Frictionless' options", e1,"xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
                         if (FAIL) { return;} 

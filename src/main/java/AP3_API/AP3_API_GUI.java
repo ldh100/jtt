@@ -3059,13 +3059,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("AP3 User");
             user_ap3 BR = new AP3_API.user_ap3(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("AP3 User - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
             AP3_User_ID = BR.AP3_User_ID;
@@ -3078,13 +3072,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Locations");
             locations BR = new AP3_API.locations(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Locations - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
             AppID = BR.AppID;
@@ -3112,13 +3100,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Config");
             config BR = new AP3_API.config(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Config - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3130,8 +3112,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             exact_gateway_id = BR.exact_gateway_id;
             exact_id = BR.exact_id;
             
-            DELIEVERY_DESTINATIONS = BR.DELIEVERY_DESTINATIONS;
-            
+            DELIEVERY_DESTINATIONS = BR.DELIEVERY_DESTINATIONS;            
             MEALPLAN_ID = BR.MEALPLAN_ID;
             MEALPLAN_TENDER = BR.MEALPLAN_TENDER;
         }
@@ -3142,13 +3123,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Global/Local Menus");
             menus BR = new AP3_API.menus(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Menus - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3168,7 +3143,6 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Categories" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "No Categories", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Categories"), new Date());
-//FAIL = true;
             } else if (ITEMS_IDS.isEmpty()) {
                 _t++;
                 _w++;
@@ -3185,13 +3159,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Promo");
             promo BR = new AP3_API.promo(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Promo - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3202,13 +3170,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Calendar");
             calendar BR = new AP3_API.calendar(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Calendar - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3218,13 +3180,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Reports");
             reports BR = new AP3_API.reports(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Reports - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3234,13 +3190,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Announcement");
             announcement BR = new AP3_API.announcement(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Announcement - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3250,13 +3200,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Recent Updates/Notifications");
             notification BR = new AP3_API.notification(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Notification - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3267,13 +3211,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Partner");
             partner BR = new AP3_API.partner(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Partner - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }   
@@ -3284,13 +3222,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Message");
             message BR = new AP3_API.message(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Message - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }     
@@ -3303,13 +3235,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Mobile User");
             user_mobile BR = new AP3_API.user_mobile(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Mobile User - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3326,13 +3252,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Payment");
             payment BR = new AP3_API.payment(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Payment - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3351,13 +3271,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("ShoppingCart");
             shoppingcart BR = new AP3_API.shoppingcart(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("ShoppingCart - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3371,13 +3285,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Order");
             order BR = new AP3_API.order(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Order - Tot: " + BR._t + ", Failed: " + BR._f);
             Order_Delivery_ID = BR.Order_Delivery_ID;
             Order_Pickup_ID = BR.Order_Pickup_ID;
@@ -3389,13 +3297,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Datalake");
             datalake BR = new AP3_API.datalake(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Datalake - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }         
@@ -3406,13 +3308,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Meal Plan");
             mealplan BR = new AP3_API.mealplan(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Meal Plan - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }       
@@ -3424,13 +3320,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Bolter");
             user_bolter BR = new AP3_API.user_bolter(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Bolter - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
 
@@ -3445,12 +3335,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Task");
             task BR = new AP3_API.task(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             r_time += BR.r_time;
             ParentTest.getModel().setName("Task - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
@@ -3461,13 +3346,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("KDS");
             kds BR = new AP3_API.kds(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("KDS - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3478,13 +3357,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Logouts");
             logouts BR = new AP3_API.logouts(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Logouts - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
@@ -3494,13 +3367,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("File");
             file BR = new AP3_API.file(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("File - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }        
@@ -3510,45 +3377,18 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest = HtmlReport.createTest("Voucherify");
             voucherify BR = new AP3_API.voucherify(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Voucherify - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }
-//        if (true) {
-//            SCOPE += "SSO ";
-//            EX += " - " + "\t" + "SSO" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//            ParentTest = HtmlReport.createTest("SSO");
-//            sso BR = new API.sso(AP3_API_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX;
-//            _t += BR._t;
-//            _p += BR._p;
-//            _f += BR._f;
-//            _w += BR._w;
-//            _i += BR._i;
-//            r_time += BR.r_time;
-//            ParentTest.getModel().setName("SSO - Tot: " + BR._t + ", Failed: " + BR._f);
-//            ParentTest.getModel().setEndTime(new Date());
-//        }    
-        if (env.equals("DE")) {
+  
+        if (!env.equals("PR")) {
             SCOPE += "Vendor ";
             EX += " - " + "\t" + "Vendor" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Vendor");
             vendor BR = new AP3_API.vendor(AP3_API_GUI.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
             ParentTest.getModel().setName("Vendor - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }

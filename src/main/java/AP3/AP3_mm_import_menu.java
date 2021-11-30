@@ -97,7 +97,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             Thread.sleep(3000);
             File_UnZip("Unzip Menu Set export file ", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Export Zip File", Download_Dir,t, ParentTest, "no_jira");
+            File_Delete("Delete Export Zip File", Download_Dir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}  
                 
                  
@@ -105,7 +105,8 @@ class AP3_mm_import_menu extends AP3_GUI{
             Excel_Convert_PLU(Download_Dir,ExportFileName,"Menuset");
      if(true){
         return;
-    }            Excel_Edit_Menuset(Download_Dir,ExportFileName,"Menuset");
+    }   
+            Excel_Edit_Menuset(Download_Dir,ExportFileName,"Menuset");
             
             String[] valueToWrite = {"Modifier Group", "", "Auto Mod group " + New_ID, "Automation Label " + New_ID, "0", "1", "2", "TRUE", "", "", "", "", "", "", "", ""};
             writeExcel(Download_Dir,ExportFileName,"Modifier Groups",valueToWrite);
@@ -457,8 +458,8 @@ class AP3_mm_import_menu extends AP3_GUI{
     
     public void Excel_Convert_PLU(String filePath, String fileName, String sheetName) {
         try{
-            EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Modify PLU data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            File file = new File(filePath+ "/" + fileName);           //Create an object of File class to open xlsx file
+            EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Modify PLU data ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            File file = new File(filePath + File.separator + fileName);           //Create an object of File class to open xlsx file
             FileInputStream inputStream = new FileInputStream(file);  //Create an object of FileInputStream class to read excel file
             Workbook modifier_Workbook = null;
             String fileExtensionName = fileName.substring(fileName.indexOf("."));
@@ -486,7 +487,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             FileOutputStream outputStream = new FileOutputStream(file); //Create an object of FileOutputStream class to create write data in excel file
             modifier_Workbook.write(outputStream);//write data in the excel file
             outputStream.close();//close output stream
-            EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Modify PLU data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += "\n - " + "\t" + " ==== End ====" + "\t" + " ===== " + "\t" + " == Modify PLU data ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
              
         }catch(Exception ex){
             AAA = ex.getMessage();
@@ -557,8 +558,8 @@ class AP3_mm_import_menu extends AP3_GUI{
     
     public void writeExcel(String filePath, String fileName, String sheetName, String[] dataToWrite) {
         try{
-          EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Write data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            File file =    new File(filePath+ "/" + fileName);           //Create an object of File class to open xlsx file
+          EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Write data ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            File file =    new File(filePath + File.separator + fileName);           //Create an object of File class to open xlsx file
             Workbook modifier_Workbook;
             try (FileInputStream inputStream = new FileInputStream(file) //Create an object of FileInputStream class to read excel file
             ) {
@@ -593,7 +594,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             try (FileOutputStream outputStream = new FileOutputStream(file)) { //Create an object of FileOutputStream class to create write data in excel file           
                 modifier_Workbook.write(outputStream); //write data in the excel file
             } //write data in the excel file
-            EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Write data to Excel file ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += "\n - " + "\t" + " ====End====" + "\t" + " ===== " + "\t" + " == Write data ==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         } catch (Exception ex){
             //
         } 

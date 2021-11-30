@@ -24,10 +24,29 @@ class vendor extends AP3_API_GUI{
         if(json != null){
             AAA = json.toString(4);
         } 
-  
+ 
         //GET vendor/auth with client_id/client_password as Basic auth - > should return access and refresh token
+        Auth = "Basic " + Base64.getEncoder().encodeToString(("WRONG_ID" + ":" + ADMIN_PW).getBytes());
+        JOB_Api_Call("AP3 API Client ID/PW Authentication - Wrong ID", "GET", 
+            BaseAPI + "/vendor/auth", Auth, "", 401, ParentTest, "no_jira");         
+        if(json != null){ 
+            try {
+                if(json.has("access")) {
+                    Client_Accces_TKN = json.getJSONObject("access").getString("token");                   
+                }
+                if(json.has("refresh")) {
+                    Client_Refresh_TKN = json.getJSONObject("refresh").getString("token");                         
+                } 
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+        }        
+    if(!env.equals("DE")) {
+        return;
+    } 
+    
         Auth = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
-        JOB_Api_Call("AP3 Client ID/PW Authentication", "GET", 
+        JOB_Api_Call("AP3 API Client ID/PW Authentication", "GET", 
             BaseAPI + "/vendor/auth", Auth, "", 200, ParentTest, "no_jira");         
         if(json != null){ 
             try {
@@ -47,7 +66,7 @@ class vendor extends AP3_API_GUI{
         requestParams.put("refresh_token", Client_Refresh_TKN); 
 
         BODY = requestParams.toString();
-        JOB_Api_Call("AP3 Client - New Access Token", "POST", 
+        JOB_Api_Call("AP3 API Client - New Access Token", "POST", 
             BaseAPI + "/vendor/auth", Auth, BODY, 200, ParentTest, "no_jira"); 
         if(json != null){ 
             try {

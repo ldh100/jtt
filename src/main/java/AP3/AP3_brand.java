@@ -128,7 +128,7 @@ class AP3_brand extends AP3_GUI{
                     if (FAIL) { continue;}
                 if(t.trim().startsWith(BRAND)){
                     T_Index = j;
-                    Element_Child_List_L2("Stations List Column Cout", L1.get(j), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
+                    Element_Child_List_L2("Stations List Column Count", L1.get(j), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
                     BRAND_TABLE_COL_COUNT = L2.size();
                     Element_Child_List_L2("Save Target Stations List", L0.get(i), "tagName", "tr", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
                 }
@@ -201,7 +201,7 @@ class AP3_brand extends AP3_GUI{
                 }
             }
         }            
-        Element_Child_List_L2("Stations List Column Cout", L2.get(T_Index), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
+        Element_Child_List_L2("Stations List Column Count", L2.get(T_Index), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
             if (FAIL) { return;} 
         Element_Click("Click Brand '" + BRAND + "' row", L2.get(0), ParentTest, Ver);
             if (FAIL) { return;}             
@@ -219,8 +219,11 @@ class AP3_brand extends AP3_GUI{
         Thread.sleep(500); 
         List_L0("Brand Configuration Navigation Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");             
             if (FAIL) { return;}    
-        List_L1("Brand Configuration Group Count", "xpath", "//div[starts-with(@id, 'toc-')]", ParentTest, "no_jira");             
+        List_L1("Brand Configuration Groups Count", "xpath", "//div[starts-with(@id, 'toc-')]", ParentTest, "no_jira");             
             if (FAIL) { return;}  
+        if(L0.size() != L1.size()){
+            //
+        }
         
         for (int i = 0; i < L0.size(); i++) { // ========================================================================================
             Element_Attribute("Brand Configuration Navigation >>>>>>", L0.get(i), "textContent", ParentTest, "no_jira"); 
@@ -309,11 +312,10 @@ class AP3_brand extends AP3_GUI{
 
                     if (delivery_destinations.isEmpty()) {
                         EX += " - " + "\t" + "Delivery Details - No Locations" + "\t" + "Delivery Details - No Locations in Site" + "\t" + "Delivery Details - No Locations in Site" + "\t" + "" + "\t" + " - " + "\t" + " - " + "\r\n";
- 
                     } else {
-                        List_L0("Check if 'Delivery Details' is enabled", "xpath", "//*[@id='toc-delivery']//div[contains(text(),'DISABLE')]", ParentTest, "no_jira");
+                        List_L2("Check if 'Delivery Details' is enabled", "xpath", "//*[@id='toc-delivery']//div[contains(text(),'DISABLE')]", ParentTest, "no_jira");
                             if (FAIL) { return;}
-                        if (!L0.isEmpty()) {
+                        if (!L2.isEmpty()) {
                             Element_By_Path_Click("Click > 'DISABLE' on 'Delivery Details'", "xpath", "//*[@id='toc-delivery']//div[contains(text(),'DISABLE')]", ParentTest, "no_jira");
                                 if (FAIL) { return;}
                             Wait_For_Element_By_Path_Presence("Wait for 'Disable ...' to appear", "xpath", "//*[contains(text(),'Delivery Program')]", ParentTest, "no_jira");
@@ -453,16 +455,16 @@ class AP3_brand extends AP3_GUI{
                     }               
                     break;
                 case "Scan & Go Setup":   
-                    Find_Text("Find 'Enable Scan & ...'", "Enable Scan & Go?", true, ParentTest, "no_jira");                    
+                    Find_Text("Find 'Enable Scan ...'", "Enable Scan & Go?", true, ParentTest, "no_jira");                    
                     break;
-                case "Assign Menus":          
+                case "Assign Menus":  
+                    // =============================================  ????
                     break;
                 case "Integration Type": 
                     Find_Text("Find '...KDS Refunds'", "Allow for KDS Refunds", true, ParentTest, "no_jira");                    
                     break;
                 case "Third Party Integration":
-                    Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true, ParentTest, "no_jira");
-                   
+                    Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true, ParentTest, "no_jira");                  
                     break;
                 case "Menu Information":
                     Find_Text("Find 'Calorie Disclaimer'", "Calorie Disclaimer", true, ParentTest, "no_jira");
@@ -478,19 +480,19 @@ class AP3_brand extends AP3_GUI{
                     }                    
                     break;
                 case "Payment ID":
-                    
+                    // =============================================  ????
                     break;
                 case "Meal Plan":
-                    
+                    // =============================================  ????
                     break;
                 case "Loyalty Program":  // Loyalty is not enabled for this brand
                     Find_Text("Find 'Loyalty is not enabled..'", "Loyalty is not enabled", true,ParentTest, "no_jira");                     
                     break;
                 case "Payment Method Exclusion":  
-                    Find_Text("Find 'Payment exclusions ..Credit card..'", "Credit Card", true,ParentTest, "no_jira"); 
-                    Find_Text("Find 'Payment exclusions ..Apple Wallet..'", "Apple Wallet", true,ParentTest, "no_jira"); 
-                    Find_Text("Find 'Payment exclusions ..Google Wallet..'", "Google Wallet", true,ParentTest, "no_jira"); 
-                    Find_Text("Find 'Payment exclusions ..Meal Plans..'", "Meal Plans", true,ParentTest, "no_jira");                   
+                    Find_Text("Find 'Payment exclusions ..Credit card..'", "Credit Card", true, ParentTest, "no_jira"); 
+                    Find_Text("Find 'Payment exclusions ..Apple Wallet..'", "Apple Wallet", true, ParentTest, "no_jira"); 
+                    Find_Text("Find 'Payment exclusions ..Google Wallet..'", "Google Wallet", true, ParentTest, "no_jira"); 
+//  Find_Text("Find 'Payment exclusions ..Meal Plans..'", "Meal Plans", true, ParentTest, "no_jira");          // DEBUG          
                     break;
                 case "Web Ordering":  
                     Element_E1_Find("Find Web Ordering", "id", "web-order", ParentTest, "no_jira"); 
@@ -501,7 +503,7 @@ class AP3_brand extends AP3_GUI{
                         if (FAIL) { return;}                   
                     break;
                 case "Frictionless":  
-                    Element_E1_Find("Find Web Ordering", "id", "frictionless-detail", ParentTest, "no_jira"); 
+                    Element_E1_Find("Find 'Frictionless detail' section", "id", "frictionless-detail", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Element_Child_List_L1("Find 'Allow Frictionless' options", e1,"xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
@@ -514,8 +516,7 @@ class AP3_brand extends AP3_GUI{
                     Element_Text(" Find 'Select Store' > Cancel", L1.get(0), ParentTest, "no_jira"); 
                     Element_Text(" Find 'Select Store' > OK", L1.get(1), ParentTest, "no_jira"); 
                     Element_Click("Click 'Cancel'", L1.get(0), ParentTest, "no_jira"); 
-                        if (FAIL) { return;}                      
-//                    
+                        if (FAIL) { return;}                                         
 //                    Element_Child_Click("Open 'Store List' drop-down", e2, "xpath", ".//div[@class='v-select__selections']", ParentTest, "no_jira"); 
 //                        if (FAIL) { return;}     
 //                    List_L0("Get Store List", "xpath", "//table/tbody/tr/td[5]", ParentTest, "no_jira");
@@ -543,7 +544,7 @@ class AP3_brand extends AP3_GUI{
             Element_By_Path_Click(" 'LEAVE' Click", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
         } 
-        List_L0("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", ParentTest, "no_jira");             
+        List_L0("Brand Setup Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", ParentTest, "no_jira");             
             if (FAIL) { return;} 
         for (int i = 0; i < L0.size(); i++) {        
             Element_Text("Brand Setup Tab >>>>", L0.get(i), ParentTest, "no_jira"); 
@@ -763,7 +764,12 @@ class AP3_brand extends AP3_GUI{
                             if (FAIL) { return;}
                     }    
                 } 
-            }    
+            } else if (Tab_Name.toLowerCase().contains("atation alosure")) {  
+                Element_By_Path_Click("Click 'Station Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}
+                Page_URL("Station Closure page URL", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                 
+            }
        }
     } catch (Exception ex){}   // =============================================  
     }  
