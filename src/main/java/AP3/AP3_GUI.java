@@ -2851,15 +2851,15 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Export menuset: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         } 
-//        if(_MM_import){
-//            SCOPE += ", Import Global Modifiers";
-//            ParentTest = HtmlReport.createTest("Import Global Modifiers"); 
-//            AP3_mm_import_mod BR = new AP3.AP3_mm_import_mod(AP3_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-//            ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
-//            ParentTest.getModel().setEndTime(new Date()); 
-//        }
+        if(_MM_import){
+            SCOPE += ", Import Global Modifiers";
+            ParentTest = HtmlReport.createTest("Import Global Modifiers"); 
+            AP3_mm_import_mod BR = new AP3.AP3_mm_import_mod(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+            ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        }
         if(_MM_import){            
             SCOPE += ", Import Global Menuset";
             ParentTest = HtmlReport.createTest("Import Global Menuset"); 
