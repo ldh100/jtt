@@ -3459,18 +3459,18 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
             if (status == ExpStatus) {
                 _p++;
-                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+                        + " ", ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
 //break; // =================  Do not attempt againg if passed                    
             } else {
                 _f++;
                 FAIL = true;
-                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+                        + " ", ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
             }
 //} // =======   3 times Loop if not good
 
@@ -3608,18 +3608,18 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
             if (status == ExpStatus) {
                 _p++;
-                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + "GET" + ": " + EndPoint), API_SRART);
+                        + " ", ParentTest.createNode(_t + ". " + NAME + " > " + "GET" + ": " + EndPoint), API_SRART);
 //break; // =================  Do not attempt againg if passed                    
             } else {
                 _f++;
                 FAIL = true;
-                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + "GET" + ": " + EndPoint), API_SRART);
+                        + " ", ParentTest.createNode(_t + ". " + NAME + " > " + "GET" + ": " + EndPoint), API_SRART);
             }
 //} // =======   3 times Loop if not good
 
