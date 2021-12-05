@@ -15,6 +15,8 @@ class vendor extends AP3_API_GUI{
         ParentTest = a.ParentTest;
     }
     String AAA = "";
+    String Client_ID = "";
+    String Client_PW = "";
     String Client_Accces_TKN = "";
     String Client_Refresh_TKN = "";
     protected void run() {   
@@ -44,8 +46,11 @@ class vendor extends AP3_API_GUI{
     if(!env.equals("DE")) {
         return;
     } 
-    
-        Auth = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
+        // Copy from AP3:
+        //{"client_id":"646497f5d045433d99de9e41d872f1af","client_password":"a9ca54819d244a22bc422d4b321146c3"}
+        Client_ID = "646497f5d045433d99de9e41d872f1af";
+        Client_PW = "a9ca54819d244a22bc422d4b321146c3";
+        Auth = "Basic " + Base64.getEncoder().encodeToString((Client_ID + ":" + Client_PW).getBytes());
         JOB_Api_Call("AP3 API Client ID/PW Authentication", "GET", 
             BaseAPI + "/vendor/auth", Auth, "", 200, ParentTest, "no_jira");         
         if(json != null){ 

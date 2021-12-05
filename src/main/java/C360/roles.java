@@ -15,8 +15,9 @@ class roles extends C360_GUI{
     try { 
         EX += " - " + "\t" + " === User Management " + "\t" + " ===== " + "\t" + " == User Management   Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
-        Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
-        Thread.sleep(500);
+        //Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
+        Refresh("Refresh > Open Side Menu", ParentTest, "no_jira");          
+        Thread.sleep(1000);
         List_L0("Navigation Nodes", "xpath", "//div[@class='p-treenode-content']", ParentTest, err);
         T_Index = -1;
         for (int i = 0; i < L0.size(); i++) {

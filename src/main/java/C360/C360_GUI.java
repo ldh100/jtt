@@ -1997,15 +1997,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Users: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }
-        if(_Concepts){
-            SCOPE += "Concepts, ";
-            ParentTest = HtmlReport.createTest("Concepts"); 
-            concepts BR = new C360.concepts(C360_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
-            ParentTest.getModel().setName("Concepts: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date()); 
-        }      
+     
         if(_Concept_groups){
             SCOPE += "Concept Groups, ";
             ParentTest = HtmlReport.createTest("Concept Groups"); 
@@ -2013,6 +2005,15 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
             ParentTest.getModel().setName("Concept Groups: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date()); 
+        } 
+        if(_Concepts){
+            SCOPE += "Concepts, ";
+            ParentTest = HtmlReport.createTest("Concepts"); 
+            concepts BR = new C360.concepts(C360_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;       
+            ParentTest.getModel().setName("Concepts: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         } 
         if(_Posid_ranges){

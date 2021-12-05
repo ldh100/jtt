@@ -103,7 +103,7 @@ public class Env extends javax.swing.JInternalFrame {
         });
 
         cmbWhat.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus", "Promo", " " }));
+        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus", "Promo" }));
         cmbWhat.setMinimumSize(new java.awt.Dimension(113, 24));
         cmbWhat.setPreferredSize(new java.awt.Dimension(113, 24));
         cmbWhat.addItemListener(new java.awt.event.ItemListener() {

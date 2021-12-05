@@ -429,7 +429,8 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         START_CRON();       
     }//GEN-LAST:event_btnStartCronMouseClicked
     private void btnStopCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStopCronMouseClicked
-        STOP_CRON();  
+        STOP_CRON(); 
+        LOAD_JOBS(); //  ==== Reload definitions to capture possible updates
     }//GEN-LAST:event_btnStopCronMouseClicked
 
     private void btnHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHelpMouseClicked

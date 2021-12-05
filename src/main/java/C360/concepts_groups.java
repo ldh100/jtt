@@ -15,8 +15,9 @@ class concepts_groups extends C360_GUI{
     try { 
         EX += " - " + "\t" + " === Concept Groups " + "\t" + " ===== " + "\t" + " == Concept Groups  Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 
-        Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
-        Thread.sleep(500);
+        //Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
+        Refresh("Refresh > Open Side Menu", ParentTest, "no_jira");          
+        Thread.sleep(1000);
         List_L0("Navigation Nodes", "xpath", "//div[@class='p-treenode-content']", ParentTest, "no_jira");
         T_Index = -1;
         for (int i = 0; i < L0.size(); i++) {
@@ -25,7 +26,7 @@ class concepts_groups extends C360_GUI{
                 T_Index = i; 
             }
         }          
-        Element_Child_Click("Click/Expand 'Item Catalog", L0.get(T_Index), "xpath", ".//button[@class='p-tree-toggler p-link']", ParentTest, "no_jira");
+        Element_Child_Click("Click/Expand 'Item Catalog'", L0.get(T_Index), "xpath", ".//button[@class='p-tree-toggler p-link']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Child_List_L1("'Item Catalog' navigation nodes", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
         Find_Text("Find Navigation node 'Concept Groups'", "Concept Groups", true, ParentTest, "no_jira");    
@@ -58,7 +59,6 @@ class concepts_groups extends C360_GUI{
         Element_Child_Text("Find 'Header Bar' Title text", e1, "xpath", ".//h6[@class='ml-3 md:mr-4 md:ml-4']", ParentTest, "no_jira");
         Element_Child_Text("Find 'Header Bar > Discard' text", e1, "xpath", ".//span[text()='Discard']", ParentTest, "no_jira");
         Element_Child_Text("Find 'Header Bar > Save' text", e1, "xpath", ".//span[text()='Save']", ParentTest, "no_jira");
-        
         
         Element_Child_Click("Click 'Discard' button", e1, "xpath", ".//span[text()='Discard']/ancestor::button", ParentTest, "no_jira");
              if (FAIL) { return;}

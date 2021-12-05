@@ -1006,7 +1006,7 @@ class AP3_mm_items extends AP3_GUI{
 
             Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
             if (FAIL) { return;}
-            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
             if (FAIL) { return;}

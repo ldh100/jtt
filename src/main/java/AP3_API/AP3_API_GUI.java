@@ -3382,16 +3382,16 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setEndTime(new Date());
         }
   
-        if (!env.equals("PR")) {
-            SCOPE += "Vendor ";
-            EX += " - " + "\t" + "Vendor" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest = HtmlReport.createTest("Vendor");
-            vendor BR = new AP3_API.vendor(AP3_API_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
-            ParentTest.getModel().setName("Vendor - Tot: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());
-        }
+//        if (!env.equals("PR")) { // ================ Vendor =========
+//            SCOPE += "Vendor ";
+//            EX += " - " + "\t" + "Vendor" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//            ParentTest = HtmlReport.createTest("Vendor");
+//            vendor BR = new AP3_API.vendor(AP3_API_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time;
+//            ParentTest.getModel().setName("Vendor - Tot: " + BR._t + ", Failed: " + BR._f);
+//            ParentTest.getModel().setEndTime(new Date());
+//        }     
     }
 
     protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {

@@ -2851,15 +2851,15 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Export menuset: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         } 
-        if(_MM_import){
-            SCOPE += ", Import Global Modifiers";
-            ParentTest = HtmlReport.createTest("Import Global Modifiers"); 
-            AP3_mm_import_mod BR = new AP3.AP3_mm_import_mod(AP3_GUI.this);
-            BR.run(); // ======================================
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date()); 
-        }
+//        if(_MM_import){
+//            SCOPE += ", Import Global Modifiers";
+//            ParentTest = HtmlReport.createTest("Import Global Modifiers"); 
+//            AP3_mm_import_mod BR = new AP3.AP3_mm_import_mod(AP3_GUI.this);
+//            BR.run(); // ======================================
+//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+//            ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
+//            ParentTest.getModel().setEndTime(new Date()); 
+//        }
         if(_MM_import){            
             SCOPE += ", Import Global Menuset";
             ParentTest = HtmlReport.createTest("Import Global Menuset"); 
@@ -6288,13 +6288,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     break;
                 }
             } 
-
             if("".equals(t)){
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "WARN" + "\t" + "File not found" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                
                 Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
-                        "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                        "<br />File: " + F_NAME + " - Not Found", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + "Delete the file after test" +
@@ -6419,7 +6418,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
  
         FAIL = false;
         try {
-            Files.copy(Paths.get(SOURCE), Paths.get(TARGET), StandardCopyOption.COPY_ATTRIBUTES);
+            Files.copy(Paths.get(SOURCE), Paths.get(TARGET), StandardCopyOption.REPLACE_EXISTING);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + SOURCE + "\t" + TARGET + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -6427,10 +6426,10 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + SOURCE + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Source: " + SOURCE + "\t" + "Target: " + TARGET + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Target: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Source: " + SOURCE + ", Target: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     } 
@@ -6442,14 +6441,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
  
         FAIL = false;
-        String ExportFile = "";
         File zip_source = new File(DIR + File.separator + F_NAME);
         File destDir = new File(DIR);
         byte[] buffer = new byte[1024];
         try {
             try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zip_source))) {
                 ZipEntry zipEntry = zis.getNextEntry();
-                ExportFile = zipEntry.getName();
                 while (zipEntry != null) {
                     File newFile = newUnzipFile(destDir, zipEntry);
                     if (zipEntry.isDirectory()) {
