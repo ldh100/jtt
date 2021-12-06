@@ -3064,6 +3064,13 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setEndTime(new Date());
             AP3_User_ID = BR.AP3_User_ID;
             AP3_TKN = BR.AP3_TKN;
+            if (AP3_User_ID.isEmpty()) {
+                EX += " - " + "\t" + "User API: " + "\t" + "AP3 Admin: " + ADMIN_ID + "\t" + "ID Not Found" + "\t" + "WARN" + "\t" + " - "
+                        + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("WARN", "", ParentTest.createNode("Uaer API: AP3 Admin '" + ADMIN_ID + "' > " + "ID Not Found"), new Date());
+                FAIL = true;
+                return;
+            }            
         }
 
         if (!FAIL) {
@@ -3087,11 +3094,26 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             BRAND_TIMESLOTS = BR.BRAND_TIMESLOTS;
             MENU_TIMESLOTS = BR.MENU_TIMESLOTS;
             DELIEVEY_TIMESLOTS = BR.DELIEVEY_TIMESLOTS;
+            if (SiteID.isEmpty()) {
+                EX += " - " + "\t" + "Location API: " + "\t" + "Site: " + SITE + "\t" + "ID Not Found" + "\t" + "WARN" + "\t" + " - "
+                        + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("WARN", "", ParentTest.createNode("Location API: Site '" + SITE + "' > " + "ID Not Found"), new Date());
+                FAIL = true;
+                return;
+            }
+            if (BrandID.isEmpty()) {
+                EX += " - " + "\t" + "Location API: " + "\t" + "Brand: " + BRAND + "\t" + "ID Not Found" + "\t" + "WARN" + "\t" + " - "
+                        + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("WARN", "", ParentTest.createNode("Location API: Brand '" + BRAND + "' > " + "ID Not Found"), new Date());
+                FAIL = true;
+                return;
+            }            
             if (MENU_IDS.size() < 1) {
                 EX += " - " + "\t" + "Brand: " + BRAND + "\t" + "No Menu(s)" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "", ParentTest.createNode("Brand: " + BRAND + " No Menus"), new Date());
                 FAIL = true;
+                return;
             }
         }
         if (true) {
@@ -3137,12 +3159,15 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "No Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Timeslots"), new Date());
                 FAIL = true;
+                return;
             } else if (CATEGORIES_IDS.isEmpty()) {
                 _t++;
                 _w++;
                 EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Categories" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "No Categories", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Categories"), new Date());
+                FAIL = true;
+                return;
             } else if (ITEMS_IDS.isEmpty()) {
                 _t++;
                 _w++;
@@ -3150,6 +3175,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "No Items", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Items"), new Date());
                 FAIL = true;
+                return;
             }
         }
 

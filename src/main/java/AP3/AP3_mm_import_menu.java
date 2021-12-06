@@ -119,9 +119,8 @@ class AP3_mm_import_menu extends AP3_GUI{
             Backup_File_Name = MenuName + "_Backup.xlsx";
             File_Copy("Create Exported Menuset File Copy", Download_Dir + File.separator + Export_File_Name, Download_Dir + File.separator + Backup_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;} 
-                
-            // ===============   Good Export to the same as Imported - override
-            Element_Attribute("Get Menu ID (Index 1) - Exported", Menu_IDS.get(0), "menu-id", ParentTest, "no_jira");            
+    
+            Element_Attribute("Get Menu ID (Index 0) - Exported", Menu_IDS.get(0), "menu-id", ParentTest, "no_jira");             
             Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - 'As Is' to the Same MenuSet", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}            
             Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
@@ -133,7 +132,7 @@ class AP3_mm_import_menu extends AP3_GUI{
                     _f++; EX += _t + "\t" + "Import Errors - Expected None" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("FAIL", "Found " + L3.size() + " unexpected error(s)", true,ParentTest.createNode(_t + ". " + "Import Errors - Expected None"), new Date());                       
                     for (int i = 0; i < L3.size(); i++) {
-                        Element_Attribute("Unexpected Errors List: (Index " + i + ") Text", L3.get(i), "textContent", ParentTest, "no_jira");
+                        Element_Attribute("UnExpected Error (Index " + i + ") Text", L3.get(i), "textContent", ParentTest, "no_jira");
                         Errors += t + "\n";
                     }
                 }                 
@@ -148,21 +147,34 @@ class AP3_mm_import_menu extends AP3_GUI{
             Find_Text("Find Import Errors Notification - Expected", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
             for (int i = 0; i < L0.size(); i++) {
-                Element_Attribute("Expected Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira"); 
+                Element_Attribute("Expected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira"); 
             }
             Find_Text("Find Error: 'Imported category has \"Category ID\" set, but no matching category was found.'", "but no matching category was found.", true, ParentTest, "no_jira"); 
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
-            Thread.sleep(500);   
+            Thread.sleep(500);  
             
-            //  ===========================  Import to other Menu with ID(s) removed    
+            //  ===========================  Import to other Menu with ID(s) removed and Price '>$200'  
             Excel_Edit = Excel_Edit_DataRow(Download_Dir, Export_File_Name, MenuName, "New_Category_Name"); 
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            } 
+            Excel_Edit = Excel_Edit_DataRow(Download_Dir, Export_File_Name, MenuName, "Price 205"); 
+            Element_Attribute("Get Menu ID (Index 1) - next after Exported", Menu_IDS.get(1), "menu-id", ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - 'Removed ID(s)' to Another MenuSet", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}  
+            Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);  
+            Find_Text("Find Import Errors Notification - Expected", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
+            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            for (int i = 0; i < L0.size(); i++) {
+                Element_Attribute("Expected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
+                Errors += t + "\n";
+            }           
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            
+            //  ===========================  Import to other Menu with ID(s) removed   
+            File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
+                if (FAIL) { return;}             
+            
+            Excel_Edit = Excel_Edit_DataRow(Download_Dir, Export_File_Name, MenuName, "New_Category_Name");  
             Element_Attribute("Get Menu ID (Index 1) - next after Exported", Menu_IDS.get(1), "menu-id", ParentTest, "no_jira");
             Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - 'Removed ID(s)' to Another MenuSet", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
@@ -176,8 +188,6 @@ class AP3_mm_import_menu extends AP3_GUI{
                     Log_Html_Result("FAIL", "Found " + L3.size() + " unexpected error(s)", true,ParentTest.createNode(_t + ". " + "Find import Errors list - Expected None"), new Date());                       
                 } 
 
-
-// ===================================   Bad Exports
 /*
 1	          2	            3	            4	             5	           6	      7	         8	  9	         10	          11	         12	13	         14	                  15	                 16	          17	          18
 Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID   Item Name	Price	Calories	Description	Item Chit #	PLU	Item Enabled	Modifier Group ID	Modifier Group Name	Tax Tags	Barcodes	Units
@@ -185,23 +195,16 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
             //                               1         2        3            4     5     6   7   8   9   10  11  12  13  14  15  16  17  18
             ValuesToWrite = new String[] {"Category", "", "Cat " + New_ID, "10", "TRUE", "", "", "", "", "", "", "", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            } 
+//            if(Excel_Edit.contains("Error")){
+//                _t++;
+//                _w++;
+//                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
+//                return;
+//            } 
             //                               1     2  3   4   5   6     7              8       9    10  11   12         13     14  15  16   17   18            
-            ValuesToWrite = new String[] {"Item", "", "", "", "", "", "Item Name X", "1.12", "100", "", "9", "900911", "FALSE", "", "", "[\"Carbonated Beverage\"]", "", "2"};
+            ValuesToWrite = new String[] {"Item", "", "", "", "", "", "Item Name X", "200.12", "100", "", "9", "900911", "FALSE", "", "", "[\"Carbonated Beverage\"]", "", "2"};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }
             Element_Attribute("Get Menu ID (Index 1) - next after Exported", Menu_IDS.get(1), "menu-id", ParentTest, "no_jira");            
             Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - 'With New Rows' to other MenuSet > Expect OK", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}            
@@ -210,105 +213,40 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
             Thread.sleep(500);
             List_L0("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 for (int i = 0; i < L0.size(); i++) {
-                    Element_Attribute("Unexpected Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
+                    Element_Attribute("UnExpected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
                     Errors += t + "\n";
                 }
-
             //                            1   2   3   4   5   6   7   8   9  10   11  12  13  14  15  16  17  18            
             ValuesToWrite = new String[] {"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }
-            //                            1           2   3   4    5   6   7   8  9   10   11    12   13  14  15  16  17  18            
+          
             ValuesToWrite = new String[] {"Category", "", "", "a", "", "", "", "", "", "", "", "PLU", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }            
+            
             ValuesToWrite = new String[] {"Category", "", "Duplicate Name", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite); 
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }            
+          
             ValuesToWrite = new String[] {"Category", "", "Duplicate Name", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);            
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }
+
             ValuesToWrite = new String[] {"Item", "", "", "1.2", "", "", "Item Name XXX", "210.99", "100.2", "", "10.2", "PLU", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }
+
             ValuesToWrite = new String[] {"Modifier Group", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }
+
             ValuesToWrite = new String[] {"Item", "", "", "", "", "", "", "Price", "Cal", "", "", "90078.9", "", "", "", "Tax Tag", "", "A"};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            } 
             // Duplicate Modifier Group
             ValuesToWrite = new String[] {"Modifier Group", "", "", "", "", "", "", "", "", "", "", "", "", "A3lvmDKMQkfrKlyq5m0qs1MMZD7mEwslL7MDpZDes9eq7w4R7kC7Dm9WdemRUL0OGNGBrXhyZ6z4olzpsqd6qjYZ0", "", "", "", ""};
-            Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);            
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }            
+            Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);                        
+            
             ValuesToWrite = new String[] {"Modifier Group", "", "", "", "", "", "", "", "", "", "", "", "", "A3lvmDKMQkfrKlyq5m0qs1MMZD7mEwslL7MDpZDes9eq7w4R7kC7Dm9WdemRUL0OGNGBrXhyZ6z4olzpsqd6qjYZ0", "", "", "", ""};         
-            Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);            
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }                                    
+            Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);                                              
+            
             ValuesToWrite = new String[] {"Item", "", "", "5", "", "2J8oB5rMkmU8j0gOQJoMukXERLwg98FA3mDYZ0vpHk4vgjGz0PCBLLX3kdP3uPZgYdr", "Item Name XYZ", "1.00", "350", "", "", "900789", "", "", "", "[]", "", "4"};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, MenuName,  ValuesToWrite);  
-            if(Excel_Edit.contains("Error")){
-                _t++;
-                _w++;
-                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-                return;
-            }       
-            
-            
+       
             Element_Attribute("Get Menu ID (Index 1) - next after Exported", Menu_IDS.get(1), "menu-id", ParentTest, "no_jira");                        
             Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - 'With New Rows' to other MenuSet > Expect Errors", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}            
@@ -317,44 +255,13 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
             Thread.sleep(500);
             Find_Text("Find Import Errors Notification - Expected", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-//                if (FAIL || L0.isEmpty()) { 
-//                    return;
-//                } 
             for (int i = 0; i < L0.size(); i++) {
-                Element_Attribute("Expected Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
+                Element_Attribute("Expected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
                 Errors += t + "\n";
             }         
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(500);
-            
-//            File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
-//                if (FAIL) { return;}            
-//            Excel_Edit = Excel_Edit_DataRow(Download_Dir, Export_File_Name, MenuName, "Price 205"); 
-//            if(Excel_Edit.contains("Error")){
-//                _t++;
-//                _w++;
-//                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Write new data row ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-//                return;
-//            }            
-//            Element_Attribute("Get Menu ID (Index 1) - next after Exported", Menu_IDS.get(1), "menu-id", ParentTest, "no_jira");                        
-//            Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - 'With New Rows' to other MenuSet > Expect Errors", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
-//                if (FAIL) { return;}            
-//            Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
-//                if (FAIL) { return;}
-//            Thread.sleep(500);
-//            Find_Text("Find Import Errors Notification - Expected", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
-//            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-////                if (FAIL || L0.isEmpty()) { 
-////                    return;
-////                } 
-//            for (int i = 0; i < L0.size(); i++) {
-//                Element_Attribute("Expected Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
-//                Errors += t + "\n";
-//            }         
-//            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
-//            Thread.sleep(500);
-            
+      
             Check_Error("Invalid \"Record Type\". Should be \"Category\", \"Item\", or \"Modifier Group\".");
             Check_Error("Imported item has \"Item ID\" set, but no matching item was found.");
             Check_Error("\"Category Name\" is a required field. Please enter a string value.");
@@ -387,7 +294,7 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
     private void Check_Error(String ExpectedError){
         if(Errors.contains(ExpectedError)){
             _t++; _p++; EX += _t + "\t" + "Expected Error:" + "\t" + "Found" + "\t" + ExpectedError + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", ExpectedError, false,ParentTest.createNode(_t + ". " + "Expected Error Found"), new Date());                                       
+            Log_Html_Result("PASS", ExpectedError, false,ParentTest.createNode(_t + ". " + "Expected Error: " + ExpectedError), new Date());                                       
         }else{
             _t++; _f++; EX += _t + "\t" + "Expected Error:" + "\t" + "Not Found" + "\t" + ExpectedError + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             Log_Html_Result("FAIL", ExpectedError, false,ParentTest.createNode(_t + ". " + "Expected Error Not Found"), new Date());                                       
@@ -443,7 +350,7 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
                _Workbook = new HSSFWorkbook(inputStream);                  //If it is xls file then create object of XSSFWorkbook class
             }    
             Sheet sheet = _Workbook.getSheet(sheetName);                //Read excel sheet by sheet name    
-            for(int i = 0; i < sheet.getLastRowNum(); i++) {
+            for(int i = 1; i <= sheet.getLastRowNum(); i++) {
                 Row row = sheet.getRow(i);       
                 Cell cell = row.getCell(0);
                 if(cell.getStringCellValue().equals("Category")) {
@@ -453,6 +360,10 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
                 } 
                 if(cell.getStringCellValue().equals("Item") && Whatt_ToEdit.equals("Price 205")) { 
                     row.getCell(7).setCellValue(205);
+                }         
+                if(cell.getStringCellValue().equals("Item") && Whatt_ToEdit.equals("Remove Item ID")) { 
+                    row.getCell(5).setCellValue("");
+                    row.getCell(6).setCellValue(row.getCell(6).getStringCellValue() + " Exported-" + New_ID);
                 }                
 //                else if (cell.getStringCellValue().equals("Modifier Group")) {
 //                    if(Whatt_ToEdit.equals("New_Mod_Group_Name")){

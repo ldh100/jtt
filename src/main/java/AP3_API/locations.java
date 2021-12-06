@@ -35,14 +35,27 @@ class locations extends AP3_API_GUI {
     private String AAA = "";
     JSONObject requestParams = null;
     protected void run() {
+        Double LA = 0.0;
+        Double LO = 0.0; 
+        switch (env) {
+            case "PR":
+                LA = 42.299371;
+                LO = -71.265995;
+            case "ST":
+                LA = 43.6352304;
+                LO = -79.6925862;
+            case "DE":
+                LA = 43.6352304;
+                LO = -79.6925862;
+        }      
         JOB_Api_Call("Location > Search (lat missing/long)", "GET",
-                BaseAPI + "/location/search?long=-71.265995&operation_id=123", "", "", 400, ParentTest, "no_jira");    
+                BaseAPI + "/location/search?long=" + LO + "&operation_id=123", "", "", 400, ParentTest, "no_jira");    
         JOB_Api_Call("Location > Search (lat/long missing)", "GET",
-                BaseAPI + "/location/search?lat=42.299371&operation_id=123", "", "", 400, ParentTest, "no_jira"); 
+                BaseAPI + "/location/search?lat=" + LA + "&operation_id=123", "", "", 400, ParentTest, "no_jira"); 
         JOB_Api_Call("Location > Search (lat/long/operation_id missing)", "GET",
-                BaseAPI + "/location/search?lat=42.299371&long=-71.265995", "", "", 200, ParentTest, "no_jira"); 
+                BaseAPI + "/location/search?lat=" + LA + "&long=" + LO, "", "", 200, ParentTest, "no_jira"); 
         JOB_Api_Call("Location > Search (lat/long)", "GET",
-                BaseAPI + "/location/search?lat=42.299371&long=42.299371&operation_id=123", "", "", 200, ParentTest, "no_jira"); 
+                BaseAPI + "/location/search?lat=" + LA + "&long=" + LO + "&operation_id=123", "", "", 200, ParentTest, "no_jira"); 
             //{
             //    "locations": []
             //}

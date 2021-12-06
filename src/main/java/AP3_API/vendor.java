@@ -46,6 +46,10 @@ class vendor extends AP3_API_GUI{
     if(!env.equals("DE")) {
         return;
     } 
+    
+    if(true) {
+        return;
+    }    
         // Copy from AP3:
         //{"client_id":"646497f5d045433d99de9e41d872f1af","client_password":"a9ca54819d244a22bc422d4b321146c3"}
         Client_ID = "646497f5d045433d99de9e41d872f1af";
