@@ -4438,7 +4438,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     }
 
-    protected void Element_By_Path_Text_DblClick(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception  {
+    protected void Element_By_Path_DblClick(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception  {
         if (sw1.isRunning()) {
             sw1.reset();
         }
@@ -4477,8 +4477,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             Actions action = new Actions(d1);
             action.moveToElement(e).doubleClick().perform();
             _p++;
-            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - "
-            + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "DblClick successful" + "\t" + "PASS" + "\t" + " - "
+                + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), new Date());
         } catch (Exception ex) {
             _f++;
@@ -4486,7 +4486,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             err = ex.getMessage().trim();
             if (err.contains("\n")) { (err = err.substring(0, err.indexOf("\n"))).trim(); }
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err
-            + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+                + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), new Date());
         }

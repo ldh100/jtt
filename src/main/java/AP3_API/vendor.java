@@ -31,25 +31,12 @@ class vendor extends AP3_API_GUI{
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WRONG_ID" + ":" + ADMIN_PW).getBytes());
         JOB_Api_Call("AP3 API Client ID/PW Authentication - Wrong ID", "GET", 
             BaseAPI + "/vendor/auth", Auth, "", 401, ParentTest, "no_jira");         
-        if(json != null){ 
-            try {
-                if(json.has("access")) {
-                    Client_Accces_TKN = json.getJSONObject("access").getString("token");                   
-                }
-                if(json.has("refresh")) {
-                    Client_Refresh_TKN = json.getJSONObject("refresh").getString("token");                         
-                } 
-            } catch (Exception ex){
-                AAA = ex.getMessage();
-            }
-        }        
+        
     if(!env.equals("DE")) {
         return;
     } 
     
-    if(true) {
-        return;
-    }    
+   
         // Copy from AP3:
         //{"client_id":"646497f5d045433d99de9e41d872f1af","client_password":"a9ca54819d244a22bc422d4b321146c3"}
         Client_ID = "646497f5d045433d99de9e41d872f1af";

@@ -108,13 +108,12 @@ class AP3_orders extends AP3_GUI{
         Find_Text("Find 'Export' text", "Export", true, ParentTest, "no_jira");      
         Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
             if (FAIL) { return;} 
-    Thread.sleep(5000);           
-        //  Call it later after date range selected, Check PDF > delete,  achnge to CSV > Check > delete 
+        Thread.sleep(5000);           
+        //  Call it later after date range selected, Check PDF > delete, change to CSV > Check > delete 
      
         File tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ "pickup-orders-undefined.pdf");
         if (tmp.exists()) {
-            _t++; Thread.sleep((long) sleep);File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
-               if (FAIL) { return;}   
+            File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
         } else {
             _t++;
             _w++;
@@ -190,8 +189,7 @@ class AP3_orders extends AP3_GUI{
                 Thread.sleep(3000);
                 tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ "all-orders-undefined.csv");
                 if (tmp.exists()) {
-                    _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "all-orders-undefined.csv",ParentTest, "no_jira");
-                            if (FAIL) { return;}   
+                    File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "all-orders-undefined.csv",ParentTest, "no_jira");
                 } else {
                     _t++; _w++;
                     EX += _t + "\t" + "File to delete does not exist" + "\t" + "all-orders-undefined.pdf  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -293,7 +291,7 @@ Thread.sleep(1000);
         Element_By_Path_Click("Click day 17", "xpath", "//tr/td[contains(number(),17)]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 Thread.sleep(3000);    
-       Element_By_Path_Text_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira"); 
+       Element_By_Path_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira"); 
             if (FAIL) { return; }
 Thread.sleep(3000);
         Element_By_Path_Click("Click day 16", "xpath", "//tr/td[contains(number(),16)]", ParentTest, "no_jira"); 
@@ -305,7 +303,6 @@ Thread.sleep(1000);
         //URL to verify the date picker has selected 7 day range
         Page_URL("Current URL", ParentTest, "no_jira");
        
-        
         Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
            if (FAIL) { return;}         
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
@@ -313,12 +310,13 @@ Thread.sleep(1000);
         Thread.sleep(3000);
         tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ filebrand);
         if (tmp.exists()) {
-          _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", filebrand, ParentTest, "no_jira");
-             if (FAIL) { return;}   
+            File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", filebrand, ParentTest, "no_jira"); 
         } else {
             _t++; _w++;
             EX += _t + "\t" + "File to delete does not exist" + "\t" + filebrand + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        // =============================================  
+    }   
     } 
 }

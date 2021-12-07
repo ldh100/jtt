@@ -154,6 +154,9 @@ class locations extends AP3_API_GUI {
                 AAA = ex.getMessage();
             }
         }
+        if(MENU_IDS.isEmpty()){ // ================================== Cannot process without Menus
+            return;
+        }
         Auth = "Bearer " + AP3_TKN;  // ===============    AP3 Sector ===========================
         JOB_Api_Call("Location/Sector > /'SectorID'?extended=true&nocache=1", "GET",
                 BaseAPI + "/location/sector/" + SectorID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
@@ -285,7 +288,7 @@ class locations extends AP3_API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
         
         JOB_Api_Call("Location > Site - Get drop-off location > ID does not Exist", "GET", 
-                   BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + "ID_Does_Not-Exists", Auth, BODY, 404, ParentTest, "no_jira");
+                   BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + "ID_Does_Not-Exists", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
         BODY = "{"
