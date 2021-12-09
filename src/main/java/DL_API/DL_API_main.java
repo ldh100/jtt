@@ -1,4 +1,4 @@
-package C360_API;
+package DL_API;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -28,18 +28,17 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.SwingWorker;
 import org.json.JSONObject;
 
-public class C360_API_main {   
+public class DL_API_main {   
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
     protected String Realm = "";
     protected String Auth = "";
     protected String NewID = "";
 
-    protected String C360_ADMIN_ID = "";
-    protected String C360_ADMIN_PW = "";
-    protected String C360_User_ID = "";
-    protected String C360_User_TKN = "";
-
+    protected String DL_ADMIN_ID = "";
+    protected String DL_ADMIN_PW = "";
+    protected String DL_User_ID = "";
+    protected String DL_User_TKN = "";
 
     private String HTML_Report_Path = "";
     private String Report_Date = "";
@@ -67,7 +66,7 @@ public class C360_API_main {
     private String SQL = "";
 
     private String url = "";
-    protected String app = "C360";
+    protected String app = "DL";
     protected String env = "";
     protected String BaseAPI = "";
     protected String BODY = "";
@@ -102,18 +101,18 @@ public class C360_API_main {
     protected void Extent_Report_Config() throws IOException {
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "C360_API_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "DL_API_" + env + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
 
-        HtmlReport.setSystemInfo("Application", "C360 API(s)");
+        HtmlReport.setSystemInfo("Application", "DL API(s)");
         HtmlReport.setSystemInfo("Machine", A.A.WsID);
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
         HtmlReport.setSystemInfo("Tester ID", A.A.UserID);
         HtmlReport.setSystemInfo("Run Trigger", r_type);
         HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
 
-        HtmlReporter.config().setDocumentTitle("JTT C360 API Automation Report");
+        HtmlReporter.config().setDocumentTitle("JTT DL API Automation Report");
         //HtmlReporter.config().setTheme(Theme.DARK);               
         HtmlReporter.config().setTheme(Theme.STANDARD);
     }
@@ -197,8 +196,8 @@ public class C360_API_main {
                 if (l.contains("_slack: ")) {  _Slack = Boolean.parseBoolean(value); }
                 if (l.contains("_zip_report: ")) { Zip_Report = Boolean.parseBoolean(value); }
                 
-                if (l.contains("C360_ADMIN_ID: ")) { C360_ADMIN_ID = value; }
-                if (l.contains("C360_ADMIN_PW: ")) { C360_ADMIN_PW = value; } 
+                if (l.contains("DL_ADMIN_ID: ")) { DL_ADMIN_ID = value; }
+                if (l.contains("DL_ADMIN_PW: ")) { DL_ADMIN_PW = value; } 
                 
 
             }
@@ -267,10 +266,10 @@ public class C360_API_main {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'C360_API_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
+                    " WHERE [app] = 'DL_API_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "C360_API_" + env);
+            _update.setString(3, "DL_API_" + env);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -335,7 +334,7 @@ public class C360_API_main {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "C360_API_" + env);
+            _insert.setString(3, "DL_API_" + env);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -426,7 +425,7 @@ public class C360_API_main {
             Current_Log_Update(GUI, t_rep + "\r\n");
         }               
 
-        EX = "C360_API " + env + ". "
+        EX = "DL_API " + env + ". "
                 + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
                 + ". " + t_rep
                 + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
@@ -437,12 +436,12 @@ public class C360_API_main {
            
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i + Summary;
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
-        Current_Log_Update(GUI, "= C360 API(s) " + ", Environment: " + env + "\r\n");
+        Current_Log_Update(GUI, "= DL API(s) " + ", Environment: " + env + "\r\n");
 
 
         LOG_UPDATE(Log); // ========================================================
         
-        HtmlReporter.config().setReportName("C360 API(s)" + ", Env: " + env
+        HtmlReporter.config().setReportName("DL API(s)" + ", Env: " + env
                 + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
                 + ". Resp(sec) - Min: " + A.A.df.format(t_min)
                 + ", Avg: " + A.A.df.format(t_avg)
@@ -454,7 +453,7 @@ public class C360_API_main {
 
         if (_Slack && !Slack_Channel.equals("N/A")) {
 
-            String MSG = "C360_API_" + env + " Automation report - " + Report_Date
+            String MSG = "DL_API_" + env + " Automation report - " + Report_Date
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
@@ -581,13 +580,13 @@ public class C360_API_main {
             SCOPE += "Login ";
             EX += " - " + "\t" + "Login" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Login");
-            login BR = new C360_API.login(C360_API_main.this);
+            login BR = new DL_API.login(DL_API_main.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             ParentTest.getModel().setName("Login - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-            C360_User_ID = BR.C360_User_ID;
-            C360_User_TKN = BR.C360_User_TKN;
+            DL_User_ID = BR.DL_User_ID;
+            DL_User_TKN = BR.DL_User_TKN;
         }     
    }
 }

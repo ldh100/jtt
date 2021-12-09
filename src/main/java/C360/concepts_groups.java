@@ -29,24 +29,23 @@ class concepts_groups extends C360_GUI{
         Element_Child_Click("Click/Expand 'Item Catalog'", L0.get(T_Index), "xpath", ".//button[@class='p-tree-toggler p-link']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Child_List_L1("'Item Catalog' navigation nodes", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
-        Find_Text("Find Navigation node 'Concept Groups'", "Concept Groups", true, ParentTest, "no_jira");    
-        Element_By_Path_Click("Click > 'User'", "xpath", "//a[@label='Concept Groups']/ancestor::span[@class='p-treenode-label']", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click > 'Item Catalog > Concept Groups'", "xpath", "//a[@href='/item-catalog/concept-groups']", ParentTest, "no_jira");    
              if (FAIL) { return;}           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                   
              if (FAIL) { return;}                     
         Element_By_Path_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");     
         Thread.sleep(500);
 
-        List_L0("Table Column Titles", "xpath", "//span[@class='p-column-title']", ParentTest, err);
+        List_L0("Concept Groups Table Column Titles", "xpath", "//span[@class='p-column-title']", ParentTest, err);
             for (int i = 0; i < L0.size(); i++) {
-                Element_Text("Column Title " + (i + 1), L0.get(i), ParentTest, "no_jira");   
+                Element_Text("Concept Groups Column Title " + (i + 1), L0.get(i), ParentTest, "no_jira");   
             }
         // Pagination    ????
-        Element_E1_Find("Find Table body", "tagName", "tbody", ParentTest, "no_jira");
+        Element_E1_Find("Find Concept Groups Table body", "tagName", "tbody", ParentTest, "no_jira");
              if (FAIL) { return;}                     
-        Element_Child_List_L1("Table Rows", e1, "tagName", "tr", ParentTest, "no_jira");
+        Element_Child_List_L1("Concept Groups Table Rows", e1, "tagName", "tr", ParentTest, "no_jira");
             for (int i = 0; i < L1.size(); i++) {
-                Element_Text("Get Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira");   
+                Element_Text("Get Concept Groups Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira");   
                 if(!_All_data) { break;}
             }
             
