@@ -199,7 +199,6 @@ public class C360_API_main {
                 
                 if (l.contains("C360_ADMIN_ID: ")) { C360_ADMIN_ID = value; }
                 if (l.contains("C360_ADMIN_PW: ")) { C360_ADMIN_PW = value; } 
-                
 
             }
             CONFIG = true;
