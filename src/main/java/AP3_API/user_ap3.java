@@ -19,7 +19,7 @@ class user_ap3 extends AP3_API_GUI{
         Realm = A.Func.Realm_ID("AP3", env);
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
-        JOB_Api_Call("Bolter/Bolter Login in AP3", "GET", 
+        JOB_Api_Call("Bolter/Runner Login in AP3", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + Realm, Auth, "", 401, ParentTest, "no_jira");        
         
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + ADMIN_PW).getBytes());
@@ -77,12 +77,12 @@ class user_ap3 extends AP3_API_GUI{
         
         BODY = "{\"name\":" +       //  ==================   New AP3 Admin User ===============================
                 "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
-            "\"permissions\":" +
-                "{\"scopes\":[\"*:*\",\"*:user\",\"site_operator_role:group:\",\"write:order:*\",\"kick:menu:*\",\"read:analytics:*\"]}," +
-            "\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," +
-            "\"phone\":" + "1" + NewID + "," +
-            "\"realm\":\"" + Realm + "\"," +
-            "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
+                "\"permissions\":" +
+                    "{\"scopes\":[\"*:*\",\"*:user\",\"site_operator_role:group:\",\"write:order:*\",\"kick:menu:*\",\"read:analytics:*\"]}," +
+                "\"email\":\"" + "a_" + NewID + "@gmail.com" + "\"," +
+                "\"phone\":" + "1" + NewID + "," +
+                "\"realm\":\"" + Realm + "\"," +
+                "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
         JOB_Api_Call("AP3 User - Create New Admin", "POST", 
             BaseAPI + "/user", Auth, BODY, 200, ParentTest, "no_jira"); 
         String New_AP3_User_ID = "";

@@ -668,7 +668,7 @@ if(true) return;
                         
                     File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_brand_image.png");
                     if(tmp.exists()) {
-                      Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_brand_image.png", false, ParentTest, "no_jira"); 
+                      Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "AP3_brand_image.png", false, ParentTest, "no_jira"); 
                           if (FAIL) { return;}
                     } else {
                       _t++; 
@@ -890,9 +890,9 @@ if(true) return;
                                         if (FAIL) { return;}                        
                                     Element_By_Path_Text_Enter("Enter KDS Admin Passcode", "css", "[aria-label='KDS Admin Passcode']", "1459", false, ParentTest, "no_jira"); 
                                         if (FAIL) { return;}
-                                        File kdstmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_kds_image.png");
+                                        File kdstmp = new File(System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "AP3_kds_image.png");
                                         if(kdstmp.exists()) {
-                                            Element_By_Path_Text_Enter("Upload KDS receipt image", "xpath", "//div[@id='toc-kds']//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"AP3_kds_image.png", false, ParentTest, "no_jira"); 
+                                            Element_By_Path_Text_Enter("Upload KDS receipt image", "xpath", "//div[@id='toc-kds']//input[@type='file']", System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "AP3_kds_image.png", false, ParentTest, "no_jira"); 
                                                 if (FAIL) { return;}
                                         } else {
                                             _t++; 
@@ -1875,7 +1875,7 @@ if(true) return;
                if(digital_wallet.getString(l).equals("applewallet") || digital_wallet.getString(l).equals("googlewallet")) { //Print Pass Expected  is excluded
                     _t++;
                     _p++; 
-                    EX += _t + "\t" + "Digital wallet exclusions - expected" + "\t" + digital_wallet.getString(l)+" is excluded" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    EX += _t + "\t" + "Digital wallet exclusions - expected" + "\t" + digital_wallet.getString(l)+ " is excluded" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("PASS", "Digital wallet exclusions - expected", false, ParentTest.createNode(_t + ". " + "Digital wallet exclusions - expected"), new Date());
                }
            }
@@ -1906,8 +1906,8 @@ if(true) return;
                 Log_Html_Result("PASS", "Tax rate set to Location tax - Tax Rate field empty", false, ParentTest.createNode(_t + ". " + "Tax rate set to Location tax"), new Date()); 
            } else  {
                 _t++;
-                _f++; EX += _t + "\t" + "Tax rate field not empty - not expected" + "\t" + "Tax Rate - "+json.getNumber("tax_rate") + "\t" + "Tax Rate - Location tax rate" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Tax rate field not empty - not expected : "+json.getNumber("tax_rate"), true, ParentTest.createNode(_t + ". " + "Digital wallet exclusions Enabled - expected"), new Date()); 
+                _f++; EX += _t + "\t" + "Tax rate field not empty - not expected" + "\t" + "Tax Rate - " +json.getNumber("tax_rate") + "\t" + "Tax Rate - Location tax rate" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Tax rate field not empty - not expected : " +json.getNumber("tax_rate"), true, ParentTest.createNode(_t + ". " + "Digital wallet exclusions Enabled - expected"), new Date()); 
            }
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Brand API Private config Verification End==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";
@@ -2027,7 +2027,7 @@ if(true) return;
     
     private void Verify_menu_category_API(String B_ID,int flag,int Menu_set_cnt,int Category_cnt)  {
     try {    
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start==" + "\t" + "Round : "+flag+ "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start==" + "\t" + "Round : " +flag+ "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         String[] Menu_ID = new String[2];
         int lmenu_cnt = 0;
         Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );
@@ -2066,25 +2066,25 @@ if(true) return;
                 JSONObject json1 = new JSONObject(API_Response_Body);
                 if(json1.getJSONObject("is").getBoolean("linked")) {
                     _t++;
-                    _p++; EX += _t + "\t" + "Active Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    _p++; EX += _t + "\t" + "Active Menu set - " +json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     
                     JSONArray Category = json1.getJSONArray("groups");
                     for(int l = 0; l < Category.length(); l++) {
                         JSONObject category_obj = Category.getJSONObject(l);
                         if(category_obj.getJSONObject("is").getBoolean("linked")) {
                             _t++;
-                            _p++; EX += _t + "\t" + "Active Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                             Log_Html_Result("PASS", "Active Category set - "+category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Active category "), new Date());       
+                            _p++; EX += _t + "\t" + "Active Category set - " +category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                             Log_Html_Result("PASS", "Active Category set - " +category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Active category "), new Date());       
                         } else if(!category_obj.getJSONObject("is").getBoolean("linked"))  {
                             _t++;
-                            _p++;EX += _t + "\t" + "Deleted Category set - "+category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            Log_Html_Result("PASS", "Deleted Category set - "+category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Deleted Category"), new Date());
+                            _p++;EX += _t + "\t" + "Deleted Category set - " +category_obj.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            Log_Html_Result("PASS", "Deleted Category set - " +category_obj.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Deleted Category"), new Date());
                         }
                     }
                 } else if(!json1.getJSONObject("is").getBoolean("linked"))  {
                     _t++;
-                    _p++;EX += _t + "\t" + "Deleted Menu set - "+json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("PASS", "Deleted Menu set - "+json1.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Deleted Menu Set"), new Date());
+                    _p++;EX += _t + "\t" + "Deleted Menu set - " +json1.getJSONObject("label").getString("en") + "\t" + "-" + "\t" + "-" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "Deleted Menu set - " +json1.getJSONObject("label").getString("en"), false, ParentTest.createNode(_t + ". " + "Deleted Menu Set"), new Date());
                 }
             }
         }
@@ -2128,12 +2128,12 @@ if(true) return;
                         sectorName = meta.getString("sector_name");
                         if(sectorName.contentEquals(SECTOR)) { 
                             _t++;
-                            _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Sector : "+sectorName + "\t" + SECTOR + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Sector : " +sectorName + "\t" + SECTOR + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                             Log_Html_Result("PASS", "Found-as expected: " + sectorName + " Expected: " + SECTOR, false, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
                
                         } else {
                             _t++;
-                            _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Sector : "+sectorName + "\t" + SECTOR + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                            _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Sector : " +sectorName + "\t" + SECTOR + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                             Log_Html_Result("FAIL", "Not Found. Actual : " + sectorName + " Expected: " + SECTOR, true, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
                         }   
                     } else {
@@ -2168,13 +2168,13 @@ if(true) return;
         if (meta.has("app_name")){
             if(meta.getString("app_name").contentEquals("Boost")) {      // Explicitly Boost since its hardcoded in the code. Else we can use appId field from JTT.    
                     _t++;
-                    _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "App Name : "+meta.getString("app_name") + "\t" + "Boost" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                   Log_Html_Result("PASS", "Found-as expected" + "\t" + "App Name : "+meta.getString("app_name"), false, ParentTest.createNode(_t + ". " + "Verify App name"), new Date());
+                    _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "App Name : " +meta.getString("app_name") + "\t" + "Boost" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                   Log_Html_Result("PASS", "Found-as expected" + "\t" + "App Name : " +meta.getString("app_name"), false, ParentTest.createNode(_t + ". " + "Verify App name"), new Date());
                       
             } else {
                 _t++;   
-                _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "App Name : "+meta.getString("app_name") + "\t" + "Boost" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Not Found- expected" + "\t" + "App Name : "+meta.getString("app_name")+ "Expected : Boost", true, ParentTest.createNode(_t + ". " + "Verify App name"), new Date());
+                _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "App Name : " +meta.getString("app_name") + "\t" + "Boost" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Not Found- expected" + "\t" + "App Name : " +meta.getString("app_name")+ "Expected : Boost", true, ParentTest.createNode(_t + ". " + "Verify App name"), new Date());
        
             }   
         }else{
@@ -2189,7 +2189,7 @@ if(true) return;
         if(sector_name.equalsIgnoreCase(SECTOR)) { // ======================== ????
             _t++;  
             _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Sector : " + sector_name + "\t" + SECTOR + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-           Log_Html_Result("PASS", "Found-as expected : "+ sector_name + " Expected: " + SECTOR, false, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
+           Log_Html_Result("PASS", "Found-as expected : " + sector_name + " Expected: " + SECTOR, false, ParentTest.createNode(_t + ". " + "Verify sector name"), new Date());
                
         } else {
             _t++;   

@@ -552,7 +552,7 @@ public class JIRA extends javax.swing.JInternalFrame {
                 System.setProperty("webdriver.ie.driver", CWD + "\\IEDriverServer.exe"); 
             }
             if(WsOS.toLowerCase().contains("mac")){
-                System.out.println("******** "+CWD+"/chromedriver.exe");
+                System.out.println("******** " +CWD+ "/chromedriver.exe");
                 //System.setProperty("webdriver.chrome.driver", CWD + "/chromedriver");  
                 System.setProperty("webdriver.chrome.driver", "/Users/prathyusha.deshpande/distilr/BrowserDriver/87/chromedriver");            
                 System.setProperty("webdriver.edge.driver",  CWD + "/msedgedriver");  

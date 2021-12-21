@@ -39,8 +39,7 @@ class C360_login extends C360_GUI{
             // 503 Service Temporarily Unavailable
             
             Close_Current_Tab_switch_To_1st("Back to 'Login' tab", ParentTest, "no_jira");
-        }  
-        
+        }     
   
         if(_Invalid_entries){
             Element_By_Path_Text("Get 'Security Disclaimer' text", "xpath", "//button[@class='btn btn-link security-disclaimer']", ParentTest,"no_jira");

@@ -591,10 +591,10 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         for (int i = 0; i < L0.size(); i++) {
             if (i == 0) {
-                Element_Child_Text("Get country value "+ (i+1), e, "xpath", "//div[contains(text(),'Canada')]", ParentTest, "no_jira");
+                Element_Child_Text("Get country value " + (i+1), e, "xpath", "//div[contains(text(),'Canada')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             } else if (i == 1) {
-                Element_Child_Text("Get country value "+ (i+1), e, "xpath", "//div[contains(text(),'United States')]", ParentTest, "no_jira");
+                Element_Child_Text("Get country value " + (i+1), e, "xpath", "//div[contains(text(),'United States')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             } else {
                 _t++;
@@ -1038,9 +1038,9 @@ class AP3_site extends AP3_GUI{
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'"+New_ID+"') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
+        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'" +New_ID+ "') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'"+New_ID+"') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'" +New_ID+ "') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
             if (FAIL) { return;}

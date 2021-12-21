@@ -46,7 +46,7 @@ class AP3_password extends AP3_GUI {
         New_ID = a.New_ID;        
         TZone = a.TZone;               
     }        
-    private final String eMail = New_ID+"_ds@mailinator.com";
+    private final String eMail = New_ID+ "_ds@mailinator.com";
     private final String passWord1="Dhruv891111111"; //At least 15 characters
     private final String passWord2="dhruvseth251215"; //An uppercase character
     private final String passWord3="DHRUVSETH251215"; //A lowercase character
@@ -1274,7 +1274,7 @@ Thread.sleep(5000);
        
     
        
-       System.err.println("Value "+checkdisabled);
+       System.err.println("Value " +checkdisabled);
        
        if(checkdisabled==false)                
        { 

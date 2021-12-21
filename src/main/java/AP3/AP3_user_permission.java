@@ -160,7 +160,7 @@ Thread.sleep(1000);
             }else{
                 _f++;
                 EX += _t + "\t" + " === Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
-                Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode(_t + ". " + "Admin No Options-Station visibility status (hide/unhide)"), new Date());
+                Log_Html_Result("FAIL", "Disabled for " + L1.size()  , true, ParentTest.createNode(_t + ". " + "Admin No Options-Station visibility status (hide/unhide)"), new Date());
             }            
             // </editor-fold> 
 
@@ -437,7 +437,7 @@ Thread.sleep(1000);
             }else{
                 _f++;
                 EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Station visibility status (hide/unhide)"), new Date());
+                Log_Html_Result("FAIL", "Disabled for " + L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Station visibility status (hide/unhide)"), new Date());
             }
             //</editor-fold> 
             
@@ -471,7 +471,7 @@ Thread.sleep(1000);
                     }else{
                         _f++;
                         EX += _t + "\t" + " === SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
-                        Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Menu visibility status (hide/unhide)"), new Date());
+                        Log_Html_Result("FAIL", "Disabled for " + L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Menu visibility status (hide/unhide)"), new Date());
                     }                                      
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 

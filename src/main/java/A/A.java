@@ -947,7 +947,6 @@ public class A extends javax.swing.JFrame {
             Menu_Env.setVisible(true);
         }
     }//GEN-LAST:event_Menu_EnvMouseClicked
-
     private void Menu_SLMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_SLMouseClicked
         // TODO add your handling code here:
         if(!Menu_SL.isEnabled()){

@@ -90,8 +90,7 @@ class config extends AP3_API_GUI {
                 AAA = ex.getMessage();
             }
         }
-
-
+        
 //        JOB_Api_Call("config > /'UnitID'", "GET", BaseAPI + "/config/" + UnitID, Auth, "", 200, ParentTest, "no_jira");
 //        JOB_Api_Call("Public config > /'UnitID'", "GET", BaseAPI + "/config/public/" + UnitID, "", "", 200, ParentTest, "no_jira");
 

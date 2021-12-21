@@ -115,11 +115,11 @@ class AP3_images extends AP3_GUI{
                 Thread.sleep(500);
             Element_By_Path_Click("Open 'Group' dropdown", "css", "[aria-label='Group']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Select Group > 'Automation only/CA'", "xpath", "//*[contains(text(),'"+SECTOR+"')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Select Group > 'Automation only/CA'", "xpath", "//*[contains(text(),'" +SECTOR+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_By_Path_Click("Open 'Global Menu Assignaton' dropdown", "css", "[aria-label='Global Menu Assignation']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Select Global Menu > '"+GL_MENU+"'", "xpath", "//*[contains(@class,'menuable__content__active')]//*[contains(text(),'"+GL_MENU+"')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Select Global Menu > '" +GL_MENU+ "'", "xpath", "//*[contains(@class,'menuable__content__active')]//*[contains(text(),'" +GL_MENU+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Scroll_to_WebElement("Scroll to 'Menu Information' Section", "xpath", "//div[@id='toc-menu-info']", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -168,7 +168,7 @@ class AP3_images extends AP3_GUI{
                  Log_Html_Result("PASS", "images are disabled" + "\t" + "\"global_images_enabled\" : " + is.getBoolean("global_images_enabled"), false, ParentTest.createNode(_t + ". " + "API - Global Menu Images are Disabled"), new Date());
             } 
 
-            Element_By_Path_Click("Click > Edit Global menu on '"+GL_MENU+"' Brand", "xpath", "//*[text()='"+GL_MENU+"']/ancestor::tr//button", ParentTest, "no_jira");
+            Element_By_Path_Click("Click > Edit Global menu on '" +GL_MENU+ "' Brand", "xpath", "//*[text()='" +GL_MENU+ "']/ancestor::tr//button", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Wait_For_Element_By_Path_Presence("Check > 'Edit Global Menu Brand Name' dialog is open", "xpath", "//div[contains(text(),'Allow Images in Global Menu')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -207,11 +207,11 @@ class AP3_images extends AP3_GUI{
                 if (FAIL) { return;}
             Element_By_Path_Click("Open 'Group' dropdown", "css", "[aria-label='Group']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Select Group > '"+SECTOR+"'", "xpath", "//*[contains(text(),'"+SECTOR+"')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Select Group > '" +SECTOR+ "'", "xpath", "//*[contains(text(),'" +SECTOR+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_By_Path_Click("Open 'Global Menu Assignaton' dropdown", "css", "[aria-label='Global Menu Assignation']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Select Global Menu > '"+GL_MENU+"'", "xpath", "//*[contains(@class,'menuable__content__active')]//*[contains(text(),'"+GL_MENU+"')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Select Global Menu > '" +GL_MENU+ "'", "xpath", "//*[contains(@class,'menuable__content__active')]//*[contains(text(),'" +GL_MENU+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Scroll_to_WebElement("Scroll to 'Menu Information' Section", "xpath", "//div[@id='toc-menu-info']", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -329,17 +329,17 @@ class AP3_images extends AP3_GUI{
             }
             //try non png,jpg file
             EX += " - " + "\t" + " === " + "\t" + " ===== Try upload non jpg/png file type" + "\t" + " == Start >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
+            File tmp = new File(System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "Ap3_test_pdf_in_image.pdf");
             if(tmp.exists()) {
-                d1.findElement(By.xpath("//div[contains(@class,'croppa-container')]/input[@type='file']")).sendKeys(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_test_pdf_in_image.pdf");
+                d1.findElement(By.xpath("//div[contains(@class,'croppa-container')]/input[@type='file']")).sendKeys(System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "Ap3_test_pdf_in_image.pdf");
                 _t++; 
                 Find_Text("Toast message", "Invalid file type, choose a jpg or png file.", true, ParentTest, "no_jira");
                     if (FAIL) { return;}
             }
             EX += " - " + "\t" + " === " + "\t" + " ===== Try upload non jpg/png file type" + "\t" + " == End >>" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-            tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1.png");
+            tmp = new File(System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "Ap3_image1.png");
             if(tmp.exists()) {
-                Element_By_Path_Text_Enter("Upload Item Image with png extension", "xpath", "//div[contains(@class,'croppa-container')]/input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1.png", false, ParentTest, "no_jira"); 
+                Element_By_Path_Text_Enter("Upload Item Image with png extension", "xpath", "//div[contains(@class,'croppa-container')]/input[@type='file']", System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "Ap3_image1.png", false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             }
             else {
@@ -366,13 +366,13 @@ class AP3_images extends AP3_GUI{
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                     Thread.sleep(500);    
-            Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'"+CATEGORY+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'" +CATEGORY+ "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Element_By_Path_Click("Click > 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
                 if (FAIL) { return;}    
-            Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'"+CATEGORY+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'" +CATEGORY+ "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
                 if (FAIL) { return;}
@@ -438,7 +438,7 @@ class AP3_images extends AP3_GUI{
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
                 if (FAIL) { return;}    
-            Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'"+CATEGORY+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'" +CATEGORY+ "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
@@ -470,9 +470,9 @@ class AP3_images extends AP3_GUI{
                     if (FAIL) { return;} 
                 Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
-                tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1-jpg.jpg");
+                tmp = new File(System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "Ap3_image1-jpg.jpg");
                 if(tmp.exists()) {
-                    _t++; Element_By_Path_Text_Enter("Upload Item Image with jpg extension", "xpath", "//div[contains(@class,'croppa-container')]/input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
+                    _t++; Element_By_Path_Text_Enter("Upload Item Image with jpg extension", "xpath", "//div[contains(@class,'croppa-container')]/input[@type='file']", System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
                     if (FAIL) { return;}
                 }
                 else {
@@ -518,7 +518,7 @@ class AP3_images extends AP3_GUI{
                     if (FAIL) { return;} 
                 Wait_For_Element_By_Path_Presence("Wait to be in Edit mode", "xpath", "//*[contains(text(),'You are editing this menu')]", ParentTest, Ver);
                     if (FAIL) { return;}    
-                Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'"+CATEGORY+"')][1]/parent::span", ParentTest, "no_jira"); 
+                Element_By_Path_Click("Click > Category Item manipulated in global menu", "xpath", "//*[contains(text(),'" +CATEGORY+ "')][1]/parent::span", ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
                 Element_By_Path_Click("Click > First Item", "xpath", "//table/tbody/tr[1]/td[3]", ParentTest, "no_jira"); 
                     if (FAIL) { return;} 
@@ -563,7 +563,7 @@ class AP3_images extends AP3_GUI{
                     if (FAIL) { return;}
                     Thread.sleep(500);
                 //navigate to global menu and check that images cannot be added
-                Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/"+SectorID+"/brand/company/"+CompanyID, ParentTest, "no_jira");
+                Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" +SectorID+ "/brand/company/" +CompanyID, ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                     if (FAIL) { return;}

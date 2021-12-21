@@ -944,7 +944,7 @@ public class TWeb {
             }
             if(t != null && t.trim() != ""){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "Not Found";
             }
@@ -1009,7 +1009,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         }
@@ -1056,7 +1056,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         }
@@ -1198,7 +1198,7 @@ public class TWeb {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -1491,7 +1491,7 @@ public class TWeb {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -1501,7 +1501,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         }
@@ -1523,12 +1523,12 @@ public class TWeb {
                 E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }   
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         }
@@ -1549,7 +1549,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         }
@@ -1567,7 +1567,7 @@ public class TWeb {
             t = E.getAttribute(VAL);
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " "); 
+                t = t.replaceAll("[ ]+ ", " "); 
             } else {
                 t = "null";
             }
@@ -1606,7 +1606,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         }
@@ -1813,7 +1813,7 @@ public class TWeb {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -1969,7 +1969,7 @@ public class TWeb {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -2279,7 +2279,7 @@ public class TWeb {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -2331,7 +2331,7 @@ public class TWeb {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -2553,7 +2553,7 @@ public class TWeb {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -3047,7 +3047,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         } 
@@ -3095,7 +3095,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         } 
@@ -3124,7 +3124,7 @@ public class TWeb {
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         } 
@@ -3140,12 +3140,12 @@ public class TWeb {
         try {
             E.sendKeys(Keys.chord(Keys.ENTER)); //select all text in textbox
             _p++;
-            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses"+ "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
         }
@@ -3455,22 +3455,22 @@ public class TWeb {
         try {
             if(actual.equals(Expected)) {
                 _p++;
-                EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches "+Expected+"  with Actual Value "+actual+"" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches " +Expected+ "  with Actual Value " +actual+ "" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             }
             else if((Integer.parseInt(actual)-2)<=Integer.parseInt(Expected)) {
                 _p++;
-                EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches "+Expected+"  with Actual Value "+actual+"" + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Expected Matches " +Expected+ "  with Actual Value " +actual+ "" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             }else {
-                _f++; FAIL = true; err ="Failed to match Expected value "+Expected+"  with Actual value - "+actual+"";
+                _f++; FAIL = true; err ="Failed to match Expected value " +Expected+ "  with Actual value - " +actual+ "";
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
             }
         } catch(Exception ex){
-            _f++; FAIL = true; err ="Failed due to exception " + Expected + "  with Actual value - "+actual+"";
+            _f++; FAIL = true; err ="Failed due to exception " + Expected + "  with Actual value - " +actual+ "";
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t"  + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";

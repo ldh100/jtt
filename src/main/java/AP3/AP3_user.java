@@ -1005,7 +1005,7 @@ class AP3_user extends AP3_GUI{
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}            
-                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+" + "R_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+ " + "R_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165554321", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}           
@@ -1072,7 +1072,7 @@ class AP3_user extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="Runner Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}         
-        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "cdl.test.xtt+" + "R_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "cdl.test.xtt+ " + "R_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira" ); 
         List_L0("Users Data Rows Count", "tagName", "tr", ParentTest, "no_jira" );             
@@ -1080,7 +1080,7 @@ class AP3_user extends AP3_GUI{
             for (int j = 0; j < L0.size(); j++) {
                 Element_Text("Users Data Row Text", L0.get(j), ParentTest, "no_jira" );             
             } 
-        Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "cdl.test.xtt+" + "r_" + New_ID + "@gmail.com" + "']", ParentTest, "no_jira" ); 
+        Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "cdl.test.xtt+ " + "r_" + New_ID + "@gmail.com" + "']", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
          Thread.sleep(500);           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira" );

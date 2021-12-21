@@ -22,9 +22,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -381,7 +383,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES11.setText("Browser:");
         lblSITES11.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 72, 16));
+        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 24, 72, 16));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -775,7 +777,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _brand_config.setRequestFocusEnabled(false);
 
         _mm_import.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _mm_import.setText("MM Import");
+        _mm_import.setText("MM Imports");
         _mm_import.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _mm_import.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _mm_import.setIconTextGap(1);
@@ -2330,7 +2332,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected void Extent_Report_Config() {
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "AP3" + "_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + JOB_Name + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
@@ -2858,15 +2860,15 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Import Global Modifiers: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }
-//        if(_MM_import){            
-//            SCOPE += ", Import Global Menuset";
-//            ParentTest = HtmlReport.createTest("Import Global Menuset"); 
-//            AP3_mm_import_menu BR = new AP3.AP3_mm_import_menu(AP3_GUI.this);
-//            BR.run(); // ======================================
-//            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-//            ParentTest.getModel().setName("Import Global Menuset: " + BR._t + ", Failed: " + BR._f);
-//            ParentTest.getModel().setEndTime(new Date());             
-//        } 
+        if(_MM_import){            
+            SCOPE += ", Import Global Menuset";
+            ParentTest = HtmlReport.createTest("Import Global Menuset"); 
+            AP3_mm_import_menu BR = new AP3.AP3_mm_import_menu(AP3_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
+            ParentTest.getModel().setName("Import Global Menuset: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());             
+        } 
         if(_MM_items){
             SCOPE += ", MM Items Update";
             ParentTest = HtmlReport.createTest("Items Update"); 
@@ -4027,7 +4029,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null && t.trim() != ""){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "Not Found";
             }
@@ -4105,7 +4107,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -4155,7 +4157,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
-            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -4306,7 +4308,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -4436,7 +4438,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     }
 
-    protected void Element_By_Path_Text_DblClick(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception  {
+    protected void Element_By_Path_DblClick(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception  {
         if (sw1.isRunning()) {
             sw1.reset();
         }
@@ -4475,8 +4477,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             Actions action = new Actions(d1);
             action.moveToElement(e).doubleClick().perform();
             _p++;
-            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - "
-            + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "DblClick successful" + "\t" + "PASS" + "\t" + " - "
+                + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), new Date());
         } catch (Exception ex) {
             _f++;
@@ -4484,7 +4486,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             err = ex.getMessage().trim();
             if (err.contains("\n")) { (err = err.substring(0, err.indexOf("\n"))).trim(); }
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err
-            + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+                + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), new Date());
         }
@@ -4670,7 +4672,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -4681,7 +4683,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -4705,13 +4707,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }   
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared"+ "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -4735,7 +4737,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -4755,7 +4757,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             t = E.getAttribute(VAL);
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " "); 
+                t = t.replaceAll("[ ]+ ", " "); 
             } else {
                 t = "null";
             }
@@ -4799,7 +4801,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
@@ -5019,7 +5021,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -5184,7 +5186,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
             if(t != null){
                 t = t.replace("\r\n", " ").replace("\n", " ");
-                t = t.replaceAll("[ ]+", " ");
+                t = t.replaceAll("[ ]+ ", " ");
             } else {
                 t = "null";
             }
@@ -5517,7 +5519,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -5572,7 +5574,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -5804,7 +5806,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 dt = X.get(k).getAttribute("textContent");
                 if(dt != null){
                     dt = dt.replace("\r\n", " ").replace("\n", " ");
-                    dt = dt.replaceAll("[ ]+", " ");
+                    dt = dt.replaceAll("[ ]+ ", " ");
                 }else{
                     dt = "null";
                 }
@@ -6286,25 +6288,27 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     break;
                 }
             } 
-
             if("".equals(t)){
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "WARN" + "\t" + "File not found" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
+                        "<br />File: " + F_NAME + " - Not Found", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + "Delete the file after test" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
+                        "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+            Log_Html_Result("FAIL", "Error: " + err + 
+                    "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -6329,7 +6333,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             if("".equals(t)){
                 _f++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "FAIL" + "\t" + "File not found";                
-                Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
+                        "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 if("User_Count".equals(CHECK)){
                     ArrayList<String> lines = new ArrayList<>(Files.readAllLines(Paths.get(DIR + File.separator + t), StandardCharsets.UTF_8));
@@ -6337,34 +6342,38 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                         _p++; 
                         EX += _t + "\t" + NAME + "\t" + F_NAME + "\t" + lines.size() + " Expected: header + " + VAL + "\t" + "PASS" + "\t" + "User Count + Header" +
                         "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                             
-                        Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                        Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
+                                "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                     } else{
                         _w++; 
                         EX += _t + "\t" + NAME + "\t" + F_NAME + "\t" + lines.size() + " Expected: header + " + VAL + "\t" + "WARN" + "\t" + "User Count + Header" +
                         "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                            
-                        Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                        Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
+                                "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                     }
                 }
                 if("Site_Count".equals(CHECK)){
                     _p++; 
                     EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
+                            "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
                 if("Record Type".equals(CHECK)){
                     _p++; 
                     EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + 
+                            "<br />File: " + F_NAME + " > Check: " + CHECK + ", Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }                
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -6381,22 +6390,46 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             if (xx.exists()) {
                 xx.delete();     
                 _p++; 
-                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + " - " +
+                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _w++; 
-                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "WARN" + "\t" + "File not found" +
+                EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "WARN" + "\t" + "File not found" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found"+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+        } 
+        sw1.reset();
+    } 
+    protected void File_Copy(String NAME, String SOURCE, String TARGET, ExtentTest ParentTest, String JIRA) throws Exception {
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
+ 
+        FAIL = false;
+        try {
+            Files.copy(Paths.get(SOURCE), Paths.get(TARGET), StandardCopyOption.REPLACE_EXISTING);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + SOURCE + "\t" + TARGET + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Target: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+        } catch(Exception ex){
+            _f++; FAIL = true;  err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Source: " + SOURCE + "\t" + "Target: " + TARGET + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Source: " + SOURCE + ", Target: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     } 
@@ -6408,14 +6441,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
  
         FAIL = false;
-        String ExportFile = "";
         File zip_source = new File(DIR + File.separator + F_NAME);
         File destDir = new File(DIR);
         byte[] buffer = new byte[1024];
         try {
             try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zip_source))) {
                 ZipEntry zipEntry = zis.getNextEntry();
-                ExportFile = zipEntry.getName();
                 while (zipEntry != null) {
                     File newFile = newUnzipFile(destDir, zipEntry);
                     if (zipEntry.isDirectory()) {
@@ -6447,7 +6478,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     } 
@@ -6472,13 +6503,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         try {
             E.sendKeys(Keys.chord(Keys.ENTER)); //select all text in textbox
             _p++;
-            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses"+ "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - "+ "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);

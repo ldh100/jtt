@@ -1,6 +1,7 @@
 package FW_API;
 
 import java.util.Base64;
+import org.json.JSONObject;
 
 
 class login extends FW_API_main{
@@ -9,7 +10,6 @@ class login extends FW_API_main{
         BaseAPI = a.BaseAPI;
         FW_ADMIN_ID = a.FW_ADMIN_ID;
         FW_ADMIN_PW = a.FW_ADMIN_PW;
-        NewID = a.NewID;
         ParentTest = a.ParentTest;        
     }
     String AAA = "";
@@ -28,17 +28,35 @@ class login extends FW_API_main{
         if(json != null){
             try {
                 if(json.has("user")) {
-                    FW_User_ID = json.getJSONObject("user").getString("id");
+                    FW_Admin_ID = json.getJSONObject("user").getString("id");
                 } 
-                if(json.has("token")) FW_User_TKN = json.getString("token");  
+                if(json.has("token")) FW_Admin_TKN = json.getString("token");  
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
             AAA = "";
         }
-        
-        
-        
+        Auth = "Bearer " + FW_Admin_TKN;
+        JOB_Api_Call("FW User' Partners", "GET", 
+            BaseAPI + "/partners?ownerUserId=" + FW_Admin_ID, Auth, "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            try {
+                if(json.has("user")) {
+                    FW_Admin_ID = json.getJSONObject("user").getString("id");
+                } 
+                if(json.has("token")) FW_Admin_TKN = json.getString("token");  
+            } catch (Exception ex){
+                AAA = ex.getMessage();
+            }
+            AAA = "";
+        } 
+
+        //BODY = "{\"email\":\"" + FW_ADMIN_ID + "\"}";
+        JSONObject requestParams = new JSONObject();       
+        requestParams.put("email", FW_ADMIN_ID);
+        BODY = requestParams.toString();  
+        JOB_Api_Call("FW User - Send 'Forgot Password' Link", "POST", 
+            BaseAPI + "/users/forgotpassword", Auth, BODY, 200, ParentTest, "no_jira");         
     }
     
     

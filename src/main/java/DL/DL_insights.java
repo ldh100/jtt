@@ -19,11 +19,9 @@ public class DL_insights extends DL_GUI {
         try {
             Thread.sleep(500);
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
+                if (FAIL) { return; }
             Thread.sleep(500);
-            SelectMember();
+            SelectMember(); // ================================
             Find_Text("Find 'Insights' label", "Insights", true, ParentTest, "no_jira");
             Thread.sleep(3000);
             Move_to_Element_By_Path("User is able to find 'Insights' label", "xpath", "//p[contains(text(),'Insights')]", ParentTest, "no_jira");
@@ -33,12 +31,12 @@ public class DL_insights extends DL_GUI {
                 Element_Text("Tabs name", L0.get(j), ParentTest, "no_jira");
             }
             Element_By_Path_Click("Click on 'Settings' icon", "xpath", "//button[@class='MuiButtonBase-root MuiIconButton-root']", ParentTest, "no_jira");
+                if (FAIL) { return; }
             Thread.sleep(20000);
             Element_By_Path_Click("Click on 'Cancel' button", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
+                if (FAIL) { return; }
             Wait_For_Element_By_Path_Presence("Wait for Show More Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
+                if (FAIL) { return; }
             Element_By_Path_Click("Click on 'Show More' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
 //            Element_E1_Find("Verify whether the Graph is displayed or not", "xpath", "(//*[@class='MuiCollapse-container MuiCollapse-entered'])[2]", ParentTest, "no_jira");
             Element_By_Path_Click("Click on 'Show Less' Chevron", "xpath", "//*[contains(text(),'Show ')]", ParentTest, "no_jira");
@@ -46,56 +44,51 @@ public class DL_insights extends DL_GUI {
 //            Element_E1_Find("Verify whether the Graph is displayed or not", "xpath", "//*[@class='MuiCollapse-container MuiCollapse-hidden']", ParentTest, "no_jira");
 //            e1.isEnabled();
             Element_E1_Find("Verify whether the Back button is disabled or not", "xpath", "//span[contains(text(),'Back')]/..", ParentTest, "no_jira");
-            System.out.println(e1.isEnabled());
-            //System.out.println();
+                if (FAIL) { return; }
             List_L2("Get the number of Insights Count", "xpath", "//div[contains(@class, 'MuiMobileStepper-dot')]", ParentTest, "no_jira");
             for (int j = 0; j < L2.size(); j++) {
                 if (!L2.get(j).isEnabled()) {
+                    // ===========
                 } else {
                     Element_By_Path_Click("Click on 'Next' button", "xpath", "//span[contains(text(),'Next')]/..", ParentTest, "no_jira");
                 }
-
             }
             Element_By_Path_Click("Click on 'Not interested in this insight' link", "xpath", "//span[contains(text(),'Not interested in this insight')]/..", ParentTest, "no_jira");
+                if (FAIL) { return; }
             Element_E1_Find("Verify whether the Reasons for Insights prompt is displayed or not", "xpath", "(//div[@class='MuiCollapse-wrapperInner'])[3]", ParentTest, "no_jira");
+                if (FAIL) { return; }
             List_L2("Get the number of Reasons for Not interested in the insight ", "xpath", "//*[@class='MuiFormControlLabel-root']", ParentTest, "no_jira");
+                if (FAIL) { return; }
             for (int j = 0; j < L2.size(); j++) {
                 Element_Click("Select the reasons for Not interested in the insight " + j, L2.get(j), ParentTest, "no_jira");
+                    if (FAIL) { return; }
             }
             Element_E1_Find("Verify whether the Cancel button is disabled or not", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
-            {
-                System.out.println(e1.isEnabled());
-            }
             Element_E1_Find("Verify whether the Submit button is disabled or not", "xpath", "//span[contains(text(),'Submit')]/..", ParentTest, "no_jira");
-            {
-                System.out.println(e1.isEnabled());
-
-            }
             Element_By_Path_Click("Click on 'Cancel' button", "xpath", "//span[contains(text(),'Cancel')]/..", ParentTest, "no_jira");
-
+                if (FAIL) { return; }
             Wait_For_Element_By_Path_Presence("Wait for Insight", "xpath", "(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira");
-            if (FAIL) {
-                return;
-            }
+                if (FAIL) { return; }
             Element_By_Path_Text("Get the status of Insight", "xpath", "(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira");
-            System.out.println(t);
             if (t.equalsIgnoreCase("Save")) {
                 Thread.sleep(5000);
                 Element_By_Path_Click("Click on 'Save' button", "xpath", "(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira");
+                    if (FAIL) { return; }
                 Thread.sleep(5000);
                 Element_By_Path_Text("Get the confirmation of Insight", "css", "[role='alert']", ParentTest, "no_jira");
                 System.out.println(t);
             } else {
                 Thread.sleep(5000);
                 Element_By_Path_Click("Navigate to 'Saved Insights' tab", "xpath", "//span[contains(text(),'Saved Insights')]/..", ParentTest, "no_jira");
+                    if (FAIL) { return; }
                 Element_By_Path_Click("Click on 'Unsave' button", "xpath", "(//div[contains(@class, 'MuiGrid-root jss')]/div/button)[2]", ParentTest, "no_jira");
+                    if (FAIL) { return; }
                 Thread.sleep(5000);
                 Element_By_Path_Text("Get the confirmation of Insight", "css", "[role='alert']", ParentTest, "no_jira");
                 System.out.println(t);
-
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
+            // =============
         }
     }
 

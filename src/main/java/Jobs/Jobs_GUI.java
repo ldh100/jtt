@@ -3,6 +3,8 @@ package Jobs;
 import it.sauronsoftware.cron4j.InvalidPatternException;
 import it.sauronsoftware.cron4j.Scheduler;
 import java.awt.Cursor;
+import java.io.IOException;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,51 +27,53 @@ import javax.swing.table.TableRowSorter;
  */
 
 public class Jobs_GUI extends javax.swing.JInternalFrame {
-
-//<editor-fold defaultstate="collapsed" desc="Cron Pattern Samples">
-//    5 * * * *
-//    This pattern causes a task to be launched once every hour, at the begin of the fifth minute (00:05, 01:05, 02:05 etc.).
-//    
-//    * * * * *
-//    This pattern causes a task to be launched every minute.
-//    
-//    * 12 * * Mon
-//    This pattern causes a task to be launched every minute during the 12th hour of Monday.
-//    
-//    * 12 16 * Mon
-//    This pattern causes a task to be launched every minute during the 12th hour of Monday, 16th, but only if the day is the 16th of the month.
-//    
-//    Every sub-pattern can contain two or more comma separated values.
-//    59 11 * * 1,2,3,4,5
-//    This pattern causes a task to be launched at 11:59AM on Monday, Tuesday, Wednesday, Thursday and Friday.
-//    
-//    Values intervals are admitted and defined using the minus character.
-//    59 11 * * 1-5
-//    This pattern is equivalent to the previous one.
-//    
-//    The slash character can be used to identify step values within a range. It can be used both in the form */c and a-b/c. The subpattern is matched every c values of the range 0,maxvalue or a-b.         
-//    */5 * * * *
-//    This pattern causes a task to be launched every 5 minutes (0:00, 0:05, 0:10, 0:15 and so on).
-//            
-//    3-18/5 * * * *
-//    This pattern causes a task to be launched every 5 minutes starting from the third minute of the hour, up to the 18th (0:03, 0:08, 0:13, 0:18, 1:03, 1:08 and so on).
-//
-//    */15 9-17 * * *
-//    This pattern causes a task to be launched every 15 minutes between the 9th and 17th hour of the day (9:00, 9:15, 9:30, 9:45 and so on... note that the last execution will be at 17:45).
-//
-//    All the fresh described syntax rules can be used together.
-//
-//    * 12 10-16/2 * *
-//    This pattern causes a task to be launched every minute during the 12th hour of the day, but only if the day is the 10th, the 12th, the 14th or the 16th of the month.
-//
-//    * 12 1-15,17,20-25 * *
-//    This pattern causes a task to be launched every minute during the 12th hour of the day, but the day of the month must be between the 1st and the 15th, the 20th and the 25, or at least it must be the 17th.
-//
-//    Finally cron4j lets you combine more scheduling patterns into one, with the pipe character:
-//
-//    0 5 * * *|8 10 * * *|22 17 * * *
-//    This pattern causes a task to be launched every day at 05:00, 10:08 and 17:22.
-//</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Cron Patterns">    
+    String C_HELP = "Cron for Java - Pattern Samples" + " >> https://www.sauronsoftware.it/projects/cron4j/manual.php" +
+    "	\n\n" +
+    "    5 * * * *\n" +
+    "    This pattern causes a task to be launched once every hour, at the begin of the fifth minute (00:05, 01:05, 02:05 etc.).\n" +
+    "    \n" +
+    "    * * * * *\n" +
+    "    This pattern causes a task to be launched every minute.\n" +
+    "    \n" +
+    "    * 12 * * Mon\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of Monday.\n" +
+    "    \n" +
+    "    * 12 16 * Mon\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of Monday, 16th, but only if the day is the 16th of the month.\n" +
+    "    \n" +
+    "    Every sub-pattern can contain two or more comma separated values.\n" +
+    "    59 11 * * 1,2,3,4,5\n" +
+    "    This pattern causes a task to be launched at 11:59AM on Monday, Tuesday, Wednesday, Thursday and Friday.\n" +
+    "    \n" +
+    "    Values intervals are admitted and defined using the minus character.\n" +
+    "    59 11 * * 1-5\n" +
+    "    This pattern is equivalent to the previous one.\n" +
+    "    \n" +
+    "    The slash character can be used to identify step values within a range. It can be used both in the form */c and a-b/c. The subpattern is matched every c values of the range 0,maxvalue or a-b.         \n" +
+    "    */5 * * * *\n" +
+    "    This pattern causes a task to be launched every 5 minutes (0:00, 0:05, 0:10, 0:15 and so on).\n" +
+    "            \n" +
+    "    3-18/5 * * * *\n" +
+    "    This pattern causes a task to be launched every 5 minutes starting from the third minute of the hour, up to the 18th (0:03, 0:08, 0:13, 0:18, 1:03, 1:08 and so on).\n" +
+    "\n" +
+    "    */15 9-17 * * *\n" +
+    "    This pattern causes a task to be launched every 15 minutes between the 9th and 17th hour of the day (9:00, 9:15, 9:30, 9:45 and so on... note that the last execution will be at 17:45).\n" +
+    "\n" +
+    "    All the fresh described syntax rules can be used together.\n" +
+    "\n" +
+    "    * 12 10-16/2 * *\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of the day, but only if the day is the 10th, the 12th, the 14th or the 16th of the month.\n" +
+    "\n" +
+    "    * 12 1-15,17,20-25 * *\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of the day, but the day of the month must be between the 1st and the 15th, the 20th and the 25, or at least it must be the 17th.\n" +
+    "\n" +
+    "    Finally cron4j lets you combine more scheduling patterns into one, with the pipe character:\n" +
+    "\n" +
+    "    0 5 * * *|8 10 * * *|22 17 * * *\n" +
+    "    This pattern causes a task to be launched every day at 05:00, 10:08 and 17:22."
+            + "";
+    // </editor-fold>
     
     public Jobs_GUI() {
         initComponents();
@@ -97,6 +101,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         txtCron = new javax.swing.JFormattedTextField();
         btnStartCron = new javax.swing.JButton();
         btnStopCron = new javax.swing.JButton();
+        btnHelp = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -134,7 +139,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -160,8 +164,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 552, 424));
-
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -171,8 +173,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 430, 548, 68));
-
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -181,7 +181,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 472, 104, 24));
 
         btnSave.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave.setText("Save Changes ^");
@@ -193,7 +192,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnSaveMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 436, 104, 24));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnRun.setForeground(new java.awt.Color(0, 0, 0));
@@ -205,7 +203,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 472, 176, 24));
 
         txtConfig.setColumns(20);
         txtConfig.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -215,48 +212,37 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         txtConfig.setMinimumSize(new java.awt.Dimension(854, 525));
         jScrollPane2.setViewportView(txtConfig);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 96, 296, 332));
-
         txtJob_Name.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtJob_Name.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtJob_Name.setEnabled(false);
         txtJob_Name.setSelectionColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(txtJob_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 4, 152, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        jLabel1.setText("Config:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 80, 48, -1));
-        getContentPane().add(txtCheckValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 48, 152, -1));
+        jLabel1.setText("Job Configuration, Data Setup:");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Job Name");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 8, 79, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Trigger");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 28, 79, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setText("Check Value");
+        jLabel4.setText("Check ");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 52, 80, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setText("Cron Frequency");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 72, 96, -1));
 
         cmbTrigger.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbTrigger.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "websocket", "webhook", "new version", "new githash" }));
-        getContentPane().add(cmbTrigger, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 24, 152, 20));
 
         txtCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        getContentPane().add(txtCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 72, 152, -1));
 
         btnStartCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnStartCron.setForeground(new java.awt.Color(0, 0, 0));
@@ -267,7 +253,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnStartCronMouseClicked(evt);
             }
         });
-        getContentPane().add(btnStartCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 436, 84, 24));
 
         btnStopCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnStopCron.setForeground(new java.awt.Color(0, 0, 0));
@@ -279,7 +264,116 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnStopCronMouseClicked(evt);
             }
         });
-        getContentPane().add(btnStopCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 436, 84, 24));
+
+        btnHelp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnHelp.setForeground(new java.awt.Color(0, 0, 0));
+        btnHelp.setText("Cron Help");
+        btnHelp.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnHelp.setName("btnStart"); // NOI18N
+        btnHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHelpMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(txtJob_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(4, 4, 4))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbTrigger, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCheckValue, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtCron, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnStartCron, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(btnStopCron, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jLabel2))
+                            .addComponent(txtJob_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jLabel7))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cmbTrigger, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(0, 0, 0)
+                                .addComponent(txtCheckValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtCron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel1)
+                        .addGap(1, 1, 1)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnStartCron, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnStopCron, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,8 +429,18 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         START_CRON();       
     }//GEN-LAST:event_btnStartCronMouseClicked
     private void btnStopCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStopCronMouseClicked
-        STOP_CRON();  
+        STOP_CRON(); 
+        LOAD_JOBS(); //  ==== Reload definitions to capture possible updates
     }//GEN-LAST:event_btnStopCronMouseClicked
+
+    private void btnHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHelpMouseClicked
+         try {
+            A.Func.SHOW_FILE(C_HELP, "txt");
+        }
+        catch (Exception ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnHelpMouseClicked
     // </editor-fold>
     
     private void LOAD_JOBS() {
@@ -587,7 +691,16 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         });                       
                         Job_Count++;
                         Set_Cron_Status_Running(CronJobName);
+                    } else if(CronJobName.startsWith("DL_API")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Job_DL_API(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });                       
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);
 
+                        
                     } else if(CronJobName.startsWith("C360_FE")){
                         SCH.schedule(SCH_PATTERN, () -> {
                             Job_C360(CronJobName,CONFIG);
@@ -596,7 +709,17 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                         });
                         Job_Count++;
                         Set_Cron_Status_Running(CronJobName);   
+                        
+                    } else if(CronJobName.startsWith("C360_API")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            Job_C360_API(CronJobName,CONFIG);
+                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);   
 
+                        
                     } else if(CronJobName.startsWith("FW_FE")){
                         //Job_FW(CronJobName,CONFIG);
                         
@@ -702,13 +825,17 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             Job_AP3_API(JobName, config);
         } else if(JobName.startsWith("FW_API")){
             Job_FW_API(JobName, config);
-        } else if(JobName.startsWith("AP3")){
+        } else if(JobName.startsWith("AP3_FE")){
             Job_AP3(JobName, config);        
-        } else if(JobName.startsWith("DL")){
+        } else if(JobName.startsWith("DL_FE")){
             Job_DL(JobName, config);
-        } else if(JobName.startsWith("C360")){
+        } else if(JobName.startsWith("DL_API")){
+            Job_DL_API(JobName, config);
+        } else if(JobName.startsWith("C360_FE")){
             Job_C360(JobName, config);
-        } else if(JobName.startsWith("FW")){
+        } else if(JobName.startsWith("C360_API")){
+            Job_C360_API(JobName, config);
+        } else if(JobName.startsWith("FW_FE")){
             //Job_FW(CronJobName,config);
         } else if(JobName.startsWith("WO")){
             //Job_WO(config);
@@ -771,8 +898,26 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             LOG_FAILURE(RES);
         }
     }
+    private void Job_C360_API(String job, String config){
+        C360_API.C360_API_main _Job = new C360_API.C360_API_main();
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILURE(RES);
+        }
+    }
     private void Job_DL(String job, String config){
         DL.DL_GUI _Job = new DL.DL_GUI();
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
+        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILURE(RES);
+        }
+    }
+    private void Job_DL_API(String job, String config){
+        DL_API.DL_API_main _Job = new DL_API.DL_API_main();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
         txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -785,6 +930,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave;

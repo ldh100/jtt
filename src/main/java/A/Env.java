@@ -103,7 +103,7 @@ public class Env extends javax.swing.JInternalFrame {
         });
 
         cmbWhat.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus", "Promo", " " }));
+        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus", "Promo" }));
         cmbWhat.setMinimumSize(new java.awt.Dimension(113, 24));
         cmbWhat.setPreferredSize(new java.awt.Dimension(113, 24));
         cmbWhat.addItemListener(new java.awt.event.ItemListener() {
@@ -416,7 +416,7 @@ public class Env extends javax.swing.JInternalFrame {
             CSV = CSV.substring(0, CSV.length() - 1) + "\r\n";
             for (int j = 0; j < rows; j++) {
                 for (int i = 0; i < cols - 3; i++) { 
-                    CSV += "\""+ DV1.getModel().getValueAt(j, i).toString() + "\"" + ",";
+                    CSV += "\"" + DV1.getModel().getValueAt(j, i).toString() + "\"" + ",";
                 }
                 CSV = CSV.substring(0, CSV.length() - 1) + "\r\n";
             }
@@ -444,11 +444,11 @@ public class Env extends javax.swing.JInternalFrame {
                 dh = 0;
                 Statistics = "";
                 SQL = "SELECT st.app, " +
-                        "(SELECT count(*) FROM [dbo].[" + TBL +"]  WHERE app = st.app ) AS Total, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL' AND app = st.app) AS v1Menu, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL migrated' AND app = st.app) AS v2Menu, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'DH' AND app = st.app) AS BadMenu " +
-                        "FROM [dbo].[" + TBL +"] st GROUP BY app";
+                        "(SELECT count(*) FROM [dbo].[" + TBL + "]  WHERE app = st.app ) AS Total, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL' AND app = st.app) AS v1Menu, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL migrated' AND app = st.app) AS v2Menu, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'DH' AND app = st.app) AS BadMenu " +
+                        "FROM [dbo].[" + TBL + "] st GROUP BY app";
                 ResultSet rs = conn.createStatement().executeQuery(SQL);
                 while(rs.next()) {
                     int SubTot = (int)rs.getObject(2);
@@ -484,9 +484,9 @@ public class Env extends javax.swing.JInternalFrame {
                         Statistics + "\r\n";
                 
                 SQL = "SELECT TOP 1 " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL' AND country LIKE 'c%') AS v1c, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL migrated' AND country LIKE 'c%') AS v2c, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'DH' AND country LIKE 'c%') AS Badc " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL' AND country LIKE 'c%') AS v1c, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL migrated' AND country LIKE 'c%') AS v2c, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'DH' AND country LIKE 'c%') AS Badc " +
                         "FROM [dbo].[" + TBL + "]";
                 rs = conn.createStatement().executeQuery(SQL);
                 rs.next();
@@ -541,11 +541,11 @@ public class Env extends javax.swing.JInternalFrame {
                 Bt = 0;
                 Statistics = "";
                 SQL = "SELECT st.app, " +
-                        "(SELECT count(*) FROM [dbo].[" + TBL +"]  WHERE app = st.app ) AS TotMenu, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v1' AND app = st.app) AS v1Menu, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v2' AND app = st.app) AS v2Menu, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = '?' AND app = st.app) AS BadMenu " +
-                        "FROM [dbo].[" + TBL +"] st GROUP BY app";
+                        "(SELECT count(*) FROM [dbo].[" + TBL + "]  WHERE app = st.app ) AS TotMenu, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v1' AND app = st.app) AS v1Menu, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v2' AND app = st.app) AS v2Menu, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = '?' AND app = st.app) AS BadMenu " +
+                        "FROM [dbo].[" + TBL + "] st GROUP BY app";
                 ResultSet rs = conn.createStatement().executeQuery(SQL);
                 while(rs.next()) {
                     int SubTot = (int)rs.getObject(2);
@@ -582,9 +582,9 @@ public class Env extends javax.swing.JInternalFrame {
                         Statistics + "\r\n";
                 
                 SQL = "SELECT TOP 1 " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v1' AND country LIKE 'c%') AS v1c, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v2' AND country LIKE 'c%') AS v2c, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = '?' AND country LIKE 'c%') AS Badc " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v1' AND country LIKE 'c%') AS v1c, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v2' AND country LIKE 'c%') AS v2c, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = '?' AND country LIKE 'c%') AS Badc " +
                         "FROM [dbo].[" + TBL + "]";
                 rs = conn.createStatement().executeQuery(SQL);
                 rs.next();

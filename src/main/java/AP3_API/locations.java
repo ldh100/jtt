@@ -3,7 +3,6 @@ package AP3_API;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,7 +35,35 @@ class locations extends AP3_API_GUI {
     private String AAA = "";
     JSONObject requestParams = null;
     protected void run() {
+        Double LA = 0.0;
+        Double LO = 0.0; 
+        switch (env) {
+            case "PR":
+                LA = 42.299371;
+                LO = -71.265995;
+            case "ST":
+                LA = 43.6352304;
+                LO = -79.6925862;
+            case "DE":
+                LA = 43.6352304;
+                LO = -79.6925862;
+        }      
+        JOB_Api_Call("Location > Search (lat missing/long)", "GET",
+                BaseAPI + "/location/search?long=" + LO + "&operation_id=123", "", "", 400, ParentTest, "no_jira");    
+        JOB_Api_Call("Location > Search (lat/long missing)", "GET",
+                BaseAPI + "/location/search?lat=" + LA + "&operation_id=123", "", "", 400, ParentTest, "no_jira"); 
+        JOB_Api_Call("Location > Search (lat/long/operation_id missing)", "GET",
+                BaseAPI + "/location/search?lat=" + LA + "&long=" + LO, "", "", 200, ParentTest, "no_jira"); 
+        JOB_Api_Call("Location > Search (lat/long)", "GET",
+                BaseAPI + "/location/search?lat=" + LA + "&long=" + LO + "&operation_id=123", "", "", 200, ParentTest, "no_jira"); 
+            //{
+            //    "locations": []
+            //}
+        
+        JOB_Api_Call("Location > Get all location 'Not Implemented?'", "GET", // Gets Location within a radius of the provided point
+                BaseAPI + "/location", Auth, "", 400, ParentTest, "no_jira");        
 
+        
         Auth = "Bearer " + AP3_TKN;  // =============== AP3 Sectors > Company ID ================
         JOB_Api_Call("Location > /sector?_provider=cdl", "GET",
                 BaseAPI + "/location/sector?_provider=cdl", Auth, "", 200, ParentTest, "no_jira");
@@ -44,10 +71,7 @@ class locations extends AP3_API_GUI {
         Auth = "";                        // =============== AP3 ALL Sites ===========================
         AppID = A.Func.App_ID(app, env);
         JOB_Api_Call("Location > /multigroup/", "GET",
-                BaseAPI + "/location/multigroup/", Auth, "", 200, ParentTest, "no_jira");
-        
-//        List<String> EXEPTIONS = new ArrayList<>();
-//        String EXEPTION = EXEPTIONS.get(5);
+                BaseAPI + "/location/multigroup/", Auth, "", 200, ParentTest, "no_jira");       
 
         Auth = "";                       // =============== AP3 App Sites ===========================
         AppID = A.Func.App_ID(app, env);
@@ -93,8 +117,6 @@ class locations extends AP3_API_GUI {
                 AAA = ex.getMessage();
             }
         } 
-        
-       
 
         Auth = "";                      // ===============    AP3 Unit ===========================
         JOB_Api_Call("Location > /'UnitID'?extended=true&nocache=1", "GET",
@@ -131,6 +153,9 @@ class locations extends AP3_API_GUI {
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
+        }
+        if(MENU_IDS.isEmpty()){ // ================================== Cannot process without Menus
+            return;
         }
         Auth = "Bearer " + AP3_TKN;  // ===============    AP3 Sector ===========================
         JOB_Api_Call("Location/Sector > /'SectorID'?extended=true&nocache=1", "GET",
@@ -184,7 +209,9 @@ class locations extends AP3_API_GUI {
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
-        }        
+        }
+        
+        // ================================================================================
         if (!env.equals("PR")) {
             Group_APIs();
             Location_APIs();
@@ -192,10 +219,12 @@ class locations extends AP3_API_GUI {
             Sector_APIs();
             Company_APIs();
         }
-
+        if (env.equals("DE")) {
+            Delete_APIs();
+        }
     }
 
-    protected void Group_APIs() {
+    private void Group_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST New Group/Site with Delivery Drop-Off Locations">
         // Test Scenario 1: Positive flow to post site
         BODY = "{\"address\":{"
@@ -257,6 +286,9 @@ class locations extends AP3_API_GUI {
                 + "}";
         JOB_Api_Call("Location - POST add drop-off location to newly created group/site", "POST", 
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
+        
+        JOB_Api_Call("Location > Site - Get drop-off location > ID does not Exist", "GET", 
+                   BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + "ID_Does_Not-Exists", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
         BODY = "{"
@@ -566,7 +598,7 @@ class locations extends AP3_API_GUI {
         //</editor-fold>
     }
 
-    protected void Location_APIs() {
+    private void Location_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST Business Unit/Location">
         // Test Scenario 1: Positive flow to Add new Business Unit 
         BODY = "{"
@@ -601,6 +633,7 @@ class locations extends AP3_API_GUI {
             try {
                 New_Business_UnitID = json.getString("id");
             } catch (Exception ex) {
+                //
             }
         }
 
@@ -656,7 +689,8 @@ class locations extends AP3_API_GUI {
                 + "},"
                 + "\"name\":\"This is API test to update Business Unit name\""
                 + "}";
-        JOB_Api_Call("Location - PATCH update newly added Busines Unit", "PATCH", BaseAPI + "/location/" + New_Business_UnitID, Auth, BODY, 200, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH update newly added Busines Unit", "PATCH", 
+                BaseAPI + "/location/" + New_Business_UnitID, Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 2: Negative flow to update new Business Unit without name
         BODY = "{"
@@ -666,7 +700,8 @@ class locations extends AP3_API_GUI {
                 + "},"
                 + "\"name\":\"\""
                 + "}";
-        JOB_Api_Call("Location - PATCH negative flow to update new Busines Unit without name", "PATCH", BaseAPI + "/location/" + New_Business_UnitID, Auth, BODY, 400, ParentTest, "no_jira");
+        JOB_Api_Call("Location - PATCH negative flow to update new Busines Unit without name", "PATCH", 
+                BaseAPI + "/location/" + New_Business_UnitID, Auth, BODY, 400, ParentTest, "no_jira");
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Get Business unit by ID">
@@ -676,7 +711,7 @@ class locations extends AP3_API_GUI {
         //</editor-fold>
     }
 
-    protected void Brand_APIs() {
+    private void Brand_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST Brand/Station under newly created Business Unit">
         // Test Scenario 1: Positive flow to Add new Brand/Station under newly created Business Unit
         BODY = "{"
@@ -749,6 +784,7 @@ class locations extends AP3_API_GUI {
             try {
                 New_BrandID = json.getString("id");
             } catch (Exception ex) {
+                AAA = json.toString(4);
             }
         }
         // Test Scenario 2: Positive flow to Add public config to new Brand/Station
@@ -1089,30 +1125,9 @@ class locations extends AP3_API_GUI {
 
         //</editor-fold>
 
-        //<editor-fold defaultstate="collapsed" desc="Brand / Document Food Works Brand Only">
-//        List<String> DOCS_IDS = new ArrayList<>();
-//        if(env.equals("DE")){
-//            JOB_Api_Call("Location - GET Brand Attached Documents", "GET", 
-//                    BaseAPI + "/location/brand/" + BrandID + "/documents", Auth, "", 200, ParentTest, "no_jira");
-//        }
-//        if (json != null) {
-//            try {
-//                if (json.has("documents")) {
-//                    JSONArray docs = json.getJSONArray("documents");
-//                    for (int i = 0; i < docs.length(); i++) {
-//                        JSONObject doc = docs.getJSONObject(i);
-//                        DOCS_IDS.add(doc.getNumber("id").toString());
-//                    }
-//                }
-//            } catch (Exception ex) {
-//                AAA = ex.getMessage();
-//            }
-//        }
-        //</editor-fold>
-        
     }
 
-    protected void Sector_APIs() {
+    private void Sector_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST  New Sector/Group">
         // Test Scenario 1: Positive flow to post new Sector/group
         BODY = "{"
@@ -1161,7 +1176,7 @@ class locations extends AP3_API_GUI {
         //</editor-fold>
     }
 
-    protected void Company_APIs() {
+    private void Company_APIs() {
         //<editor-fold defaultstate="collapsed" desc="POST  New Company/Global Menu">
         // Test Scenario 1: Positive flow to post new Company/Global Menu
         BODY = "{"
@@ -1224,6 +1239,7 @@ class locations extends AP3_API_GUI {
                 + "}";
         JOB_Api_Call("Location - PATCH update newly added Company/Global Menu", "PATCH", 
                 BaseAPI + "/location/company/" + New_CompanyID, Auth, BODY, 200, ParentTest, "no_jira");
+        
         // Test Scenario 2: Negative flow to PATCH update Company/Global Menu with empty name
         BODY = "{"
                 + "\"sector\":\"" + New_SecotorID + "\","
@@ -1244,5 +1260,225 @@ class locations extends AP3_API_GUI {
         JOB_Api_Call("Location - Get newly created Sector/Group by Id", "GET", 
                 BaseAPI + "/location/company/" + New_CompanyID, Auth, "", 200, ParentTest, "no_jira");
         //</editor-fold>
+    }
+    private void Delete_APIs() {  
+        Auth = "Bearer " + AP3_TKN; 
+/*
+When user try to delete with dryrun=true , record shouldn’t be deleted - Pass
+When user try to delete with dryrun=false , record should be deleted - Pass
+When user try to delete with cache=true, record should be deleted - Pass
+When user try to delete with cache=false, record should be deleted - Pass
+When user try to delete only one station at a time - Pass
+When user try to delete all station along with Business Unit - Pass
+When user try to delete Site ->Business unit ->all station /Cascading data should be deleted - Pass        
+*/
+        JOB_Api_Call("Location/record - DELETE > Wrong Location ID", "DELETE", 
+                BaseAPI + "/location/record/" + "Location_56363_WRONG" + "?dryrun=true", Auth, "", 400, ParentTest, "no_jira");  
+
+        //<editor-fold defaultstate="collapsed" desc="Delete Brand">
+        JOB_Api_Call("Location/record - DELETE newly created Brand > dryrun=true", "DELETE", 
+                BaseAPI + "/location/record/" + New_BrandID + "?dryrun=true", Auth, "", 200, ParentTest, "no_jira");     
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        JOB_Api_Call("Location > New_BrandID should Not be Deleted", "GET",
+                BaseAPI + "/location/brand/" + New_BrandID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }    
+        
+        JOB_Api_Call("Location/record - DELETE newly created Brand > dryrun=false", "DELETE", 
+                BaseAPI + "/location/record/" + New_BrandID + "?dryrun=false", Auth, "", 200, ParentTest, "no_jira");     
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        JOB_Api_Call("Location > New_BrandID should be Deleted", "GET",
+                BaseAPI + "/location/brand/" + New_BrandID + "?extended=true&nocache=1", Auth, "", 404, ParentTest, "no_jira");
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }        
+        //</editor-fold>    
+        
+        //<editor-fold defaultstate="collapsed" desc="Delete Unit">
+        JOB_Api_Call("Location/record - DELETE newly created Business Unit > dryrun=true", "DELETE", 
+                BaseAPI + "/location/record/" + New_Business_UnitID + "?dryrun=true", Auth, "", 200, ParentTest, "no_jira");     
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        JOB_Api_Call("Location > New_Business_UnitID should Not be Deleted", "GET",
+                BaseAPI + "/location/" + New_Business_UnitID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }    
+        
+        JOB_Api_Call("Location/record - DELETE newly created New_Business_UnitID > dryrun=false", "DELETE", 
+                BaseAPI + "/location/record/" + New_Business_UnitID + "?dryrun=false", Auth, "", 200, ParentTest, "no_jira");     
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        JOB_Api_Call("Location > New_Business_UnitID should be Deleted", "GET",
+                BaseAPI + "/location/" + New_Business_UnitID + "?extended=true&nocache=1", Auth, "", 404, ParentTest, "no_jira");
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }        
+        //</editor-fold>          
+
+        //<editor-fold defaultstate="collapsed" desc="Delete Site">
+
+        JOB_Api_Call("Location/record - DELETE newly created Site > dryrun=true", "DELETE", 
+                BaseAPI + "/location/record/" + New_SiteID + "?dryrun=true", Auth, "", 200, ParentTest, "no_jira");     
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        JOB_Api_Call("Location > New_SiteID should Not be Deleted", "GET",
+                BaseAPI + "/location/group/" + New_SiteID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }    
+        
+        JOB_Api_Call("Location/record - DELETE newly created New_SiteID > dryrun=false", "DELETE", 
+                BaseAPI + "/location/record/" + New_SiteID + "?dryrun=false", Auth, "", 200, ParentTest, "no_jira");     
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }
+        JOB_Api_Call("Location > New_SiteID should be Deleted", "GET",
+                BaseAPI + "/location/group/" + New_SiteID + "?extended=true&nocache=1", Auth, "", 404, ParentTest, "no_jira");
+        if (json != null) {
+            AAA = json.toString(4);
+            try {
+//                if (json.has("timeslots")) {
+//                    JSONArray timeslots = json.getJSONArray("timeslots");
+//                    for (int i = 0; i < timeslots.length(); i++) {
+//                        JSONObject timeslot = timeslots.getJSONObject(i);
+//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
+//                    }
+//                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }        
+        //</editor-fold>          
+        
     }
 }

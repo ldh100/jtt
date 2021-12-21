@@ -201,8 +201,8 @@ public class M_Devices extends javax.swing.JInternalFrame {
             ADB_HOME = "";  
             EMULATOR_HOME = "C:/Users/" + A.A.UserID + "/AppData/Local/Android/Sdk/emulator";
         }else{
-            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
-            EMULATOR_HOME =System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "emulator" + File.separator;   
+            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android" + File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
+            EMULATOR_HOME =System.getenv("HOME") + File.separator + "Library" + File.separator + "Android" + File.separator + "sdk" + File.separator + "emulator" + File.separator;   
         }
         Load_AVD();
         Load_Connected_Devices();        

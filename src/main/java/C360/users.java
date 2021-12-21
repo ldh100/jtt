@@ -15,8 +15,9 @@ class users extends C360_GUI{
     try { 
         EX += " - " + "\t" + " === User Management " + "\t" + " ===== " + "\t" + " == User Management   Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
-        Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
-        Thread.sleep(500);
+        //Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
+        Refresh("Refresh > Open Side Menu", ParentTest, "no_jira");          
+        Thread.sleep(1000);
         List_L0("Navigation Nodes", "xpath", "//div[@class='p-treenode-content']", ParentTest, err);
         T_Index = -1;
         for (int i = 0; i < L0.size(); i++) {
@@ -28,43 +29,54 @@ class users extends C360_GUI{
         Element_Child_Click("Click/Expand 'User Management'", L0.get(T_Index), "xpath", ".//button[@class='p-tree-toggler p-link']",ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Child_List_L1("'User Management' navigation nodes", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
-        Find_Text("Find Navigation node 'Users'", "Users", true, ParentTest, "no_jira");    
-        Element_By_Path_Click("Click > 'User'", "xpath", "//a[@label='Users']/ancestor::span[@class='p-treenode-label']", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click > 'User Management > Users'", "xpath", "//a[@href='/user-management/users']", ParentTest, "no_jira"); 
              if (FAIL) { return;}           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                   
              if (FAIL) { return;}
         Element_By_Path_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");
              if (FAIL) { return;}
         Thread.sleep(500);
-        
-        
-        List_L0("Table Column Titles", "xpath", "//span[@class='p-column-title']", ParentTest, "no_jira");
+
+        List_L0("User Table Column Titles", "xpath", "//span[@class='p-column-title']", ParentTest, "no_jira");
             for (int i = 0; i < L0.size(); i++) {
                 Element_Text("Column Title " + (i + 1), L0.get(i), ParentTest, "no_jira");   
             }
         // Pagination    ????
-        Element_E1_Find("Find Table body", "tagName", "tbody", ParentTest, "no_jira");
+        Element_E1_Find("Find User Table body", "tagName", "tbody", ParentTest, "no_jira");
         Element_Child_List_L1("Table Rows", e1, "tagName", "tr", ParentTest, "no_jira");
             for (int i = 0; i < L1.size(); i++) {
-                Element_Text("Get Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira"); 
+                Element_Text("Get Users Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira"); 
                 if(!_All_data) { break;}
             }  
             
         Element_By_Path_Text("Find 'New User' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira"); 
         Element_By_Path_Click("Click 'New User' button", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
              if (FAIL) { return;}
-        Thread.sleep(500);        
+        Thread.sleep(500);  
         Element_E1_Find("Find 'Header Bar'", "id", "header-bar", ParentTest, "no_jira"); 
-             if (FAIL) { return;} // ======================== E1 to be used later ======================
+             if (FAIL) { return;} // ======================== e1 to be used later, do not re-define ======================
         Element_Child_Text("Find 'Header Bar' Title text", e1, "xpath", ".//h6[@class='ml-3 md:mr-4 md:ml-4']", ParentTest, "no_jira");
         Element_Child_Text("Find 'Header Bar > Discard' text", e1, "xpath", ".//span[text()='Discard']", ParentTest, "no_jira");
-        Element_Child_Text("Find 'Header Bar > Save' text", e1, "xpath", ".//span[text()='Save']", ParentTest, "no_jira");
+        Element_Child_Text("Find 'Header Bar > Save' text", e1, "xpath", ".//span[text()='Save']", ParentTest, "no_jira");            
         
+        Element_By_Path_Text("Find 'Enter Email Prompt' text", "xpath", "//div[@class='p-card-title']", ParentTest, "no_jira");         
+        Element_By_Path_Text_Enter("Enter Invalid Email", "xpath", "//input[@placeholder='Search Email']", "abc", false, ParentTest, "no_jira"); 
+        Click_out_of_Element("Click below the 'Header Bar' - activate email check", e1, "DOWN", 0, 4, ParentTest, "no_jira");
+             if (FAIL) { return;}        
+        Element_By_Path_Text("Find 'Enter Email error' text", "xpath", "//span[@class='caption']", ParentTest, "no_jira"); 
+        
+        Element_By_Path_Input_Select_Clear("Clear invalid Email", "xpath", "//input[@placeholder='Search Email']", ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Email", "xpath", "//input[@placeholder='Search Email']", "a@b.com", false, ParentTest, "no_jira"); 
         
         Element_Child_Click("Click 'Discard' button", e1, "xpath", ".//span[text()='Discard']/ancestor::button", ParentTest, "no_jira");
              if (FAIL) { return;}
+        Element_By_Path_Text("Find 'Dialog Header' text", "xpath", "//span[@class='p-dialog-title']", ParentTest, "no_jira"); 
+        Element_By_Path_Text("Find 'Dialog Message' text", "xpath", "//span[@class='p-confirm-dialog-message']", ParentTest, "no_jira"); 
+        Element_By_Path_Text("Find 'Dialog Reject' text", "xpath", "//button[@class='p-button p-component p-confirm-dialog-reject p-button-text']", ParentTest, "no_jira"); 
+        Element_By_Path_Text("Find 'Dialog Accept' text", "xpath", "//button[@class='p-button p-component p-confirm-dialog-accept']", ParentTest, "no_jira");  
+        Element_By_Path_Click("Click 'Discard' Confirm button", "xpath", "//button[@class='p-button p-component p-confirm-dialog-accept']", ParentTest, "no_jira");
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                   
-             if (FAIL) { return;}   
+             if (FAIL) { return;}    
         Thread.sleep(500);      
         
         EX += " - " + "\t" + " === ^ User Management  " + "\t" + " ===== " + "\t" + " == ^ User Management End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  

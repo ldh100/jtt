@@ -1,6 +1,5 @@
 package C360_API;
 
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -22,10 +21,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingWorker;
@@ -38,10 +35,10 @@ public class C360_API_main {
     protected String Auth = "";
     protected String NewID = "";
 
-    protected String FW_ADMIN_ID = "";
-    protected String FW_ADMIN_PW = "";
-    protected String FW_User_ID = "";
-    protected String FW_User_TKN = "";
+    protected String C360_ADMIN_ID = "";
+    protected String C360_ADMIN_PW = "";
+    protected String C360_User_ID = "";
+    protected String C360_User_TKN = "";
 
 
     private String HTML_Report_Path = "";
@@ -70,39 +67,10 @@ public class C360_API_main {
     private String SQL = "";
 
     private String url = "";
-    protected String app = "FW";
+    protected String app = "C360";
     protected String env = "";
     protected String BaseAPI = "";
     protected String BODY = "";
-
-    protected String UNIT = "";
-    protected String SiteID = "";
-    protected String RESTAURANT = "";
-    protected String SectorID = "";
-    protected String BRAND = "";
-    protected String BrandID = "";
-    protected String BrandIDS = "";
-    protected String UnitID = "";
-    protected String UnitNum = "";
-    protected String CompanyID = "";
-    protected String RestID = "";
-    protected String GL_MENU_ID = "";
-
-
-    protected List<String> BolterBrandIDS = new ArrayList<>();
-    protected List<String> SECTOR_IDS = new ArrayList<>();
-    protected List<String> COMP_IDS = new ArrayList<>();
-    protected List<String> MENU_IDS = new ArrayList<>();
-    protected List<String> ORDER_IDS = new ArrayList<>();
-    protected List<String> SCART_IDS = new ArrayList<>();
-    protected List<String> CATEGORIES_IDS = new ArrayList<>();
-    protected List<String> ITEMS_IDS = new ArrayList<>();
-    protected List<String> BRAND_TIMESLOTS = new ArrayList<>();
-    protected List<String> MENU_TIMESLOTS = new ArrayList<>();
-    protected List<String> DELIEVEY_TIMESLOTS = new ArrayList<>();
-    protected List<String> DELIEVERY_DESTINATIONS = new ArrayList<>();
-
-    protected List<String> NOTIFICATION_IDS = new ArrayList<>();
 
 
 
@@ -127,7 +95,6 @@ public class C360_API_main {
     protected double p_50 = 0;
     protected double p_90 = 0;
     private Duration DD;
-    private String Last_EX = "";
     private String Report_File = "";
     // </editor-fold>  
     
@@ -135,18 +102,18 @@ public class C360_API_main {
     protected void Extent_Report_Config() throws IOException {
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "FW_API_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "C360_API_" + env + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
 
-        HtmlReport.setSystemInfo("Application", "FW API(s)");
+        HtmlReport.setSystemInfo("Application", "C360 API(s)");
         HtmlReport.setSystemInfo("Machine", A.A.WsID);
         HtmlReport.setSystemInfo("Machine OS", A.A.WsOS);
         HtmlReport.setSystemInfo("Tester ID", A.A.UserID);
         HtmlReport.setSystemInfo("Run Trigger", r_type);
         HtmlReport.setReportUsesManualConfiguration(true); // DEBUG - steps duration time incorrect
 
-        HtmlReporter.config().setDocumentTitle("JTT FW API Automation Report");
+        HtmlReporter.config().setDocumentTitle("JTT C360 API Automation Report");
         //HtmlReporter.config().setTheme(Theme.DARK);               
         HtmlReporter.config().setTheme(Theme.STANDARD);
     }
@@ -230,29 +197,20 @@ public class C360_API_main {
                 if (l.contains("_slack: ")) {  _Slack = Boolean.parseBoolean(value); }
                 if (l.contains("_zip_report: ")) { Zip_Report = Boolean.parseBoolean(value); }
                 
-                if (l.contains("FW_ADMIN_ID: ")) { FW_ADMIN_ID = value; }
-                if (l.contains("FW_ADMIN_PW: ")) { FW_ADMIN_PW = value; } 
-                
-                if (l.contains("RESTAURANT: ")) { RESTAURANT = value; }
-                if (l.contains("RestID: ")) { RestID = value; }
-                if (l.contains("UNIT: ")) { UNIT = value; }
-                if (l.contains("UnitID: ")) { UnitID = value; }
-
+                if (l.contains("C360_ADMIN_ID: ")) { C360_ADMIN_ID = value; }
+                if (l.contains("C360_ADMIN_PW: ")) { C360_ADMIN_PW = value; } 
 
             }
             CONFIG = true;
             switch (env) {
                 case "ST":
                     BaseAPI = "https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging";
-                    url = "https://staging.app.foodworks.org/"; 
                     break;
                 case "DE":
                     BaseAPI = "https://czb8fru7ij.execute-api.us-east-1.amazonaws.com/dev";
-                    url = "https://dev.app.foodworks.org/"; 
                     break;
                 default:
                     BaseAPI = "https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1";
-                    url = "https://app.foodworks.org/";
                     break;
             }         
 
@@ -308,10 +266,10 @@ public class C360_API_main {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'FW_API_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
+                    " WHERE [app] = 'C360_API_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "FW_API_" + env);
+            _update.setString(3, "C360_API_" + env);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -336,83 +294,47 @@ public class C360_API_main {
     private void LOG_START() {
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             PreparedStatement _insert = conn.prepareStatement("INSERT INTO [dbo].[aw_result] ("
-                    + "[Date]"
-                    + // 1
-                    ", [Time]"
-                    + // 2
-                    ", [app]"
-                    + // 3
-                    ", [url]"
-                    + // 4
-                    ", [summary]"
-                    + // 5
-                    ", [t_calls]"
-                    + // 6
-                    ", [t_min]"
-                    + // 7
-                    ", [t_avg]"
-                    + // 8
-                    ", [t_max]"
-                    + // 9
-                    ", [p_50]"
-                    + // 10
-                    ", [p_90]"
-                    + // 11
-                    ", [test_type]"
-                    + // 12
-                    ", [user_id]"
-                    + // 13
-                    ", [user_ws]"
-                    + // 14
-                    ", [env]"
-                    + // 15
-                    ", [Result]"
-                    + // 16
-                    ", [Status]"
-                    + // 17
-                    ", [Excel]"
-                    + // 18
+                    + "[Date]" + // 1
+                    ", [Time]" + // 2
+                    ", [app]" + // 3
+                    ", [url]" + // 4
+                    ", [summary]" + // 5
+                    ", [t_calls]" + // 6
+                    ", [t_min]" + // 7
+                    ", [t_avg]" + // 8
+                    ", [t_max]" + // 9
+                    ", [p_50]" + // 10
+                    ", [p_90]" + // 11
+                    ", [test_type]" + // 12
+                    ", [user_id]" + // 13
+                    ", [user_ws]" + // 14
+                    ", [env]" + // 15
+                    ", [Result]" + // 16
+                    ", [Status]" + // 17
+                    ", [Excel]" + // 18
                     ") VALUES ("
-                    + "?"
-                    + // 1
-                    ",?"
-                    + // 2
-                    ",?"
-                    + // 3
-                    ",?"
-                    + // 4
-                    ",?"
-                    + // 5
-                    ",?"
-                    + // 6
-                    ",?"
-                    + // 7
-                    ",?"
-                    + // 8
-                    ",?"
-                    + // 9
-                    ",?"
-                    + // 10
-                    ",?"
-                    + // 11
-                    ",?"
-                    + // 12
-                    ",?"
-                    + // 13
-                    ",?"
-                    + // 14
-                    ",?"
-                    + // 15
-                    ",?"
-                    + // 16
-                    ",?"
-                    + // 17
-                    ",?"
-                    + // 18
+                    + "?" + // 1
+                    ",?" + // 2
+                    ",?" + // 3
+                    ",?" + // 4
+                    ",?" + // 5
+                    ",?" + // 6
+                    ",?" + // 7
+                    ",?" + // 8
+                    ",?" + // 9
+                    ",?" + // 10
+                    ",?" + // 11
+                    ",?" + // 12
+                    ",?" + // 13
+                    ",?" + // 14
+                    ",?" + // 15
+                    ",?" + // 16
+                    ",?" + // 17
+                    ",?" + // 18
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "FW_API_" + env);
+            _insert.setString(3, "C360_API_" + env);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -463,8 +385,8 @@ public class C360_API_main {
                     Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
                     _t++;
                     _f++;
-                    EX += " - " + "\t" + "=== Fatal Execution Error ==="+ "\t" + " >>> " + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - "
-                        + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira"+ "\r\n";
+                    EX += " - " + "\t" + "=== Fatal Execution Error ===" + "\t" + " >>> " + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - "
+                        + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("FAIL", ex.getMessage(), ParentTest.createNode("Fatal Execution Error"), API_SRART);                    
                     
                 }
@@ -503,7 +425,7 @@ public class C360_API_main {
             Current_Log_Update(GUI, t_rep + "\r\n");
         }               
 
-        EX = "FW_API " + env + ". "
+        EX = "C360_API " + env + ". "
                 + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
                 + ". " + t_rep
                 + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
@@ -511,16 +433,15 @@ public class C360_API_main {
                 + EX;
 
         Current_Log_Update(GUI, EX.replaceAll("\t", " > ") + "\r\n");        
-        
-        Last_EX = EX;       
+           
         Summary = "Steps: " + _t + ", Passed: " + _p + ", Failed: " + _f + ", Warnings: " + _w + ", Info: " + _i + Summary;
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
-        Current_Log_Update(GUI, "= FW API(s) " + ", Environment: " + env + "\r\n");
+        Current_Log_Update(GUI, "= C360 API(s) " + ", Environment: " + env + "\r\n");
 
 
         LOG_UPDATE(Log); // ========================================================
         
-        HtmlReporter.config().setReportName("FW API(s)" + ", Env: " + env
+        HtmlReporter.config().setReportName("C360 API(s)" + ", Env: " + env
                 + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
                 + ". Resp(sec) - Min: " + A.A.df.format(t_min)
                 + ", Avg: " + A.A.df.format(t_avg)
@@ -532,7 +453,7 @@ public class C360_API_main {
 
         if (_Slack && !Slack_Channel.equals("N/A")) {
 
-            String MSG = "FW_API_" + env + " Automation report - " + Report_Date
+            String MSG = "C360_API_" + env + " Automation report - " + Report_Date
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
@@ -579,8 +500,6 @@ public class C360_API_main {
         request.header("Content-Type", "application/json");
         request.header("Accept", "application/json");
         try {
-            int i = 1;
-//for (i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
             if (sw1.isRunning()) {
                 sw1.reset();
             }
@@ -628,21 +547,18 @@ public class C360_API_main {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
             if (status == ExpStatus) {
                 _p++;
-                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
-//break; // =================  Do not attempt againg if passed                    
+                Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")",
+                        ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);                
             } else {
                 _f++;
                 FAIL = true;
-                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
+                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+                Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")",
+                        ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
             }
-//} // =======   3 times Loop if not good
-
         } catch (Exception ex) {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
             _f++;
@@ -659,24 +575,18 @@ public class C360_API_main {
         sw1.reset();
     }
     
-    private void Execute() throws Exception {
+    private void Execute() throws Exception {       
         if (true) {
             SCOPE += "Login ";
             EX += " - " + "\t" + "Login" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Login");
             login BR = new C360_API.login(C360_API_main.this);
             BR.run(); // ======================================
-            EX += BR.EX;
-            _t += BR._t;
-            _p += BR._p;
-            _f += BR._f;
-            _w += BR._w;
-            _i += BR._i;
-            r_time += BR.r_time;
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             ParentTest.getModel().setName("Login - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-            FW_User_ID = BR.FW_User_ID;
-            FW_User_TKN = BR.FW_User_TKN;
+            C360_User_ID = BR.C360_User_ID;
+            C360_User_TKN = BR.C360_User_TKN;
         }     
    }
 }

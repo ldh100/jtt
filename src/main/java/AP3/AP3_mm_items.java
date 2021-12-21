@@ -49,8 +49,6 @@ class AP3_mm_items extends AP3_GUI{
         String MENU_ID = "";      
         int PAGES;
         boolean NO_DATA = false;
-        
-        
 
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -478,7 +476,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}
 
         //Verify API if ID's are unique
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start ==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         String[] Menu_ID = new String[2];
         int lmenu_cnt = 0;
         Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );
@@ -503,14 +501,14 @@ class AP3_mm_items extends AP3_GUI{
         }
 
         //Verify if cloned menu items are unique
-        Call_API("Call menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/"+Menu_ID[0], true, ParentTest, "no_jira" );
+        Call_API("Call menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" +Menu_ID[0], true, ParentTest, "no_jira" );
         json = new JSONObject(t);
         JSONArray items = json.getJSONArray("groups").getJSONObject(0).getJSONArray("items");
         String[] Item_ID = new String[2];
         int Item_ID_cnt = 0;
         for(int k=0; k<items.length(); k++)  {
             JSONObject item = items.getJSONObject(k);
-            if(item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Item "+ New_ID)) {
+            if(item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Item " + New_ID)) {
                 Item_ID[Item_ID_cnt] = item.getString("id");
                 Item_ID_cnt++;
             }
@@ -525,7 +523,7 @@ class AP3_mm_items extends AP3_GUI{
                 _p++; EX += _t + "\t" + "Unique ids for cloned Items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
-        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API END==" + "\t" + "-" +"\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API END==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         //</editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Delete Last Added Cloned Menu and Original Menu Set"> 
@@ -548,7 +546,7 @@ class AP3_mm_items extends AP3_GUI{
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Attribute("Menu (Index " + i + ") Name", L0.get(i), "textContent", ParentTest, "no_jira");            
                         if (FAIL) { return;}
-                    if(t.contains("Added "+ New_ID)) { 
+                    if(t.contains("Added " + New_ID)) { 
                         T_Index=i; 
                     }
                 }              
@@ -665,7 +663,7 @@ class AP3_mm_items extends AP3_GUI{
                 if (FAIL) { return;}
             String Category = t;
             System.out.println(Category);
-            Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -780,7 +778,7 @@ class AP3_mm_items extends AP3_GUI{
 
             Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
 
 
@@ -1008,7 +1006,7 @@ class AP3_mm_items extends AP3_GUI{
 
             Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
             if (FAIL) { return;}
-            Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
             if (FAIL) { return;}
@@ -1078,7 +1076,7 @@ class AP3_mm_items extends AP3_GUI{
             Refresh("Refresh the page", ParentTest, "no_jira");     
             Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" + Category + "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;}          
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}    
@@ -1107,7 +1105,7 @@ class AP3_mm_items extends AP3_GUI{
             Refresh("Refresh the page", ParentTest, "no_jira");
             Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click > '"+Category+"' Category", "xpath", "//*[contains(text(),'"+Category+"')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}    
