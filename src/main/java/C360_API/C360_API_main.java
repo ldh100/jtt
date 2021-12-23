@@ -31,6 +31,7 @@ import org.json.JSONObject;
 public class C360_API_main {   
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
+    protected String JOB_Name = ""; 
     protected String Realm = "";
     protected String Auth = "";
     protected String NewID = "";
@@ -139,6 +140,7 @@ public class C360_API_main {
     
     //<editor-fold defaultstate="collapsed" desc="Automated JOB">
     public String JOB_Run_Auto(String job_name, String run_type, String config) {
+        JOB_Name = job_name;
         run_start = Instant.now();
         Log = "";
         String RES = "";
@@ -204,13 +206,13 @@ public class C360_API_main {
             CONFIG = true;
             switch (env) {
                 case "ST":
-                    BaseAPI = "https://a1vtgusl3m.execute-api.us-east-1.amazonaws.com/staging";
+                    BaseAPI = "https://api.compassdigital.org/staging";
                     break;
                 case "DE":
-                    BaseAPI = "https://czb8fru7ij.execute-api.us-east-1.amazonaws.com/dev";
+                    BaseAPI = "https://api.compassdigital.org/dev";
                     break;
                 default:
-                    BaseAPI = "https://fg74jjx1x7.execute-api.us-east-1.amazonaws.com/v1";
+                    BaseAPI = "https://api.compassdigital.org/v1";
                     break;
             }         
 
@@ -425,7 +427,7 @@ public class C360_API_main {
             Current_Log_Update(GUI, t_rep + "\r\n");
         }               
 
-        EX = "C360_API " + env + ". "
+        EX = "C360_API_" + env + ". "
                 + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
                 + ". " + t_rep
                 + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
@@ -453,7 +455,7 @@ public class C360_API_main {
 
         if (_Slack && !Slack_Channel.equals("N/A")) {
 
-            String MSG = "C360_API_" + env + " Automation report - " + Report_Date
+            String MSG = JOB_Name + " Excel Automation report - " + Report_Date
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
@@ -542,6 +544,8 @@ public class C360_API_main {
                 json = new JSONObject(response.asString());
                 if (json.has("message")) {
                     ErrorMsg = "Error Message: " + json.getString("message") + ". ";
+                } else if(json.has("error")){
+                    ErrorMsg = "Error: " + json.getString("error") + ". ";
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
@@ -587,6 +591,18 @@ public class C360_API_main {
             ParentTest.getModel().setEndTime(new Date());
             C360_User_ID = BR.C360_User_ID;
             C360_User_TKN = BR.C360_User_TKN;
-        }     
+        }
+        if (true) {
+            SCOPE += "Users ";
+            EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Users");
+            cafe360user BR = new C360_API.cafe360user(C360_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Users - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+            C360_User_ID = BR.C360_User_ID;
+            C360_User_TKN = BR.C360_User_TKN;
+        }        
    }
 }

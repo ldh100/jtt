@@ -1018,8 +1018,11 @@ public class Orders extends javax.swing.JInternalFrame {
 
                         if(or.has("payment") && or.getJSONObject("payment").has("credit_card") && 
                            or.getJSONObject("payment").getJSONObject("credit_card").has("card_type")){
-                            _Payment = or.getJSONObject("payment").getJSONObject("credit_card").getString("card_type") +
-                                " x" + or.getJSONObject("payment").getJSONObject("credit_card").getString("last4");
+                            String Last4 = " x????";
+                            if(or.getJSONObject("payment").getJSONObject("credit_card").has("last4")){
+                                Last4 = " x" + or.getJSONObject("payment").getJSONObject("credit_card").getString("last4");
+                            }
+                            _Payment = or.getJSONObject("payment").getJSONObject("credit_card").getString("card_type") + Last4;
                         } 
                         if(or.has("payment") && or.getJSONObject("payment").has("digital_wallet_pay")){
                             _Payment = or.getJSONObject("payment").getString("digital_wallet_pay");

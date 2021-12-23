@@ -924,6 +924,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Local Variables">
+    protected String JOB_Name = "";   
     private boolean Zip_Report = true;
     private String Slack_Channel = "";
     protected boolean _Slack = false;
@@ -972,8 +973,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected long WaitForElement = 1500; // milisec
     protected double LoadTimeOut = 15 * 1000; // milisec 
     
-    protected String err = ""; 
-    protected String JOB_Name = "";     
+    protected String err = "";   
     private SwingWorker BW1;  
     private SwingWorker BW2; 
     private Instant run_start;
@@ -2075,105 +2075,105 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     }
     
     private void GUI_Run_Manual(){
+        JOB_Name = "AP3_FE_" + env; 
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExel.setEnabled(false);
-        JOB_Name = "AP3_FE_" + env;
-//        try{    
-            run_start = Instant.now();
-            Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-            
-            BROWSER = cmbBrow.getSelectedItem().toString();
-            WaitForElement = Math.round((double)nWaitElement.getValue() * 1000);
-            LoadTimeOut = (double)nWaitLoad.getValue() *1000;
+   
+        run_start = Instant.now();
+        Current_Log_Update(true, "= Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
 
-            EX = "";
-            F = "";
-            t_calls = 0;
-            t_min =  0;
-            t_avg = 0;
-            t_max =  0;
-            p_50 = 0;
-            p_90 = 0;
-            _t = 0; // Total
-            _p = 0; // Passed
-            _f = 0; // Failed
-            _w = 0; // Warn
-            r_time = "";
+        BROWSER = cmbBrow.getSelectedItem().toString();
+        WaitForElement = Math.round((double)nWaitElement.getValue() * 1000);
+        LoadTimeOut = (double)nWaitLoad.getValue() *1000;
 
-            ADMIN_ID = txtADMIN_ID.getText();
-            ADMIN_PW = txtADMIN_PW.getText();
-            MOBILE_ID = txtMOBILE_ID.getText();
-            MOBILE_PW = txtMOBILE_PW.getText();
-            RUNNER_ID = txtRUNNER_ID.getText();
-            RUNNER_PW = txtRUNNER_PW.getText();
-            DH_MENU_ID = "Not Used"; // like NWEJgN87Q3Sw46JaQ1Q, length > 18
-            
-            Slack_Channel = txtSlackCh.getText();
-            _Slack = _slack.isSelected();
-            _Headless = _headless.isSelected();             
+        EX = "";
+        F = "";
+        t_calls = 0;
+        t_min =  0;
+        t_avg = 0;
+        t_max =  0;
+        p_50 = 0;
+        p_90 = 0;
+        _t = 0; // Total
+        _p = 0; // Passed
+        _f = 0; // Failed
+        _w = 0; // Warn
+        r_time = "";
 
-            _Site = _site.isSelected();
-            _Site_new = _site_new.isSelected();
-            _Smart_analytics = _smart_analytics.isSelected();
-            _Brand_new = _brand_new.isSelected();
-            _Brand = _brand.isSelected();
-            _Brand_closure = _brand_closure.isSelected();
-            _Brand_config = _brand_config.isSelected();
-            _Group_management = _group_management.isSelected();
-            _Menu_manager = _menu_manager.isSelected();
-            _Notifications = _notifications.isSelected();
-            _Bulk_apply = _bulk_apply.isSelected();
-            _Export_menuset = _export_menuset.isSelected();
-            _MM_items = _mm_items.isSelected();
-            _MM_import = _mm_import.isSelected();
-            _Images = _images.isSelected();
-            _Timeslots = _timeslots.isSelected();
-            _Orders = _orders.isSelected();
-            _Orders_report_hidden = _orders_report_hidden.isSelected();
-            _Sales_report_hidden= _sales_report_hidden.isSelected();
-            _Sales_reporting = _sales_reporting.isSelected();
-            _Users = _users.isSelected();
-            _Resent_updates = _resent_updates.isSelected();
-            _Announcements = _announcements.isSelected();
-            _Promo = _promo.isSelected();
-            _Reschedule_menu = _reschedule_menu.isSelected();
-            _Sales_analytics = _sales_analytics.isSelected();
-            _Password = _password.isSelected();
-            _Roles = _roles.isSelected();
-            _All_data = _all_data.isSelected();
-            _Logout = _logout.isSelected();
-            
-            if(DV1.getRowCount() > 0) {
-                SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
-                platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
-                COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
-            }
-            if(DV2.getRowCount() > 0) {
-                BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
-            }
+        ADMIN_ID = txtADMIN_ID.getText();
+        ADMIN_PW = txtADMIN_PW.getText();
+        MOBILE_ID = txtMOBILE_ID.getText();
+        MOBILE_PW = txtMOBILE_PW.getText();
+        RUNNER_ID = txtRUNNER_ID.getText();
+        RUNNER_PW = txtRUNNER_PW.getText();
+        DH_MENU_ID = "Not Used"; // like NWEJgN87Q3Sw46JaQ1Q, length > 18
 
-            SECTOR = txtSector.getText();
-            GL_MENU = txtComp.getText();
-            //GroupID = "";
-            //CompanyID = "";
+        Slack_Channel = txtSlackCh.getText();
+        _Slack = _slack.isSelected();
+        _Headless = _headless.isSelected();             
 
-            SCOPE = "";
-            r_type = "manual"; 
-            
-            if(_Headless) {
-                Current_Log_Update(true, "= Headless mode is selected - Browser is hidden" + "\r\n");
-                txtLog.append( "= Please wait for report...\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            }
-            Current_Log_Update(true, "= Starting " + BROWSER + " Driver..." + "\r\n");
-            
-            if(sw1.isRunning()){
-                sw1.reset();
-            }
-            sw1.start();
-            LOG_START(); // ========================================================
-            BW1_DoWork(true);
+        _Site = _site.isSelected();
+        _Site_new = _site_new.isSelected();
+        _Smart_analytics = _smart_analytics.isSelected();
+        _Brand_new = _brand_new.isSelected();
+        _Brand = _brand.isSelected();
+        _Brand_closure = _brand_closure.isSelected();
+        _Brand_config = _brand_config.isSelected();
+        _Group_management = _group_management.isSelected();
+        _Menu_manager = _menu_manager.isSelected();
+        _Notifications = _notifications.isSelected();
+        _Bulk_apply = _bulk_apply.isSelected();
+        _Export_menuset = _export_menuset.isSelected();
+        _MM_items = _mm_items.isSelected();
+        _MM_import = _mm_import.isSelected();
+        _Images = _images.isSelected();
+        _Timeslots = _timeslots.isSelected();
+        _Orders = _orders.isSelected();
+        _Orders_report_hidden = _orders_report_hidden.isSelected();
+        _Sales_report_hidden= _sales_report_hidden.isSelected();
+        _Sales_reporting = _sales_reporting.isSelected();
+        _Users = _users.isSelected();
+        _Resent_updates = _resent_updates.isSelected();
+        _Announcements = _announcements.isSelected();
+        _Promo = _promo.isSelected();
+        _Reschedule_menu = _reschedule_menu.isSelected();
+        _Sales_analytics = _sales_analytics.isSelected();
+        _Password = _password.isSelected();
+        _Roles = _roles.isSelected();
+        _All_data = _all_data.isSelected();
+        _Logout = _logout.isSelected();
+
+        if(DV1.getRowCount() > 0) {
+            SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
+            platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
+            COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+        }
+        if(DV2.getRowCount() > 0) {
+            BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
+        }
+
+        SECTOR = txtSector.getText();
+        GL_MENU = txtComp.getText();
+        //GroupID = "";
+        //CompanyID = "";
+
+        SCOPE = "";
+        r_type = "manual"; 
+
+        if(_Headless) {
+            Current_Log_Update(true, "= Headless mode is selected - Browser is hidden" + "\r\n");
+            txtLog.append( "= Please wait for report...\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        }
+        Current_Log_Update(true, "= Starting " + BROWSER + " Driver..." + "\r\n");
+
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        sw1.start();
+        LOG_START(); // ========================================================
+        BW1_DoWork(true);
     }
     public String JOB_Run_Auto(String job_name, String run_type, String config){
         run_start = Instant.now();

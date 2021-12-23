@@ -312,7 +312,7 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
                 _Workbook = new HSSFWorkbook(inputStream);    //If it is xls file then create object of XSSFWorkbook class
             }    
             Sheet sheet = _Workbook.getSheet(sheetName);               //Read excel sheet by sheet name    
-            int rowCount = sheet.getLastRowNum()-sheet.getFirstRowNum();    //Get the current count of rows in excel file
+            int rowCount = sheet.getLastRowNum() - sheet.getFirstRowNum();  //Get the current count of rows in excel file
             Row row = sheet.getRow(0);                                //Get the first row from the sheet
             Row newRow = sheet.createRow(rowCount + 1);                     //Create a new row and append it at last of sheet
             

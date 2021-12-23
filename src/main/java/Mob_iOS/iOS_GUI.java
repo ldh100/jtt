@@ -2941,7 +2941,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
-            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +
+            String MSG = "Android_" + app + "_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
                     "Device: " + device + " > ID: " + devID + "\r\n" +     
                     "Scope: " + SCOPE + "\r\n" +

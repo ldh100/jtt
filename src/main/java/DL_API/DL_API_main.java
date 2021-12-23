@@ -31,6 +31,7 @@ import org.json.JSONObject;
 public class DL_API_main {   
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
+    protected String JOB_Name = "";   
     protected String Realm = "";
     protected String Auth = "";
     protected String NewID = "";
@@ -65,7 +66,7 @@ public class DL_API_main {
     private final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     private String SQL = "";
 
-    private String url = "";
+    protected String url = "";
     protected String app = "DL";
     protected String env = "";
     protected String BaseAPI = "";
@@ -138,6 +139,7 @@ public class DL_API_main {
     
     //<editor-fold defaultstate="collapsed" desc="Automated JOB">
     public String JOB_Run_Auto(String job_name, String run_type, String config) {
+        JOB_Name = job_name;
         run_start = Instant.now();
         Log = "";
         String RES = "";
@@ -266,10 +268,10 @@ public class DL_API_main {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'DL_API_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
+                    " WHERE [app] = '" + JOB_Name + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "DL_API_" + env);
+            _update.setString(3, JOB_Name);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -334,7 +336,7 @@ public class DL_API_main {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "DL_API_" + env);
+            _insert.setString(3, JOB_Name);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -425,7 +427,7 @@ public class DL_API_main {
             Current_Log_Update(GUI, t_rep + "\r\n");
         }               
 
-        EX = "DL_API " + env + ". "
+        EX = JOB_Name + ". "
                 + " Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ", Info: " + _i
                 + ". " + t_rep
                 + ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n"
@@ -452,8 +454,7 @@ public class DL_API_main {
         HtmlReport.flush();
 
         if (_Slack && !Slack_Channel.equals("N/A")) {
-
-            String MSG = "DL_API_" + env + " Automation report - " + Report_Date
+            String MSG = JOB_Name + " Excel Automation report - " + Report_Date
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;

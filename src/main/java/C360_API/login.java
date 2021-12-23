@@ -16,11 +16,7 @@ class login extends C360_API_main{
     String COOKIE = "";
 /*
 SSO authentication often results in setting a cookie. 
-If you capture this cookie after the authentication phase, then you can reuse this cookie in every Selenium test.        
-      
-DL 1st call        
-https://ssoqas.compassmanager.com/login?service=https://ssoqas.compassmanager.com/oauth2.0/callbackAuthorize?client_id=FMP+Distilr+Test&redirect_uri=https%3A%2F%2Fstaging.member.distilr.io%2Flogin&response_type=code&client_name=CasOAuthClient    
-https://ssoqas.compassmanager.com/oauth2.0/authorize?client_id=FMP Distilr Test&response_type=code&redirect_uri=https://staging.member.distilr.io/login
+If you capture this cookie after the authentication phase, then you can reuse this cookie        
  */ 
     protected void run() { 
         String C360_Clien_ID = "";
@@ -47,8 +43,11 @@ https://ssoqas.compassmanager.com/oauth2.0/authorize?client_id=FMP Distilr Test&
                      "&response_type=code&redirect_uri=" + C360_Redirect_URL + "&response_type=code", Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
+        }   
+        JOB_Api_Call("C360 SSO OAuth Login Redirect", "GET",      
+            BaseAPI + "?code=OC-139-cCVucy5kQNDTXzx1TVgKBvUgoX0S54P-", Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
         }        
-        
-        // https://api.compassdigital.org/dev/cafe360user
     }
 }

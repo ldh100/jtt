@@ -48,12 +48,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -63,7 +58,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -756,6 +750,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declarations">
+    protected String JOB_Name = "";   
     private boolean Zip_Report = true;
     private String Slack_Channel = "";
     protected boolean _Slack = false;
@@ -1020,7 +1015,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");
 
-     
         cmbEnv.setSelectedIndex(0); // 2 Select Development
         cmbApp.setSelectedIndex(0);
         
@@ -1115,10 +1109,10 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'C360_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
+                    " WHERE [app] = '" + JOB_Name + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
             _update.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-            _update.setString(3, "C360_" + env);
+            _update.setString(3, JOB_Name);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -1186,7 +1180,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(A.A.Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(A.A.Time_24_formatter));
-            _insert.setString(3, "C360_" + env);
+            _insert.setString(3, JOB_Name);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -1380,6 +1374,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     }
     
     private void GUI_Run_Manual(){
+        JOB_Name = "C360_FE_" + env;
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExcel.setEnabled(false);
@@ -1458,6 +1453,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
     }
     public String JOB_Run_Auto(String job_name, String run_type, String config){
+        JOB_Name = job_name;
         run_start = Instant.now();
         Log  = "";
         String RES = "";
@@ -1567,7 +1563,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected void Extent_Report_Config() throws IOException{
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "C360" + "_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + JOB_Name + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
@@ -1774,7 +1770,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
-                EX = "C360 " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
+                EX = JOB_Name + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
                     " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
@@ -1933,7 +1929,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
-            String MSG = "C360_" + env + " Excel Automation report - " + Report_Date +  
+            String MSG = JOB_Name + " Excel Automation report - " + Report_Date +  
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: *" + A.A.UserID + "*\r\n" +
                     "Browser: *" + BROWSER  + HEADLESS + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +

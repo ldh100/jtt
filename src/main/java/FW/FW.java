@@ -978,7 +978,7 @@ public class FW extends javax.swing.JInternalFrame {
         
         if(_slack.isSelected()){
             Report(false);
-            String MSG = "FW_" + env + " Automation report - " + Report_Date  +  
+            String MSG = "FW_" + env + " Excel Automation report - " + Report_Date  +  
                     "\r\n Machine: " + WsID + " OS: " + WsOS + ", User: *" + UserID + "*\r\n" +
                     "Browser: *" + cmbBrow.getSelectedItem().toString() + "*" + "\r\n" +        
                     "Scope: " + SCOPE + "\r\n" +

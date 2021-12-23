@@ -1,5 +1,11 @@
 package AP3_API;
 
+// /menu/import
+// /menu/items/location/{location}
+// /menu/client/{client_id}
+// /menu/item/random/location/{location}
+// /menu/{id}/export
+
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
