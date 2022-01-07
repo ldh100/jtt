@@ -1038,9 +1038,9 @@ class AP3_site extends AP3_GUI{
         Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'" +New_ID+ "') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
+        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'" +New_ID+ "') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1157,7 +1157,7 @@ class AP3_site extends AP3_GUI{
                 if (FAIL) { return;}
             Element_By_Path_Input_Select_Clear("Clear > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", "54321", false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Enter > value in 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", "84112", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_By_Path_Click("Click > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}

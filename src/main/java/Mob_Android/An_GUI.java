@@ -1317,7 +1317,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");
  
-        cmbEnv.setSelectedIndex(0); // 2 Select Development
+        cmbEnv.setSelectedIndex(1); // 0 Select Development
         cmbApp.setSelectedIndex(1); // 1 Boost
         
         Load = false;
@@ -3418,8 +3418,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
             if(!A.A.WsOS.toLowerCase().contains("windows")){
                 //asb.usingDriverExecutable(new File(("/path/to/node")));
                 HashMap<String, String> environment = new HashMap();
-                //environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); 
-                environment.put("ANDROID_HOME", System.getenv("JAVA_HOME")); 
+                environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); 
+                //environment.put("ANDROID_HOME", System.getenv("ANDROID_SDK_ROOT")); 
                 //environment.put("JAVA_HOME", "/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home"); 
                 environment.put("JAVA_HOME", System.getenv("JAVA_HOME"));
                 
