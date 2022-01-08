@@ -729,7 +729,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="436" y="144" width="420" height="260"/>
+          <AbsoluteConstraints x="436" y="144" width="420" height="262"/>
         </Constraint>
       </Constraints>
 
@@ -740,45 +740,45 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="_sales_analytics" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_login" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_site" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_brand" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_brand_closure" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_brand_config" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_reschedule_menu" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_sales_reporting" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_sales_analytics" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_smart_analytics" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_mm_import" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_menu_manager" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_bulk_apply" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_brand" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_reschedule_menu" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_brand_closure" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_sales_reporting" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_menu_manager" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                       <Component id="_export_menuset" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="_mm_items" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_brand_config" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_mm_import" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="_smart_analytics" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="_images" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_timeslots" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_resent_updates" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_announcements" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="_promo" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                               <Component id="_notifications" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_images" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                               <Component id="_orders" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_orders_report_hidden" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_resent_updates" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
                               <Component id="_sales_report_hidden" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_announcements" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_orders_report_hidden" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_promo" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_timeslots" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="_all_data" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
                               <Component id="_site_new" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                              <Component id="_brand_new" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="_users" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="_roles" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
                               <Component id="_password" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
                               <Component id="_logout" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="_roles" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="_brand_new" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -879,10 +879,13 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="txtSector" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="lblSITES12" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                          <Component id="txtComp" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblSITES12" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                  <Component id="txtComp" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -1087,9 +1090,6 @@
             </Property>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="_passwordActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_logout">
           <Properties>
@@ -1235,6 +1235,9 @@
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
           </Properties>
+          <AccessibilityProperties>
+            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
+          </AccessibilityProperties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSector">
           <Properties>
