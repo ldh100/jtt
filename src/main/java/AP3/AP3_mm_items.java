@@ -403,17 +403,41 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;} 
         Find_Text("Find 'Add Image' text", "Add Image", true, ParentTest, "no_jira");
         Find_Text("Find 'Preview Image' text", "Preview Image", true, ParentTest, "no_jira");
-        File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
+
+        File tmp;
+        tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
         if(tmp.exists()) {
-            Element_By_Path_Text_Enter("Upload Menu Image file", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
+            Element_By_Path_Text_Enter("Upload Menu Image file 1", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
         } else {
             _t++; 
             _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
         }
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
+        Find_Text("Find 'Remove Image' text", "REMOVE IMAGE", true, ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click 'REMOVE IMAGE' button", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+  
+        tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
+        if(tmp.exists()) {
+            Element_By_Path_Text_Enter("Upload Menu Image file 2", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+        } else {
+            _t++; 
+            _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+        }    
+  
+        tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
+        if(tmp.exists()) {
+            Element_By_Path_Text_Enter("Upload Menu Image file - override existing", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+        } else {
+            _t++; 
+            _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+        }
+
         
         Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}              
@@ -849,12 +873,12 @@ class AP3_mm_items extends AP3_GUI{
             Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Refresh("Refresh the page", ParentTest, "no_jira");    
-            Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest,"no_jira");
+            Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
             if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
                 if (FAIL) { return;}      
             EX += " - " + "\t" + " === Update existing modifier" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Wait_For_Element_By_Path_Presence("Wait for Modifier side panel", "xpath", "//div[contains(@class,'layout modifier')]", ParentTest,"no_jira");
+            Wait_For_Element_By_Path_Presence("Wait for Modifier side panel", "xpath", "//div[contains(@class,'layout modifier')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(1000);
 
@@ -978,14 +1002,14 @@ class AP3_mm_items extends AP3_GUI{
                 Find_Text("Check > Existing Modifier Price Changed", "$1.00", true, ParentTest, "no_jira");
             }
             if (CBC.contains("1")) {
-                Find_Text("Check > Existing Modifier Calories Changed", "200", true, ParentTest, "no_jira");
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:200", true, ParentTest, "no_jira");
             } else {
-                Find_Text("Check > Existing Modifier Calories Changed", "100", true, ParentTest, "no_jira");  
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:100", true, ParentTest, "no_jira");  
             }
             if (PLU.contains("1")) {
-                Find_Text("Check > Existing Modifier PLU Changed", "222", true, ParentTest, "no_jira");
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:222", true, ParentTest, "no_jira");
             } else {
-                Find_Text("Check > Existing Modifier PLU Changed", "111", true, ParentTest, "no_jira");
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:111", true, ParentTest, "no_jira");
             } 
 
     /* Commenting because of changes in auto assigning of newly added modifier. To remove once Ram confirms*/
@@ -1021,26 +1045,23 @@ class AP3_mm_items extends AP3_GUI{
                 Find_Text("Check > Existing Modifier Price Changed", "$1.00", true, ParentTest, "no_jira");
             }
             if (CBC.contains("1")) {
-                Find_Text("Check > Existing Modifier Calories Changed", "200", true, ParentTest, "no_jira");
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:200", true, ParentTest, "no_jira");
             } else {
-                Find_Text("Check > Existing Modifier Calories Changed", "100", true, ParentTest, "no_jira"); 
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:100", true, ParentTest, "no_jira"); 
             }
             if (PLU.contains("1")) {
-                Find_Text("Check > Existing Modifier PLU Changed", "222", true, ParentTest, "no_jira");
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:222", true, ParentTest, "no_jira");
             } else {
-                Find_Text("Check > Existing Modifier PLU Changed", "111", true, ParentTest, "no_jira");
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:111", true, ParentTest, "no_jira");
             }      
 
-    /* Commenting because of changes in auto assigning of newly added modifier. To remove once Ram confirms*/     
-    //        Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'add-delete-mod')]", ParentTest, "no_jira");
-    //        if (FAIL) { return;}
 
             EX += " - " + "\t" + " === Delete new modifier from the group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Refresh("Refresh the page", ParentTest, "no_jira");        
             Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest,"no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Move_to_Element_By_Path("Move > New Modifier", "xpath", "(//*[contains(@class,'layout modifier')])[2]", ParentTest, "no_jira");
