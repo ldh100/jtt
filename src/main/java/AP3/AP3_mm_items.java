@@ -203,7 +203,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}  
         Thread.sleep(500);
  
-         Element_By_Path_Click("Click Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
         Thread.sleep(500);                  
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
@@ -321,6 +321,8 @@ class AP3_mm_items extends AP3_GUI{
         Thread.sleep(500);            
         Element_By_Path_Click("Click 'NEW ITEM'", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
+        Wait_For_Element_By_Path_Presence("Wait for 'Item Image' tab", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, Ver);
+            if (FAIL) { return;}
         Element_By_Path_Click("Click 'New Item Name'", "css", "[aria-label='Item Name']", ParentTest, "no_jira");
             if (FAIL) { return;}             
         Element_By_Path_Text_Enter("Enter Item Name", "css", "[aria-label='Item Name']", "Item " + New_ID, false, ParentTest, "no_jira");
@@ -385,7 +387,8 @@ class AP3_mm_items extends AP3_GUI{
                 if (FAIL) { return;}
             }
         Element_Click("Select 1st Group", L1.get(0), ParentTest, "no_jira");
-            if (FAIL) { return;}             
+            if (FAIL) { return;}   
+        Thread.sleep(500);           
         List_L0("Updated Modifier Group Count", "xpath", "//div[@class='modifier-group']", ParentTest, "no_jira");             
             if (FAIL) { return;}   
             for (int i = 0; i < L0.size(); i++) {
@@ -402,14 +405,15 @@ class AP3_mm_items extends AP3_GUI{
         Find_Text("Find 'Preview Image' text", "Preview Image", true, ParentTest, "no_jira");
         File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
         if(tmp.exists()) {
-            Element_By_Path_Text_Enter("Upload Menu Image file", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_brand_image.jpg", false, ParentTest, "no_jira"); 
+            Element_By_Path_Text_Enter("Upload Menu Image file", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
         } else {
             _t++; 
             _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
         }
-
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
         
         Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}              
@@ -1075,7 +1079,7 @@ class AP3_mm_items extends AP3_GUI{
 
             // Verifying if modifier item Name/ price/calories /PLU / chit is not editable
             List_L0("Find Disabled elements", "xpath", "//div[@class='pa-0']/descendant::div[contains(@class,'disabled')]", ParentTest, "no_jira");
-            if(L0.size()==6 || (L0.size()%6==0)) {
+            if(L0.size() == 6 || (L0.size()%6 == 0)) {
                 _t++;
                 _p++; EX += _t + "\t" + "Price,Calories,PLU,Item Enabled,Chit,Tax tags" + "\t" + "Disabled" + "\t" + " - " + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("PASS", "Disabled", false, ParentTest.createNode(_t + ". " + "Price,Calories,PLU,Item Enabled,Chit,Tax tags are disabled"), new Date());
