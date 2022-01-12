@@ -4310,7 +4310,7 @@ public class SL_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
  
         FAIL = false;
-        if(L1 != null) {L1.clear();}
+        if(L2 != null) {L2.clear();}
         try {
             switch (BY) {
                 case "xpath":

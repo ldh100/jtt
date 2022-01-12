@@ -4417,7 +4417,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();        
  
         FAIL = false;
-        if(aL1 != null) {aL1.clear();}
+        if(aL2 != null) {aL2.clear();}
         try {
             switch (BY) {
                 case "xpath":

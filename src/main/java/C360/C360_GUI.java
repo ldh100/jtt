@@ -1523,7 +1523,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("nWaitElement: ")) WaitForElement = Math.round(Double.parseDouble(value) * 1000);
                 if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
-                if(l.contains("_ivalid_entries: ")) _Invalid_entries = Boolean.parseBoolean(value);
+                if(l.contains("_invalid_entries: ")) _Invalid_entries = Boolean.parseBoolean(value);
                 if(l.contains("_users: ")) _Users = Boolean.parseBoolean(value);
                 if(l.contains("_concepts: ")) _Concepts = Boolean.parseBoolean(value);
                 if(l.contains("_concept_groups: ")) _Concept_groups = Boolean.parseBoolean(value);
@@ -2461,7 +2461,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         sw1.reset();
     }    
 
-    protected void Wait_For_Element_By_Path_Visibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Wait_For_Element_By_Selector_Visibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2509,7 +2509,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Wait_For_Element_By_Selector_Presence(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2610,7 +2610,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Wait_For_Element_By_Selector_InVisibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2748,7 +2748,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     } 
-    protected void Move_to_Element_By_Path(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Move_to_Element_By_Selector(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2801,7 +2801,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Move_out_of_Element_By_Selector(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -2869,7 +2869,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Click_out_of_Element_By_Selector(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3115,7 +3115,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Click(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Click(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3168,7 +3168,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         t = "empty"; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -3219,7 +3219,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Attribute(String NAME, String BY, String PATH, String VAL, ExtentTest ParentTest, String JIRA) throws Exception {
         t = ""; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
@@ -3276,7 +3276,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_Select_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3329,7 +3329,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_DblClick_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3382,7 +3382,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3438,7 +3438,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Input_Select_Clear(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset(); 
         }
@@ -3497,7 +3497,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
@@ -3772,7 +3772,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
-        if(L1 != null) {L1.clear();}
+        if(L2 != null) {L2.clear();}
         try {
             switch (BY) {
                 case "xpath":
@@ -4345,7 +4345,7 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         } 
         sw1.reset();
     }
-    protected void List_Child_E1_By_Path(String NAME, WebElement E, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void List_Child_E1_By_Selector(String NAME, WebElement E, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }

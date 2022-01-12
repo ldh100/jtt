@@ -15,7 +15,7 @@ class roles extends C360_GUI{
     try { 
         EX += " - " + "\t" + " === User Management " + "\t" + " ===== " + "\t" + " == User Management   Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
-        //Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
+        //Element_By_Selector_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
         Refresh("Refresh > Open Side Menu", ParentTest, "no_jira");          
         Thread.sleep(1000);
         List_L0("Navigation Nodes", "xpath", "//div[@class='p-treenode-content']", ParentTest, err);
@@ -31,11 +31,11 @@ class roles extends C360_GUI{
         Element_Child_List_L1("'User Management' navigation nodes", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
         
         Find_Text("Find Navigation node 'Roles'", "Users", true, ParentTest, "no_jira"); 
-        Element_By_Path_Click("Click > 'User Management > Roles'", "xpath", "//a[@href='/user-management/roles']", ParentTest, "no_jira");    
+        Element_By_Selector_Click("Click > 'User Management > Roles'", "xpath", "//a[@href='/user-management/roles']", ParentTest, "no_jira");    
              if (FAIL) { return;}           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                   
              if (FAIL) { return;}
-        Element_By_Path_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");
+        Element_By_Selector_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");
              if (FAIL) { return;}
         Thread.sleep(500);
         
@@ -52,8 +52,8 @@ class roles extends C360_GUI{
                 if(!_All_data) { break;}
             }  
             
-        Element_By_Path_Text("Find 'New User' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira"); 
-        Element_By_Path_Click("Click 'New User' button", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
+        Element_By_Selector_Text("Find 'New User' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Click 'New User' button", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
              if (FAIL) { return;}
         Thread.sleep(500);        
         Element_E1_Find("Find 'Header Bar'", "id", "header-bar", ParentTest, "no_jira"); 

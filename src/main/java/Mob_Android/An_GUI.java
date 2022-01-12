@@ -5198,7 +5198,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
         Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs          
  
         FAIL = false;
-        if(aL1 != null) {aL1.clear();}
+        if(aL2 != null) {aL2.clear();}
         try {
             switch (BY) {
                 case "xpath":

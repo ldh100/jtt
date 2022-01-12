@@ -4866,7 +4866,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
  
         FAIL = false;
-        if(L1 != null) {L1.clear();}
+        if(L2 != null) {L2.clear();}
         try {
             switch (BY) {
                 case "xpath":
