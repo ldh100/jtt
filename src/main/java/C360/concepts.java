@@ -1,4 +1,7 @@
 package C360;
+
+import java.util.Date;
+
 class concepts extends C360_GUI{
     protected concepts(C360_GUI a) {
         USER_NAME = a.USER_NAME;
@@ -66,6 +69,12 @@ class concepts extends C360_GUI{
              if (FAIL) { return;}   
         Thread.sleep(500);             
         EX += " - " + "\t" + " === ^ Concepts " + "\t" + " ===== " + "\t" + " == ^ Concepts End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage();
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Run Exeption:" + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + AAA + "\t" + " - " + "\r\n";
+        try{
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+        }catch(Exception eee) {};
+    }   
     }
 }

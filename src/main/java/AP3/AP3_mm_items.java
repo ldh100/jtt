@@ -155,9 +155,9 @@ class AP3_mm_items extends AP3_GUI{
                 } 
             }
             if(T_Index == -1 && PAGES > 1){
-                Scroll_to_Element("Scroll to Pagination", L3.get(1), ParentTest, "no_jira");
+                Scroll_to_Element("Scroll to Pagination", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}    
-                Element_Click("Click Navigation Page 2", L3.get(1), ParentTest, "no_jira");
+                Element_Click("Click Navigation Page 2", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                     if (FAIL) { return;}
@@ -169,9 +169,9 @@ class AP3_mm_items extends AP3_GUI{
                     } 
                 } 
                 if(T_Index == -1 && PAGES > 2){
-                    Scroll_to_Element("Scroll to Pagination", L3.get(2), ParentTest, "no_jira");
+                    Scroll_to_Element("Scroll to Pagination", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}    
-                    Element_Click("Click Navigation Page 3", L3.get(2), ParentTest, "no_jira");
+                    Element_Click("Click Navigation Page 3", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                         if (FAIL) { return;}
@@ -188,6 +188,7 @@ class AP3_mm_items extends AP3_GUI{
             _t++; 
             _f++;
             EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            Log_Html_Result("FAIL", "Find Menu:" + GL_MENU, false, ParentTest.createNode(_t + ". " + "Menu '" + GL_MENU + "' not found"), new Date());
             return;
         }  
         
@@ -1129,6 +1130,11 @@ class AP3_mm_items extends AP3_GUI{
             EX += " - " + "\t" + " === Manipulate Global Modifiers" + "\t" + " ===== " + "\t" + " == Manipulate Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             // </editor-fold> 
         } 
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){    // =============================================  
+        String AAA = ex.getMessage();
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Run Exeption:" + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + AAA + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } // =============================================  
+
     }
 }

@@ -1,4 +1,7 @@
 package C360;
+
+import java.util.Date;
+
 class C360_login extends C360_GUI{
     protected C360_login(C360_GUI a) {
         USER_NAME = a.USER_NAME;
@@ -19,7 +22,7 @@ class C360_login extends C360_GUI{
         Navigate_to_URL("Navigate to", url, ParentTest, "no_jira"); 
         Wait_For_Element_By_Selector_Presence("Wait for Home Image", "xpath", "//img[contains(@class, 'right-side')]", ParentTest,"no_jira");
             if (FAIL) { return;}
-        Page_URL("C360 Login page", ParentTest, "no_jira"); 
+        Page_URL("C360 Login page URL", ParentTest, "no_jira"); 
         Element_By_Selector_Text("Get 'Welcome' text", "xpath", "//h4[contains(text(), 'Welcome to Cafe360')]", ParentTest,"no_jira");
         Element_By_Selector_Text("Get 'Sign in..' text", "xpath", "//p[contains(text(), 'Sign in ')]", ParentTest,"no_jira");
         Element_By_Selector_Text("Get 'Don't have..' text", "xpath", "//p[contains(text(), 'Reach out to your Compass Manager')]", ParentTest,"no_jira");
@@ -152,6 +155,12 @@ class C360_login extends C360_GUI{
         Element_By_Selector_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");
         
         EX += " - " + "\t" + " === ^ Login/Navigation Tree " + "\t" + " ===== " + "\t" + " == ^ Login/Navigation Tree End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage();
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Run Exeption:" + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + AAA + "\t" + " - " + "\r\n";
+        try{
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+        }catch(Exception eee) {};
+    }   
     }
 }

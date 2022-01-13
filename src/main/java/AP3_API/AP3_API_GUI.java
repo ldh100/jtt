@@ -2649,7 +2649,11 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             }
             sw1.start();
             LOG_START();   // ========================================================
-            BW1_DoWork(false);
+            if(run_type.equals("cron")){
+                BW1_DoWork(false); // GUI > manual - false
+            } else{
+                BW1_DoWork(true); // GUI > manual - true
+            }
         } catch (Exception ex) {
             return "ERROR > " + ex.getMessage();
         }
@@ -2708,7 +2712,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         }
     }
 
-    protected void Current_Log_Update(boolean GUI, String Text) {
+    private void Current_Log_Update(boolean GUI, String Text) {
         if (GUI) {
             txtLog.append(Text);
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -2926,7 +2930,21 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception {
                 Extent_Report_Config();
                 NewID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                Execute(); // ======================================================================= 
+                Execute(); // ========================== ===========================================cleanup lists >>>>
+                BolterBrandIDS = new ArrayList<>();
+                SECTOR_IDS = new ArrayList<>();
+                COMP_IDS = new ArrayList<>();
+                MENU_IDS = new ArrayList<>();
+                ORDER_IDS = new ArrayList<>();
+                SCART_IDS = new ArrayList<>();
+                CATEGORIES_IDS = new ArrayList<>();
+                ITEMS_IDS = new ArrayList<>();
+                BRAND_TIMESLOTS = new ArrayList<>();
+                MENU_TIMESLOTS = new ArrayList<>();
+                DELIEVEY_TIMESLOTS = new ArrayList<>();
+                DELIEVERY_DESTINATIONS = new ArrayList<>();
+                NOTIFICATION_IDS = new ArrayList<>();
+                ANNOUNCEMENT_IDS = new ArrayList<>();
 
                 if (_f > 0) {
                     return "= Execution finished @" + LocalDateTime.now().format(A.A.Time_12_formatter) + " with " + _f + " FAIL(s)";
@@ -3005,22 +3023,22 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
 
         if (GUI) {
             Log = txtLog.getText();
+            HtmlReporter.config().setReportName("API(s)" + ", Env: " + env
+                    + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
+                    + ". Resp(sec) - Min: " + A.A.df.format(t_min)
+                    + ", Avg: " + A.A.df.format(t_avg)
+                    + ", Max: " + A.A.df.format(t_max)
+                    + ", p50: " + A.A.df.format(p_50)
+                    + ", p90: " + A.A.df.format(p_90)
+                    + ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+            HtmlReport.flush(); 
+
         }
         LOG_UPDATE(Log); // ========================================================
-        
-        HtmlReporter.config().setReportName("API(s)" + ", Env: " + env
-                + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
-                + ". Resp(sec) - Min: " + A.A.df.format(t_min)
-                + ", Avg: " + A.A.df.format(t_avg)
-                + ", Max: " + A.A.df.format(t_max)
-                + ", p50: " + A.A.df.format(p_50)
-                + ", p90: " + A.A.df.format(p_90)
-                + ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
-        HtmlReport.flush();
 
-        if (_Slack && !Slack_Channel.equals("N/A")) {
+        if (GUI && _Slack && !Slack_Channel.equals("N/A")) {
             Report(false);
-            String MSG = JOB_Name + " Excel Automation report - " + Report_Date
+            String MSG = JOB_Name + " Excel Automation report - " + Report_Date + " (" + r_type + ")"
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
