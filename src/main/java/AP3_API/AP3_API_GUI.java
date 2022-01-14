@@ -743,7 +743,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     protected double p_90 = 0;
     private Duration DD;
     private String Last_EX = "";
-    private String Report_File = "";
+    private String Excel_Report_File = "";
     // </editor-fold>   
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
@@ -2723,7 +2723,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
 
     private void Report(boolean Open_File) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        Report_File = "";
+        Excel_Report_File = "";
         if ("".equals(Last_EX.trim()) || "None".equals(Last_EX.trim())) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             txtLog.append("=== Report > Not Excel" + "\r\n");
@@ -2741,8 +2741,8 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                 String[] v = lines[i].split("\t");
                 System.arraycopy(v, 0, Values[i], 0, v.length);
             }
-            Report_File = A.Func.fExcel(l, col, Values, JOB_Name + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
-            txtLog.append("=== Report Excel file:\r\n" + Report_File + "\r\n");
+            Excel_Report_File = A.Func.fExcel(l, col, Values, JOB_Name + "_" + Report_Date, Top_Row, 0, 0, null, " ", " ", Open_File);
+            txtLog.append("=== Report Excel file:\r\n" + Excel_Report_File + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         } catch (IOException ex) {
             txtLog.append("=== Report > ERROR: " + ex.getMessage() + "\r\n");
@@ -3021,7 +3021,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "= API(s) " + ", Environment: " + env + "\r\n");
 
-        if (GUI) {
+        if (GUI) { //   generate HTML report only "ad-hoc" to save on user desktop, do not in cron
             Log = txtLog.getText();
             HtmlReporter.config().setReportName("API(s)" + ", Env: " + env
                     + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
@@ -3032,7 +3032,6 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                     + ", p90: " + A.A.df.format(p_90)
                     + ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
             HtmlReport.flush(); 
-
         }
         LOG_UPDATE(Log); // ========================================================
 
@@ -3043,13 +3042,13 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;
 
-            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(Report_File, Slack_Channel, MSG));
-            File ef = new File(Report_File);
+            Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(Excel_Report_File, Slack_Channel, MSG));
+            File ef = new File(Excel_Report_File);
             if (ef.exists() && !ef.isDirectory()) {
                 ef.delete();
             }
             
-            String HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Click to Open";
+            String HTML_Report_Msg = "HTML Report - to view please Download > Open containing folder > Open";
             String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
             if (Zip_Report) {
                 String Origin_HTML = HTML_Path;
@@ -3058,9 +3057,28 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                 if (hf.exists() && !hf.isDirectory()) {
                     hf.delete();
                 }
-                HTML_Report_Msg = "HTML Report - to view please Click > Open containing folder > Extract Here > open unzipped HTML file";
+                HTML_Report_Msg = "HTML Report - to view please Downlod > Open containing folder > Extract Here > open unzipped HTML file";
             }
             Current_Log_Update(GUI, A.Func.Send_File_with_Message_to_Slack(HTML_Path, Slack_Channel, HTML_Report_Msg));
+            File hf = new File(HTML_Path);
+            if (hf.exists() && !hf.isDirectory()) {
+                hf.delete();
+            }
+        }
+
+        if (!GUI && env.equals("PR") && _f > 0) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
+            HtmlReporter.config().setReportName("API(s)" + ", Env: " + env
+                    + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
+                    + ". Resp(sec) - Min: " + A.A.df.format(t_min)
+                    + ", Avg: " + A.A.df.format(t_avg)
+                    + ", Max: " + A.A.df.format(t_max)
+                    + ", p50: " + A.A.df.format(p_50)
+                    + ", p90: " + A.A.df.format(p_90)
+                    + ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+            HtmlReport.flush(); 
+            String HTML_Report_Msg = "AP3 API Production test failed" + "\r\n" + "Details in JTT HTML Report - Download > Open containing folder > Open";
+            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
+            String SEND = A.Func.Send_File_with_Message_to_Slack(HTML_Path, "#qa_only", HTML_Report_Msg);
             File hf = new File(HTML_Path);
             if (hf.exists() && !hf.isDirectory()) {
                 hf.delete();

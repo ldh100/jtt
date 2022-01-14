@@ -44,8 +44,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -2413,19 +2415,26 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             switch (BROWSER) {
                 case "Chrome":
                         ChromeOptions chrome_op = new ChromeOptions();
-                        //chrome_op.addExtensions(new File("/path/to/extension.crx"));
-                        chrome_op.addArguments("--disable-infobars");
-                        chrome_op.addArguments("--start-maximized");
-            //            chrome_op.addArguments("--start-minimized");
-            //            chrome_op.addArguments("enable-automation");
-            //            chrome_op.addArguments("--no-sandbox");
-            //            chrome_op.addArguments("--disable-extensions");
-            //            chrome_op.addArguments("--dns-prefetch-disable");
-            //            chrome_op.addArguments("--disable-gpu");
+                        chrome_op.addArguments("--disable-web-security");
+                        chrome_op.addArguments("--no-proxy-server");
+                        if(!_Mobile_view){
+                            chrome_op.addArguments("--start-maximized");
+                        } else{
+                            //chrome_op. >> Set Screen Dimension
+                        };
                         if(_Headless){
                             chrome_op.addArguments("--headless");
                         }
                         chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
+                        chrome_op.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"}); 
+                        //chrome_op.setExperimentalOption("useAutomationExtension", false);
+                        Map<String, Object> prefs = new HashMap<String, Object>();
+                        prefs.put("useAutomationExtension", false); 
+                        prefs.put("credentials_enable_service", false);
+                        prefs.put("profile.password_manager_enabled", false);
+                        chrome_op.setExperimentalOption("prefs", prefs);
+
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":

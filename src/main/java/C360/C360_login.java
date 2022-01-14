@@ -142,15 +142,15 @@ class C360_login extends C360_GUI{
             Element_Child_Click("Click/Expand '" + t + "'", L0.get(i), "xpath", ".//button[@class='p-tree-toggler p-link']",ParentTest, "no_jira");
         }  
         // User Management
-        Find_Text("Find Navigation node 'Users'", "Users", true, ParentTest, "no_jira"); 
-        Find_Text("Find Navigation node 'Roles'", "Roles", false, ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'Users' text", "Users", true, ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'Roles' text", "Roles", false, ParentTest, "no_jira"); 
         // Item Catalog       
-        Find_Text("Find Navigation node 'Menus'", "Menus", false, ParentTest, "no_jira");
-        Find_Text("Find Navigation node 'Concepts'", "Concepts", true, ParentTest, "no_jira"); 
-        Find_Text("Find Navigation node 'Concept Groups'", "Concept Groups", true, ParentTest, "no_jira"); 
-        Find_Text("Find Navigation node 'POSID Ranges'", "POSID Ranges", true, ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'Menus' text", "Menus", false, ParentTest, "no_jira");
+        Find_Text("Find Navigation node 'Concepts' text", "Concepts", true, ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'Concept Groups' text", "Concept Groups", true, ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'POSID Ranges' text", "POSID Ranges", true, ParentTest, "no_jira"); 
         // Version  
-        Find_Text("Find 'Version", "Version", false, ParentTest, "no_jira");   
+        Find_Text("Find 'Version text", "Version", false, ParentTest, "no_jira");   
 
         Element_By_Selector_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");
         

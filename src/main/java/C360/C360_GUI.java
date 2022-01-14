@@ -162,7 +162,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         setTitle("C360 Automation Manager >>> loading, please wait ... ... ... ...");
         setMinimumSize(new java.awt.Dimension(862, 525));
         setName("C360"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(862, 525));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -174,20 +173,20 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -400,8 +399,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                                 .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(_menu_manager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(_concepts, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addComponent(_posid_ranges, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                .addComponent(_concepts, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(_posid_ranges, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(_concept_groups, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -698,13 +697,13 @@ public class C360_GUI extends javax.swing.JInternalFrame {
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 64, 100, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 64, 110, 14));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<<<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 80, 100, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 80, 110, 14));
 
         _mobile_view.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _mobile_view.setText("mobile_view");
@@ -1657,7 +1656,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
             switch (BROWSER) {
                 case "Chrome":
                         ChromeOptions chrome_op = new ChromeOptions();
-                        //chrome_op.addArguments("--disable-infobars");
                         chrome_op.addArguments("--disable-web-security");
                         chrome_op.addArguments("--no-proxy-server");
                         if(!_Mobile_view){
@@ -1671,11 +1669,13 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                         chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
                         chrome_op.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"}); 
-                        chrome_op.setExperimentalOption("useAutomationExtension", false);
+                        //chrome_op.setExperimentalOption("useAutomationExtension", false);
                         Map<String, Object> prefs = new HashMap<String, Object>();
+                        prefs.put("useAutomationExtension", false); 
                         prefs.put("credentials_enable_service", false);
                         prefs.put("profile.password_manager_enabled", false);
                         chrome_op.setExperimentalOption("prefs", prefs);
+
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
