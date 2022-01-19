@@ -154,7 +154,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Sites.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Sites.setCellSelectionEnabled(true);
-        DV_Sites.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Sites.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Sites.setName("DV_Sites"); // NOI18N
         DV_Sites.setRowHeight(18);
         DV_Sites.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -179,7 +179,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Brands.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Brands.setCellSelectionEnabled(true);
-        DV_Brands.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Brands.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Brands.setName("DV_Brands"); // NOI18N
         DV_Brands.setOpaque(false);
         DV_Brands.setRowHeight(18);
@@ -216,7 +216,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_MTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_MTS.setCellSelectionEnabled(true);
-        DV_MTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_MTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
         DV_MTS.setRowHeight(18);
         DV_MTS.getTableHeader().setReorderingAllowed(false);
@@ -239,7 +239,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Items.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Items.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Items.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Items.setName("DV_Items"); // NOI18N
         DV_Items.setOpaque(false);
         DV_Items.setRowHeight(18);
@@ -263,7 +263,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Mods.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Mods.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Mods.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Mods.setName("DV_Mods"); // NOI18N
         DV_Mods.setOpaque(false);
         DV_Mods.setRowHeight(18);
@@ -298,7 +298,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Menus.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Menus.setCellSelectionEnabled(true);
-        DV_Menus.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Menus.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Menus.setName("DV_Menus"); // NOI18N
         DV_Menus.setOpaque(false);
         DV_Menus.setRowHeight(18);
@@ -323,7 +323,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_DTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_DTS.setCellSelectionEnabled(true);
-        DV_DTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_DTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_DTS.setName("DV_DTS"); // NOI18N
         DV_DTS.setRowHeight(18);
         DV_DTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

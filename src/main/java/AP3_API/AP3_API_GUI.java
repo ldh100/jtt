@@ -362,7 +362,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV1.setCellSelectionEnabled(true);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setOpaque(false);
         DV1.setRowHeight(18);
@@ -388,7 +388,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV2.setCellSelectionEnabled(true);
-        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
@@ -732,6 +732,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     protected String Summary = "";
     protected boolean FAIL = false;
     protected boolean FATAL_FAIL = false;
+    protected String FAILED = "";
     protected String r_type = "";
     protected String t_rep = "";
 
@@ -3066,23 +3067,26 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             }
         }
 
-        if (!GUI && env.equals("PR") && _f > 0) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
-            HtmlReporter.config().setReportName("API(s)" + ", Env: " + env
-                    + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
-                    + ". Resp(sec) - Min: " + A.A.df.format(t_min)
-                    + ", Avg: " + A.A.df.format(t_avg)
-                    + ", Max: " + A.A.df.format(t_max)
-                    + ", p50: " + A.A.df.format(p_50)
-                    + ", p90: " + A.A.df.format(p_90)
-                    + ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
-            HtmlReport.flush(); 
-            String HTML_Report_Msg = "AP3 API Production test failed" + "\r\n" + "Details in JTT HTML Report - Download > Open containing folder > Open";
-            String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
-            String SEND = A.Func.Send_File_with_Message_to_Slack(HTML_Path, "#qa_only", HTML_Report_Msg);
-            File hf = new File(HTML_Path);
-            if (hf.exists() && !hf.isDirectory()) {
-                hf.delete();
-            }
+        if (GUI && env.equals("PR")) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
+        //if (!GUI && env.equals("PR") && _f > 0) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
+//            HtmlReporter.config().setReportName("API(s)" + ", Env: " + env
+//                    + ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i
+//                    + ". Resp(sec) - Min: " + A.A.df.format(t_min)
+//                    + ", Avg: " + A.A.df.format(t_avg)
+//                    + ", Max: " + A.A.df.format(t_max)
+//                    + ", p50: " + A.A.df.format(p_50)
+//                    + ", p90: " + A.A.df.format(p_90)
+//                    + ". Dur: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s");
+//            HtmlReport.flush(); 
+            String Msg = "AP3 API Production test failure(s)" + "\r\n" + "Details in JTT Reports" +  "\r\n" + FAILED;
+            //String HTML_Path = HtmlReporter.getFile().getAbsolutePath();
+            //String SEND = A.Func.Send_File_with_Message_to_Slack(HTML_Path, "#qa_only", HTML_Report_Msg);
+            String SEND = A.Func.Send_File_with_Message_to_Slack("", "#xtt_test", Msg);
+String XX = SEND;
+//            File hf = new File(HTML_Path);
+//            if (hf.exists() && !hf.isDirectory()) {
+//                hf.delete();
+//            }
         }
     }
     //</editor-fold>    
@@ -3515,7 +3519,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
-                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+                    ErrorMsg = "Error: " + json.getString("error") + ", ";
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
@@ -3533,6 +3537,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
                         + " ", ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+                FAILED += NAME + "\r\n" + EndPoint + "\r\n" + ErrorMsg + Result + " (" + LocalDateTime.now().format(Time_12_formatter) + ")\r\n\r\n";
             }
 //} // =======   3 times Loop if not good
 
@@ -3547,6 +3552,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + Method + " " + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
                     + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
             Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+            FAILED += NAME + "\r\n" + EndPoint + "\r\n" + err + " (" + LocalDateTime.now().format(Time_12_formatter) + ")\r\n\r\n";
         }
         r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
         sw1.reset();
@@ -3683,6 +3689,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
                         + " ", ParentTest.createNode(_t + ". " + NAME + " > " + "GET" + ": " + EndPoint), API_SRART);
+                FAILED += NAME + "\r\n" + EndPoint + "\r\n" + ErrorMsg + Result + " (" + LocalDateTime.now().format(Time_12_formatter) + ")\r\n\r\n";
             }
 //} // =======   3 times Loop if not good
 

@@ -227,7 +227,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_METRICS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_METRICS.setCellSelectionEnabled(true);
-        DV_METRICS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_METRICS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_METRICS.setName("DV_METRICS"); // NOI18N
         DV_METRICS.setRequestFocusEnabled(false);
         DV_METRICS.setRowHeight(18);
@@ -252,7 +252,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_D_RANGES.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_D_RANGES.setCellSelectionEnabled(true);
-        DV_D_RANGES.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_D_RANGES.setGridColor(java.awt.SystemColor.windowBorder);
         DV_D_RANGES.setName("DV_D_RANGES"); // NOI18N
         DV_D_RANGES.setOpaque(false);
         DV_D_RANGES.setRowHeight(18);
@@ -581,7 +581,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_QA.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_QA.setCellSelectionEnabled(true);
-        DV_QA.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_QA.setGridColor(java.awt.SystemColor.windowBorder);
         DV_QA.setName("DV2"); // NOI18N
         DV_QA.setOpaque(false);
         DV_QA.setRowHeight(18);
@@ -602,7 +602,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_D_Variants.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_D_Variants.setCellSelectionEnabled(true);
-        DV_D_Variants.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_D_Variants.setGridColor(java.awt.SystemColor.windowBorder);
         DV_D_Variants.setName("DV_D_Variants"); // NOI18N
         DV_D_Variants.setOpaque(false);
         DV_D_Variants.setRowHeight(18);

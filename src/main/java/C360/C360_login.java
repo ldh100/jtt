@@ -28,7 +28,8 @@ class C360_login extends C360_GUI{
         Element_By_Selector_Text("Get 'Don't have..' text", "xpath", "//p[contains(text(), 'Reach out to your Compass Manager')]", ParentTest,"no_jira");
         Element_By_Selector_Text("Get 'Your Compass Account' text", "xpath", "//span[contains(text(), 'Your Compass Account')]", ParentTest,"no_jira");
         Element_By_Selector_Click("Click 'Your Compass Account'", "id", "cafe360-login-button", ParentTest,"no_jira");
-            if (FAIL) { return;}  
+            if (FAIL) { return;} 
+Thread.sleep(1000);  
         Element_E1_Find("Find 'Language' dropdown", "xpath", "//select[contains(@class, 'locale-select')]", ParentTest, "no_jira");
         Element_By_Selector_Text("Get 'English' text", "id", "en", ParentTest,"no_jira");        
         Element_By_Selector_Text("Get 'French' text", "id", "fr", ParentTest,"no_jira");        
@@ -101,9 +102,10 @@ class C360_login extends C360_GUI{
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");  
             if (FAIL) { return;}  
         Thread.sleep(500);
+Thread.sleep(2000); 
         Page_URL("Login page URL", ParentTest, "no_jira");  
         
-        List_L3("Check for Login Messages (count)", "xpath", "//*[@class = 'message' or @class = 'note note-danger']", ParentTest, "no_jira");              
+        List_L3("Check for Login Warning Messages (count)", "xpath", "//*[@class = 'message' or @class = 'note note-danger']", ParentTest, "no_jira");              
         if(L3.isEmpty()){ // L3 specific for Login Messages - if No "will expire" or "Locked" - PASS, otherwise - WARN > proceed in Execution
             Login_OK = true;
         }else{
@@ -124,14 +126,15 @@ class C360_login extends C360_GUI{
                 Thread.sleep(500);  
                 Login_OK = true;
             }
-        }     
-        Wait_For_Element_By_Selector_Presence("Wait for User Avatar", "xpath", "//span[@class='p-avatar-text']", ParentTest,"no_jira");
+        }    
+        //Wait_For_Element_By_Selector_Presence("Wait for User Avatar", "xpath", "//span[@class='p-avatar-text']", ParentTest,"no_jira");
+        Wait_For_Element_By_Selector_Presence("Wait for User Avatar", "xpath", "//div[contains(@class, 'p-avatar']", ParentTest,"no_jira");
             if (FAIL) { 
                 Login_OK = false;
                 return;
             }
-        Element_By_Selector_Text("User Avatar Circle Letter", "xpath", "//span[@class='p-avatar-text']", ParentTest,"no_jira");  
-        Element_By_Selector_Text("User Avatar Name", "xpath", "//p[@class='white-space-nowrap overflow-hidden hidden md:block mr-4']", ParentTest,"no_jira");         
+//        Element_By_Selector_Text("User Avatar Circle Letter", "xpath", "//span[@class='p-avatar-text']", ParentTest,"no_jira");  
+//        Element_By_Selector_Text("User Avatar Name", "xpath", "//p[@class='white-space-nowrap overflow-hidden hidden md:block mr-4']", ParentTest,"no_jira");         
         Login_OK = true; 
         
         Wait_For_Element_By_Selector_Presence("Wait for Menu Tree'", "xpath", "//button[@class='p-tree-toggler p-link']", ParentTest,"no_jira");

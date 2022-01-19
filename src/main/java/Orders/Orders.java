@@ -119,7 +119,7 @@ public class Orders extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -351,7 +351,7 @@ public class Orders extends javax.swing.JInternalFrame {
         ));
         DV_Sites.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Sites.setCellSelectionEnabled(true);
-        DV_Sites.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Sites.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Sites.setName("DV_Sites"); // NOI18N
         DV_Sites.setRowHeight(18);
         DV_Sites.getTableHeader().setReorderingAllowed(false);
@@ -373,7 +373,7 @@ public class Orders extends javax.swing.JInternalFrame {
         ));
         DV_Brands.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Brands.setCellSelectionEnabled(true);
-        DV_Brands.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Brands.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Brands.setName("DV_Brands"); // NOI18N
         DV_Brands.setOpaque(false);
         DV_Brands.setRowHeight(18);

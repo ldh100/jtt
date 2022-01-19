@@ -51,14 +51,13 @@ public class Env extends javax.swing.JInternalFrame {
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Env"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(858, 527));
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -72,7 +71,7 @@ public class Env extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRowHeight(18);
         DV1.getTableHeader().setReorderingAllowed(false);

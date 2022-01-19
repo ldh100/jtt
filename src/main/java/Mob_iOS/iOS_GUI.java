@@ -555,7 +555,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
@@ -754,7 +754,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV3.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV3.setGridColor(java.awt.SystemColor.windowBorder);
         DV3.setName("DV2"); // NOI18N
         DV3.setOpaque(false);
         DV3.setRowHeight(18);

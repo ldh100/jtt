@@ -149,7 +149,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRequestFocusEnabled(false);
         DV1.setRowHeight(18);
