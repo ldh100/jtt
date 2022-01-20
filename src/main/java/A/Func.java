@@ -29,6 +29,18 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import com.slack.api.Slack;
+import com.slack.api.SlackConfig;
+import com.slack.api.methods.response.chat.ChatPostMessageResponse;
+import com.slack.api.methods.MethodsClient;
+import com.slack.api.model.Attachment;
+import com.slack.api.model.Message;
+import com.slack.api.util.http.SlackHttpClient;
+import com.slack.api.webhook.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -434,26 +446,38 @@ public class Func {
         }
     }
 
-    public static String Message_to_Slack(String Channel, String MSG) {
-        try{           
-            HttpClient httpclient = HttpClientBuilder.create().disableContentCompression().build();
-            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");  
-            
-            MultipartEntityBuilder reqEntity = MultipartEntityBuilder.create(); 
-            reqEntity.addTextBody("token", A.S_OAuth_TKN);       
-            reqEntity.addTextBody("channels", Channel); 
-            reqEntity.addTextBody("initial_comment", MSG); 
-            reqEntity.addTextBody("media", "file");
+    public static String Message_to_Slack(String Channel, String MSG, String ATT, boolean ERR) {
+        String Color = "#96FF33";
+        if(ERR){
+            Color = "#FF333C";
+        }
+        try{       
+            List<Attachment> atts = new ArrayList<>();
+            Attachment att = new Attachment();
+            att.setText(ATT);
+            att.setColor(Color);
+            atts.add(att);
+            //MethodsClient methods = Slack.methods(A.S_OAuth_TKN);
+            //      Message msg = new Message();
+            //
+            //msg.setChannel(Channel);
+            //msg.setText(MSG);
+            //msg.setAttachments(atts);
 
-//            reqEntity.addBinaryBody("file", file, ContentType.create("application/vnd.ms-excel"), Path);
-//            reqEntity.addBinaryBody("file", file, ContentType.create("application/zip"), Path);
-            
-            httpPost.setEntity(reqEntity.build());
-            HttpResponse response = httpclient.execute(httpPost);
-            
-            return "= File to Slack: " + " > " + response.getStatusLine().getStatusCode() + ", " + response.getStatusLine().getReasonPhrase()+ "\r\n"; 
-        } catch(IOException ex) {
-            return "= File to Slack: " + " > ERROR: " + ex.getMessage() + "\r\n";
+            MethodsClient client = Slack.getInstance().methods();
+            ChatPostMessageResponse response = client.chatPostMessage(req -> req
+                .token(A.S_OAuth_TKN)
+                .channel(Channel)
+                .text(MSG)
+                .attachments(atts)
+            );
+            if (response.isOk()) {
+                return "message responce is OK";
+            } else {
+                return response.getError(); // e.g., "invalid_auth", "channel_not_found"
+            }            
+        } catch(Exception ex) {
+            return "= Message to Slack: " + " > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
 

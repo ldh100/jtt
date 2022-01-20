@@ -33,7 +33,7 @@ class users extends C360_GUI{
         } 
         Element_Child_Click("Click/Expand 'User Management'", L0.get(T_Index), "xpath", ".//button[@class='p-tree-toggler p-link']",ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_Child_List_L1("'User Management' navigation nodes", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
+        Element_Child_List_L1("Nodes under 'User Management'", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
         Element_By_Selector_Click("Click > 'User Management > Users'", "xpath", "//a[@href='/user-management/users']", ParentTest, "no_jira"); 
             if (FAIL) { return;}           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                   
