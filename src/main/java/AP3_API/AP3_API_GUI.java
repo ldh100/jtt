@@ -3069,15 +3069,14 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
 
         //if (GUI && env.equals("PR")) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
         if (!GUI && env.equals("PR") && _f > 0) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
-            String Msg = "AP3 API Production test: " + _f + " failed";
-            String SEND = A.Func.Message_to_Slack("#xtt_test", Msg, FAILED, true);
+            String Msg = " === JTT cron - AP3 API Production test: " + _f + " failed";
+            String SEND = A.Func.Message_to_Slack("#qa_only", Msg, FAILED, true); // #xtt_test #qa_only
             //String XX = SEND;
         }
     }
     //</editor-fold>    
 
     private void Execute() throws Exception {
-  
         if (true) {
             SCOPE += "AP3 User ";
             EX += " - " + "\t" + "AP3 User" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -3504,7 +3503,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
-                    ErrorMsg = "Error: " + json.getString("error") + ", ";
+                    ErrorMsg = "Error: " + json.getString("error") + "  ";
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
@@ -3656,7 +3655,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
-                    ErrorMsg = "Error: " + json.getString("error") + ". ";
+                    ErrorMsg = "Error: " + json.getString("error") + "  ";
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";

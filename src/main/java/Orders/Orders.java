@@ -20,6 +20,8 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
+import org.joda.time.DateTime;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import javax.swing.RowSorter;
@@ -502,7 +504,7 @@ public class Orders extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");  
         
-        cmbEnv.setSelectedIndex(1); // Staging
+        cmbEnv.setSelectedIndex(2); // Production
         cmbApp.setSelectedIndex(0); // Boost      
         Load = false;
         LOAD_ENV();
@@ -569,9 +571,11 @@ public class Orders extends javax.swing.JInternalFrame {
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
         
-        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        int Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
+        //long m7 = System.currentTimeMillis() - (60*60*24*(Days_Back - 1)*1000);  // Now - 7 days
+        Date DateBack = new DateTime(new Date()).minusDays(Days_Back - 1).withTimeAtStartOfDay().toDate();      
+        long m7 = DateBack.getTime();
         
         Api_Call(BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth);
         //Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
@@ -591,9 +595,11 @@ public class Orders extends javax.swing.JInternalFrame {
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
 
-        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        int Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (1*24*3600*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (Days_Back*24*3600*1000);  // Now - Days_Back days > default 7
+        //long m7 = System.currentTimeMillis() - ((Days_Back-1)*24*3600*1000);  // Now - Days_Back days > default 7
+        Date DateBack = new DateTime(new Date()).minusDays(Days_Back - 1).withTimeAtStartOfDay().toDate();      
+        long m7 = DateBack.getTime();
         
         Api_Call(BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth);
         
@@ -958,10 +964,13 @@ public class Orders extends javax.swing.JInternalFrame {
             return;
         }
                
-        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        int Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
-        
+
+        //long m7 = System.currentTimeMillis() - (60*60*24*(Days_Back-1)*1000);  // Now - 7 days
+        Date DateBack = new DateTime(new Date()).minusDays(Days_Back - 1).withTimeAtStartOfDay().toDate();      
+        long m7 = DateBack.getTime();
+
         txtLog.append("\r\n- Get Mobile User Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         

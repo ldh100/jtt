@@ -128,7 +128,7 @@ Thread.sleep(2000);
             }
         }    
         //Wait_For_Element_By_Selector_Presence("Wait for User Avatar", "xpath", "//span[@class='p-avatar-text']", ParentTest,"no_jira");
-        Wait_For_Element_By_Selector_Presence("Wait for User Avatar", "xpath", "//div[contains(@class, 'p-avatar']", ParentTest,"no_jira");
+        Wait_For_Element_By_Selector_Presence("Wait for User Avatar", "xpath", "//div[contains(@class, 'p-avatar')]", ParentTest,"no_jira");
             if (FAIL) { 
                 Login_OK = false;
                 return;
