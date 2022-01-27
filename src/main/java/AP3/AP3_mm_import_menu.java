@@ -119,7 +119,8 @@ class AP3_mm_import_menu extends AP3_GUI{
             Backup_File_Name = MenuName + "_Backup.xlsx";
             File_Copy("Create Exported Menuset File Copy", Download_Dir + File.separator + Export_File_Name, Download_Dir + File.separator + Backup_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;} 
-    
+                
+            //  ===========================  Import to the Same Menu As Is     
             Element_Attribute("Get Menu ID (Index 0) - Exported", Menu_IDS.get(0), "menu-id", ParentTest, "no_jira");             
             Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - 'As Is' to the Same MenuSet", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}            
@@ -135,7 +136,28 @@ class AP3_mm_import_menu extends AP3_GUI{
                         Element_Attribute("UnExpected Error (Index " + i + ") Text", L3.get(i), "textContent", ParentTest, "no_jira");
                         Errors += t + "\n";
                     }
-                }                 
+                } 
+
+            //  ===========================  Import to the Same Menu With added Item under same Category    
+            Element_Attribute("Get Menu ID (Index 0) - Exported", Menu_IDS.get(0), "menu-id", ParentTest, "no_jira");             
+            Excel_Edit = Excel_Delete_All_Items(Download_Dir, Export_File_Name, MenuName); 
+            
+            
+            Element_By_Path_Text_Enter("Import MenuSet " + MenuName + " - Add Item to the Same MenuSet", "xpath", "//input[@id='menuSetImportInput-" + t + "']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}            
+            Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
+                if (FAIL) { return;}
+            Thread.sleep(500);
+            List_L3("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+                if (!L3.isEmpty()) { 
+                    _t++;
+                    _f++; EX += _t + "\t" + "Import Errors - Expected None" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Found " + L3.size() + " unexpected error(s)", true,ParentTest.createNode(_t + ". " + "Import Errors - Expected None"), new Date());                       
+                    for (int i = 0; i < L3.size(); i++) {
+                        Element_Attribute("UnExpected Error (Index " + i + ") Text", L3.get(i), "textContent", ParentTest, "no_jira");
+                        Errors += t + "\n";
+                    }
+                }                  
             
             //  ===========================  Import to other Menu with ID(s)    
             Element_Attribute("Get Menu ID (Index 1) - next after Exported", Menu_IDS.get(1), "menu-id", ParentTest, "no_jira");
@@ -338,7 +360,7 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
             return "Error: " + ex.getMessage();
         } 
     } 
-    private String Excel_Edit_DataRow(String filePath, String fileName, String sheetName, String Whatt_ToEdit) {
+    private String Excel_Edit_DataRow(String filePath, String fileName, String sheetName, String What_ToEdit) {
         try {
             File file = new File(filePath + File.separator + fileName);      //Create an object of File class to open xlsx file
             FileInputStream inputStream = new FileInputStream(file);         //Create an object of FileInputStream class to read excel file
@@ -358,10 +380,10 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
                     row.getCell(2).setCellValue("Update Category " + New_ID + " " + i);
                     //row.getCell(3).setCellValue(i + 1);
                 } 
-                if(cell.getStringCellValue().equals("Item") && Whatt_ToEdit.equals("Price 205")) { 
+                if(cell.getStringCellValue().equals("Item") && What_ToEdit.equals("Price 205")) { 
                     row.getCell(7).setCellValue(205);
                 }         
-                if(cell.getStringCellValue().equals("Item") && Whatt_ToEdit.equals("Remove Item ID")) { 
+                if(cell.getStringCellValue().equals("Item") && What_ToEdit.equals("Remove Item ID")) { 
                     row.getCell(5).setCellValue("");
                     row.getCell(6).setCellValue(row.getCell(6).getStringCellValue() + " Exported-" + New_ID);
                 }                
@@ -371,6 +393,31 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
 //                        //row.getCell(13).setCellValue(""); 
 //                    }
 //                }                            
+            }
+            inputStream.close(); 
+            FileOutputStream outputStream = new FileOutputStream(file);   //Create an object of FileOutputStream class to create write data in excel file
+            _Workbook.write(outputStream);                          //write data in the excel file
+            outputStream.close();                                         //close output stream
+            return "OK";
+        }catch(Exception ex){
+            return "Error: " + ex.getMessage();
+        } 
+    } 
+    private String Excel_Delete_All_Items(String filePath, String fileName, String sheetName) {
+        try {
+            File file = new File(filePath + File.separator + fileName);      //Create an object of File class to open xlsx file
+            FileInputStream inputStream = new FileInputStream(file);         //Create an object of FileInputStream class to read excel file
+            Workbook _Workbook = null;
+            String fileExtensionName = fileName.substring(fileName.indexOf("."));
+            if(fileExtensionName.equals(".xlsx")) {
+                _Workbook = new XSSFWorkbook(inputStream);                //If it is xlsx file then create object of XSSFWorkbook class
+            } else if(fileExtensionName.equals(".xls")){
+               _Workbook = new HSSFWorkbook(inputStream);                  //If it is xls file then create object of XSSFWorkbook class
+            }    
+            Sheet sheet = _Workbook.getSheet(sheetName);                //Read excel sheet by sheet name    
+            for(int i = 2; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);       
+                sheet.shiftRows(row.getRowNum(), 1, -1);         
             }
             inputStream.close(); 
             FileOutputStream outputStream = new FileOutputStream(file);   //Create an object of FileOutputStream class to create write data in excel file
