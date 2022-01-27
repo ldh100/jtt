@@ -53,17 +53,25 @@ class users extends C360_GUI{
         Element_Child_List_L1("List User Table Rows", e1, "tagName", "tr", ParentTest, "no_jira");
             if (FAIL) { return;}
         int Missing_user_data = 0; 
+        boolean No_users = false;
         for (int i = 0; i < L1.size(); i++) {
             //Element_Text("Get Users Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira"); 
             Element_Child_List_L2("List User Table row " + (i + 1) + " data columns", L1.get(i), "tagName", "td", ParentTest, "no_jira");
                 if (FAIL) { return;} 
-            for (int j = 0; j < L0.size(); j++) {
+            for (int j = 0; j < L2.size(); j++) {
                 Element_Text("User Table row " + (i + 1) + " - Column " + (j + 1) + " text", L2.get(j), ParentTest, "no_jira");
+                if(t.toLowerCase().contains("no user")){
+                    _i++; _w++; 
+                    EX += _t + "\t" + "User Table - Empty" + "\t" + "Current page" + "\t" + t + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\r\n";    
+                    Log_Html_Result("WARN", "Current page > " + t, true, ParentTest.createNode(_t + ". " + "User Table - Empty"), new Date());
+                    No_users = true;
+                    break;
+                }
                 if(t.trim().isEmpty()){
                     Missing_user_data++;
                 }
             }
-            if(!_All_data) { 
+            if(!_All_data || No_users) { 
                 break;
             }
         } 
@@ -72,17 +80,24 @@ class users extends C360_GUI{
             EX += _t + "\t" + "User Table - Empty Data" + "\t" + "Current page" + "\t" + Missing_user_data + " empty cells" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\r\n";    
             Log_Html_Result("WARN", "Current page > " + Missing_user_data + " empty cells", true, ParentTest.createNode(_t + ". " + "User Table - Empty Data"), new Date());
         }
-        Element_Click("Open User details pade - 1st in the Users table", L1.get(0), ParentTest, "no_jira");
-        Find_Text("Check 'Email' is present", "Email", true, ParentTest, "no_jira");
-        Find_Text("Check 'User Info' is present", "User Info", true, ParentTest, "no_jira");
-        Find_Text("Check 'Name' is present", "Name", true, ParentTest, "no_jira");
-        Find_Text("Check 'Job Title' is present", "Job Title", true, ParentTest, "no_jira");
-        Find_Text("Check 'Company' is present", "Company", true, ParentTest, "no_jira");
-        Find_Text("Check 'Department' is present", "Department", true, ParentTest, "no_jira");
-        Find_Text("Check 'Username' is present", "Username", true, ParentTest, "no_jira");
-        Find_Text("Check 'Telephone' is present", "Telephone", true, ParentTest, "no_jira");
-        Navigate_Back("Browser > Navigate back", "User Details", "Users Table", ParentTest, "no_jira");
- 
+
+        if(!No_users){
+            Element_Click("Open User details page - 1st in the Users table", L1.get(0), ParentTest, "no_jira");
+            List_L3("Check for 'Pending User' Message", "xpath", "//*[contains(@class, 'pending-message')]", ParentTest, "no_jira");              
+            if(L3.isEmpty()){ // L3 specific for Login Messages - if No User Info "N/A, user hasn't logged in." - PASS, otherwise - WARN > proceed in Execution
+                Find_Text("Check 'Email' is present", "Email", true, ParentTest, "no_jira");
+                Find_Text("Check 'User Info' is present", "User Info", true, ParentTest, "no_jira");
+                Find_Text("Check 'Name' is present", "Name", true, ParentTest, "no_jira");
+                Find_Text("Check 'Job Title' is present", "Job Title", true, ParentTest, "no_jira");
+                Find_Text("Check 'Company' is present", "Company", true, ParentTest, "no_jira");
+                Find_Text("Check 'Department' is present", "Department", true, ParentTest, "no_jira");
+                Find_Text("Check 'Username' is present", "Username", true, ParentTest, "no_jira");
+                Find_Text("Check 'Telephone' is present", "Telephone", true, ParentTest, "no_jira");  
+            }else{
+                Element_By_Selector_Text("User Info", "xpath", "//*[contains(@class, 'pending-message')]", ParentTest, "no_jira");
+            }
+            Navigate_Back("Browser > Navigate back", "User Details", "Users Table", ParentTest, "no_jira");
+        } 
         Element_By_Selector_Text("Find 'New User' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira"); 
         Element_By_Selector_Click("Click 'New User' button", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
              if (FAIL) { return;}
