@@ -2439,7 +2439,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             _Welcome = _welcome.isSelected();
 
             SCOPE = "";
-            r_type = "manual";
+            r_type = "ad-hoc";
 
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();

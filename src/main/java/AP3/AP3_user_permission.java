@@ -240,11 +240,11 @@ Thread.sleep(1000);
                 if (FAIL) { return;} 
             Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}                    
-            Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", false,  ParentTest, "no_jira"); 
+            Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "_Edit", false,  ParentTest, "no_jira"); 
                 if (!FAIL) {
                     Find_Text("Find 'Save Changes' text", "Save Changes", true, ParentTest, "no_jira"); 
-                    Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']", ParentTest, "no_jira");
-                        if (FAIL) { return;} 
+                    Element_By_Path_Click("Click 'CANCEL'", "xpath", "//footer[@class='v-footer v-footer--fixed theme--light']//button[1]", ParentTest, "no_jira");
+                       if (FAIL) { return;} 
                 } else {
                     _t++; 
                     _f++;
@@ -805,7 +805,7 @@ Thread.sleep(1000);
             Find_Text("DM Y Dashboard 'Users'", "Users", true, ParentTest, "no_jira");     
             Find_Text("DM Y Dashboard 'Announcements'", "Announcements", true, ParentTest, "no_jira"); 
             Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira");                     
-            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
+            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira");
             Find_Text("DM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
             
             // DM Y Sites permissions

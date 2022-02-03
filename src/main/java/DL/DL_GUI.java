@@ -1670,7 +1670,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             }
 
             SCOPE = "";
-            r_type = "manual"; 
+            r_type = "ad-hoc"; 
 
             _Headless = _headless.isSelected();
             _Slack = _slack.isSelected();                

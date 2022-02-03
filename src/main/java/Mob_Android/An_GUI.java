@@ -1822,17 +1822,28 @@ public class An_GUI extends javax.swing.JInternalFrame {
             cap.setCapability("noReset", true); // ====== ?????
             cap.setCapability("automationName", "UiAutomator2"); 
             
-            AppiumServiceBuilder builder = new AppiumServiceBuilder();
-            builder.usingAnyFreePort();
-            AppiumDriverLocalService appiumService = AppiumDriverLocalService.buildService(builder);
+            AppiumServiceBuilder ASB  = new AppiumServiceBuilder();
+            if(!A.A.WsOS.toLowerCase().contains("windows")){
+                //asb.usingDriverExecutable(new File(("/path/to/node")));
+                HashMap<String, String> environment = new HashMap();
+                environment.put("ANDROID_HOME", "/Users/" + A.A.UserID + "/Library/Android/sdk"); 
+                //environment.put("ANDROID_HOME", System.getenv("ANDROID_SDK_ROOT")); 
+                //environment.put("JAVA_HOME", "/Library/Java/JavaVirtualMachines/jdk1.8.0_281.jdk/Contents/Home"); 
+                environment.put("JAVA_HOME", System.getenv("JAVA_HOME"));
+                
+                ASB.withEnvironment(environment);
+                ASB.withAppiumJS(new File(("/usr/local/lib/node_modules/appium/build/lib/main.js")));
+            }
+            ASB.usingAnyFreePort();
+            appiumService = AppiumDriverLocalService.buildService(ASB);
             appiumService.start();
-            
-            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);                
+
+            ad = new AndroidDriver(new URL(appiumService.getUrl().toString()), cap);
             ad.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);
-                      
-            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
-			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);       
+
+            loadTimeout = new FluentWait(ad).withTimeout(Duration.ofMillis((long) LoadTimeOut))
+                    .pollingEvery(Duration.ofMillis(200))
+                    .ignoring(NoSuchElementException.class);    
             
             Current_Log_Update(true, "= Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
             sw1.reset();
@@ -2501,7 +2512,7 @@ public class An_GUI extends javax.swing.JInternalFrame {
             _Welcome = _welcome.isSelected();
 
             SCOPE = "";
-            r_type = "manual";
+            r_type = "ad-hoc";
 
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();

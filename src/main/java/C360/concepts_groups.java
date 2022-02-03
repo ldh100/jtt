@@ -70,7 +70,7 @@ class concepts_groups extends C360_GUI{
         EX += " - " + "\t" + " === ^ Concept Groups " + "\t" + " ===== " + "\t" + " == ^ Concept Groups End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
     } catch (Exception ex){
         String AAA = ex.getMessage();
-        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Run Exeption:" + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + AAA + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
         try{
             Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
         }catch(Exception eee) {};

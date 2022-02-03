@@ -1,6 +1,10 @@
 package AP3;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
 
 /**
  *
@@ -279,7 +283,15 @@ class AP3_user extends AP3_GUI{
             if (FAIL) { return;}   
         Thread.sleep(500);           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" );
-            if (FAIL) { return;}         
+            if (FAIL) { return;} 
+        Path path = Paths.get(System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv");
+        for(int i = 0; i < 20; i++){
+            if(Files.exists(path)){
+                break;
+            }else{
+                Thread.sleep(500);
+            }
+        }        
         File_Find("Find User List File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", ParentTest, "no_jira" );
             if (FAIL) { return;}
         if(!"".equals(t)){
@@ -346,7 +358,7 @@ class AP3_user extends AP3_GUI{
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}            
-                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "A_" + New_ID + "@gmail", false, ParentTest, "no_jira" );
+                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "a_" + New_ID + "@gmail", false, ParentTest, "no_jira" );
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}           
@@ -354,7 +366,7 @@ class AP3_user extends AP3_GUI{
                             if (FAIL) { return;}
                         Element_By_Path_Input_Select_Clear("Email Clear", "css", "[aria-label='E-mail']", ParentTest, "no_jira" ); 
                             if (FAIL) { return;}  
-                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "A_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "a_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
                             if (FAIL) { return;} 
 
                         Find_Text("Find 'Allow refunds' text", "Allow Refunds", true, ParentTest, "no_jira"); 
@@ -410,7 +422,7 @@ class AP3_user extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("User Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  ParentTest, "no_jira" ); 
             if (FAIL) { return;}            
-        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "A_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "a_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
@@ -456,7 +468,7 @@ class AP3_user extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for page load...", "css", "[aria-label='Search Users']", ParentTest, "no_jira" ); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "A_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "a_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}
         Find_Text("Deleted Admin 'Not Found' notification", "No matching records found", true, ParentTest, "no_jira"); 
             if (FAIL) { return;}             
@@ -498,7 +510,7 @@ class AP3_user extends AP3_GUI{
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Error Message (index " + i + ")", L1.get(i),  ParentTest, "no_jira" );             
             }     
-        List_L3("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
+        List_L0("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
             if (FAIL) { return;}
         List_L2("v-cards Titles Count", "xpath", "//div[@class='v-card__title v-card__title--primary']", ParentTest, "no_jira" );             
             if (FAIL) { return;} 
@@ -515,7 +527,7 @@ class AP3_user extends AP3_GUI{
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}            
-                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "S_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "s_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}           
@@ -584,7 +596,7 @@ class AP3_user extends AP3_GUI{
                                 }                                  
                                 Element_By_Path_Click("Click 'Continue'", "xpath", ".//*[text()='Continue']", ParentTest, "no_jira" ); 
                                     if (FAIL) { return;} 
-                                Element_Child_List_L1("Sites count", L3.get(i), "xpath", ".//div[contains(@class, 'layout Site-Permissions-Container px-3 mt-2 mb-2 noselect')]", ParentTest, "no_jira" );             
+                                Element_Child_List_L1("Sites count", L0.get(i), "xpath", ".//div[contains(@class, 'layout Site-Permissions-Container px-3 mt-2 mb-2 noselect')]", ParentTest, "no_jira" );             
                                     if (FAIL) { return;}    
                                     int Count_Down = L1.size();
                                     for (int j = 0; j < Count_Down; j++) {                                       
@@ -605,13 +617,13 @@ class AP3_user extends AP3_GUI{
                     case "Menu Scheduler":  
                         Find_Text("Find 'Turn Menus On/Off' text", "Turn Menus On/Off", true, ParentTest, "no_jira");           
                         Find_Text("Find 'Menu Scheduling' text", "Menu Scheduling", true, ParentTest, "no_jira"); 
-                        Element_Child_List_L1("Checks 'Read' count", L3.get(i), "xpath", ".//input[@aria-label='Read']", ParentTest, "no_jira" );             
+                        Element_Child_List_L1("Checks 'Read' count", L0.get(i), "xpath", ".//input[@aria-label='Read']", ParentTest, "no_jira" );             
                             if (FAIL) { return;} 
                             for (int j = 0; j < L1.size(); j++) {
                                 Element_Click("Check all 'Read'", L1.get(j), ParentTest, "no_jira");             
                                     if (FAIL) { return;}  
                             }  
-                        Element_Child_List_L1("Checks 'Write' count", L3.get(i), "xpath", ".//input[@aria-label='Write']", ParentTest, "no_jira" );             
+                        Element_Child_List_L1("Checks 'Write' count", L0.get(i), "xpath", ".//input[@aria-label='Write']", ParentTest, "no_jira" );             
                             if (FAIL) { return;}                             
                             for (int j = 0; j < L1.size(); j++) {
                                 Element_Click("Check all 'Write'", L1.get(j), ParentTest, "no_jira");             
@@ -632,7 +644,7 @@ class AP3_user extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="Site User Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}         
-        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "S_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "s_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
@@ -723,7 +735,7 @@ class AP3_user extends AP3_GUI{
                 Element_Text("Error Message (index " + i + ")", L1.get(i),  ParentTest, "no_jira" );             
                 if (FAIL) { return;}
             }     
-        List_L3("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
+        List_L0("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
             if (FAIL) { return;}
         List_L2("v-cards Titles Count", "xpath", "//div[@class='v-card__title v-card__title--primary']", ParentTest, "no_jira" );             
             if (FAIL) { return;} 
@@ -740,7 +752,7 @@ class AP3_user extends AP3_GUI{
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}            
-                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "D_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "d_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165551234", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}           
@@ -831,7 +843,7 @@ class AP3_user extends AP3_GUI{
 //                              }                                  
                                 Element_By_Path_Click("Click 'Continue'", "xpath", ".//*[text()='Continue']", ParentTest, "no_jira" ); 
                                     if (FAIL) { return;} 
-                                Element_Child_List_L1("Sites count", L3.get(i), "xpath", ".//div[contains(@class, 'layout Site-Permissions-Container px-3 mt-2 mb-2 noselect')]", ParentTest, "no_jira" );             
+                                Element_Child_List_L1("Sites count", L0.get(i), "xpath", ".//div[contains(@class, 'layout Site-Permissions-Container px-3 mt-2 mb-2 noselect')]", ParentTest, "no_jira" );             
                                     if (FAIL) { return;}    
                                     int Count_Down = L1.size();
                                     for (int j = 0; j < Count_Down; j++) {                                       
@@ -854,13 +866,13 @@ class AP3_user extends AP3_GUI{
                             if (FAIL) { return;}             
                         Find_Text("Find 'Menu Scheduling' text", "Menu Scheduling", true, ParentTest, "no_jira"); 
                             if (FAIL) { return;} 
-                        Element_Child_List_L1("Checks 'Read' count", L3.get(i), "xpath", ".//input[@aria-label='Read']", ParentTest, "no_jira" );             
+                        Element_Child_List_L1("Checks 'Read' count", L0.get(i), "xpath", ".//input[@aria-label='Read']", ParentTest, "no_jira" );             
                             if (FAIL) { return;} 
                             for (int j = 0; j < L1.size(); j++) {
                                 Element_Click("Check all 'Read'", L1.get(j), ParentTest, "no_jira");             
                                     if (FAIL) { return;}  
                             }  
-                        Element_Child_List_L1("Checks 'Write' count", L3.get(i), "xpath", ".//input[@aria-label='Write']", ParentTest, "no_jira" );             
+                        Element_Child_List_L1("Checks 'Write' count", L0.get(i), "xpath", ".//input[@aria-label='Write']", ParentTest, "no_jira" );             
                             if (FAIL) { return;}                             
                             for (int j = 0; j < L1.size(); j++) {
                                 Element_Click("Check all 'Write'", L1.get(j), ParentTest, "no_jira");             
@@ -892,7 +904,7 @@ class AP3_user extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="CDL Delivery Manager Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}         
-        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "D_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "d_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
@@ -988,7 +1000,7 @@ class AP3_user extends AP3_GUI{
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Error Message (index " + i + ")", L1.get(i),  ParentTest, "no_jira" );             
             }     
-        List_L3("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
+        List_L0("v-cards Count", "xpath", "//div[@class='v-card__title v-card__title--primary']/parent::div", ParentTest, "no_jira" );             
             if (FAIL) { return;}
         List_L2("v-cards Titles Count", "xpath", "//div[@class='v-card__title v-card__title--primary']", ParentTest, "no_jira" );             
             if (FAIL) { return;} 
@@ -1005,7 +1017,7 @@ class AP3_user extends AP3_GUI{
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Last Name", "css", "[aria-label='Last Name']", "Automation", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}            
-                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+ " + "R_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+                        Element_By_Path_Text_Enter("Enter Email", "css", "[aria-label='E-mail']", "r_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
                             if (FAIL) { return;} 
                         Element_By_Path_Text_Enter("Enter Phone", "css", "[aria-label='Phone Number']", "4165554321", false, ParentTest, "no_jira" );
                             if (FAIL) { return;}           
@@ -1039,7 +1051,7 @@ class AP3_user extends AP3_GUI{
                                         
                                 Element_By_Path_Click("Click 'Continue'", "xpath", ".//*[text()='Continue']", ParentTest, "no_jira" ); 
                                     if (FAIL) { return;} 
-                                Element_Child_List_L1("Sites count", L3.get(i), "xpath", ".//div[contains(@class, 'layout Site-Permissions-Container px-3 mt-2 mb-2 noselect')]", ParentTest, "no_jira" );             
+                                Element_Child_List_L1("Sites count", L0.get(i), "xpath", ".//div[contains(@class, 'layout Site-Permissions-Container px-3 mt-2 mb-2 noselect')]", ParentTest, "no_jira" );             
                                     if (FAIL) { return;}    
                                     int Count_Down = L1.size();
                                     for (int j = 0; j < Count_Down; j++) {                                       
@@ -1072,7 +1084,7 @@ class AP3_user extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="Runner Search > Delete">
         Wait_For_Element_By_Path_Presence("Wait for page load...", "xpath", "//*[contains(text(), 'Search Users')]", ParentTest, "no_jira" ); 
             if (FAIL) { return;}         
-        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "cdl.test.xtt+ " + "R_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
+        Element_By_Path_Text_Enter("Enter Search User Name", "css", "[aria-label='Search Users']", "r_" + New_ID + "@gmail.com", false, ParentTest, "no_jira" );
             if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira" ); 
         List_L0("Users Data Rows Count", "tagName", "tr", ParentTest, "no_jira" );             
@@ -1080,9 +1092,9 @@ class AP3_user extends AP3_GUI{
             for (int j = 0; j < L0.size(); j++) {
                 Element_Text("Users Data Row Text", L0.get(j), ParentTest, "no_jira" );             
             } 
-        Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "cdl.test.xtt+ " + "r_" + New_ID + "@gmail.com" + "']", ParentTest, "no_jira" ); 
+        Element_By_Path_Click("User Email Click", "xpath", "//div[text()='" + "r_" + New_ID + "@gmail.com" + "']", ParentTest, "no_jira" ); 
             if (FAIL) { return;} 
-         Thread.sleep(500);           
+        Thread.sleep(500);           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira" );
             if (FAIL) { return;} 
 
@@ -1128,6 +1140,10 @@ class AP3_user extends AP3_GUI{
             if (FAIL) { return;}            
         // </editor-fold>  
         }
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){  
+        String AAA = ex.getMessage();
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    }
     }
 }

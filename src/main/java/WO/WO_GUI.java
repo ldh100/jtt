@@ -1514,7 +1514,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
 
             SCOPE = "";
-            r_type = "manual"; 
+            r_type = "ad-hoc"; 
             if(_Headless) {
                 Current_Log_Update(true,"= Headless mode is selected - Browser is hidden" + "\r\n");
                 txtLog.append( "= Please wait for report...\r\n");

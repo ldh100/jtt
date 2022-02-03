@@ -474,6 +474,7 @@ class menus extends AP3_API_GUI{
         // Test Scenario 2: Positive flow to Get a Modifier Group by ID
         JOB_Api_Call(" Global Modifier Group - GET a Modifier Group by /'ModifierGroupID'", "GET", 
             BaseAPI + "/menu/modifier/group/" + New_GlobalMod_ID, Auth, "", 200, ParentTest, "no_jira");
+        GlobalModGroup_Items_IDS = new ArrayList<>();
         if (json != null) {           
             try {
               if (json.has("items")) {

@@ -95,6 +95,7 @@ class locations extends AP3_API_GUI {
         Auth = "";                      // =============== AP3 Site Brands ===========================
         JOB_Api_Call("Location > /group/'SiteID'?nocache=true&extended=true", "GET",
                 BaseAPI + "/location/group/" + SiteID + "?nocache=true&extended=true", Auth, "", 200, ParentTest, "no_jira");
+        BrandIDS = "";
         if (json != null) {
             try {
                 JSONArray Location = json.getJSONArray("locations");
@@ -136,8 +137,8 @@ class locations extends AP3_API_GUI {
                 BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
         SectorID = "";
         CompanyID = "";
+        MENU_IDS = new ArrayList<>();
         if (json != null) {
-            MENU_IDS = new ArrayList<>();
             try {
                 JSONArray MENUS = json.getJSONArray("menus");
                 for (int i = 0; i < MENUS.length(); i++) {
