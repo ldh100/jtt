@@ -587,7 +587,6 @@ class AP3_brand_new extends AP3_GUI {
                         if (FAIL) { return; }
                     Wait_For_Element_By_Path_Presence("Wait for Import options...", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");
                         if (FAIL) { return; }
-//                    Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");    
                     Element_Child_List_L1("Inport Menu > drop-down(s) count", L2.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", ParentTest, "no_jira");
                         if (FAIL) { return; }
                     Element_Click("Open 'Location Station' drop-down", L1.get(0), ParentTest, "no_jira");

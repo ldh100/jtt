@@ -70,7 +70,7 @@ class concepts extends C360_GUI{
         Thread.sleep(500);             
         EX += " - " + "\t" + " === ^ Concepts " + "\t" + " ===== " + "\t" + " == ^ Concepts End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
     } catch (Exception ex){
-        String AAA = ex.getMessage();
+        String AAA = ex.getMessage(); _t++; _f++;
         EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
         try{
             Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());

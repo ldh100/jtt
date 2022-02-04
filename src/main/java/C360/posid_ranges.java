@@ -77,8 +77,8 @@ class posid_ranges extends C360_GUI{
              if (FAIL) { return;}   
         Thread.sleep(500);                      
         EX += " - " + "\t" + " === ^ POSID Ranges " + "\t" + " ===== " + "\t" + " == ^ POSID Ranges End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
-    } catch (Exception ex){
-        String AAA = ex.getMessage();
+    } catch (Exception ex){ 
+        String AAA = ex.getMessage(); _t++; _f++;
         EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
         try{
             Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());

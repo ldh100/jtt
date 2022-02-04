@@ -422,7 +422,7 @@ class AP3_mm_import_mod extends AP3_GUI{
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");             
             Delete_Test_Items(); // ==================        
         } catch (Exception ex){
-            String AAA = ex.getMessage();
+            String AAA = ex.getMessage(); _t++; _f++;
             EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
             Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
         }
