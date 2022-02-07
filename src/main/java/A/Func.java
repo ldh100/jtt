@@ -29,6 +29,18 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 
+import com.slack.api.Slack;
+import com.slack.api.SlackConfig;
+import com.slack.api.methods.response.chat.ChatPostMessageResponse;
+import com.slack.api.methods.MethodsClient;
+import com.slack.api.model.Attachment;
+import com.slack.api.model.Message;
+import com.slack.api.util.http.SlackHttpClient;
+import com.slack.api.webhook.*;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -387,6 +399,28 @@ public class Func {
         return ExcelFile.getAbsolutePath();
     }
     
+    public static String Zip_File(String Source){
+        try {
+            try (FileOutputStream fos = new FileOutputStream(Source.replace(".html", ".zip"))) {
+                FileInputStream fis;
+                try (ZipOutputStream zipOut = new ZipOutputStream(fos)) {
+                    File fileToZip = new File(Source);
+                    fis = new FileInputStream(fileToZip);
+                    ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+                    zipOut.putNextEntry(zipEntry);
+                    final byte[] bytes = new byte[1024];
+                    int length;
+                    while ((length = fis.read(bytes)) >= 0) {
+                        zipOut.write(bytes, 0, length);
+                    }
+                }
+                fis.close();
+            }
+            return Source.replace(".html", ".zip"); 
+        } catch (IOException ex) {
+            return "Zip_File ERROR: " + ex.getMessage();  
+        }            
+    }
 
     public static String Send_File_with_Message_to_Slack(String Path, String Channel, String MSG) {
         try{           
@@ -411,26 +445,65 @@ public class Func {
             return "= File to Slack: " + Path + " > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
-    public static String Zip_File(String Source){
-        try {
-            try (FileOutputStream fos = new FileOutputStream(Source.replace(".html", ".zip"))) {
-                FileInputStream fis;
-                try (ZipOutputStream zipOut = new ZipOutputStream(fos)) {
-                    File fileToZip = new File(Source);
-                    fis = new FileInputStream(fileToZip);
-                    ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
-                    zipOut.putNextEntry(zipEntry);
-                    final byte[] bytes = new byte[1024];
-                    int length;
-                    while ((length = fis.read(bytes)) >= 0) {
-                        zipOut.write(bytes, 0, length);
-                    }
-                }
-                fis.close();
-            }
-            return Source.replace(".html", ".zip"); 
-        } catch (IOException ex) {
-            return "Zip_File ERROR: " + ex.getMessage();  
-        }            
+
+    public static String Message_to_Slack(String Channel, String MSG, String ATT, boolean ERR) {
+        String Color = "#96FF33";
+        if(ERR){
+            Color = "#FF333C";
+        }
+        try{       
+            List<Attachment> atts = new ArrayList<>();
+            Attachment att = new Attachment();
+            att.setText(ATT);
+            att.setColor(Color);
+            atts.add(att);
+            //MethodsClient methods = Slack.methods(A.S_OAuth_TKN);
+            //      Message msg = new Message();
+            //
+            //msg.setChannel(Channel);
+            //msg.setText(MSG);
+            //msg.setAttachments(atts);
+
+            MethodsClient client = Slack.getInstance().methods();
+            ChatPostMessageResponse response = client.chatPostMessage(req -> req
+                .token(A.S_OAuth_TKN)
+                .channel(Channel)
+                .text(MSG)
+                .attachments(atts)
+            );
+            if (response.isOk()) {
+                return "message responce is OK";
+            } else {
+                return response.getError(); // e.g., "invalid_auth", "channel_not_found"
+            }            
+        } catch(Exception ex) {
+            return "= Message to Slack: " + " > ERROR: " + ex.getMessage() + "\r\n";
+        }
     }
+
+    public static String File_to_Slack(String Path, String Channel, String MSG) {
+        try{           
+            File file = new File(Path); 
+            HttpClient httpclient = HttpClientBuilder.create().disableContentCompression().build();
+            HttpPost httpPost = new HttpPost("https://slack.com/api/files.upload");  
+            
+            MultipartEntityBuilder reqEntity = MultipartEntityBuilder.create(); 
+            reqEntity.addTextBody("token", A.S_OAuth_TKN);       
+            reqEntity.addTextBody("channels", Channel); 
+            reqEntity.addTextBody("initial_comment", MSG); 
+            reqEntity.addTextBody("media", "file");
+            reqEntity.addBinaryBody("file", file);
+//            reqEntity.addBinaryBody("file", file, ContentType.create("application/vnd.ms-excel"), Path);
+//            reqEntity.addBinaryBody("file", file, ContentType.create("application/zip"), Path);
+            
+            httpPost.setEntity(reqEntity.build());
+            HttpResponse response = httpclient.execute(httpPost);
+            
+            return "= File to Slack: " + Path + " > " + response.getStatusLine().getStatusCode() + ", " + response.getStatusLine().getReasonPhrase()+ "\r\n"; 
+        } catch(IOException ex) {
+            return "= File to Slack: " + Path + " > ERROR: " + ex.getMessage() + "\r\n";
+        }
+    }
+
+
 }

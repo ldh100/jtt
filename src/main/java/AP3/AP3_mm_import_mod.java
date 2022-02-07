@@ -3,6 +3,9 @@ package AP3;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -61,9 +64,16 @@ class AP3_mm_import_mod extends AP3_GUI{
             Thread.sleep(500);
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(5000);
+//            Thread.sleep(5000);
             Export_File_Name = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();
-
+            Path path = Paths.get(Download_Dir + File.separator + Export_File_Name + File.separator + ".zip");
+            for(int i = 0; i < 20; i++){
+                if(Files.exists(path)){
+                    break;
+                }else{
+                    Thread.sleep(500);
+                }
+            }
             File_Find("Find Global mod exported Zip File", Download_Dir, Export_File_Name, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             File_UnZip("Unzip global mod export Zip file ", Download_Dir, t, ParentTest, "no_jira");
@@ -76,15 +86,6 @@ class AP3_mm_import_mod extends AP3_GUI{
             File_Copy("Create Exported File Copy", Download_Dir + File.separator + Export_File_Name, Download_Dir + File.separator + Backup_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;}             
             
-//            Excel_Edit = Excel_Convert_PLU(Download_Dir,Export_File_Name,"Modifier Groups");
-//            if(Excel_Edit.contains("Error")){
-//                _t++;
-//                _w++;
-//                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Modify PLU data ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-//                Delete_Test_Items();
-//                return;
-//            }             
             Excel_Edit = Excel_Edit_DataRow(Download_Dir,Export_File_Name,"Modifier Groups");
             if(Excel_Edit.contains("Error")){
                 _t++;
@@ -234,17 +235,6 @@ class AP3_mm_import_mod extends AP3_GUI{
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;}  
 
-            //2) Import file with missing recored type
-//            Excel_Edit = Excel_Convert_PLU(Download_Dir,Export_File_Name,"Modifier Groups");
-//            if(Excel_Edit.contains("Error")){
-//                _t++;
-//                _w++;
-//                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Modify PLU data ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-//                Delete_Test_Items();
-//                return;
-//            } 
-            
             ValuesToWrite = new String[] {"", "Test: Missing Record type", "Missing Record type", "", "5", "9", "8", "TRUE", "", "", "", "", "", "", "", ""};             
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, "Modifier Groups", ValuesToWrite);
             if(Excel_Edit.contains("Error")){
@@ -278,7 +268,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 if(L0.get(i).getAttribute("textContent").contains("Invalid \"Record Type\". Should be \"Modifier Group\" or \"Modifier\".")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Invalid Record Type. Should be Modifier Group or Modifier."),new Date());                       
+                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), false, ParentTest.createNode(_t + ". " + "Invalid Record Type. Should be Modifier Group or Modifier."), new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -287,21 +277,11 @@ class AP3_mm_import_mod extends AP3_GUI{
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            //Thread.sleep(1000);
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");              
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;}  
 
-            //3) Import file with Empty Modifier Group Enabled and Empty Modifier Enabled
-//            Excel_Edit = Excel_Convert_PLU(Download_Dir,Export_File_Name,"Modifier Groups");
-//            if(Excel_Edit.contains("Error")){
-//                _t++;
-//                _w++;
-//                EX += "\n - " + "\t" + " ==== Exported file update ===="  + "\t" + "== Modify PLU data ==" + "\t" + Excel_Edit + "\t" + "WARN" + "\t" + "Execution interrupted" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//                Log_Html_Result("WARN", Excel_Edit, false, ParentTest.createNode(_t + ". " + " == Exported file update Error =="), new Date());
-//                Delete_Test_Items();
-//                return;
-//            }  
+
             ValuesToWrite = new String[] {"Modifier Group", "", "Missing Enabled", "Missing Enabled", "0", "1", "89", "", "", "", "", "", "", "", "", ""};
             Excel_Edit = Excel_New_DataRow(Download_Dir, Export_File_Name, "Modifier Groups", ValuesToWrite);
             if(Excel_Edit.contains("Error")){
@@ -337,7 +317,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 if(L0.get(0).getAttribute("textContent").contains("\"Modifier Group Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "Correct Error Found: " + L0.get(0).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(0).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + " \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
+                    Log_Html_Result("PASS", L0.get(0).getAttribute("textContent"), false, ParentTest.createNode(_t + ". " + " \"Modifier Group Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -345,7 +325,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 if(L0.get(1).getAttribute("textContent").contains("\"Modifier Enabled\" is a required field. Please enter a boolean value. (TRUE/FALSE)")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "Correct Error Found: " + L0.get(1).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(1).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + " \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
+                    Log_Html_Result("PASS", L0.get(1).getAttribute("textContent"), false, ParentTest.createNode(_t + ". " + " \"Modifier Enabled\" must be a boolean. (TRUE/FALSE)"),new Date());                       
                 } else {
                    _t++;
                    _f++; EX += _t + "\t" + "Test Failed" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -430,7 +410,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 if(L0.get(i).getAttribute("textContent").contains("Modifier \"Price\" must be a number from 0 to 200.")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Modifier \"Price\" must be a number from 0 to 200."),new Date());                       
+                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), false, ParentTest.createNode(_t + ". " + "Modifier \"Price\" must be a number from 0 to 200."),new Date());                       
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Test Failed" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -442,7 +422,9 @@ class AP3_mm_import_mod extends AP3_GUI{
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");             
             Delete_Test_Items(); // ==================        
         } catch (Exception ex){
-            // 
+            String AAA = ex.getMessage(); _t++; _f++;
+            EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
         }
     }
 

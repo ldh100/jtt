@@ -578,7 +578,7 @@ public class FW_API_main {
 
         if (_Slack && !Slack_Channel.equals("N/A")) {
 
-            String MSG = "FW_API_" + env + " Automation report - " + Report_Date
+            String MSG = "FW_API_" + env + " Excel Automation report - " + Report_Date
                     + "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n"
                     + "Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n"
                     + "Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i;

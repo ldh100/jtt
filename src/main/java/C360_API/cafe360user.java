@@ -1,8 +1,5 @@
 package C360_API;
 
-import java.util.Base64;
-
-// https://api.compassdigital.org/dev/cafe360user
 class cafe360user extends C360_API_main{
     protected cafe360user(C360_API_main a) {
         env = a.env;
@@ -14,7 +11,12 @@ class cafe360user extends C360_API_main{
     }
     String AAA = "";
     protected void run() { 
-        // https://api.compassdigital.org/dev/cafe360user
         
+        Auth = "";      
+        JOB_Api_Call("Get Users", "GET", 
+            BaseAPI + "/cafe360user", Auth, "", 200, ParentTest, "no_jira"); 
+        if(json != null){
+            AAA = json.toString(4);
+        }              
     }
 }

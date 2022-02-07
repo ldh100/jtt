@@ -49,18 +49,18 @@ class promo extends AP3_API_GUI {
         //<editor-fold defaultstate="collapsed" desc="POST promo voucher">
         // Test Scenario 1: Positive flow to POST promo voucher with AMOUNT type
         BODY = "{"
-                + "\"code\":\"LOCATION-" + RELEASE_DATE_SECONDS + "\","
-                + "\"discount\":{"
-                + "\"type\":\"AMOUNT\","
-                + "\"amount_off\":1"
-                + "},"
-                + "\"metadata\":{"
-                + "\"name\":\"This is API test promo voucher\","
-                + "\"location_id\":\"" + SiteID + "\","
-                + "\"is_mealplan_promo\":false"
-                + "},"
-                + "\"active\":false,"
-                + "\"app\":\"" + app + "\""
+                    + "\"code\":\"LOCATION-" + RELEASE_DATE_SECONDS + "\","
+                    + "\"discount\":{"
+                        + "\"type\":\"AMOUNT\","
+                        + "\"amount_off\":1"
+                    + "},"
+                    + "\"metadata\":{"
+                        + "\"name\":\"This is API test promo voucher\","
+                        + "\"location_id\":\"" + SiteID + "\","
+                        + "\"is_mealplan_promo\":false"
+                    + "},"
+                    + "\"active\":false,"
+                    + "\"app\":\"" + app + "\""
                 + "}";
         JOB_Api_Call("Promotion Voucher - POST add new promo voucher with AMOUNT type", "POST", 
                 BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
@@ -70,6 +70,7 @@ class promo extends AP3_API_GUI {
                 Promo_Voucher_Code = json.getString("code");
                 PROMO_VOUCHER_IDS.add(json.getString("id"));
             } catch (Exception ex) {
+                String AAA = ex.getMessage();
             }
         }
 
@@ -92,7 +93,6 @@ class promo extends AP3_API_GUI {
                 BaseAPI + "/promo/voucher", Auth, BODY, 200, ParentTest, "no_jira");
         if (json != null) {
             try {
-
                 PROMO_VOUCHER_IDS.add(json.getString("id"));
             } catch (Exception ex) {
             }

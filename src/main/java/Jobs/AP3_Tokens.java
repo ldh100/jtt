@@ -26,10 +26,11 @@ public class AP3_Tokens {
     private String Summary = "?"; 
     private Instant run_start;
     private Duration DD;
-    private String Log = "GET AP3 Admin User Tokens: ";
+    private String Log = "AP3 Admin User Tokens:";
     private String ADMIN_ID = "oleg.spozito@compassdigital.io";
     private String ADMIN_PW = "Password1"; 
     private String TKN = "";
+    private String ENV = "";
 
     private String JOB_Load_CONFIG(String config) {
         String[] lines = config.split("\n");
@@ -58,6 +59,7 @@ public class AP3_Tokens {
 
             String AUTH = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
 
+            ENV = "Development";
             JOB_Api_Call("https://api.compassdigital.org/dev/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH);    //  DE 
             if(!TKN.isEmpty()) {
                 try {    
@@ -68,6 +70,8 @@ public class AP3_Tokens {
                     Log += "SQL > " + ex.getMessage();
                 }
             }
+
+            ENV = "Staging";
             JOB_Api_Call("https://api.compassdigital.org/staging/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH); //  ST       
             if(!TKN.isEmpty()) {
                 try {  
@@ -78,6 +82,8 @@ public class AP3_Tokens {
                     Log += "SQL > " + ex.getMessage();
                 }                    
             }
+
+            ENV = "Production";
             JOB_Api_Call("https://api.compassdigital.org/v1/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH);     //  PR       
             if(!TKN.isEmpty()) {
                 try {  
@@ -113,18 +119,18 @@ public class AP3_Tokens {
                 JSONObject json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     _f++;
-                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: " + json.getString("error") + ". ";
+                    Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> Error: " + json.getString("error") + ". ";
                 }else{
                     TKN = json.getString("token");
-                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> TKN: " + TKN;
+                    Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> TKN: " + TKN;
                 }
             }else{
                 _f++;
-                Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: Responce is Not JSON";
+                Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> Error: Responce is Not JSON";
             }
         } catch (Exception ex) {
             _f++;
-            Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: " + ex.getMessage().trim();
+            Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> Error: " + ex.getMessage().trim();
         }
     }
 

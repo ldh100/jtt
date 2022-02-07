@@ -2,6 +2,7 @@ package AP3;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.io.File;
 import org.json.JSONArray;
 import org.json.JSONObject;
  /*
@@ -141,8 +142,8 @@ class AP3_mm_items extends AP3_GUI{
 
         // <editor-fold defaultstate="collapsed" desc="Global Menus Add Menu Set">  
         EX += " - " + "\t" + " === MM Global Menus Add Menu Set" + "\t" + " ===== " + "\t" + " == Add Menu Sets Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        List_L3("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", ParentTest, "no_jira"); 
-        PAGES = L3.size();
+        List_L1("Menus Pages Count", "xpath", "//button[contains(@class, 'v-pagination__item')]", ParentTest, "no_jira"); 
+        PAGES = L1.size();
         
         List_L2("Menus Count on the Page 1", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -154,9 +155,9 @@ class AP3_mm_items extends AP3_GUI{
                 } 
             }
             if(T_Index == -1 && PAGES > 1){
-                Scroll_to_Element("Scroll to Pagination", L3.get(1), ParentTest, "no_jira");
+                Scroll_to_Element("Scroll to Pagination", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}    
-                Element_Click("Click Navigation Page 2", L3.get(1), ParentTest, "no_jira");
+                Element_Click("Click Navigation Page 2", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                     if (FAIL) { return;}
@@ -168,9 +169,9 @@ class AP3_mm_items extends AP3_GUI{
                     } 
                 } 
                 if(T_Index == -1 && PAGES > 2){
-                    Scroll_to_Element("Scroll to Pagination", L3.get(2), ParentTest, "no_jira");
+                    Scroll_to_Element("Scroll to Pagination", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}    
-                    Element_Click("Click Navigation Page 3", L3.get(2), ParentTest, "no_jira");
+                    Element_Click("Click Navigation Page 3", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
                         if (FAIL) { return;}
@@ -187,6 +188,7 @@ class AP3_mm_items extends AP3_GUI{
             _t++; 
             _f++;
             EX += " - " + "\t" + "Find Menu" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+            Log_Html_Result("FAIL", "Find Menu:" + GL_MENU, false, ParentTest.createNode(_t + ". " + "Menu '" + GL_MENU + "' not found"), new Date());
             return;
         }  
         
@@ -200,17 +202,9 @@ class AP3_mm_items extends AP3_GUI{
 
         Element_Click("Click Menu " + GL_MENU, L2.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}  
-//            List_L1("Local Menus count", "xpath", "//div[@class='layout hover indent align-center row wrap']", ParentTest, "no_jira");         
-//                if (FAIL) { return;}       
-//                for (int j = 0; j < L1.size(); j++) {    
-//                   Element_Attribute("Local Menu (Index " + j + ") Name", L1.get(j), "textContent", ParentTest, "no_jira"); 
-//                }  
         Thread.sleep(500);
-//        List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Menus' button", L2.get(T_Index), "xpath", ".//button[@type='button'][1]", ParentTest, "no_jira"); 
-//            if (FAIL) { return;} 
-//        Element_Click("Click 'View Global Menus'", e1, ParentTest, "no_jira"); 
-//            if (FAIL) { return;}   
-         Element_By_Path_Click("Click Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
+ 
+        Element_By_Path_Click("Click Global Menu", "xpath", "//span[@id='global-menu-label']", ParentTest, "no_jira");
         Thread.sleep(500);                  
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
@@ -230,7 +224,6 @@ class AP3_mm_items extends AP3_GUI{
         Thread.sleep(2000); 
         List_L0("Menus + 1 Added Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
             if (FAIL) { return;} 
-//Thread.sleep(1000);
         List_Child_E1_By_Path("Find New Menu Set Name input", L0.get((L0.size() - 1)), "xpath", ".//input[@type='text']", ParentTest, "no_jira"); 
             if (FAIL) { return;}     
         Element_Text_Enter("Enter Added Menu Set Name", e1, "Added " + New_ID, ParentTest, "no_jira"); 
@@ -326,12 +319,11 @@ class AP3_mm_items extends AP3_GUI{
         
         // ======== New Item
         To_Top("Scroll to page Top", ParentTest, "no_jira");
-            if (FAIL) { return;}   
-//        Move_to_Element_By_Path("Scroll to 'NEW ITEM' button", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira");        
-//            if (FAIL) { return;}   //    WRONG >>> moves a button under "User" > then clicks User
         Thread.sleep(500);            
         Element_By_Path_Click("Click 'NEW ITEM'", "xpath", "//*[contains(text(), 'new item')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
+        Wait_For_Element_By_Path_Presence("Wait for 'Item Image' tab", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, Ver);
+            if (FAIL) { return;}
         Element_By_Path_Click("Click 'New Item Name'", "css", "[aria-label='Item Name']", ParentTest, "no_jira");
             if (FAIL) { return;}             
         Element_By_Path_Text_Enter("Enter Item Name", "css", "[aria-label='Item Name']", "Item " + New_ID, false, ParentTest, "no_jira");
@@ -377,14 +369,13 @@ class AP3_mm_items extends AP3_GUI{
                 Element_Click("Click 'Prepared'", L1.get(T_Index), ParentTest, "no_jira");
                     if (FAIL) { return;}   
             } 
-//                Click_out_of_Element_By_Path("Tax Tags dropdown Close", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]",  "Top",4, 4, ParentTest, "no_jira");
-//                    if (FAIL) { return;} 
-
-        Element_By_Path_Click("Description click to close tax tags ", "css", "[aria-label='Description']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Item Name' to close tax tags", "css", "[aria-label='Item Name']", ParentTest, "no_jira");
             if (FAIL) { return;}          
 
         // ======= Add Modifier >>>
-        Element_By_Path_Click("Click Modifiers 'Add Group'", "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, "no_jira"); 
+        Scroll_to_WebElement("Scroll to 'Add Modifier Group' button",  "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, Ver);
+            if (FAIL) { return;}  
+        Element_By_Path_Click("Click 'Add Modifier Group'", "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
         Element_By_Path_Click("Click 'Modifier Name' Input", "xpath", "//div[@class='v-input v-text-field v-select v-input--is-focused theme--light primary--text']", ParentTest, "no_jira"); 
             if (FAIL) { return;}                                                                                                     
@@ -397,17 +388,60 @@ class AP3_mm_items extends AP3_GUI{
                 if (FAIL) { return;}
             }
         Element_Click("Select 1st Group", L1.get(0), ParentTest, "no_jira");
-            if (FAIL) { return;}             
+            if (FAIL) { return;}   
+        Thread.sleep(500);           
         List_L0("Updated Modifier Group Count", "xpath", "//div[@class='modifier-group']", ParentTest, "no_jira");             
             if (FAIL) { return;}   
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Modifier Group (Index " + i + ") Text Content", L0.get(i), "textContent", ParentTest, "no_jira");            
-                if (FAIL) { return;}
             }
-        // ======= Add Modifier End ^^^         
+        // ======= Add Modifier End ^^^ 
+
+        // Images >>>>
+        Scroll_to_WebElement("Scroll to 'Item Image' tab", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, Ver);
+            if (FAIL) { return;}  
+        Element_By_Path_Click("Click 'Item Image' tab", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Find_Text("Find 'Add Image' text", "Add Image", true, ParentTest, "no_jira");
+        Find_Text("Find 'Preview Image' text", "Preview Image", true, ParentTest, "no_jira");
+
+        File tmp;
+        tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
+        if(tmp.exists()) {
+            Element_By_Path_Text_Enter("Upload Menu Image file 1", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+        } else {
+            _t++; 
+            _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+        }
+        Find_Text("Find 'Remove Image' text", "REMOVE IMAGE", true, ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click 'REMOVE IMAGE' button", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+  
+        tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
+        if(tmp.exists()) {
+            Element_By_Path_Text_Enter("Upload Menu Image file 2", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+        } else {
+            _t++; 
+            _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+        }    
+  
+        tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
+        if(tmp.exists()) {
+            Element_By_Path_Text_Enter("Upload Menu Image file - override existing", "xpath", "//input[@type='file' and @accept='.png,.jpg,.jpeg']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+        } else {
+            _t++; 
+            _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+        }
+
+        
         Element_By_Path_Click("Click 'APPLY Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
-            
+            if (FAIL) { return;}              
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         //Cloning item 
@@ -476,14 +510,14 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}
 
         //Verify API if ID's are unique
-        EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += "\n - " + "\t" + " ===START===" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API Start ==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         String[] Menu_ID = new String[2];
         int lmenu_cnt = 0;
         Call_API("Call Global menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );
         JSONObject json = new JSONObject(t);
         JSONArray menus = json.getJSONArray("menus");
 
-        for(int k=0; k<menus.length(); k++) {
+        for(int k = 0; k < menus.length(); k++) {
             JSONObject menu = menus.getJSONObject(k);
             if(menu.getJSONObject("label").getString("en").contains("Added " + New_ID))  {
                 Menu_ID[lmenu_cnt] = menu.getString("id");
@@ -501,12 +535,12 @@ class AP3_mm_items extends AP3_GUI{
         }
 
         //Verify if cloned menu items are unique
-        Call_API("Call menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" +Menu_ID[0], true, ParentTest, "no_jira" );
+        Call_API("Call menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID[0], true, ParentTest, "no_jira" );
         json = new JSONObject(t);
         JSONArray items = json.getJSONArray("groups").getJSONObject(0).getJSONArray("items");
         String[] Item_ID = new String[2];
         int Item_ID_cnt = 0;
-        for(int k=0; k<items.length(); k++)  {
+        for(int k = 0; k < items.length(); k++)  {
             JSONObject item = items.getJSONObject(k);
             if(item.getJSONObject("meta").getJSONObject("original_label").getString("en").contains("Item " + New_ID)) {
                 Item_ID[Item_ID_cnt] = item.getString("id");
@@ -523,7 +557,7 @@ class AP3_mm_items extends AP3_GUI{
                 _p++; EX += _t + "\t" + "Unique ids for cloned Items" + "\t" + Item_ID[0] + "\t" + Item_ID[1] + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }
         }
-        EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API END==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
+        EX += " - " + "\t" + " ===END===" + "\t" + " ===== " + "\t" + " == Verify_menu_category_API END==" + "\t" + "-" + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
         //</editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Delete Last Added Cloned Menu and Original Menu Set"> 
@@ -662,8 +696,8 @@ class AP3_mm_items extends AP3_GUI{
             Element_By_Path_Text("Get First Category", "xpath", "(//*[@class='listspan'])[1]/div", ParentTest, "no_jira");
                 if (FAIL) { return;}
             String Category = t;
-            System.out.println(Category);
-            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
+
+            Element_By_Path_Click("Click > '" + Category + "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -778,16 +812,10 @@ class AP3_mm_items extends AP3_GUI{
 
             Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" + Category + "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
+            Thread.sleep(1000);
 
-
-             Thread.sleep(1000);
-
-            //Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
-            //if (FAIL) { return;}
-            // get name and check if it changed
-            //Thread.sleep(1000);
 
             Element_By_Path_Text("Get Item Name in Local Menu", "xpath", "//tr[1]/td[3]", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -846,34 +874,30 @@ class AP3_mm_items extends AP3_GUI{
             Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Refresh("Refresh the page", ParentTest, "no_jira");    
-            Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest,"no_jira");
+            Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
             if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
                 if (FAIL) { return;}      
             EX += " - " + "\t" + " === Update existing modifier" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            Wait_For_Element_By_Path_Presence("Wait for Modifier side panel", "xpath", "//div[contains(@class,'layout modifier')]", ParentTest,"no_jira");
+            Wait_For_Element_By_Path_Presence("Wait for Modifier side panel", "xpath", "//div[contains(@class,'layout modifier')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(3000);
-            //Element_By_Path_Click("Click > Item Name Field on Existing Modifier", "xpath", "(.//span[@class='Body-1-Black-Medium-Emphasis-Left'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-
-                Thread.sleep(1000);
+            Thread.sleep(1000);
 
             //DS Code Changes
             List_L2("Modifiers Count", "xpath", "//*[@class='layout modifier row wrap align-center']", ParentTest, "no_jira");             
-                    if (FAIL) { return;}   
-                Move_to_Element("1st Mofifier Hover", L2.get(0), ParentTest, "no_jira"); 
-                    if (FAIL) { return;}    
-                List_Child_E1_By_Path("Find 1st Mofifier Name input", L2.get(0), "xpath", ".//span[@class='Body-1-Black-Medium-Emphasis-Left']", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}      
-                Element_Click("1st Mofifier Name Click", e1, ParentTest, "no_jira"); 
-                    if (FAIL) { return;} 
+                if (FAIL) { return;}   
+            Move_to_Element("1st Mofifier Hover", L2.get(0), ParentTest, "no_jira"); 
+                if (FAIL) { return;}    
+            List_Child_E1_By_Path("Find 1st Mofifier Name input", L2.get(0), "xpath", ".//span[@class='Body-1-Black-Medium-Emphasis-Left']", ParentTest, "no_jira"); 
+                if (FAIL) { return;}      
+            Element_Click("1st Mofifier Name Click", e1, ParentTest, "no_jira"); 
+                if (FAIL) { return;} 
 
-                Element_By_Path_Text_DblClick_Copy("1st Mod Name", "css", "[aria-label='Item Name']", ParentTest, "no_jira"); 
-                    if (FAIL) { return;}
-                NBC = e.getAttribute("value");
-                System.out.println(NBC);
-                if (!NBC.contains("-upd")) {
+            Element_By_Path_Text_DblClick_Copy("1st Mod Name", "css", "[aria-label='Item Name']", ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+            NBC = e.getAttribute("value");
+
+            if (!NBC.contains("-upd")) {
                 Element_By_Path_Input_Select_Clear("Clear > Item Name Field on Existing Modifier", "xpath", "(//*[@aria-label='Item Name'])[1]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Element_By_Path_Text_Enter("Enter a Name for Existing Modifier", "xpath", "(//*[@aria-label='Item Name'])[1]", NBC + "-upd", false, ParentTest, "no_jira");
@@ -930,16 +954,19 @@ class AP3_mm_items extends AP3_GUI{
                     if (FAIL) { return;}
             }
             EX += " - " + "\t" + " === Add new modifier to a group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            Scroll_to_WebElement("Scroll to 'ADD MODIFIER' button",  "xpath", "//*[contains(text(), 'Add MODIFIER')]", ParentTest, Ver);
+                if (FAIL) { return;} 
             Element_By_Path_Click("Click > ADD MODIFIER", "xpath", "//*[contains(text(),'Add MODIFIER')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click > Item Name Field on New Modifier", "xpath", "(//input[@aria-label='Item Name'])[2]", ParentTest, "no_jira");
+            List_L1("Modifiers (+new) Count", "xpath", "//div[@class='layout modifier row wrap align-center']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter a Name for New Modifier", "xpath", "(//input[@aria-label='Item Name'])[2]", "adddeletemod", false, ParentTest, "no_jira");
+            Scroll_to_Element("Scroll to new Mofified row", L1.get(L1.size() - 1), ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click > Price Field on New Modifier", "xpath", "(//input[@aria-label='Price'])[2]", ParentTest, "no_jira");
+            Element_Child_Text_Enter("Enter a Name for New Modifier", L1.get(L1.size() - 1), "css", "[aria-label='Item Name']", "add-delete-mod", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter a Price for New Modifier", "xpath", "(//input[@aria-label='Price'])[2]", "3", false, ParentTest, "no_jira");
+            Element_Child_Text_Enter("Enter a Price for New Modifier", L1.get(L1.size() - 1), "css", "[aria-label='Price']", "3", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
+
             Element_By_Path_Click("Click > 'Apply Changes'", "xpath", "//*[contains(text(), 'Apply Changes')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(1000);
@@ -954,48 +981,40 @@ class AP3_mm_items extends AP3_GUI{
             Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
                 if (FAIL) { return;}
             Wait_For_Element_By_Path_Presence("Wait for Global Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             Element_By_Path_Click("Click > '" + Category + "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             Element_By_Path_Click("Click > Second Item", "xpath", "//table/tbody/tr[2]/td[3]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Wait_For_Element_By_Path_Presence("Wait for Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             if (!NBC.contains("-upd")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Name Changed", "xpath", "//*[contains(text(),'existing1-upd')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Name Changed", "existing1-upd", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Name Changed", "xpath", "//*[contains(text(),'existing1')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Name Changed", "existing1", true, ParentTest, "no_jira");
             }
             if (PBC.contains("1")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Price Changed", "xpath", "//*[contains(text(),'$2.00')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Price Changed", "$2.00", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Price Changed", "xpath", "//*[contains(text(),'$1.00')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Price Changed", "$1.00", true, ParentTest, "no_jira");
             }
             if (CBC.contains("1")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Calories Changed", "xpath", "//*[contains(text(),'200')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:200", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Calories Changed", "xpath", "//*[contains(text(),'100')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}   
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:100", true, ParentTest, "no_jira");  
             }
             if (PLU.contains("1")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier PLU Changed", "xpath", "//*[contains(text(),'222')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:222", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier PLU Changed", "xpath", "//*[contains(text(),'111')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:111", true, ParentTest, "no_jira");
             } 
 
     /* Commenting because of changes in auto assigning of newly added modifier. To remove once Ram confirms*/
-    //        Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'adddeletemod')]", ParentTest, "no_jira");
+    //        Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'add-delet-emod')]", ParentTest, "no_jira");
     //        if (FAIL) { return;}
 
             EX += " - " + "\t" + " === Check modifier changes in Local Menu item" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
@@ -1006,55 +1025,44 @@ class AP3_mm_items extends AP3_GUI{
 
             Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
             if (FAIL) { return;}
-            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" + Category + "' Category", "xpath", "//*[contains(text(),'" + Category + "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait for Items table", "xpath", "//*[text()='Menu Version: 2']", ParentTest,"no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             Element_By_Path_Click("Click > Second Item", "xpath", "//table/tbody/tr[2]/td[3]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             Wait_For_Element_By_Path_Presence("Wait for Item side panel", "xpath", "(//aside[contains(@class,'v-navigation-drawer')])[3]", ParentTest,"no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             if (!NBC.contains("-upd")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Name Changed", "xpath", "//*[contains(text(),'existing1-upd')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Name Changed", "existing1-upd", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Name Changed", "xpath", "//*[contains(text(),'existing1')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Name Changed", "existing1", true, ParentTest, "no_jira");
             }
             if (PBC.contains("1")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Price Changed", "xpath", "//*[contains(text(),'$2.00')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Price Changed", "$2.00", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Price Changed", "xpath", "//*[contains(text(),'$1.00')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Price Changed", "$1.00", true, ParentTest, "no_jira");
             }
             if (CBC.contains("1")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Calories Changed", "xpath", "//*[contains(text(),'200')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:200", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier Calories Changed", "xpath", "//*[contains(text(),'100')]", ParentTest, "no_jira");
-                if (FAIL) { return;}   
+                Find_Text("Check > Existing Modifier Calories Changed", "Calories:100", true, ParentTest, "no_jira"); 
             }
             if (PLU.contains("1")) {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier PLU Changed", "xpath", "//*[contains(text(),'222')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:222", true, ParentTest, "no_jira");
             } else {
-                Wait_For_Element_By_Path_Presence("Check > Existing Modifier PLU Changed", "xpath", "//*[contains(text(),'111')]", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                Find_Text("Check > Existing Modifier PLU Changed", "PLU:111", true, ParentTest, "no_jira");
             }      
 
-    /* Commenting because of changes in auto assigning of newly added modifier. To remove once Ram confirms*/     
-    //        Wait_For_Element_By_Path_Presence("Check > New Modifier Exists", "xpath", "//*[contains(text(),'adddeletemod')]", ParentTest, "no_jira");
-    //        if (FAIL) { return;}
 
             EX += " - " + "\t" + " === Delete new modifier from the group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods/", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Refresh("Refresh the page", ParentTest, "no_jira");        
             Wait_For_Element_By_Path_Presence("Wait for Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest,"no_jira");
-            if (FAIL) { return;}
+                if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'MMTG')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Move_to_Element_By_Path("Move > New Modifier", "xpath", "(//*[contains(@class,'layout modifier')])[2]", ParentTest, "no_jira");
@@ -1088,12 +1096,12 @@ class AP3_mm_items extends AP3_GUI{
                 if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists", "xpath", "//*[contains(text(),'adddeletemod')]", ParentTest, "no_jira");
+            Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists", "xpath", "//*[contains(text(),'add-delete-mod')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
 
             // Verifying if modifier item Name/ price/calories /PLU / chit is not editable
             List_L0("Find Disabled elements", "xpath", "//div[@class='pa-0']/descendant::div[contains(@class,'disabled')]", ParentTest, "no_jira");
-            if(L0.size()==6 || (L0.size()%6==0)) {
+            if(L0.size() == 6 || (L0.size()%6 == 0)) {
                 _t++;
                 _p++; EX += _t + "\t" + "Price,Calories,PLU,Item Enabled,Chit,Tax tags" + "\t" + "Disabled" + "\t" + " - " + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("PASS", "Disabled", false, ParentTest.createNode(_t + ". " + "Price,Calories,PLU,Item Enabled,Chit,Tax tags are disabled"), new Date());
@@ -1105,7 +1113,7 @@ class AP3_mm_items extends AP3_GUI{
             Refresh("Refresh the page", ParentTest, "no_jira");
             Wait_For_Element_By_Path_Presence("Wait for Local Menu", "xpath", "//*[@class='menu-nav']", ParentTest,"no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Click > '" +Category+ "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
+            Element_By_Path_Click("Click > '" + Category + "' Category", "xpath", "//*[contains(text(),'" +Category+ "')][1]/parent::span", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}    
@@ -1117,11 +1125,16 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}
             Element_By_Path_Click("Click > Modifier Group", "xpath", "//*[contains(text(),'Modifier Manipulation')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists", "xpath", "//*[contains(text(),'adddeletemod')]", ParentTest, "no_jira");
+            Wait_For_Element_By_Path_InVisibility("Check > New Modifier no longer exists", "xpath", "//*[contains(text(),'add-delete-mod')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             EX += " - " + "\t" + " === Manipulate Global Modifiers" + "\t" + " ===== " + "\t" + " == Manipulate Global Modifiers End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             // </editor-fold> 
         } 
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){    // =============================================  
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } // =============================================  
+
     }
 }

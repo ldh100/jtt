@@ -77,7 +77,7 @@ public class A extends javax.swing.JFrame {
 //                java.util.logging.// Logger.getLogger(AP3_GUI.class.getName()).log(java.util.logging.Level.SEVERE, ex.getMessage(), ex);
 //            }
             Dimension screenSize = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());                
-            AF.setSize(screenSize.width - 150, screenSize.height - 150);    
+            AF.setSize(screenSize.width - 350, screenSize.height - 175);    
             AF.setLocationRelativeTo(null);
             AF.setVisible(true);
         });

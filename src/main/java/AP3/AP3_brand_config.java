@@ -544,126 +544,58 @@ class AP3_brand_config extends AP3_GUI {
                     break;
                 case "Assign Menus":
                     List_L3("Menu 'Button' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }                                       
-        
-//                  Element_By_Path_Click("Open Menus drop-down", "css", "[aria-label='Menus']", ParentTest, "no_jira");                            
+                        if (FAIL) { return; }                                                                 
                     Element_Click("ADD MENU Click", L3.get(0), ParentTest, "no_jira");    // index 0 > 1st button - Add
-                    if (FAIL) {
-                        return;
-                    }
-//                    Element_By_Path_Click("Open Menu Name drop-down", "css", "[aria-label='Menu Name']", ParentTest, "no_jira");    
-//                        if (FAIL) { return;} 
+                        if (FAIL) { return; }                                       
                     Element_Child_List_L1("Add Menu > drop-down(s) count", L2.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                        if (FAIL) { return; }                                       
                     Element_Click("Open 'Menu Name' drop-down", L1.get(0), ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-
+                        if (FAIL) { return; }                                       
                     Element_E1_Find("Find 'Menu Names' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+                        if (FAIL) { return; }                                       
                     Element_Child_List_L1("Menu Names Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
-                    if (L1.size() > 0) {                         
+                        if (FAIL) { return; }                                       
+                    if (!L1.isEmpty()) {                         
                         Element_Attribute("Select Last Menu Name", L1.get(L1.size() - 1), "textContent", ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
+                            if (FAIL) { return; }                                       
                         Element_Click("Select Last Menu Name", L1.get(L1.size() - 1), ParentTest, "no_jira");
-                        if (FAIL) {
-                            return;
-                        }
-                    }                                                
-                    
-                    if (L1.size() > 0) {                        
-                    for( int k=0; k<L1.size();k++){                                                   
-                       Element_Attribute("Get Menu Name", L1.get(k), "textContent", ParentTest, "no_jira");
-                       MenuName=t.trim();
-                   
-                        if(MenuNamesGlobal.contains(MenuName)){
-                        //if(L1.get(k).getAttribute("textContent").contains(MenuNamesGlobal.get(k))){    
-                        _t++;
-                         _p++; EX += _t + "\t" + "Test Passed: Menus match with Global Menu" + "\t" + MenuName + "\t" + MenuNamesGlobal.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        //print pass as only Menus that exist in global menu are available to be assigned in brand configuration                  
-                        } else {
-                        _t++;
-                        _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        //print fail if found incorrect menus that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + MenuName, true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
-                        }                             
-                        }
-                    }
-                    
-                    //System.out.println(Categories_EnabledList.);                  
-                    List_L2("List of Category that are enabled","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }    
-                    System.out.println(L2.size());
-                    if(L2.size()>0){
-                    for ( int k = 0; k < L2.size(); k++){                 
-                        Element_Attribute("Menu Category (Index " + k + ") Name", L2.get(k), "textContent", ParentTest, "no_jira");                                                    
-                        if(L2.get(k).getAttribute("textContent").equals(Categories_EnabledList.get(k))){
-                            _t++;
-                             _p++; EX += _t + "\t" + "Test Passed: Menu Categories Match" + "\t" + L2.get(k).getAttribute("textContent") + "\t" + Categories_EnabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                            //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                            if (FAIL) { return; }                                                               
+                        for( int k = 0; k < L1.size(); k++){                                                   
+                            Element_Attribute("Get Menu Name", L1.get(k), "textContent", ParentTest, "no_jira");
+                            MenuName=t.trim();
+                            if(MenuNamesGlobal.contains(MenuName)){
+                                _t++;
+                                 _p++; EX += _t + "\t" + "Test Passed: Menus match with Global Menu" + "\t" + MenuName + "\t" + MenuNamesGlobal.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                                //print pass as only Menus that exist in global menu are available to be assigned in brand configuration                  
                             } else {
-                            _t++;
-                            _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus Categories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                            //print fail if found incorrect menus categories that are'nt from global menu
-                            Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
-                            }
-                        }                                                                
-                    }else {
-                        _f++;
-                        F += "Step: " + _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
-                        EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                    }
-                    
-                    
-                    /*
-                    List_L2("List of Category that are enabled","xpath", "(.//div[@id='toc-assignMenus']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }    
-                    System.out.println(L2.size());
-                    if(L2.size()>0){
-                    for ( int k = 0; k < L2.size()-1; k++){                 
-                    Element_Attribute("Menu Category (Index " + k+1 + ") Name", L2.get(k+1), "textContent", ParentTest, "no_jira");            
-                    //if (FAIL) { 
-                        //return;
-                    //}                    
-                    //String myList= L0.get(i).getAttribute("textContent").trim();
-                    
-                    if(L2.get(k+1).getAttribute("textContent").equals(Categories_EnabledList.get(k))){
-                        _t++;
-                         _p++; EX += _t + "\t" + "Test Passed: Menu Categories Match" + "\t" + L2.get(k+1).getAttribute("textContent") + "\t" + Categories_EnabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                        //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
-                        } else {
-                        _t++;
-                        _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus Categories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        //print fail if found incorrect menus categories that are'nt from global menu
-                        Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"));                        
+                                _t++;
+                                _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuName  > " + MenuName, true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
+                            }                             
                         }
-                    
-                    System.out.println(L2.get(k+1).getAttribute("textContent") + " : " + (Categories_EnabledList.get(k)));                                                                               
-                    //Thread.sleep(500);
-                    }                                                                
-                    }else {
-
+                    }
+                
+                    List_L2("List of Category that are enabled","xpath", "(.//div[@class='layout row wrap justify-end']//div[@class='v-select__selection v-select__selection--comma'])", ParentTest, "no_jira");
+                        if (FAIL) { return; }    
+                    if(!L2.isEmpty()){
+                        for ( int k = 0; k < L2.size(); k++){                 
+                            Element_Attribute("Menu Category (Index " + k + ") Name", L2.get(k), "textContent", ParentTest, "no_jira");                                                    
+                            if(L2.get(k).getAttribute("textContent").equals(Categories_EnabledList.get(k))){
+                                _t++;
+                                 _p++; EX += _t + "\t" + "Test Passed: Menu Categories Match" + "\t" + L2.get(k).getAttribute("textContent") + "\t" + Categories_EnabledList.get(k) + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
+                                //print pass as only Menus Categories that exist in global menu are available to be assigned in brand configuration                  
+                             } else {
+                                _t++;
+                                _f++; EX += _t + "\t" + "Test Failed" + "\t" + "-" + "\t" + "Found incorrect Menus Categories" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                                //print fail if found incorrect menus categories that are'nt from global menu
+                                Log_Html_Result("FAIL", "Error: " + err + "Incorrect MenuCategory  > " + L2.get(k).getAttribute("textContent"), true, ParentTest.createNode(_t + ". " + "Menus don't match Global Menu"), new Date());                        
+                             }
+                        }                                                                
+                    } else {
                         _f++;
                         F += "Step: " + _t + " > " + "Add Station > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-                    }
-*/                  
+                    }                
                     break;
                     
                 case "Integration Type":

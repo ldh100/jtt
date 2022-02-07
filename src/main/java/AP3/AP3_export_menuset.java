@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -370,11 +373,19 @@ class AP3_export_menuset extends AP3_GUI{
             Wait_For_Element_By_Path_InVisibility("Wait for Spinner", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);
-            Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
+            Element_By_Path_Click("Click 'Global mod Export'", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(5000);
-
-            String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();    
+            //Thread.sleep(5000);  
+            String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();  
+            Path path = Paths.get(destinationDir + File.separator + ModGrpPath + File.separator + ".zip");
+            for(int i = 0; i < 20; i++){
+                if(Files.exists(path)){
+                    break;
+                }else{
+                    Thread.sleep(500);
+                }
+            }
+  
             File_Find("Find Global mod export Zip File", destinationDir, ModGrpPath, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(3000);
@@ -384,7 +395,7 @@ class AP3_export_menuset extends AP3_GUI{
                 if (FAIL) { return;}  
             ModGrpPath = GL_MENU.trim()+ "-global-modifier-groups.xlsx";
 
-            readGlobalModExcel( destinationDir, ModGrpPath ,"Modifier Groups");              
+            readGlobalModExcel(destinationDir, ModGrpPath ,"Modifier Groups");              
 
             Thread.sleep(3000);
 

@@ -65,8 +65,10 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -237,7 +239,7 @@ public class SL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_METRICS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_METRICS.setCellSelectionEnabled(true);
-        DV_METRICS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_METRICS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_METRICS.setName("DV_METRICS"); // NOI18N
         DV_METRICS.setRequestFocusEnabled(false);
         DV_METRICS.setRowHeight(18);
@@ -262,7 +264,7 @@ public class SL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_D_RANGES.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_D_RANGES.setCellSelectionEnabled(true);
-        DV_D_RANGES.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_D_RANGES.setGridColor(java.awt.SystemColor.windowBorder);
         DV_D_RANGES.setName("DV_D_RANGES"); // NOI18N
         DV_D_RANGES.setOpaque(false);
         DV_D_RANGES.setRowHeight(18);
@@ -599,7 +601,7 @@ public class SL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_QA.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_QA.setCellSelectionEnabled(true);
-        DV_QA.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_QA.setGridColor(java.awt.SystemColor.windowBorder);
         DV_QA.setName("DV2"); // NOI18N
         DV_QA.setOpaque(false);
         DV_QA.setRowHeight(18);
@@ -620,7 +622,7 @@ public class SL_GUI extends javax.swing.JInternalFrame {
         ));
         DV_D_Variants.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_D_Variants.setCellSelectionEnabled(true);
-        DV_D_Variants.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_D_Variants.setGridColor(java.awt.SystemColor.windowBorder);
         DV_D_Variants.setName("DV_D_Variants"); // NOI18N
         DV_D_Variants.setOpaque(false);
         DV_D_Variants.setRowHeight(18);
@@ -1704,7 +1706,7 @@ public class SL_GUI extends javax.swing.JInternalFrame {
             }
 
             SCOPE = "";
-            r_type = "manual"; 
+            r_type = "ad-hoc"; 
 
             _Headless = _headless.isSelected();
             _Slack = _slack.isSelected();                
@@ -1931,19 +1933,21 @@ public class SL_GUI extends javax.swing.JInternalFrame {
             switch (BROWSER) {
                 case "Chrome":
                         ChromeOptions chrome_op = new ChromeOptions();
-                        //chrome_op.addExtensions(new File("/path/to/extension.crx"));
-                        chrome_op.addArguments("--disable-infobars");
-                        chrome_op.addArguments("--start-maximized");
-            //            chrome_op.addArguments("--start-minimized");
-            //            chrome_op.addArguments("enable-automation");
-            //            chrome_op.addArguments("--no-sandbox");
-            //            chrome_op.addArguments("--disable-extensions");
-            //            chrome_op.addArguments("--dns-prefetch-disable");
-            //            chrome_op.addArguments("--disable-gpu");
+                        chrome_op.addArguments("--disable-web-security");
+                        chrome_op.addArguments("--no-proxy-server");
                         if(_Headless){
                             chrome_op.addArguments("--headless");
                         }
                         chrome_op.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
+                        chrome_op.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"}); 
+                        //chrome_op.setExperimentalOption("useAutomationExtension", false);
+                        Map<String, Object> prefs = new HashMap<String, Object>();
+                        prefs.put("useAutomationExtension", false); 
+                        prefs.put("credentials_enable_service", false);
+                        prefs.put("profile.password_manager_enabled", false);
+                        chrome_op.setExperimentalOption("prefs", prefs);
+
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
@@ -4310,7 +4314,7 @@ public class SL_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();       
  
         FAIL = false;
-        if(L1 != null) {L1.clear();}
+        if(L2 != null) {L2.clear();}
         try {
             switch (BY) {
                 case "xpath":

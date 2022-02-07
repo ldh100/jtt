@@ -555,7 +555,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
@@ -754,7 +754,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV3.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV3.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV3.setGridColor(java.awt.SystemColor.windowBorder);
         DV3.setName("DV2"); // NOI18N
         DV3.setOpaque(false);
         DV3.setRowHeight(18);
@@ -2439,7 +2439,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
             _Welcome = _welcome.isSelected();
 
             SCOPE = "";
-            r_type = "manual";
+            r_type = "ad-hoc";
 
             if(DV1.getRowCount() > 0) {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
@@ -2941,7 +2941,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         
         if(_Slack && !Slack_Channel.equals("N/A")){
             Report(false);
-            String MSG = "Android_" + app + "_" + env + " Automation report - " + Report_Date +
+            String MSG = "Android_" + app + "_" + env + " Excel Automation report - " + Report_Date +
                     "\r\n Machine: " + A.A.WsID + " OS: " + A.A.WsOS + ", User: " + A.A.UserID + "\r\n" +
                     "Device: " + device + " > ID: " + devID + "\r\n" +     
                     "Scope: " + SCOPE + "\r\n" +
@@ -4417,7 +4417,7 @@ public class iOS_GUI extends javax.swing.JInternalFrame {
         _t++; sw1.start();        
  
         FAIL = false;
-        if(aL1 != null) {aL1.clear();}
+        if(aL2 != null) {aL2.clear();}
         try {
             switch (BY) {
                 case "xpath":

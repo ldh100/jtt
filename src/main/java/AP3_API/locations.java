@@ -95,6 +95,7 @@ class locations extends AP3_API_GUI {
         Auth = "";                      // =============== AP3 Site Brands ===========================
         JOB_Api_Call("Location > /group/'SiteID'?nocache=true&extended=true", "GET",
                 BaseAPI + "/location/group/" + SiteID + "?nocache=true&extended=true", Auth, "", 200, ParentTest, "no_jira");
+        BrandIDS = "";
         if (json != null) {
             try {
                 JSONArray Location = json.getJSONArray("locations");
@@ -136,8 +137,8 @@ class locations extends AP3_API_GUI {
                 BaseAPI + "/location/brand/" + BrandID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
         SectorID = "";
         CompanyID = "";
+        MENU_IDS = new ArrayList<>();
         if (json != null) {
-            MENU_IDS = new ArrayList<>();
             try {
                 JSONArray MENUS = json.getJSONArray("menus");
                 for (int i = 0; i < MENUS.length(); i++) {
@@ -288,7 +289,7 @@ class locations extends AP3_API_GUI {
                 BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination", Auth, BODY, 200, ParentTest, "no_jira");
         
         JOB_Api_Call("Location > Site - Get drop-off location > ID does not Exist", "GET", 
-                   BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + "ID_Does_Not-Exists", Auth, BODY, 400, ParentTest, "no_jira");
+                   BaseAPI + "/location/group/" + New_SiteID + "/deliverydestination/" + "ID_Does_Not-Exists", Auth, BODY, 404, ParentTest, "no_jira");
 
         // Test Scenario 4: Negative flow to Add duplicate Drop-off location to newly created group/site.
         BODY = "{"
@@ -446,7 +447,8 @@ class locations extends AP3_API_GUI {
                 BaseAPI + "/location/multigroup/Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6", Auth, BODY, 200, ParentTest, "no_jira");
 
         // Test Scenario 3: Positive flow to Update > Patch Drop-off location under newly created group/site.
-        if(env.equals("DE")){
+        //if(!env.equals("PR")){
+        if(true){            
             BODY = "{"
                     + "\"delivery_destinations\":["
                         + "{"    
@@ -582,7 +584,8 @@ class locations extends AP3_API_GUI {
 
         //<editor-fold defaultstate="collapsed" desc="Delete drop-off location">
         // Test Scenario 1: Positive flow to delete Drop-off location under newly created group/site.
-        if(env.equals("DE")){
+        //if(!env.equals("PR")){
+        if(true){            
             requestParams = new JSONObject();
             JSONArray IDS = new JSONArray();  
             IDS.put(New_DropOff_LocationID);
