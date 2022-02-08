@@ -1,11 +1,14 @@
 package WO;
 
+import java.util.Date;
 import org.openqa.selenium.WebElement;
 
-class WO_explore_brand_menu extends WO_GUI {
-    protected WO_explore_brand_menu(WO_GUI a) {
+class WO_explore_brand extends WO_GUI {
+    protected WO_explore_brand(WO_GUI a) {
         url = a.url;
         d1 = a.d1;
+        app = a.app;
+
         SITE = a.SITE;
         _Edit_item = a._Edit_item;
 
@@ -15,7 +18,7 @@ class WO_explore_brand_menu extends WO_GUI {
     }
     protected void run () { 
     try {    
-        Find_Text("Find 'Enter Location' text", "Enter Your Thrive Location", true,ParentTest, "no_jira"); 
+        Find_Text("Find 'Enter Location' text", "Enter Your " + app.toLowerCase() + " Location", true,ParentTest, "no_jira"); 
             //if (FAIL) { return;}
         List_L0("Find 'Location' combobox", "css", "[role='combobox']", ParentTest, "no_jira");             
             if (FAIL) { return;}             
@@ -48,7 +51,7 @@ class WO_explore_brand_menu extends WO_GUI {
         DELIVERY = false;
         List_L0("Find Service tabs", "css", "[role='tab']", ParentTest, "no_jira");
         if (L0.isEmpty()) {
-            Element_By_Path_Text("Single Available Service:", "xpath", "//div[@class='pickup-or-delivery']",  ParentTest, "no_jira"); 
+            Element_By_Selector_Text("Single Available Service:", "xpath", "//div[@class='pickup-or-delivery']",  ParentTest, "no_jira"); 
             if (t.toLowerCase().contains("pickup")) { 
                 PICKUP = true; 
                 List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", ParentTest, "no_jira");
@@ -110,10 +113,16 @@ class WO_explore_brand_menu extends WO_GUI {
             Element_Text("Menu Category : ", we ,  ParentTest, "no_jira");
             Element_Click("Click Category",we , ParentTest, "no_jira");                
         }
-        Element_By_Path_Click(" Return to site page in:   ", "xpath","//div[text()='" + SITE + "']",  ParentTest, "no_jira"); 
+        Element_By_Selector_Click(" Return to site page in:   ", "xpath","//div[text()='" + SITE + "']",  ParentTest, "no_jira"); 
         //(By.xpath("//div[contains(@class,'row pa-0')]")
-    } catch (Exception ex){}    
-    } 
-
+  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        try{
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+        }catch(Exception eee) {};
+    }
+    }
 }
 

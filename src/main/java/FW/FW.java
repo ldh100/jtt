@@ -789,7 +789,7 @@ public class FW extends javax.swing.JInternalFrame {
                     Thread.sleep(1000);
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
-                        if(ALERTS.size() > 0){
+                        if(!ALERTS.isEmpty()){
                             Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
                             if(     Toast_Msg.toLowerCase().contains("successfully") || 
                                     Toast_Msg.toLowerCase().contains(" been updated") || 

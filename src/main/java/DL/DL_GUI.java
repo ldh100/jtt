@@ -1981,7 +1981,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             if(d1 != null) {
                 d1.quit();
             }
-            return "=WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+            return "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
         }  
     }
     private void BW1_DoWork(Boolean GUI) { 
@@ -2059,7 +2059,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                     Thread.sleep(1000);
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
-                        if(ALERTS.size() > 0) {
+                        if(!ALERTS.isEmpty()) {
                             Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
                             if(Toast_Msg.equals(Previous_Toast_Msg)){
                                 continue;
