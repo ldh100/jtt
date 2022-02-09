@@ -1,11 +1,13 @@
 package WO;
 
+import java.util.Date;
 import org.openqa.selenium.By;
 
 class WO_account_settings extends WO_GUI {
     protected WO_account_settings(WO_GUI a) {
         url = a.url;
         d1 = a.d1;
+        app = a.app;
 
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
@@ -56,38 +58,38 @@ class WO_account_settings extends WO_GUI {
             if (FAIL) { return;}           
         Element_Child_Click("Click 'Account' Button", e1, "xpath", ".//i[@class='v-icon notranslate mdi mdi-account-circle theme--light']",ParentTest, "no_jira");                                     
             if (FAIL) { return;} 
-        Element_By_Path_Click("Click 'Account Settings'", "xpath", ".//*[text()='Account Settings']",ParentTest, "no_jira");                                     
+        Element_By_Selector_Click("Click 'Account Settings'", "xpath", ".//*[text()='Account Settings']",ParentTest, "no_jira");                                     
             if (FAIL) { return;}  
-        Element_By_Path_Text("Title text", "xpath", ".//h1[@class='header']",ParentTest, "no_jira");
+        Element_By_Selector_Text("Title text", "xpath", ".//h1[@class='header']",ParentTest, "no_jira");
             if (FAIL) { return;}   
     //Test add Credit Card 
     //1. open Payment  Tab
-        Element_By_Path_Text("Payment tab  text", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");  
-        Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
+        Element_By_Selector_Text("Payment tab  text", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");  
+        Element_By_Selector_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
           if (FAIL) { return;} 
 Thread.sleep(5000);  
     //verify CC ---- delete  existed
     
-        Element_By_Path_Text("Detect First row of list ", "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");
+        Element_By_Selector_Text("Detect First row of list ", "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");
         int n=1;
         while(t.toLowerCase().contains("card ending"))
         {
-            Element_By_Path_Click("Click First row of list " + n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");               
-            Element_By_Path_Click("Click Deletc betton   " + n, "xpath", "//span[text()=' Delete ']" ,ParentTest, "no_jira");
-            Wait_For_Element_By_Path_Presence("wait for alert present","className", "vts__message",ParentTest, "no_jira");
+            Element_By_Selector_Click("Click First row of list " + n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");               
+            Element_By_Selector_Click("Click Deletc betton   " + n, "xpath", "//span[text()=' Delete ']" ,ParentTest, "no_jira");
+            Wait_For_Element_By_Selector_Presence("wait for alert present","className", "vts__message",ParentTest, "no_jira");
             //Thread.sleep(5000);
             if (FAIL) { return;} 
             n++;
-            Element_By_Path_Click("Click 'My Account' Tab", "xpath", "//a[@href='/account-settings/my-account']",ParentTest, "no_jira");
-            Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
+            Element_By_Selector_Click("Click 'My Account' Tab", "xpath", "//a[@href='/account-settings/my-account']",ParentTest, "no_jira");
+            Element_By_Selector_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
             if (FAIL) { return;} 
             Thread.sleep(5000);
-            Element_By_Path_Text("Detect First row of list " + n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");
+            Element_By_Selector_Text("Detect First row of list " + n, "xpath", "(//div[contains(@class,'v-list v-sheet')]//div)[2]",ParentTest, "no_jira");
       
         }
     //Enter Add New CC screen   
-        Element_By_Path_Text("Find 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
-        Element_By_Path_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira"); 
+        Element_By_Selector_Text("Find 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
+        Element_By_Selector_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira"); 
         if (FAIL) { return;}  
         Thread.sleep(5000); 
     //Determine the payment type
@@ -111,8 +113,8 @@ Thread.sleep(5000);
                     
                     AddCC_FreedomPay(pi);
                     
-                    Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
-                    Element_By_Path_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
+                    Element_By_Selector_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
+                    Element_By_Selector_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
                 }
               
                 Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)",ParentTest, "no_jira");
@@ -130,12 +132,12 @@ Thread.sleep(5000);
                     
                     AddCC_Exact(pi);
                     
-                    Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
-                    Element_By_Path_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
+                    Element_By_Selector_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
+                    Element_By_Selector_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
                 
                  }
                     
-              //  Element_By_Path_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
+              //  Element_By_Selector_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
               //  if (FAIL) { return;} 
               //  Thread.sleep(5000); 
               Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)",ParentTest, "no_jira"); 
@@ -151,32 +153,32 @@ Thread.sleep(5000);
     private void AddCC_FreedomPay(PaymentInfo pi) {
     try{
     //Verfiy the Name input 
-        Element_By_Path_Attribute("Add card form---Name Label","css", "div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label","textContent",ParentTest, "no_jira");
-        Element_By_Path_Click("click ---Name field",           "className", "iframe-input",ParentTest, "no_jira");
-        Element_By_Path_Text_Enter("Input Name ", "className", "iframe-input", pi.name,false, ParentTest, "no_jira");
+        Element_By_Selector_Attribute("Add card form---Name Label","css", "div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label","textContent",ParentTest, "no_jira");
+        Element_By_Selector_Click("click ---Name field",           "className", "iframe-input",ParentTest, "no_jira");
+        Element_By_Selector_Text_Enter("Input Name ", "className", "iframe-input", pi.name,false, ParentTest, "no_jira");
     //Switch to iframe
         Swith_to_Frame("switch iframe",          "tagName", "IFRAME",ParentTest, "no_jira");
     //Verify label and input CC Info
-        Element_By_Path_Text("Verify label ---Card number",   "xpath", "//label[text()='Card Number']",ParentTest, "no_jira"); 
-        Element_By_Path_Click("Cursor locate to --Card number field",          "id", "CardNumber",ParentTest, "no_jira");
-        Element_By_Path_Text_Enter("Input Card Number ",          "id", "CardNumber",pi.card_num ,false, ParentTest, "no_jira");
+        Element_By_Selector_Text("Verify label ---Card number",   "xpath", "//label[text()='Card Number']",ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Cursor locate to --Card number field",          "id", "CardNumber",ParentTest, "no_jira");
+        Element_By_Selector_Text_Enter("Input Card Number ",          "id", "CardNumber",pi.card_num ,false, ParentTest, "no_jira");
 
         String expiration = pi.expire_month+ "/" + pi.expire_year.substring(2);
-        Element_By_Path_Text("Add card form---Expire Date Label ",  "xpath", "//label[text()='Expiration Date']",ParentTest, "no_jira");  
-        Element_By_Path_Click("Cursor locate to --Expire Date field",          "id", "ExpirationDate",ParentTest, "no_jira");
-        Element_By_Path_Text_Enter("Input Expire Date ",          "id", "ExpirationDate",expiration ,false, ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Expire Date Label ",  "xpath", "//label[text()='Expiration Date']",ParentTest, "no_jira");  
+        Element_By_Selector_Click("Cursor locate to --Expire Date field",          "id", "ExpirationDate",ParentTest, "no_jira");
+        Element_By_Selector_Text_Enter("Input Expire Date ",          "id", "ExpirationDate",expiration ,false, ParentTest, "no_jira");
    
-        Element_By_Path_Text("Add card form---CVV Label",   "xpath", "//label[text()='Security Code']",ParentTest, "no_jira");  
-        Element_By_Path_Click("Cursor locate to --CVV field",          "id", "SecurityCode",ParentTest, "no_jira");
-        Element_By_Path_Text_Enter("Input CVV ",            "id", "SecurityCode",pi.cvv ,false, ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---CVV Label",   "xpath", "//label[text()='Security Code']",ParentTest, "no_jira");  
+        Element_By_Selector_Click("Cursor locate to --CVV field",          "id", "SecurityCode",ParentTest, "no_jira");
+        Element_By_Selector_Text_Enter("Input CVV ",            "id", "SecurityCode",pi.cvv ,false, ParentTest, "no_jira");
    
-        Element_By_Path_Text("Add card form---Postal Code  Label",  "xpath", "//label[text()='Postal Code']",ParentTest, "no_jira");
-        Element_By_Path_Click("Cursor locate to --Postal Codefield",           "id",   "PostalCode",ParentTest, "no_jira");
-        Element_By_Path_Text_Enter("Input Postal Code ",            "id",   "PostalCode",pi.postalcode ,false, ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Postal Code  Label",  "xpath", "//label[text()='Postal Code']",ParentTest, "no_jira");
+        Element_By_Selector_Click("Cursor locate to --Postal Codefield",           "id",   "PostalCode",ParentTest, "no_jira");
+        Element_By_Selector_Text_Enter("Input Postal Code ",            "id",   "PostalCode",pi.postalcode ,false, ParentTest, "no_jira");
    
-        Element_By_Path_Text("Add card form---Next button Label",   "xpath", "//button[text()='Next']",ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Next button Label",   "xpath", "//button[text()='Next']",ParentTest, "no_jira");
         //String ds = d1.getPageSource(); System.out.println("ds");
-        Element_By_Path_Click("click --Next button to save",        "xpath", "//button[text()='Next']",ParentTest, "no_jira");
+        Element_By_Selector_Click("click --Next button to save",        "xpath", "//button[text()='Next']",ParentTest, "no_jira");
             Thread.sleep(5000);  
     //Determine page redirect        
        
@@ -211,42 +213,42 @@ Thread.sleep(5000);
     //wd.switchTo("//div[@class='v-window-item v-window-item--active']")
   //  String str = d1.findElement(By.xpath("div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label")).getText();
     // String str[] = d1.findElements(By.className("label");
-//    Element_By_Path_Text("Add card form---Name Label",          "css", "div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label",ParentTest, "no_jira");
-//        Element_By_Path_Text("Add card form---Name Label",          "xpath", "//div[@id='app']/div[1]/main[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/label[1]",ParentTest, "no_jira");
+//    Element_By_Selector_Text("Add card form---Name Label",          "css", "div#app>div>main>div>div>div:nth-of-type(3)>div>div>div>div:nth-of-type(2)>div>div>label",ParentTest, "no_jira");
+//        Element_By_Selector_Text("Add card form---Name Label",          "xpath", "//div[@id='app']/div[1]/main[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/label[1]",ParentTest, "no_jira");
 //        
 //        //"html[1]/body[1]/form[1]/div[1]"
 //        _t++; Element_E1_Find("Find iframe", "tagName", "iframe",ParentTest, "no_jira");
 //        //_t++; Element_E1_Find("Find form", "tagName", "form",ParentTest, "no_jira");
 //        
-//        _t++; Element_By_Path_Text("Add card form---Card number Label", "xpath", "html[1]/body[1]/form[1]/div[1]",ParentTest, "no_jira"); 
+//        _t++; Element_By_Selector_Text("Add card form---Card number Label", "xpath", "html[1]/body[1]/form[1]/div[1]",ParentTest, "no_jira"); 
 //        
  //       _t++; Element_Child_Text("Add card form---Card number Label", e1, "xpath",  "//div[@class='control-group invalid']//label[1]",ParentTest, "no_jira");
         
 //        _Text("Add card form---Card number Label",   "xpath", "//label[@for='CardNumber']",ParentTest, "no_jira");  
-//        Element_By_Path_Text("Add card form---Expire Date Label ",  "xpath", "//div[@class='control-group valid']//label",ParentTest, "no_jira");  
-//        Element_By_Path_Text("Add card form---CVV Label",           "xpath", "(//div[@class='control-group valid']//label)[2]",ParentTest, "no_jira");  
-//        Element_By_Path_Text("Add card form---Postal Code  Label",  "xpath", "(//div[@class='control-group']//label)[2]",ParentTest, "no_jira");
-//        Element_By_Path_Text("Add card form---Submit button Label", "xpath", "//button[text()='Next']",ParentTest, "no_jira");
+//        Element_By_Selector_Text("Add card form---Expire Date Label ",  "xpath", "//div[@class='control-group valid']//label",ParentTest, "no_jira");  
+//        Element_By_Selector_Text("Add card form---CVV Label",           "xpath", "(//div[@class='control-group valid']//label)[2]",ParentTest, "no_jira");  
+//        Element_By_Selector_Text("Add card form---Postal Code  Label",  "xpath", "(//div[@class='control-group']//label)[2]",ParentTest, "no_jira");
+//        Element_By_Selector_Text("Add card form---Submit button Label", "xpath", "//button[text()='Next']",ParentTest, "no_jira");
 //         if (FAIL) { return;} 
 //         
 //    //input CC info
 //
-//       // Element_By_Path_Click("cursor locate to---Name input", "xpath", "(//div[@class='v-input__slot']//div)[12]",ParentTest, "no_jira");
-//        Element_By_Path_Text_Enter("Input card NAME ", "xpath", "//input[@placeholder='Enter name on card']", NAME[1], false,ParentTest, "no_jira");
+//       // Element_By_Selector_Click("cursor locate to---Name input", "xpath", "(//div[@class='v-input__slot']//div)[12]",ParentTest, "no_jira");
+//        Element_By_Selector_Text_Enter("Input card NAME ", "xpath", "//input[@placeholder='Enter name on card']", NAME[1], false,ParentTest, "no_jira");
 //       
-//        Element_By_Path_Click("cursor locate to ---Card number input","xpath", "(//div[@class='v-input__slot']//div)[13]",ParentTest, "no_jira");  
-//        Element_By_Path_Text_Enter("Input card NUMBER ", "xpath", "//label[text()='Card Number']/following::input", CARD_NUM[1], false,ParentTest, "no_jira");
+//        Element_By_Selector_Click("cursor locate to ---Card number input","xpath", "(//div[@class='v-input__slot']//div)[13]",ParentTest, "no_jira");  
+//        Element_By_Selector_Text_Enter("Input card NUMBER ", "xpath", "//label[text()='Card Number']/following::input", CARD_NUM[1], false,ParentTest, "no_jira");
 //        
-//        Element_By_Path_Click("cursor locate to---Expire Date input ", "xpath", "(//div[@class='v-input__slot']//div)[14]",ParentTest, "no_jira");
-//        Element_By_Path_Text_Enter("Input card MONTH ", "xpath", "//label[text()='Expiry Month']/following::input", EXPIRE_MON[1], false,ParentTest, "no_jira");
+//        Element_By_Selector_Click("cursor locate to---Expire Date input ", "xpath", "(//div[@class='v-input__slot']//div)[14]",ParentTest, "no_jira");
+//        Element_By_Selector_Text_Enter("Input card MONTH ", "xpath", "//label[text()='Expiry Month']/following::input", EXPIRE_MON[1], false,ParentTest, "no_jira");
 //        
-//        Element_By_Path_Click("cursor locate to---CVV input", "xpath", "(//div[@class='v-input__slot']//div)[15]",ParentTest, "no_jira");       
-//        Element_By_Path_Text_Enter("Input card YEAR ", "xpath", "//label[text()='Expiry Year']/following::input", EXPIRE_YEAR[1], false,ParentTest, "no_jira");
+//        Element_By_Selector_Click("cursor locate to---CVV input", "xpath", "(//div[@class='v-input__slot']//div)[15]",ParentTest, "no_jira");       
+//        Element_By_Selector_Text_Enter("Input card YEAR ", "xpath", "//label[text()='Expiry Year']/following::input", EXPIRE_YEAR[1], false,ParentTest, "no_jira");
 //        
-//        Element_By_Path_Click("cursor locate to---Postal Code input", "xpath", "(//div[@class='v-input__slot']//div)[16]",ParentTest, "no_jira");        
-//        Element_By_Path_Text_Enter("Input card CVV ", "xpath", "//label[text()='CVV']/following::input", CVV[1], false,ParentTest, "no_jira");
+//        Element_By_Selector_Click("cursor locate to---Postal Code input", "xpath", "(//div[@class='v-input__slot']//div)[16]",ParentTest, "no_jira");        
+//        Element_By_Selector_Text_Enter("Input card CVV ", "xpath", "//label[text()='CVV']/following::input", CVV[1], false,ParentTest, "no_jira");
 //        
-//         Element_By_Path_Click("click Submit button", "xpath", "//span[@class='v-btn__content']//span[1]",ParentTest, "no_jira");
+//         Element_By_Selector_Click("click Submit button", "xpath", "//span[@class='v-btn__content']//span[1]",ParentTest, "no_jira");
 //          if (FAIL) { return;} 
 //         Thread.sleep(5000); 
          
@@ -257,31 +259,31 @@ Thread.sleep(5000);
     private void AddCC_Exact(PaymentInfo pi){
     try {       
     //input CC info
-        Element_By_Path_Text("Add card form---Name input field", "xpath", "(//div[@class='v-input__slot']//div)[12]",ParentTest, "no_jira");       
-        Element_By_Path_Click("cursor locate to---Name input", "xpath", "(//div[@class='v-input__slot']//div)[12]",ParentTest, "no_jira");
-        Element_By_Path_Text_Enter("Input card NAME ", "xpath", "//label[text()='Name on Card']/following::input", pi.name, false,ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Name input field", "xpath", "(//div[@class='v-input__slot']//div)[12]",ParentTest, "no_jira");       
+        Element_By_Selector_Click("cursor locate to---Name input", "xpath", "(//div[@class='v-input__slot']//div)[12]",ParentTest, "no_jira");
+        Element_By_Selector_Text_Enter("Input card NAME ", "xpath", "//label[text()='Name on Card']/following::input", pi.name, false,ParentTest, "no_jira");
         
-        Element_By_Path_Text("Add card form---Card number input field", "xpath", "(//div[@class='v-input__slot']//div)[13]",ParentTest, "no_jira");  
-        Element_By_Path_Click("cursor locate to ---Card number input","xpath", "(//div[@class='v-input__slot']//div)[13]",ParentTest, "no_jira");  
-        Element_By_Path_Text_Enter("Input card NUMBER ", "xpath", "//label[text()='Card Number']/following::input", pi.card_num, false,ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Card number input field", "xpath", "(//div[@class='v-input__slot']//div)[13]",ParentTest, "no_jira");  
+        Element_By_Selector_Click("cursor locate to ---Card number input","xpath", "(//div[@class='v-input__slot']//div)[13]",ParentTest, "no_jira");  
+        Element_By_Selector_Text_Enter("Input card NUMBER ", "xpath", "//label[text()='Card Number']/following::input", pi.card_num, false,ParentTest, "no_jira");
         
-        Element_By_Path_Text("Add card form---Expire Month input Field ", "xpath", "(//div[@class='v-input__slot']//div)[14]",ParentTest, "no_jira");  
-        Element_By_Path_Click("cursor locate to---Expire Month input ", "xpath", "(//div[@class='v-input__slot']//div)[14]",ParentTest, "no_jira");
-        Element_By_Path_Text_Enter("Input card MONTH ", "xpath", "//label[text()='Expiry Month']/following::input", pi.expire_month, false,ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Expire Month input Field ", "xpath", "(//div[@class='v-input__slot']//div)[14]",ParentTest, "no_jira");  
+        Element_By_Selector_Click("cursor locate to---Expire Month input ", "xpath", "(//div[@class='v-input__slot']//div)[14]",ParentTest, "no_jira");
+        Element_By_Selector_Text_Enter("Input card MONTH ", "xpath", "//label[text()='Expiry Month']/following::input", pi.expire_month, false,ParentTest, "no_jira");
         
-        Element_By_Path_Text("Add card form---Expire Year input field", "xpath", "(//div[@class='v-input__slot']//div)[15]",ParentTest, "no_jira");  
-        Element_By_Path_Click("cursor locate to---Expire Year input", "xpath", "(//div[@class='v-input__slot']//div)[15]",ParentTest, "no_jira");       
-        Element_By_Path_Text_Enter("Input card YEAR ", "xpath", "//label[text()='Expiry Year']/following::input", pi.expire_year, false,ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Expire Year input field", "xpath", "(//div[@class='v-input__slot']//div)[15]",ParentTest, "no_jira");  
+        Element_By_Selector_Click("cursor locate to---Expire Year input", "xpath", "(//div[@class='v-input__slot']//div)[15]",ParentTest, "no_jira");       
+        Element_By_Selector_Text_Enter("Input card YEAR ", "xpath", "//label[text()='Expiry Year']/following::input", pi.expire_year, false,ParentTest, "no_jira");
         
-        Element_By_Path_Text("Add card form---CVV input field", "xpath", "(//div[@class='v-input__slot']//div)[16]",ParentTest, "no_jira");
-        Element_By_Path_Click("cursor locate to---CVV input", "xpath", "(//div[@class='v-input__slot']//div)[16]",ParentTest, "no_jira");        
-        Element_By_Path_Text_Enter("Input card CVV ", "xpath", "//label[text()='CVV']/following::input", pi.cvv, false,ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---CVV input field", "xpath", "(//div[@class='v-input__slot']//div)[16]",ParentTest, "no_jira");
+        Element_By_Selector_Click("cursor locate to---CVV input", "xpath", "(//div[@class='v-input__slot']//div)[16]",ParentTest, "no_jira");        
+        Element_By_Selector_Text_Enter("Input card CVV ", "xpath", "//label[text()='CVV']/following::input", pi.cvv, false,ParentTest, "no_jira");
         
         
-        Element_By_Path_Text("Add card form---Submit button", "xpath", "//span[@class='v-btn__content']//span[1]",ParentTest, "no_jira");
-        Element_By_Path_Click("click Submit button", "xpath", "//span[@class='v-btn__content']//span[1]",ParentTest, "no_jira");
+        Element_By_Selector_Text("Add card form---Submit button", "xpath", "//span[@class='v-btn__content']//span[1]",ParentTest, "no_jira");
+        Element_By_Selector_Click("click Submit button", "xpath", "//span[@class='v-btn__content']//span[1]",ParentTest, "no_jira");
           if (FAIL) { return;} 
-//        Wait_For_Element_By_Path_Presence("Alert Present","css", "[role='alert']",ParentTest, "no_jira");
+//        Wait_For_Element_By_Selector_Presence("Alert Present","css", "[role='alert']",ParentTest, "no_jira");
 //        // Thread.sleep(5000); 
 //         List<WebElement> ALERTS_1 = d1.findElements(By.cssSelector("[role='alert']"));
 //         
@@ -314,6 +316,12 @@ Thread.sleep(5000);
         }
         Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)", ParentTest, "no_jira");
             if (FAIL) { return;}       
-    } catch (Exception ex){}
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        try{
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+        }catch(Exception eee) {};
     }
+}
 }

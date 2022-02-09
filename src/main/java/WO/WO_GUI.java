@@ -136,6 +136,9 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _explore_brand_menu = new javax.swing.JCheckBox();
         _promo = new javax.swing.JCheckBox();
         txtPromo = new javax.swing.JTextField();
+        lblSITES12 = new javax.swing.JLabel();
+        txtMplan = new javax.swing.JTextField();
+        _mplan = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -171,37 +174,34 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 4, 360, -1));
 
         lblBRANDS.setText("Selected Site - Brands");
         lblBRANDS.setName("lblBRANDS"); // NOI18N
-        getContentPane().add(lblBRANDS, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 296, 280, -1));
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV1.setCellSelectionEnabled(true);
-        DV1.setGridColor(java.awt.SystemColor.windowBorder);
+        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setOpaque(false);
         DV1.setRowHeight(18);
@@ -215,8 +215,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(DV1);
         DV1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 22, 428, 272));
-
         DV2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -228,7 +226,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV2.setCellSelectionEnabled(true);
-        DV2.setGridColor(java.awt.SystemColor.windowBorder);
+        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
@@ -241,8 +239,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 316, 428, 88));
-
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -253,28 +249,22 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 408, 428, 96));
-
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES4.setText("Existing Mobile/Web User Email");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 356, 180, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setText("App_User@?.?");
-        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 372, 212, -1));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("< Password");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 356, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_PW.setText("password");
-        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 372, 164, -1));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Wait (sec):"));
 
@@ -323,7 +313,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 .addComponent(lblSITES9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,8 +327,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     .addComponent(nShowPage, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(2, 2, 2))
         );
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 16, 416, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Scope"));
         jPanel1.setToolTipText("");
@@ -436,82 +424,111 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         txtPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtPromo.setText("None");
 
+        lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblSITES12.setText("Meal Plan Name");
+        lblSITES12.setAlignmentX(0.5F);
+
+        txtMplan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        txtMplan.setText("None");
+
+        _mplan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _mplan.setText("MPlan");
+        _mplan.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _mplan.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _mplan.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(_explore_brand_menu)
-                    .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_login)
-                    .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblSITES8)
-                            .addGap(99, 99, 99))
-                        .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(_order_history, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(_account_settings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(_new_user, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMplan, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_account_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblSITES8)
+                                .addGap(33, 33, 33)
+                                .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(108, 108, 108))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(_account_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSITES8)
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_account_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSITES8)
+                    .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES12)
+                    .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMplan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 64, 412, 232));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 40, 78, 20));
+        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 80, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -522,7 +539,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 68, 78, 28));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 78, 28));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -532,7 +549,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 72, 84, 22));
+        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -543,7 +560,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnFailsMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 40, 84, 22));
+        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 84, 22));
 
         btnExcel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnExcel.setText("Excel Rep");
@@ -554,13 +571,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnExcelMouseClicked(evt);
             }
         });
-        jPanel3.add(btnExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 16, 84, 22));
+        jPanel3.add(btnExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 84, 22));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        _headless.setText("Headless <<<<");
+        _headless.setText("Headless <<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 104, 14));
+        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 100, 14));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -571,25 +588,25 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 72, 116, 22));
+        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 116, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES11.setText("Browser:");
         lblSITES11.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 24, 72, 16));
+        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 72, 16));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 24, 92, 16));
+        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(228, 24, 92, 16));
+        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -597,7 +614,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 116, 20));
+        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -605,31 +622,105 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 40, 108, 20));
+        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 108, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 64, 108, 14));
+        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 108, 14));
 
         lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblSITES16.setText("Slack Channel:");
+        lblSITES16.setText("Slack Shannel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 4, 72, 16));
+        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 72, 16));
 
         txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSlackCh.setText("xtt_test");
         jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 4, 96, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(436, 404, 416, 100));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(lblSITES6))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addComponent(lblBRANDS, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblSITES)
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(lblBRANDS)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSITES4)
+                            .addComponent(lblSITES6))
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Instance Variables Declaration">
+    protected String JOB_Name = "";  
     private boolean Zip_Report = true;
     private boolean _Slack = false;
     private String Slack_Channel = "";
@@ -734,7 +825,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected String BaseAPI;
     protected String PROMO = "";
     protected boolean _New_user = false;
-    protected boolean _Explore_brand_menu = false;
+    protected boolean _Explore_brand = false;
     protected boolean _Account_settings = false;
     protected boolean _Order_status = false;
     protected boolean _Order_history = false;
@@ -1222,7 +1313,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "WO_" + env);
+            _insert.setString(3, JOB_Name);
             _insert.setString(4, url);
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -1268,10 +1359,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'WO_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
+                    " WHERE [app] = '" + JOB_Name + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "WO_" + env);
+            _update.setString(3, JOB_Name);
             _update.setString(4, url);
             _update.setString(5, Summary + " (dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + ")");
             _update.setInt(6, t_calls);
@@ -1449,6 +1540,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     }
 
     protected void GUI_Run_Manual(){
+        JOB_Name = "WO_" + env;
         btnRun.setEnabled(false);
         btnFails.setEnabled(false);
         btnExcel.setEnabled(false);
@@ -1489,7 +1581,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             MOBILE_PW = txtMobile_PW.getText();
 
             _New_user = _new_user.isSelected();
-            _Explore_brand_menu = _explore_brand_menu.isSelected();
+            _Explore_brand = _explore_brand_menu.isSelected();
             _Account_settings = _account_settings.isSelected();
             _Order_status = _order_status.isSelected();
             _Order_history = _order_history.isSelected();
@@ -1537,6 +1629,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         }
     }
     public String JOB_Run_Auto(String job_name, String run_type, String config){
+        JOB_Name = job_name;
         run_start = Instant.now();
         Log  = "";
         String RES = "";
@@ -1609,7 +1702,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("nWaitLoad: ")) LoadTimeOut = Double.parseDouble(value) * 1000;
 
                 if(l.contains("_new_user: ")) _New_user = Boolean.parseBoolean(value); 
-                if(l.contains("_explore_brand_menu: ")) _Explore_brand_menu = Boolean.parseBoolean(value);
+                if(l.contains("_explore_brand_menu: ")) _Explore_brand = Boolean.parseBoolean(value);
                 if(l.contains("_account_settings: ")) _Account_settings = Boolean.parseBoolean(value);
                 if(l.contains("_order_status: ")) _Order_status = Boolean.parseBoolean(value);
                 if(l.contains("_order_history: ")) _Order_history = Boolean.parseBoolean(value);
@@ -1650,7 +1743,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected void Extent_Report_Config() throws IOException{
         HTML_Report_Path = System.getProperty("user.home") + File.separator + "Desktop";
         Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMMyyyy_HHmmss"));
-        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + "WO" + "_" + env + "_" + Report_Date + ".html");
+        HtmlReporter = new ExtentSparkReporter(HTML_Report_Path + File.separator + JOB_Name + "_" + Report_Date + ".html");
         HtmlReport = new ExtentReports();
         HtmlReport.attachReporter(HtmlReporter);
         
@@ -1664,7 +1757,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         HtmlReporter.config().setDocumentTitle("JTT Web Automation Report");
         HtmlReporter.config().setTheme(Theme.STANDARD);               
     }    
-    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test) throws IOException  {
+    protected void Log_Html_Result(String RES, String Test_Description, boolean Capture_Screenshot, ExtentTest Test, Date API_Start) throws IOException  {
         switch (RES) {
             case "PASS":
                 Test.log(Status.PASS, MarkupHelper.createLabel(Test_Description, ExtentColor.GREEN));
@@ -1697,6 +1790,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 }
                 break;
         }
+        Test.getModel().setStartTime(API_Start);
+        Test.getModel().setEndTime(new Date());
     }
     protected String getScreenshot() {
         try{
@@ -1721,7 +1816,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
-
             txtLog.append( "= CWD: " + A.A.CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             
@@ -1823,7 +1917,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             if(d1 != null) {
                 d1.quit();
             }
-            return "=WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+            return "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
         }  
     }
     protected void BW1_DoWork(Boolean GUI) { 
@@ -1890,7 +1984,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         BW1.execute();  
     }
-    protected void BW2_DoWork(){
+    private void BW2_DoWork(){
         BW2 = new SwingWorker() {             
             @Override
             protected String doInBackground() throws Exception { 
@@ -1901,7 +1995,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     Thread.sleep(1000);
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
-                        if(ALERTS.size() > 0) {
+                        if(!ALERTS.isEmpty()) {
                             Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
                             if(Toast_Msg.equals(Previous_Toast_Msg)){
                                 continue;
@@ -1916,7 +2010,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                                 _t++;
                                 _p++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                            
-                                Log_Html_Result("PASS", Toast_Msg, false, ParentTest.createNode("Snackbar Toast Msg"));                            
+                                Log_Html_Result("PASS", Toast_Msg, false, ParentTest.createNode(_t + ". " + "Snackbar Toast Msg"), new Date());                            
                             } else if(Toast_Msg.toLowerCase().contains("could not")|| 
                                     Toast_Msg.toLowerCase().contains("unable to save")|| 
                                     Toast_Msg.toLowerCase().contains("already ")|| 
@@ -1925,18 +2019,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                                 _f++;
                                 F += "Step: " + _t + " > FAIL - " + Toast_Msg + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
-                                Log_Html_Result("FAIL", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));                            
+                                Log_Html_Result("FAIL", Toast_Msg, true, ParentTest.createNode(_t + ". " + "Snackbar Toast Msg"), new Date());                            
                             } else if(Toast_Msg.toLowerCase().contains("fix") || Toast_Msg.toLowerCase().contains("error")) {
                                 _t++;
                                 _w++;
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
-                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));                            
+                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode(_t + ". " + "Snackbar Toast Msg"), new Date());                            
                             } else {
                                 _t++;
                                 _w++;
                                 //F += "Step: " + _t + " > WARN - " + tt + "\r\n";
                                 EX += _t + "\t" + " === Snackbar Toast Msg" + "\t" + "[role='alert']" + "\t" + Toast_Msg + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";                           
-                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode("Snackbar Toast Msg"));
+                                Log_Html_Result("WARN", Toast_Msg, true, ParentTest.createNode(_t + ". " + "Snackbar Toast Msg"), new Date());
                             }
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
@@ -2054,6 +2148,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     // </editor-fold> 
 
     protected void Execute() throws InterruptedException{
+
+        if (_Explore_brand) { 
+            SCOPE += ", Explore Brand Menu";
+            ParentTest = HtmlReport.createTest("Explore Brand"); 
+            EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_explore_brand BR = new WO_explore_brand(WO_GUI.this);
+            BR.run(); // ======================================
+            EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+        } 
         if (true) { 
             SCOPE += "Login";
             ParentTest = HtmlReport.createTest("Login"); 
@@ -2064,14 +2167,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         }
 
-        if (_Explore_brand_menu) { 
-            SCOPE += ", Explore Brand Menu";
-            ParentTest = HtmlReport.createTest("Explore Brand"); 
-            EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            WO_explore_brand_menu BR = new WO_explore_brand_menu(WO_GUI.this);
-            BR.run(); // ======================================
-            EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-        }
 
         if (_Place_pickup_order) { 
             SCOPE += ", Pickup Order";
@@ -2137,7 +2232,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
         FAIL = false;
         try {
             d1.manage().deleteAllCookies();
@@ -2245,7 +2341,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class);       // for load > progress
             
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Browser: " + BROWSER + " > " + "d1.manage().deleteAllCookies()", false, ParentTest.createNode("Clear Cookies & Re-start Driver"));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Browser: " + BROWSER + " > " + "d1.manage().deleteAllCookies()", false, ParentTest.createNode(_t + ". " + "Clear Cookies & Re-start Driver"), new Date());
             EX += " - " + "\t" + "Clear Cookies & Re-start Driver" + "\t" + "Current page" + "\t" + "d1.manage().deleteAllCookies()" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
@@ -2255,7 +2351,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + "Clear Cookies & Re-start Driver" + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Browser: " + BROWSER + " > " + "d1.manage().deleteAllCookies()", true, ParentTest.createNode("Clear Cookies & Re-start Driver"));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Browser: " + BROWSER + " > " + "d1.manage().deleteAllCookies()", true, ParentTest.createNode(_t + ". " + "Clear Cookies & Re-start Driver"), new Date());
         } 
         sw1.reset();
     }
@@ -2263,25 +2359,28 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t ="?";
         try {
-            ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
+            if(!LINK.isEmpty()){
+                ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
+            }
             ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
             d1.switchTo().window(tabs.get(1));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Target URL" + "\t" + LINK + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />Target URL" + " > " + LINK, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />Target URL" + " > " + LINK, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Target URL" + "\t" + LINK + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Target URL" + " > " + LINK, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Target URL" + " > " + LINK, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }    
@@ -2289,7 +2388,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t ="?";
@@ -2297,18 +2397,22 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             t = d1.getCurrentUrl();
             d1.close();
             ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
+//            for(int i = tabs.size(); i > 0; i--){
+//              d1.switchTo().window(tabs.get(i)); 
+//              d1.close();
+//            }
             d1.switchTo().window(tabs.get(0));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Page URL"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.switchTo().window()", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.switchTo().window()", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.switchTo().window()", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.switchTo().window()", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2316,7 +2420,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t ="?";
@@ -2325,14 +2430,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Page URL"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />d1.getCurrentUrl()" + " URL: " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />d1.getCurrentUrl()" + " URL: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Page URL" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.getCurrentUrl()", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.getCurrentUrl()", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }    
@@ -2340,7 +2445,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2348,14 +2454,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "URL" + "\t" + URL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().to(" + URL + ")", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().to(" + URL + ")", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + URL + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().to(" + URL + ")", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().to(" + URL + ")", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2363,7 +2469,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2371,14 +2478,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().back()(" + FROM + "  > " + TO + ")", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().back()(" + FROM + "  > " + TO + ")", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().back()(" + FROM + "  > " + TO + ")", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().back()(" + FROM + "  > " + TO + ")", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2386,7 +2493,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2394,14 +2502,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />d1.forward().back()(" + FROM + "  > " + TO + ")", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />d1.forward().back()(" + FROM + "  > " + TO + ")", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + FROM + "\t" + TO + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().forward()(" + FROM + "  > " + TO + ")", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().forward()(" + FROM + "  > " + TO + ")", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2409,7 +2517,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2417,34 +2526,38 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().refresh()", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />d1.navigate().refresh()", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim(); 
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().refresh()", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.navigate().refresh()", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
     protected void To_Top(String NAME, ExtentTest ParentTest, String JIRA) throws Exception {
-       sw1.start();
-       FAIL = false;
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs  
+        FAIL = false;
         try {
             Actions action = new Actions(d1);
             action.sendKeys(Keys.HOME).perform();
             _p++;
             EX += _t + "\t" + "Move to page Top" + "\t" + "Current page" + "\t" + "Scroll bar at top" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.sendKeys(Keys.HOME).perform())", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.sendKeys(Keys.HOME).perform())", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + "Move to page Top" + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />action.sendKeys(Keys.HOME).perform())", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />action.sendKeys(Keys.HOME).perform())", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -2452,7 +2565,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2461,14 +2575,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + "Move to page Bottom" + "\t" + "Current page" + "\t" + "Scroll bar at Bottom" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.sendKeys(Keys.END).perform())", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.sendKeys(Keys.END).perform())", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + "Move to page Bottom" + "\t" + " - " + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />action.sendKeys(Keys.END).perform())", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />action.sendKeys(Keys.END).perform())", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2477,7 +2591,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
 
         try {
             switch (BY) {
@@ -2514,14 +2629,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY  + "\t" + PATH + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />d1.switchTo().frame())", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />d1.switchTo().frame())", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.switchTo().frame())", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />d1.switchTo().frame())", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2529,7 +2644,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2537,23 +2653,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "X = " + X + ", Y = " + Y + "\t" + "Scroll OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />\"window.scrollBy(" + X + "," + Y + ")", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName()+ "<br />\"window.scrollBy(" + X + "," + Y + ")", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "X = " + X + ", Y = " + Y + "\t" + "Scroll Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />window.scrollBy(" + X + "," + Y + ")", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />window.scrollBy(" + X + "," + Y + ")", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }    
 
-    protected void Wait_For_Element_By_Path_Visibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Wait_For_Element_By_Selector_Visibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
         FAIL = false;
         try {
             switch (BY) {
@@ -2585,22 +2702,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Wait_For_Element_By_Path_Presence(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Wait_For_Element_By_Selector_Presence(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2633,14 +2751,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2648,7 +2766,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {          
@@ -2684,22 +2803,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Wait_For_Element_By_Path_InVisibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Wait_For_Element_By_Selector_InVisibility(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2732,14 +2852,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "Wait:  " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />" + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME  + "\t" + BY + " > " + PATH + "\t" + "LoadTimeOut " + LoadTimeOut + " ms" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />" + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2748,7 +2868,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2756,14 +2877,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />executeScript(\"arguments[0].scrollIntoView(true)", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />executeScript(\"arguments[0].scrollIntoView(true)", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />executeScript(\"arguments[0].scrollIntoView(true)", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />executeScript(\"arguments[0].scrollIntoView(true)", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -2771,7 +2892,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2780,14 +2902,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.moveToElement(E).perform()", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.moveToElement(E).perform()", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />action.moveToElement(E).perform()", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />action.moveToElement(E).perform()", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     } 
@@ -2795,7 +2917,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2818,22 +2941,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.moveToElement(E, XX, YY).click().perform()", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />action.moveToElement(E, XX, YY).click().perform()", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + DIRECTION + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />action.moveToElement(E, XX, YY).click().perform()", true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />action.moveToElement(E, XX, YY).click().perform()", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     } 
-    protected void Move_to_Element_By_Path(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Move_to_Element_By_Selector(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2870,22 +2994,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Move_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Move_out_of_Element_By_Selector(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -2937,22 +3062,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Move '" + DIRECTION + "' of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Click_out_of_Element_By_Path(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Click_out_of_Element_By_Selector(String NAME, String BY, String PATH, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3005,14 +3131,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3021,7 +3147,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t ="?";
@@ -3030,21 +3157,22 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             t = "Found";
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             t = "Not Found";
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Not Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         _p++;
         sw1.reset();
     }
-    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED,ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Find_Text(String NAME, String VAL, Boolean EXPECTED, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "Not Found";
@@ -3064,13 +3192,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + "Text Found" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL + " Expected: " + EXPECTED + " Text: " + t, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL + " Expected: " + EXPECTED + " Text: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             } else {
                 _f++; FAIL = false; 
                 EX += _t + "\t" + NAME + "\t" + "Unexpected Text Found" + "\t" + t + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + "Found Unexpected Text: " + t;
-                Log_Html_Result("FAIL", "Found Unexpected Text"  + "<br />Element locator: " + VAL + " Expected: " + EXPECTED + " Text: " + t, true, ParentTest.createNode(NAME));                
+                Log_Html_Result("FAIL", "Found Unexpected Text"  + "<br />Element locator: " + VAL + " Expected: " + EXPECTED + " Text: " + t, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
             }
         } catch(Exception ex){
             if(EXPECTED){
@@ -3079,12 +3207,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
-                Log_Html_Result("FAIL", "Error: " + err  + "<br />Element locator: " + VAL + " Expected: " + EXPECTED, true, ParentTest.createNode(NAME));                
+                Log_Html_Result("FAIL", "Error: " + err  + "<br />Element locator: " + VAL + " Expected: " + EXPECTED, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
             } else {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text Not Found As Expected" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                
-                Log_Html_Result("PASS", "Text Not Found As Expected", false, ParentTest.createNode(NAME));                
+                Log_Html_Result("PASS", "Text Not Found As Expected", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
             }
         }
         sw1.reset();
@@ -3095,7 +3223,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
 
         try {
             switch (BY) {
@@ -3129,14 +3258,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3145,7 +3274,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
 
         try {
             switch (BY) {
@@ -3178,22 +3308,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Element Found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element Not Found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Click(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Click(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3230,23 +3361,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         t = "empty"; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
 
         try {
             switch (BY) {
@@ -3280,23 +3412,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t.replace("\r\n", " ").replace("\n", " ") + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Text: " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Text: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Attribute(String NAME, String BY, String PATH, String VAL, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Attribute(String NAME, String BY, String PATH, String VAL, ExtentTest ParentTest, String JIRA) throws Exception {
         t = ""; FAIL = false;
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
 
         try {
             switch (BY) {
@@ -3336,22 +3469,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + VAL  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + VAL, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + VAL, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_Select_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_Select_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "not found!";
@@ -3388,22 +3522,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex) {
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_DblClick_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_DblClick_Copy(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "not found!";
@@ -3440,22 +3575,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_DblClick_Paste(String NAME, String BY, String PATH, String VAL,  ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        sw1.start();
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs  
  
         FAIL = false;
         t = "not found!";
@@ -3495,22 +3631,23 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + " > " + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + t + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Input_Select_Clear(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Input_Select_Clear(String NAME, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset(); 
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3546,29 +3683,31 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
             }else{
-                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                e.clear();
+                //e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                //e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
 
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim(); 
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    protected void Element_By_Path_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Element_By_Selector_Text_Enter(String NAME, String BY, String PATH, String VAL, boolean HIDE, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3607,14 +3746,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + "Enter: " + VAL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + "Enter: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH + "Enter: " + VAL, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH + "Enter: " + VAL, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -3623,7 +3762,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "?";
@@ -3641,14 +3781,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element Text: " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element Text: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3656,7 +3796,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {      
@@ -3664,20 +3805,21 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
             }else{
-                E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                E.clear();
+//                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+//                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }   
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3685,7 +3827,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3693,14 +3836,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element enter: " + VAL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element enter: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3709,7 +3852,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3724,12 +3868,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element Attribute: " + t, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element Attribute: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element Attribute: " + t, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element Attribute: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = false;  err = ex.getMessage().trim();
@@ -3737,7 +3881,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3745,7 +3889,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3754,14 +3899,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element", false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Passed Element", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -3770,7 +3915,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         if(L1 != null) {L1.clear();}
@@ -3807,12 +3953,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3820,7 +3966,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" +  BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -3828,7 +3974,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         if(L2 != null) {L2.clear();}
@@ -3865,12 +4012,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L2.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L2.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -3878,7 +4025,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -3886,7 +4033,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -3921,14 +4069,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Element (e2) found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "e2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -3936,7 +4084,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "?";
@@ -3981,14 +4130,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++;
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -3996,7 +4145,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         WebElement _e = null;
@@ -4036,14 +4186,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }            
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4051,7 +4201,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -4086,14 +4237,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++;
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }    
@@ -4102,7 +4253,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -4145,12 +4297,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "WARN" + "\t" + "No Image" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _w++;
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Attribute: " + t, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Attribute: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             } else {
                 EX += _t + "\t" + NAME + "\t" + VAL + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++;
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " Attribute: " + t, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " Attribute: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             } 
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
@@ -4158,7 +4310,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + VAL + "\t" + "Text" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4167,7 +4319,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         if(L0 != null) {L0.clear();}
@@ -4204,12 +4357,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L0.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L0.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L0.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L0.size() + " item(s) (L0)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L0.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L0.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4217,7 +4370,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L0" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4225,7 +4378,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         if(L1 != null) {L1.clear();}
@@ -4262,12 +4416,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L1.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L1.size() + " item(s) (L1)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L1.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4275,7 +4429,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L1" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4283,7 +4437,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         if(L2 != null) {L2.clear();}
@@ -4320,12 +4475,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "WARN" + "\t" + "L2.isEmpty()" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L2.size() + " item(s) (L2)" + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";               
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L2.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4333,7 +4488,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L2" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4341,7 +4496,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         if(L3 != null) {L3.clear();}
@@ -4378,12 +4534,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "List is Empty" + "\t" + "PASS" + "\t" + "L3.isEmpty" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L3.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L3.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + L3.size() + " item(s) (L3)" + "\t" + "WARN" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L3.size(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH + " - Size: " + L3.size(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4391,57 +4547,58 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "L3" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
-    protected void List_Child_E1_By_Path(String NAME, List<WebElement> L, int I, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void List_Child_E1_By_Selector(String NAME, WebElement E, String BY, String PATH, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
  
         FAIL = false;
         try {
             switch (BY) {
                 case "xpath":
-                    e1 = L.get(I).findElement(By.xpath(PATH));
+                    e1 = E.findElement(By.xpath(PATH));
                     break;
                 case "css":
-                    e1 = L.get(I).findElement(By.cssSelector(PATH));
+                    e1 = E.findElement(By.cssSelector(PATH));
                     break;
                 case "className":
-                    e1 = L.get(I).findElement(By.className(PATH));
+                    e1 = E.findElement(By.className(PATH));
                     break;
                 case "id":
-                    e1 = L.get(I).findElement(By.id(PATH));
+                    e1 = E.findElement(By.id(PATH));
                     break;
                 case "tagName":
-                    e1 = L.get(I).findElement(By.tagName(PATH));
+                    e1 = E.findElement(By.tagName(PATH));
                     break;
                 case "name":
-                    e1 = L.get(I).findElement(By.name(PATH));
+                    e1 = E.findElement(By.name(PATH));
                     break;
                 case "linkText":
-                    e1 = L.get(I).findElement(By.linkText(PATH));
+                    e1 = E.findElement(By.linkText(PATH));
                     break;
                 case "partialLinkText":
-                    e1 = L.get(I).findElement(By.partialLinkText(PATH));
+                    e1 = E.findElement(By.partialLinkText(PATH));
                     break;
                 default:
                     break;
             }
             _p++; 
-            EX += _t + "\t" + NAME + "\t" + "List index " + I + " > " + PATH + "\t" + "element found" + "\t" + "PASS" + "\t" + " - " +
+            EX += _t + "\t" + NAME + "\t" + "PAssed Element " + " > " + PATH + "\t" + "element found" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-            EX += _t + "\t" + NAME + "\t" + "List index " + I + " > " + PATH + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
+            EX += _t + "\t" + NAME + "\t" + "Passed Element " + " > " + PATH + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4450,7 +4607,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "";
@@ -4491,14 +4649,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": td(s) >>" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Text: " + t, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Text: " + t, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": td(s)" + "\t" + "table data" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4506,7 +4664,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "";
@@ -4529,14 +4688,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": th(s) >>" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />List[" + I + "] " +  " > " + t , false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />List[" + I + "] " +  " > " + t , false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Index " + I + ": th(s)" + "\t" + "table header" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4545,7 +4704,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -4555,14 +4715,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + " - " + "\t" + "Day " + I + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Day " + I + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4570,7 +4730,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "";
@@ -4589,14 +4750,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + "Day " + (I + 1) + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++; 
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             } else if ("true".equals(X2)){
                 _24 = "Closed All Day"; 
                 t = Day + ": " + Open + " > " + Close + " > " + _24;
                 EX += _t + "\t" + NAME + "\t" + "Day " + (I + 1) + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++; 
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             } else {
                 _24 = "";
                 e = L.get(I).findElement(By.cssSelector("[aria-label='Opens']"));
@@ -4635,7 +4796,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t" + NAME + "\t" + "Day " + (I + 1) + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 _p++; 
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
@@ -4643,7 +4804,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Day " + (I + 1) + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4651,7 +4812,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -4670,14 +4832,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + VAL + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4686,7 +4848,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t ="?";
@@ -4701,14 +4864,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye"  + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = false; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }     
@@ -4716,7 +4879,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -4727,14 +4891,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye-off"  + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "mdi-eye/mdi-eye-off" + "\t" + "action.moveToElement(e).click().perform()" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }     
@@ -4742,7 +4906,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "";
@@ -4762,74 +4927,33 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + "Row Index " + I + ": td(s)" + "\t" + t + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             _p++; 
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Row" + " Index " + I + ": td(s)" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
 
-    protected void Call_API_Auth(String NAME, String URL, boolean EXPECT_OK, ExtentTest ParentTest, String JIRA) throws Exception {
+    protected void Call_API(String NAME, String AUTH, String URL, boolean EXPECT_OK, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
- 
-        FAIL = false;
-        CloseableHttpClient httpclient = HttpClients.createDefault(); 
-        try {
-            HttpGet httpget = new HttpGet(URL); 
-            httpget.setHeader("Authorization",  "Bearer " + A.A.AP3_TKN);
-            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
-                int status = response.getStatusLine().getStatusCode();
-                String Msg = response.getStatusLine().getReasonPhrase();
-                if (status >= 200 && status < 300) {
-                    HttpEntity entity = response.getEntity();
-                    return entity != null ? EntityUtils.toString(entity) : null;
-                } else {
-                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
-                }
-            };
-            _p++; 
-            API_Response_Body = httpclient.execute(httpget, responseHandler);
-            r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
-            EX += _t + "\t == " + NAME + "\t" + URL + "\t" + "Call successful" + "\t" + "PASS" + "\t" + " - " +
-            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n"; 
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(NAME));
-        } catch(Exception ex){
-            if(EXPECT_OK){
-                _f++; FAIL = true; err = ex.getMessage().trim();
-                if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-                EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
-                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-                F += "Step: " + _t + " > " + err + "\r\n";
-                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(NAME));                
-            } else {
-                _p++; err = ex.getMessage().trim();
-                if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
-                EX += _t + "\t == " + NAME + "\t" + URL + "\t" + err + "\t" + "PASS" + "\t" + " - " +
-                "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n"; 
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(NAME));
-            }
-        } 
-        sw1.reset();
-    }
-    protected void Call_API(String NAME, String URL, boolean EXPECT_OK, ExtentTest ParentTest, String JIRA) throws Exception {
-        if(sw1.isRunning()){
-            sw1.reset();
-        }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         String RR = "";
         CloseableHttpClient httpclient = HttpClients.createDefault(); 
         try {
             HttpGet httpget = new HttpGet(URL); 
+            if(AUTH != ""){
+                httpget.setHeader("Authorization", AUTH);               
+            }
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -4845,7 +4969,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
             EX += _t + "\t == " + NAME + "\t" + URL + "\t" + "Call successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n"; 
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             if(EXPECT_OK){
                 _f++; FAIL = true; err = ex.getMessage().trim();
@@ -4853,13 +4977,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
-                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(NAME));                
+                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
             } else {
                 _p++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + err + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n"; 
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />URL: " + URL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } 
         sw1.reset();
@@ -4868,7 +4992,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault(); 
@@ -4880,24 +5005,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + VAL + "\t" + "Found - as expected" + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                      
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 } else {
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + VAL + "\t" + "Found - not expected" + "\t" + "FAIL" + "\t" + "not Expected" +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                      
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }  
             } else{
                 if(EXPECTED){
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + VAL + "\t" + "Not Found - expected" + "\t" + "FAIL" + "\t" + "Not Found - Expected" +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                      
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 } else {
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + VAL + "\t" + "Not Found - as expected" + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                       
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + VAL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }                                    
             }
         } catch(Exception ex){
@@ -4906,7 +5031,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t == " + NAME + "\t" + VAL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Value: " + VAL, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Value: " + VAL, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -4915,7 +5040,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -4946,24 +5072,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + "Title: " + C_Name + "\t" + S + " - " + E + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                     
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }else{
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + "Title: " + C_Name + "\t" + "Found after remove in AP3" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";    
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }else{
                 if(EXPECTED){
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + "Title: " + C_Name + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";   
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }else{
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + "Title: " + C_Name + "\t" + "Not Found after remove in AP3" + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                  
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }
         } catch(Exception ex){
@@ -4972,7 +5098,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t == " + NAME + "\t" + "Closure Title: " + C_Name + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -4980,7 +5106,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -5042,17 +5169,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " start:" + _start + ", end:" + _end + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                     
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 } else{
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + "AP3 change: " + From + "-" + To + "\t" + Z_From + "-" + Z_To + " TZone: " + TZone + " > UTC: " + _From + "-" + _To + " start:" + _start + ", end:" + _end + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                                    
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }else{
                 _f++; 
                 EX += _t + "\t == " + NAME + "\t" + "Wrong From - To Format" + "\t" + from_to + "\t" + "FAIL" + "\t" + "Expected " + From + "-" + To +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                                                    
+                Log_Html_Result("FAIL", "Wrong From - To Format", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
@@ -5060,7 +5188,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t == " + NAME + "\t" + TARGET + "\t" + "Day " + DAY + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -5068,7 +5196,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -5089,24 +5218,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + "*_supported" + "\t" + "Found - Brand AP3 Status: 'Supported'" + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                      
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 } else {
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + "*_supported" + "\t" + "Found - Brand AP3 Status: 'Not Supported'" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                       
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }  
             } else{
                 if(EXPECTED){
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + "*_supported" + "\t" + "Not Found - Brand AP3 Status: 'Supported'" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                     
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 } else {
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + "*_supported" + "\t" + "Not Found - Brand AP3 Status: 'Not Supported'" + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                       
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Value: " + TARGET, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }                                    
             }
         } catch(Exception ex){
@@ -5115,7 +5244,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t == " + NAME + "\t" + TARGET + "\t" + "*_supported" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Value: " + TARGET, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Value: " + TARGET, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -5124,7 +5253,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
 
         FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -5159,19 +5289,19 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + DAY+ "\t" + "Found after remove in AP3" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";    
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }else{
                 if(EXPECTED){
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";  
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }else{
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + "Not Found after remove in AP3" + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                  
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }
 
@@ -5181,7 +5311,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -5189,7 +5319,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -5220,24 +5351,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + S + " - " + E + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                     
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }else{
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + DAY+ "\t" + "Found after remove in AP3" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";   
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }else{
                 if(EXPECTED){
                     _f++; 
                     EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";   
-                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }else{
                     _p++; 
                     EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + "Not Found after remove in AP3" + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                  
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }
 
@@ -5247,7 +5378,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t == " + NAME + "\t" + DAY + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -5256,7 +5387,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "";
@@ -5276,12 +5408,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "WARN" + "\t" + "File not found" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + "Delete the file after test" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
@@ -5289,7 +5421,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -5297,7 +5429,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         t = "";
@@ -5313,7 +5446,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             if("".equals(t)){
                 _f++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + F_NAME + "\t" + "FAIL" + "\t" + "File not found";                
-                Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                Log_Html_Result("FAIL", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 if("User_Count".equals(CHECK)){
                     ArrayList<String> lines = new ArrayList<>(Files.readAllLines(Paths.get(DIR + File.separator + t), StandardCharsets.UTF_8));
@@ -5321,19 +5454,19 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         _p++; 
                         EX += _t + "\t" + NAME + "\t" + F_NAME + "\t" + lines.size() + " Expected: header + " + VAL + "\t" + "PASS" + "\t" + "User Count + Header" +
                         "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                             
-                        Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                        Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                     } else{
                         _w++; 
                         EX += _t + "\t" + NAME + "\t" + F_NAME + "\t" + lines.size() + " Expected: header + " + VAL + "\t" + "WARN" + "\t" + "User Count + Header" +
                         "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                            
-                        Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                        Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                     }
                 }
                 if("Site_Count".equals(CHECK)){
                     _p++; 
                     EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                     "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";                    
-                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                    Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
                 }
             }
         } catch(Exception ex){
@@ -5342,7 +5475,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     }
@@ -5351,7 +5484,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();       
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs       
  
         FAIL = false;
         try {
@@ -5361,12 +5495,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 _p++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "PASS" + "\t" + " - " +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }else{
                 _w++; 
                 EX += _t + "\t" + NAME + "\t" + DIR + "\t" + t + "\t" + "WARN" + "\t" + "File not found" +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(NAME));
+                Log_Html_Result("WARN", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />File: " + F_NAME, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
             }
         } catch(Exception ex){
             _f++; FAIL = true;  err = ex.getMessage().trim();
@@ -5374,7 +5508,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += _t + "\t" + NAME + "\t" + DIR + "\t" + "File not found" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />File: " + F_NAME, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } 
         sw1.reset();
     } 
@@ -5383,7 +5517,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();      
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs      
  
         FAIL = false;
         try {
@@ -5391,14 +5526,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName(), false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + " - " + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -5407,7 +5542,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();      
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs      
  
         FAIL = false;
         try {
@@ -5450,14 +5586,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "item has been displayed & deleted successfully" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + BY + "\t" + PATH + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
@@ -5466,7 +5602,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(sw1.isRunning()){
             sw1.reset();
         }
-        _t++; sw1.start();      
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs      
  
         FAIL = false;
         try {         
@@ -5502,19 +5639,19 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _p++;
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Scroll OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
-            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(NAME));
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />Element locator: " + BY + " > " + PATH, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         } catch(Exception ex){
             _f++; FAIL = true; err = ex.getMessage().trim();
             if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Scroll Failed" + "\t" + "FAIL" + "\t" + err +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
             F += "Step: " + _t + " > " + err + "\r\n";
-            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(NAME));
+            Log_Html_Result("FAIL", "Error: " + err + "<br />Element locator: " + BY + " > " + PATH, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
         }
         sw1.reset();
     }
-    // </editor-fold>  
-
+    // </editor-fold>    
+ 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
@@ -5525,6 +5662,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
+    private javax.swing.JCheckBox _mplan;
     private javax.swing.JCheckBox _new_user;
     private javax.swing.JCheckBox _order_email;
     private javax.swing.JCheckBox _order_history;
@@ -5552,6 +5690,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSITES;
     private javax.swing.JLabel lblSITES10;
     private javax.swing.JLabel lblSITES11;
+    private javax.swing.JLabel lblSITES12;
     private javax.swing.JLabel lblSITES13;
     private javax.swing.JLabel lblSITES14;
     private javax.swing.JLabel lblSITES16;
@@ -5566,6 +5705,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea txtLog;
     private javax.swing.JTextField txtMobile_ID;
     private javax.swing.JTextField txtMobile_PW;
+    private javax.swing.JTextField txtMplan;
     private javax.swing.JTextField txtPromo;
     private javax.swing.JTextField txtSlackCh;
     // End of variables declaration//GEN-END:variables

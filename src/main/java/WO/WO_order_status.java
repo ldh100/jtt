@@ -4,6 +4,7 @@ class WO_order_status extends WO_GUI {
     protected WO_order_status(WO_GUI a) {
         url = a.url;
         d1 = a.d1;
+        app = a.app;
 
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;

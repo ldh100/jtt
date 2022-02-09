@@ -9,6 +9,7 @@ class WO_place_order extends WO_GUI {
     protected WO_place_order(WO_GUI a) {
         url = a.url;
         d1 = a.d1;
+        app = a.app;
 
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
@@ -19,7 +20,9 @@ class WO_place_order extends WO_GUI {
     
     protected void run(boolean ISDELIVERYORDER) throws InterruptedException { 
     try{    
-       if (env == "PR"){ return;}
+        if (env == "PR"){ 
+            return;
+        }
         
        final String ORDERTYPE  =  ISDELIVERYORDER?"Delivery":"Pickup";
 //        try {
@@ -49,16 +52,16 @@ class WO_place_order extends WO_GUI {
 //            //String isDeliveryTabSelected=d1.findElement(By.xpath(ServiceTabxPathStr)).findElement(By.xpath("./..")).getAttribute("aria-selected");
 //                //Verify is Service tab selected
 //            while(!"true".equalsIgnoreCase(d1.findElement(By.xpath(ServiceTabxPathStr)).findElement(By.xpath("./..")).getAttribute("aria-selected"))){
-//                _t++;   TWeb.Element_By_Path_Click("Click service tab ","xpath",ServiceTabxPathStr,ParentTest, "no_jira");             
+//                _t++;   TWeb.Element_By_Selector_Click("Click service tab ","xpath",ServiceTabxPathStr,ParentTest, "no_jira");             
 //            }
 //        }
 //        
         if(true){
             Thread.sleep((long) 3000);
             for (int ordersCount=0; ordersCount< ORDERCOUNT; ordersCount++ ){
-                Element_By_Path_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input",ParentTest, "no_jira");
-                Element_By_Path_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, ParentTest, "no_jira");
-                Wait_For_Element_By_Path_Presence("Wait for location list present ", "xpath", "//div[@role='listbox']", ParentTest, "no_jira");
+                Element_By_Selector_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input",ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, ParentTest, "no_jira");
+                Wait_For_Element_By_Selector_Presence("Wait for location list present ", "xpath", "//div[@role='listbox']", ParentTest, "no_jira");
                 List_L0("Locate to Location list", "xpath", "//div[@role='listbox']", ParentTest, "no_jira");
                     if (FAIL|L0.size()==0) { continue;}  
                 Element_Child_List_L1("Matching Locations Count", L0.get(L0.size()-1),"xpath", ".//div[@class='v-list-item__title']", ParentTest, "no_jira");                                     
@@ -70,22 +73,22 @@ class WO_place_order extends WO_GUI {
               
                 Element_Click("Select 1st Location in the list", L1.get(0),ParentTest, "no_jira"); 
                 if (FAIL) { return; } 
-                Wait_For_Element_By_Path_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", ParentTest, "no_jira");   
+                Wait_For_Element_By_Selector_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", ParentTest, "no_jira");   
                 Thread.sleep( 3000);
                 if(d1.findElements(By.className("pickup-or-delivery")).isEmpty()){
                     while(!"true".equalsIgnoreCase(d1.findElement(By.xpath(ServiceTabxPathStr)).findElement(By.xpath("./..")).getAttribute("aria-selected"))){
-                        Element_By_Path_Click("Click service tab ","xpath",ServiceTabxPathStr,ParentTest, "no_jira");             
+                        Element_By_Selector_Click("Click service tab ","xpath",ServiceTabxPathStr,ParentTest, "no_jira");             
                     }                   
-                   // Element_By_Path_Click("Click 'service' tab", "xpath",ServiceTabxPathStr,ParentTest, "no_jira"); 
+                   // Element_By_Selector_Click("Click 'service' tab", "xpath",ServiceTabxPathStr,ParentTest, "no_jira"); 
                     Thread.sleep( 3000);
                 }
                 
-                Element_By_Path_Click("Enter Selected  Brand:   " + BRAND ,"xpath", "//strong[text()=' " +BRAND+ " ']",  ParentTest, "no_jira"); 
+                Element_By_Selector_Click("Enter Selected  Brand:   " + BRAND ,"xpath", "//strong[text()=' " +BRAND+ " ']",  ParentTest, "no_jira"); 
                 if (FAIL){
                     _t++; EX += _t + "\t" + "Brand --" +BRAND+ " --has no " +ORDERTYPE+ " service, quit placing order " + "\t" + " ===== " + "\t" + "Jump out PICKUP order" + "\t" + " Fail " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                     return;
                 }
-                Wait_For_Element_By_Path_Presence("Wait for Brand Menu page rendering", "xpath", "//div[@class='pt-5']", ParentTest, "no-jira");
+                Wait_For_Element_By_Selector_Presence("Wait for Brand Menu page rendering", "xpath", "//div[@class='pt-5']", ParentTest, "no-jira");
                 System.out.println(" +++++++++++++++++++++++++++++++++++ Start " + ORDERTYPE + " Order Number " + (ordersCount+1) + " of " + ORDERCOUNT + " +++++++++++++++++++++++++++++++++++ ");
                 _t++; EX += _t + "\t" + "Start placing " +ORDERTYPE + "  #" + (ordersCount+1) + " order " + "\t" + " +++++++++ " + "\t" + " ++++++++++ " + "\t" + "  " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 //Menu screen
@@ -106,24 +109,24 @@ class WO_place_order extends WO_GUI {
                             return;} 
 
                 //switch to opened modal 
-                    Wait_For_Element_By_Path_Presence("Wait for item modal rendering", "xpath", "(//span[@class='v-btn__content'])[5]", ParentTest, "no-jira");
-                    Element_By_Path_Text("--Verify Item Name in Model Title", "css", "[class='my-0']", ParentTest, "no_jira");
+                    Wait_For_Element_By_Selector_Presence("Wait for item modal rendering", "xpath", "(//span[@class='v-btn__content'])[5]", ParentTest, "no-jira");
+                    Element_By_Selector_Text("--Verify Item Name in Model Title", "css", "[class='my-0']", ParentTest, "no_jira");
                         if (FAIL) { return;}  
-                    Element_By_Path_Text("--Button(in item modal) Text" , "xpath","(//span[@class='v-btn__content'])[5]" , ParentTest, "no_jira"); //verify button 
+                    Element_By_Selector_Text("--Button(in item modal) Text" , "xpath","(//span[@class='v-btn__content'])[5]" , ParentTest, "no_jira"); //verify button 
                     String buttonText = t;
                    
                     if (buttonText.trim().contains("HOURS HAVE ENDED")){
-                        Element_By_Path_Click("Close item model ","css", "[class='v-icon notranslate pa-5 close mdi mdi-close theme--light']", ParentTest, "no_jira");
+                        Element_By_Selector_Click("Close item model ","css", "[class='v-icon notranslate pa-5 close mdi mdi-close theme--light']", ParentTest, "no_jira");
                         Thread.sleep((long) 3000);
                         Navigate_Back("Return to Site Page","Brand page ", "Site page",ParentTest, "no_jira");
-                        //TWeb.Element_By_Path_Click("Return to Site Page", "xpath", "//div[text()=' " + SITE + " ']", ParentTest, "no_jira");
+                        //TWeb.Element_By_Selector_Click("Return to Site Page", "xpath", "//div[text()=' " + SITE + " ']", ParentTest, "no_jira");
                         Thread.sleep((long) 3000);
                         return;
                     }
                     
                     if (t.trim().equalsIgnoreCase(" Add to Cart ".trim().toLowerCase())){
                         Thread.sleep((long) 1000);
-                        Element_By_Path_Click("--Click 'add to basket' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", ParentTest, "no_jira");
+                        Element_By_Selector_Click("--Click 'add to basket' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", ParentTest, "no_jira");
                         continue;
                     }
   //L0:       L1:items of each catgory         L2:modifier catgory list        L3:   Middle Pannel catgory                   
@@ -204,14 +207,14 @@ class WO_place_order extends WO_GUI {
                             }
                         }
                     }
-                    Element_By_Path_Click("---Click 'add to cart' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", ParentTest, "no_jira");
+                    Element_By_Selector_Click("---Click 'add to cart' button " , "xpath","//button[contains(@class,'add-to-cart v-btn')]", ParentTest, "no_jira");
                     if(FAIL){return;}
                 }           
             //Place order
-                Element_By_Path_Click("Click CHECKOUT Button", "xpath", "//p[text()='Checkout']", ParentTest, "no_jira");
+                Element_By_Selector_Click("Click CHECKOUT Button", "xpath", "//p[text()='Checkout']", ParentTest, "no_jira");
                 
                 if (url.contains("dev.thriveapp.io")){
-                    Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//h3[text()=' Ordering from ']", ParentTest, "no-Jira");
+                    Wait_For_Element_By_Selector_Presence("Wait for checkout screen", "xpath", "//h3[text()=' Ordering from ']", ParentTest, "no-Jira");
 
                     WebElement placeOrdertext = d1.findElement(By.xpath("//p[text()='Place order']"));
                     System.out.println(placeOrdertext.getText());
@@ -225,8 +228,8 @@ class WO_place_order extends WO_GUI {
 
                     while ("true".equals(d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled"))){
                         Refresh("Refresh Page", ParentTest, "no-jira");
-                        Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//h3[text()=' Ordering from ']", ParentTest, "no_jira");
-                        //Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira"); 
+                        Wait_For_Element_By_Selector_Presence("Wait for checkout screen", "xpath", "//h3[text()=' Ordering from ']", ParentTest, "no_jira");
+                        //Element_By_Selector_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira"); 
                         pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",true);
 
                         if (ISDELIVERYORDER){
@@ -239,15 +242,15 @@ class WO_place_order extends WO_GUI {
                         pickPayment(true);
                         System.out.println("Place Order Button disabled is " +d1.findElement(By.xpath("//p[text()='Place order']")).findElement(By.xpath("./..")).findElement(By.xpath("./..")).getAttribute("disabled")); 
                     }
-                    Element_By_Path_Click("Click 'PLACE ORDER' button ", "xpath","//p[text()='Place order']/../..", ParentTest, "no-Jira");
+                    Element_By_Selector_Click("Click 'PLACE ORDER' button ", "xpath","//p[text()='Place order']/../..", ParentTest, "no-Jira");
                 }
                 
             
                 else{
                 
-                    Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");
+                    Wait_For_Element_By_Selector_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");
     //                Thread.sleep(3000); 
-                    Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");       
+                    Element_By_Selector_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");       
 
 
                     pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",false);
@@ -256,8 +259,8 @@ class WO_place_order extends WO_GUI {
                     System.out.println("Place button " +d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"));
                     while ("true".equals(d1.findElement(By.xpath("(//div[@class='v-window-item v-window-item--active']//button)[2]")).getAttribute("disabled"))){
                         Refresh("Refresh Page", ParentTest, "no-jira");
-                        Wait_For_Element_By_Path_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");
-                        Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira"); 
+                        Wait_For_Element_By_Selector_Presence("Wait for checkout screen", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");
+                        Element_By_Selector_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira"); 
                         pickTimeSlot(ISDELIVERYORDER?"Delivery":"Pickup",false);
 
                         if (ISDELIVERYORDER){
@@ -267,14 +270,14 @@ class WO_place_order extends WO_GUI {
 
                         pickPayment(false);
                     }
-                    Element_By_Path_Click("Click 'PLACE ORDER' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", ParentTest, "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
+                    Element_By_Selector_Click("Click 'PLACE ORDER' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", ParentTest, "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
                 
                     
                 }
               
-              //  Element_By_Path_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", ParentTest, "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
-                Wait_For_Element_By_Path_InVisibility("Wait for greating message Loader complete and page redirect ", "css", "[role='document']", ParentTest, "no_jira");
-                Wait_For_Element_By_Path_InVisibility("Wait for 'Place Order' button disappear, and page redirect(Loader present) ", "css", "[class='col col-4']", ParentTest, "no_jira");
+              //  Element_By_Selector_Click("Click 'PLACE ORDR' button ", "xpath", "(//div[@class='v-window-item v-window-item--active']//button)[2]", ParentTest, "no_jira");//(//div[@class='v-window-item v-window-item--active']//button)[2]
+                Wait_For_Element_By_Selector_InVisibility("Wait for greating message Loader complete and page redirect ", "css", "[role='document']", ParentTest, "no_jira");
+                Wait_For_Element_By_Selector_InVisibility("Wait for 'Place Order' button disappear, and page redirect(Loader present) ", "css", "[class='col col-4']", ParentTest, "no_jira");
                     if(FAIL){continue;}
                     
                 
@@ -285,8 +288,8 @@ class WO_place_order extends WO_GUI {
                 
                 
              //Return to Site page
-//                Element_By_Path_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input",ParentTest, "no_jira");
-//                Element_By_Path_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, ParentTest, "no_jira");
+//                Element_By_Selector_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input",ParentTest, "no_jira");
+//                Element_By_Selector_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, ParentTest, "no_jira");
 //                _t++; Thread.sleep((long) sleep); TWeb.Element_E1_Find("Find Location list", "xpath", "//div[@role='listbox']", ParentTest, "no_jira");
 //                    if (FAIL) { return;}  
 //                _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Matching Locations Count", e1,"xpath", ".//div[@class='v-list-item__title']", ParentTest, "no_jira");                                     
@@ -297,10 +300,10 @@ class WO_place_order extends WO_GUI {
 //              
 //                _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select 1st Location in the list", L1.get(0),ParentTest, "no_jira"); 
 //                if (FAIL) { return; } Thread.sleep(1000);
-//                Wait_For_Element_By_Path_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", ParentTest, "no_jira");   
+//                Wait_For_Element_By_Selector_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", ParentTest, "no_jira");   
 //                Thread.sleep( 3000);
 //                if(d1.findElements(By.className("pickup-or-delivery")).isEmpty()){
-//                    Element_By_Path_Click("Click 'service' tab", "xpath",ServiceTabxPathStr,ParentTest, "no_jira"); 
+//                    Element_By_Selector_Click("Click 'service' tab", "xpath",ServiceTabxPathStr,ParentTest, "no_jira"); 
 //                    Thread.sleep( 3000);
 //                }
             }
@@ -315,10 +318,10 @@ class WO_place_order extends WO_GUI {
                 return;
             }
             if (PICKUP && DELIVERY){
-                Element_By_Path_Click("Click Pickup Tab ", "xpath", "//strong[text()=' Pickup ']", ParentTest, "no_jira");
+                Element_By_Selector_Click("Click Pickup Tab ", "xpath", "//strong[text()=' Pickup ']", ParentTest, "no_jira");
                     if(FAIL) return;
             }
-            Element_By_Path_Click("Enter Selected  Brand:   " + BRAND ,"xpath", "//strong[text()=' " +BRAND+ " ']",  ParentTest, "no_jira"); 
+            Element_By_Selector_Click("Enter Selected  Brand:   " + BRAND ,"xpath", "//strong[text()=' " +BRAND+ " ']",  ParentTest, "no_jira"); 
             List_L2("Menu Category count ", "css", "[role='tab']", ParentTest, "no_jira");
                 
             //List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", ParentTest, "no_jira");
@@ -333,16 +336,16 @@ class WO_place_order extends WO_GUI {
         
         String cssStr = newUI?"[placeholder='Select a " +    OrderType +  " Time']":"[placeholder='Select " +    OrderType +  " Time']";
         
-        Wait_For_Element_By_Path_Presence("Wait for timeslot presence ", "css", cssStr, ParentTest, "no_jira");
+        Wait_For_Element_By_Selector_Presence("Wait for timeslot presence ", "css", cssStr, ParentTest, "no_jira");
        
         WebElement TimeSlotDroplist;
          //WebElement TimeSlotDroplist = d1.findElement(By.cssSelector(cssStr));//.getAttribute("disabled");
         while (FAIL||"true".equalsIgnoreCase(d1.findElement(By.cssSelector(cssStr)).getAttribute("disabled"))) {           
             Refresh("Refresh Page", ParentTest, "no-jira");
-           // Wait_For_Element_By_Path_Presence("Wait for 'ORDRR DETAIL' screen", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");
+           // Wait_For_Element_By_Selector_Presence("Wait for 'ORDRR DETAIL' screen", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira");
             Thread.sleep(3000); 
-            Element_By_Path_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira"); 
-            Wait_For_Element_By_Path_Presence("Wait for TimeSlot presence", "css", cssStr, ParentTest, "no_jira");
+            Element_By_Selector_Click("Click 'PROCEED TO CHECKOUT' BUTTON", "xpath", "//p[text()='Proceed to Checkout']", ParentTest, "no_jira"); 
+            Wait_For_Element_By_Selector_Presence("Wait for TimeSlot presence", "css", cssStr, ParentTest, "no_jira");
            // TimeSlotDroplist = d1.findElement(By.cssSelector(cssStr));//.getAttribute("disabled");
         }
         Thread.sleep(1000);
@@ -357,7 +360,7 @@ class WO_place_order extends WO_GUI {
     
     private void pickLocation(boolean newUI){
     try {       
-        Element_By_Path_Click("Click 'select Delivery location' dropdown", "css", newUI?"[placeholder='Select a Delivery Location']":"[placeholder='Select Delivery Location']", ParentTest, "no_jira");
+        Element_By_Selector_Click("Click 'select Delivery location' dropdown", "css", newUI?"[placeholder='Select a Delivery Location']":"[placeholder='Select Delivery Location']", ParentTest, "no_jira");
         List_L0("find list box ", "xpath", "(//div[@role='listbox'])", ParentTest, "no_jira");
         //List<WebElement> listBox = d1.findElements(By.xpath("(//div[@role='listbox'])"));
         Element_Child_List_L1("Find location list count ", L0.get(L0.size()-1), "css", "[role='option']", ParentTest, "no_jira");
@@ -372,7 +375,7 @@ class WO_place_order extends WO_GUI {
     private void pickPayment(boolean newUI){
     try {       
         if (newUI){
-            Element_By_Path_Click("Open Payment Dropdown", "css", "[placeholder='Select a Payment Method']", ParentTest, "no_jira");
+            Element_By_Selector_Click("Open Payment Dropdown", "css", "[placeholder='Select a Payment Method']", ParentTest, "no_jira");
             List_L0("Locate list box ", "xpath", "(//div[@role='listbox'])",  ParentTest, "no_jira");
             Element_Child_List_L1("Find Payment CC list count ", L0.get(L0.size()-1), "css", "[role='option']", ParentTest, "no_jira");
             Element_Click("Select 'Payment' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), ParentTest, "no_jira");
@@ -403,7 +406,7 @@ class WO_place_order extends WO_GUI {
 //        System.out.println(" ListBox   " +L1.size());
         //Element_E1_Find(app, "xpath", "(//div[@role='listbox'])[3]", url);
         
-        //Element_By_Path_Click("Select lasrt Payment card  from Dropdown", "xpath", "(//div[@role='option'])[" +(L1.size())+ "]", ParentTest, "no_jira");
+        //Element_By_Selector_Click("Select lasrt Payment card  from Dropdown", "xpath", "(//div[@role='option'])[" +(L1.size())+ "]", ParentTest, "no_jira");
 
 //        Element_Click("Select 'Payment' from dropdown", L1.get(L1.size()>3?3:(L1.size()-1)), ParentTest, "no_jira");
     } catch (Exception ex){}        

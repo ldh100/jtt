@@ -2583,7 +2583,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                     Thread.sleep(1000);
                     try {
                         List<WebElement> ALERTS = d1.findElements(By.cssSelector("[role='alert']"));
-                        if(ALERTS.size() > 0) {
+                        if(!ALERTS.isEmpty()) {
                             Toast_Msg = ALERTS.get(0).getAttribute("textContent");// .getText();
                             if(Toast_Msg.equals(Previous_Toast_Msg)){
                                 continue;
@@ -4421,8 +4421,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
             }else{
-                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                e.clear();
+//                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+//                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
@@ -4704,9 +4705,10 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
             }else{
-                E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
-            }   
+                E.clear();
+//                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+//                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+            }  
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
