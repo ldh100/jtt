@@ -295,20 +295,20 @@ class AP3_brand extends AP3_GUI{
                         Element_Text_Enter("Enter 'DISABLX' > typo", e2, "DISABLX", ParentTest, "no_jira");
                             if (FAIL) { return;}                     
                         Find_Text("Find 'typo' error message", "Must input the word", true, ParentTest, "no_jira");
-                            if (FAIL) { return;} 
+                            //if (FAIL) { return;} 
                         Element_Text_Clear("Clear 'DISABLE' input", e2, ParentTest, "no_jira");
                             if (FAIL) { return;}  
                         Find_Text("Find 'cannot be empty' error message", "Confirmation cannot be", true, ParentTest, "no_jira");
-                            if (FAIL) { return;}
+                            //if (FAIL) { return;}
                         Element_Text_Enter("Enter 'DISABLE'", e2, "DISABLE", ParentTest, "no_jira");
                             if (FAIL) { return;}                     
-                        Find_Text("Find 'Cannot' error message", "Cannot disable both", true, ParentTest, "no_jira");
-                            if (FAIL) { return;} 
+                        //Find_Text("Find 'Cannot disable both' error message", "Cannot disable both", true, ParentTest, "no_jira");
+                            //if (FAIL) { return;} 
                         Element_Child_E2("Find 'DISABLE' dialog Cancel", e1, "xpath", ".//div[text()='cancel']", ParentTest, "no_jira");
                             if (FAIL) { return;}   
-                        Element_Text(" 'DISABLE' Cancel text", e2, ParentTest, "no_jira");
+                        Element_Text("Find 'DISABLE' Cancel text", e2, ParentTest, "no_jira");
                             if (FAIL) { return;}                         
-                        Element_Click(" 'DISABLE' Cancel Click", e2, ParentTest, "no_jira");
+                        Element_Click("Click 'DISABLE' Cancel", e2, ParentTest, "no_jira");
                             if (FAIL) { return;} 
    
                     } else {
