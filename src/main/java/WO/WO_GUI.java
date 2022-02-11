@@ -539,7 +539,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 78, 28));
+        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 98, 78, 30));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -707,13 +707,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                .addGap(2, 2, 2))
         );
 
         pack();
@@ -2150,21 +2150,28 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected void Execute() throws InterruptedException{
 
         if (_Explore_brand) { 
-            SCOPE += ", Explore Brand Menu";
+            SCOPE += "Explore Brand Menu";
             ParentTest = HtmlReport.createTest("Explore Brand"); 
             EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_explore_brand BR = new WO_explore_brand(WO_GUI.this);
             BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            PICKUP = BR.PICKUP;
+            DELIVERY = BR.DELIVERY;
             EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Explore Brand Menu: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
         } 
         if (true) { 
-            SCOPE += "Login";
+            SCOPE += ", Login";
             ParentTest = HtmlReport.createTest("Login"); 
             EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Login Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_login BR = new WO_login(WO_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Login: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
         }
 
 
@@ -2174,7 +2181,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_place_order BR = new WO_place_order(WO_GUI.this);
             BR.run(false); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Place Pickup Order" + "\t" + " ===== " + "\t" + " == ^ Place Pickup Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Pickup Order: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Place_delivery_order) { 
             SCOPE += ", Delivery Order";
@@ -2182,7 +2192,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_place_order BR = new WO_place_order(WO_GUI.this);
             BR.run(true); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Place Delivery Order: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
         }
         // ============================== Last Blocks
         if (_Order_status) { 
@@ -2191,6 +2204,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Order Status" + "\t" + " ===== " + "\t" + " == Order Status Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_order_status BR = new WO_order_status(WO_GUI.this);
             BR.run(); // ======================================            
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Order Status" + "\t" + " ===== " + "\t" + " == ^ Order Status End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         }
         if (_Account_settings) { 
@@ -2199,7 +2213,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_account_settings BR = new WO_account_settings(WO_GUI.this);
             BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Account Settings: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Order_history) { 
             SCOPE += ", Order History";
@@ -2207,7 +2224,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Order History" + "\t" + " ===== " + "\t" + " == Order History Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_order_history BR = new WO_order_history(WO_GUI.this);
             BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Order History" + "\t" + " ===== " + "\t" + " == ^ Order History End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Order History: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Logout) { 
             SCOPE += ", LogOut";
@@ -2215,7 +2235,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_logout BR = new WO_logout(WO_GUI.this);
             BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Logout" + "\t" + " ===== " + "\t" + " == ^ Logout End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("LogOut: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
         }
                                    
         if(_f > 0) {
@@ -3683,9 +3706,9 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
             }else{
-                e.clear();
-                //e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                //e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                //e.clear();
+                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
 
             _p++; 
@@ -3805,9 +3828,9 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
             }else{
-                E.clear();
-//                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-//                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                //E.clear();
+                E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }   
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +

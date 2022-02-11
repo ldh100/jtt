@@ -17,9 +17,15 @@ class WO_explore_brand extends WO_GUI {
         ParentTest = a.ParentTest;
     }
     protected void run () { 
-    try {    
-        Find_Text("Find 'Enter Location' text", "Enter Your " + app.toLowerCase() + " Location", true,ParentTest, "no_jira"); 
-            //if (FAIL) { return;}
+    try {   
+        Navigate_to_URL("Navigate to", url, ParentTest, "no_jira");             
+            if (FAIL) { return;}
+        Page_URL("Login page", ParentTest, "no_jira");             
+        Element_By_Selector_Attribute("Find " + app + " Image", "xpath", "//div[@class='v-image__image v-image__image--cover']", "style", ParentTest, "no_jira");
+        //Element_By_Selector_Text("Find 'card-header' text", "xpath", "//p[@class='card-header']", ParentTest, "no_jira");           
+        Find_Text("Find 'Support' text", "Support", true, ParentTest, "no_jira");           
+        Find_Text("Find 'Enter Location' text", "Enter Your " + app.toLowerCase() + " Location", true, ParentTest, "no_jira");           
+
         List_L0("Find 'Location' combobox", "css", "[role='combobox']", ParentTest, "no_jira");             
             if (FAIL) { return;}             
         Element_Child_Click("Click 'Select Location' Slot", L0.get(0), "tagName", "input", ParentTest, "no_jira");             
@@ -40,12 +46,12 @@ class WO_explore_brand extends WO_GUI {
         Element_Click("Select 1st Location in the list", L1.get(0),ParentTest, "no_jira"); 
             if (FAIL) { return; }  
         
-        Element_E1_Find("Find Header Card", "xpath", "//div[@class='header-card v-card v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        Element_Child_List_L1("Header lines count", e1,"xpath", ".//div[contains(@class, 'v-card__')]", ParentTest, "no_jira");                                     
-            for (int i = 0; i < L1.size(); i++) {
-                Element_Text("Header (" + i + ") line:", L1.get(i),  ParentTest, "no_jira");             
-            }  
+//        Element_E1_Find("Find Header Card", "xpath", "//div[@class='header-card v-card v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        Element_Child_List_L1("Header lines count", e1,"xpath", ".//div[contains(@class, 'v-card__')]", ParentTest, "no_jira");                                     
+//            for (int i = 0; i < L1.size(); i++) {
+//                Element_Text("Header (" + i + ") line:", L1.get(i),  ParentTest, "no_jira");             
+//            }  
             
         PICKUP = false;
         DELIVERY = false;
@@ -54,67 +60,64 @@ class WO_explore_brand extends WO_GUI {
             Element_By_Selector_Text("Single Available Service:", "xpath", "//div[@class='pickup-or-delivery']",  ParentTest, "no_jira"); 
             if (t.toLowerCase().contains("pickup")) { 
                 PICKUP = true; 
-                List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", ParentTest, "no_jira");
+                List_L1("Pickup Brands Count", "xpath", "//span[@class='ma-0 pa-7 pb-0 pt-3 brand-name-text']", ParentTest, "no_jira");
                 for (int j = 0; j < L1.size(); j++) {
                     Element_Text("Pickup Brand (" + j + "):", L1.get(j),  ParentTest, "no_jira");     
                 }
             }
             if (t.toLowerCase().contains("delivery")) { 
                 DELIVERY = true;
-                for (int j = 0; j < L1.size(); j++) {
-                    Element_Text("Delivery Brand (" + j + ") name:", L1.get(j),  ParentTest, "no_jira");     
-                } 
-                List_L1("Delivery Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", ParentTest, "no_jira"); 
+                List_L1("Delivery Brands Count", "xpath", "//span[@class='ma-0 pa-7 pb-0 pt-3 brand-name-text']", ParentTest, "no_jira"); 
                 for (int j = 0; j < L1.size(); j++) {
                     Element_Text("Delivery Brand (" + j + "):", L1.get(j),  ParentTest, "no_jira");     
                 } 
             } 
         } else { 
-            for (int i = 0; i < L0.size(); i++) {
+            for (int i = 0; i < 2; i++) {
                 List_L0("Find Service tabs", "css", "[role='tab']", ParentTest, "no_jira");
-                Element_Text("Service tab (" + i + ") name:", L0.get(i),  ParentTest, "no_jira");       
-                
+                Element_Text("Service tab (" + i + ") name:", L0.get(i),  ParentTest, "no_jira");                       
                 if (t.toLowerCase().equals("pickup")) { 
                     PICKUP = true; 
                     Element_Click("Click 'Pickup' tab", L0.get(i),ParentTest, "no_jira"); 
                         if (FAIL) { return; } 
-                    List_L1("Pickup Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", ParentTest, "no_jira");
+                    List_L1("Pickup Brands Count", "xpath", "//span[@class='ma-0 pa-7 pb-0 pt-3 brand-name-text']", ParentTest, "no_jira");
                         if(L1.isEmpty())  {return;}
                     for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Pickup Brand (" + j + "):", L1.get(j),  ParentTest, "no_jira");     
+                        Element_Text("Pickup Brand (" + j + "):", L1.get(j), ParentTest, "no_jira");     
                     }
-                   // _t++; Thread.sleep((long) sleep);  TWeb.Element_Click("Enter first Brand in Pickup:   ", L1.get(0),  ParentTest, "no_jira"); 
-                    leftPanelClick(L1.get(0));
-                    
+                    leftPanelClick(L1.get(0));                  
                 }
                 if (t.toLowerCase().equals("delivery")) { 
                     DELIVERY = true;
-                    Element_Click("Click 'Delivery' tab", L0.get(i),ParentTest, "no_jira"); 
+                    Element_Click("Click 'Delivery' tab", L0.get(i), ParentTest, "no_jira"); 
                         if (FAIL) { return; } 
-                    List_L1("Delivery Brands Count", "xpath", "//div[@class='v-card v-card--hover v-card--link v-sheet v-sheet--tile theme--light brand']", ParentTest, "no_jira"); 
+                    List_L1("Delivery Brands Count", "xpath", "//span[@class='ma-0 pa-7 pb-0 pt-3 brand-name-text']", ParentTest, "no_jira"); 
                         if(L1.isEmpty())  {return;}
-                     for (int j = 0; j < L1.size(); j++) {
+                    for (int j = 0; j < L1.size(); j++) {
                         Element_Text("Delivery Brand (" + j + "):", L1.get(j),  ParentTest, "no_jira");     
                     } 
-                    //_t++; Thread.sleep((long) sleep);  TWeb.Element_Click("Enter first Brand in Delivery:   ", L1.get(0),  ParentTest, "no_jira"); 
                     leftPanelClick(L1.get(0));
                 } 
             } 
  
         }    
-        } catch (Exception ex){}   
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        try{
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+        }catch(Exception eee) {};
+    }  
     }  
     private void leftPanelClick( WebElement brandCard ) {
     try {
-        Element_Click("Enter first Brand in Pickup:", brandCard,  ParentTest, "no_jira"); 
-        List_L2("Menu Category count ", "css", "[role='tab']", ParentTest, "no_jira");
-//L0:       L1:         L2:Left pannel category         L3:                 
+        Element_Click("Select first Brand in the List", brandCard,  ParentTest, "no_jira"); 
+        List_L2("Menu Category count ", "css", "[role='tab']", ParentTest, "no_jira");                 
         for ( WebElement we : L2){         
-            Element_Text("Menu Category : ", we ,  ParentTest, "no_jira");
-            Element_Click("Click Category",we , ParentTest, "no_jira");                
+            Element_Text("Menu Category : ", we,  ParentTest, "no_jira");
+            Element_Click("Click Category", we, ParentTest, "no_jira");                
         }
-        Element_By_Selector_Click(" Return to site page in:   ", "xpath","//div[text()='" + SITE + "']",  ParentTest, "no_jira"); 
-        //(By.xpath("//div[contains(@class,'row pa-0')]")
+        Navigate_Back("Navigate Back", "Brand", "Site", ParentTest, "no_jira");
   
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;
