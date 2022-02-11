@@ -201,7 +201,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         DV1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV1.setCellSelectionEnabled(true);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setOpaque(false);
         DV1.setRowHeight(18);
@@ -226,7 +226,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV2.setCellSelectionEnabled(true);
-        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
