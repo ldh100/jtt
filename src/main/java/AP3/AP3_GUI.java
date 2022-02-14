@@ -198,29 +198,29 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 AP3_AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -4421,9 +4421,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
             }else{
-                e.clear();
-//                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-//                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                //e.clear();
+                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH  + "\t" + "Cleared" + "\t" + "PASS" + "\t" + " - " +
@@ -4705,9 +4705,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
             }else{
-                E.clear();
-//                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-//                e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                //E.clear();
+                E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }  
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +

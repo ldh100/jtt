@@ -4915,9 +4915,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 ae.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 ae.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
             }else{
-                ae.clear();
-                //ae.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                //ae.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                //ae.clear();
+                ae.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                ae.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
 
             _p++; 
@@ -5038,9 +5038,9 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 E.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
                 E.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it              
             }else{
-                E.clear();
-                //E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
-                //E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
+                //E.clear();
+                E.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                E.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }   
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Text cleared" + "\t" + "PASS" + "\t" + " - " +

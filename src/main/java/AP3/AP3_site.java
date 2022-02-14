@@ -1543,6 +1543,7 @@ class AP3_site extends AP3_GUI{
             if (!t.contains("No locations found") && t.contains(New_ID)) {
                 Move_to_Element("Move to Location " + i, L1.get(i), ParentTest, "no_jira");
                     if (FAIL) { return;}
+                Thread.sleep(500);
                 Element_Child_Click("Click > 'delete icon'", L1.get(i),"xpath", ".//i[contains(@class,'mdi-delete')]", ParentTest, "np_jira");
                     if (FAIL) { return;}
                 Element_E1_Find("Find 'Revome Location?' confirmation dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
@@ -1739,7 +1740,7 @@ class AP3_site extends AP3_GUI{
                         for (int j = 0; j < L1.size(); j++) {
                             Element_Text("Available Meal Plan " + j, L1.get(j), ParentTest, "no_jira");             
                         }   
-                    Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Blackboard" + "')]", ParentTest, "no_jira");
+                    Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Transact Premise" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
                     Element_By_Path_Text("Meal Plan Name", "css", "[aria-label='Plan Name']", ParentTest, "no_jira");
                         if (FAIL) { return;}
