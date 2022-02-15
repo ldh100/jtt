@@ -2008,11 +2008,15 @@ class AP3_brand_config extends AP3_GUI {
             _f++;
             EX += _t + "\t" + "Re-adding it in brand configuration" + "\t" + "Original Assigned menus Category" + countAssignedMenuCategories + "\t" + "Count After Adding Category : " + countAssignedMenuCategoriesAfterAdding + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\"\t" + "no_jira" + "\r\n";
         }                
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
     // </editor-fold>
     
-  public void setservicehours(){
+    public void setservicehours(){
     try {
         //stationName="Add Station 907290928";
         

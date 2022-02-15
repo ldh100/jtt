@@ -600,6 +600,10 @@ class AP3_images extends AP3_GUI{
                 _w++; EX += _t + "\t" + "WARNING - NO SITE OR GLOBAL MENU EXISTS" + "\t" + "- IMAGES CANNOT BE TESTED" + "\t" + "---" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("WARN", "---" + "\t" + "- IMAGES CANNOT BE TESTED", false, ParentTest.createNode(_t + ". " + "WARNING - NO SITE EXISTS OR GLOBAL MENU EXISTS"), new Date());    
             }
-        } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

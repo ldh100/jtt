@@ -199,7 +199,7 @@ class AP3_site_new extends AP3_GUI{
                             Element_Text("Available Meal Plan " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                         }   
-                    Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Blackboard" + "')]", ParentTest, "no_jira");
+                    Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Transact Premise" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
 //                    Element_By_Path_Text_Enter("Enter Plan Name", "css", "[aria-label='Plan Name']", "BLACKBOARD", false, ParentTest, "no_jira");
 //                        if (FAIL) { return;}
@@ -2309,6 +2309,10 @@ if(true) return;
             Log_Html_Result("FAIL", "Brand Api call response different after Refresh", true, ParentTest.createNode(_t + ". " + "Verify Brand config - after refresh"), new Date());
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh END ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     }
 }

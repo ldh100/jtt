@@ -543,6 +543,10 @@ class AP3_announcements extends AP3_GUI{
         Call_API("Call /announcement/ API", "",  BaseAPI + "/announcement/" + A_ID, false, ParentTest, "no_jira"); 
         // Expected {"code":404,"error":"Not found!"}
             
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     }
 }

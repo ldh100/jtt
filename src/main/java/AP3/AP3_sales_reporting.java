@@ -2,6 +2,7 @@ package AP3;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -465,6 +466,10 @@ class AP3_sales_reporting extends AP3_GUI{
                 Element_Child_Attribute("Input 'End Time' state", L0.get(i), "css", "[aria-label='End Time']", "disabled", ParentTest, "no_jira");  
                     if (FAIL) { return;}
             }   
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

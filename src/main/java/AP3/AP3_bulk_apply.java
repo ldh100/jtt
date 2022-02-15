@@ -1199,7 +1199,11 @@ class AP3_bulk_apply extends AP3_GUI{
             Log_Html_Result("WARN", "---" + "\t" + "- BULK APPLY CANNOT BE TESTED", false, ParentTest.createNode(_t + ". " + "WARNING - NO CATEGORIES EXIST"), new Date());
         }
         
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
     
     // Comparison eg. LIST1.size() ==/>/< LIST2.size()
