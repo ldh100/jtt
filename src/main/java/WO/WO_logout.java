@@ -21,7 +21,7 @@ class WO_logout extends WO_GUI {
         Element_By_Selector_Click("Click 'Logout'", "xpath", ".//*[text()='Logout']", ParentTest, "no_jira");                                     
             if (FAIL) { return;}    
         Thread.sleep(500);    
-        Find_Text("Find 'Login' after logout", "Login", true, ParentTest, "no_jira");
+        Find_Text("Verify 'Login' page present after logout", "Login", true, ParentTest, "no_jira");
             if (FAIL) { return;}  
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;

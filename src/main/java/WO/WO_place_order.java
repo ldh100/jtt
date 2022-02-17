@@ -67,8 +67,7 @@ class WO_place_order extends WO_GUI {
                 Element_Child_List_L1("Matching Locations Count", L0.get(L0.size()-1),"xpath", ".//div[@class='v-list-item__title']", ParentTest, "no_jira");                                     
                 if(L1.size()==0){continue;}
                 //for (int i = 0; i < L1.size(); i++) {
-                Element_Text("Location (" + "1" + ") Name:", L1.get(0),  ParentTest, "no_jira");             
-                    if (FAIL) { return;}
+                    Element_Text("Location (" + "1" + ") Name:", L1.get(0),  ParentTest, "no_jira");             
                 //}
               
                 Element_Click("Select 1st Location in the list", L1.get(0),ParentTest, "no_jira"); 

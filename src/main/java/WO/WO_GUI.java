@@ -165,12 +165,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -813,12 +813,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     protected final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-    protected String WO_TKN = "";    
+    protected String AP3_TKN = "";    
 
     protected String app = "";
     protected String appId = "";
     protected String SITE = "";
+    protected String Site_ID = "";
     protected String BRAND = "";
+    protected String Brand_ID = "";
 
     protected String COUNTRY = "COUNTRY";
     protected String platform = "CDL";
@@ -981,7 +983,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             env = "PR";
             url = "https://thriveapp.io/";
         }
-        Get_WO_TKN();
+        Get_AP3_TKN();
         GUI_Load_CONFIG();
         if (CONFIG) {
             Load = true;
@@ -1218,12 +1220,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    protected void Get_WO_TKN(){
+    protected void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
-            WO_TKN = rs.getString(1);
+            AP3_TKN = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
             txtLog.append("=== WO_TKN > ERROR: " + ex.getMessage() + "\r\n");
@@ -1600,6 +1602,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
                 platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
                 COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+                Site_ID = DV1.getValueAt(DV1.getSelectedRow(), 3).toString();
             }
             if(DV2.getRowCount() > 0) {
                 BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
@@ -2173,7 +2176,17 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Login: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
-
+        if (_Account_settings) { 
+            SCOPE += ", Account Settings";
+            ParentTest = HtmlReport.createTest("Account Settings"); 
+            EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_account_settings BR = new WO_account_settings(WO_GUI.this);
+            BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Account Settings: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
 
         if (_Place_pickup_order) { 
             SCOPE += ", Pickup Order";
@@ -2207,17 +2220,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Order Status" + "\t" + " ===== " + "\t" + " == ^ Order Status End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         }
-        if (_Account_settings) { 
-            SCOPE += ", Account Settings";
-            ParentTest = HtmlReport.createTest("Account Settings"); 
-            EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            WO_account_settings BR = new WO_account_settings(WO_GUI.this);
-            BR.run(); // ====================================== 
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Account Settings: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());    
-        }
+
         if (_Order_history) { 
             SCOPE += ", Order History";
             ParentTest = HtmlReport.createTest("Order History"); 
@@ -3381,6 +3384,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
             Actions action = new Actions(d1);
             action.moveToElement(e).click().perform();
+            Thread.sleep(500);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5000,7 +5004,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
-                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
+                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
             } else {
                 _p++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
