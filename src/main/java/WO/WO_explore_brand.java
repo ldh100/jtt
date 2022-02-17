@@ -1,8 +1,6 @@
 package WO;
 
-import com.aventstack.extentreports.ExtentTest;
 import java.util.Date;
-import org.openqa.selenium.WebElement;
 
 class WO_explore_brand extends WO_GUI {
     protected WO_explore_brand(WO_GUI a) {
@@ -68,14 +66,14 @@ class WO_explore_brand extends WO_GUI {
                 SERVICE = "Delivery";
 
             } 
-            List_L1(SERVICE + " Brands Count", "xpath", "//span[@class='ma-0 pa-7 pb-0 pt-3 brand-name-text']", ParentTest, "no_jira"); 
+            List_L1(SITE + " > " + SERVICE + " Brands Count", "xpath", "//span[@class='ma-0 pa-7 pb-0 pt-3 brand-name-text']", ParentTest, "no_jira"); 
             for (int j = 0; j < L1.size(); j++) {
-                Element_Text("Delivery Brand (" + j + "):", L1.get(j),  ParentTest, "no_jira");     
+                Element_Text(SERVICE + " Brand (" + j + ") Name", L1.get(j),  ParentTest, "no_jira");     
             } 
         } else { 
             for (int i = 0; i < 2; i++) {
                 List_L0("Find Service tabs", "css", "[role='tab']", ParentTest, "no_jira");
-                Element_Text("Service tab (" + i + ") name:", L0.get(i),  ParentTest, "no_jira");                       
+                Element_Text("Service tab (" + (i+1) + ") name:", L0.get(i),  ParentTest, "no_jira");                       
                 if (t.toLowerCase().equals("pickup")) { 
                     PICKUP = true; 
                     SERVICE = "Pickup";           
@@ -89,13 +87,13 @@ class WO_explore_brand extends WO_GUI {
                 List_L1("List " + SERVICE + " Brands / Count", "xpath", "//span[@class='ma-0 pa-7 pb-0 pt-3 brand-name-text']", ParentTest, "no_jira"); 
                 if(!L1.isEmpty()) {
 //                    for (int j = 0; j < L1.size(); j++) {
-//                        Element_Text(SERVICE + " Brand (" + j + "):", L1.get(j), ParentTest, "no_jira");     
+//                        Element_Text(SERVICE + " Brand (" + (j+1) + ") Name", L1.get(j), ParentTest, "no_jira");     
 //                    }
                     Element_Click("Select 1st " + SERVICE + " Brand in the List", L1.get(0),  ParentTest, "no_jira"); 
                     List_L2("Get Menu Category count ", "css", "[role='tab']", ParentTest, "no_jira");                 
 //                    for (int j = 0; j < L2.size(); j++){         
-//                        //Element_Text("Print Menu Category " + j + " Name ", L2.get(j),  ParentTest, "no_jira");
-//                        Element_Click("Select Category " + j, L2.get(j), ParentTest, "no_jira");                
+//                        //Element_Text("Print Menu Category " + (j+1) + " Name ", L2.get(j),  ParentTest, "no_jira");
+//                        Element_Click("Select Category " + (j+1), L2.get(j), ParentTest, "no_jira");                
 //                    }   
                     Element_Click("Select 1st Category", L2.get(0), ParentTest, "no_jira"); 
                     List_L2("Get Selected Category > Menu Items Count", "xpath", "//div[@class='menu-item pa-3 mt-3 v-card v-card--link v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira"); 

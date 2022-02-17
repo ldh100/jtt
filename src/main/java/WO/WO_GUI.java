@@ -410,7 +410,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _explore_brand_menu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _explore_brand_menu.setSelected(true);
         _explore_brand_menu.setText("Explore Brand Menu");
-        _explore_brand_menu.setEnabled(false);
         _explore_brand_menu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _explore_brand_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _explore_brand_menu.setRequestFocusEnabled(false);

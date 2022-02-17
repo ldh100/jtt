@@ -1,6 +1,8 @@
 package WO;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 
 class WO_account_settings extends WO_GUI {
@@ -11,13 +13,14 @@ class WO_account_settings extends WO_GUI {
         BaseAPI = a.BaseAPI;
         AP3_TKN = a.AP3_TKN;
 
+        New_ID = a.New_ID;
         Site_ID = a.Site_ID;
 
         loadTimeout = a.loadTimeout;
         LoadTimeOut = a.LoadTimeOut;
         ParentTest = a.ParentTest;
     }
-    String[] NAME = new String[]{"", "Mister Mickey Mouse", "AMEX Donald Duck","Discovery snoopy "}  ;
+    String[] NAME = new String[]{"JTT Visa", "JTT Mastercard", "JTT AMEX","JTT Discovery"}  ;
     String[] CARD_NUM = new String[]{"4111111111111111", "5500000000000004","340000000000009" ,"6011000000000004"};
     String[] EXPIRE_MON = new String[]{"01","04","07","12"};
     String[] EXPIRE_YEAR = new String[]{"2023","2025","2030", "2027"};
@@ -61,15 +64,15 @@ class WO_account_settings extends WO_GUI {
           if (FAIL) { return;} 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}
-        //verify CC ---- delete  existed
-        List_L1("Get Item List in 'Payment Cards' container / Count", "css", "[role='listitem']", ParentTest, "no_jira"); 
+        //Get Payment Cards >>> delete  existed
+        List_L1("Get Item List in 'Payment Cards' container / Count (including 'Add New Card)", "css", "[role='listitem']", ParentTest, "no_jira"); 
         for (int j = 0; j < (L1.size() - 1); j++) {
             Element_Text("Card > last 4 digit:", L1.get(j), ParentTest, "no_jira");     
             Element_By_Selector_Click("Click/Open Card details", "xpath", "//*[contains(@class, 'v-list-item__action')]", ParentTest, "no_jira");  
                 if (FAIL) { return;} 
             Thread.sleep(500);
-            Wait_For_Element_By_Selector_Presence("Wait for Card Detail >'DELETE' button present", "xpath", "//span[@class='delete-card-text']", ParentTest, "no_jira");
-                if (FAIL) { return;}              
+//            Wait_For_Element_By_Selector_Presence("Wait for Card Detail >'DELETE' button present", "xpath", "//span[@class='delete-card-text']", ParentTest, "no_jira");
+//                if (FAIL) { return;}              
             Element_By_Selector_Click("Click Card > Delete button", "xpath", "//span[@class='delete-card-text']", ParentTest, "no_jira");
                 if (FAIL) { return;} 
             Thread.sleep(500);
@@ -80,53 +83,78 @@ class WO_account_settings extends WO_GUI {
         //Enter Add New CC screen   
         //Element_By_Selector_Text("Find 'Add New Card' row", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
         Element_By_Selector_Click("Click 'Add New Card'", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Wait_For_Element_By_Selector_Presence("Wait for ''Add New Card' container present", "xpath", "//h2[@class='mb-4 text-center']", ParentTest, "no_jira");
             if (FAIL) { return;}  
-            if (!FAIL) { return;}  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        //Determine the payment type FreedomPay vs. EXACT
-        paymentType = "freedompay";
-        
-         //T.Element_E1_Find("Determine the payment type","tagName", "iframe", ParentTest, "no_jira");    
-//        if(d1.findElements(By.tagName("iframe")).isEmpty()) {    // no iframe ----- exact 
-//            paymentType = "exact";
-//        }
-//        _t++; EX += _t + "\t" + "Determine the payment type " + "\t" + " ===== " + "\t" + paymentType + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//       
+        //Determine the payment type FreedomPay/EXACT validate against API return
+        if(paymentType.toLowerCase().equals("freedompay")){
+            Element_E1_Find("Determine the payment type (iframe > freedompay)","xpath", "//iframe[contains(@src, 'freedompay')]", ParentTest, "no_jira");    
+            if(FAIL) {    // no freedompay iframe >>> exact 
+                paymentType = "exact";
+                _t++; _f++;
+                EX += _t + "\t" + "Validate Payment Type" + "\t" + "Expected by API return" + "\t" + paymentType + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "iframe[contains(@src, 'freedompay')] - Not found", false, ParentTest.createNode(_t + ". " + "Validate FE Payment Type - expected from API: freedompay"), new Date());
+            }else{
+                paymentType = "freedompay";
+                _t++; _p++;
+                EX += _t + "\t" + "Validate Payment Type" + "\t" + "Expected by API return" + "\t" + paymentType + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "iframe[contains(@src, 'freedompay')] - found", false, ParentTest.createNode(_t + ". " + "Validate FE Payment Type - expected from API: freedompay"), new Date());
+            }
+        }
+       
+       
         PaymentInfo pi = new PaymentInfo() ;
         
         switch (paymentType){
-            case "freedompay":
-                for (int i = 0; i < NAME.length; i++){               
-                    pi = new PaymentInfo(NAME[i],CARD_NUM[i],EXPIRE_MON[i],EXPIRE_YEAR[i],CVV[i],POSTAL[i]);
-                    _t++; EX += _t + "\t" + "Add CC  " + i  + "\t" + " ===== " + "\t" + NAME[i] + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    
-                    AddCC_FreedomPay(pi);
-                    
-                    Element_By_Selector_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
-                    Element_By_Selector_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
-                }
-              
-                Navigate_Back("Navigate Back", SITE + "Account Settings", "Previous page (???)",ParentTest, "no_jira");
-                    if (FAIL) { return;} 
-                break;
-            
             case "exact":     
-                 for (int i = 0; i < NAME.length; i++){               
-                    pi = new PaymentInfo(NAME[i],CARD_NUM[i],EXPIRE_MON[i],EXPIRE_YEAR[i],CVV[i],POSTAL[i]);
-                    _t++; EX += _t + "\t" + "Add CC (Exact)  " + i  + "\t" + " ===== " + "\t" + NAME[i] + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    
-                    AddCC_Exact(pi);
-                    
-                    Element_By_Selector_Click("Click 'Payment Option' tab", "xpath", "//a[@href='/account-settings/payment-options']",ParentTest, "no_jira");
-                    Element_By_Selector_Click("Click 'Add New Card' ROW", "xpath", "//h4[text()='Add a new card']",ParentTest, "no_jira");
-                
-                 }
-                Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)",ParentTest, "no_jira");                  
-                break;                
+                Element_By_Selector_Text_Enter("Enter Name on card", "id", "nameOnCard", "JTT " + New_ID, false, ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Element_By_Selector_Text_Enter("Enter Card Number", "id", "maskedCardNumber", "5500000000000004", false, ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                Element_By_Selector_Text_Enter("Enter Expiration Date", "id", "expiryDate", "1223", false, ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                Element_By_Selector_Text_Enter("Enter CVV", "id" , "cvv", "123", false, ParentTest, "no_jira");
+                    if (FAIL) { return;}
+                Element_By_Selector_Text_Enter("Enter Canada Postal code", "id" , "zipcode", "L4L3C3", false, ParentTest, "no_jira");
+                    if (FAIL) { return;}
+
+                Element_By_Selector_Click("Click 'Save' <Card> button", "id", "saveCardButton", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}
+                Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+                    if (FAIL) { return;}
+                //Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)",ParentTest, "no_jira");                  
+                break; 
+            case "freedompay":
+                Element_By_Selector_Click("Click 'Enter Name on card' input", "className", "iframe-input", ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Element_By_Selector_Text_Enter("Enter Name on Card", "className", "iframe-input", "JTT " + New_ID, false, ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                //Switch to iframe
+                Swith_to_Frame("switch iframe", "tagName", "iframe", ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Element_By_Selector_Text_Enter("Enter Card Number", "id", "CardNumber", "340000000000009",false, ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Element_By_Selector_Text_Enter("Enter Expire Date", "id", "ExpirationDate", "1124", false, ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Element_By_Selector_Text_Enter("Enter CVV","id", "SecurityCode", "6960", false, ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Element_By_Selector_Text_Enter("Enter US Zip Code", "id", "PostalCode", "47234", false, ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Element_By_Selector_Click("Click Save Card", "className", "fp-hpc-pay-button", ParentTest, "no_jira");
+                    if (FAIL) { return;} 
+                Swith_to_Frame("Switch back from 'ifarme' to orginal 'defaultContent'", "defaultContent", null, ParentTest, "no_jira");
+                //Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)",ParentTest, "no_jira");
+                break;
             default: 
                 break;
         }
-        } catch (Exception ex){}
-    
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        try{
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+        }catch(Exception eee) {};
+        }       
     }  
     
     private void AddCC_FreedomPay(PaymentInfo pi) {
@@ -136,7 +164,7 @@ class WO_account_settings extends WO_GUI {
         Element_By_Selector_Click("click ---Name field", "className", "iframe-input",ParentTest, "no_jira");
         Element_By_Selector_Text_Enter("Input Name ", "className", "iframe-input", pi.name,false, ParentTest, "no_jira");
     //Switch to iframe
-        Swith_to_Frame("switch iframe",          "tagName", "IFRAME",ParentTest, "no_jira");
+        Swith_to_Frame("switch iframe", "tagName", "IFRAME",ParentTest, "no_jira");
     //Verify label and input CC Info
         Element_By_Selector_Text("Verify label ---Card number",   "xpath", "//label[text()='Card Number']",ParentTest, "no_jira"); 
         Element_By_Selector_Click("Cursor locate to --Card number field", "id", "CardNumber",ParentTest, "no_jira");
@@ -176,7 +204,7 @@ class WO_account_settings extends WO_GUI {
         _t++;_f++; EX += _t + "\t" + "Add CC FAIL " + "\t" + " ===== " + "\t" + errormessages + "\t" + " FAIL " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
    
-        Swith_to_Frame("switch to orginal webdriver",          "defaultContent", null,ParentTest, "no_jira");
+        Swith_to_Frame("switch to orginal webdriver", "defaultContent", null,ParentTest, "no_jira");
         Navigate_Back("Navigate Back", SITE + "Account Settings","Previous page (???)",ParentTest, "no_jira");
             if (FAIL) { return;}       
  
