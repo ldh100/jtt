@@ -769,7 +769,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private Duration DD;
     
     private String SQL = ""; 
-    private String Ver = "";
+    protected String Ver = "";
     private String TZone;      
     private String Summary;
     private String r_type;  
@@ -2096,7 +2096,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
 
-        HtmlReporter.config().setReportName("WO" + ", Env: " + env + 
+        HtmlReporter.config().setReportName("WO" + ", Env: " + env + ", Ver: " + Ver +
                 ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                             ", Avg: " + A.A.df.format(t_avg) +
@@ -2171,6 +2171,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             WO_login BR = new WO_login(WO_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            Ver = BR.Ver;
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest.getModel().setName("Login: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    

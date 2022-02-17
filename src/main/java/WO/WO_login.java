@@ -132,7 +132,6 @@ class WO_login extends WO_GUI {
         Wait_For_All_Elements_InVisibility("Wait for 'fetch-sites-loader'...", "xpath", "//*[contains(@class, 'fetch-sites-loader')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}            
 //        Element_SendKey_Enter("Click 'Location' combobox 'ENTER'", L0.get(0), ParentTest, "no_jira");  
-//                                                                             v-menu__content theme--light v-menu__content--fixed menuable__content__active v-autocomplete__content
         Element_E1_Find("Find Matching Location list", "xpath", "//div[@class='v-menu__content theme--light v-menu__content--fixed menuable__content__active v-autocomplete__content']", ParentTest, "no_jira");
             if (FAIL) { return;}  
         Element_Child_List_L1("Matching Locations Count", e1, "xpath", ".//div[@class='v-list-item__title']", ParentTest, "no_jira");                                     
@@ -142,6 +141,10 @@ class WO_login extends WO_GUI {
 //            }
         Element_Click("Select 1st Location in the found Locations list", L1.get(0),ParentTest, "no_jira"); 
             if (FAIL) { return; }  
+        //Element_E1_Find("Find 'Version' element", "xpath", "//div[contains(@class, 'footer-container')]//h6[@style='text-align: center;']", ParentTest, "no_jira"); 
+        Element_By_Selector_Text("Find 'Version' text", "xpath", "//div[contains(@class, 'footer-container')]//h6[@style='text-align: center;']", ParentTest, "no_jira"); 
+        Ver = t.substring(t.lastIndexOf(" "));
+
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;
         EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
