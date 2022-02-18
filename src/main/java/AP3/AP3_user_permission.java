@@ -58,12 +58,9 @@ class AP3_user_permission extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(),'Logout')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-       
-
-        // @ST - Hiding this "Runner Login" code for me to run unit test   
-        /*    
-        */
+     
         // <editor-fold defaultstate="collapsed" desc="Runner Login" >
+/*
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
@@ -85,8 +82,8 @@ class AP3_user_permission extends AP3_GUI{
 //                if (FAIL) { return;}            
 //            Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true, ParentTest, "no_jira");             
 //                if (FAIL) { return;}             
-//        }
-          
+//        }    
+*/
         // </editor-fold>     
         
         // <editor-fold defaultstate="collapsed" desc="Admin N" >  
@@ -95,7 +92,7 @@ class AP3_user_permission extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-        Element_By_Path_Text_Enter("Enter ==== Admin N Email", "css", "[aria-label='E-mail']", AP3_RN, false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter ==== Admin N Email", "css", "[aria-label='E-mail']", AP3_AN, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", PW, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
