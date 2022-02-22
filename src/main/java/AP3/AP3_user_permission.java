@@ -31,19 +31,12 @@ class AP3_user_permission extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     }    
-    // in each Env:
-    // cdl.test.xtt+rn@gmail.com - Runner // https://api.compassdigital.org/dev/user/auth?realm=bolter  
-    // cdl.test.xtt+an@gmail.com - Admin no Allow refunds, no Allow Menu Kick-Outs
-    // cdl.test.xtt+sy@gmail.com - Site Manager All Options
-    // cdl.test.xtt+sn@gmail.com - Site Manager No Options
-    // cdl.test.xtt+dy@gmail.com - CDL Delivery Manager All Options
-    // cdl.test.xtt+dn@gmail.com - CDL Delivery Manager No Options
     String AP3_AN = "ap3.qa1@compassdigital.io"; // Admin no Allow refunds, no Allow Menu Kick-Outs
     String AP3_SY = "ap3.qa2@compassdigital.io"; // Site Manager All Options
     String AP3_SN = "ap3.qa3@compassdigital.io"; // Site Manager No Options
     String AP3_DY = "ap3.qa4@compassdigital.io"; // CDL Delivery Manager All Options
     String AP3_DN = "ap3.qa5@compassdigital.io"; // CDL Delivery Manager No Options
-    String AP3_RN = "ap3.qa6@compassdigital.io"; // Runner
+    String AP3_RN = "ap3.qa6@compassdigital.io"; // Runner > https://api.compassdigital.org/dev/user/auth?realm=bolter  
     // Password for ALL
     String PW = "Password_111_01";
     //Pre-requisite for this scope: The Brand should not have any existing Station Closure added

@@ -27,8 +27,10 @@ class WO_login extends WO_GUI {
         //Find_Text("Verify 'Support' button/text present ", "Support", true, ParentTest, "no_jira");           
         //Find_Text("Find 'Enter Location' text", "Enter Your " + app.toLowerCase() + " Location", true, ParentTest, "no_jira");           
         //Find_Text("Find 'Log in' text", "Log in", true, ParentTest, "no_jira"); 
-        Element_By_Selector_Click("Click 'Log in'", "xpath", "//*[text()='Log in']", ParentTest, "no_jira"); 
-            if (FAIL) { return;}               
+//        Element_By_Selector_Click("Click 'Log in'", "xpath", "//*[text()='Log in']", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}               
+        Element_By_Selector_Click("Click 'Log in'", "id", "nav-log-in-btn", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
         Element_E1_Find("Find 'Login' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
             if (FAIL) { return;} 
         //Element_Child_Text("Find 'Login' dialog Title", e1, "xpath", ".//div[@class='row pt-8 no-gutters']", ParentTest, "no_jira");               
@@ -94,8 +96,7 @@ class WO_login extends WO_GUI {
                 if (FAIL) { return;} 
             Element_Child_Click("Click 'Passsword' input", L1.get(4), "id" , "input-106", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            String password = "Abcwd234";
-            Element_Child_Text_Enter("Enter Valid Password", L1.get(4), "id" , "input-106", password, true, ParentTest, "no_jira");
+            Element_Child_Text_Enter("Enter Valid Password", L1.get(4), "id" , "input-106", "Abcwd234", true, ParentTest, "no_jira");
                 if (FAIL) { return;} 
             //Element_By_Selector_Click("Click 'Un-hide Password'", "css", "[aria-label='append icon']", ParentTest, "no_jira"); 
             Element_By_Selector_Click("Click 'Create Account'", "xpath", "(//button[@type='button'])[11]",  ParentTest, "no_jira");
@@ -109,11 +110,11 @@ class WO_login extends WO_GUI {
                 if (FAIL) { return;}            
             Element_Child_Click("Click 'Pssword' input", L1.get(1), "tagName" , "input", ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
-            Element_Child_Text_Enter("Enter Valid Pssword", L1.get(1), "tagName" , "input", MOBILE_PW, true, ParentTest, "no_jira"); 
+            Element_Child_Text_Enter("Enter Valid Password", L1.get(1), "tagName" , "input", MOBILE_PW, true, ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
             //Element_By_Selector_Click("Click 'Un-hide Password'", "css", "[aria-label='append icon']", ParentTest, "no_jira"); 
             Element_Child_Click("Click 'LOGIN'", e1,"xpath", ".//button[contains(@class, 'v-btn v-btn--contained theme--light v-size--default')]", ParentTest, "no_jira");             
-                if (FAIL) { return;} // =========================    Development Red ^^^^^
+                if (FAIL) { return;} 
         }           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}   
@@ -141,7 +142,6 @@ class WO_login extends WO_GUI {
 //            }
         Element_Click("Select 1st Location in the found Locations list", L1.get(0),ParentTest, "no_jira"); 
             if (FAIL) { return; }  
-        //Element_E1_Find("Find 'Version' element", "xpath", "//div[contains(@class, 'footer-container')]//h6[@style='text-align: center;']", ParentTest, "no_jira"); 
         Element_By_Selector_Text("Find 'Version' text", "xpath", "//div[contains(@class, 'footer-container')]//h6[@style='text-align: center;']", ParentTest, "no_jira"); 
         Ver = t.substring(t.lastIndexOf(" "));
 

@@ -19,7 +19,7 @@ class WO_explore_brand extends WO_GUI {
     try {   
         Navigate_to_URL("Navigate to " + url, url, ParentTest, "no_jira");             
             if (FAIL) { return;}
-        Page_URL("Login page", ParentTest, "no_jira");             
+        Page_URL("Start page URL", ParentTest, "no_jira");             
         //Element_By_Selector_Attribute("Find " + app + " Image", "xpath", "//div[@class='v-image__image v-image__image--cover']", "style", ParentTest, "no_jira");
         //Element_By_Selector_Text("Find 'card-header' text", "xpath", "//p[@class='card-header']", ParentTest, "no_jira");           
         //Find_Text("Find 'Support' text", "Support", true, ParentTest, "no_jira");           
@@ -43,13 +43,7 @@ class WO_explore_brand extends WO_GUI {
 //            }
         Element_Click("Select 1st Location in the found Locations list", L1.get(0),ParentTest, "no_jira"); 
             if (FAIL) { return; }  
-        
-//        Element_E1_Find("Find Header Card", "xpath", "//div[@class='header-card v-card v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira");
-//            if (FAIL) { return;} 
-//        Element_Child_List_L1("Header lines count", e1,"xpath", ".//div[contains(@class, 'v-card__')]", ParentTest, "no_jira");                                     
-//            for (int i = 0; i < L1.size(); i++) {
-//                Element_Text("Header (" + i + ") line:", L1.get(i),  ParentTest, "no_jira");             
-//            }  
+
             
         PICKUP = false;
         DELIVERY = false;
@@ -100,7 +94,6 @@ class WO_explore_brand extends WO_GUI {
                 } 
                 Navigate_Back("Navigate Back", "Brand Menu", "Site Brands", ParentTest, "no_jira");   
             } 
- 
         }    
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;
@@ -110,23 +103,6 @@ class WO_explore_brand extends WO_GUI {
         }catch(Exception eee) {};
     }  
     }  
-//    private void leftPanelClick( WebElement brandCard ) {
-//    try {
-//        Element_Click("Select first Brand in the List", brandCard,  ParentTest, "no_jira"); 
-//        List_L2("Menu Category count ", "css", "[role='tab']", ParentTest, "no_jira");                 
-//        for ( WebElement we : L2){         
-//            Element_Text("Menu Category : ", we,  ParentTest, "no_jira");
-//            Element_Click("Click Category", we, ParentTest, "no_jira");                
-//        }
-//
-//  
-//    } catch (Exception ex){
-//        String AAA = ex.getMessage(); _t++; _f++;
-//        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-//        try{
-//            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
-//        }catch(Exception eee) {};
-//    }
-//    }
+
 }
 
