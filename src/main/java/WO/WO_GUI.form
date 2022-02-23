@@ -797,7 +797,7 @@
                           <EmptySpace min="110" pref="110" max="-2" attributes="0"/>
                           <Component id="btnRun" min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="_mobile" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="_mobile" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>

@@ -23,8 +23,7 @@ class WO_place_order_delivery extends WO_GUI {
     try{    
         DELIVERY = false;
         String SERVICE = "";
-        Element_By_Selector_Click("Click Application '" + app + "' > Home logo", "id", "home-logo", ParentTest, "no_jira"); 
-            if (FAIL) { return;}
+
         List_L0("Check Available Services (Delivery/Delivery)", "css", "[role='tab']", ParentTest, "no_jira");
         if (L0.isEmpty()) {
             Element_By_Selector_Text("Single Available Service: ", "xpath", "//div[@class='pickup-or-delivery']",  ParentTest, "no_jira"); 

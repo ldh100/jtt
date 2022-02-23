@@ -70,69 +70,30 @@ class WO_place_order_pickup extends WO_GUI {
 //                    }   
         Element_Click("Select 1st Category", L2.get(0), ParentTest, "no_jira"); 
         List_L2("Get Selected Category > Menu Items Count", "xpath", "//div[@class='menu-item pa-3 mt-3 v-card v-card--link v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira"); 
+        Element_Click("Select 1st Menu Item", L2.get(0), ParentTest, "no_jira");
+//        Element_E1_Find("Find 'Add to basket' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+        Element_By_Selector_Click("Click '+'  > add 1 more Item", "xpath", "//button[contains(@class, 'mdi-plus')]", ParentTest, "no_jira");
+        Element_By_Selector_Click("Click 'Add to basket'", "id", "add-to-basket", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+            if (FAIL) { return;}
+// Options ???
+        Element_By_Selector_Click("Click 'Checkout'", "id", "prompt-to-checkout",  ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+            if (FAIL) { return;}
+//Payments input id card-list placeholder "Select a payment method" parent test contains Crad ending
+//Promo
+        Element_By_Selector_Click("Click 'Place order'", "id", "place-order",  ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+            if (FAIL) { return;}
 
-
+        Element_By_Selector_Click("Click Application '" + app + "' > Home logo", "id", "home-logo", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
 /*
-        String ServiceTabxPathStr="";
-//        if(d1.findElements(By.className("pickup-or-delivery")).isEmpty()){
-        ServiceTabxPathStr = ISDELIVERYORDER?"//strong[text()=' Delivery ']" :    "//strong[text()=' Pickup ']"   ;
-//            //String isDeliveryTabSelected=d1.findElement(By.xpath(ServiceTabxPathStr)).findElement(By.xpath("./..")).getAttribute("aria-selected");
-//                //Verify is Service tab selected
-//            while(!"true".equalsIgnoreCase(d1.findElement(By.xpath(ServiceTabxPathStr)).findElement(By.xpath("./..")).getAttribute("aria-selected"))){
-//                _t++;   TWeb.Element_By_Selector_Click("Click service tab ","xpath",ServiceTabxPathStr,ParentTest, "no_jira");             
-//            }
-//        }
-//        
-        if(true){
-            Thread.sleep((long) 3000);
-            for (int ordersCount=0; ordersCount< ORDERCOUNT; ordersCount++ ){
-                Element_By_Selector_Click("click search bar ", "xpath", "//label[text()='Enter Your Thrive Location']/following::input",ParentTest, "no_jira");
-                Element_By_Selector_Text_Enter("Type in search bar", "xpath", "//label[text()='Enter Your Thrive Location']/following::input", SITE, FAIL, ParentTest, "no_jira");
-                Wait_For_Element_By_Selector_Presence("Wait for location list present ", "xpath", "//div[@role='listbox']", ParentTest, "no_jira");
-                List_L0("Locate to Location list", "xpath", "//div[@role='listbox']", ParentTest, "no_jira");
-                    if (FAIL|L0.size()==0) { continue;}  
-                Element_Child_List_L1("Matching Locations Count", L0.get(L0.size()-1),"xpath", ".//div[@class='v-list-item__title']", ParentTest, "no_jira");                                     
-                if(L1.size()==0){continue;}
-                //for (int i = 0; i < L1.size(); i++) {
-                    Element_Text("Location (" + "1" + ") Name:", L1.get(0),  ParentTest, "no_jira");             
-                //}
-              
-                Element_Click("Select 1st Location in the list", L1.get(0),ParentTest, "no_jira"); 
-                if (FAIL) { return; } 
-                Wait_For_Element_By_Selector_Presence("Wait for location screen rendering", "xpath","//strong[text()=' Delivery ']", ParentTest, "no_jira");   
-                Thread.sleep( 3000);
-                if(d1.findElements(By.className("pickup-or-delivery")).isEmpty()){
-                    while(!"true".equalsIgnoreCase(d1.findElement(By.xpath(ServiceTabxPathStr)).findElement(By.xpath("./..")).getAttribute("aria-selected"))){
-                        Element_By_Selector_Click("Click service tab ","xpath",ServiceTabxPathStr,ParentTest, "no_jira");             
-                    }                   
-                   // Element_By_Selector_Click("Click 'service' tab", "xpath",ServiceTabxPathStr,ParentTest, "no_jira"); 
-                    Thread.sleep( 3000);
-                }
-                
-                Element_By_Selector_Click("Enter Selected  Brand:   " + BRAND ,"xpath", "//strong[text()=' " +BRAND+ " ']",  ParentTest, "no_jira"); 
-                if (FAIL){
-                    _t++; EX += _t + "\t" + "Brand --" +BRAND+ " --has no " +ORDERTYPE+ " service, quit placing order " + "\t" + " ===== " + "\t" + "Jump out PICKUP order" + "\t" + " Fail " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                    return;
-                }
-                Wait_For_Element_By_Selector_Presence("Wait for Brand Menu page rendering", "xpath", "//div[@class='pt-5']", ParentTest, "no-jira");
-                System.out.println(" +++++++++++++++++++++++++++++++++++ Start " + ORDERTYPE + " Order Number " + (ordersCount+1) + " of " + ORDERCOUNT + " +++++++++++++++++++++++++++++++++++ ");
-                _t++; EX += _t + "\t" + "Start placing " +ORDERTYPE + "  #" + (ordersCount+1) + " order " + "\t" + " +++++++++ " + "\t" + " ++++++++++ " + "\t" + "  " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                //Menu screen
-                
-                List_L3("Menu Category in the middle pannel  ", "xpath", "//div[@class='pb-6']", ParentTest, "no-jira");
-                    if(FAIL|L3.size()==0){continue;}
-  //L0:       L1:         L2:       L3:   Middle Pannel catgory 
-                //iterate each category's first item
-                if (ORDERCOUNT>2){L3 = L3.subList(0, 1);}
-                for(WebElement we: L3) {
-                    Element_Child_Text("Category Name:  ", we, "css"  , "[class='pb-4']", ParentTest, "no_jira");
-                    Element_Child_List_L1("-Items count in Category  ",we, "css","[class='row mb-5 bold no-gutters']", ParentTest, "no_jira");
-   //L0:       L1:items of each catgory         L2:        L3:   Middle Pannel catgory           
-                
-                    Element_Text("-First item name in Catgory  ",L1.get(0),ParentTest, "no_jira");
-                    Element_Click("-Click to open first item modal --- " +L1.get(0).getText(),L1.get(0) , ParentTest, "no_jira");
-                        if (FAIL) { 
-                            return;} 
+     
 
                 //switch to opened modal 
                     Wait_For_Element_By_Selector_Presence("Wait for item modal rendering", "xpath", "(//span[@class='v-btn__content'])[5]", ParentTest, "no-jira");

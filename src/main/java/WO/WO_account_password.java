@@ -23,9 +23,7 @@ class WO_account_password extends WO_GUI {
 
 
     protected void run() {   
-    try {     
-//        Element_By_Selector_Click("Open User 'Menu'", "xpath", "//i[@class='v-icon notranslate mdi mdi-menu theme--light']", ParentTest, "no_jira");                                     
-//            if (FAIL) { return;}     
+    try {        
         Element_By_Selector_Click("Open User 'Menu'", "id", "nav-menu-btn", ParentTest, "no_jira");                                     
             if (FAIL) { return;}   
         Element_By_Selector_Click("Click Menu > 'My Account'", "xpath", "//h4[text()='My account']", ParentTest, "no_jira");                                     

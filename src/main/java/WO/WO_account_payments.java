@@ -88,21 +88,21 @@ class WO_account_payments extends WO_GUI {
                 Log_Html_Result("PASS", "iframe[contains(@src, 'freedompay')] - found", false, ParentTest.createNode(_t + ". " + "Validate FE Payment Type - expected from API: freedompay"), new Date());
             }
         }
-
+        Thread.sleep(500);
         switch (paymentType){
             case "exact":     
-                Element_By_Selector_Text_Enter("Enter Name on card", "id", "nameOnCard", "JTT " + New_ID, false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Name on card", "id", "name-on-card", "JTT " + New_ID, false, ParentTest, "no_jira");
                     if (FAIL) { return;} 
-                Element_By_Selector_Text_Enter("Enter Card Number", "id", "maskedCardNumber", "5500000000000004", false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Card Number", "id", "masked-card-number", "5500000000000004", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
-                Element_By_Selector_Text_Enter("Enter Expiration Date", "id", "expiryDate", "1223", false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Expiration Date", "id", "expiry-date", "1223", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Element_By_Selector_Text_Enter("Enter CVV (SecurityCode)", "id" , "cvv", "123", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
-                Element_By_Selector_Text_Enter("Enter Canada Postal code", "id" , "zipcode", "L4L3C3", false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Canada Postal code", "id" , "postal-code", "L4L3C3", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
 
-                Element_By_Selector_Click("Click 'Save' <Card> button", "id", "saveCardButton", ParentTest, "no_jira"); 
+                Element_By_Selector_Click("Click 'Save' <New Card> button", "id", "save-card-btn", ParentTest, "no_jira"); 
                     if (FAIL) { return;}
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
                     if (FAIL) { return;}  
