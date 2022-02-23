@@ -1535,6 +1535,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_mobile: ")) _mobile.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_run_on_remote: ")) _remote.setSelected(Boolean.parseBoolean(value));
 
                 if(l.contains("_new_user: ")) _new_user.setSelected(Boolean.parseBoolean(value));
@@ -1585,7 +1586,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             C += "_zip_report: " + "true" + "\r\n";
             
             C += "_headless: " + _headless.isSelected() + "\r\n";  
-            C += "_mobile " + _mobile.isSelected() + "\r\n";  
+            C += "_mobile: " + _mobile.isSelected() + "\r\n";  
             C += "_run_on_remote: " + _remote.isSelected() + "\r\n";  
             
             C += "SITE: " + _S + "\r\n";
