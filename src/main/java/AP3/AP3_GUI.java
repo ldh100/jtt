@@ -2491,6 +2491,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
+
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
             d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
@@ -2529,6 +2530,23 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 New_ID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
                 
                 Extent_Report_Config(); 
+
+                //((JavascriptExecutor) d1).executeScript("document.body.style.zoom='80%';");
+
+//String scaleX = "0.8";
+//String scaleY = "0.8";
+//String jss = "document.body.style.transform='scale(0.8, 0.8)'";
+//
+//JavascriptExecutor js = (JavascriptExecutor)d1;
+//js.executeScript(jss);
+/*
+If you want to zoom in, you need to specify a value greater than 1. For instance a value of 1.5 would meaning zooming in for 150%.
+For zooming out it the value should be between 0.0 to 1.
+The value 1 refers to the original page size i.e 100% zoom.
+So you can zoom in/out, test your thing and can get back to the the original page size by running the following code again:
+
+js.executeScript(document.body.style.transform='scale(1, 1)');
+*/
                 Execute(); // ======================================================================= 
 
                 DD = Duration.between(run_start, Instant.now());
@@ -5867,7 +5885,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
-                Log_Html_Result("FAIL", "API Response: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
+                Log_Html_Result("FAIL", "API Response: " + err + "<br />URL: " +  URL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
             } else {
                 _p++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();

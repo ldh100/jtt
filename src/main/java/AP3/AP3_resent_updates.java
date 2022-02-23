@@ -1,5 +1,7 @@
 package AP3;
 
+import java.util.Date;
+
 class AP3_resent_updates extends AP3_GUI{
     protected AP3_resent_updates(AP3_GUI a) {
         ADMIN_ID = a.ADMIN_ID;
@@ -24,6 +26,10 @@ class AP3_resent_updates extends AP3_GUI{
                 if (FAIL) { return;}
             }
         Click_out_of_Element_By_Path("Resent Updates Close", "xpath", "//span[contains(text(), 'Recent Updates')]", "Left", -40, 10,  ParentTest, "no_jira");             
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

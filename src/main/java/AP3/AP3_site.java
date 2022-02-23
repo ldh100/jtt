@@ -392,12 +392,10 @@ class AP3_site extends AP3_GUI{
         for (int i = 0; i < L0.size(); i++) {
             switch (i) {
                 case 0:
-                    Element_Text("Definition section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
+                    Element_Text("Location Details section Name", L0.get(i), ParentTest, "no_jira");             
                     Element_Click("Location Details Click", L0.get(i), ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Find_Text("Find 'Location Details' text", "Location Details", true, ParentTest, "no_jira"); 
-                    //Element_By_Path_Text("Find 'Timezone' text", "className", "timezone", ParentTest, "no_jira");                      
                     Find_Text("Find 'Location Name' text", "Location Name", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Address' text", "Address", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Country' text", "Country", true, ParentTest, "no_jira"); 
@@ -413,7 +411,6 @@ class AP3_site extends AP3_GUI{
                     break;
                 case 1:
                     Element_Text("Payment section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
                     Element_Click("Payment Info Click", L0.get(i), ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Find_Text("Find 'Payment ID' text", "Payment ID", true, ParentTest, "no_jira");                       
@@ -428,8 +425,7 @@ class AP3_site extends AP3_GUI{
                     Find_Text("Find 'Meal Plan' text", "Meal Plan", true, ParentTest, "no_jira"); 
                       break;
                 case 3:
-                     Element_Text("Loyalty section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
+                    Element_Text("Loyalty section", L0.get(i), ParentTest, "no_jira");             
                     Element_Click("Loyalty Info Click", L0.get(i), ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Find_Text("Find 'Loyalty Program' text", "Loyalty Program", true, ParentTest, "no_jira"); 
@@ -441,7 +437,6 @@ class AP3_site extends AP3_GUI{
                    break;
                 case 4:
                     Element_Text("Promotion section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
                     Element_Click("Click 'Promotion Info'", L0.get(i), ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Find_Text("Find 'Promotions' text", "Promotions", true, ParentTest, "no_jira"); 
@@ -449,30 +444,37 @@ class AP3_site extends AP3_GUI{
                         if (FAIL) { return;} 
                         for (int j = 0; j < L1.size(); j++) {
                             Element_Text("Promotion Data Row", L1.get(j), ParentTest, "no_jira");             
-                            if (FAIL) { return;}
                         }
-                default:
+                case 5:
+                    Element_Text("KDS section", L0.get(i), ParentTest, "no_jira"); 
+                    Find_Text("Find 'KDS Configuration' text", "KDS Configuration", true, ParentTest, "no_jira");             
+
+                    break;
+                case 6:
+                    Element_Text("Delievery Drop-off section", L0.get(i), ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    break;
+                case 7:
+                    Element_Text("APEX section", L0.get(i), ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    break;
+                case 8:
+                    Element_Text("Frictionless section", L0.get(i), ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    break; 
+               default:
                     break;
             }
         } 
-  
+        // </editor-fold> 
+
+        // <editor-fold defaultstate="collapsed" desc="Dropp-Off Locations - ALL">
+
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
-        //get delivery destinations(drop-off locations) from API 
-//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-//        if(t.startsWith("{")){
-//            API_Response_Body = t;               
-//        }else{
-//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-//            return;
-//        }        
-//        JSONObject json = new JSONObject(API_Response_Body);
-//        JSONArray delivery_destinations = json.getJSONArray("delivery_destinations");
 
         Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Move_to_Element_By_Path("Move 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
+        Move_to_Element_By_Path("Move to 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -500,7 +502,7 @@ class AP3_site extends AP3_GUI{
         Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//input[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         for (int i = 1; i < 82; i++) {
-            Element_By_Path_Text_Enter("Try entering a Location Name with greater than 80 characters", "xpath","(//input[@aria-label='Location Name'])[1]", "a",false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Try entering a Location Name with greater than 80 characters", "xpath","(//input[@aria-label='Location Name'])[1]", "a", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
         }
         Element_By_Path_Attribute("Get value in 'Location Name' field", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
@@ -540,49 +542,6 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Location address is required' message", "xpath", "//*[contains(text(),'Address is required')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-
-        //get country value from API for chosen site
-//        Call_API("Call /location/group/'SiteID'", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", true, ParentTest, "no_jira");
-//        if(t.startsWith("{")){
-//            API_Response_Body = t;               
-//        }else{
-//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-//            return;
-//        }
-//        json = new JSONObject(API_Response_Body);
-//        JSONObject address = json.getJSONObject("address");
-//        String country = address.getString("country");
-//
-//        Element_By_Path_Attribute("Get default value of 'Country' field", "xpath", "(//input[@aria-label='Country'])[1]", "value", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        if (country.equals("US")) {
-//            if (t.equals("United States")) {
-//                _t++;
-//                _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
-//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-//            } else {
-//                _t++;
-//                _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
-//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-//            }     
-//        } else if (country.equals("CA")) {
-//            if (t.equals("Canada")) {
-//                _t++;
-//                _p++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "PASS" + "\t" 
-//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//                Log_Html_Result("PASS", "country = " + t, false, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-//            } else {
-//                _t++;
-//                _f++; EX += _t + "\t" + "Check preselected country is set to " + country + "\t" + "-" + "\t" + "country = " + t + "\t" + "FAIL" + "\t" 
-//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//                Log_Html_Result("FAIL", "country = " + t, true, ParentTest.createNode(_t + ". " + "Check preselected country is set to " + country), new Date());
-//            }
-//        }
-
         Element_By_Path_Click("Click > 'Country' field", "xpath", "(//input[@aria-label='Country'])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for dd list of 'countries'", "xpath", "(//div[contains(text(),'United States')]//ancestor::div[contains(@class,'v-menu__content')])[1]", ParentTest, "no_jira");
@@ -592,10 +551,8 @@ class AP3_site extends AP3_GUI{
         for (int i = 0; i < L0.size(); i++) {
             if (i == 0) {
                 Element_Child_Text("Get country value " + (i+1), e, "xpath", "//div[contains(text(),'Canada')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
             } else if (i == 1) {
                 Element_Child_Text("Get country value " + (i+1), e, "xpath", "//div[contains(text(),'United States')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Country list field to load as expected" + "\t" + "-" + "\t" + "Country list size = " + L0.size() + "\t" + "FAIL" + "\t" 
@@ -796,8 +753,6 @@ class AP3_site extends AP3_GUI{
                             + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
                 Log_Html_Result("FAIL", String.valueOf(!t.equals("")), true, ParentTest.createNode(_t + ". " + "Check 'Zip Code' was auto-filled"), new Date());
             }
-//            Element_By_Path_Click("Click > 'State'","xpath", "(//input[@aria-label='State'])[1]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
             Element_By_Path_Attribute("Get auto-filled value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
             if (FAIL) { return;}
             if (!t.equals("")) {
@@ -870,38 +825,14 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}  
         Wait_For_Element_By_Path_Presence("Wait for 'Configuration' page to load", "xpath", "//form[@class='v-form settings']", ParentTest, "no_jira");
             if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
         List_L2("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
-
-        //get delivery destinations(drop-off locations) from API 
-//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-//        if(t.startsWith("{")){
-//            API_Response_Body = t;               
-//        }else{
-//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-//            return;
-//        }        
-//        json = new JSONObject(API_Response_Body);
-//        delivery_destinations = json.getJSONArray("delivery_destinations");
-//        
-//        if (delivery_destinations.length() == L2.size()) {
-//            _t++;
-//            _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "(5MAX shown on table, if expected is > 5)" + "\t" + "PASS" + "\t" 
-//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-//        } else {
-//            _t++;
-//            _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "FAIL" + "\t" 
-//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-//        }
-        // test Address auto-fill - End
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Duplicate/Edit Location">
@@ -914,9 +845,9 @@ class AP3_site extends AP3_GUI{
         // 6. verify location was edited
         Wait_For_Element_By_Path_Presence("Wait for presence of Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
+//        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Edit > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
@@ -1004,40 +935,15 @@ class AP3_site extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
+        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
         List_L2("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
-
-        //get delivery destinations(drop-off locations) from API 
-//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-//        if(t.startsWith("{")){
-//            API_Response_Body = t;               
-//        }else{
-//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-//            return;
-//        }        
-//        json = new JSONObject(API_Response_Body);
-//        delivery_destinations = json.getJSONArray("delivery_destinations");
-//
-//        if (delivery_destinations.length() == L2.size()) {
-//            _t++;
-//            _p++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "PASS" + "\t" 
-//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//            Log_Html_Result("PASS", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-//        } else {
-//            _t++;
-//            _f++; EX += _t + "\t" + "Check > Number of Locations" + "\t" + "-" + "\t" + "expected: " + delivery_destinations.length() + " / output: " + L2.size() + "\t" + "FAIL" + "\t" 
-//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//            Log_Html_Result("FAIL", "expected: " + delivery_destinations.length() + " / output: " + L2.size(), false, ParentTest.createNode(_t + ". " + "Check > Number of Locations"), new Date());
-//        }
-        
-        //test Edit location
-        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
+//        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
@@ -1046,7 +952,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
 
         Element_By_Path_Attribute("Get value of 'Location Name'", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
-        if (FAIL) { return;}
+            if (FAIL) { return;}
         String loc_name_before_edit = t;
         if (loc_name_before_edit.equals(loc_name_before_clone + "-copy")) {
             _t++;
@@ -1322,56 +1228,13 @@ class AP3_site extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-//        Move_to_Element_By_Path("Move 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-//        if (FAIL) { return;}
-//        Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-//        if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
         List_L2("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
 
-        //get delivery destinations(drop-off locations) from API 
-//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-//        if(t.startsWith("{")){
-//            API_Response_Body = t;        
-//        }else{
-//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-//            "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-//            return;
-//        }        
-//        json = new JSONObject(API_Response_Body);
-//        delivery_destinations = json.getJSONArray("delivery_destinations");
-//
-//        for (int i = 0; i < delivery_destinations.length(); i++) {
-//            JSONObject location = delivery_destinations.getJSONObject(i);
-//            String loc_name_from_api = location.getString("name");
-//            if (loc_name_from_api.equals(loc_name_after_edit)) {
-//                String loc_info_from_api = location.getString("information");
-//                Boolean foodlocker_status_from_api = location.getBoolean("foodlocker");
-//                JSONObject ADDRESS = location.getJSONObject("address");
-//                String address_from_api = ADDRESS.getString("address");
-//                String city_from_api = ADDRESS.getString("city");
-//                String stateprovince_from_api = ADDRESS.getString("state");
-//                String postalzip_from_api = ADDRESS.getString("zip");
-//                if (!foodlocker_status_from_api) {
-//                    if (addr_after_edit.equals(address_from_api) && city_after_edit.equals(city_from_api) && (stateprovince_from_api.equals("IL") || stateprovince_from_api.equals("AB"))
-//                            && postalzip_after_edit.equals(postalzip_from_api) && loc_info_after_edit.equals(loc_info_from_api)) {
-//                        _t++;
-//                        _p++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was edited correctly" + "\t" + "PASS" + "\t" 
-//                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//                        Log_Html_Result("PASS", "location was edited correctly", false, ParentTest.createNode(_t + ". " + "Check > Edited location"), new Date());
-//                    } else {
-//                        _t++;
-//                        _f++; EX += _t + "\t" + "Check > Edited location" + "\t" + "-" + "\t" + "location was not edited correctly" + "\t" + "FAIL" + "\t" 
-//                                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//                        Log_Html_Result("FAIL", "location was not edited correctly", false, ParentTest.createNode(_t + ". " + "Check > Edited location"), new Date());
-//                    }
-//                } 
-//            }
-//        }              
-        // test duplicate/edit location - End
         // </editor-fold>   
             
         // <editor-fold defaultstate="collapsed" desc="Sort/Filter Locations">
@@ -1379,9 +1242,9 @@ class AP3_site extends AP3_GUI{
         // 2. Sort by Location name
         // 3. Sort by Location type
         // 4. Filter (currently only works by Location name)
-        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
+//        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Clone > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-content-copy')]", ParentTest, "no_jira");
@@ -1421,11 +1284,10 @@ class AP3_site extends AP3_GUI{
         Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
+        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
         Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[3]", ParentTest, "no_jira");
             if (FAIL) { return;}
         // paginagion > ALL    
@@ -1463,10 +1325,9 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}  
         Wait_For_Element_By_Path_Presence("Wait for 'Configuration' page to load", "xpath", "//form[@class='v-form settings']", ParentTest, "no_jira");
             if (FAIL) { return;}
+        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
-        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
         // paginagion > ALL    
@@ -1476,26 +1337,13 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
             
         //Click on Location Name column label to sort in decending order
-        Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class, 'column sortable')])[1]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click > 'Location Name' column header - Sort Descending", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class, 'column sortable')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
-        
-//        Wait_For_Element_By_Path_Presence("Check Sort > 'Descending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(), 'Sort-filter')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
         //Click on Location Name column label to sort in ascending order
-        Element_By_Path_Click("Click > 'Location Name' column header", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click > 'Location Name' column header - Sort Ascending", "xpath", "(//*[@id='drop-off-locations']//*[contains(@class,'column sortable')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(500);
-//        String first_loc_in_record = "";
-//        if (loc_name_before_clone.contains("-X")) {
-//            int indx = loc_name_before_clone.indexOf("-X");
-//            first_loc_in_record = loc_name_before_clone.substring(0, indx - 1);
-//            Wait_For_Element_By_Path_Presence("Check Sort > 'Ascending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'" + first_loc_in_record + "')]", ParentTest, "no_jira");
-//                if (FAIL) { return;}
-//        } else {
-//            Wait_For_Element_By_Path_Presence("Check Sort > 'Ascending'", "xpath", "((//tbody)[3]//tr)[1]//td[contains(text(),'" + loc_name_before_clone + "')]", ParentTest, "no_jira");
-//                if (FAIL) { return;}
-//        }        
+        Thread.sleep(500);   
         //filter locations (only by name)
         Move_to_Element_By_Path("Move to 'Search Locations' field", "xpath", "//*[@aria-label='Search Locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1528,32 +1376,31 @@ class AP3_site extends AP3_GUI{
                         + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
             Log_Html_Result("FAIL", "locations failed to filter", true, ParentTest.createNode(_t + ". " + "Check List was Filtered"), new Date());
         }
-//        Element_By_Path_Input_Select_Clear("Clear > 'Search Locations' field", "xpath", "//*[@aria-label='Search Locations']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Thread.sleep(1000);
-//        Kepp filtered - only new Location for delete them below
         // </editor-fold>  
         
         // <editor-fold defaultstate="collapsed" desc="Delete New_ID Locations">
-        List_L1("Get List of Locations - after filter test", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
+        List_L1("Get List of Locations - after filtering", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}        
         for (int i = (L1.size() - 1); i >= 0; i--) {
             Element_Text("Get Location " + i, L1.get(i), ParentTest, "no_jira");
                 if (FAIL) { return;}
             if (!t.contains("No locations found") && t.contains(New_ID)) {
-                Move_to_Element("Move to Location " + i, L1.get(i), ParentTest, "no_jira");
-                    if (FAIL) { return;}
-                Thread.sleep(500);
-                Element_Child_Click("Click > 'delete icon'", L1.get(i),"xpath", ".//i[contains(@class,'mdi-delete')]", ParentTest, "np_jira");
-                    if (FAIL) { return;}
+                Move_to_Element("Move to Location " + i, L1.get(i), ParentTest, "no_jira"); 
+                //Scroll_to_Element("Scroll to Location " + i, L1.get(i), ParentTest, "no_jira");
+                //Move_to_Element_By_Path("Move to Location " + i, "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[" + i + "]", ParentTest, "no_jira");            
+                //Element_Click("Move to Location " + i, L1.get(i), ParentTest, "no_jira");
+                    //if (FAIL) { return;}
+                Element_Child_Click("Click > 'delete icon'", L1.get(i), "xpath", ".//i[contains(@class,'mdi-delete')]", ParentTest, "np_jira");
+                    //if (FAIL) { return;}
                 Element_E1_Find("Find 'Revome Location?' confirmation dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                    //if (FAIL) { return;}
                 Element_Child_Click("Click > 'Remove'", e1, "xpath", ".//*[contains(text(),'REMOVE')]", ParentTest, "np_jira");
-                    if (FAIL) { return;}
-                Wait_For_Element_By_Path_InVisibility("Wait for 'Revome Location?' confirmation dialog to disappear", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                    //if (FAIL) { return;}
+//                Wait_For_Element_By_Path_InVisibility("Wait for 'Revome Location?' confirmation dialog to disappear", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
+//                    if (FAIL) { return;}
             }   
-        }   
+        } 
+  
         Move_to_Element_By_Path("Move > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
@@ -1572,40 +1419,14 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
             if (FAIL) { return;} 
-
-        //get delivery destinations(drop-off locations) from API 
         List_L1("Get List of Locations - All", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
-//        Call_API("Call /location/group/'SiteID'/deliverydestination", "Bearer " + AP3_TKN, BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", true, ParentTest, "no_jira");
-//        if(t.startsWith("{")){
-//            API_Response_Body = t;               
-//        }else{
-//            EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-//                                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-//            Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "/deliverydestination?nocache=1&extended=true", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-//            return;
-//        }        
-//        json = new JSONObject(API_Response_Body);
-//        delivery_destinations = json.getJSONArray("delivery_destinations");
-//        int num_of_locs_after_delete = delivery_destinations.length();
-//
-//        if (num_of_locs_after_delete == L1.size()) {
-//            _t++;
-//            _p++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + " - " + "\t" + "Before: " + L1.size() + " After: " + num_of_locs_after_delete + "\t" + "PASS" + "\t" 
-//                    + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//            Log_Html_Result("PASS", "Before: " + L1.size() + " After: " + num_of_locs_after_delete, false, 
-//                    ParentTest.createNode(_t + ". " + "Check > number of locations after a delete"), new Date());
-//        } else {
-//            _t++;
-//            _f++; EX += _t + "\t" + "Check > number of locations after a delete" + "\t" + " - " + "\t" + "Before: " + L1.size() + " After: " + num_of_locs_after_delete + "\t" + "FAIL" + "\t" 
-//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-//            Log_Html_Result("FAIL", "Before: " + L1.size() + " After: " + num_of_locs_after_delete, false, 
-//                    ParentTest.createNode(_t + ". " + "Check > number of locations after a delete"), new Date());
-//        }
-        // </editor-fold>
-        
+        // </editor-fold>       
+
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+
         // </editor-fold>
+
 
         Navigate_to_URL("Navigate back to Station List", url + "#/sites/all", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1642,7 +1463,7 @@ class AP3_site extends AP3_GUI{
         for (int i = 0; i < L0.size(); i++) {
             switch (i) {
                 case 0:
-                    Element_Text("Definition section", L0.get(i), ParentTest, "no_jira");             
+                    Element_Text("Location Details section", L0.get(i), ParentTest, "no_jira");             
                         if (FAIL) { return;} 
                     Element_Click("Location Details Click", L0.get(i), ParentTest, "no_jira");
                         if (FAIL) { return;} 
@@ -1861,9 +1682,7 @@ class AP3_site extends AP3_GUI{
                         if (FAIL) { return;} 
                     Element_E1_Find("Find 'Promo State' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light v-menu__content--fixed menuable__content__active')]", ParentTest, "no_jira");
                         if (FAIL) { return;}                           
-                    Element_Child_List_L1("Promo State Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                            
-//                    List_L1("Promo State Count", "xpath", "/html/body/div/div[4]/div/div/div", ParentTest, "no_jira");             
-//                        if (FAIL) { return;} 
+                    Element_Child_List_L1("Promo State Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                             
                         for (int j = 0; j < L1.size(); j++) {
                             Element_Text("Promo State:", L1.get(j), ParentTest, "no_jira");             
                         }    
@@ -1871,8 +1690,6 @@ class AP3_site extends AP3_GUI{
                         if (FAIL) { return;}  
                     Element_By_Path_Click("Create promo 'Save Changes' Click", "xpath", "//*[contains(text(), 'save changes')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}  
-//                        Element_By_Path_Click("Create promo 'Cancel' Click", "xpath", "//*[contains(text(), 'cancel')]", ParentTest, "no_jira"); 
-//                            if (FAIL) { return;}
                     List_L1("Promotions Count", "tagName", "tr", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
                         for (int j = 0; j < L1.size(); j++) {
@@ -1888,8 +1705,6 @@ class AP3_site extends AP3_GUI{
                     Element_E1_Find("Find 'Promo Types' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light v-menu__content--fixed menuable__content__active')]", ParentTest, "no_jira");
                         if (FAIL) { return;}                                         
                     Element_Child_List_L1("Promo Types Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                            
-//                    List_L1("Promo Types Count", "xpath", "/html/body/div/div[4]/div/div/div", ParentTest, "no_jira");             
-//                        if (FAIL) { return;} 
                         for (int j = 0; j < L1.size(); j++) {
                             Element_Text("Promo Type " + j, L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
@@ -1904,27 +1719,46 @@ class AP3_site extends AP3_GUI{
                     Element_E1_Find("Find 'Promo State' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light v-menu__content--fixed menuable__content__active')]", ParentTest, "no_jira");
                         if (FAIL) { return;}                           
                     Element_Child_List_L1("Promo State Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                            
-//                    List_L1("Promo State Count", "xpath", "/html/body/div/div[4]/div/div/div", ParentTest, "no_jira");             
-//                        if (FAIL) { return;} 
-                    for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Promo State:", L1.get(j), ParentTest, "no_jira");             
-                    }   
+                        for (int j = 0; j < L1.size(); j++) {
+                            Element_Text("Promo State:", L1.get(j), ParentTest, "no_jira");             
+                        }   
                     Element_By_Path_Click("Select Promo State 'Active'", "xpath", "//*[contains(text(), '" + "Active" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
                     Element_By_Path_Click("Create promo 'Save Changes' Click", "xpath", "//*[contains(text(), 'save changes')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}  
-//                        Element_By_Path_Click("Create promo 'Cancel' Click", "xpath", "//*[contains(text(), 'cancel')]", ParentTest, "no_jira"); 
-//                            if (FAIL) { return;}
                     List_L1("Promo Count - Only 1 Active", "tagName", "tr", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
-                    for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Promotion Data Row", L1.get(j), ParentTest, "no_jira");             
-                    }                              
-                    break;          
+                        for (int j = 0; j < L1.size(); j++) {
+                            Element_Text("Promotion Data Row", L1.get(j), ParentTest, "no_jira");             
+                        }                              
+                    break;  
+                case 5:
+                    Element_Text("KDS section", L0.get(i), ParentTest, "no_jira"); 
+                    Find_Text("Find 'KDS Configuration' text", "KDS Configuration", true, ParentTest, "no_jira");             
+
+                    break;
+                case 6:
+                    Element_Text("Delievery Drop-off section", L0.get(i), ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    break;
+                case 7:
+                    Element_Text("APEX section", L0.get(i), ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    break;
+                case 8:
+                    Element_Text("Frictionless section", L0.get(i), ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    break;         
                 default:
                     break;
                 }
             }   
+
+        Move_to_Element_By_Path("Move > New Site > 'Cancel' button", "xpath", "//footer//*[contains(text(),'Cancel')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_By_Path_Click("Click > New Site > 'Cancel' button", "xpath", "//footer//*[contains(text(),'Cancel')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+
         Element_By_Path_Click("New Site 'Cancel' Click", "xpath", "//*[contains(text(), 'Cancel')]", ParentTest, "no_jira");             
             if (FAIL) { return;}         
         Navigate_Back("Navigate Back","Add New Site page", "App Site page", ParentTest, "no_jira"); 
@@ -1932,6 +1766,10 @@ class AP3_site extends AP3_GUI{
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");          
         // </editor-fold> 
    
-        } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

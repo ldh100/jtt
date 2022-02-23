@@ -63,7 +63,6 @@ class user_bolter extends AP3_API_GUI{
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
-        }
-        
+        }       
     }
 }

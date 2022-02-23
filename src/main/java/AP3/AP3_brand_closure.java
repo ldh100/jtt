@@ -259,6 +259,10 @@ class AP3_brand_closure extends AP3_GUI{
                 Calendar_API_Closure("Validate Future Closure Removed in 'calendar' API", API_Response_Body, "Auto Future Closure " + New_ID, false, ParentTest, "no_jira" );              
             }
         }
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

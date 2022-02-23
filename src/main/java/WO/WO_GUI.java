@@ -19,6 +19,7 @@ import java.awt.event.ComponentListener;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -59,6 +60,7 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -69,6 +71,7 @@ import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import java.text.SimpleDateFormat;
@@ -91,7 +94,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 
 public class WO_GUI extends javax.swing.JInternalFrame {
     public WO_GUI() {
@@ -122,7 +124,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         lblSITES10 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         _login = new javax.swing.JCheckBox();
-        _account_settings = new javax.swing.JCheckBox();
+        _account_info = new javax.swing.JCheckBox();
         _order_status = new javax.swing.JCheckBox();
         _edit_item = new javax.swing.JCheckBox();
         _order_history = new javax.swing.JCheckBox();
@@ -139,6 +141,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         lblSITES12 = new javax.swing.JLabel();
         txtMplan = new javax.swing.JTextField();
         _mplan = new javax.swing.JCheckBox();
+        _account_password = new javax.swing.JCheckBox();
+        _account_payments = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -155,6 +159,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _slack = new javax.swing.JCheckBox();
         lblSITES16 = new javax.swing.JLabel();
         txtSlackCh = new javax.swing.JTextField();
+        _remote = new javax.swing.JCheckBox();
+        _mobile = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -301,7 +307,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(lblSITES7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(nShowPage, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,11 +315,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 .addComponent(lblSITES10, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
                 .addComponent(nWaitElement, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addComponent(lblSITES9, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(nWaitLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,11 +347,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _login.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _login.setRequestFocusEnabled(false);
 
-        _account_settings.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _account_settings.setText("Account Settings");
-        _account_settings.setContentAreaFilled(false);
-        _account_settings.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _account_settings.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _account_info.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _account_info.setText("Account Information");
+        _account_info.setContentAreaFilled(false);
+        _account_info.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _account_info.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
         _order_status.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _order_status.setText("Order Status");
@@ -410,7 +416,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _explore_brand_menu.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _explore_brand_menu.setSelected(true);
         _explore_brand_menu.setText("Explore Brand Menu");
-        _explore_brand_menu.setEnabled(false);
         _explore_brand_menu.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _explore_brand_menu.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _explore_brand_menu.setRequestFocusEnabled(false);
@@ -438,6 +443,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _mplan.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _mplan.setRequestFocusEnabled(false);
 
+        _account_password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _account_password.setText("Account Change Password");
+        _account_password.setContentAreaFilled(false);
+        _account_password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _account_password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        _account_payments.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _account_payments.setText("Account Payments");
+        _account_payments.setContentAreaFilled(false);
+        _account_payments.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _account_payments.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -445,17 +462,17 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(lblSITES8)
+                        .addGap(33, 33, 33)
+                        .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -463,72 +480,74 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         .addComponent(txtMplan, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_account_info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_account_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(_account_payments, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_account_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lblSITES8)
-                                .addGap(33, 33, 33)
-                                .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(_new_user, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_account_settings, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_account_info, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_account_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_account_payments, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES8)
                     .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES12)
-                    .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSITES12)
+                        .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMplan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         cmbBrow.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jPanel3.add(cmbBrow, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 80, 20));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         btnRun.setForeground(new java.awt.Color(204, 0, 0));
@@ -539,7 +558,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        jPanel3.add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 98, 78, 30));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -549,7 +567,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        jPanel3.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 84, 22));
 
         btnFails.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnFails.setText("Show Fails");
@@ -560,7 +577,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnFailsMouseClicked(evt);
             }
         });
-        jPanel3.add(btnFails, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 84, 22));
 
         btnExcel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnExcel.setText("Excel Rep");
@@ -571,13 +587,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnExcelMouseClicked(evt);
             }
         });
-        jPanel3.add(btnExcel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 84, 22));
 
         _headless.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _headless.setText("Headless <<");
         _headless.setToolTipText("");
         _headless.setRequestFocusEnabled(false);
-        jPanel3.add(_headless, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 100, 14));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -588,25 +602,21 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        jPanel3.add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 116, 22));
 
         lblSITES11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES11.setText("Browser:");
         lblSITES11.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 72, 16));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Environment:");
         lblSITES13.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 92, 16));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("Application:");
         lblSITES14.setAlignmentX(0.5F);
-        jPanel3.add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 92, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -614,7 +624,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 116, 20));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -622,24 +631,116 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        jPanel3.add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 108, 20));
 
         _slack.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         _slack.setText("Report to Slack");
         _slack.setToolTipText("");
         _slack.setRequestFocusEnabled(false);
-        jPanel3.add(_slack, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 108, 14));
 
         lblSITES16.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES16.setText("Slack Shannel:");
         lblSITES16.setAlignmentX(0.5F);
         lblSITES16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jPanel3.add(lblSITES16, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 72, 16));
 
         txtSlackCh.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtSlackCh.setText("xtt_test");
-        jPanel3.add(txtSlackCh, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 4, 96, -1));
+
+        _remote.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        _remote.setText("Remote <<");
+        _remote.setToolTipText("");
+        _remote.setRequestFocusEnabled(false);
+
+        _mobile.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        _mobile.setText("Mobile View <<");
+        _mobile.setToolTipText("");
+        _mobile.setRequestFocusEnabled(false);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(_slack, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(lblSITES16, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(txtSlackCh, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblSITES11, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(cmbBrow, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFails, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_headless, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_remote, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSlackCh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_slack, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES16, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSITES11, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbBrow, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnFails, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(_headless, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(_remote, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -650,24 +751,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -676,44 +764,57 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                                         .addGap(40, 40, 40)
                                         .addComponent(lblSITES6))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(8, 8, 8)
+                                        .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addComponent(lblBRANDS, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBRANDS, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblSITES)
                         .addGap(2, 2, 2)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(lblBRANDS))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(lblBRANDS)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSITES4)
                             .addComponent(lblSITES6))
                         .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(4, 4, 4)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -770,7 +871,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private Duration DD;
     
     private String SQL = ""; 
-    private String Ver = "";
+    protected String Ver = "";
     private String TZone;      
     private String Summary;
     private String r_type;  
@@ -794,7 +895,9 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     
     protected String SCOPE;
     protected boolean _Headless = false;
-    
+    protected boolean _Mobile = false;
+    protected boolean _Run_on_Remote = false;  
+  
     protected String MOBILE_ID;
     protected String MOBILE_PW;
     
@@ -813,12 +916,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected final DateTimeFormatter Time_24_formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     protected final DateTimeFormatter Date_formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-    protected String WO_TKN = "";    
+    protected String AP3_TKN = "";    
 
     protected String app = "";
     protected String appId = "";
     protected String SITE = "";
+    protected String Site_ID = "";
     protected String BRAND = "";
+    protected String Brand_ID = "";
 
     protected String COUNTRY = "COUNTRY";
     protected String platform = "CDL";
@@ -826,7 +931,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected String PROMO = "";
     protected boolean _New_user = false;
     protected boolean _Explore_brand = false;
-    protected boolean _Account_settings = false;
+    protected boolean _Account_payments = false;
+    protected boolean _Account_password = false;
+    protected boolean _Account_info = false;
+
     protected boolean _Order_status = false;
     protected boolean _Order_history = false;
     protected boolean _Edit_item = false;
@@ -981,7 +1089,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             env = "PR";
             url = "https://thriveapp.io/";
         }
-        Get_WO_TKN();
+        Get_AP3_TKN();
         GUI_Load_CONFIG();
         if (CONFIG) {
             Load = true;
@@ -1218,12 +1326,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         lblBRANDS.setText("Selected Site Brands (" + DV2.getRowCount() + " found)");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-    protected void Get_WO_TKN(){
+    protected void Get_AP3_TKN(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));       
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM[dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
             rs.next();
-            WO_TKN = rs.getString(1);
+            AP3_TKN = rs.getString(1);
             conn.close();
         } catch (SQLException ex) {
             txtLog.append("=== WO_TKN > ERROR: " + ex.getMessage() + "\r\n");
@@ -1427,19 +1535,24 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_mobile: ")) _mobile.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_run_on_remote: ")) _remote.setSelected(Boolean.parseBoolean(value));
 
                 if(l.contains("_new_user: ")) _new_user.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_explore_brand_menu: ")) _explore_brand_menu.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_account_settings: ")) _account_settings.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_account_info: ")) _account_info.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_account_password: ")) _account_password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_account_payments: ")) _account_payments.setSelected(Boolean.parseBoolean(value));
+
                 if(l.contains("_order_status: "))  _order_status.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_order_history: "))  _order_history.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_edit_item: "))  _edit_item.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_place_pickup_order: "))  _place_pickup_order.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_place_delivery_order: "))  _place_delivery_order.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_order_email: "))  _order_email.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value));  
+                if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value)); 
+                if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("Promo: ")) txtPromo.setText(value);             
             }  
             CONFIG = true;
@@ -1473,6 +1586,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             C += "_zip_report: " + "true" + "\r\n";
             
             C += "_headless: " + _headless.isSelected() + "\r\n";  
+            C += "_mobile: " + _mobile.isSelected() + "\r\n";  
+            C += "_run_on_remote: " + _remote.isSelected() + "\r\n";  
             
             C += "SITE: " + _S + "\r\n";
             C += "BRAND: " + _B + "\r\n";
@@ -1487,7 +1602,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 
             C += "_new_user: " + _new_user.isSelected() + "\r\n";
             C += "_explore_brand_menu: " + _explore_brand_menu.isSelected() + "\r\n";
-            C += "_account_settings: " + _account_settings.isSelected() + "\r\n";
+            C += "_account_info: " + _account_info.isSelected() + "\r\n";
+            C += "_account_payments: " + _account_payments.isSelected() + "\r\n";
+            C += "_account_password: " + _account_password.isSelected() + "\r\n";
+
             C += "_order_status: " + _order_status.isSelected() + "\r\n";
             C += "_order_history: " + _order_history.isSelected() + "\r\n";
             C += "_edit_item: " + _edit_item.isSelected() + "\r\n";
@@ -1575,6 +1693,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Slack_Channel = txtSlackCh.getText();
             _Slack = _slack.isSelected();
             _Headless = _headless.isSelected();
+            _Mobile= _mobile.isSelected();
+            _Run_on_Remote = _remote.isSelected();
             Zip_Report = true;
 
             MOBILE_ID = txtMobile_ID.getText();
@@ -1582,7 +1702,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 
             _New_user = _new_user.isSelected();
             _Explore_brand = _explore_brand_menu.isSelected();
-            _Account_settings = _account_settings.isSelected();
+
+            _Account_info = _account_info.isSelected();
+            _Account_payments = _account_payments.isSelected();
+            _Account_password = _account_password.isSelected();
+
             _Order_status = _order_status.isSelected();
             _Order_history = _order_history.isSelected();
             _Edit_item = _edit_item.isSelected();
@@ -1600,6 +1724,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 SITE = DV1.getValueAt(DV1.getSelectedRow(), 0).toString();
                 platform = DV1.getValueAt(DV1.getSelectedRow(), 1).toString(); // platform
                 COUNTRY = DV1.getValueAt(DV1.getSelectedRow(), 2).toString();
+                Site_ID = DV1.getValueAt(DV1.getSelectedRow(), 3).toString();
             }
             if(DV2.getRowCount() > 0) {
                 BRAND = DV2.getValueAt(DV2.getSelectedRow(), 0).toString();
@@ -1614,7 +1739,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
             
             
-            Current_Log_Update(true, "= Starting Appium Service and Android Driver..." + "\r\n");
+            Current_Log_Update(true, "= Starting WebDriver..." + "\r\n");
             
             if(sw1.isRunning()){
                 sw1.reset();
@@ -1663,7 +1788,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             SCOPE = "";
             r_type = run_type; 
 
-            Current_Log_Update(false, "- Starting Appium Service and Android Driver..." + "\r\n");
+            Current_Log_Update(false, "- Starting Web Driver..." + "\r\n");
             if(sw1.isRunning()){
                 sw1.reset();
             }
@@ -1690,6 +1815,9 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("SlackCh: ")) Slack_Channel = value;
                 if(l.contains("_slack:")) _Slack = Boolean.parseBoolean(value); 
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
+                if(l.contains("_mobile: ")) _Mobile = Boolean.parseBoolean(value);
+                if(l.contains("_run_on_remote: ")) _Run_on_Remote = Boolean.parseBoolean(value);
+
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
                 if(l.contains("SITE: ")) SITE = value;
@@ -1703,7 +1831,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 
                 if(l.contains("_new_user: ")) _New_user = Boolean.parseBoolean(value); 
                 if(l.contains("_explore_brand_menu: ")) _Explore_brand = Boolean.parseBoolean(value);
-                if(l.contains("_account_settings: ")) _Account_settings = Boolean.parseBoolean(value);
+
+                if(l.contains("_account_info: ")) _Account_info = Boolean.parseBoolean(value);
+                if(l.contains("_account_payments: ")) _Account_payments = Boolean.parseBoolean(value);
+                if(l.contains("_account_password: ")) _Account_password = Boolean.parseBoolean(value);
+
+
                 if(l.contains("_order_status: ")) _Order_status = Boolean.parseBoolean(value);
                 if(l.contains("_order_history: ")) _Order_history = Boolean.parseBoolean(value);
                 if(l.contains("_edit_item: ")) _Edit_item = Boolean.parseBoolean(value);
@@ -1808,7 +1941,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
      //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Execution > Reports">
-    protected String StartWebDriver() {
+    protected String StartLocalWebDriver() {
         if(_Headless){
             HEADLESS = " - headless";           
         } else{
@@ -1899,8 +2032,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         d1 = new SafariDriver();     
                     break;
             }
+            if(_Mobile){
+                Dimension dimension = new Dimension(414, 896);
+                d1.manage().window().setSize(dimension);
+            } else{
+                d1.manage().window().maximize();
+            }
 
-            d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
@@ -1911,7 +2049,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 			.ignoring(NoSuchElementException.class); 
             
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            return "= WabDriver Start > OK " + "\r\n";
+            return "= Local WebDriver Start > OK " + "\r\n";
         } catch (Exception ex) {
             F += "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
             if(d1 != null) {
@@ -1920,13 +2058,111 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             return "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
         }  
     }
+    protected String StartRemotelWebDriver() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try { 
+            switch (BROWSER) {
+                case "Chrome":
+                        ChromeOptions chrome_op = new ChromeOptions();
+                        chrome_op.setCapability("browserVersion", "latest");
+                        chrome_op.setCapability("platformName", "Windows 10");
+                        Map<String, Object> prefs = new HashMap<String, Object>();
+//                        prefs.put("username", "ospozito");
+//                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
+                        prefs.put("name", app + " Web Ordering");
+                        prefs.put("screenResolution", "1920x1200");
+
+                        chrome_op.setCapability("sauce:options", prefs);
+                        URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
+                        d1 = new RemoteWebDriver(url, chrome_op);
+                    break;
+                case "Edge":
+//                    txtLog.append( "= Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
+//                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                        EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
+                        //edgeServise.SuppressInitialDiagnosticInformation = true;
+//                        service.seVerboseLogging = false;
+//                        service.UseSpecCompliantProtocol = false;
+                        EdgeOptions edge_op = new EdgeOptions();
+                       //edge_op.setPageLoadStrategy("normal");
+                        edge_op.setCapability( "disable-infobars", true);
+                        edge_op.setCapability( "disable-gpu", true);
+                        edge_op.setCapability("useAutomationExtension", false);
+//                                PageLoadStrategy = PageLoadStrategy.Default,
+//                                UnhandledPromptBehavior = UnhandledPromptBehavior.Dismiss
+                        if(_Headless){
+                            edge_op.setCapability( "headless", true);
+                        }
+                        
+                        d1 = new EdgeDriver(edgeServise, edge_op);
+                    break;
+                case "Firefox":
+                        FirefoxProfile profile = new FirefoxProfile();
+                        profile.setPreference("network.proxy.no_proxies_on", "localhost");
+                        profile.setPreference("javascript.enabled", true);
+
+//                        DesiredCapabilities capabilities = DesiredCapabilities.;
+//                        capabilities.setCapability("marionette", true);
+//                        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+
+                        FirefoxOptions ff_op = new FirefoxOptions();
+                        //ff_op.merge(capabilities);
+                        //ff_op.addPreference("browser.link.open_newwindow", 3);
+                        //ff_op.addPreference("browser.link.open_newwindow.restriction", 0);
+
+                        d1 = new FirefoxDriver(ff_op);
+                    break;
+                case "IE11":
+                        InternetExplorerOptions ie_op = new InternetExplorerOptions();
+                        ie_op.ignoreZoomSettings(); // Not necessarily in case 100% zoom.
+                        ie_op.introduceFlakinessByIgnoringSecurityDomains(); // Necessary to skip protected  mode setup
+                        ie_op.elementScrollTo(ElementScrollBehavior.BOTTOM);
+                        ie_op.disableNativeEvents();
+                        d1 = new InternetExplorerDriver(ie_op);
+                    break;
+                case "Safari":
+                        //To do on MAC machine // =====================================
+                        d1 = new SafariDriver();     
+                    break;
+            }
+            if(_Mobile){
+                Dimension dimension = new Dimension(414, 896);
+                d1.manage().window().setSize(dimension);
+            } else{
+                d1.manage().window().maximize();
+            }
+
+            d1.manage().deleteAllCookies(); // =================================
+            
+            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
+            loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class); 
+            
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return "= Remote WebDriver Start > OK " + "\r\n";
+        } catch (Exception ex) {
+            F += "= Remote WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+            if(d1 != null) {
+                d1.quit();
+            }
+            return "= Remote WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+        }  
+    }
     protected void BW1_DoWork(Boolean GUI) { 
         BW1 = new SwingWorker() {             
             @Override
             protected String doInBackground() throws Exception { 
-                String DriverStart = StartWebDriver();
+                String DriverStart = "";
+                if(_Run_on_Remote){
+                    DriverStart = StartRemotelWebDriver();
+                } else{
+                    DriverStart = StartLocalWebDriver();
+                }
                 if(DriverStart.contains("OK")){
-                    Current_Log_Update(GUI, "= Appium Service and Android Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
+                    Current_Log_Update(GUI, "= WebDriver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
                     sw1.reset();
                 } else{
                     Current_Log_Update(GUI, DriverStart.trim() + "\r\n");
@@ -2085,7 +2321,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Current_Log_Update(GUI, "= LOG_UPDATE > Call Times parsing ERROR: " + ex.getMessage() + "\r\n");
         }
         
-        Current_Log_Update(GUI, "= WO" + " v: " + "?" + ", Env: " + env + "\r\n");       
+        Current_Log_Update(GUI, "= WO" + " v: " + Ver + ", App: " + app + ", Env: " + env + "\r\n");       
         Current_Log_Update(GUI, "= Scope: " + SCOPE + "\r\n"); // SCOPE shown in EX top
         Current_Log_Update(GUI, "= " + Summary + "\r\n"); // Summary shown in EX top
         Current_Log_Update(GUI, "= Duration: " + DD.toHours() + "h, " + (DD.toMinutes() % 60) + "m, " + (DD.getSeconds() % 60) + "s" + "\r\n");
@@ -2094,7 +2330,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Log = txtLog.getText();
         }
 
-        HtmlReporter.config().setReportName("WO" + ", Env: " + env + 
+        HtmlReporter.config().setReportName("WO" + ", Env: " + env + ", Ver: " + Ver +
                 ", Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i +
                 ". Resp(sec) - Min: " + A.A.df.format(t_min) +
                             ", Avg: " + A.A.df.format(t_avg) +
@@ -2152,14 +2388,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if (_Explore_brand) { 
             SCOPE += "Explore Brand Menu";
             ParentTest = HtmlReport.createTest("Explore Brand"); 
-            EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand Menu >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            EX += " - " + "\t" + " === Explore Brand Menu" + "\t" + " ===== " + "\t" + " == Explore Brand > Menu, no Login >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_explore_brand BR = new WO_explore_brand(WO_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             PICKUP = BR.PICKUP;
             DELIVERY = BR.DELIVERY;
-            EX += " - " + "\t" + " === ^ Explore Brand Menu" + "\t" + " ===== " + "\t" + " == ^ Explore Brand Menu" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Explore Brand Menu: " + BR._t + ", Failed: " + BR._f);
+            EX += " - " + "\t" + " === ^ Explore Brand > Menu, no Login" + "\t" + " ===== " + "\t" + " == ^ Explore Brand > Menu, no Login" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Explore Brand > Menu, no Login: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         } 
         if (true) { 
@@ -2169,29 +2405,62 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             WO_login BR = new WO_login(WO_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            Ver = BR.Ver;
             EX += " - " + "\t" + " === ^ Login " + "\t" + " ===== " + "\t" + " == ^ Login End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest.getModel().setName("Login: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
-
+        if (_Account_info) { 
+            SCOPE += ", Account Info";
+            ParentTest = HtmlReport.createTest("Account Info"); 
+            EX += " - " + "\t" + " === Account Info" + "\t" + " ===== " + "\t" + " == Account Settings Info >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_account_info BR = new WO_account_info(WO_GUI.this);
+            BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Account Info" + "\t" + " ===== " + "\t" + " == ^ Account Settings Info End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Account Info: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
+        if (_Account_password) { 
+            SCOPE += ", Account Payments";
+            ParentTest = HtmlReport.createTest("Account Password"); 
+            EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account Settings Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_account_password BR = new WO_account_password(WO_GUI.this);
+            BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Account Password" + "\t" + " ===== " + "\t" + " == ^ Account Settings Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Account Password: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
+        if (_Account_payments) { 
+            SCOPE += ", Account Payments";
+            ParentTest = HtmlReport.createTest("Account Payments"); 
+            EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Payments Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_account_payments BR = new WO_account_payments(WO_GUI.this);
+            BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Account Payments" + "\t" + " ===== " + "\t" + " == ^ Account Settings Payments End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Account Payments: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
 
         if (_Place_pickup_order) { 
             SCOPE += ", Pickup Order";
             ParentTest = HtmlReport.createTest("Place Pickup Order"); 
             EX += " - " + "\t" + " === Place Pickup Order" + "\t" + " ===== " + "\t" + " == Place Pickup Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            WO_place_order BR = new WO_place_order(WO_GUI.this);
-            BR.run(false); // ======================================
+            WO_place_order_pickup BR = new WO_place_order_pickup(WO_GUI.this);
+            BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Place Pickup Order" + "\t" + " ===== " + "\t" + " == ^ Place Pickup Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Pickup Order: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Place Pickup Order: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Place_delivery_order) { 
             SCOPE += ", Delivery Order";
             ParentTest = HtmlReport.createTest("Place Delivery Order"); 
             EX += " - " + "\t" + " === Place Delivery Order" + "\t" + " ===== " + "\t" + " == Place Delivery Order >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            WO_place_order BR = new WO_place_order(WO_GUI.this);
-            BR.run(true); // ======================================
+            WO_place_order_delivery BR = new WO_place_order_delivery(WO_GUI.this);
+            BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Place Delivery Order" + "\t" + " ===== " + "\t" + " == ^ Place Delivery Order" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest.getModel().setName("Place Delivery Order: " + BR._t + ", Failed: " + BR._f);
@@ -2207,17 +2476,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Order Status" + "\t" + " ===== " + "\t" + " == ^ Order Status End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         }
-        if (_Account_settings) { 
-            SCOPE += ", Account Settings";
-            ParentTest = HtmlReport.createTest("Account Settings"); 
-            EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            WO_account_settings BR = new WO_account_settings(WO_GUI.this);
-            BR.run(); // ====================================== 
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Account Settings" + "\t" + " ===== " + "\t" + " == ^ Account Settings End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Account Settings: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());    
-        }
+
         if (_Order_history) { 
             SCOPE += ", Order History";
             ParentTest = HtmlReport.createTest("Order History"); 
@@ -2231,7 +2490,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         }
         if (_Logout) { 
             SCOPE += ", LogOut";
-            ParentTest = HtmlReport.createTest("LogOut"); 
+            ParentTest = HtmlReport.createTest("Log Out"); 
             EX += " - " + "\t" + " === Logout" + "\t" + " ===== " + "\t" + " == Logout Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_logout BR = new WO_logout(WO_GUI.this);
             BR.run(); // ====================================== 
@@ -3381,6 +3640,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
             Actions action = new Actions(d1);
             action.moveToElement(e).click().perform();
+            Thread.sleep(500);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click successful" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5000,7 +5260,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 EX += _t + "\t == " + NAME + "\t" + URL + "\t" + " --- " + "\t" + "FAIL" + "\t" + err +
                 "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
                 F += "Step: " + _t + " > " + err + "\r\n";
-                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, true, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
+                Log_Html_Result("FAIL", "Error: " + err + "<br />URL: " +  URL, false, ParentTest.createNode(_t + ". " + NAME), API_SRART);                
             } else {
                 _p++; err = ex.getMessage().trim();
                 if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
@@ -5545,7 +5805,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
  
         FAIL = false;
         try {
-            E.sendKeys(Keys.chord(Keys.ENTER)); //select all text in textbox
+            E.sendKeys(Keys.chord(Keys.ENTER)); 
             _p++;
             EX += _t + "\t" + NAME + "\t" + "Passed Element"  + "\t" + "Enter key presses" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
@@ -5679,12 +5939,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
     private javax.swing.JTable DV2;
-    private javax.swing.JCheckBox _account_settings;
+    private javax.swing.JCheckBox _account_info;
+    private javax.swing.JCheckBox _account_password;
+    private javax.swing.JCheckBox _account_payments;
     private javax.swing.JCheckBox _edit_item;
     private javax.swing.JCheckBox _explore_brand_menu;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
+    private javax.swing.JCheckBox _mobile;
     private javax.swing.JCheckBox _mplan;
     private javax.swing.JCheckBox _new_user;
     private javax.swing.JCheckBox _order_email;
@@ -5694,6 +5957,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _place_delivery_order;
     private javax.swing.JCheckBox _place_pickup_order;
     private javax.swing.JCheckBox _promo;
+    private javax.swing.JCheckBox _remote;
     private javax.swing.JCheckBox _slack;
     private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnFails;

@@ -5,6 +5,7 @@ import static A.A.sleep;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -316,7 +317,9 @@ Thread.sleep(1000);
             EX += _t + "\t" + "File to delete does not exist" + "\t" + filebrand + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
     } catch (Exception ex){
-        // =============================================  
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
     }   
     } 
 }
