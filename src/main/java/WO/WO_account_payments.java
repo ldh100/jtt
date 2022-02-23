@@ -105,15 +105,21 @@ class WO_account_payments extends WO_GUI {
                 Element_By_Selector_Click("Click 'Save' <Card> button", "id", "saveCardButton", ParentTest, "no_jira"); 
                     if (FAIL) { return;}
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
-                    if (FAIL) { return;}               
+                    if (FAIL) { return;}  
+                List_L3("Check Error Message(s)", "xpath", "//*[contains(@class, 'error-card')]", ParentTest, "no_jira");
+                if(!L3.isEmpty()){  // Check Error 'Wallet error', 'Could not save card in wallet'
+                    Element_Text("Get Error Message(s)", L3.get(L3.size() - 1), ParentTest, "no_jira");
+                    Element_Child_Click("Click 'Error Card > Ok'", L3.get(L3.size() - 1), "xpath", ".//*[text()='Ok']", ParentTest, "no_jira");             
+                        //if (FAIL) { return;}  
+                }             
                 break; 
             case "freedompay":
                 Element_By_Selector_Click("Click 'Enter Name on card' input", "className", "iframe-input", ParentTest, "no_jira");
                     if (FAIL) { return;} 
                 Element_By_Selector_Text_Enter("Enter Name on Card", "className", "iframe-input", "JTT " + New_ID, false, ParentTest, "no_jira");
-                    if (FAIL) { return;} 
-                //Switch to iframe
-                Swith_to_Frame("switch iframe", "tagName", "iframe", ParentTest, "no_jira");
+                    if (FAIL) { return;}    
+             
+                Swith_to_Frame("switch iframe", "tagName", "iframe", ParentTest, "no_jira"); //Switch to iframe
                     if (FAIL) { return;} 
                 Element_By_Selector_Text_Enter("Enter Card Number", "id", "CardNumber", "340000000000009",false, ParentTest, "no_jira");
                     if (FAIL) { return;} 
@@ -126,18 +132,18 @@ class WO_account_payments extends WO_GUI {
                 Element_By_Selector_Click("Click Save Card", "className", "fp-hpc-pay-button", ParentTest, "no_jira");
                     if (FAIL) { return;} 
                 Swith_to_Frame("Switch back from 'ifarme' to 'defaultContent'", "defaultContent", null, ParentTest, "no_jira");
+
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
                     if (FAIL) { return;} 
-
+                List_L3("Check Error Message(s)", "xpath", "//*[contains(@class, 'error-card')]", ParentTest, "no_jira");
+                if(!L3.isEmpty()){  // Check Error 'Wallet error', 'Could not save card in wallet'
+                    Element_Text("Get Error Message(s)", L3.get(L3.size() - 1), ParentTest, "no_jira");
+                    Element_Child_Click("Click 'Error Card > Ok'", L3.get(L3.size() - 1), "xpath", ".//*[text()='Ok']", ParentTest, "no_jira");             
+                        //if (FAIL) { return;}  
+                }
                 break;
             default: 
                 break;
-        }
-        List_L3("Check Error Message(s)", "xpath", "//*[contains(@class, 'error-card')]", ParentTest, "no_jira");
-        if(!L3.isEmpty()){  // Check Error 'Wallet error', 'Could not save card in wallet'
-            Element_Text("Get Error Message(s)", L3.get(L3.size() - 1), ParentTest, "no_jira");
-            Element_Child_Click("Click 'Error Card > Ok'", L3.get(L3.size() - 1), "xpath", ".//*[text()='Ok']", ParentTest, "no_jira");             
-                //if (FAIL) { return;}  
         }
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;

@@ -40,9 +40,9 @@ class WO_place_order_delivery extends WO_GUI {
                 if (t.toLowerCase().equals("Delivery")) { 
                     DELIVERY = true; 
                     SERVICE = "Delivery";           
+                    Element_Click("Click '" + SERVICE + "' tab", L0.get(i), ParentTest, "no_jira"); 
+                        if (FAIL) { return; } 
                 }
-                Element_Click("Click '" + SERVICE + "' tab", L0.get(i), ParentTest, "no_jira"); 
-                    if (FAIL) { return; } 
             } 
         }
         if (!DELIVERY){

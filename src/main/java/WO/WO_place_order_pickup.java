@@ -23,7 +23,6 @@ class WO_place_order_pickup extends WO_GUI {
     protected void run() { 
     try{    
         PICKUP = false;
-        DELIVERY = false;
         String SERVICE = "";
         Element_By_Selector_Click("Click Application '" + app + "' > Home logo", "id", "home-logo", ParentTest, "no_jira"); 
             if (FAIL) { return;}

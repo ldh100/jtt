@@ -25,24 +25,30 @@ class WO_explore_brand extends WO_GUI {
         //Find_Text("Find 'Support' text", "Support", true, ParentTest, "no_jira");           
         //Find_Text("Find 'Enter Location' text", "Enter Your " + app.toLowerCase() + " Location", true, ParentTest, "no_jira");           
 
-        List_L0("Find 'Enter Location' combobox", "css", "[role='combobox']", ParentTest, "no_jira");             
-            if (FAIL) { return;}             
-        Element_Child_Click("Click 'Select Location' Slot", L0.get(0), "tagName", "input", ParentTest, "no_jira");             
-            if (FAIL) { return;}                      
-        Element_Child_Text_Enter("Enter Target Site Name: " + SITE, L0.get(0), "tagName", "input", SITE, false, ParentTest, "no_jira");             
+        Element_E1_Find("Find 'Select Location' input", "xpath", "//input[@type='text']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Element_Text_Enter("Enter Target Site Name: " + SITE, e1, SITE, ParentTest, "no_jira");             
             if (FAIL) { return;} 
-        Wait_For_All_Elements_InVisibility("Wait for 'fetch-sites-loader'...", "xpath", "//*[contains(@class, 'fetch-sites-loader')]", ParentTest, "no_jira");                                                                                     
-            if (FAIL) { return;}            
-//        Element_SendKey_Enter("Click 'Location' combobox 'ENTER'", L0.get(0), ParentTest, "no_jira");  
-        Element_E1_Find("Find Matching Location list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active v-autocomplete__content']", ParentTest, "no_jira");
-            if (FAIL) { return;}  
-        Element_Child_List_L1("Matching Locations Count", e1, "xpath", ".//div[@class='v-list-item__title']", ParentTest, "no_jira");                                     
-            if (FAIL) { return; }  
-//            for (int i = 0; i < L1.size(); i++) {
-//                Element_Text("Location (" + i + ") Name:", L1.get(i),  ParentTest, "no_jira");             
-//            }
-        Element_Click("Select 1st Location in the found Locations list", L1.get(0),ParentTest, "no_jira"); 
-            if (FAIL) { return; }  
+        Element_SendKey_Enter("Click 'Location' combobox 'ENTER'", e1, ParentTest, "no_jira"); 
+
+//        List_L0("Find 'Enter Location' combobox", "css", "[role='combobox']", ParentTest, "no_jira");             
+//            if (FAIL) { return;}             
+//        Element_Child_Click("Click 'Select Location' Slot", L0.get(0), "tagName", "input", ParentTest, "no_jira");             
+//            if (FAIL) { return;}                      
+//        Element_Child_Text_Enter("Enter Target Site Name: " + SITE, L0.get(0), "tagName", "input", SITE, false, ParentTest, "no_jira");             
+//            if (FAIL) { return;} 
+//        Wait_For_All_Elements_InVisibility("Wait for 'fetch-sites-loader'...", "xpath", "//*[contains(@class, 'fetch-sites-loader')]", ParentTest, "no_jira");                                                                                     
+//            if (FAIL) { return;}            
+////        Element_SendKey_Enter("Click 'Location' combobox 'ENTER'", L0.get(0), ParentTest, "no_jira");  
+//        Element_E1_Find("Find Matching Location list", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active v-autocomplete__content']", ParentTest, "no_jira");
+//            if (FAIL) { return;}  
+//        Element_Child_List_L1("Matching Locations Count", e1, "xpath", ".//div[@class='v-list-item__title']", ParentTest, "no_jira");                                     
+//            if (FAIL) { return; }  
+////            for (int i = 0; i < L1.size(); i++) {
+////                Element_Text("Location (" + i + ") Name:", L1.get(i),  ParentTest, "no_jira");             
+////            }
+//        Element_Click("Select 1st Location in the found Locations list", L1.get(0),ParentTest, "no_jira"); 
+//            if (FAIL) { return; }  
 
             
         PICKUP = false;
