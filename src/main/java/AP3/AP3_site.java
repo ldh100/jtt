@@ -360,26 +360,26 @@ class AP3_site extends AP3_GUI{
             } 
         // </editor-fold> 
           
-        // <editor-fold defaultstate="collapsed" desc="Training Video">
-        Element_By_Path_Click("Training Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}     
-        Thread.sleep(500);               
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Swith_to_Frame("Switch to Video Player", "tagName", "iframe", ParentTest, "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
-            if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        Element_By_Path_Click("Play Click", "className", "play-icon", ParentTest, "no_jira"); 
-            if (FAIL) { return;}
-            Thread.sleep(1000);
-        Swith_to_Frame("Back to default frame", "defaultContent", "N/A", ParentTest, "no_jira");
-            if (FAIL) { return;}      
-        Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        // </editor-fold> 
+//        // <editor-fold defaultstate="collapsed" desc="Training Video">
+//        Element_By_Path_Click("Training Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}     
+//        Thread.sleep(500);               
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Swith_to_Frame("Switch to Video Player", "tagName", "iframe", ParentTest, "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
+//            if (FAIL) { return;} 
+//        Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        Element_By_Path_Click("Play Click", "className", "play-icon", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}
+//            Thread.sleep(1000);
+//        Swith_to_Frame("Back to default frame", "defaultContent", "N/A", ParentTest, "no_jira");
+//            if (FAIL) { return;}      
+//        Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        // </editor-fold> 
 
         // <editor-fold defaultstate="collapsed" desc="Site Congiguration">
         Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira"); 
@@ -835,407 +835,407 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         // </editor-fold>
 
-        // <editor-fold defaultstate="collapsed" desc="Duplicate/Edit Location">
-        // test duplicate/edit location - Begin
-        // 1. open edit mode of location
-        // 2. store initial values in all fields
-        // 3. cancel, then duplicate location
-        // 4. verify field values in cloned location
-        // 5. edit location
-        // 6. verify location was edited
-        Wait_For_Element_By_Path_Presence("Wait for presence of Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-//        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+//        // <editor-fold defaultstate="collapsed" desc="Duplicate/Edit Location">
+//        // test duplicate/edit location - Begin
+//        // 1. open edit mode of location
+//        // 2. store initial values in all fields
+//        // 3. cancel, then duplicate location
+//        // 4. verify field values in cloned location
+//        // 5. edit location
+//        // 6. verify location was edited
+//        Wait_For_Element_By_Path_Presence("Wait for presence of Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+////        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+////            if (FAIL) { return;}
+////        Thread.sleep(500);
+//        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Edit > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Attribute("Get value of 'Location Name'", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String loc_name_before_clone = t;
+//        Element_By_Path_Attribute("Get value of 'Address'", "xpath", "(//input[@aria-label='Address'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String addr_before_clone = t;
+//        Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String city_before_clone = t;
+//        String stateprovince_before_clone = "";
+//        String postalzip_before_clone = "";
+//        if (COUNTRY.toUpperCase().startsWith("US")) {
+//            Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            stateprovince_before_clone = t;
+//            Element_By_Path_Attribute("Get value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            postalzip_before_clone = t;
+//        } else {
+//            Element_By_Path_Attribute("Get value of 'Province'", "xpath", "(//input[@aria-label='Province'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            stateprovince_before_clone = t;
+//            Element_By_Path_Attribute("Get value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            postalzip_before_clone = t;
+//        }
+//        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Attribute("Get value of 'Location Information'", "xpath", "//*[@name='dropOffLocationInformation']", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String loc_info_before_clone = t;
+//        Move_to_Element_By_Path("Move > 'Cancel' button", "xpath", "(//*[contains(text(),'cancel')])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Cancel' button", "xpath", "(//*[contains(text(),'cancel')])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_InVisibility("Wait for 'Edit Drop-off Location' dialog to disappear", "xpath", "//*[@class='v-dialog__content']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Clone > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-content-copy')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for 'Duplicate Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Duplicate Drop-off Location')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for 'Location name is already used' message", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Location name is already used')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Input_Select_Clear("Clear > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        if (!loc_name_before_clone.contains(New_ID)) {
+//            loc_name_before_clone = loc_name_before_clone + New_ID;
+//        } else if (loc_name_before_clone.contains(New_ID)) {
+//            loc_name_before_clone = loc_name_before_clone + "-X";
+//        }
+//        Element_By_Path_Text_Enter("Enter > value in 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", loc_name_before_clone + "-copy", false, ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > 'Create Location' button", "xpath", "//*[contains(text(),'Create Location')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Create Location' button", "xpath", "//*[contains(text(),'Create Location')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_InVisibility("Wait for 'Duplicate Drop-off Location' dialog to disappear", "xpath", "//*[@class='v-dialog__content']//*[contains(text(),'Duplicate Drop-off Location')]", ParentTest, Ver);
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Wait_For_Element_By_Path_Presence("Wait for 'Configuration' page to load", "xpath", "//form[@class='v-form settings']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
 //            if (FAIL) { return;}
 //        Thread.sleep(500);
-        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Edit > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Attribute("Get value of 'Location Name'", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String loc_name_before_clone = t;
-        Element_By_Path_Attribute("Get value of 'Address'", "xpath", "(//input[@aria-label='Address'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String addr_before_clone = t;
-        Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String city_before_clone = t;
-        String stateprovince_before_clone = "";
-        String postalzip_before_clone = "";
-        if (COUNTRY.toUpperCase().startsWith("US")) {
-            Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            stateprovince_before_clone = t;
-            Element_By_Path_Attribute("Get value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            postalzip_before_clone = t;
-        } else {
-            Element_By_Path_Attribute("Get value of 'Province'", "xpath", "(//input[@aria-label='Province'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            stateprovince_before_clone = t;
-            Element_By_Path_Attribute("Get value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            postalzip_before_clone = t;
-        }
-        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Attribute("Get value of 'Location Information'", "xpath", "//*[@name='dropOffLocationInformation']", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String loc_info_before_clone = t;
-        Move_to_Element_By_Path("Move > 'Cancel' button", "xpath", "(//*[contains(text(),'cancel')])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Cancel' button", "xpath", "(//*[contains(text(),'cancel')])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_InVisibility("Wait for 'Edit Drop-off Location' dialog to disappear", "xpath", "//*[@class='v-dialog__content']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Clone > Location ", "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[1]//i[contains(@class,'mdi-content-copy')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for 'Duplicate Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Duplicate Drop-off Location')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for 'Location name is already used' message", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Location name is already used')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Input_Select_Clear("Clear > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        if (!loc_name_before_clone.contains(New_ID)) {
-            loc_name_before_clone = loc_name_before_clone + New_ID;
-        } else if (loc_name_before_clone.contains(New_ID)) {
-            loc_name_before_clone = loc_name_before_clone + "-X";
-        }
-        Element_By_Path_Text_Enter("Enter > value in 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", loc_name_before_clone + "-copy", false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > 'Create Location' button", "xpath", "//*[contains(text(),'Create Location')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Create Location' button", "xpath", "//*[contains(text(),'Create Location')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_InVisibility("Wait for 'Duplicate Drop-off Location' dialog to disappear", "xpath", "//*[@class='v-dialog__content']//*[contains(text(),'Duplicate Drop-off Location')]", ParentTest, Ver);
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Wait_For_Element_By_Path_Presence("Wait for 'Configuration' page to load", "xpath", "//form[@class='v-form settings']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
-        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        List_L2("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
-            if (FAIL) { return;}
-//        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+//        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        List_L2("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+////        Scroll_to_WebElement("Scroll > 'Drop-off Locations' section", "xpath", "//div[@id='drop-off-locations']", ParentTest, "no_jira");
+////            if (FAIL) { return;}
+////        Thread.sleep(500);
+//        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//
+//        Element_By_Path_Attribute("Get value of 'Location Name'", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String loc_name_before_edit = t;
+//        if (loc_name_before_edit.equals(loc_name_before_clone + "-copy")) {
+//            _t++;
+//            _p++; EX += _t + "\t" + "Check > 'Location Name' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")) + "\t" + "PASS" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), false, ParentTest.createNode(_t + ". " + "Check > 'Location Name' of cloned location"), new Date());
+//        } else {
+//            _t++;
+//            _f++; EX += _t + "\t" + "Check > 'Location Name' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")) + "\t" + "FAIL" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), true, ParentTest.createNode(_t + ". " + "Check > 'Location Name' of cloned location"), new Date());
+//        }
+//
+//        Element_By_Path_Attribute("Get value of 'Address'", "xpath", "(//input[@aria-label='Address'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String addr_before_edit = t;
+//        if (addr_before_edit.equals(addr_before_clone)) {
+//            _t++;
+//            _p++; EX += _t + "\t" + "Check > 'Address' of cloned location" + "\t" + "-" + "\t" + String.valueOf(addr_before_edit.equals(addr_before_clone)) + "\t" + "PASS" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", String.valueOf(addr_before_edit.equals(addr_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Address' of cloned location"), new Date());
+//        } else {
+//            _t++;
+//            _f++; EX += _t + "\t" + "Check > 'Address' of cloned location" + "\t" + "-" + "\t" + String.valueOf(addr_before_edit.equals(addr_before_clone)) + "\t" + "FAIL" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", String.valueOf(addr_before_edit.equals(addr_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Address' of cloned location"), new Date());
+//        }
+//
+//        Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
+//        if (FAIL) { return;}
+//        String city_before_edit = t;
+//        if (city_before_edit.equals(city_before_clone)) {
+//            _t++;
+//            _p++; EX += _t + "\t" + "Check > 'City' of cloned location" + "\t" + "-" + "\t" + String.valueOf(city_before_edit.equals(city_before_clone)) + "\t" + "PASS" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", String.valueOf(city_before_edit.equals(city_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'City' of cloned location"), new Date());
+//        } else {
+//            _t++;
+//            _f++; EX += _t + "\t" + "Check > 'City' of cloned location" + "\t" + "-" + "\t" + String.valueOf(city_before_edit.equals(city_before_clone)) + "\t" + "FAIL" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", String.valueOf(city_before_edit.equals(city_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'City' of cloned location"), new Date());
+//        }
+//        String city_after_edit = "";
+//        String stateprovince_before_edit = "";
+//        String stateprovince_after_edit = "";
+//        String postalzip_before_edit = "";
+//        String postalzip_after_edit = "";
+//        if (COUNTRY.toUpperCase().startsWith("US")) {
+//            Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            stateprovince_before_edit = t;
+//            if (stateprovince_before_edit.equals(stateprovince_before_clone)) {
+//                _t++;
+//                _p++; EX += _t + "\t" + "Check > 'State' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "PASS" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'State' of cloned location"), new Date());
+//            } else {
+//                _t++;
+//                _f++; EX += _t + "\t" + "Check > 'State' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "FAIL" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'State' of cloned location"), new Date());
+//            }
+//
+//            Element_By_Path_Attribute("Get value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            postalzip_before_edit = t;
+//            if (postalzip_before_edit.equals(postalzip_before_clone)) {
+//                _t++;
+//                _p++; EX += _t + "\t" + "Check > 'Zip' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "PASS" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Zip' of cloned location"), new Date());
+//            } else {
+//                _t++;
+//                _f++; EX += _t + "\t" + "Check > 'Zip' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "FAIL" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Zip' of cloned location"), new Date());
+//            }
+//            Move_to_Element_By_Path("Move > 'City' field", "xpath", "(//*[contains(text(),'City')])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Clear > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter > value in 'City' field", "xpath", "(//*[@aria-label='City'])[1]", "Chicago", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            city_after_edit = t;
+//            Move_to_Element_By_Path("Move > 'State' field", "xpath", "(//*[contains(text(),'State')])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'State' field", "xpath", "(//*[@aria-label='State'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Clear > 'State' field", "xpath", "(//*[@aria-label='State'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter > value in 'State' field", "xpath", "(//*[@aria-label='State'])[1]", "Illinois", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Thread.sleep(1000);
+//            Element_By_Path_Click("Select > 'State'", "xpath", "//div[contains(@class,'menuable__content__active')]//a", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            stateprovince_after_edit = t;
+//            Move_to_Element_By_Path("Move > 'Zip Code' field", "xpath", "(//*[contains(text(),'Zip Code')])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Clear > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter > value in 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", "84112", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Attribute("Get value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            postalzip_after_edit = t;
+//        } else {
+//            Element_By_Path_Attribute("Get value of 'Province'", "xpath", "(//input[@aria-label='Province'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            stateprovince_before_edit = t;
+//            if (stateprovince_before_edit.equals(stateprovince_before_clone)) {
+//                _t++;
+//                _p++; EX += _t + "\t" + "Check > 'Province' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "PASS" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Province' of cloned location"), new Date());
+//            } else {
+//                _t++;
+//                _f++; EX += _t + "\t" + "Check > 'Province' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "FAIL" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Province' of cloned location"), new Date());
+//            }
+//            Element_By_Path_Attribute("Get value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//            postalzip_before_edit = t;
+//            if (postalzip_before_edit.equals(postalzip_before_clone)) {
+//                _t++;
+//                _p++; EX += _t + "\t" + "Check > 'Postal' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "PASS" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Postal' of cloned location"), new Date());
+//            } else {
+//                _t++;
+//                _f++; EX += _t + "\t" + "Check > 'Postal' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "FAIL" + "\t" 
+//                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Postal' of cloned location"), new Date());
+//            }
+//            Move_to_Element_By_Path("Move > 'City' field", "xpath", "(//*[contains(text(),'City')])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Clear > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter > value in 'City' field", "xpath", "(//*[@aria-label='City'])[1]", "Calgary", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            city_after_edit = t;
+//            Move_to_Element_By_Path("Move > 'Province' field", "xpath", "(//*[contains(text(),'Province')])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Clear > 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter > value in 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", "Alb", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter > value in 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", "erta", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Thread.sleep(1000);
+//            Element_By_Path_Click("Select > 'Province'", "xpath", "//div[contains(@class,'menuable__content__active')]//a", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Attribute("Get value of 'Province'", "xpath", "(//input[@aria-label='Province'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            stateprovince_after_edit = t;
+//            Move_to_Element_By_Path("Move > 'Postal Code' field", "xpath", "(//*[contains(text(),'Postal Code')])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Input_Select_Clear("Clear > 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Text_Enter("Enter > value in 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", "J7V9N1", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Click > 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Attribute("Get value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            postalzip_after_edit = t;   
+//        }
+//        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Attribute("Get value of 'Location Information'", "xpath", "//*[@name='dropOffLocationInformation']", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String loc_info_before_edit = t;
+//        if (loc_info_before_edit.equals(loc_info_before_clone)) {
+//            _t++;
+//            _p++; EX += _t + "\t" + "Check > 'Location Information' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)) + "\t" + "PASS" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Location Information' of cloned location"), new Date());
+//        } else {
+//            _t++;
+//            _f++; EX += _t + "\t" + "Check > 'Location Information' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)) + "\t" + "FAIL" + "\t" 
+//                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Location Information' of cloned location"), new Date());
+//        }
+//        Move_to_Element_By_Path("Move > 'Location Name' field", "xpath", "(//*[contains(text(),'Location Name')])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Input_Select_Clear("Clear > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Text_Enter("Enter > value in 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", loc_name_before_edit + "-edited", false, ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Attribute("Get value of 'Location Name'", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String loc_name_after_edit = t;
+//        Move_to_Element_By_Path("Move > 'Address' field", "xpath", "(//*[contains(text(),'Address')])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Input_Select_Clear("Clear > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Text_Enter("Enter > value in 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", "456 Somewher Rd", false, ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Attribute("Get value of 'Address'", "xpath", "(//input[@aria-label='Address'])[1]", "value", ParentTest, "no_jira");
+//        if (FAIL) { return;}
+//        String addr_after_edit = t;
+//        Move_to_Element_By_Path("Move > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Input_Select_Clear("Clear > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Text_Enter("Enter > value in 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", "new info edited", false, ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Attribute("Get value of 'Location Information'", "xpath", "//*[@name='dropOffLocationInformation']", "value", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        String loc_info_after_edit = t;
+//        Element_By_Path_Click("Set > 'Foodlocker' toggle to 'No'", "xpath", "//p[contains(text(),'APEX Foodlocker')]/parent::div//*[contains(text(),'No')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Check > 'Foodlocker' toggle is set to 'No'", "xpath", "(//*[@class='Option-Right-Selected-Blue-White'])[1]/div[contains(text(),'No')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > 'Save Changes' button", "xpath", "(//*[contains(text(),'Save Changes')])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "(//*[contains(text(),'Save Changes')])[1]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        Wait_For_Element_By_Path_InVisibility("Wait for 'Edit Drop-off Location' dialog to disappear", "xpath", "//*[@class='v-dialog__content']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, Ver);
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Wait_For_Element_By_Path_Presence("Wait for 'Configuration' page to load", "xpath", "//form[@class='v-form settings']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
 //            if (FAIL) { return;}
 //        Thread.sleep(500);
-        Move_to_Element_By_Path("Move > Location in table", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Edit > Location ", "xpath", "(//td[contains(text(),'" + New_ID + "') and contains(text(),'-copy')])[1]/parent::tr//i[contains(@class,'mdi-pencil')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for 'Edit Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-
-        Element_By_Path_Attribute("Get value of 'Location Name'", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String loc_name_before_edit = t;
-        if (loc_name_before_edit.equals(loc_name_before_clone + "-copy")) {
-            _t++;
-            _p++; EX += _t + "\t" + "Check > 'Location Name' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")) + "\t" + "PASS" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), false, ParentTest.createNode(_t + ". " + "Check > 'Location Name' of cloned location"), new Date());
-        } else {
-            _t++;
-            _f++; EX += _t + "\t" + "Check > 'Location Name' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")) + "\t" + "FAIL" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(loc_name_before_edit.equals(loc_name_before_clone + "-copy")), true, ParentTest.createNode(_t + ". " + "Check > 'Location Name' of cloned location"), new Date());
-        }
-
-        Element_By_Path_Attribute("Get value of 'Address'", "xpath", "(//input[@aria-label='Address'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String addr_before_edit = t;
-        if (addr_before_edit.equals(addr_before_clone)) {
-            _t++;
-            _p++; EX += _t + "\t" + "Check > 'Address' of cloned location" + "\t" + "-" + "\t" + String.valueOf(addr_before_edit.equals(addr_before_clone)) + "\t" + "PASS" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(addr_before_edit.equals(addr_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Address' of cloned location"), new Date());
-        } else {
-            _t++;
-            _f++; EX += _t + "\t" + "Check > 'Address' of cloned location" + "\t" + "-" + "\t" + String.valueOf(addr_before_edit.equals(addr_before_clone)) + "\t" + "FAIL" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(addr_before_edit.equals(addr_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Address' of cloned location"), new Date());
-        }
-
-        Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
-        if (FAIL) { return;}
-        String city_before_edit = t;
-        if (city_before_edit.equals(city_before_clone)) {
-            _t++;
-            _p++; EX += _t + "\t" + "Check > 'City' of cloned location" + "\t" + "-" + "\t" + String.valueOf(city_before_edit.equals(city_before_clone)) + "\t" + "PASS" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(city_before_edit.equals(city_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'City' of cloned location"), new Date());
-        } else {
-            _t++;
-            _f++; EX += _t + "\t" + "Check > 'City' of cloned location" + "\t" + "-" + "\t" + String.valueOf(city_before_edit.equals(city_before_clone)) + "\t" + "FAIL" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(city_before_edit.equals(city_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'City' of cloned location"), new Date());
-        }
-        String city_after_edit = "";
-        String stateprovince_before_edit = "";
-        String stateprovince_after_edit = "";
-        String postalzip_before_edit = "";
-        String postalzip_after_edit = "";
-        if (COUNTRY.toUpperCase().startsWith("US")) {
-            Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            stateprovince_before_edit = t;
-            if (stateprovince_before_edit.equals(stateprovince_before_clone)) {
-                _t++;
-                _p++; EX += _t + "\t" + "Check > 'State' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "PASS" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'State' of cloned location"), new Date());
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Check > 'State' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "FAIL" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'State' of cloned location"), new Date());
-            }
-
-            Element_By_Path_Attribute("Get value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            postalzip_before_edit = t;
-            if (postalzip_before_edit.equals(postalzip_before_clone)) {
-                _t++;
-                _p++; EX += _t + "\t" + "Check > 'Zip' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "PASS" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Zip' of cloned location"), new Date());
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Check > 'Zip' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "FAIL" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Zip' of cloned location"), new Date());
-            }
-            Move_to_Element_By_Path("Move > 'City' field", "xpath", "(//*[contains(text(),'City')])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Clear > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'City' field", "xpath", "(//*[@aria-label='City'])[1]", "Chicago", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            city_after_edit = t;
-            Move_to_Element_By_Path("Move > 'State' field", "xpath", "(//*[contains(text(),'State')])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'State' field", "xpath", "(//*[@aria-label='State'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Clear > 'State' field", "xpath", "(//*[@aria-label='State'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'State' field", "xpath", "(//*[@aria-label='State'])[1]", "Illinois", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(1000);
-            Element_By_Path_Click("Select > 'State'", "xpath", "//div[contains(@class,'menuable__content__active')]//a", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Attribute("Get value of 'State'", "xpath", "(//input[@aria-label='State'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            stateprovince_after_edit = t;
-            Move_to_Element_By_Path("Move > 'Zip Code' field", "xpath", "(//*[contains(text(),'Zip Code')])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Clear > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", "84112", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'Zip Code' field", "xpath", "(//*[@aria-label='Zip Code'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Attribute("Get value of 'Zip Code'", "xpath", "(//input[@aria-label='Zip Code'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            postalzip_after_edit = t;
-        } else {
-            Element_By_Path_Attribute("Get value of 'Province'", "xpath", "(//input[@aria-label='Province'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            stateprovince_before_edit = t;
-            if (stateprovince_before_edit.equals(stateprovince_before_clone)) {
-                _t++;
-                _p++; EX += _t + "\t" + "Check > 'Province' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "PASS" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Province' of cloned location"), new Date());
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Check > 'Province' of cloned location" + "\t" + "-" + "\t" + String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)) + "\t" + "FAIL" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(stateprovince_before_edit.equals(stateprovince_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Province' of cloned location"), new Date());
-            }
-            Element_By_Path_Attribute("Get value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-            postalzip_before_edit = t;
-            if (postalzip_before_edit.equals(postalzip_before_clone)) {
-                _t++;
-                _p++; EX += _t + "\t" + "Check > 'Postal' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "PASS" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("PASS", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Postal' of cloned location"), new Date());
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Check > 'Postal' of cloned location" + "\t" + "-" + "\t" + String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)) + "\t" + "FAIL" + "\t" 
-                            + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", String.valueOf(postalzip_before_edit.equals(postalzip_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Postal' of cloned location"), new Date());
-            }
-            Move_to_Element_By_Path("Move > 'City' field", "xpath", "(//*[contains(text(),'City')])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Clear > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'City' field", "xpath", "(//*[@aria-label='City'])[1]", "Calgary", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'City' field", "xpath", "(//*[@aria-label='City'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Attribute("Get value of 'City'", "xpath", "(//input[@aria-label='City'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            city_after_edit = t;
-            Move_to_Element_By_Path("Move > 'Province' field", "xpath", "(//*[contains(text(),'Province')])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Clear > 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", "Alb", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'Province' field", "xpath", "(//*[@aria-label='Province'])[1]", "erta", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(1000);
-            Element_By_Path_Click("Select > 'Province'", "xpath", "//div[contains(@class,'menuable__content__active')]//a", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Attribute("Get value of 'Province'", "xpath", "(//input[@aria-label='Province'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            stateprovince_after_edit = t;
-            Move_to_Element_By_Path("Move > 'Postal Code' field", "xpath", "(//*[contains(text(),'Postal Code')])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Input_Select_Clear("Clear > 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Text_Enter("Enter > value in 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", "J7V9N1", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Click > 'Postal Code' field", "xpath", "(//*[@aria-label='Postal Code'])[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Attribute("Get value of 'Postal Code'", "xpath", "(//input[@aria-label='Postal Code'])[1]", "value", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            postalzip_after_edit = t;   
-        }
-        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Attribute("Get value of 'Location Information'", "xpath", "//*[@name='dropOffLocationInformation']", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String loc_info_before_edit = t;
-        if (loc_info_before_edit.equals(loc_info_before_clone)) {
-            _t++;
-            _p++; EX += _t + "\t" + "Check > 'Location Information' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)) + "\t" + "PASS" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("PASS", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), false, ParentTest.createNode(_t + ". " + "Check > 'Location Information' of cloned location"), new Date());
-        } else {
-            _t++;
-            _f++; EX += _t + "\t" + "Check > 'Location Information' of cloned location" + "\t" + "-" + "\t" + String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)) + "\t" + "FAIL" + "\t" 
-                        + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" +  "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", String.valueOf(loc_info_before_edit.equals(loc_info_before_clone)), true, ParentTest.createNode(_t + ". " + "Check > 'Location Information' of cloned location"), new Date());
-        }
-        Move_to_Element_By_Path("Move > 'Location Name' field", "xpath", "(//*[contains(text(),'Location Name')])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Input_Select_Clear("Clear > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter > value in 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", loc_name_before_edit + "-edited", false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Location Name' field", "xpath", "(//*[@aria-label='Location Name'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Attribute("Get value of 'Location Name'", "xpath", "(//input[@aria-label='Location Name'])[1]", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String loc_name_after_edit = t;
-        Move_to_Element_By_Path("Move > 'Address' field", "xpath", "(//*[contains(text(),'Address')])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Input_Select_Clear("Clear > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter > value in 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", "456 Somewher Rd", false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Address' field", "xpath", "(//*[@aria-label='Address'])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Attribute("Get value of 'Address'", "xpath", "(//input[@aria-label='Address'])[1]", "value", ParentTest, "no_jira");
-        if (FAIL) { return;}
-        String addr_after_edit = t;
-        Move_to_Element_By_Path("Move > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Input_Select_Clear("Clear > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter > value in 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", "new info edited", false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Location Information' field", "xpath", "//*[contains(@aria-label,'Location Information')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Attribute("Get value of 'Location Information'", "xpath", "//*[@name='dropOffLocationInformation']", "value", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        String loc_info_after_edit = t;
-        Element_By_Path_Click("Set > 'Foodlocker' toggle to 'No'", "xpath", "//p[contains(text(),'APEX Foodlocker')]/parent::div//*[contains(text(),'No')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Check > 'Foodlocker' toggle is set to 'No'", "xpath", "(//*[@class='Option-Right-Selected-Blue-White'])[1]/div[contains(text(),'No')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > 'Save Changes' button", "xpath", "(//*[contains(text(),'Save Changes')])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "(//*[contains(text(),'Save Changes')])[1]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        Wait_For_Element_By_Path_InVisibility("Wait for 'Edit Drop-off Location' dialog to disappear", "xpath", "//*[@class='v-dialog__content']//*[contains(text(),'Edit Drop-off Location')]", ParentTest, Ver);
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Save Changes' button", "xpath", "//footer//*[contains(text(),'Save Changes')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Wait_For_Element_By_Path_Presence("Wait for 'Configuration' page to load", "xpath", "//form[@class='v-form settings']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500);
-        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        List_L2("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
-            if (FAIL) { return;}
-
-        // </editor-fold>   
+//        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        List_L2("Get List of Locations", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//
+//        // </editor-fold>   
             
         // <editor-fold defaultstate="collapsed" desc="Sort/Filter Locations">
         // 1. add 2 more locations with unique name; 1 with foodlocker, 1 without

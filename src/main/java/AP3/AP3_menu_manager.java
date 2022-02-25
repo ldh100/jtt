@@ -106,27 +106,27 @@ class AP3_menu_manager extends AP3_GUI{
         EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection End ^^" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         // </editor-fold>           
 
-        // <editor-fold defaultstate="collapsed" desc="Training Video">
-        Element_By_Path_Click("Trainig Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Thread.sleep(500);            
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Swith_to_Frame("Swith to Video Player", "tagName", "iframe", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        Thread.sleep(500);               
-        Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", ParentTest, "no_jira"); 
-            if (FAIL) { return;}              
-        Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        Element_By_Path_Click("Play Click", "className", "play-icon", ParentTest, "no_jira"); 
-            if (FAIL) { return;}
-            Thread.sleep(1000);
-        Swith_to_Frame("Back to default frame", "defaultContent", "N/A", ParentTest, "no_jira");
-            if (FAIL) { return;}      
-        Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        // </editor-fold>        
+//        // <editor-fold defaultstate="collapsed" desc="Training Video">
+//        Element_By_Path_Click("Trainig Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Thread.sleep(500);            
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Swith_to_Frame("Swith to Video Player", "tagName", "iframe", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        Thread.sleep(500);               
+//        Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}              
+//        Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        Element_By_Path_Click("Play Click", "className", "play-icon", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}
+//            Thread.sleep(1000);
+//        Swith_to_Frame("Back to default frame", "defaultContent", "N/A", ParentTest, "no_jira");
+//            if (FAIL) { return;}      
+//        Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        // </editor-fold>        
 
         // <editor-fold defaultstate="collapsed" desc="Global Modifiers">  
         EX += " - " + "\t" + " === MM Global Modifiers " + "\t" + " ===== " + "\t" + " == Global Modifiers Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
