@@ -286,16 +286,15 @@ class AP3_export_menuset extends AP3_GUI{
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent", ParentTest,"no_jira"); 
-                if (FAIL) { return;}            
-            Thread.sleep(3000); 
+                if (FAIL) { return;}   
+         
+            Thread.sleep(5000); 
             Refresh("Refresh", ParentTest, "no_jira");
-            
-            Call_Company_API(MenuSetName,flag);
-            
-            Refresh("Refresh", ParentTest, "no_jira");
-            
-            Call_GlobalMenuSet_API(Menu_ID,MenuSetName,flag);
-            
+            Refresh("Refresh", ParentTest, "no_jira");   
+         
+            Thread.sleep(10000); // allow time to propage published updates
+            Call_Company_API(MenuSetName,flag);               // ========================== 
+            Call_GlobalMenuSet_API(Menu_ID,MenuSetName,flag); // ========================== 
             
             Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
@@ -363,8 +362,8 @@ class AP3_export_menuset extends AP3_GUI{
             Refresh("Refresh",ParentTest, "no_jira");
              
             flag = 2;       
+            Thread.sleep(10000); // allow time to propage published updates
             Call_Company_API(MenuSetName, flag);
-            Thread.sleep(3000);   
             Call_GlobalMenuSet_API(Menu_ID, MenuSetName, flag);
 
             Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods", ParentTest, "no_jira");
@@ -1017,6 +1016,7 @@ class AP3_export_menuset extends AP3_GUI{
     //</editor-fold>
     
     public void readGlobalModExcel(String filePath, String fileName, String sheetName) {
+
     //<editor-fold defaultstate="collapsed" desc="Read Global Mod Group Excel">
     //This block reads and gets the cell value of from the exported Global Mod Group excel file
     try {            
@@ -1154,7 +1154,6 @@ class AP3_export_menuset extends AP3_GUI{
     
     //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/" +CompanyID
     public  void Call_Company_API(String MenuSetName, int flag) {
-    //<editor-fold defaultstate="collapsed" desc="Call Company API">    //This block call the company API: BaseAPI + "/menu/company/" +CompanyID
     try {            
         Call_API("Call Global Menu API", "Bearer " + AP3_TKN, BaseAPI + "/menu/company/" + CompanyID, true, ParentTest, "no_jira" );        
         if(t.startsWith("{")){
@@ -1195,6 +1194,7 @@ class AP3_export_menuset extends AP3_GUI{
     //</editor-fold>  
     
     public  void Call_GlobalMenuSet_API(String Menu_ID, String MenuSetName, int flag) {
+
     //<editor-fold defaultstate="collapsed" desc="Call Global Menuset API">    //This block call the GlobalMenuSet API: BaseAPI + "/menu/" + Menu_ID
     try {    
         Call_API("Call Global MenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );

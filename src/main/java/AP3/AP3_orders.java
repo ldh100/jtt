@@ -267,18 +267,18 @@ Thread.sleep(3000);
         Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date(s)']", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 Thread.sleep(5000);
-        Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        String button_date_attribute = t;  //2021-06-02
-        Page_URL("Current URL", ParentTest, "no_jira");
-        String date_URL = t.substring(t.length() - 10);
-        if(date_URL.equals(button_date_attribute))  { // Pass order date is equal to displayed order date
-            _t++;
-            _p++; EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } else { 
-            _t++;
-            _f++; EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        }
+//        Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        String button_date_attribute = t;  //2021-06-02
+//        Page_URL("Current URL", ParentTest, "no_jira");
+//        String date_URL = t.substring(t.length() - 10);
+//        if(date_URL.equals(button_date_attribute))  { // Pass order date is equal to displayed order date
+//            _t++;
+//            _p++; EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//        } else { 
+//            _t++;
+//            _f++; EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//        }
               
         //Select a 7 day range from the calendar to view the orders for that period
         Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", ParentTest, "no_jira"); 
