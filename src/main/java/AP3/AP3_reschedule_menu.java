@@ -54,7 +54,12 @@ class AP3_reschedule_menu extends AP3_GUI{
         List_L0("List of Scheduled Menus", "xpath", "//tbody/tr", ParentTest, "no_jira");
             if (FAIL) {return;}
         int expectedScheduledMenus = L0.size(); 
-        int expected_num_of_events = expectedScheduledMenus*8;
+        int expected_num_of_events = expectedScheduledMenus*10;
+        if (env.equals("ST")){
+            expected_num_of_events = expectedScheduledMenus*8;
+        } else if (env.equals("PR")) {
+            expected_num_of_events = expectedScheduledMenus*13;
+        }
         for (int i = 0; i < 50; i++) {  //this will run the rescheduling of a menu 50 times
             String startTime = startTimes[new Random().nextInt(startTimes.length)];
             String endTime = endTimes[new Random().nextInt(endTimes.length)];
@@ -114,7 +119,7 @@ class AP3_reschedule_menu extends AP3_GUI{
                 if(t.startsWith("{")){
                     API_Response_Body = t;               
                 }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "?nocache=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "?nocache=false"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
                     Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID + "?nocache=false", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
@@ -135,11 +140,19 @@ class AP3_reschedule_menu extends AP3_GUI{
                 Element_Click("Click > first menu on list", L0.get(0), ParentTest, "no_jira");
                 if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for 'Menu Details' page", "xpath", "//*[contains(text(),'Menu Details')]", ParentTest, "no_jira");
-                    if (FAIL) {return;}
-                if (d1.findElements(By.xpath("(//div[@class='flex']//div[contains(@class,'is-disabled')])[1]")).size() > 0) {
-                    //click on All day
-                    Element_By_Path_Click("Deselect > 'All day' checkbox", "xpath", "(//i[contains(@class,'marked')])[1]", ParentTest, "no_jira");
-                        if (FAIL) { return;} 
+                    if (FAIL) {return;}             
+                if (!env.equals("DE")) {
+                    if (d1.findElements(By.xpath("(//div[@class='flex']//div[contains(@class,'is-disabled')])[2]")).size() > 0) {
+                        //click on All day
+                        Element_By_Path_Click("Deselect > 'All day' checkbox", "xpath", "(//i[contains(@class,'marked')])[2]", ParentTest, "no_jira");
+                            if (FAIL) { return;} 
+                    }
+                } else {
+                    if (d1.findElements(By.xpath("(//div[@class='flex']//div[contains(@class,'is-disabled')])[1]")).size() > 0) {
+                        //click on All day
+                        Element_By_Path_Click("Deselect > 'All day' checkbox", "xpath", "(//i[contains(@class,'marked')])[1]", ParentTest, "no_jira");
+                            if (FAIL) { return;} 
+                    }
                 }
                 Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira");
                     if (FAIL) {return;}
@@ -190,10 +203,6 @@ class AP3_reschedule_menu extends AP3_GUI{
                 _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             }                
         }           //------- AUT-850
-    } catch (Exception ex){
-        String AAA = ex.getMessage(); _t++; _f++;
-        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
-        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
-    } 
+    } catch (Exception ex){}   // =============================================  
     } 
 }
