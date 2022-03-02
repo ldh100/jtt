@@ -2,6 +2,7 @@ package AP3;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -316,7 +317,7 @@ class AP3_sales_reporting extends AP3_GUI{
                 Element_Click("Select Unit (index " + i + ")", L1.get(i), ParentTest, "no_jira");
                 if (FAIL) { return;} 
             }        
-        Click_out_of_Element_By_Path("Filter drawer Close", "xpath", "//aside[contains(@class, 'v-navigation-drawer v-navigation-drawer--fixed v-navigation-drawer--open')]",  "Left",-100, 0, ParentTest, "no_jira");
+        Click_out_of_Element_By_Path("Filter drawer Close", "xpath", "//aside[contains(@class, 'v-navigation-drawer v-navigation-drawer--fixed v-navigation-drawer--open')]",  "Left", -100, 0, ParentTest, "no_jira");
         if (FAIL) { return;} 
         Element_Child_List_L1("Selected Units count", e1,"xpath", "//span[contains(@class, 'v-chip__content')]", ParentTest, "no_jira");                                    
             if (FAIL) { return;}
@@ -465,6 +466,10 @@ class AP3_sales_reporting extends AP3_GUI{
                 Element_Child_Attribute("Input 'End Time' state", L0.get(i), "css", "[aria-label='End Time']", "disabled", ParentTest, "no_jira");  
                     if (FAIL) { return;}
             }   
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

@@ -18,9 +18,6 @@
       <Dimension value="[858, 527]"/>
     </Property>
     <Property name="name" type="java.lang.String" value="Android" noResource="true"/>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[858, 527]"/>
-    </Property>
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
   <AccessibilityProperties>
@@ -116,7 +113,7 @@
                                   <Component id="_logout" alignment="1" max="32767" attributes="0"/>
                                   <Component id="_login" alignment="1" max="32767" attributes="0"/>
                                   <Component id="_order_history" max="32767" attributes="0"/>
-                                  <Component id="_order_email" alignment="1" pref="105" max="32767" attributes="0"/>
+                                  <Component id="_order_email" alignment="1" pref="0" max="32767" attributes="0"/>
                                   <Component id="_reorder" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -127,9 +124,9 @@
                                   <Component id="_mplan" alignment="1" max="32767" attributes="0"/>
                                   <Component id="_allow_loc" alignment="1" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="10" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="_support" alignment="1" pref="163" max="32767" attributes="0"/>
+                                  <Component id="_support" alignment="1" max="32767" attributes="0"/>
                                   <Component id="_welcome" alignment="1" max="32767" attributes="0"/>
                                   <Component id="_acc_options" alignment="1" max="32767" attributes="0"/>
                                   <Component id="_edit_profile" alignment="1" min="-2" pref="155" max="-2" attributes="0"/>

@@ -93,8 +93,8 @@
                               <Component id="lblSITES6" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="txtAdmin_ID" min="-2" pref="216" max="-2" attributes="0"/>
-                              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+                              <Component id="txtAdmin_ID" min="-2" pref="212" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="txtAdmin_PW" min="-2" pref="164" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -402,26 +402,34 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="_account_manager" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_insights" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_metrics_selection" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_drilldown" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_login" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
-                      <Component id="_invalid_login" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                      <Component id="_metric_data" min="-2" pref="191" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="_logout" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
-                          <Component id="_all_data" alignment="1" max="32767" attributes="0"/>
-                          <Component id="_password" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="_insights" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_metrics_selection" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_drilldown" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_login" alignment="1" min="-2" pref="124" max="-2" attributes="0"/>
+                              <Component id="_invalid_login" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="_metric_data" min="-2" pref="191" max="-2" attributes="0"/>
+                              <Component id="_timegraph" min="-2" pref="132" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="22" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="_logout" alignment="1" min="-2" pref="114" max="-2" attributes="0"/>
+                                  <Component id="_all_data" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="_password" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="_users" alignment="1" min="-2" pref="158" max="-2" attributes="0"/>
+                              <Component id="_sanity" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="_users" alignment="1" min="-2" pref="158" max="-2" attributes="0"/>
-                      <Component id="_sanity" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="_account_manager" min="-2" pref="132" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -448,21 +456,24 @@
                           <Component id="_logout" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                  <Component id="_account_manager" min="-2" pref="14" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_users" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="_account_manager" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <Component id="_users" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="_sanity" min="-2" pref="14" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <Component id="_drilldown" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_insights" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="_timegraph" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="_insights" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="_sanity" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="9" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -508,7 +519,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="11" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Secondary Metric Data Validation "/>
+            <Property name="text" type="java.lang.String" value="Secondary Metric Data Validation"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
@@ -603,6 +614,17 @@
               <Font name="Dialog" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Account Manager"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="horizontalTextPosition" type="int" value="10"/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="_timegraph">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="11" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Timegraph"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
@@ -729,7 +751,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="60" width="110" height="22"/>
+              <AbsoluteConstraints x="100" y="60" width="112" height="22"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -780,7 +802,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="36" width="116" height="20"/>
+              <AbsoluteConstraints x="100" y="36" width="112" height="20"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -796,7 +818,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="210" y="52" width="110" height="14"/>
+              <AbsoluteConstraints x="220" y="52" width="96" height="14"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -812,7 +834,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="210" y="68" width="110" height="14"/>
+              <AbsoluteConstraints x="220" y="68" width="96" height="14"/>
             </Constraint>
           </Constraints>
         </Component>

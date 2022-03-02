@@ -249,7 +249,7 @@ public class PR_Cache {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'PR_Cache"+ "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'PR_Cache" + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "PR_Cache");

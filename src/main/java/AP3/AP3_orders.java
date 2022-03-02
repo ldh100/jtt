@@ -5,6 +5,7 @@ import static A.A.sleep;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -103,18 +104,17 @@ class AP3_orders extends AP3_GUI{
         Find_Text("Find 'Order type'", "Order Type", true, ParentTest, "no_jira"); 
             
         String filebrand = BRAND.toLowerCase().replace(" ","-");
-        filebrand = "all-orders-"+filebrand+"-undefined.pdf";
+        filebrand = "all-orders-" +filebrand+ "-undefined.pdf";
         // Should be not here > expected nothing for today  //Once we add placing orders to our script the below export is required.
         Find_Text("Find 'Export' text", "Export", true, ParentTest, "no_jira");      
         Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
             if (FAIL) { return;} 
-    Thread.sleep(5000);           
-        //  Call it later after date range selected, Check PDF > delete,  achnge to CSV > Check > delete 
+        Thread.sleep(5000);           
+        //  Call it later after date range selected, Check PDF > delete, change to CSV > Check > delete 
      
-        File tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ "pickup-orders-undefined.pdf");
+        File tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ "pickup-orders-undefined.pdf");
         if (tmp.exists()) {
-            _t++; Thread.sleep((long) sleep);File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
-               if (FAIL) { return;}   
+            File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
         } else {
             _t++;
             _w++;
@@ -188,10 +188,9 @@ class AP3_orders extends AP3_GUI{
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                    if (FAIL) { return;}      
                 Thread.sleep(3000);
-                tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ "all-orders-undefined.csv");
+                tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ "all-orders-undefined.csv");
                 if (tmp.exists()) {
-                    _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "all-orders-undefined.csv",ParentTest, "no_jira");
-                            if (FAIL) { return;}   
+                    File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "all-orders-undefined.csv",ParentTest, "no_jira");
                 } else {
                     _t++; _w++;
                     EX += _t + "\t" + "File to delete does not exist" + "\t" + "all-orders-undefined.pdf  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -262,24 +261,24 @@ class AP3_orders extends AP3_GUI{
                 if (FAIL) { return;} 
          }  
 Thread.sleep(3000);
-        Element_By_Path_Click("Click previous day", "xpath", "//tr/td[contains(number(),"+ prev_date.getDayOfMonth() +")]", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click previous day", "xpath", "//tr/td[contains(number()," + prev_date.getDayOfMonth() + ")]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 Thread.sleep(3000);  
         Element_By_Path_Click("Close Date picker", "css", "[aria-label='Date(s)']", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 Thread.sleep(5000);
-        Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        String button_date_attribute = t;  //2021-06-02
-        Page_URL("Current URL", ParentTest, "no_jira");
-        String date_URL = t.substring(t.length() - 10);
-        if(date_URL.equals(button_date_attribute))  { // Pass order date is equal to displayed order date
-            _t++;
-            _p++; EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        } else { 
-            _t++;
-            _f++; EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-        }
+//        Element_By_Path_Attribute("Button Attribute", "xpath", "//button[@class=' button-styling export-button v-btn theme--light primary']", "dates", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        String button_date_attribute = t;  //2021-06-02
+//        Page_URL("Current URL", ParentTest, "no_jira");
+//        String date_URL = t.substring(t.length() - 10);
+//        if(date_URL.equals(button_date_attribute))  { // Pass order date is equal to displayed order date
+//            _t++;
+//            _p++; EX += _t + "\t" + "URL Order date is equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//        } else { 
+//            _t++;
+//            _f++; EX += _t + "\t" + "URL Order date is not equal to button date attribute" + "\t" + "Date in URL: " + date_URL + "\t" + "Date in Datepicker: " + button_date_attribute + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//        }
               
         //Select a 7 day range from the calendar to view the orders for that period
         Element_By_Path_Click("Open Date picker", "css", "[aria-label='Date(s)']", ParentTest, "no_jira"); 
@@ -293,7 +292,7 @@ Thread.sleep(1000);
         Element_By_Path_Click("Click day 17", "xpath", "//tr/td[contains(number(),17)]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
 Thread.sleep(3000);    
-       Element_By_Path_Text_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira"); 
+       Element_By_Path_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira"); 
             if (FAIL) { return; }
 Thread.sleep(3000);
         Element_By_Path_Click("Click day 16", "xpath", "//tr/td[contains(number(),16)]", ParentTest, "no_jira"); 
@@ -305,20 +304,22 @@ Thread.sleep(1000);
         //URL to verify the date picker has selected 7 day range
         Page_URL("Current URL", ParentTest, "no_jira");
        
-        
         Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
            if (FAIL) { return;}         
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
            if (FAIL) { return;}      
         Thread.sleep(3000);
-        tmp = new File(System.getProperty("user.home") + File.separator + "Downloads"+ File.separator+ filebrand);
+        tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ filebrand);
         if (tmp.exists()) {
-          _t++; Thread.sleep((long) sleep); File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", filebrand, ParentTest, "no_jira");
-             if (FAIL) { return;}   
+            File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", filebrand, ParentTest, "no_jira"); 
         } else {
             _t++; _w++;
             EX += _t + "\t" + "File to delete does not exist" + "\t" + filebrand + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
         }
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    }   
     } 
 }

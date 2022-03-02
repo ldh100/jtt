@@ -31,14 +31,14 @@ class AP3_user_permission extends AP3_GUI{
         New_ID = a.New_ID;
         TZone = a.TZone;
     }    
-    // in each Env:
-    // cdl.test.xtt+rn@gmail.com - Runner // https://api.compassdigital.org/dev/user/auth?realm=bolter  
-    // cdl.test.xtt+an@gmail.com - Admin no Allow refunds, no Allow Menu Kick-Outs
-    // cdl.test.xtt+sy@gmail.com - Site Manager All Options
-    // cdl.test.xtt+sn@gmail.com - Site Manager No Options
-    // cdl.test.xtt+dy@gmail.com - CDL Delivery Manager All Options
-    // cdl.test.xtt+dn@gmail.com - CDL Delivery Manager No Options
-    
+    String AP3_AN = "ap3.qa1@compassdigital.io"; // Admin no Allow refunds, no Allow Menu Kick-Outs
+    String AP3_SY = "ap3.qa2@compassdigital.io"; // Site Manager All Options
+    String AP3_SN = "ap3.qa3@compassdigital.io"; // Site Manager No Options
+    String AP3_DY = "ap3.qa4@compassdigital.io"; // CDL Delivery Manager All Options
+    String AP3_DN = "ap3.qa5@compassdigital.io"; // CDL Delivery Manager No Options
+    String AP3_RN = "ap3.qa6@compassdigital.io"; // Runner > https://api.compassdigital.org/dev/user/auth?realm=bolter  
+    // Password for ALL
+    String PW = "Password_111_01";
     //Pre-requisite for this scope: The Brand should not have any existing Station Closure added
     protected void run() { 
     try {    
@@ -51,20 +51,17 @@ class AP3_user_permission extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Click("Click 'Logout'", "xpath", "//*[contains(text(),'Logout')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-       
-
-        // @ST - Hiding this "Runner Login" code for me to run unit test   
-        /*    
-        */
+     
         // <editor-fold defaultstate="collapsed" desc="Runner Login" >
+/*
         Element_By_Path_Input_Select_Clear("Email Clear", "xpath", ".//input[@type='text']",   ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
             if (FAIL) { return;}      
 
-        Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+rn@gmail.com", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter ==== Runner Email", "css", "[aria-label='E-mail']", AP3_RN, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password11", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", PW, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}  
@@ -78,8 +75,8 @@ class AP3_user_permission extends AP3_GUI{
 //                if (FAIL) { return;}            
 //            Find_Text("Find 'Cannot login...' Text", "Cannot log into Admin Panel as a Runner",true, ParentTest, "no_jira");             
 //                if (FAIL) { return;}             
-//        }
-          
+//        }    
+*/
         // </editor-fold>     
         
         // <editor-fold defaultstate="collapsed" desc="Admin N" >  
@@ -88,9 +85,9 @@ class AP3_user_permission extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-        Element_By_Path_Text_Enter("Enter ==== Admin N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+an@gmail.com", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter ==== Admin N Email", "css", "[aria-label='E-mail']", AP3_AN, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", PW, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -160,7 +157,7 @@ Thread.sleep(1000);
             }else{
                 _f++;
                 EX += _t + "\t" + " === Admin No Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected enabled" + "\r\n";
-                Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode(_t + ". " + "Admin No Options-Station visibility status (hide/unhide)"), new Date());
+                Log_Html_Result("FAIL", "Disabled for " + L1.size()  , true, ParentTest.createNode(_t + ". " + "Admin No Options-Station visibility status (hide/unhide)"), new Date());
             }            
             // </editor-fold> 
 
@@ -240,11 +237,11 @@ Thread.sleep(1000);
                 if (FAIL) { return;} 
             Element_By_Path_Click("Click 'Station Name'", "css", "[aria-label='Station Name']",  ParentTest, "no_jira"); 
                 if (FAIL) { return;}                    
-            Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "Edit", false,  ParentTest, "no_jira"); 
+            Element_By_Path_Text_Enter("Edit 'Station Name'", "css", "[aria-label='Station Name']", "_Edit", false,  ParentTest, "no_jira"); 
                 if (!FAIL) {
                     Find_Text("Find 'Save Changes' text", "Save Changes", true, ParentTest, "no_jira"); 
-                    Element_By_Path_Click("Click 'CANCEL'", "xpath", "//*[text()='Cancel']", ParentTest, "no_jira");
-                        if (FAIL) { return;} 
+                    Element_By_Path_Click("Click 'CANCEL'", "xpath", "//footer[@class='v-footer v-footer--fixed theme--light']//button[1]", ParentTest, "no_jira");
+                       if (FAIL) { return;} 
                 } else {
                     _t++; 
                     _f++;
@@ -363,9 +360,9 @@ Thread.sleep(1000);
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-        Element_By_Path_Text_Enter("Enter ==== SM Y Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+sy@gmail.com", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter ==== SM Y Email", "css", "[aria-label='E-mail']", AP3_SY, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", PW, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}  
@@ -437,7 +434,7 @@ Thread.sleep(1000);
             }else{
                 _f++;
                 EX += _t + "\t" + " === SM All Options " + "\t" + "Station visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
-                Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Station visibility status (hide/unhide)"), new Date());
+                Log_Html_Result("FAIL", "Disabled for " + L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Station visibility status (hide/unhide)"), new Date());
             }
             //</editor-fold> 
             
@@ -471,7 +468,7 @@ Thread.sleep(1000);
                     }else{
                         _f++;
                         EX += _t + "\t" + " === SM All Options " + "\t" + "Menu visibility status (hide/unhide)" + "\t" + "Disabled for " + L1.size() + " Stations" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";
-                        Log_Html_Result("FAIL", "Disabled for "+ L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Menu visibility status (hide/unhide)"), new Date());
+                        Log_Html_Result("FAIL", "Disabled for " + L1.size()  , true, ParentTest.createNode(_t + ". " + "SM All Options-Menu visibility status (hide/unhide)"), new Date());
                     }                                      
                 } else if (Tab_Name.toLowerCase().contains("service")) { 
                     Element_By_Path_Click("Click 'Service Hours'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]",  ParentTest, "no_jira"); 
@@ -581,9 +578,9 @@ Thread.sleep(1000);
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-        Element_By_Path_Text_Enter("Enter ==== SM N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+sn@gmail.com", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter ==== SM N Email", "css", "[aria-label='E-mail']", AP3_SN, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", PW, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}  
@@ -782,9 +779,9 @@ Thread.sleep(1000);
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-        Element_By_Path_Text_Enter("Enter ==== DM Y Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+dy@gmail.com", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter ==== DM Y Email", "css", "[aria-label='E-mail']", AP3_DY, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", PW, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}   
@@ -805,7 +802,7 @@ Thread.sleep(1000);
             Find_Text("DM Y Dashboard 'Users'", "Users", true, ParentTest, "no_jira");     
             Find_Text("DM Y Dashboard 'Announcements'", "Announcements", true, ParentTest, "no_jira"); 
             Find_Text("DM Y Dashboard 'Promo Management'", "Promo Management", false, ParentTest, "no_jira");                     
-            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", false, ParentTest, "no_jira");
+            Find_Text("DM Y Dashboard 'Smart Analytics'", "Smart Analytics", true, ParentTest, "no_jira");
             Find_Text("DM Y Dashboard 'Ap3 Notification'", "AP3 Notification", false, ParentTest, "no_jira"); 
             
             // DM Y Sites permissions
@@ -994,9 +991,9 @@ Thread.sleep(1000);
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Password Clear", "xpath", ".//input[@type='password']",  ParentTest, "no_jira"); 
             if (FAIL) { return;}      
-        Element_By_Path_Text_Enter("Enter ==== DM N Email", "css", "[aria-label='E-mail']", "cdl.test.xtt+dn@gmail.com", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter ==== DM N Email", "css", "[aria-label='E-mail']", AP3_DN, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", "Password1", false,  ParentTest, "no_jira"); 
+        Element_By_Path_Text_Enter("Enter Valid Password", "css", "[aria-label='Password']", PW, false,  ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Path_Click("Sign In Click", "xpath", "//*[contains(text(), 'Sign in')]",  ParentTest, "no_jira"); 
             if (FAIL) { return;}   
@@ -1195,6 +1192,10 @@ Thread.sleep(1000);
         }
         // </editor-fold>    
         
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     }  
 }

@@ -34,10 +34,6 @@ class AP3_notifications extends AP3_GUI{
     protected void run() {
     String API_Response_Body = "";    
     try {    
-        Wait_For_Element_By_Path_Visibility("Wait for 'AP3 Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the CDL Admin Panel')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Page_URL("AP3 Dashboard URL", ParentTest, "no_jira");
-            if (FAIL) { return;}
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500);
@@ -50,7 +46,6 @@ class AP3_notifications extends AP3_GUI{
         Thread.sleep(500);
         
         // <editor-fold defaultstate="collapsed" desc="Verify Notifications API">  
-        //Call_API("Notification API", "Bearer " + AP3_TKN, BaseAPI +"/notification?realm=cdl&target=admin_panel&end=2021-03-28T16:06:36.678Z", true, ParentTest, "no_jira");
         Call_API("Notification API", "Bearer " + AP3_TKN, BaseAPI + "/notification?realm=cdl&target=admin_panel", true, ParentTest, "no_jira");
             if (FAIL) { return;}
         if(t.startsWith("{")){
@@ -157,7 +152,7 @@ class AP3_notifications extends AP3_GUI{
             if (FAIL) { return;}
             
         To_Bottom("Scroll to Bottom",  ParentTest, "no_jira");
-        Thread.sleep(2000);
+        Thread.sleep(100);
         Element_Child_Click("Click > Start Time Input Field", L1.get(1), "xpath", "//input[@aria-label='Start Time']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Start Time Dropdown List", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira");
@@ -318,7 +313,7 @@ class AP3_notifications extends AP3_GUI{
                 if (FAIL) { return;}
         } else {
             day = day+1;
-            Element_By_Path_Click("Select A Later Date", "xpath", "//div[contains(@class, 'v-btn__content') and contains(text(),'"+String.valueOf(day)+"')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Select A Later Date", "xpath", "//div[contains(@class, 'v-btn__content') and contains(text(),'" +String.valueOf(day)+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
         }
         Element_By_Path_Click("Click > Cancel Button", "xpath", "//div[contains(text(),'Cancel')]", ParentTest, "no_jira");
@@ -333,7 +328,7 @@ class AP3_notifications extends AP3_GUI{
             if (FAIL) { return;}
         Element_Child_Text("Canceled edit Notification > Notification Status", L2.get(0), "xpath", "//div[contains(text(),'Pending')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_Child_Text("Canceled edit Notification > Date Scheduled", L2.get(0), "xpath", "//span[contains(text(),'"+DATE+"')]", ParentTest, "no_jira");
+        Element_Child_Text("Canceled edit Notification > Date Scheduled", L2.get(0), "xpath", "//span[contains(text(),'" +DATE+ "')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         // </editor-fold>
 
@@ -424,30 +419,30 @@ class AP3_notifications extends AP3_GUI{
         // <editor-fold defaultstate="collapsed" desc="Edit 'Released' Notification"> 
         //========== Edit Notification with 'Released' Status
         Refresh("Refresh for New Notification Status >  'Released", ParentTest, "no_jira");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         Page_URL("AP3 Notification URL", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Text("Get 'Released' Original Notification Name", "xpath", "(//div[contains(text(), 'Released')]/ancestor::tr)[1]/td[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        String nn = t;
+        String NewNotificationName = t;
         Element_By_Path_Text("Original 'Released' Notification Description", "xpath", "(//div[contains(text(), 'Released')]/ancestor::tr)[1]/td[2]", ParentTest, "no_jira");
             if (FAIL) { return;}
         String nd = t;   
-        Element_By_Path_Click("Click > Edit on Notif. with Released Status", "xpath", "//div[contains(text(),'" + nn + "')]/ancestor::tr//i[contains(@class, 'mdi-pencil')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click > Edit on Notif. with Released Status", "xpath", "//div[contains(text(),'" + NewNotificationName + "')]/ancestor::tr//i[contains(@class, 'mdi-pencil')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(1000);
         //Released notification auto controller (AC)
         char AC = '1';
-        if (nn.charAt(nn.length() - 1)!= AC && nd.charAt(nd.length()-1)!= AC) {
-            nn = nn + AC;
+        if (NewNotificationName.charAt(NewNotificationName.length() - 1) != AC && nd.charAt(nd.length() - 1) != AC) {
+            NewNotificationName = NewNotificationName + AC;
             nd = nd + AC;
         } else {
-            nn = nn.substring(0, nn.length()-1);
-            nd = nd.substring(0, nd.length()-1);
+            NewNotificationName = NewNotificationName.substring(0, NewNotificationName.length() - 1);
+            nd = nd.substring(0, nd.length() - 1);
         }
         Element_By_Path_Input_Select_Clear("Clear > Notification Name", "xpath", "//input[@aria-label='Notification Name']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter > Updated Notification Name", "xpath", "//input[@aria-label='Notification Name']", nn, false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Enter > Updated Notification Name", "xpath", "//input[@aria-label='Notification Name']", NewNotificationName, false, ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Input_Select_Clear("Clear > Notification Description", "xpath", "//textarea[@aria-label='Notification Description']", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -462,9 +457,9 @@ class AP3_notifications extends AP3_GUI{
         Element_By_Path_Click("Click > Save Changes Button", "xpath", "//*[contains(text(),'Save Changes')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(5000);
-        Element_By_Path_Text("Updated > Notif. Name on Released Notif.", "xpath", "//div[contains(text(), '" + nn + "')]", ParentTest, "no_jira");
+        Element_By_Path_Text("Updated > Notif. Name on Released Notif.", "xpath", "//div[contains(text(), '" + NewNotificationName + "')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text("Updated > Notif. Desc. on Released Notif.", "xpath", "//div[contains(text(), '" + nn + "')]/ancestor::tr/td[2]", ParentTest, "no_jira");
+        Element_By_Path_Text("Updated > Notif. Desc. on Released Notif.", "xpath", "//div[contains(text(), '" + NewNotificationName + "')]/ancestor::tr/td[2]", ParentTest, "no_jira");
             if (FAIL) { return;}
         // </editor-fold>
 
@@ -482,7 +477,6 @@ class AP3_notifications extends AP3_GUI{
                 i++; //<------ loop breaker          
             } else {
                 Navigate_to_URL("Navigate to Notifications page", url + "#/notification-manager/", ParentTest, "no_jira");
-                    if (FAIL) { return;}
             }
             Thread.sleep(1000);  //<------- this should limit the loop to run once per second until the condition is no longer met 
         }
@@ -505,26 +499,32 @@ class AP3_notifications extends AP3_GUI{
             if (FAIL) { return;}
         if(BNN > 1){
             Element_By_Path_Text("Bell Notif. - Updated Number", "xpath", "(//button[contains(@class, 'bell-button')])[1]//span", ParentTest, "no_jira");
-                if (FAIL) { return;}
         }
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Delete Notification"> 
         Refresh("Refresh Notifications page", ParentTest, "no_jira");
             if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for 'New Notif' Name in the table", "xpath", "//div[contains(text(), '" + NewNotificationName + "')])", ParentTest, "no_jira");
+//            if (FAIL) { return;}  
+        Thread.sleep(1000);
         Page_URL("AP3 Notification URL", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Click > Delete icon", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]/ancestor::tr//i[contains(@class, 'mdi-delete')]", ParentTest, "no_jira");
+        Element_By_Path_Click("'" + NewNotificationName + "' > Delete", "xpath", "//div[contains(text(), '" + NewNotificationName + "')]/ancestor::tr//i[contains(@class, 'mdi-delete')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Wait_For_Element_By_Path_Visibility("Delete Confirmation Dialog", "xpath", "//div[contains(@class,'confirm-dialog v-card')]", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Visibility("Delete Confirmation Dialog", "xpath", "//div[contains(@class, 'confirm-dialog v-card')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Click > Delete in Dialog", "xpath", "//*[contains(text(),'DELETE')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Thread.sleep(5000);            
-        Wait_For_Element_By_Path_InVisibility("Deleted Notification no Longer in the Table", "xpath", "//div[contains(text(),'Auto-notif-test-upd')]", ParentTest, "no_jira");
+        Thread.sleep(1000);            
+        Wait_For_Element_By_Path_InVisibility("Deleted New Notification no Longer in the Table", "xpath", "//div[contains(text(), '" + NewNotificationName + "')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         // </editor-fold>
 
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

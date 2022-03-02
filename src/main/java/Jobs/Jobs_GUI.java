@@ -25,51 +25,53 @@ import javax.swing.table.TableRowSorter;
  */
 
 public class Jobs_GUI extends javax.swing.JInternalFrame {
-
-//<editor-fold defaultstate="collapsed" desc="Cron Pattern Samples">
-//    5 * * * *
-//    This pattern causes a task to be launched once every hour, at the begin of the fifth minute (00:05, 01:05, 02:05 etc.).
-//    
-//    * * * * *
-//    This pattern causes a task to be launched every minute.
-//    
-//    * 12 * * Mon
-//    This pattern causes a task to be launched every minute during the 12th hour of Monday.
-//    
-//    * 12 16 * Mon
-//    This pattern causes a task to be launched every minute during the 12th hour of Monday, 16th, but only if the day is the 16th of the month.
-//    
-//    Every sub-pattern can contain two or more comma separated values.
-//    59 11 * * 1,2,3,4,5
-//    This pattern causes a task to be launched at 11:59AM on Monday, Tuesday, Wednesday, Thursday and Friday.
-//    
-//    Values intervals are admitted and defined using the minus character.
-//    59 11 * * 1-5
-//    This pattern is equivalent to the previous one.
-//    
-//    The slash character can be used to identify step values within a range. It can be used both in the form */c and a-b/c. The subpattern is matched every c values of the range 0,maxvalue or a-b.         
-//    */5 * * * *
-//    This pattern causes a task to be launched every 5 minutes (0:00, 0:05, 0:10, 0:15 and so on).
-//            
-//    3-18/5 * * * *
-//    This pattern causes a task to be launched every 5 minutes starting from the third minute of the hour, up to the 18th (0:03, 0:08, 0:13, 0:18, 1:03, 1:08 and so on).
-//
-//    */15 9-17 * * *
-//    This pattern causes a task to be launched every 15 minutes between the 9th and 17th hour of the day (9:00, 9:15, 9:30, 9:45 and so on... note that the last execution will be at 17:45).
-//
-//    All the fresh described syntax rules can be used together.
-//
-//    * 12 10-16/2 * *
-//    This pattern causes a task to be launched every minute during the 12th hour of the day, but only if the day is the 10th, the 12th, the 14th or the 16th of the month.
-//
-//    * 12 1-15,17,20-25 * *
-//    This pattern causes a task to be launched every minute during the 12th hour of the day, but the day of the month must be between the 1st and the 15th, the 20th and the 25, or at least it must be the 17th.
-//
-//    Finally cron4j lets you combine more scheduling patterns into one, with the pipe character:
-//
-//    0 5 * * *|8 10 * * *|22 17 * * *
-//    This pattern causes a task to be launched every day at 05:00, 10:08 and 17:22.
-//</editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Cron Patterns">    
+    String C_HELP = "Cron for Java - Pattern Samples" + " >> https://www.sauronsoftware.it/projects/cron4j/manual.php" +
+    "	\n\n" +
+    "    5 * * * *\n" +
+    "    This pattern causes a task to be launched once every hour, at the begin of the fifth minute (00:05, 01:05, 02:05 etc.).\n" +
+    "    \n" +
+    "    * * * * *\n" +
+    "    This pattern causes a task to be launched every minute.\n" +
+    "    \n" +
+    "    * 12 * * Mon\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of Monday.\n" +
+    "    \n" +
+    "    * 12 16 * Mon\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of Monday, 16th, but only if the day is the 16th of the month.\n" +
+    "    \n" +
+    "    Every sub-pattern can contain two or more comma separated values.\n" +
+    "    59 11 * * 1,2,3,4,5\n" +
+    "    This pattern causes a task to be launched at 11:59AM on Monday, Tuesday, Wednesday, Thursday and Friday.\n" +
+    "    \n" +
+    "    Values intervals are admitted and defined using the minus character.\n" +
+    "    59 11 * * 1-5\n" +
+    "    This pattern is equivalent to the previous one.\n" +
+    "    \n" +
+    "    The slash character can be used to identify step values within a range. It can be used both in the form */c and a-b/c. The subpattern is matched every c values of the range 0,maxvalue or a-b.         \n" +
+    "    */5 * * * *\n" +
+    "    This pattern causes a task to be launched every 5 minutes (0:00, 0:05, 0:10, 0:15 and so on).\n" +
+    "            \n" +
+    "    3-18/5 * * * *\n" +
+    "    This pattern causes a task to be launched every 5 minutes starting from the third minute of the hour, up to the 18th (0:03, 0:08, 0:13, 0:18, 1:03, 1:08 and so on).\n" +
+    "\n" +
+    "    */15 9-17 * * *\n" +
+    "    This pattern causes a task to be launched every 15 minutes between the 9th and 17th hour of the day (9:00, 9:15, 9:30, 9:45 and so on... note that the last execution will be at 17:45).\n" +
+    "\n" +
+    "    All the fresh described syntax rules can be used together.\n" +
+    "\n" +
+    "    * 12 10-16/2 * *\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of the day, but only if the day is the 10th, the 12th, the 14th or the 16th of the month.\n" +
+    "\n" +
+    "    * 12 1-15,17,20-25 * *\n" +
+    "    This pattern causes a task to be launched every minute during the 12th hour of the day, but the day of the month must be between the 1st and the 15th, the 20th and the 25, or at least it must be the 17th.\n" +
+    "\n" +
+    "    Finally cron4j lets you combine more scheduling patterns into one, with the pipe character:\n" +
+    "\n" +
+    "    0 5 * * *|8 10 * * *|22 17 * * *\n" +
+    "    This pattern causes a task to be launched every day at 05:00, 10:08 and 17:22."
+            + "";
+    // </editor-fold>
     
     public Jobs_GUI() {
         initComponents();
@@ -97,6 +99,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         txtCron = new javax.swing.JFormattedTextField();
         btnStartCron = new javax.swing.JButton();
         btnStopCron = new javax.swing.JButton();
+        btnHelp = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -106,7 +109,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Jobs"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 103, 0));
-        setPreferredSize(new java.awt.Dimension(858, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -118,20 +120,20 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,7 +149,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRequestFocusEnabled(false);
         DV1.setRowHeight(18);
@@ -158,9 +160,14 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 DV1MouseClicked(evt);
             }
         });
+        DV1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                DV1ComponentHidden(evt);
+            }
+        });
         jScrollPane3.setViewportView(DV1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 4, 552, 424));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 4, 548, 435));
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -171,7 +178,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 430, 548, 68));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 443, 548, 68));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
@@ -181,7 +188,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 472, 104, 24));
+        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 479, 110, 24));
 
         btnSave.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave.setText("Save Changes ^");
@@ -193,10 +200,9 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnSaveMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 436, 104, 24));
+        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 449, 110, 24));
 
         btnRun.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnRun.setForeground(new java.awt.Color(0, 0, 0));
         btnRun.setText(" Run Selected Job (ad-hoc)");
         btnRun.setEnabled(false);
         btnRun.setName("btnRun"); // NOI18N
@@ -205,7 +211,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 btnRunMouseClicked(evt);
             }
         });
-        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 472, 176, 24));
+        getContentPane().add(btnRun, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 479, 186, 24));
 
         txtConfig.setColumns(20);
         txtConfig.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -215,71 +221,82 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         txtConfig.setMinimumSize(new java.awt.Dimension(854, 525));
         jScrollPane2.setViewportView(txtConfig);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 96, 296, 332));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 119, 296, 322));
 
         txtJob_Name.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtJob_Name.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtJob_Name.setEnabled(false);
         txtJob_Name.setSelectionColor(new java.awt.Color(0, 0, 0));
-        getContentPane().add(txtJob_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 4, 152, -1));
+        getContentPane().add(txtJob_Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 4, 155, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        jLabel1.setText("Config:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 80, 48, -1));
-        getContentPane().add(txtCheckValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 48, 152, -1));
+        jLabel1.setText("Job Configuration, Data Setup:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 104, 178, -1));
+        getContentPane().add(txtCheckValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 49, 156, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Job Name");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 8, 79, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(631, 8, 60, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Trigger");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 28, 79, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 31, 44, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setText("Check Value");
+        jLabel4.setText("Check ");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(608, 52, 80, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(652, 56, 40, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Cron Frequency");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 72, 96, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(558, 65, 96, -1));
 
         cmbTrigger.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbTrigger.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "N/A", "websocket", "webhook", "new version", "new githash" }));
-        getContentPane().add(cmbTrigger, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 24, 152, 20));
+        getContentPane().add(cmbTrigger, new org.netbeans.lib.awtextra.AbsoluteConstraints(697, 29, 157, 20));
 
         txtCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        getContentPane().add(txtCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 72, 152, -1));
+        getContentPane().add(txtCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 79, 300, -1));
 
         btnStartCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnStartCron.setForeground(new java.awt.Color(0, 0, 0));
         btnStartCron.setText("Start Cron");
+        btnStartCron.setMargin(new java.awt.Insets(0, 1, 0, 1));
         btnStartCron.setName("btnStart"); // NOI18N
         btnStartCron.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnStartCronMouseClicked(evt);
             }
         });
-        getContentPane().add(btnStartCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 436, 84, 24));
+        getContentPane().add(btnStartCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(668, 449, 86, 24));
 
         btnStopCron.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnStopCron.setForeground(new java.awt.Color(0, 0, 0));
         btnStopCron.setText("Stop Cron");
         btnStopCron.setEnabled(false);
+        btnStopCron.setMargin(new java.awt.Insets(0, 1, 0, 1));
         btnStopCron.setName("btnStop"); // NOI18N
         btnStopCron.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnStopCronMouseClicked(evt);
             }
         });
-        getContentPane().add(btnStopCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 436, 84, 24));
+        getContentPane().add(btnStopCron, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 449, 94, 24));
+
+        btnHelp.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnHelp.setText("Cron Help");
+        btnHelp.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btnHelp.setName("btnStart"); // NOI18N
+        btnHelp.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHelpMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 33, 64, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,8 +352,22 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         START_CRON();       
     }//GEN-LAST:event_btnStartCronMouseClicked
     private void btnStopCronMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStopCronMouseClicked
-        STOP_CRON();  
+        STOP_CRON(); 
+        LOAD_JOBS(); //  ==== Reload definitions to capture possible updates
     }//GEN-LAST:event_btnStopCronMouseClicked
+
+    private void btnHelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHelpMouseClicked
+         try {
+            A.Func.SHOW_FILE(C_HELP, "txt");
+        }
+        catch (Exception ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnHelpMouseClicked
+
+    private void DV1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_DV1ComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DV1ComponentHidden
     // </editor-fold>
     
     private void LOAD_JOBS() {
@@ -521,7 +552,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         btnStartCron.setEnabled(false);
         txtLog.append( "= START_CRON @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        r_type = "cron";
+
         int Job_Count = 0;
         SCH = new Scheduler();
         String SCH_PATTERN = ""; // "59 11 * * 1,2,3,4,5" 
@@ -530,71 +561,115 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             SCH_PATTERN = DV1.getValueAt(i, 3).toString();
             
             if(!SCH_PATTERN.toLowerCase().contains("no") && Cron_Status.equals("Idle")){
-                JobName = DV1.getValueAt(i, 0).toString();
+                String CronJobName = DV1.getValueAt(i, 0).toString();
                 String CONFIG = DV1.getValueAt(i, 6).toString();
                 try{
-                    if(JobName.equals("Tokens_AP3")){              
+                    if(CronJobName.equals("Tokens_AP3")){              
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Tokens_AP3(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                            r_type = "cron";                            
+                            Tokens_AP3(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);
                         
-                    } else if(JobName.startsWith("API")){              
+                    } else if(CronJobName.startsWith("AP3_API")){              
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_API(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                            r_type = "cron";                            
+                            Job_AP3_API(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);
                         
-                    } else if(JobName.startsWith("AP3")){
+                    } else if(CronJobName.startsWith("FW_API")){              
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_AP3(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                            r_type = "cron";                            
+                            Job_FW_API(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);
                         
-                    } else if(JobName.startsWith("DL")){
+                    } else if(CronJobName.startsWith("AP3_PR_Smoke")){
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_DL(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                            r_type = "cron";                            
+                            Job_AP3(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);
+                        
+                    } else if(CronJobName.startsWith("AP3_FE")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            r_type = "cron";                            
+                            Job_AP3(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);
+                        
+                    } else if(CronJobName.startsWith("DL_FE")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            r_type = "cron";                            
+                            Job_DL(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });                       
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
-
-                    } else if(JobName.startsWith("C360")){
+                        Set_Cron_Status_Running(CronJobName);
+                    } else if(CronJobName.startsWith("DL_API")){
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_C360(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                            r_type = "cron";                            
+                            Job_DL_API(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });                       
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);
+                        
+                    } else if(CronJobName.startsWith("C360_FE")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            r_type = "cron";                            
+                            Job_C360(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
+                        Set_Cron_Status_Running(CronJobName);   
                         
-                    } else if(JobName.startsWith("Android")){
+                    } else if(CronJobName.startsWith("C360_API")){
                         SCH.schedule(SCH_PATTERN, () -> {
-                            Job_Android(JobName,CONFIG);
-                            txtLog.append("= Scheduled Job " + JobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
-                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                            r_type = "cron";                            
+                            Job_C360_API(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
                         });
                         Job_Count++;
-                        Set_Cron_Status_Running(JobName);
-                    
-                    } else if(JobName.startsWith("FW")){
-                        //Job_FW(JobName,CONFIG);
+                        Set_Cron_Status_Running(CronJobName);   
                         
-                    } else if(JobName.startsWith("WO")){
-                        //Job_WO(JobName,CONFIG);
+                    } else if(CronJobName.startsWith("FW_FE")){
+                        //Job_FW(CronJobName,CONFIG);
                         
-     
-                    } else if(JobName.startsWith("iOS")){
+                    } else if(CronJobName.startsWith("WO_FE")){
+                        //Job_WO(CronJobName,CONFIG);
+  
+                    } else if(CronJobName.startsWith("Android")){
+                        SCH.schedule(SCH_PATTERN, () -> {
+                            r_type = "cron";                            
+                            Job_Android(CronJobName,CONFIG);
+//                            txtLog.append("= Scheduled Job " + CronJobName + " started @"  + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+//                            txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                        });
+                        Job_Count++;
+                        Set_Cron_Status_Running(CronJobName);
+                         
+                    } else if(CronJobName.startsWith("iOS")){
                         //Job_iOS(config);
                     }                    
 
@@ -604,22 +679,6 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
                 }                
             }
         }
-
-//        try{        
-//            Scheduler SCH = new Scheduler();
-//            SCH_PATTERN = "*/5 * * * *";
-//            ProcessTask TASK = new ProcessTask("A_TASK");
-//            String Sch_Task_ID = SCH.schedule(SCH_PATTERN, () -> {
-//                txtLog.append( "= SCH_2 Another 5 minutes ticked away..." + "\r\n");
-//                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
-//            });
-//            SCH.start();
-//            txtLog.append( "= Scheduler SCH_2 started started @" + LocalDateTime.now().format(Time_12_formatter) + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//        } catch(InvalidPatternException | IllegalStateException ex){
-//            txtLog.append( "= SCH ERROR > " + ex.getMessage() + "\r\n");
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());            
-//        }
         if(Job_Count > 0){
             SCH.start();
             btnStopCron.setEnabled(true);
@@ -689,23 +748,29 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
             }
     }
     private void Run_Selected_Job(String Job, String config){
-        JobName = txtJob_Name.getText();
+        JobName = Job;
         r_type = "ad-hoc";
-        txtLog.append( "= " + Job + ": (ad-hoc) Execution started @" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\r\n");
+        txtLog.append( "= " + Job + ": (ad-hoc) Execution started. Check Reports..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         if(JobName.equals("Tokens_AP3")){
             Tokens_AP3(JobName, config);
-        } else if(JobName.startsWith("API")){
-            Job_API(JobName, config);
-        } else if(JobName.startsWith("AP3")){
+        } else if(JobName.startsWith("AP3_API")){
+            Job_AP3_API(JobName, config);
+        } else if(JobName.startsWith("FW_API")){
+            Job_FW_API(JobName, config);
+        } else if(JobName.startsWith("AP3_FE") || JobName.equals("AP3_PR_Smoke")){
             Job_AP3(JobName, config);        
-        } else if(JobName.startsWith("DL")){
+        } else if(JobName.startsWith("DL_FE")){
             Job_DL(JobName, config);
-        } else if(JobName.startsWith("C360")){
+        } else if(JobName.startsWith("DL_API")){
+            Job_DL_API(JobName, config);
+        } else if(JobName.startsWith("C360_FE")){
             Job_C360(JobName, config);
-        } else if(JobName.startsWith("FW")){
-            //Job_FW(JobName,config);
+        } else if(JobName.startsWith("C360_API")){
+            Job_C360_API(JobName, config);
+        } else if(JobName.startsWith("FW_FE")){
+            //Job_FW(CronJobName,config);
         } else if(JobName.startsWith("WO")){
             //Job_WO(config);
         } else if(JobName.startsWith("Android")){
@@ -718,33 +783,42 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
     //<editor-fold defaultstate="collapsed" desc="Jobs_GUI > Job Name, Config">
     private void Tokens_AP3(String job, String config){
         AP3_Tokens _Job = new AP3_Tokens();
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         _Job.AP3_Tokens(job, r_type, config);
-        txtLog.append("= Please Check Report" + "\r\n");
+//        txtLog.append("= Please Check Report" + "\r\n");
     }    
     private void Job_AP3(String job, String config){
         AP3.AP3_GUI _Job = new AP3.AP3_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
-        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
     }
-    private void Job_API(String job, String config){
-        API.API_GUI _Job = new API.API_GUI();
+    private void Job_AP3_API(String job, String config){
+        AP3_API.AP3_API_GUI _Job = new AP3_API.AP3_API_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
-        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
     }
+    private void Job_FW_API(String job, String config){
+        FW_API.FW_API_main _Job = new FW_API.FW_API_main();
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILURE(RES);
+        }
+    }    
     private void Job_Android(String job, String config){
         Mob_Android.An_GUI _Job = new Mob_Android.An_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
-        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
@@ -752,8 +826,17 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
     private void Job_C360(String job, String config){
         C360.C360_GUI _Job = new C360.C360_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
-        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILURE(RES);
+        }
+    }
+    private void Job_C360_API(String job, String config){
+        C360_API.C360_API_main _Job = new C360_API.C360_API_main();
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
@@ -761,8 +844,17 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
     private void Job_DL(String job, String config){
         DL.DL_GUI _Job = new DL.DL_GUI();
         String RES = _Job.JOB_Run_Auto(job, r_type, config);
-        txtLog.append("= Job " + job + " > Result @" + LocalDateTime.now().format(A.A.Time_12_formatter) +  "\r\n" + RES.trim() + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        if(!RES.contains("OK")){
+            LOG_FAILURE(RES);
+        }
+    }
+    private void Job_DL_API(String job, String config){
+        DL_API.DL_API_main _Job = new DL_API.DL_API_main();
+        String RES = _Job.JOB_Run_Auto(job, r_type, config);
+//        txtLog.append("= " + job + " > " + RES.trim() + "\r\n");
+//        txtLog.setCaretPosition(txtLog.getDocument().getLength());
         if(!RES.contains("OK")){
             LOG_FAILURE(RES);
         }
@@ -772,6 +864,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;
+    private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JButton btnSave;

@@ -1,5 +1,7 @@
 package AP3;
 
+import java.util.Date;
+
 class AP3_feedback_logout extends AP3_GUI{
     protected AP3_feedback_logout (AP3_GUI a) {
         d1 = a.d1; 
@@ -78,6 +80,10 @@ class AP3_feedback_logout extends AP3_GUI{
         Find_Text("Forgot Password Text", "Forgot Password", true, ParentTest, "no_jira");
             if (FAIL) {return;}
         Page_URL("AP3 Welcome page URL", ParentTest, "no_jira");
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    }  
     } 
 }

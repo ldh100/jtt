@@ -20,6 +20,8 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
+import org.joda.time.DateTime;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import javax.swing.RowSorter;
@@ -119,7 +121,7 @@ public class Orders extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -351,7 +353,7 @@ public class Orders extends javax.swing.JInternalFrame {
         ));
         DV_Sites.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Sites.setCellSelectionEnabled(true);
-        DV_Sites.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Sites.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Sites.setName("DV_Sites"); // NOI18N
         DV_Sites.setRowHeight(18);
         DV_Sites.getTableHeader().setReorderingAllowed(false);
@@ -373,7 +375,7 @@ public class Orders extends javax.swing.JInternalFrame {
         ));
         DV_Brands.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Brands.setCellSelectionEnabled(true);
-        DV_Brands.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Brands.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Brands.setName("DV_Brands"); // NOI18N
         DV_Brands.setOpaque(false);
         DV_Brands.setRowHeight(18);
@@ -502,7 +504,7 @@ public class Orders extends javax.swing.JInternalFrame {
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");  
         
-        cmbEnv.setSelectedIndex(1); // Staging
+        cmbEnv.setSelectedIndex(2); // Production
         cmbApp.setSelectedIndex(0); // Boost      
         Load = false;
         LOAD_ENV();
@@ -569,9 +571,11 @@ public class Orders extends javax.swing.JInternalFrame {
         SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));
         SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
         
-        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        int Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
+        //long m7 = System.currentTimeMillis() - (60*60*24*(Days_Back - 1)*1000);  // Now - 7 days
+        Date DateBack = new DateTime(new Date()).minusDays(Days_Back - 1).withTimeAtStartOfDay().toDate();      
+        long m7 = DateBack.getTime();
         
         Api_Call(BaseAPI + "/order/location/group/" + SiteID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth);
         //Api_Call("GET",  BaseAPI + "/order/location/group/" + SiteID + "?pickup_start=" + m7 + "&pickup_end=" + m1 + "&order_type=all&extended=true", Auth, "");
@@ -591,9 +595,11 @@ public class Orders extends javax.swing.JInternalFrame {
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
 
-        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        int Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (1*24*3600*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (Days_Back*24*3600*1000);  // Now - Days_Back days > default 7
+        //long m7 = System.currentTimeMillis() - ((Days_Back-1)*24*3600*1000);  // Now - Days_Back days > default 7
+        Date DateBack = new DateTime(new Date()).minusDays(Days_Back - 1).withTimeAtStartOfDay().toDate();      
+        long m7 = DateBack.getTime();
         
         Api_Call(BaseAPI + "/order/location/brand/" + BrandID + "?start=" + m7 + "&end=" + m1 + "&order_type=all&extended=true", Auth);
         
@@ -958,10 +964,13 @@ public class Orders extends javax.swing.JInternalFrame {
             return;
         }
                
-        long Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
+        int Days_Back = Integer.parseInt(cmbDAYS.getSelectedItem().toString());
         long m1 = System.currentTimeMillis() + (60*60*24*1*1000);  // Now + 1 day to include future 'requested date'
-        long m7 = System.currentTimeMillis() - (60*60*24*Days_Back*1000);  // Now - 7 days
-        
+
+        //long m7 = System.currentTimeMillis() - (60*60*24*(Days_Back-1)*1000);  // Now - 7 days
+        Date DateBack = new DateTime(new Date()).minusDays(Days_Back - 1).withTimeAtStartOfDay().toDate();      
+        long m7 = DateBack.getTime();
+
         txtLog.append("\r\n- Get Mobile User Orders ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         
@@ -996,7 +1005,7 @@ public class Orders extends javax.swing.JInternalFrame {
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
         ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(10, SortOrder.DESCENDING));
+        sortKeys.add(new RowSorter.SortKey(12, SortOrder.DESCENDING));
         sorter.setSortKeys(sortKeys);      
         DV1.setRowSorter(sorter);
         
@@ -1018,8 +1027,11 @@ public class Orders extends javax.swing.JInternalFrame {
 
                         if(or.has("payment") && or.getJSONObject("payment").has("credit_card") && 
                            or.getJSONObject("payment").getJSONObject("credit_card").has("card_type")){
-                            _Payment = or.getJSONObject("payment").getJSONObject("credit_card").getString("card_type") +
-                                " x" + or.getJSONObject("payment").getJSONObject("credit_card").getString("last4");
+                            String Last4 = " x????";
+                            if(or.getJSONObject("payment").getJSONObject("credit_card").has("last4")){
+                                Last4 = " x" + or.getJSONObject("payment").getJSONObject("credit_card").getString("last4");
+                            }
+                            _Payment = or.getJSONObject("payment").getJSONObject("credit_card").getString("card_type") + Last4;
                         } 
                         if(or.has("payment") && or.getJSONObject("payment").has("digital_wallet_pay")){
                             _Payment = or.getJSONObject("payment").getString("digital_wallet_pay");
@@ -1059,23 +1071,22 @@ public class Orders extends javax.swing.JInternalFrame {
                 DV1.getColumnModel().getColumn(3).setPreferredWidth(120); // Destination       
                 DV1.getColumnModel().getColumn(4).setPreferredWidth(95);  // req date
                 DV1.getColumnModel().getColumn(5).setPreferredWidth(50);  // Amount
-                DV1.getColumnModel().getColumn(6).setPreferredWidth(130); // name           
-                DV1.getColumnModel().getColumn(7).setPreferredWidth(100); // payment
-                DV1.getColumnModel().getColumn(8).setPreferredWidth(70); // service
-                DV1.getColumnModel().getColumn(9).setPreferredWidth(50);  
-                DV1.getColumnModel().getColumn(10).setPreferredWidth(50); 
-                DV1.getColumnModel().getColumn(11).setPreferredWidth(60); 
-                DV1.getColumnModel().getColumn(12).setPreferredWidth(150); 
+                DV1.getColumnModel().getColumn(6).setPreferredWidth(130); // Pickup name           
+                DV1.getColumnModel().getColumn(7).setPreferredWidth(100); // Promo
+                DV1.getColumnModel().getColumn(8).setPreferredWidth(70); // payment
+                DV1.getColumnModel().getColumn(9).setPreferredWidth(50);  // service
+                DV1.getColumnModel().getColumn(10).setPreferredWidth(50); // SCard ID
+                DV1.getColumnModel().getColumn(11).setPreferredWidth(60); // Order ID
+                DV1.getColumnModel().getColumn(12).setPreferredWidth(150); // Modfied Date UTC
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
-                sorter.setSortable(10, true); 
+                sorter.setSortable(12, true); 
                 sorter.sort(); 
                 
             } catch (Exception ex) {
                 txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");   
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-            } 
-            
+            }    
         }    
     }
 

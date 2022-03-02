@@ -144,7 +144,7 @@ public class JIRA extends javax.swing.JInternalFrame {
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV1.setCellSelectionEnabled(true);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRequestFocusEnabled(false);
         DV1.setRowHeight(18);
@@ -552,7 +552,7 @@ public class JIRA extends javax.swing.JInternalFrame {
                 System.setProperty("webdriver.ie.driver", CWD + "\\IEDriverServer.exe"); 
             }
             if(WsOS.toLowerCase().contains("mac")){
-                System.out.println("******** "+CWD+"/chromedriver.exe");
+                System.out.println("******** " +CWD+ "/chromedriver.exe");
                 //System.setProperty("webdriver.chrome.driver", CWD + "/chromedriver");  
                 System.setProperty("webdriver.chrome.driver", "/Users/prathyusha.deshpande/distilr/BrowserDriver/87/chromedriver");            
                 System.setProperty("webdriver.edge.driver",  CWD + "/msedgedriver");  
@@ -795,7 +795,7 @@ public class JIRA extends javax.swing.JInternalFrame {
                     ", [Result] = ?" +    // 16
                     ", [Status] = ?" +    // 17
                     ", [Excel] = ?" +     // 18
-                    " WHERE [app] = 'JIRA_" + env + "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'JIRA_" + env + "' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
             _update.setString(3, "JIRA_" + env);

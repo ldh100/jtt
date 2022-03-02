@@ -102,7 +102,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRowHeight(18);
         DV1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -170,7 +170,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
             }
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);
         DV2.setName("DV1"); // NOI18N
         DV2.setRowHeight(18);
         DV2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -196,13 +196,18 @@ public class M_Devices extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
+    private String ADB_HOME;
+    private String EMULATOR_HOME;
+    // </editor-fold> 
+        
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         if(A.A.WsOS.toLowerCase().contains("windows")){
             ADB_HOME = "";  
-            EMULATOR_HOME = "C:/Users/" + A.A.UserID + "/AppData/Local/Android/Sdk/emulator";
+            EMULATOR_HOME = "C:/Users/" + A.A.UserID + "/AppData/Local/Android/Sdk/emulator/";
         }else{
-            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
-            EMULATOR_HOME =System.getenv("HOME") + File.separator + "Library" + File.separator + "Android"+ File.separator + "sdk" + File.separator + "emulator" + File.separator;   
+            ADB_HOME = System.getenv("HOME") + File.separator + "Library" + File.separator + "Android" + File.separator + "sdk" + File.separator + "platform-tools" + File.separator;     
+            EMULATOR_HOME =System.getenv("HOME") + File.separator + "Library" + File.separator + "Android" + File.separator + "sdk" + File.separator + "emulator" + File.separator;   
         }
         Load_AVD();
         Load_Connected_Devices();        
@@ -262,7 +267,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
         M2.setColumnIdentifiers(M2_ColumnsName);
         DV2.setModel(M2); 
         
-        Dev = Func.ExecuteCmdProcessBuilder("emulator -list-avds", EMULATOR_HOME, true, true).trim();
+        Dev = Func.ExecuteCmdProcessBuilder(EMULATOR_HOME + "emulator -list-avds", EMULATOR_HOME, true, true).trim();
         txtLog.append("- " + "emulator -list-avds" + " >> " + "\r\n" + Dev + "\r\n\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
@@ -289,7 +294,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
         M1.setColumnIdentifiers(M1_ColumnsName);
         DV1.setModel(M1);
         
-        Dev  = Func.ExecuteCmdProcessBuilder("adb devices -l", ADB_HOME, true, true).trim();
+        Dev  = Func.ExecuteCmdProcessBuilder(ADB_HOME + "adb devices -l", ADB_HOME, true, true).trim();
         txtLog.append("- " + "adb devices -l" + " >> " + "\r\n" + Dev + "\r\n\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
@@ -320,7 +325,7 @@ public class M_Devices extends javax.swing.JInternalFrame {
             String AVD = String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 1));
             if(String.valueOf(DV2.getValueAt(DV2.getSelectedRow(), 0)).equals("Android")){
                 D = "";
-                Dev  = Func.ExecuteCmdProcessBuilder("emulator -avd " + AVD, EMULATOR_HOME, true, false).trim();
+                Dev  = Func.ExecuteCmdProcessBuilder(EMULATOR_HOME + "emulator -avd " + AVD, EMULATOR_HOME, true, false).trim();
                 txtLog.append("- " + "emulator -avd " + AVD + " >> " + "\r\n" + Dev + "\r\n\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
             }else{
@@ -334,11 +339,6 @@ public class M_Devices extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
 
-
-    // <editor-fold defaultstate="collapsed" desc="Public & Private Variables">    
-    private String ADB_HOME;
-    private String EMULATOR_HOME;
-    
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DV1;

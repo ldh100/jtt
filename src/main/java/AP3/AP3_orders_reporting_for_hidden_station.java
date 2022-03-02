@@ -476,7 +476,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
             if (FAIL) {
                 return;
             }
-            Element_By_Path_Text_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira");
+            Element_By_Path_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
@@ -519,7 +519,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 return;
             }
             Thread.sleep(1000);
-            Element_By_Path_Text_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira");
+            Element_By_Path_DblClick("Click day 10", "xpath", "//tr/td[contains(number(),10)]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }
@@ -570,7 +570,7 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
                 return;
             }
 
-            Element_By_Path_Text_DblClick("Click day 1", "xpath", "//tr/td[contains(number(),1)]", ParentTest, "no_jira");
+            Element_By_Path_DblClick("Click day 1", "xpath", "//tr/td[contains(number(),1)]", ParentTest, "no_jira");
             if (FAIL) {
                 return;
             }

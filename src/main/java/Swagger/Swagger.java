@@ -35,7 +35,7 @@ public class Swagger extends javax.swing.JInternalFrame {
         btnLog = new javax.swing.JButton();
         btnRun = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList_Tragets = new javax.swing.JList<>();
+        jList_Tagets = new javax.swing.JList<>();
         lblOutput = new javax.swing.JLabel();
         lblTargets = new javax.swing.JLabel();
         cmbEnv = new javax.swing.JComboBox<>();
@@ -113,20 +113,20 @@ public class Swagger extends javax.swing.JInternalFrame {
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane4.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
 
-        jList_Tragets.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jList_Tragets.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "announcement", "calendar", "config", "datalake", "file", "kds", "location", "logger", "loyalty", "mealplan", "menu", "message", "notification", "order", "partner", "payment", "promo", "report", "shoppingcart", "task", "user", "vote" };
+        jList_Tagets.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jList_Tagets.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "announcement", "calendar", "config", "datalake", "file", "kds", "location", "logger", "loyalty", "mealplan", "menu", "message", "notification", "order", "partner", "payment", "promo", "report", "shoppingcart", "task", "user", "vendor", "vote" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList_Tragets.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList_Tragets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jList_Tragets.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        jList_Tagets.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jList_Tagets.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jList_Tagets.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList_TragetsValueChanged(evt);
+                jList_TagetsValueChanged(evt);
             }
         });
-        jScrollPane4.setViewportView(jList_Tragets);
+        jScrollPane4.setViewportView(jList_Tagets);
 
         getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, 172, 408));
 
@@ -173,15 +173,16 @@ public class Swagger extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
     }//GEN-LAST:event_btnLogMouseClicked
-    private void jList_TragetsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_TragetsValueChanged
+    private void jList_TagetsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList_TagetsValueChanged
         if(!evt.getValueIsAdjusting()) {
             RUN();
         }
-    }//GEN-LAST:event_jList_TragetsValueChanged
+    }//GEN-LAST:event_jList_TagetsValueChanged
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
-        cmbEnv.setSelectedIndex(1);
-        jList_Tragets.setSelectedValue("config", true);
+        cmbEnv.setSelectedIndex(0);
+        LoadEnv();
+        jList_Tagets.setSelectedValue("config", true);
     }//GEN-LAST:event_formAncestorAdded
 
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
@@ -221,9 +222,9 @@ public class Swagger extends javax.swing.JInternalFrame {
         txtLog.setVisible(false);
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));        
         try {
-            txtLog.append(GUI_API_Get(BaseAPI + "/" + jList_Tragets.getSelectedValue() + "/swagger.json", "Bearer " + TKN));             
+            txtLog.append(GUI_API_Get(BaseAPI + "/" + jList_Tagets.getSelectedValue() + "/swagger.json", "Bearer " + TKN));             
         } catch (IOException | JSONException ex) {
-            txtLog.append(BaseAPI + "/" + jList_Tragets.getSelectedValue() + " > " + ex.getMessage());  
+            txtLog.append(BaseAPI + "/" + jList_Tagets.getSelectedValue() + " > " + ex.getMessage());  
         }  
         txtLog.setCaretPosition(0);
         txtLog.setVisible(true);
@@ -256,7 +257,7 @@ public class Swagger extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JComboBox<String> cmbEnv;
-    private javax.swing.JList<String> jList_Tragets;
+    private javax.swing.JList<String> jList_Tagets;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel lblEnv;

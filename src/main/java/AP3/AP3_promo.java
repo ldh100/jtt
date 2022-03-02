@@ -860,7 +860,11 @@ Thread.sleep(10000);
             //End of staging environment
         }
     // </editor-fold>
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
     
     private void Promo_details(String Promo_type) {
@@ -1188,20 +1192,20 @@ Thread.sleep(5000);
                     float fpromo_amount = discount.getFloat("amount_off");           //getString("amount_off");
                     _t++;
                     if(fpromo_amount == 0.50)  { 
-                        _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Discount Amount: "+fpromo_amount + "\t" + "0.50" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Discount Amount: "+fpromo_amount, false, ParentTest.createNode(_t + ". " + "Discount Amount : Found-as expected"), new Date());
+                        _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Discount Amount: " +fpromo_amount + "\t" + "0.50" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "Discount Amount: " +fpromo_amount, false, ParentTest.createNode(_t + ". " + "Discount Amount : Found-as expected"), new Date());
                     } else {
-                        _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Discount Amount: "+fpromo_amount + "\t" + "0.50" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Discount Amount: "+fpromo_amount  , true, ParentTest.createNode(_t + ". " + "Discount Amount : Not Found - expected"), new Date()); 
+                        _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Discount Amount: " +fpromo_amount + "\t" + "0.50" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "Discount Amount: " +fpromo_amount  , true, ParentTest.createNode(_t + ". " + "Discount Amount : Not Found - expected"), new Date()); 
                     }
                 }  else if(discount.has("percent_off")) {
                     int promo_amount = discount.getInt("percent_off");           //getString("amount_off");
                     if(promo_amount == 50) { 
-                        _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Percent off : "+promo_amount + "\t" + "50%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Percent off : "+promo_amount, false, ParentTest.createNode(_t + ". " + "Percent off : Found-as expected"), new Date());
+                        _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Percent off : " +promo_amount + "\t" + "50%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("PASS", "Percent off : " +promo_amount, false, ParentTest.createNode(_t + ". " + "Percent off : Found-as expected"), new Date());
                     } else {
-                        _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Percent off : "+promo_amount + "\t" + "50%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Percent off : "+promo_amount  , true, ParentTest.createNode(_t + ". " + "Percent off : Not Found - expected"), new Date());
+                        _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Percent off : " +promo_amount + "\t" + "50%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("FAIL", "Percent off : " +promo_amount  , true, ParentTest.createNode(_t + ". " + "Percent off : Not Found - expected"), new Date());
                     }
                 }//End of percent off
        }//End of for
@@ -1210,7 +1214,7 @@ Thread.sleep(5000);
     
     private void Promo_Location_API(String P_ID,String Promo_action,String Promo_type) {
     try {    
-        EX += "\n - " + "\t" + " ====START====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";    
+        EX += "\n - " + "\t" + " ==== Start ====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";    
         if(Promo_type.equalsIgnoreCase("bundle")) {
             Call_API("Call/Promo/Location API", "Bearer " + AP3_TKN, BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );  
             if(t.startsWith("{")){

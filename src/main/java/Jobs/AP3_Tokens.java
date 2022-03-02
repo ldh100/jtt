@@ -26,20 +26,40 @@ public class AP3_Tokens {
     private String Summary = "?"; 
     private Instant run_start;
     private Duration DD;
-    private String Log = "GET AP3 Admin User Tokens: ";
+    private String Log = "AP3 Admin User Tokens:";
     private String ADMIN_ID = "oleg.spozito@compassdigital.io";
     private String ADMIN_PW = "Password1"; 
     private String TKN = "";
+    private String ENV = "";
+
+    private String JOB_Load_CONFIG(String config) {
+        String[] lines = config.split("\n");
+        String value;
+        try {
+            for (String l : lines) {
+                value = l.substring(l.indexOf(" ")).trim();
+                if (l.contains("ADMIN_ID: ")) { ADMIN_ID = value; }
+                if (l.contains("ADMIN_PW: ")) { ADMIN_PW = value; } 
+            }
+            return "OK";
+        } catch (Exception ex) {
+            return "ERROR > " + ex.getMessage();
+        }
+    }
 
     protected void AP3_Tokens(String job, String run_type, String config){
         r_type = run_type;
-        run_start = Instant.now();
+        run_start = Instant.now();    
+        String RES = "";
+        RES = JOB_Load_CONFIG(config);
+        
         try {
             conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING);
             LOG_START();
 
             String AUTH = "Basic " + Base64.getEncoder().encodeToString((ADMIN_ID + ":" + ADMIN_PW).getBytes());
 
+            ENV = "Development";
             JOB_Api_Call("https://api.compassdigital.org/dev/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH);    //  DE 
             if(!TKN.isEmpty()) {
                 try {    
@@ -50,6 +70,8 @@ public class AP3_Tokens {
                     Log += "SQL > " + ex.getMessage();
                 }
             }
+
+            ENV = "Staging";
             JOB_Api_Call("https://api.compassdigital.org/staging/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH); //  ST       
             if(!TKN.isEmpty()) {
                 try {  
@@ -60,6 +82,8 @@ public class AP3_Tokens {
                     Log += "SQL > " + ex.getMessage();
                 }                    
             }
+
+            ENV = "Production";
             JOB_Api_Call("https://api.compassdigital.org/v1/user/auth?realm=6MNvqeNgGWSLAv4DoQr7CaKzaNGZl5", AUTH);     //  PR       
             if(!TKN.isEmpty()) {
                 try {  
@@ -95,18 +119,18 @@ public class AP3_Tokens {
                 JSONObject json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     _f++;
-                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: " + json.getString("error") + ". ";
+                    Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> Error: " + json.getString("error") + ". ";
                 }else{
                     TKN = json.getString("token");
-                    Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> TKN: " + TKN;
+                    Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> TKN: " + TKN;
                 }
             }else{
                 _f++;
-                Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: Responce is Not JSON";
+                Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> Error: Responce is Not JSON";
             }
         } catch (Exception ex) {
             _f++;
-            Log += "\r\n" + "=== API Endpoint: " + EndPoint + " >> Error: " + ex.getMessage().trim();
+            Log += "\r\n\r\n" + "=== " + ENV + ":   " + EndPoint + " >> Error: " + ex.getMessage().trim();
         }
     }
 
@@ -189,7 +213,7 @@ public class AP3_Tokens {
                     ")");
             _insert.setString(1, LocalDateTime.now().format(Date_formatter));
             _insert.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _insert.setString(3, "AP3_Tokens");
+            _insert.setString(3, "Tokens_AP3");
             _insert.setString(4, ".../user/auth?realm=");
             _insert.setString(5, "Running...");
             _insert.setString(6, "0");
@@ -249,10 +273,10 @@ public class AP3_Tokens {
                     + // 17
                     ", [Excel] = ?"
                     + // 18
-                    " WHERE [app] = 'AP3_Tokens"+ "' AND [Status] = 'Running'");
+                    " WHERE [app] = 'Tokens_AP3' AND [Status] = 'Running' AND [user_id] = '" + A.A.UserID + "' AND [user_ws] = '" + A.A.WsID + "'");
             _update.setString(1, LocalDateTime.now().format(Date_formatter));
             _update.setString(2, LocalDateTime.now().format(Time_24_formatter));
-            _update.setString(3, "AP3_Tokens");
+            _update.setString(3, "Tokens_AP3");
             _update.setString(4, ".../user/auth?realm=");
             _update.setString(5, Summary); 
             _update.setInt(6, 3);

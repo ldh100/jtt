@@ -51,7 +51,6 @@ public class Env extends javax.swing.JInternalFrame {
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Env"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(858, 527));
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -72,10 +71,9 @@ public class Env extends javax.swing.JInternalFrame {
             }
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV1.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRowHeight(18);
-        DV1.setRowSelectionAllowed(true);
         DV1.getTableHeader().setReorderingAllowed(false);
         DV1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -104,7 +102,7 @@ public class Env extends javax.swing.JInternalFrame {
         });
 
         cmbWhat.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus" }));
+        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus", "Promo" }));
         cmbWhat.setMinimumSize(new java.awt.Dimension(113, 24));
         cmbWhat.setPreferredSize(new java.awt.Dimension(113, 24));
         cmbWhat.addItemListener(new java.awt.event.ItemListener() {
@@ -181,27 +179,27 @@ public class Env extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(lblUsers)
-                        .addGap(1, 1, 1)
-                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3))
+                        .addGap(18, 18, 18)
+                        .addComponent(lblUsers))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCsv, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCsv, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(cmbWhat, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnStatistics, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(btnStatistics, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2))
+                        .addGap(6, 6, 6)
+                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(cmbWhat, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +224,7 @@ public class Env extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane2)
@@ -309,7 +307,10 @@ public class Env extends javax.swing.JInternalFrame {
         }
         TBL = "p2_" + cmbWhat.getSelectedItem().toString().toLowerCase() + "_" + cmbEnv.getSelectedItem().toString().substring(0, 2).toLowerCase();
         SQL = "SELECT * FROM[dbo].[" + TBL + "] " + _where;  
-            
+        
+        if (cmbWhat.getSelectedItem().toString().startsWith("Promo")) {
+            SQL = "SELECT * FROM[dbo].[" + "p2_promo" + "]"; 
+        }            
         try (Connection conn = DriverManager.getConnection(A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
             ResultSetMetaData rsmd = rs.getMetaData();
@@ -414,7 +415,7 @@ public class Env extends javax.swing.JInternalFrame {
             CSV = CSV.substring(0, CSV.length() - 1) + "\r\n";
             for (int j = 0; j < rows; j++) {
                 for (int i = 0; i < cols - 3; i++) { 
-                    CSV += "\""+ DV1.getModel().getValueAt(j, i).toString() + "\"" + ",";
+                    CSV += "\"" + DV1.getModel().getValueAt(j, i).toString() + "\"" + ",";
                 }
                 CSV = CSV.substring(0, CSV.length() - 1) + "\r\n";
             }
@@ -442,11 +443,11 @@ public class Env extends javax.swing.JInternalFrame {
                 dh = 0;
                 Statistics = "";
                 SQL = "SELECT st.app, " +
-                        "(SELECT count(*) FROM [dbo].[" + TBL +"]  WHERE app = st.app ) AS Total, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL' AND app = st.app) AS v1Menu, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL migrated' AND app = st.app) AS v2Menu, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'DH' AND app = st.app) AS BadMenu " +
-                        "FROM [dbo].[" + TBL +"] st GROUP BY app";
+                        "(SELECT count(*) FROM [dbo].[" + TBL + "]  WHERE app = st.app ) AS Total, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL' AND app = st.app) AS v1Menu, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL migrated' AND app = st.app) AS v2Menu, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'DH' AND app = st.app) AS BadMenu " +
+                        "FROM [dbo].[" + TBL + "] st GROUP BY app";
                 ResultSet rs = conn.createStatement().executeQuery(SQL);
                 while(rs.next()) {
                     int SubTot = (int)rs.getObject(2);
@@ -482,9 +483,9 @@ public class Env extends javax.swing.JInternalFrame {
                         Statistics + "\r\n";
                 
                 SQL = "SELECT TOP 1 " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL' AND country LIKE 'c%') AS v1c, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'CDL migrated' AND country LIKE 'c%') AS v2c, " +
-                        "(SELECT count(Platform) FROM [dbo].[" + TBL +"] WHERE Platform = 'DH' AND country LIKE 'c%') AS Badc " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL' AND country LIKE 'c%') AS v1c, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'CDL migrated' AND country LIKE 'c%') AS v2c, " +
+                        "(SELECT count(Platform) FROM [dbo].[" + TBL + "] WHERE Platform = 'DH' AND country LIKE 'c%') AS Badc " +
                         "FROM [dbo].[" + TBL + "]";
                 rs = conn.createStatement().executeQuery(SQL);
                 rs.next();
@@ -539,11 +540,11 @@ public class Env extends javax.swing.JInternalFrame {
                 Bt = 0;
                 Statistics = "";
                 SQL = "SELECT st.app, " +
-                        "(SELECT count(*) FROM [dbo].[" + TBL +"]  WHERE app = st.app ) AS TotMenu, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v1' AND app = st.app) AS v1Menu, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v2' AND app = st.app) AS v2Menu, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = '?' AND app = st.app) AS BadMenu " +
-                        "FROM [dbo].[" + TBL +"] st GROUP BY app";
+                        "(SELECT count(*) FROM [dbo].[" + TBL + "]  WHERE app = st.app ) AS TotMenu, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v1' AND app = st.app) AS v1Menu, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v2' AND app = st.app) AS v2Menu, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = '?' AND app = st.app) AS BadMenu " +
+                        "FROM [dbo].[" + TBL + "] st GROUP BY app";
                 ResultSet rs = conn.createStatement().executeQuery(SQL);
                 while(rs.next()) {
                     int SubTot = (int)rs.getObject(2);
@@ -580,9 +581,9 @@ public class Env extends javax.swing.JInternalFrame {
                         Statistics + "\r\n";
                 
                 SQL = "SELECT TOP 1 " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v1' AND country LIKE 'c%') AS v1c, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = 'v2' AND country LIKE 'c%') AS v2c, " +
-                        "(SELECT count(ver) FROM [dbo].[" + TBL +"] WHERE ver = '?' AND country LIKE 'c%') AS Badc " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v1' AND country LIKE 'c%') AS v1c, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = 'v2' AND country LIKE 'c%') AS v2c, " +
+                        "(SELECT count(ver) FROM [dbo].[" + TBL + "] WHERE ver = '?' AND country LIKE 'c%') AS Badc " +
                         "FROM [dbo].[" + TBL + "]";
                 rs = conn.createStatement().executeQuery(SQL);
                 rs.next();
@@ -617,103 +618,7 @@ public class Env extends javax.swing.JInternalFrame {
         Func.SHOW_FILE(Statistics, ".txt");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
-//
-//    protected void Api_Call(String EndPoint, ) {
-//
-//        String Result = "?";
-//        int status = 0;
-//        String R_Time = "";
-//        String ErrorMsg = "";
-//        json = null;
-//        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
-//        RequestSpecification request;
-//        request = RestAssured.given();
-//        if (!AUTH.isEmpty()) {
-//            request.header("Authorization", AUTH);
-//        }
-//        request.header("Content-Type", "application/json");
-//        request.header("Accept", "application/json");
-//        try {
-//            int i = 1;
-////for (i = 1; i < 4; i++){   // ========== Loop +2 times if 1st FAIL
-//            if (sw1.isRunning()) {
-//                sw1.reset();
-//            }
-//            _t++;
-//            sw1.start();
-//            Response response = null;
-//            switch (Method) {
-//                case "GET":
-//                    if (BODY.equals("Bolter")) {
-//                        request.header("From", "Bolter/1.0");
-//                    }
-//                    response = request.get(EndPoint);
-//                    break;
-//                case "POST":
-//                    request.body(BODY);
-//                    response = request.post(EndPoint);
-//                    break;
-//                case "PATCH":
-//                    request.body(BODY);
-//                    response = request.patch(EndPoint);
-//                    break;
-//                case "DELETE":
-//                    request.body(BODY);
-//                    response = request.delete(EndPoint);
-//                    break;
-//                case "PUT":
-//                    request.body(BODY);
-//                    response = request.put(EndPoint);
-//                    break;
-//                case "OPTIONS":
-//                    response = request.options(EndPoint);
-//                    break;
-//                default:
-//                    break;
-//            }
-//            Result = response.getStatusLine();
-//            status = response.getStatusCode();
-//
-//            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
-//                json = new JSONObject(response.asString());
-//                if (json.has("error")) {
-//                    ErrorMsg = "Error: " + json.getString("error") + ". ";
-//                }
-//            }
-//            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
-//            if (status == ExpStatus) {
-//                _p++;
-//                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + "Attempt #" + i
-//                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-//                Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-//                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
-////break; // =================  Do not attempt againg if passed                    
-//            } else {
-//                _f++;
-//                FAIL = true;
-//                EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + "Attempt #" + i
-//                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-//                Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
-//                        + "  Attempt #" + i, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
-//            }
-////} // =======   3 times Loop if not good
-//
-//        } catch (Exception ex) {
-//            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
-//            _f++;
-//            FAIL = true;
-//            err = ex.getMessage().trim();
-//            if (err.contains("\n")) {
-//                (err = err.substring(0, err.indexOf("\n"))).trim();
-//            }
-//            EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
-//                    + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
-//            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
-//        }
-//        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
-//        sw1.reset();
-//    }
-//    
+  
     
     // <editor-fold defaultstate="collapsed" desc="Private Variables">    
     private String SQL = "";

@@ -39,13 +39,13 @@ class AP3_brand extends AP3_GUI{
         Thread.sleep(500);          
         Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,ParentTest, "no_jira");             
+        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}        
         Element_By_Path_Click("Drawer > Sites Click", "xpath", "//*[contains(text(), 'Sites')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0,ParentTest, "no_jira");             
+        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");             
             if (FAIL) { return;}                    
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -128,7 +128,7 @@ class AP3_brand extends AP3_GUI{
                     if (FAIL) { continue;}
                 if(t.trim().startsWith(BRAND)){
                     T_Index = j;
-                    Element_Child_List_L2("Stations List Column Cout", L1.get(j), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
+                    Element_Child_List_L2("Stations List Column Count", L1.get(j), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
                     BRAND_TABLE_COL_COUNT = L2.size();
                     Element_Child_List_L2("Save Target Stations List", L0.get(i), "tagName", "tr", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
                 }
@@ -195,13 +195,13 @@ class AP3_brand extends AP3_GUI{
                     API_Response_Body = t;               
                     API_Body_Contains("Location Group API - find Displayed Brand ID", API_Response_Body, BrandID,true, ParentTest, "no_jira"); 
                 }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
                     Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                 }
             }
         }            
-        Element_Child_List_L2("Stations List Column Cout", L2.get(T_Index), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
+        Element_Child_List_L2("Stations List Column Count", L2.get(T_Index), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
             if (FAIL) { return;} 
         Element_Click("Click Brand '" + BRAND + "' row", L2.get(0), ParentTest, Ver);
             if (FAIL) { return;}             
@@ -219,10 +219,13 @@ class AP3_brand extends AP3_GUI{
         Thread.sleep(500); 
         List_L0("Brand Configuration Navigation Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");             
             if (FAIL) { return;}    
-        List_L1("Brand Configuration Group Count", "xpath", "//div[starts-with(@id, 'toc-')]", ParentTest, "no_jira");             
+        List_L1("Brand Configuration Groups Count", "xpath", "//div[starts-with(@id, 'toc-')]", ParentTest, "no_jira");             
             if (FAIL) { return;}  
+        if(L0.size() != L1.size()){
+            //
+        }
         
-        for (int i = 0; i < L0.size(); i++) { // ========================================================================================
+        for (int i = 0; i < L1.size(); i++) { // ========================================================================================
             Element_Attribute("Brand Configuration Navigation >>>>>>", L0.get(i), "textContent", ParentTest, "no_jira"); 
                 if (FAIL) return;
             String CHOICE = t; 
@@ -238,48 +241,76 @@ class AP3_brand extends AP3_GUI{
                         if (FAIL) { return;}
                     break;
                 case "Fee Setup":       
-                    Find_Text("Find 'Enable Fee' text", "Enable Fee", true,ParentTest, "no_jira"); 
+                    Find_Text("Find 'Enable Fee' text", "Enable Fee", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }
-                    Find_Text("Find 'Service Fee' text", "Service Fee", true,ParentTest, "no_jira"); 
+                    Find_Text("Find 'Service Fee' text", "Service Fee", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }
-                    Find_Text("Find 'Delivery Fee' text", "Delivery Fee", true,ParentTest, "no_jira"); 
+                    Find_Text("Find 'Delivery Fee' text", "Delivery Fee", true, ParentTest, "no_jira"); 
                         if (FAIL) { return; }
                     break; 
                 case "Pickup Details":   
                     Text_Found("Is Pickup Enabled?", "Pickup is not enabled", ParentTest, "no_jira"); 
                     if(t.equals("Not Found")){                    
-                        Find_Text("Find 'Timeslot Length' text", "Timeslot Length", true,ParentTest, "no_jira");                      
-                        Element_By_Path_Click("Click 'Timeslot Length' value", "css", "[aria-label='Timeslot Length']",ParentTest, "no_jira"); 
-                        Element_By_Path_Text_Select_Copy("Get 'Timeslot Length' value", "css", "[aria-label='Timeslot Length']",ParentTest, "no_jira"); 
+                        Find_Text("Find 'Timeslot Length' text", "Timeslot Length", true, ParentTest, "no_jira");                      
+                        Element_By_Path_Click("Click 'Timeslot Length' value", "css", "[aria-label='Timeslot Length']", ParentTest, "no_jira"); 
+                        Element_By_Path_Text_Select_Copy("Get 'Timeslot Length' value", "css", "[aria-label='Timeslot Length']", ParentTest, "no_jira"); 
                         if (!FAIL && !t.equals("not found!")) { 
                             String Minutes = t;
-                            Element_By_Path_Input_Select_Clear("Clear 'Timeslot Length'", "css", "[aria-label='Timeslot Length']",ParentTest, "no_jira");                            
+                            Element_By_Path_Input_Select_Clear("Clear 'Timeslot Length'", "css", "[aria-label='Timeslot Length']", ParentTest, "no_jira");                            
                             //Element_By_Path_Text("Find 'Timeslot Length < 1 min' message ", "xpath", "//div[contains(text(), 'at least 1 minute')]", ParentTest, "no_jira");                            
-                            Element_By_Path_Text_Enter("Enter 'Timeslot Length'", "css", "[aria-label='Timeslot Length']", Minutes, false,ParentTest, "no_jira"); 
+                            Element_By_Path_Text_Enter("Enter 'Timeslot Length'", "css", "[aria-label='Timeslot Length']", Minutes, false, ParentTest, "no_jira"); 
                         } 
                         
-                        Find_Text("Find 'Avg Prep time' text", "Average Prep Time", true,ParentTest, "no_jira"); 
+                        Find_Text("Find 'Avg Prep time' text", "Average Prep Time", true, ParentTest, "no_jira"); 
                             if (FAIL) { return; } 
-                        Element_By_Path_Click("Click 'Average Prep Time' value", "css", "[aria-label='Average Prep Time']",ParentTest, "no_jira"); 
-                        Element_By_Path_Text_Select_Copy("Get 'Average Prep Time' value", "css", "[aria-label='Average Prep Time']",ParentTest, "no_jira"); 
- 
-                        Find_Text("Find 'Cust per Slot' text", "Customers Per Slot", true,ParentTest, "no_jira"); 
+                        Element_By_Path_Click("Click 'Average Prep Time' value", "css", "[aria-label='Average Prep Time']", ParentTest, "no_jira"); 
+                            if (FAIL) { return; } 
+                        Element_By_Path_Text_Select_Copy("Get 'Average Prep Time' value", "css", "[aria-label='Average Prep Time']", ParentTest, "no_jira"); 
+                        Find_Text("Find 'Cust per Slot' text", "Customers Per Slot", true, ParentTest, "no_jira"); 
                             if (FAIL) { return; }
-                        Element_By_Path_Click("Click 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']",ParentTest, "no_jira");                            
-                        Element_By_Path_Text_Select_Copy("Get 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']",ParentTest, "no_jira"); 
+                        Element_By_Path_Click("Click 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']", ParentTest, "no_jira");                            
+                        Element_By_Path_Text_Select_Copy("Get 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']", ParentTest, "no_jira"); 
                             
-                        Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true,ParentTest, "no_jira"); 
+                        Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true, ParentTest, "no_jira"); 
                             if (FAIL) { return; }
                         Element_By_Path_Attribute("Find 'DISABLE' text", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", "textContent", ParentTest, "no_jira"); 
                             if (FAIL) { return; }                                                             
                         Element_By_Path_Click("Click 'DISABLE'", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", ParentTest, "no_jira"); 
                             if (FAIL) { return; }
-                        Element_By_Path_Text("Find 'CANCEL'", "xpath", "//*[contains(text(), 'cancel')]", ParentTest, "no_jira"); 
-                            if (FAIL) { return; }
-                        Element_By_Path_Text("Find 'Save..'", "xpath", "//*[contains(text(), 'save')]", ParentTest, "no_jira"); 
-                            if (FAIL) { return; }
-                        Element_By_Path_Click("Click 'Cancel'", "xpath", "//*[contains(text(), 'cancel')]",ParentTest, "no_jira"); 
+
+                        Element_E1_Find("Find 'DISABLE' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
+                            if (FAIL) { return;}    // Find fragment                     
+                        Element_Child_E2("Find 'DISABLE' dialog Title", e1, "xpath", ".//div[@class='v-card__title H4-Secondary-Center dropoff-title']", ParentTest, "no_jira");
+                            if (FAIL) { return;}   
+                        Element_Text(" 'DISABLE' dialog Title", e2, ParentTest, "no_jira");
+                            if (FAIL) { return;}                          
+                        Element_Child_E2("Find 'DISABLE' dialog Save", e1, "xpath", ".//div[text()='save']", ParentTest, "no_jira");
+                            if (FAIL) { return;}   
+                        Element_Text(" 'DISABLE' Save Text", e2, ParentTest, "no_jira");
                             if (FAIL) { return;}    
+                        Element_Child_E2("Find 'DISABLE' confirm input", e1, "xpath", ".//input[@aria-label='Confirm Disabling']", ParentTest, "no_jira");
+                            if (FAIL) { return;}   
+                        Element_Click("Click 'DISABLE' confirm input", e2, ParentTest, "no_jira");
+                            if (FAIL) { return;}                     
+                        Element_Text_Enter("Enter 'DISABLX' > typo", e2, "DISABLX", ParentTest, "no_jira");
+                            if (FAIL) { return;}                     
+                        Find_Text("Find 'typo' error message", "Must input the word", true, ParentTest, "no_jira");
+                            //if (FAIL) { return;} 
+                        Element_Text_Clear("Clear 'DISABLE' input", e2, ParentTest, "no_jira");
+                            if (FAIL) { return;}  
+                        Find_Text("Find 'cannot be empty' error message", "Confirmation cannot be", true, ParentTest, "no_jira");
+                            //if (FAIL) { return;}
+                        Element_Text_Enter("Enter 'DISABLE'", e2, "DISABLE", ParentTest, "no_jira");
+                            if (FAIL) { return;}                     
+                        //Find_Text("Find 'Cannot disable both' error message", "Cannot disable both", true, ParentTest, "no_jira");
+                            //if (FAIL) { return;} 
+                        Element_Child_E2("Find 'DISABLE' dialog Cancel", e1, "xpath", ".//div[text()='cancel']", ParentTest, "no_jira");
+                            if (FAIL) { return;}   
+                        Element_Text("Find 'DISABLE' Cancel text", e2, ParentTest, "no_jira");
+                            if (FAIL) { return;}                         
+                        Element_Click("Click 'DISABLE' Cancel", e2, ParentTest, "no_jira");
+                            if (FAIL) { return;} 
+   
                     } else {
                         Call_API("Call '/location/brand/' API", "", BaseAPI + "/location/brand/" + BrandID + "?nocache=1", true, ParentTest, "no_jira" );
                         if(t.startsWith("{")){
@@ -309,11 +340,10 @@ class AP3_brand extends AP3_GUI{
 
                     if (delivery_destinations.isEmpty()) {
                         EX += " - " + "\t" + "Delivery Details - No Locations" + "\t" + "Delivery Details - No Locations in Site" + "\t" + "Delivery Details - No Locations in Site" + "\t" + "" + "\t" + " - " + "\t" + " - " + "\r\n";
- 
                     } else {
-                        List_L0("Check if 'Delivery Details' is enabled", "xpath", "//*[@id='toc-delivery']//div[contains(text(),'DISABLE')]", ParentTest, "no_jira");
+                        List_L2("Check if 'Delivery Details' is enabled", "xpath", "//*[@id='toc-delivery']//div[contains(text(),'DISABLE')]", ParentTest, "no_jira");
                             if (FAIL) { return;}
-                        if (!L0.isEmpty()) {
+                        if (!L2.isEmpty()) {
                             Element_By_Path_Click("Click > 'DISABLE' on 'Delivery Details'", "xpath", "//*[@id='toc-delivery']//div[contains(text(),'DISABLE')]", ParentTest, "no_jira");
                                 if (FAIL) { return;}
                             Wait_For_Element_By_Path_Presence("Wait for 'Disable ...' to appear", "xpath", "//*[contains(text(),'Delivery Program')]", ParentTest, "no_jira");
@@ -334,136 +364,102 @@ class AP3_brand extends AP3_GUI{
                         Element_By_Path_Click("Set switch to 'Yes'", "xpath", "//*[@id='toc-delivery']//div[contains(text(),'Yes')]", ParentTest, "no_jira");
                             if (FAIL) { return;}
                         Thread.sleep(500);
-                    }                                                            
-                    Element_By_Path_Click("Click > 'Delivery Details' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Details')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for 'Delivery Details' section to be present", "xpath", "//*[@id='toc-delivery']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Click("Click > 'Timeslot Type' drop-down", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Timeslot Type']/preceding-sibling::div", ParentTest, "np_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for dropdown to appear", "xpath", "(//div[contains(text(),'User Generated')])[1]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Click("Click > 'User Generated' in drop-down", "xpath", "(//div[contains(text(),'User Generated')])[1]/ancestor::a", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_InVisibility("Wait for 'Choose Drop-off...' link to disappear", "xpath", "//a[contains(text(), 'Choose Drop-off')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Check > 'Timeslot Table' to be present", "xpath", "//div[@class='timeslot-table']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Check > '+ ADD TIMESLOT' button to be present", "xpath", "//div[contains(text(),'Add Timeslot')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Click("Click > '+ ADD TIMESLOT' button", "xpath", "//div[contains(text(),'Add Timeslot')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for 'Add New Timeslot' dialog to appear", "xpath", "//*[contains(text(),'Add New Timeslot')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}  
-                        
-                    Element_By_Path_Click("Click > 'Start Time' input", "css", "[aria-label='Start Time']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_E1_Find("Get 'Start Time' drop-down", "xpath", "//div[@class='v-menu__content theme--light v-menu__content--fixed menuable__content__active v-autocomplete__content']", ParentTest, "no_jira");
-                        if (FAIL) { return;}                          
-                    Element_Child_List_L2("Get list of shown 'Start Time(s)'", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                        if (FAIL) { return;}    
-                    Element_Text("Get Start Time [0]", L2.get(0), ParentTest, "no_jira");
-                    Element_Click("Select/Enter Start Time [0]", L2.get(0), ParentTest, "no_jira");
-                        if (FAIL) { return;} 
-
-                    Element_By_Path_Click("Click > 'End Time' input", "css", "[aria-label='End Time']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_E1_Find("Get 'End Time' drop-down", "xpath", "//div[@class='v-menu__content theme--light v-menu__content--fixed menuable__content__active v-autocomplete__content']", ParentTest, "no_jira");
-                        if (FAIL) { return;}                          
-                    Element_Child_List_L2("Get list of shown 'End Time(s)'", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                        if (FAIL) { return;}    
-                    Element_Text("Get Start Time [5]", L2.get(5), ParentTest, "no_jira");
-                    Element_Click("Select/Enter End Time [0]", L2.get(5), ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    
-                    Element_E1_Find("Find 'Available Locations' container", "xpath", "//div[@class='v-list list-panel theme--light']", ParentTest, "no_jira");
-                        if (FAIL) { return;}   
-                    Element_By_Path_Click("Click > 'Search Locations' input", "css", "[aria-label='Search Locations']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Text_Enter("Fill in Search 'Not Existing Location", "css", "[aria-label='Search Locations']", "Not Existing Location", false, ParentTest, "no_jira");
-                        if (FAIL) { return;}                            
-                    Element_Child_List_L1("Get list of available locations", e1, "xpath", ".//p[@class='list__tile']", ParentTest, "no_jira");
-                        if (FAIL) { return;}  
-                    Element_By_Path_Input_Select_Clear("Clear 'Search Locations'", "css", "[aria-label='Search Locations']", ParentTest, "no_jira");
-                        if (FAIL) { return;}                            
-                    Element_Child_List_L1("Get list of available locations", e1, "xpath", ".//p[@class='list__tile']", ParentTest, "no_jira");
-                        if (FAIL) { return;}                          
-                    if(L1.size() > 0) {
-                        Element_By_Path_Click("Click > 'Choose Drop-off...' link", "xpath", "//p[contains(text(),'" + L1.get(0) + "')]/ancestor::div[contains(@class,'list-content')]/preceding-sibling::div", ParentTest, "no_jira");
-                            if (FAIL) { return;}
-                        Move_to_Element_By_Path("Move > 'Add' button", "xpath", "//div[contains(text(),'add')]/parent::button", ParentTest, "no_jira");
-                            if (FAIL) { return;}
-                        Element_By_Path_Click("Click > 'Add' button", "xpath", "//div[contains(text(),'add')]/parent::button", ParentTest, "no_jira");
-                            if (FAIL) { return;}
-                        Wait_For_Element_By_Path_Presence("Wait for Timeslot table to be populated with new record ", "xpath", "//tr[@class='timeslot-row']/td[contains(text(),'" + L1.get(0) + "')]", ParentTest, "no_jira");
-                            if (FAIL) { return;}                    
-                    }else{
-                        Move_to_Element_By_Path("Move > 'CANCEL' button", "xpath", "//div[contains(text(),'cancel')]/parent::button", ParentTest, "no_jira");
-                            if (FAIL) { return;}
-                        Element_By_Path_Click("Click > 'CANCEL' button", "xpath", "//div[contains(text(),'cancel')]/parent::button", ParentTest, "no_jira");
-                            if (FAIL) { return;}                        
-                    }   
-
-                    Element_By_Path_Click("Click > 'Delivery Details' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Details')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for 'Delivery Details' section to be present", "xpath", "//*[@id='toc-delivery']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Click("Click > 'Timeslot Type' drop-down", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Timeslot Type']/preceding-sibling::div", ParentTest, "np_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for drop-down to appear", "xpath", "(//div[contains(text(),'Automatic')])[1]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Click("Click > 'Automatic' in drop-down", "xpath", "(//div[contains(text(),'Automatic')])[1]/ancestor::a", ParentTest, "no_jira");
-                        if (FAIL) { return;}     
-                    Wait_For_Element_By_Path_Presence("Wait for 'Timeslot Length' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Timeslot Length']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Click("Click > 'Timeslot Length' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Timeslot Length']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Input_Select_Clear("Clear > 'Timeslot Length' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Timeslot Length']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Text_Enter("Fill > 'Timeslot Length' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Timeslot Length']", "1", false, ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for 'Average Prep Time' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Average Prep Time']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for 'Customer Per Slot' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Customers Per Slot']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Click("Click > 'Customers per slot' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Customers Per Slot']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Input_Select_Clear("Clear > 'Customers per slot' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Customers Per Slot']", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Text_Enter("Fill > 'Customers per slot' field", "xpath", "//*[@id='toc-delivery']//input[@aria-label='Customers Per Slot']", "1", false, ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Wait for 'Choose Drop-off...' to appear", "xpath", "//a[contains(text(), 'Choose Drop-off')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Check for 'Selected Locations...' counter", "xpath", "//div[contains(text(), 'Selected Locations:')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Check for 'Display timeslots...' switch is present", "xpath", "//*[@id='toc-delivery']//p[contains(text(),'timeslots as one time')]/following-sibling::div//div[contains(text(),'Yes')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Check for 'Allow delivery...' switch is present", "xpath", "//*[@id='toc-delivery']//p[contains(text(),'delivery instruction')]/following-sibling::div//div[contains(text(),'Yes')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Wait_For_Element_By_Path_Presence("Check for 'Enable Bolter...' switch is present", "xpath", "//*[@id='toc-delivery']//p[contains(text(),'Enable Bolt')]/following-sibling::div//div[contains(text(),'Yes')]", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    Element_By_Path_Attribute("Get 'Display timeslots... switch state", "xpath", "//*[@id='toc-delivery']//p[contains(text(),'timeslots as one time')]/following-sibling::div//div[contains(text(),'Yes')]/parent::div", "class", ParentTest, "no_jira");
-                        if (FAIL) { return;}
-                    if (t.toLowerCase().contains("not-selected")) {
-                        Wait_For_Element_By_Path_Presence("Check that swtich is set to 'No'", "xpath", "//*[@id='toc-delivery']//p[contains(text(),'timeslots as one time')]/following-sibling::div//div[@class='Option-Right-Selected-Blue-White']", ParentTest, "no_jira");
-                            if (FAIL) { return;}
-                    } else {
-                        Wait_For_Element_By_Path_Presence("Check that swtich is set to 'Yes'", "xpath", "//*[@id='toc-delivery']//p[contains(text(),'timeslots as one time')]/following-sibling::div//div[@class='Option-Left-Selected-Blue-White']", ParentTest, "no_jira");
-                            if (FAIL) { return;}
-                    }               
+                    }                                                                        
                     break;
                 case "Scan & Go Setup":   
-                    Find_Text("Find 'Enable Scan & ...'", "Enable Scan & Go?", true, ParentTest, "no_jira");                    
+                    Find_Text("Find 'Enable Scan ...'", "Enable Scan & Go?", true, ParentTest, "no_jira");                    
                     break;
-                case "Assign Menus":          
+                case "Assign Menus":  
+                    Element_Child_List_L2("Assigned Menus Count", L1.get(i), "css", "[aria-label='Menu Name']", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    if (!L2.isEmpty()) {
+                        EX += _t + "\t" + "Brand: " + BRAND + "\t" + "Assign Menu" + "\t" + "Found " + L2.size() + " Menus currently assinded" + "\t" + "PASS" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("PASS", "Brand: " + BRAND, false, ParentTest.createNode(_t + ". " + "Found " + L2.size() + " Menus currently assinded"), new Date());
+
+                    } else{
+                        EX += _t + "\t" + "Brand: " + BRAND + "\t" + "Assign Menu" + "\t" + "No Menu currently assinded" + "\t" + "WARN" + "\t" + " - " +
+                        "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+                        Log_Html_Result("WARN", "Brand: " + BRAND, false, ParentTest.createNode(_t + ". " + "No Menu currently assinded"), new Date());
+                    }
+
+                    List_L2("Assign Menu 'Buttons' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_Click("Click 'IMPORT MENU'", L2.get(L2.size() - 1), ParentTest, "no_jira");    // index 1 > 2nd button - Import
+                        if (FAIL) { return; }
+                    Wait_For_Element_By_Path_Presence("Wait for 'Location Stations' list", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_By_Path_Click("Click/Open 'Location Stations' drop-down", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");    // index 1 > 2nd button - Import
+                        if (FAIL) { return; }
+
+                    Element_E1_Find("Find 'Location Station' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_Child_List_L2("Location Station Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    if (!L2.isEmpty()) {
+                        Element_Attribute("Last Location Station", L2.get(L2.size() - 1), "textContent", ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Element_Click("Select Location Station", L2.get(L2.size() - 1), ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Thread.sleep(500);
+                        Element_By_Path_Click("Open Menus drop-down", "css", "[aria-label='Menus']", ParentTest, "no_jira");    
+                            if (FAIL) { return; }
+                        Thread.sleep(500);
+                        Element_E1_Find("Find 'Menus' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Element_Child_List_L2("Menus Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Element_Attribute("Last Menu", L2.get(L2.size() - 1), "textContent", ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Element_Click("Select Last Menu", L2.get(L2.size() - 1), ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Thread.sleep(500);
+                    } else {
+                        _t++;
+                        _f++;
+                        F += "Step: " + _t + " > " + "Brand > Assign Menu" + " > " + "Import Menu" + " > " + "No available 'Location Station'" + "\r\n";
+                        EX += " - " + "\t" + "Brand > Assign Menus" + "\t" + "Import Menu" + "\t" + "No 'Location Station'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                    }
+                    List_L2("Assign Menu 'Buttons' Count updated", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_Click("ADD MENU Click", L2.get(L2.size() - 2), ParentTest, "no_jira");    // index 0 > 1st button - Add
+                        if (FAIL) { return; }
+                    Element_Child_List_L2("Updated 'Menu Name' drop-down Count", L1.get(i), "css", "[aria-label='Menu Name']", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_Click("Click/Open 'Add Menu name' drop-down", L2.get(L2.size() - 1), ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_Child_List_L2("Add Menu > drop-down(s) count", L1.get(i), "xpath", ".//div[@class='v-input__icon v-input__icon--append']", ParentTest, "no_jira");
+                        if (FAIL) { return; }            
+                    Element_Click("Open 'Add Menu Name' drop-down", L2.get(0), ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_E1_Find("Find 'Add Menu Names' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
+                        if (FAIL) { return; }
+                    Element_Child_List_L2("Add Menu Names Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                        if (FAIL) { return; }                   
+                    if (!L2.isEmpty()) {
+                        Element_Attribute("1st Menu Name", L2.get(0), "textContent", ParentTest, "no_jira");
+                            if (FAIL) { return; }
+                        Element_Click("Select 1st Menu", L2.get(0), ParentTest, "no_jira");
+                            if (FAIL) { return; }                 
+                        Thread.sleep(500);                                
+                    }else {
+                        _f++;
+                        F += "Step: " + _t + " > " + "Brand > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
+                        EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                    }
                     break;
                 case "Integration Type": 
+                    List_L1("Check KDS 'not enbaled' message", "xpath", "//div[contains(text(),'KDS is not enabled')]", ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    if(L1.isEmpty()){ // Delivery is not enabled for this station.
+                           Find_Text("Find 'not enabled...'", "KDS is not enabled for this brand", true, ParentTest, "no_jira"); 
+                           Find_Text("Find '..setup KDS...'", "Would you like to setup KDS?", true, ParentTest, "no_jira");
+                     } else{
+                        Find_Text("Find '...KDS Refunds'", "Allow for KDS Refunds", true, ParentTest, "no_jira");    
+                    }                
                     break;
                 case "Third Party Integration":
-                    Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true, ParentTest, "no_jira");
-                    if (!FAIL) {
-                        //
-                    }                    
+                    Find_Text("Find 'Request Phone...'", "Request Customer Phone Number at Checkout", true, ParentTest, "no_jira");                  
                     break;
                 case "Menu Information":
                     Find_Text("Find 'Calorie Disclaimer'", "Calorie Disclaimer", true, ParentTest, "no_jira");
@@ -475,20 +471,23 @@ class AP3_brand extends AP3_GUI{
                         Find_Text("Find '...Local Menu Images'", "Allow Local Menu Images:", true, ParentTest, "no_jira");
                         Find_Text("Find '...Menu Calories Edits...'", "Allow Local Menu Calories Edits:", true, ParentTest, "no_jira");
                         Find_Text("Find '...App Item Naming'", "Allow In App Item Naming:", true, ParentTest, "no_jira");
+                        Find_Text("Find '...Special Requests'", "Allow Special Requests:", true, ParentTest, "no_jira");
                     }                    
                     break;
-                case "Payment ID":  
+                case "Payment ID":
+                    // =============================================  ????
                     break;
                 case "Meal Plan":
+                    // =============================================  ????
                     break;
                 case "Loyalty Program":  // Loyalty is not enabled for this brand
-                    Find_Text("Find 'Loyalty is not enabled..'", "Loyalty is not enabled", true,ParentTest, "no_jira");                     
+                    Find_Text("Find 'Loyalty is not enabled..'", "Loyalty is not enabled", true, ParentTest, "no_jira");                     
                     break;
                 case "Payment Method Exclusion":  
-                    Find_Text("Find 'Payment exclusions ..Credit card..'", "Credit Card", true,ParentTest, "no_jira"); 
-                    Find_Text("Find 'Payment exclusions ..Apple Wallet..'", "Apple Wallet", true,ParentTest, "no_jira"); 
-                    Find_Text("Find 'Payment exclusions ..Google Wallet..'", "Google Wallet", true,ParentTest, "no_jira"); 
-                    Find_Text("Find 'Payment exclusions ..Meal Plans..'", "Meal Plans", true,ParentTest, "no_jira");                   
+                    Find_Text("Find 'Payment exclusions ..Credit card..'", "Credit Card", true, ParentTest, "no_jira"); 
+                    Find_Text("Find 'Payment exclusions ..Apple Wallet..'", "Apple Wallet", true, ParentTest, "no_jira"); 
+                    Find_Text("Find 'Payment exclusions ..Google Wallet..'", "Google Wallet", true, ParentTest, "no_jira"); 
+//  Find_Text("Find 'Payment exclusions ..Meal Plans..'", "Meal Plans", true, ParentTest, "no_jira");          // DEBUG          
                     break;
                 case "Web Ordering":  
                     Element_E1_Find("Find Web Ordering", "id", "web-order", ParentTest, "no_jira"); 
@@ -498,6 +497,27 @@ class AP3_brand extends AP3_GUI{
                     Element_Click("Click 'Allow Web Ordering' - Yes", L1.get(0), ParentTest, "no_jira"); 
                         if (FAIL) { return;}                   
                     break;
+                case "Frictionless":  
+                    Element_E1_Find("Find 'Frictionless detail' section", "id", "frictionless-detail", ParentTest, "no_jira"); 
+                        if (FAIL) { return;}
+                    Element_Child_List_L1("Find 'Allow Frictionless' options", e1,"xpath", ".//div[contains(@class, 'Option-Left')]", ParentTest, "no_jira");             
+                        if (FAIL) { return;} 
+                    Element_Click("Click 'Allow Frictionless' - Yes", L1.get(0), ParentTest, "no_jira"); 
+                        if (FAIL) { return;} 
+                    Element_E2_Find("Find 'Select Store' dialog", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']", ParentTest, "no_jira"); 
+                    Find_Text("Find 'Select store' Title", "Select store", true, ParentTest, "no_jira"); 
+                    Element_Child_List_L1("Get 'Select Store' action buttons", e2, "xpath", ".//div[@class='v-btn__content']", ParentTest, "no_jira");
+                        if (FAIL) { return; } 
+                    Element_Text(" Find 'Select Store' > Cancel", L1.get(0), ParentTest, "no_jira"); 
+                    Element_Text(" Find 'Select Store' > OK", L1.get(1), ParentTest, "no_jira"); 
+                    Element_Click("Click 'Cancel'", L1.get(0), ParentTest, "no_jira"); 
+                        if (FAIL) { return;}                                         
+//                    Element_Child_Click("Open 'Store List' drop-down", e2, "xpath", ".//div[@class='v-select__selections']", ParentTest, "no_jira"); 
+//                        if (FAIL) { return;}     
+//                    List_L0("Get Store List", "xpath", "//table/tbody/tr/td[5]", ParentTest, "no_jira");
+//                        if (FAIL) { return; }
+                  
+                    break;                    
                 default:
                 break;
             }
@@ -510,7 +530,7 @@ class AP3_brand extends AP3_GUI{
         Thread.sleep(500);             
         Text_Found("Find 'Leave...' warning", "Leave without", ParentTest, "no_jira"); 
         if ("Found".equals(t)) {     
-            Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true,ParentTest, "no_jira"); 
+            Find_Text("Find 'Leave...' note", "Changes will be lost if you do not save.", true, ParentTest, "no_jira"); 
                 if (FAIL) { return; }   
             Element_By_Path_Text("Find 'CANCEL'", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light grey--text')]", ParentTest, "no_jira"); 
                 if (FAIL) { return; }         
@@ -519,7 +539,7 @@ class AP3_brand extends AP3_GUI{
             Element_By_Path_Click(" 'LEAVE' Click", "xpath", "//button[contains(@class, 'v-btn v-btn--flat theme--light primary--text')][1]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
         } 
-        List_L0("Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", ParentTest, "no_jira");             
+        List_L0("Brand Setup Tabs Count", "xpath", "//div[contains(@class, 'v-tabs__div')]", ParentTest, "no_jira");             
             if (FAIL) { return;} 
         for (int i = 0; i < L0.size(); i++) {        
             Element_Text("Brand Setup Tab >>>>", L0.get(i), ParentTest, "no_jira"); 
@@ -528,7 +548,7 @@ class AP3_brand extends AP3_GUI{
                 Page_URL("Schedules page URL", ParentTest, "no_jira"); 
                     if (FAIL) { return;}   
                 if (platform.startsWith("DH")){
-                    Find_Text("Menu > Unable.. for DH", "Unable", true,ParentTest, "no_jira"); 
+                    Find_Text("Menu > Unable.. for DH", "Unable", true, ParentTest, "no_jira"); 
                 } else {
                     Find_Text("Find 'Schedule your...'", "Schedule Your Menus", true, ParentTest, "no_jira"); 
                     if(t.equals("Not Found")) { 
@@ -739,8 +759,17 @@ class AP3_brand extends AP3_GUI{
                             if (FAIL) { return;}
                     }    
                 } 
-            }    
+            } else if (Tab_Name.toLowerCase().contains("station alosure")) {  
+                Element_By_Path_Click("Click 'Station Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}
+                Page_URL("Station Closure page URL", ParentTest, "no_jira"); 
+                    if (FAIL) { return;}                 
+            }
        }
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    }   
     }  
 }

@@ -82,7 +82,7 @@ class AP3_sales_analytics extends AP3_GUI{
                 if (combinedBrands.equals("")) {
                     combinedBrands = brandIds.get(i);
                 } else {
-                    combinedBrands += ","+brandIds.get(i);
+                    combinedBrands += "," +brandIds.get(i);
                 }  
             }
 
@@ -95,13 +95,13 @@ class AP3_sales_analytics extends AP3_GUI{
             Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
             End = new SimpleDateFormat("yyyy-MM-dd").format(_End);
 
-            Call_API("Call Analytics API", "Bearer " + AP3_TKN, BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End, true, ParentTest, "no_jira");
+            Call_API("Call Analytics API", "Bearer " + AP3_TKN, BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End, true, ParentTest, "no_jira");
             if(t.startsWith("{")){
                 API_Response_Body = t;               
             }else{
-                EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                 "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End , false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                 return;
             }
             json = new JSONObject(API_Response_Body);
@@ -147,20 +147,20 @@ class AP3_sales_analytics extends AP3_GUI{
                 if (FAIL) { return;}
                 Element_By_Path_Click("Click > 'Search' field", "css", "[aria-label='Search Sites']", ParentTest,"no_jira");
                 if (FAIL) { return;}
-                Element_By_Path_Text_Enter("Search > '"+SITE+"'", "css", "[aria-label='Search Sites']", SITE, false,ParentTest, "no_jira");
+                Element_By_Path_Text_Enter("Search > '" +SITE+ "'", "css", "[aria-label='Search Sites']", SITE, false,ParentTest, "no_jira");
                 if (FAIL) { return;}
                 //get list of records
                 List_L0("Get list of records", "xpath", "//tbody/tr", ParentTest,"no_jira");
                 if (FAIL) { return;}
                 for (int i = 0; i < L0.size(); i++) {
-                    Wait_For_Element_By_Path_Presence("Check name of site " + String.valueOf(i+1), "xpath", "((//tbody/tr)["+String.valueOf(i+1)+"])/td[contains(text(),'"+SITE+"')]",ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check name of site " + String.valueOf(i+1), "xpath", "((//tbody/tr)[" +String.valueOf(i+1)+ "])/td[contains(text(),'" +SITE+ "')]",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } 
                 if (!env.equals("PR")) {
-                    Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='"+SITE+"']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else {
-                    Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//td[text()='"+SITE+"']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 }        
                 Wait_For_Element_By_Path_Presence("Wait (if needed) page to load", "xpath", "//div[@class='salesTransactions']", ParentTest, "no_jira");
@@ -188,21 +188,21 @@ class AP3_sales_analytics extends AP3_GUI{
                     }
                 }
                 EX += " - " + "\t" + " === " + "\t" + " =====  Check Default Analytics" + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$"+sales_total+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$" +sales_total+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if (String.valueOf(avg_bill).length() == 3 && String.valueOf(avg_bill).contains(".0")) {
                     String formatted_avg_bill = String.valueOf(avg_bill).substring(0, 1);
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 } else if (String.valueOf(avg_bill).length() == 3) {
                    String formatted_avg_bill = String.valueOf(avg_bill) + "0"; 
-                   Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                   Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 } else {
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 }
-                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '"+transactions_total+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '" +transactions_total+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 List_L2("List of 'Top Selling Items'", "xpath", "(//tbody)[2]/tr", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -210,11 +210,11 @@ class AP3_sales_analytics extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "Number of 'Top Selling Items'" + "\t" + "\t" + "Outout: " + L2.size() + " / Expected: " + top_items.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
                     Log_Html_Result("PASS", "Outout: " + L2.size() + " / Expected: " + top_items.length(), false, ParentTest.createNode(_t + ". " + "Number of 'Top Selling Items'"), new Date());
-                    Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='"+top_items.getJSONObject(0).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='" +top_items.getJSONObject(0).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='"+top_items.getJSONObject(1).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='" +top_items.getJSONObject(1).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='"+top_items.getJSONObject(2).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='" +top_items.getJSONObject(2).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else {
                     _t++;
@@ -284,21 +284,21 @@ class AP3_sales_analytics extends AP3_GUI{
                 if (FAIL) { return;}
                 Wait_For_Element_By_Path_Presence("Wait for page to reload", "xpath", "//*[text()='Top Selling Items']", ParentTest, "no_jira");
                 if (FAIL) { return;}
-                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$"+sales_total+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$" +sales_total+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if (String.valueOf(avg_bill).length() == 3 && String.valueOf(avg_bill).contains(".0")) {
                     String formatted_avg_bill = String.valueOf(avg_bill).substring(0, 1);
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 } else if (String.valueOf(avg_bill).length() == 3) {
                    String formatted_avg_bill = String.valueOf(avg_bill) + "0"; 
-                   Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                   Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 } else {
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 }
-                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '"+transactions_total+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '" +transactions_total+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 List_L2("List of 'Top Selling Items'", "xpath", "(//tbody)[2]/tr", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -406,10 +406,10 @@ class AP3_sales_analytics extends AP3_GUI{
                 Element_By_Path_Text_Enter("Search > 'University of Houston'", "css", "[aria-label='Search Sites']", SITE, false,ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if (!env.equals("PR")) {
-                    Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='"+SITE+"']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else {
-                    Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//td[text()='"+SITE+"']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 }        
                 Wait_For_Element_By_Path_Presence("Wait (if needed) page to load", "xpath", "//div[@class='salesTransactions']", ParentTest, "no_jira");
@@ -442,7 +442,7 @@ class AP3_sales_analytics extends AP3_GUI{
                         Log_Html_Result("FAIL", t, true, ParentTest.createNode(_t + ". " + "Verify Station " + (i+1) + "is active"), new Date());
                     }
                 }
-                Element_By_Path_Click("Deselect > '"+BRAND+"'", "xpath", "//div[text()='"+BRAND+"']", ParentTest, "no_jira");
+                Element_By_Path_Click("Deselect > '" +BRAND+ "'", "xpath", "//div[text()='" +BRAND+ "']", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 Thread.sleep(500);
                 Element_By_Path_Click("Click > 'Apply'", "xpath", "(//*[text()='Apply']/parent::button)[2]", ParentTest, "no_jira");
@@ -456,13 +456,13 @@ class AP3_sales_analytics extends AP3_GUI{
                     combinedBrands = combinedBrands.substring(1, combinedBrands.length());
                 }
 
-                Call_API("Call Analytics API", "Bearer " + AP3_TKN, BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End, true, ParentTest, "no_jira");
+                Call_API("Call Analytics API", "Bearer " + AP3_TKN, BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End, true, ParentTest, "no_jira");
                 if(t.startsWith("{")){
                     API_Response_Body = t;               
                 }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }
                 json = new JSONObject(API_Response_Body);
@@ -481,21 +481,21 @@ class AP3_sales_analytics extends AP3_GUI{
                 }
 
                 EX += " - " + "\t" + " === " + "\t" + " =====  Check Updated Analytics" + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$"+sales_total2+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$" +sales_total2+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if (String.valueOf(avg_bill2).length() == 3 && String.valueOf(avg_bill2).contains(".0")) {
                     String formatted_avg_bill = String.valueOf(avg_bill2).substring(0, 1);
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else if (String.valueOf(avg_bill2).length() == 3) {
                     String formatted_avg_bill = String.valueOf(avg_bill2) + "0"; 
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 } else {
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+avg_bill2+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +avg_bill2+ "')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 }
-                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '"+transactions_total2+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '" +transactions_total2+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 List_L2("List of 'Top Selling Items'", "xpath", "(//tbody)[2]/tr", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -503,11 +503,11 @@ class AP3_sales_analytics extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "Number of 'Top Selling Items'" + "\t" + "\t" + "Outout: " + L2.size() + " / Expected: " + top_items.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
                     Log_Html_Result("PASS", "Outout: " + L2.size() + " / Expected: " + top_items.length(), false, ParentTest.createNode(_t + ". " + "Number of 'Top Selling Items'"), new Date());
-                    Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='"+top_items.getJSONObject(0).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='" +top_items.getJSONObject(0).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='"+top_items.getJSONObject(1).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='" +top_items.getJSONObject(1).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='"+top_items.getJSONObject(2).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='" +top_items.getJSONObject(2).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else {
                     _t++;
@@ -578,7 +578,7 @@ class AP3_sales_analytics extends AP3_GUI{
                     Element_Attribute("Get 'class' value of Station " + i, L0.get(i), "class", ParentTest, "no_jira");
                     if (FAIL) { return;}
                     if (!t.contains("active")) {
-                        Element_Child_Text("Get Station Name", L0.get(i), "xpath", "//div[contains(text(),'"+BRAND+"')]", ParentTest, "no_jira");
+                        Element_Child_Text("Get Station Name", L0.get(i), "xpath", "//div[contains(text(),'" +BRAND+ "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}
                         if (!t.equals(BRAND)) {
                             Element_Click("Select 'Stations'", L0.get(i), ParentTest, "no_jira");
@@ -611,10 +611,10 @@ class AP3_sales_analytics extends AP3_GUI{
                 Element_By_Path_Text_Enter("Search > 'University of Houston'", "css", "[aria-label='Search Sites']", SITE, false,ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if (!env.equals("PR")) {
-                    Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='"+SITE+"']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else {
-                    Element_By_Path_Click("Click > 'Site' = '"+SITE+"'", "xpath", "//td[text()='"+SITE+"']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 }        
                 Wait_For_Element_By_Path_Presence("Wait (if needed) page to load", "xpath", "//div[@class='salesTransactions']", ParentTest, "no_jira");
@@ -646,13 +646,13 @@ class AP3_sales_analytics extends AP3_GUI{
                 Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
                 End = new SimpleDateFormat("yyyy-MM-dd").format(_End);
 
-                Call_API("Call Analytics API", "Bearer " + AP3_TKN, BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End, true, ParentTest, "no_jira");
+                Call_API("Call Analytics API", "Bearer " + AP3_TKN, BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End, true, ParentTest, "no_jira");
                 if(t.startsWith("{")){
                     API_Response_Body = t;               
                 }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
                     "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date="+Start+"&end_date="+End, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + combinedBrands + "&time_frame=day&start_date=" +Start+ "&end_date=" +End, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                     return;
                 }
                 json = new JSONObject(API_Response_Body);
@@ -671,21 +671,21 @@ class AP3_sales_analytics extends AP3_GUI{
                 }
 
                 EX += " - " + "\t" + " === " + "\t" + " =====  Check Updated Analytics" + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$"+sales_total3+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$" +sales_total3+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 if (String.valueOf(avg_bill3).length() == 3 && String.valueOf(avg_bill3).contains(".0")) {
                     String formatted_avg_bill = String.valueOf(avg_bill3).substring(0, 1);
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else if (String.valueOf(avg_bill3).length() == 3) {
                     String formatted_avg_bill = String.valueOf(avg_bill3) + "0"; 
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+formatted_avg_bill+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 } else {
-                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$"+avg_bill3+"')]", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +avg_bill3+ "')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 }
-                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '"+transactions_total3+"')]", ParentTest, "no_jira");
+                Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '" +transactions_total3+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
                 List_L2("List of 'Top Selling Items'", "xpath", "(//tbody)[2]/tr", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -693,11 +693,11 @@ class AP3_sales_analytics extends AP3_GUI{
                     _t++;
                     _p++; EX += _t + "\t" + "Number of 'Top Selling Items'" + "\t" + "\t" + "Outout: " + L2.size() + " / Expected: " + top_items.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
                     Log_Html_Result("PASS", "Outout: " + L2.size() + " / Expected: " + top_items.length(), false, ParentTest.createNode(_t + ". " + "Number of 'Top Selling Items'"), new Date());
-                    Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='"+top_items.getJSONObject(0).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='" +top_items.getJSONObject(0).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='"+top_items.getJSONObject(1).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='" +top_items.getJSONObject(1).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='"+top_items.getJSONObject(2).getString("itemlabel")+"']", ParentTest, "no_jira");
+                    Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='" +top_items.getJSONObject(2).getString("itemlabel")+ "']", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else {
                     _t++;
@@ -741,6 +741,10 @@ class AP3_sales_analytics extends AP3_GUI{
             _w++; EX += _t + "\t" + "WARNING - NO BRANDS EXISTS" + "\t" + "- SALES ANALYTICS CANNOT BE TESTED" + "\t" + "---" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             Log_Html_Result("WARN", "---" + "\t" + "- SALES ANALYTICS CANNOT BE TESTED", false, ParentTest.createNode(_t + ". " + "WARNING - NO BRANDS EXISTS"), new Date());
         }
-                } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    } 
     } 
 }

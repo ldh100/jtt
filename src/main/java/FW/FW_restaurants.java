@@ -80,13 +80,13 @@ public class FW_restaurants {
         _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Sections in Add a Restaurant form ", e1,"xpath", "//div/h5", "no_jira");             
              if (FAIL) { return;}                              
         for (int i = 1; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Section---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Section---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
     } 
       _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("Labels in Add a Restaurant form ", e1,"xpath", "(//*[contains(@class, 'v-label')])", "no_jira");             
              if (FAIL) { return;}                              
         for (int i = 0; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Label---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("Label---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
     }   
       _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Text("Get the *FW Employee dropdown value ", "xpath", "(//*[contains(@class, 'v-select__selection')])[1]", "no_jira");
@@ -99,8 +99,7 @@ public class FW_restaurants {
         _t++; Thread.sleep((long) sleep); TWeb.List_L0("List Markets", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
           if (FAIL) { return;}
            for (int i = 0; i < L0.size(); i++) {
-	       _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
-	                if (FAIL) { return;}
+	       _t++; TWeb.Element_Text("Market Name (" + i + ")", L0.get(i),  "no_jira"); 
 	                if(t.trim().equals("Cdl test 1")){ 
 	                    L0.get(i).click();
                         }
@@ -111,7 +110,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of Partner Type dropdown", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
          for (int i = 0; i < L0.size(); i++) {
-	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
+	    _t++; TWeb.Element_Text("Partner Type (" + i + ")", L0.get(i),  "no_jira"); 
 	                if (FAIL) { return;}
 	                if(t.trim().equals("Restaurant")){ 
 	                    L0.get(i).click();
@@ -125,7 +124,7 @@ public class FW_restaurants {
      _t++; Thread.sleep((long) sleep); TWeb.List_L0("List of *Restaurant Partner dropdown", "xpath", "//div[@role='listbox']/div/div/div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
          for (int i = 0; i < L0.size(); i++) {
-	    _t++; TWeb.Element_Text("Rows per page Value (index " + i + ")", L0.get(i),  "no_jira"); 
+	    _t++; TWeb.Element_Text("Restaurant Name (" + i + ")", L0.get(i),  "no_jira"); 
 	                if (FAIL) { return;}
 	                if(t.trim().equals("Athe Gmail Raj")){ 
 	                    L0.get(i).click();
@@ -166,7 +165,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Cuisine Type dropdown values ", e1,"xpath", "//div[@class='v-list-item__title']", "no_jira");  
       if (FAIL) { return;}
         for (int i = 64; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Cuisine Type dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Cuisine Type dropdown value---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(66), "no_jira"); 
@@ -180,7 +179,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Associated Delivery Partners", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
         if (FAIL) { return;}
         for (int i = 1; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Associated Delivery Partners dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Associated Delivery Partners dropdown value---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(2), "no_jira"); 
@@ -195,7 +194,7 @@ public class FW_restaurants {
     _t++; Thread.sleep((long) sleep); TWeb.Element_Child_List_L1("*Mobile Operations", e1,"xpath", ".//div[@class='v-list-item__title']", "no_jira");                                     
         if (FAIL) { return;}
         for (int i = 1; i < L1.size(); i++) {
-            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Mobile Operations dropdown value---'"+i+"'", L1.get(i), "no_jira");                          
+            _t++; Thread.sleep((long) sleep); TWeb.Element_Text("*Mobile Operations dropdown value---'" +i+ "'", L1.get(i), "no_jira");                          
                 if (FAIL) { return;}
         }
     _t++; Thread.sleep((long) sleep); TWeb.Element_Click("Select dropdown value", L1.get(1), "no_jira"); 
@@ -225,21 +224,17 @@ public class FW_restaurants {
     // A.A.CWD + File.separator + "FilesToUpload"; 
     // Check for Target file starting with prefix "FW_" exists
     // if Yes
-    File tmp = new File(System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"FW_login_image.jpg");
-      if(tmp.exists())
-      {
-       _t++; TWeb.Element_By_Path_Text_Enter("Upload  Image", "xpath", "//input[@type='file']", System.getProperty("user.dir")+File.separator+"FilesToUpload"+File.separator+"FW_login_image.jpg", false, "no_jira"); 
-        if (FAIL) { return;}
-      }
-      else
-      {
-       _t++; 
-       _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-
-      }  
+    File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_brand_image.jpg");
+    if(tmp.exists()) {
+        _t++; TWeb.Element_By_Path_Text_Enter("Upload Image file", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_brand_image.jpg", false, "no_jira"); 
+            if (FAIL) { return;}
+    } else {
+        _t++; 
+        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+    }  
 
       Thread.sleep(4000);
-//    //  
+ 
     _t++; Thread.sleep((long) sleep); TWeb.Element_By_Path_Click("Click on Done button", "xpath", "//button//span[contains(.,'Done')]", "no_jira"); 
       if (FAIL) { return;}  
       Thread.sleep(5000);

@@ -154,7 +154,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Sites.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Sites.setCellSelectionEnabled(true);
-        DV_Sites.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Sites.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Sites.setName("DV_Sites"); // NOI18N
         DV_Sites.setRowHeight(18);
         DV_Sites.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -179,7 +179,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Brands.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Brands.setCellSelectionEnabled(true);
-        DV_Brands.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Brands.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Brands.setName("DV_Brands"); // NOI18N
         DV_Brands.setOpaque(false);
         DV_Brands.setRowHeight(18);
@@ -216,7 +216,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_MTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_MTS.setCellSelectionEnabled(true);
-        DV_MTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_MTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
         DV_MTS.setRowHeight(18);
         DV_MTS.getTableHeader().setReorderingAllowed(false);
@@ -239,7 +239,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Items.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Items.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Items.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Items.setName("DV_Items"); // NOI18N
         DV_Items.setOpaque(false);
         DV_Items.setRowHeight(18);
@@ -263,7 +263,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Mods.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Mods.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Mods.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Mods.setName("DV_Mods"); // NOI18N
         DV_Mods.setOpaque(false);
         DV_Mods.setRowHeight(18);
@@ -298,7 +298,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Menus.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Menus.setCellSelectionEnabled(true);
-        DV_Menus.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Menus.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Menus.setName("DV_Menus"); // NOI18N
         DV_Menus.setOpaque(false);
         DV_Menus.setRowHeight(18);
@@ -323,7 +323,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_DTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_DTS.setCellSelectionEnabled(true);
-        DV_DTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_DTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_DTS.setName("DV_DTS"); // NOI18N
         DV_DTS.setRowHeight(18);
         DV_DTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -1755,7 +1755,7 @@ public class Station extends javax.swing.JInternalFrame {
         FAIL = false;
         String CCC = "";
         btnSCart.setEnabled(false);
-        txtLog.append("\r\n- " + "New Pickup Shopping Cart ...."+ "\r\n");
+        txtLog.append("\r\n- " + "New Pickup Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         Auth = "Bearer " + Mobile_User_TKN; 
@@ -1841,7 +1841,7 @@ public class Station extends javax.swing.JInternalFrame {
         }  
         
         if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
-            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...."+ "\r\n");
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
@@ -1867,7 +1867,7 @@ public class Station extends javax.swing.JInternalFrame {
     private void New_Delivery_ShoppingCart(){
         FAIL = false;
         btnSCart.setEnabled(false);
-        txtLog.append("\r\n- " + "New Delivery Shopping Cart ...."+ "\r\n");
+        txtLog.append("\r\n- " + "New Delivery Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         Auth = "Bearer " + Mobile_User_TKN;
@@ -1893,7 +1893,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } 
         Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
-        txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...."+ "\r\n");
+        txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
         String ModGroup = "";
@@ -1953,7 +1953,7 @@ public class Station extends javax.swing.JInternalFrame {
         } 
         
         if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
-            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...."+ "\r\n");
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
@@ -2024,7 +2024,7 @@ public class Station extends javax.swing.JInternalFrame {
     //Last_SCart = "https://api.compassdigital.org/dev/shoppingcart/AXNLQg1DQ9tq3PjmKG3eT0J8z1mZ9otAovNdm2ERF9e1Mp1XDXcEW3jM7qwacNOQGDq";    
 
         if(btnSCart.isEnabled()){
-            txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...."+ "\r\n");
+            txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
             Api_Call("GET", Last_SCart, "", "");
             String R = A.Func.SHOW_FILE(Last_SCart + "\r\n\r\n" + json.toString(4), "json");
@@ -2036,12 +2036,12 @@ public class Station extends javax.swing.JInternalFrame {
         try{
             if(TYPE.equals("D")){
                 TimeSlot = Long.parseLong(DV_DTS.getValueAt(DV_DTS.getSelectedRow(), 1).toString());            
-                txtLog.append("\r\n- " + "Set Order Requested date from Delivery Timeslot...."+ "\r\n");
+                txtLog.append("\r\n- " + "Set Order Requested date from Delivery Timeslot...." + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
             if(TYPE.equals("P")){
                 TimeSlot = Long.parseLong(DV_MTS.getValueAt(DV_MTS.getSelectedRow(), 1).toString());            
-                txtLog.append("\r\n- " + "Set Order Requested date from Menu (Pickup) Timeslot...."+ "\r\n");
+                txtLog.append("\r\n- " + "Set Order Requested date from Menu (Pickup) Timeslot...." + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             }
             
@@ -2142,7 +2142,7 @@ public class Station extends javax.swing.JInternalFrame {
         }
         
         Auth = "Bearer " + Access_TKN;
-        JSONObject requestParams = new JSONObject();
+        requestParams = new JSONObject();
         requestParams.put("nameOnCard", "JTT API Automation");
         requestParams.put("cardNumber", "4111111111111111"); // Visa
         requestParams.put("CVV", "123");
@@ -2172,7 +2172,7 @@ public class Station extends javax.swing.JInternalFrame {
 
     private void Place_Update_Delivery_Order(String Payment_TKN){
         FAIL = false;
-        txtLog.append("\r\n- " + "Place Delivery Order ...."+ "\r\n");
+        txtLog.append("\r\n- " + "Place Delivery Order ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + Mobile_User_TKN;
 
@@ -2201,7 +2201,7 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }              
         
-        txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...."+ "\r\n");
+        txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
         requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
@@ -2209,7 +2209,18 @@ public class Station extends javax.swing.JInternalFrame {
         ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 20000); // now + 20 sec
+        String requested_date = dateFormat.format(date);
 
+        JSONObject is = new JSONObject(); 
+        is.put("in_progress", true);
+        is.put("ready", true);     
+        requestParams.put("is", is); 
+        requestParams.put("requested_date", requested_date); 
+        
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
         if(json != null){
             try {
                 Order_Delivery_ID = json.getString("id");
@@ -2224,7 +2235,7 @@ public class Station extends javax.swing.JInternalFrame {
     }
     private void Place_Update_Pickup_Order(String Payment_TKN){
         FAIL = false;
-        txtLog.append("\r\n- " + "Place Pickup Order ...."+ "\r\n");
+        txtLog.append("\r\n- " + "Place Pickup Order ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         Auth = "Bearer " + Mobile_User_TKN;                               
@@ -2249,7 +2260,7 @@ public class Station extends javax.swing.JInternalFrame {
             return;
         }        
         
-        txtLog.append("\r\n- " + "Update Pickup Order > 'Ready' ...."+ "\r\n");
+        txtLog.append("\r\n- " + "Update Pickup Order > 'Ready' ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
         requestParams = new JSONObject();   //  Update Pickup Order  =================

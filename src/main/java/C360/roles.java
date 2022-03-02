@@ -1,4 +1,7 @@
 package C360;
+
+import java.util.Date;
+
 class roles extends C360_GUI{
     protected roles(C360_GUI a) {
         USER_NAME = a.USER_NAME;
@@ -15,8 +18,9 @@ class roles extends C360_GUI{
     try { 
         EX += " - " + "\t" + " === User Management " + "\t" + " ===== " + "\t" + " == User Management   Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
         
-        Element_By_Path_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
-        Thread.sleep(500);
+        //Element_By_Selector_Click("Open Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");          
+        Refresh("Refresh > Open Side Menu", ParentTest, "no_jira");          
+        Thread.sleep(1000);
         List_L0("Navigation Nodes", "xpath", "//div[@class='p-treenode-content']", ParentTest, err);
         T_Index = -1;
         for (int i = 0; i < L0.size(); i++) {
@@ -29,30 +33,30 @@ class roles extends C360_GUI{
             if (FAIL) { return;}
         Element_Child_List_L1("'User Management' navigation nodes", L0.get(T_Index), "xpath", ".//span[@class='p-treenode-label']", ParentTest, "no_jira");              
         
-        Find_Text("Find Navigation node 'Roles'", "Users", true, ParentTest, "no_jira");    
-        Element_By_Path_Click("Click > 'Roles'", "xpath", "//a[@Roles='Users']/ancestor::span[@class='p-treenode-label']", ParentTest, "no_jira"); 
+        Find_Text("Find Navigation node 'Roles'", "Users", true, ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Click > 'User Management > Roles'", "xpath", "//a[@href='/user-management/roles']", ParentTest, "no_jira");    
              if (FAIL) { return;}           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                   
              if (FAIL) { return;}
-        Element_By_Path_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");
+        Element_By_Selector_Click("Close Side Menu", "xpath", "//span[@class='pi pi-bars p-button-icon']", ParentTest, "no_jira");
              if (FAIL) { return;}
         Thread.sleep(500);
         
         
-        List_L0("Table Column Titles", "xpath", "//span[@class='p-column-title']", ParentTest, "no_jira");
+        List_L0("Roles Table Column Titles", "xpath", "//span[@class='p-column-title']", ParentTest, "no_jira");
             for (int i = 0; i < L0.size(); i++) {
-                Element_Text("Column Title " + (i + 1), L0.get(i), ParentTest, "no_jira");   
+                Element_Text("Roles Table Column Title " + (i + 1), L0.get(i), ParentTest, "no_jira");   
             }
         // Pagination    ????
-        Element_E1_Find("Find Table body", "tagName", "tbody", ParentTest, "no_jira");
-        Element_Child_List_L1("Table Rows", e1, "tagName", "tr", ParentTest, "no_jira");
+        Element_E1_Find("Find Roles Table body", "tagName", "tbody", ParentTest, "no_jira");
+        Element_Child_List_L1("Roles Table Rows", e1, "tagName", "tr", ParentTest, "no_jira");
             for (int i = 0; i < L1.size(); i++) {
-                Element_Text("Get Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira"); 
+                Element_Text("Get Roles Table Row " + (i + 1) + " concatenated text", L1.get(i), ParentTest, "no_jira"); 
                 if(!_All_data) { break;}
             }  
             
-        Element_By_Path_Text("Find 'New User' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira"); 
-        Element_By_Path_Click("Click 'New User' button", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
+        Element_By_Selector_Text("Find 'New User' button text", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Click 'New User' button", "xpath", "//button[@class='p-button p-component w-full']", ParentTest, "no_jira");
              if (FAIL) { return;}
         Thread.sleep(500);        
         Element_E1_Find("Find 'Header Bar'", "id", "header-bar", ParentTest, "no_jira"); 
@@ -69,6 +73,12 @@ class roles extends C360_GUI{
         Thread.sleep(500);      
         
         EX += " - " + "\t" + " === ^ User Management  " + "\t" + " ===== " + "\t" + " == ^ User Management End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        try{
+            Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+        }catch(Exception eee) {};
+    }   
     }
 }
