@@ -42,7 +42,7 @@ class WO_account_password extends WO_GUI {
         List_L1("Check Error Message(s)", "xpath", "//*[contains(@class, 'error-card')]", ParentTest, "no_jira");
         if(!L1.isEmpty()){  // Check Error: Reset password error Something went wrong when trying to reset your password. Please try again or contact us if the issue persists. Ok
             Element_Text("Get Error Message(s)", L1.get(L1.size() - 1), ParentTest, "no_jira");
-            Element_Child_Click("Click 'Error Card > Ok'", L1.get(L3.size() - 1), "xpath", ".//*[text()='Ok']", ParentTest, "no_jira");             
+            Element_Child_Click("Click 'Error Card > Ok'", L1.get(L1.size() - 1), "xpath", ".//*[text()='Ok']", ParentTest, "no_jira");             
                 //if (FAIL) { return;}  
         }                
     } catch (Exception ex){
