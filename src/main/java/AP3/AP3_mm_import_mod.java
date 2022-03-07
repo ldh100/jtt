@@ -67,13 +67,15 @@ class AP3_mm_import_mod extends AP3_GUI{
 //            Thread.sleep(5000);
             Export_File_Name = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();
             Path path = Paths.get(Download_Dir + File.separator + Export_File_Name + File.separator + ".zip");
-            for(int i = 0; i < 20; i++){
-                if(Files.exists(path)){
-                    break;
-                }else{
-                    Thread.sleep(500);
-                }
-            }
+            Thread.sleep(3000);
+//            for(int i = 0; i < 20; i++){
+//                //if(Files.exists(path)){
+//                if(Files.isReadable(path)){
+//                    break;
+//                }else{
+//                    Thread.sleep(500);
+//                }
+//            }  
             File_Find("Find Global mod exported Zip File", Download_Dir, Export_File_Name, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             File_UnZip("Unzip global mod export Zip file ", Download_Dir, t, ParentTest, "no_jira");

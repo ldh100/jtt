@@ -41,8 +41,10 @@ class WO_account_payments extends WO_GUI {
 //            if (FAIL) { return;}     
         Element_By_Selector_Click("Open User 'Menu'", "id", "nav-menu-btn", ParentTest, "no_jira");                                     
             if (FAIL) { return;}          
-        Element_By_Selector_Click("Click Menu > 'My Account'", "xpath", "//h4[text()='My account']", ParentTest, "no_jira");                                     
-            if (FAIL) { return;}    
+//        Element_By_Selector_Click("Click Menu > 'My Account'", "xpath", "//h4[text()='My account']", ParentTest, "no_jira");                                     
+//            if (FAIL) { return;}  
+        Element_By_Selector_Click("Click Menu > 'My Account'", "id", "to-my-account", ParentTest, "no_jira");                                     
+            if (FAIL) { return;}   
         //Element_By_Selector_Text("Get 'Payment methods' tab text", "xpath", "//a[@href='/account-settings/payment-options']", ParentTest, "no_jira");  
 //        Element_By_Selector_Click("Click 'Payment methods' tab", "xpath", "//a[@href='/account-settings/payment-options']", ParentTest, "no_jira");
 //           if (FAIL) { return;} 

@@ -191,14 +191,14 @@ class AP3_export_menuset extends AP3_GUI{
 
         File_Find("Find Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_jira");
          
-        File temp = new File(destinationDir+ File.separator + MenuSetFile);          
+        File temp = new File(destinationDir + File.separator + MenuSetFile);          
         if (temp.exists()) {
             File_UnZip("Unzip Report File", destinationDir, MenuSetFile, ParentTest, "no_jira");
                 if (FAIL) { return;}          
             File_Delete("Delete Report Zip File", destinationDir,MenuSetFile, ParentTest, "no_jira");
                if (FAIL) { return;}  
             readExcel(destinationDir, MenuSetName.trim() + ".xlsx",MenuSetName.trim());                   
-            Thread.sleep(3000);
+//Thread.sleep(3000);
             File_Delete("Delete File after reading", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");
                 if (FAIL) { return;}                                                                
         }  
@@ -244,14 +244,9 @@ class AP3_export_menuset extends AP3_GUI{
                 } 
                 
             Element_Attribute("Menu setName", L0.get(0), "textContent", ParentTest, "no_jira");      
-                MenuSetName= t.trim();
-                
-            System.out.println("ds:" +MenuSetName);
-            
-            Element_Attribute("Menu ID", L2.get(0), "menu-id", ParentTest, "no_jira");
-             Menu_ID=t;
-             System.out.println("ds:" +Menu_ID);
-            
+            MenuSetName= t.trim();
+            Element_Attribute("Get Menu ID", L2.get(0), "menu-id", ParentTest, "no_jira");
+            Menu_ID = t;         
             Element_Child_List_L2("Find Added Menu Set - dots", L0.get(0), "tagName", "button", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(500);
@@ -262,7 +257,7 @@ class AP3_export_menuset extends AP3_GUI{
                     if (FAIL) { return;}                
             Element_E1_Find("Find Menu Edit Options list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_Child_List_L1("Menu Edit Options list Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
+            Element_Child_List_L1("Menu Edit Options list Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
                 if (FAIL) { return;}
                 T_Index = -1;
                 for (int i = 0; i < L1.size(); i++) {
@@ -277,24 +272,21 @@ class AP3_export_menuset extends AP3_GUI{
               
             Move_to_Element_By_Path("Scroll to 'PUBLISH' button", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira");        
                 if (FAIL) { return;} 
-                            Thread.sleep(500);
+            Thread.sleep(500);
             Element_By_Path_Click("Click 'PUBLISH'", "xpath", "//*[contains(text(), 'publish')]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}                       
-                        Thread.sleep(500);
+            Thread.sleep(500);
             Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]",ParentTest, "no_jira"); 
                 if (FAIL) { return;}   
             Wait_For_Element_By_Path_Presence("Wait for Menu list", "css", "[menu-id]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent", ParentTest,"no_jira"); 
-                if (FAIL) { return;}   
-         
-            Thread.sleep(5000); 
-            Refresh("Refresh", ParentTest, "no_jira");
-            Refresh("Refresh", ParentTest, "no_jira");   
+                if (FAIL) { return;}    
+            Refresh("Refresh", ParentTest, "no_jira"); 
          
             Thread.sleep(10000); // allow time to propage published updates
-            Call_Company_API(MenuSetName,flag);               // ========================== 
-            Call_GlobalMenuSet_API(Menu_ID,MenuSetName,flag); // ========================== 
+            Call_Company_API(MenuSetName, flag);               // ========================== 
+            Call_GlobalMenuSet_API(Menu_ID, MenuSetName, flag); // ========================== 
             
             Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
@@ -364,7 +356,7 @@ class AP3_export_menuset extends AP3_GUI{
             flag = 2;       
             Thread.sleep(10000); // allow time to propage published updates
             Call_Company_API(MenuSetName, flag);
-            Call_GlobalMenuSet_API(Menu_ID, MenuSetName, flag);
+//            Call_GlobalMenuSet_API(Menu_ID, MenuSetName, flag);
 
             Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -1193,9 +1185,8 @@ class AP3_export_menuset extends AP3_GUI{
     } 
     //</editor-fold>  
     
-    public  void Call_GlobalMenuSet_API(String Menu_ID, String MenuSetName, int flag) {
-
     //<editor-fold defaultstate="collapsed" desc="Call Global Menuset API">    //This block call the GlobalMenuSet API: BaseAPI + "/menu/" + Menu_ID
+    public  void Call_GlobalMenuSet_API(String Menu_ID, String MenuSetName, int flag) {
     try {    
         Call_API("Call Global MenuSet API", "Bearer " + AP3_TKN, BaseAPI + "/menu/" + Menu_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){

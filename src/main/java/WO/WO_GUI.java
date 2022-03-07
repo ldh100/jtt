@@ -427,7 +427,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _promo.setRequestFocusEnabled(false);
 
         txtPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtPromo.setText("None");
+        txtPromo.setText("compassunlimited");
 
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -1241,7 +1241,9 @@ public class WO_GUI extends javax.swing.JInternalFrame {
          
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?web=true&extended=true&nocache=1"); 
+            //HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?web=true&extended=true&nocache=1"); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?non_scan_go=true&nocache=1"); 
+
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -2423,13 +2425,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         }
         if (_Account_password) { 
             SCOPE += ", Account Payments";
-            ParentTest = HtmlReport.createTest("Account Password"); 
-            EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account Settings Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Account > Update Password"); 
+            EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account > Update Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_account_password BR = new WO_account_password(WO_GUI.this);
             BR.run(); // ====================================== 
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Account Password" + "\t" + " ===== " + "\t" + " == ^ Account Settings Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Account Password: " + BR._t + ", Failed: " + BR._f);
+            EX += " - " + "\t" + " === ^ Account > Update Password" + "\t" + " ===== " + "\t" + " == ^ Account > Update Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Account > Update Password: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Account_payments) { 

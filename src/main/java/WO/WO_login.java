@@ -103,15 +103,19 @@ class WO_login extends WO_GUI {
                  if (FAIL) { return;}  
             //  What here ?    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         } else {
-            Element_Child_Click("Click 'Email' input", L1.get(0), "tagName" , "input", ParentTest, "no_jira"); 
-                if (FAIL) { return;}  
-            // Add Invalid Email/PW testing flow   // =================================
-            Element_Child_Text_Enter("Enter Valid Email", L1.get(0), "tagName" , "input", MOBILE_ID, false, ParentTest, "no_jira"); 
-                if (FAIL) { return;}            
-            Element_Child_Click("Click 'Pssword' input", L1.get(1), "tagName" , "input", ParentTest, "no_jira"); 
-                if (FAIL) { return;}  
-            Element_Child_Text_Enter("Enter Valid Password", L1.get(1), "tagName" , "input", MOBILE_PW, true, ParentTest, "no_jira"); 
-                if (FAIL) { return;} 
+//            Element_Child_Click("Click 'Email' input", L1.get(0), "tagName" , "input", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}  
+//            // Add Invalid Email/PW testing flow   // =================================
+//            Element_Child_Text_Enter("Enter Valid Email", L1.get(0), "tagName" , "input", MOBILE_ID, false, ParentTest, "no_jira"); 
+//                if (FAIL) { return;}            
+//            Element_Child_Click("Click 'Pssword' input", L1.get(1), "tagName" , "input", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}  
+//            Element_Child_Text_Enter("Enter Valid Password", L1.get(1), "tagName" , "input", MOBILE_PW, true, ParentTest, "no_jira"); 
+//                if (FAIL) { return;} 
+            Element_By_Selector_Text_Enter("Enter Valid Email", "id", "login-Email", MOBILE_ID, false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
+            Element_By_Selector_Text_Enter("Enter Valid Password", "id", "login-Password", MOBILE_PW, false, ParentTest, "no_jira"); 
+                if (FAIL) { return;}
             //Element_By_Selector_Click("Click 'Un-hide Password'", "css", "[aria-label='append icon']", ParentTest, "no_jira"); 
             Element_Child_Click("Click 'LOGIN'", e1,"xpath", ".//button[contains(@class, 'v-btn v-btn--contained theme--light v-size--default')]", ParentTest, "no_jira");             
                 if (FAIL) { return;} 
@@ -119,11 +123,12 @@ class WO_login extends WO_GUI {
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}   
         // Change Site from Last visited to Automation target
-        Element_By_Selector_Click("Open User 'Menu'", "xpath", "//i[@class='v-icon notranslate mdi mdi-menu theme--light']", ParentTest, "no_jira");                                     
-            if (FAIL) { return;}          
-        Element_By_Selector_Click("Click 'Change Location'", "xpath", "//button[contains(@class, 'nav-location-link-button')]", ParentTest, "no_jira");                                     
-            if (FAIL) { return;}
-
+//        Element_By_Selector_Click("Open User 'Menu'", "xpath", "//i[@class='v-icon notranslate mdi mdi-menu theme--light']", ParentTest, "no_jira");                                     
+//            if (FAIL) { return;}          
+        Element_By_Selector_Click("Open User 'Menu'", "id", "nav-menu-btn", ParentTest, "no_jira");                                     
+            if (FAIL) { return;} 
+        Element_By_Selector_Click("Click 'Change Location'", "id", "search-location-btn", ParentTest, "no_jira");                                     
+            if (FAIL) { return;} // id search-location-btn
         Element_E1_Find("Find 'Select Location' input", "xpath", "//input[@type='text']", ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_Text_Enter("Enter Target Site Name: " + SITE, e1, SITE, ParentTest, "no_jira");             

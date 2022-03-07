@@ -34,13 +34,14 @@ class WO_place_order_delivery extends WO_GUI {
 
         } else { 
             for (int i = 0; i < 2; i++) {
-                List_L0("Find Service tabs", "css", "[role='tab']", ParentTest, "no_jira");
-                Element_Text("Service tab (" + (i+1) + ") name:", L0.get(i),  ParentTest, "no_jira");                       
-                if (t.toLowerCase().equals("Delivery")) { 
+                //List_L0("Find Service tabs", "css", "[role='tab']", ParentTest, "no_jira");
+                Element_Text("Service tab (" + (i+1) + ") name: ", L0.get(i),  ParentTest, "no_jira");                       
+                if (t.toLowerCase().equals("delivery")) { 
                     DELIVERY = true; 
                     SERVICE = "Delivery";           
                     Element_Click("Click '" + SERVICE + "' tab", L0.get(i), ParentTest, "no_jira"); 
                         if (FAIL) { return; } 
+                    break;
                 }
             } 
         }
@@ -69,7 +70,52 @@ class WO_place_order_delivery extends WO_GUI {
 //                    }   
         Element_Click("Select 1st Category", L2.get(0), ParentTest, "no_jira"); 
         List_L2("Get Selected Category > Menu Items Count", "xpath", "//div[@class='menu-item pa-3 mt-3 v-card v-card--link v-sheet v-sheet--tile theme--light']", ParentTest, "no_jira"); 
+        Element_Click("Select 1st Menu Item", L2.get(0), ParentTest, "no_jira");
+//        Element_E1_Find("Find 'Add to basket' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+        Thread.sleep(500);
+        Element_By_Selector_Click("Click '+'  > add 1 more Item", "xpath", "//button[contains(@class, 'mdi-plus')]", ParentTest, "no_jira");
+// Options ??? 
 
+       Element_By_Selector_Click("Click 'Add to basket'", "id", "add-to-basket", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+            if (FAIL) { return;}
+
+        Element_By_Selector_Click("Click 'Checkout'", "id", "prompt-to-checkout",  ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+            if (FAIL) { return;}
+
+        Element_By_Selector_Click("Open 'Delivery location' drop-down", "xpath", "//input[@placeholder='Select a delivery location']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        List_L2("Get 'Delivery Location' list > Count", "xpath", "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Element_Click("Select 1st Delivery Location", L2.get(0), ParentTest, "no_jira");
+            if (FAIL) { return;}
+
+//Payments input id card-list placeholder "Select a payment method" parent test contains Card ending
+
+//Promo
+
+        Element_By_Selector_Click("Click 'Place order'", "id", "place-order",  ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+            if (FAIL) { return;}
+
+        List_L0("Check Order History > default 'Active Orders", "css", "[role='tab']", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        List_L1("Get 'Active orders' list > Count", "xpath", "//div[@class='card-container v-card v-sheet theme--light']", ParentTest, "no_jira"); 
+        // Last order details  > Delivery time: 2:40 p.m.
+
+        Element_Click("Click 'Past orders' tab", L0.get(1), ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Thread.sleep(500);
+        List_L1("Get 'Past orders' list > Count", "xpath", "//div[@class='card-container v-card v-sheet theme--light']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+
+        Element_By_Selector_Click("Click Application '" + app + "' > Home logo", "id", "home-logo", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
 
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;
