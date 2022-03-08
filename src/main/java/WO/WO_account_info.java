@@ -70,7 +70,7 @@ class WO_account_info extends WO_GUI {
             Element_By_Selector_Text("Verify Error Message > 'mandatory field'" , "xpath", "//div[@class='v-messages theme--light error--text']",  ParentTest, "no_jira"); 
             Element_By_Selector_Text_Enter("Enter invalid 'Canada Phone number'", "id", "qa-international-phone-number-input", "1902221234", false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Element_By_Selector_Text("Verify Error Message > 'invalid phone number'" , "xpath", "//div[@class='v-messages theme--light error--text']",  ParentTest, "no_jira"); 
+//Element_By_Selector_Text("Verify Error Message > 'invalid phone number'" , "xpath", "//div[@class='v-messages theme--light error--text']",  ParentTest, "no_jira"); 
             Element_By_Selector_Input_Select_Clear("Clear 'phone-number-input'", "id", "qa-international-phone-number-input", ParentTest, "no_jira");    
                 if (FAIL) { return;}
             Element_By_Selector_Text_Enter("Enter Valid 'Canada Phone number'", "id", "qa-international-phone-number-input", "9058566686", false, ParentTest, "no_jira"); 
@@ -83,7 +83,7 @@ class WO_account_info extends WO_GUI {
             Element_By_Selector_Text("Verify Error Message > 'mandatory field'" , "xpath", "//div[@class='v-messages theme--light error--text']",  ParentTest, "no_jira"); 
             Element_By_Selector_Text_Enter("Enter invalid 'Canada Phone number'", "id", "qa-international-phone-number-input", "902221234", false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Element_By_Selector_Text("Verify Error Message > 'invalid phone number'" , "xpath", "//div[@class='v-messages theme--light error--text']",  ParentTest, "no_jira"); 
+//Element_By_Selector_Text("Verify Error Message > 'invalid phone number'" , "xpath", "//div[@class='v-messages theme--light error--text']",  ParentTest, "no_jira"); 
             Element_By_Selector_Input_Select_Clear("Clear 'phone-number-input'", "id", "qa-international-phone-number-input", ParentTest, "no_jira");    
                 if (FAIL) { return;}
             Element_By_Selector_Text_Enter("Enter Valid 'US Phone number'", "id", "qa-international-phone-number-input", "7168965200", false, ParentTest, "no_jira"); 

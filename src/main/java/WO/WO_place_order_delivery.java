@@ -77,9 +77,16 @@ class WO_place_order_delivery extends WO_GUI {
         Element_By_Selector_Click("Click '+'  > add 1 more Item", "xpath", "//button[contains(@class, 'mdi-plus')]", ParentTest, "no_jira");
 // Options ??? 
 
-       Element_By_Selector_Click("Click 'Add to basket'", "id", "add-to-basket", ParentTest, "no_jira");
+        Element_By_Selector_Click("Click 'Add to basket'", "id", "add-to-basket", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
+            if (FAIL) { return;}
+
+        // check Basket
+        Element_By_Selector_Click("Click navigation > 'Basket'", "id", "nav-basket-btn", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        //  to do details
+        Element_By_Selector_Click("Click 'x' > Close 'Basket'", "id", "close-basket-btn", ParentTest, "no_jira");
             if (FAIL) { return;}
 
         Element_By_Selector_Click("Click 'Checkout'", "id", "prompt-to-checkout",  ParentTest, "no_jira");

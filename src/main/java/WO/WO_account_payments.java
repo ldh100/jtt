@@ -76,14 +76,14 @@ class WO_account_payments extends WO_GUI {
             Element_E1_Find("Determine the payment type (iframe > freedompay)","xpath", "//iframe[contains(@src, 'freedompay')]", ParentTest, "no_jira");    
             if(FAIL) {    // no freedompay iframe >>> exact 
                 paymentType = "exact";
-                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "xpath", "//h2[@class='mb-5 text-center']", ParentTest, "no_jira");
+                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "id", "name-on-card", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 _t++; _f++;
                 EX += _t + "\t" + "Validate Payment Type" + "\t" + "Expected by API return" + "\t" + paymentType + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("FAIL", "iframe[contains(@src, 'freedompay')] - Not found", false, ParentTest.createNode(_t + ". " + "Validate FE Payment Type - expected from API: freedompay"), new Date());
             }else{
                 paymentType = "freedompay";
-                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "xpath", "//h2[@class='mb-4 text-center']", ParentTest, "no_jira");
+                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "id", "name-on-card", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 _t++; _p++;
                 EX += _t + "\t" + "Validate Payment Type" + "\t" + "Expected by API return" + "\t" + paymentType + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
