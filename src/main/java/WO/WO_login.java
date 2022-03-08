@@ -29,34 +29,23 @@ class WO_login extends WO_GUI {
         //Find_Text("Find 'Log in' text", "Log in", true, ParentTest, "no_jira"); 
 //        Element_By_Selector_Click("Click 'Log in'", "xpath", "//*[text()='Log in']", ParentTest, "no_jira"); 
 //            if (FAIL) { return;}               
-        Element_By_Selector_Click("Click 'Log in'", "id", "nav-log-in-btn", ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Click navigation > 'Log in'", "id", "nav-log-in-btn", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_E1_Find("Find 'Login' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        //Element_Child_Text("Find 'Login' dialog Title", e1, "xpath", ".//div[@class='row pt-8 no-gutters']", ParentTest, "no_jira");               
-        //Element_Child_Text("Find 'Login' dialog Text", e1, "xpath", ".//p[@class='mb-5 mt-2 form-info']", ParentTest, "no_jira"); 
-
-        //Element_By_Selector_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='switch-form-text']", ParentTest, "no_jira"); 
-        //Find_Text("Verify 'Forgot password...' button/text present", "Forgot password?", true, ParentTest, "no_jira"); 
-        //Find_Text("Verify 'Need an account?' button/text present", "Need an ", true, ParentTest, "no_jira");                
-        //Find_Text("Verify 'Sign Up' button/text present", "Sign ", true, ParentTest, "no_jira"); 
-        // Forgot Paswword modal
-        //
-        Element_Child_List_L1("Find Login Text Slot(s) Count", e1,"xpath", ".//div[@class='v-text-field__slot']", ParentTest, "no_jira");             
-            if (FAIL) { return;}          
-        //Element_Child_Text("Verify Input 'Email' label", L1.get(0), "tagName" , "label", ParentTest, "no_jira"); 
-            //if (FAIL) { return;}
-        //Element_Child_Text("Verify Input 'Password' label", L1.get(1), "tagName" , "label", ParentTest, "no_jira"); 
-            //if (FAIL) { return;}
 
         if(_New_user) {
-            // Larry's code goes here
-            // test Create new user
-            // Open modal        
-            // Element_By_Selector_Click("Click 'Login'", "xpath", "//*[text()='Login']", ParentTest, "no_jira"); 
-            //    if (FAIL) { return;}             
-            // Element_E1_Find("Find 'Login' dialog", "xpath", "//html/body/div/div/div[3]/div/div/div", ParentTest, "no_jira");
-            //   if (FAIL) { return;}    
+            Element_E1_Find("Find 'Login' dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
+                if (FAIL) { return;} 
+            //Element_Child_Text("Find 'Login' dialog Title", e1, "xpath", ".//div[@class='row pt-8 no-gutters']", ParentTest, "no_jira");               
+            //Element_Child_Text("Find 'Login' dialog Text", e1, "xpath", ".//p[@class='mb-5 mt-2 form-info']", ParentTest, "no_jira"); 
+
+            //Element_By_Selector_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='switch-form-text']", ParentTest, "no_jira"); 
+            //Find_Text("Verify 'Forgot password...' button/text present", "Forgot password?", true, ParentTest, "no_jira"); 
+            //Find_Text("Verify 'Need an account?' button/text present", "Need an ", true, ParentTest, "no_jira");                
+            //Find_Text("Verify 'Sign Up' button/text present", "Sign ", true, ParentTest, "no_jira"); 
+            // Forgot Paswword modal
+            //
+            Element_Child_List_L1("Find Login Text Slot(s) Count", e1,"xpath", ".//div[@class='v-text-field__slot']", ParentTest, "no_jira");             
+            if (FAIL) { return;}     
             Element_By_Selector_Text("Find 'switch-form-text > Sign-in' text", "xpath", "//p[@class='switch-form-text']", ParentTest, "no_jira");
             Element_By_Selector_Click("Click 'Sign up'", "xpath", "//p[text()='Sign Up']", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -116,8 +105,8 @@ class WO_login extends WO_GUI {
                 if (FAIL) { return;}
             Element_By_Selector_Text_Enter("Enter Valid Password", "id", "login-Password", MOBILE_PW, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            //Element_By_Selector_Click("Click 'Un-hide Password'", "css", "[aria-label='append icon']", ParentTest, "no_jira"); 
-            Element_Child_Click("Click 'LOGIN'", e1,"xpath", ".//button[contains(@class, 'v-btn v-btn--contained theme--light v-size--default')]", ParentTest, "no_jira");             
+            //Element_By_Selector_Click("Click 'Un-hide Password'", "css", "[aria-label='append icon']", ParentTest, "no_jira"); } 
+            Element_By_Selector_Click("Click 'LOGIN'", "id", "log-in-btn", ParentTest, "no_jira");                                     
                 if (FAIL) { return;} 
         }           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     

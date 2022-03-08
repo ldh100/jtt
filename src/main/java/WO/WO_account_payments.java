@@ -121,7 +121,7 @@ class WO_account_payments extends WO_GUI {
                 Element_By_Selector_Text_Enter("Enter Name on Card", "className", "iframe-input", "JTT " + New_ID, false, ParentTest, "no_jira");
                     if (FAIL) { return;}    
              
-                Swith_to_Frame("switch iframe", "tagName", "iframe", ParentTest, "no_jira"); //Switch to iframe
+                Swith_to_Frame("Switch to Freedompay iframe", "tagName", "iframe", ParentTest, "no_jira"); //Switch to iframe
                     if (FAIL) { return;} 
                 Element_By_Selector_Text_Enter("Enter Card Number", "id", "CardNumber", "340000000000009",false, ParentTest, "no_jira");
                     if (FAIL) { return;} 
