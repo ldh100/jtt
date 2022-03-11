@@ -355,6 +355,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 
         _order_status.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _order_status.setText("Order Status");
+        _order_status.setEnabled(false);
         _order_status.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _order_status.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _order_status.setRequestFocusEnabled(false);
@@ -757,7 +758,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(_remote, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -802,7 +804,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblSITES)
@@ -814,7 +816,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSITES4)
@@ -824,8 +826,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                             .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblBRANDS)
                         .addGap(2, 2, 2)
@@ -2432,6 +2433,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Explore Brand > Menu, no Login: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         } 
+        if (_Forgot_Password) { 
+            SCOPE += ", Forgot Password";
+            ParentTest = HtmlReport.createTest("Forgot Password"); 
+            EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Forgot Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_forgot_password BR = new WO_forgot_password(WO_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            Ver = BR.Ver;
+            EX += " - " + "\t" + " === ^ Forgot Password " + "\t" + " ===== " + "\t" + " == ^ Forgot Password End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Forgot Password: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
         if (true) { 
             SCOPE += ", Login";
             ParentTest = HtmlReport.createTest("Login"); 
@@ -2457,13 +2470,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         }
         if (_Account_password) { 
             SCOPE += ", Account > Update Password";
-            ParentTest = HtmlReport.createTest("Account > Update Password"); 
+            ParentTest = HtmlReport.createTest("Update Password"); 
             EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account > Update Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_account_password BR = new WO_account_password(WO_GUI.this);
             BR.run(); // ====================================== 
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Account > Update Password" + "\t" + " ===== " + "\t" + " == ^ Account > Update Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Account > Update Password: " + BR._t + ", Failed: " + BR._f);
+            EX += " - " + "\t" + " === ^ Update Password" + "\t" + " ===== " + "\t" + " == ^ Update Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Update Password: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Account_payments) { 

@@ -22,17 +22,23 @@ class WO_forgot_password extends WO_GUI {
             if (FAIL) { return;}
         Element_By_Selector_Text_Enter("Enter Valid Email", "id", "Email", MOBILE_ID, false, ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Element_By_Selector_Click("Click 'Back to login'", "id", "to-log-in", ParentTest, "no_jira"); 
+//        Element_By_Selector_Click("Click 'Back to login'", "id", "to-log-in", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}
+        Element_By_Selector_Click("Click 'Back to login'", "xpath", "//p[text()=' Back to log in ']", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Selector_Click("Click 'Forgot Password'", "id", "to-forgot-password", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Selector_Click("Click 'Reset Password'", "id", "reset-password-btn", ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Find_Text("Verify '... Sent' message", "sent!", true, ParentTest, "no_jira"); 
-        Element_By_Selector_Click("Click 'Back to login'", "id", "to-log-in", ParentTest, "no_jira"); 
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}
-        Element_By_Selector_Click("Click 'x' > close 'login' form", "id", "modal-close-btn", ParentTest, "no_jira"); 
-
+        Find_Text("Verify '... Sent' message", "sent!", true, ParentTest, "no_jira"); 
+//        Element_By_Selector_Click("Click 'Back to login'", "id", "to-log-in", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}
+        Element_By_Selector_Click("Click 'Back to login'", "xpath", "//p[text()=' Back to log in ']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+//        Element_By_Selector_Click("Click 'x' > close 'Login' form", "id", "modal-close-btn", ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Click 'x' > close 'Login' form", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']/descendant::button[@id='modal-close-btn']", ParentTest, "no_jira"); 
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;
         EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
