@@ -14,6 +14,7 @@ class WO_account_payments extends WO_GUI {
         AP3_TKN = a.AP3_TKN;
 
         New_ID = a.New_ID;
+        COUNTRY = a.COUNTRY;
         Site_ID = a.Site_ID;
 
         loadTimeout = a.loadTimeout;
@@ -24,19 +25,25 @@ class WO_account_payments extends WO_GUI {
     String paymentType = "";   
 
 
+
     protected void run() {   
     try {     
-        Call_API("Call /location/private config API", "Bearer " + AP3_TKN, BaseAPI + "/config/" + Site_ID + "?nocache=1", true, ParentTest, "no_jira" );      
-        for(String str : PAYMENT_TYPE)
-        if (API_Response_Body.contains(str)){          
-           paymentType = str;
-           API_Body_Contains("Get the Site Payment Type from API: " + paymentType, paymentType, true, ParentTest, "no_jira");
-           break;
+        if(COUNTRY.toLowerCase().startsWith("c")){
+            paymentType = "exact";
+        } else {
+            paymentType = "freedompay";
         }
-        if(paymentType.isEmpty()){
-             EX += _t + "No payment type setting "  + "\t" + "=====" + "\t" + "could not find the payment type" + "\t" + "PASS" + "\t" + " - " + "";
-             return;
-        } 
+//        Call_API("Call /location/private config API", "Bearer " + AP3_TKN, BaseAPI + "/config/" + Site_ID + "?nocache=1", true, ParentTest, "no_jira" );      
+//        for(String str : PAYMENT_TYPE)
+//        if (API_Response_Body.contains(str)){          
+//           paymentType = str;
+//           API_Body_Contains("Get the Site Payment Type from API: " + paymentType, paymentType, true, ParentTest, "no_jira");
+//           break;
+//        }
+//        if(paymentType.isEmpty()){
+//             EX += _t + "No payment type setting "  + "\t" + "=====" + "\t" + "could not find the payment type" + "\t" + "PASS" + "\t" + " - " + "";
+//             return;
+//        } 
 //        Element_By_Selector_Click("Open User 'Menu'", "xpath", "//i[@class='v-icon notranslate mdi mdi-menu theme--light']", ParentTest, "no_jira");                                     
 //            if (FAIL) { return;}     
         Element_By_Selector_Click("Open User 'Menu'", "id", "nav-menu-btn", ParentTest, "no_jira");                                     
