@@ -4021,11 +4021,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     break;
             }
             if(A.A.WsOS.toLowerCase().contains("windows")){
-                e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text
                 e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
             }else{
                 //e.clear();
-                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text
                 e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
 

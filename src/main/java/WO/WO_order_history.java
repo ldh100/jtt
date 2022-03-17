@@ -21,12 +21,14 @@ class WO_order_history extends WO_GUI {
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}   
 
-        List_L0("Check Order History > default 'Active Orders", "css", "[role='tab']", ParentTest, "no_jira");
+        List_L0("Get Order History tabs > default 'Active Orders", "css", "[role='tab']", ParentTest, "no_jira");
             if (FAIL) { return;}
         List_L1("Get 'Active orders' list > Count", "xpath", "//div[@class='card-container v-card v-sheet theme--light']", ParentTest, "no_jira"); 
         // Last order details  > Delivery time: 2:40 p.m.
 
         Element_Click("Click 'Past orders' tab", L0.get(1), ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;} 
         Thread.sleep(500);
         List_L1("Get 'Past orders' list > Count", "xpath", "//div[@class='card-container v-card v-sheet theme--light']", ParentTest, "no_jira"); 
