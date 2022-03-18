@@ -2077,12 +2077,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             d1.manage().deleteAllCookies(); // =================================
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);        
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class); 
-            
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);     
+           
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return "= Local WebDriver Start > OK " + "\r\n";
         } catch (Exception ex) {
@@ -2170,12 +2170,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             d1.manage().deleteAllCookies(); // =================================
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);          
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class); 
-            
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS); 
+             
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return "= Remote WebDriver Start > OK " + "\r\n";
         } catch (Exception ex) {
@@ -2468,26 +2468,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Account Info: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
-        if (_Account_password) { 
-            SCOPE += ", Account > Update Password";
-            ParentTest = HtmlReport.createTest("Update Password"); 
-            EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account > Update Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            WO_account_password BR = new WO_account_password(WO_GUI.this);
-            BR.run(); // ====================================== 
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Update Password" + "\t" + " ===== " + "\t" + " == ^ Update Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Update Password: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());    
-        }
         if (_Account_payments) { 
-            SCOPE += ", Account Payments";
-            ParentTest = HtmlReport.createTest("Account Payments"); 
+            SCOPE += ", Payments";
+            ParentTest = HtmlReport.createTest("Payments"); 
             EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Payments Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_account_payments BR = new WO_account_payments(WO_GUI.this);
             BR.run(); // ====================================== 
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Account Payments" + "\t" + " ===== " + "\t" + " == ^ Account Settings Payments End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Account Payments: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Payments: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
 
@@ -2544,6 +2533,17 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Supporty" + "\t" + " ===== " + "\t" + " == ^ Support End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest.getModel().setName("Support: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
+        if (_Account_password) { 
+            SCOPE += ", Update Password";
+            ParentTest = HtmlReport.createTest("Update Password"); 
+            EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account > Update Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_account_password BR = new WO_account_password(WO_GUI.this);
+            BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Update Password" + "\t" + " ===== " + "\t" + " == ^ Update Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Update Password: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Logout) { 

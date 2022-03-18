@@ -60,7 +60,7 @@ class WO_account_payments extends WO_GUI {
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}
         //Get Payment Cards >>> delete  existed
-        List_L1("Get Item List in 'Payment Cards' container / Count (including 'Add New Card)", "css", "[role='listitem']", ParentTest, "no_jira"); 
+        List_L1("Get Item List in 'Payment Cards' container / Count (including 'Add New Card')", "css", "[role='listitem']", ParentTest, "no_jira"); 
         for (int j = 0; j < (L1.size() - 1); j++) {
             Element_Text("Card > last 4 digit:", L1.get(j), ParentTest, "no_jira");     
             Element_By_Selector_Click("Click/Open Card details", "xpath", "//*[contains(@class, 'v-list-item__action')]", ParentTest, "no_jira");  
