@@ -93,6 +93,7 @@ import javax.imageio.ImageIO;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class WO_GUI extends javax.swing.JInternalFrame {
@@ -181,8 +182,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
@@ -195,6 +194,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
 
@@ -539,7 +540,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2098,14 +2099,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         try { 
             switch (BROWSER) {
                 case "Chrome":
+                        Map<String, Object> prefs = new HashMap<String, Object>();
                         ChromeOptions chrome_op = new ChromeOptions();
                         chrome_op.setCapability("browserVersion", "latest");
-                        chrome_op.setCapability("platformName", "Windows 10");
-                        Map<String, Object> prefs = new HashMap<String, Object>();
+                        if(A.A.WsOS.toLowerCase().contains("windows")){ 
+                            chrome_op.setCapability("platformName", "Windows 10");              
+                        }else{
+                            chrome_op.setCapability("platformName", "macOS 12");                
+                         }
 //                        prefs.put("username", "ospozito");
 //                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
                         prefs.put("name", app + " Web Ordering");
-                        prefs.put("screenResolution", "1920x1200");
+
 
                         chrome_op.setCapability("sauce:options", prefs);
                         URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
@@ -2156,8 +2161,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         d1 = new InternetExplorerDriver(ie_op);
                     break;
                 case "Safari":
-                        //To do on MAC machine // =====================================
-                        d1 = new SafariDriver();     
+                    SafariOptions safariOptions = new SafariOptions();
+                    safariOptions.setCapability("browserVersion", "15");
+                    if(A.A.WsOS.toLowerCase().contains("windows")){ 
+                        safariOptions.setCapability("platformName", "Windows 10");              
+                    }else{
+                        safariOptions.setCapability("platformName", "macOS 12");                
+                    }
+                    Map<String, Object> s_prefs = new HashMap<String, Object>();
+//                        prefs.put("username", "ospozito");
+//                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
+                    s_prefs.put("name", app + " Web Ordering");
+                    d1 = new SafariDriver();     
                     break;
             }
             if(_Mobile){
