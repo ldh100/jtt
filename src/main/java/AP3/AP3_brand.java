@@ -190,15 +190,15 @@ class AP3_brand extends AP3_GUI{
                     if (FAIL) { return;}
                 Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                     if (FAIL) { return;}
-                Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,  ParentTest, "no_jira" );
-                if(t.startsWith("{")){
-                    API_Response_Body = t;               
-                    API_Body_Contains("Location Group API - find Displayed Brand ID", API_Response_Body, BrandID,true, ParentTest, "no_jira"); 
-                }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-                }
+//                Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,  ParentTest, "no_jira" );
+//                if(t.startsWith("{")){
+//                    API_Response_Body = t;               
+//                    API_Body_Contains("Location Group API - find Displayed Brand ID", API_Response_Body, BrandID, true, ParentTest, "no_jira"); 
+//                }else{
+//                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//                }
             }
         }            
         Element_Child_List_L2("Stations List Column Count", L2.get(T_Index), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
@@ -271,8 +271,8 @@ class AP3_brand extends AP3_GUI{
                         Element_By_Path_Click("Click 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']", ParentTest, "no_jira");                            
                         Element_By_Path_Text_Select_Copy("Get 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']", ParentTest, "no_jira"); 
                             
-                        Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return; }
+//                        Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true, ParentTest, "no_jira"); 
+//                            if (FAIL) { return; }
                         Element_By_Path_Attribute("Find 'DISABLE' text", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", "textContent", ParentTest, "no_jira"); 
                             if (FAIL) { return; }                                                             
                         Element_By_Path_Click("Click 'DISABLE'", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", ParentTest, "no_jira"); 

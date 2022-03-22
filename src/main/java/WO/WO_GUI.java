@@ -2111,7 +2111,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 //                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
                         prefs.put("name", app + " Web Ordering");
 
-
                         chrome_op.setCapability("sauce:options", prefs);
                         URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
                         d1 = new RemoteWebDriver(url, chrome_op);

@@ -108,10 +108,9 @@ class AP3_mm_import_menu extends AP3_GUI{
             }
             Element_Click("Click 'Export'", L1.get(T_Index), ParentTest, "no_jira");
                 if (FAIL) { return;}
-            //Thread.sleep(5000);            
+            Thread.sleep(5000);            
             Export_File_Name = MenuName + " - " +  LocalDate.now();
-            Path path = Paths.get(Download_Dir + File.separator + Export_File_Name + File.separator + ".zip");
-            Thread.sleep(3000);
+            //Path path = Paths.get(Download_Dir + File.separator + Export_File_Name + File.separator + ".zip");
 //            for(int i = 0; i < 20; i++){
 //                //if(Files.exists(path)){
 //                if(Files.isReadable(path)){
@@ -372,11 +371,13 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
             FileOutputStream outputStream = new FileOutputStream(file);     //Create an object of FileOutputStream class to create write data in excel file
             _Workbook.write(outputStream);                            //write data in the excel file
             outputStream.close();                                           //close output stream
-            _t++; _i++; EX += _t + "\t" + "Excel Add New Data Row" + "\t" + dataToWrite.toString() + "\t" + " - " + "\t" + "INFO" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            _t++; _i++; 
+            EX += _t + "\t" + "Excel Add New Data Row" + "\t" + dataToWrite.toString() + "\t" + " - " + "\t" + "INFO" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             Log_Html_Result("INFO", dataToWrite.toString(), false, ParentTest.createNode(_t + ". " + "Excel Add New Data Row"), new Date());                                       
             return "OK";
         }catch(Exception ex){
-            _t++; _f++; EX += _t + "\t" + "Excel Add New Data Row" + "\t" + "Not Found" + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+            _t++; _f++; 
+            EX += _t + "\t" + "Excel Add New Data Row" + "\t" + "Not Found" + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
             Log_Html_Result("FAIL", ex.getMessage(), false, ParentTest.createNode(_t + ". " + "Excel Add New Data Row"), new Date());                                       
             return "Error: " + ex.getMessage();
         } 
