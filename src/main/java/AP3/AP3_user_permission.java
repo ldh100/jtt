@@ -526,18 +526,18 @@ Thread.sleep(1000);
                   Log_Html_Result("FAIL", "Edit 'Station Name' enabled - Expected disabled"  , true, ParentTest.createNode(_t + ". " + "SM All Options-Station Configuration"), new Date());
 
                 }                    
-            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
-                if (FAIL) { return;}                     
-                _t++;
-                if (t.equals("true")) {
-                    _f++;
-                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
-                    Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' disabled"  , true, ParentTest.createNode(_t + ". " + "SM All Options-Station Configuration"), new Date());
-                } else {
-                    _p++;
-                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
-                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' enabled" , false, ParentTest.createNode(_t + ". " + "SM All Options-Station Configuration"), new Date());
-                }            
+//            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}                     
+//                _t++;
+//                if (t.equals("true")) {
+//                    _f++;
+//                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
+//                    Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' disabled"  , true, ParentTest.createNode(_t + ". " + "SM All Options-Station Configuration"), new Date());
+//                } else {
+//                    _p++;
+//                    EX += _t + "\t" + " === SM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+//                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' enabled" , false, ParentTest.createNode(_t + ". " + "SM All Options-Station Configuration"), new Date());
+//                }            
             //</editor-fold>   
 
             // <editor-fold defaultstate="collapsed" desc="SN Y Menu Management" >   
@@ -740,18 +740,18 @@ Thread.sleep(1000);
                     EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
                     Log_Html_Result("FAIL", "Edit 'Station Name' enabled - Expected disabled"  , true, ParentTest.createNode(_t + ". " + "SM No Options-Station Configuration"), new Date());
                 }                    
-            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
-                if (FAIL) { return;}                     
-                _t++;
-                if (t.equals("true")) {
-                    _p++;
-                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
-                   Log_Html_Result("PASS", "Edit 'ASAP Pick-up' disabled" , false, ParentTest.createNode(_t + ". " + "SM No Options-Station Configuration"), new Date());
-                 } else {
-                    _f++;
-                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
-                   Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' enabled - Expected disabled"  , true, ParentTest.createNode(_t + ". " + "SM No Options-Station Configuration"), new Date()); 
-                }            
+//            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}                     
+//                _t++;
+//                if (t.equals("true")) {
+//                    _p++;
+//                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+//                   Log_Html_Result("PASS", "Edit 'ASAP Pick-up' disabled" , false, ParentTest.createNode(_t + ". " + "SM No Options-Station Configuration"), new Date());
+//                 } else {
+//                    _f++;
+//                    EX += _t + "\t" + " === SM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+//                   Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' enabled - Expected disabled"  , true, ParentTest.createNode(_t + ". " + "SM No Options-Station Configuration"), new Date()); 
+//                }            
             // </editor-fold> 
 
             // <editor-fold defaultstate="collapsed" desc="SN N Menu Management" >   
@@ -940,18 +940,18 @@ Thread.sleep(1000);
                     EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
                     Log_Html_Result("FAIL", "Edit 'Station Name' enabled-Expected disabled"  , true, ParentTest.createNode(_t + ". " + "DM All Options - Station Configuration"), new Date());
                 }                    
-            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
-                if (FAIL) { return;}                     
-                _t++;
-                if (t.equals("true")) {
-                    _f++;
-                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
-                    Log_Html_Result("FAIL", "Disabled for " + L1.size() + " Stations - Expected enabled"  , true, ParentTest.createNode(_t + ". " + "DM All Options - Station Configuration"), new Date());
-                } else {
-                    _p++;
-                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
-                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' enabled" , false, ParentTest.createNode(_t + ". " + "DM All Options-Station Configuration"), new Date());
-                }           
+//            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}                     
+//                _t++;
+//                if (t.equals("true")) {
+//                    _f++;
+//                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "FAIL" + "\t" + "Expected enabled" + "\t" + " - " + "\r\n";                        
+//                    Log_Html_Result("FAIL", "Disabled for " + L1.size() + " Stations - Expected enabled"  , true, ParentTest.createNode(_t + ". " + "DM All Options - Station Configuration"), new Date());
+//                } else {
+//                    _p++;
+//                    EX += _t + "\t" + " === DM All Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+//                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' enabled" , false, ParentTest.createNode(_t + ". " + "DM All Options-Station Configuration"), new Date());
+//                }           
             // </editor-fold>   
             
 ////
@@ -1155,18 +1155,18 @@ Thread.sleep(1000);
                     EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'Station Name' enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + "Expected disabled" + "\r\n";                        
                     Log_Html_Result("FAIL", " Edit 'Station Name' enabled - Expected disabled"  , true, ParentTest.createNode(_t + ". " + "DM No Options-Station Configuration"), new Date());
                 }                    
-            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
-                if (FAIL) { return;}                     
-                _t++;
-                if (t.equals("true")) {
-                    _p++;
-                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
-                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' disabled" , false, ParentTest.createNode(_t + ". " + "DM No Options-Station Configuration"), new Date());
-                } else {
-                    _f++;
-                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
-                    Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' enabled - Expected disabled"  , true, ParentTest.createNode(_t + ". " + "DM No Options-Station Configuration"), new Date());
-                }
+//            Element_By_Path_Attribute("Enable 'ASAP Pick-up'?", "css", "[aria-label='ASAP Pickup']", "disabled", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}                     
+//                _t++;
+//                if (t.equals("true")) {
+//                    _p++;
+//                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' disabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\r\n";                        
+//                    Log_Html_Result("PASS", "Edit 'ASAP Pick-up' disabled" , false, ParentTest.createNode(_t + ". " + "DM No Options-Station Configuration"), new Date());
+//                } else {
+//                    _f++;
+//                    EX += _t + "\t" + " === DM No Options " + "\t" + "Station Configuration" + "\t" + "Edit 'ASAP Pick-up' enabled" + "\t" + "FAIL" + "\t" + "Expected disabled" + "\t" + " - " + "\r\n";                        
+//                    Log_Html_Result("FAIL", "Edit 'ASAP Pick-up' enabled - Expected disabled"  , true, ParentTest.createNode(_t + ". " + "DM No Options-Station Configuration"), new Date());
+//                }
             // </editor-fold> 
   
 

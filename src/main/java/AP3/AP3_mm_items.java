@@ -58,74 +58,77 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;} 
         Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");             
             if (FAIL) { return;}
-      
-        // <editor-fold defaultstate="collapsed" desc="Group Selection">  
-        EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}         
-        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
-            if (FAIL) { return;}              
-        Page_URL("Menu Manager page URL", ParentTest, "no_jira"); 
-            if (FAIL) { return;}   
-        Find_Text("Button 'Go to Menu' text", "Go to menus", true, ParentTest, "no_jira");   
-            if (FAIL) { return;}
-        Element_By_Path_Attribute("Button 'Go to Menu' state", "xpath", "//button[contains(@class, 'v-btn v-btn--disabled theme--light primary--text')]", "disabled", ParentTest, "no_jira");
-            if (FAIL) { return;}
-            
-        // =========================================== Group Selection
-        Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", ParentTest, "no_jira");
-            if (FAIL) return;   
-        Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", SECTOR, false, ParentTest, "no_jira");
-                if (FAIL) { return;}    
-            Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + SECTOR + "')]", ParentTest, "no_jira"); 
-                if (FAIL) { return;}             
-//        Element_E1_Find("Find 'Group' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active v-autocomplete__content')]", ParentTest, "no_jira");
+//      
+//        // <editor-fold defaultstate="collapsed" desc="Group Selection">  
+//        EX += " - " + "\t" + " === MM Sector Selection " + "\t" + " ===== " + "\t" + " == Sector Selection Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";  
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}         
+//        Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}              
+//        Page_URL("Menu Manager page URL", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}   
+//        Find_Text("Button 'Go to Menu' text", "Go to menus", true, ParentTest, "no_jira");   
+//            if (FAIL) { return;}
+//        Element_By_Path_Attribute("Button 'Go to Menu' state", "xpath", "//button[contains(@class, 'v-btn v-btn--disabled theme--light primary--text')]", "disabled", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//            
+//        // =========================================== Group Selection
+//        Element_By_Path_Click("Open 'Group' dropdown", "css", "[role='combobox']", ParentTest, "no_jira");
+//            if (FAIL) return;   
+//        Element_By_Path_Text_Enter("Enter Sector Name", "css", "[role='combobox']", SECTOR, false, ParentTest, "no_jira");
+//                if (FAIL) { return;}    
+//            Element_By_Path_Click("Sector Name Click", "xpath", "//*[contains(text(), '" + SECTOR + "')]", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}             
+////        Element_E1_Find("Find 'Group' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active v-autocomplete__content')]", ParentTest, "no_jira");
+////            if (FAIL) { return;} 
+////        Element_Child_List_L1("Groups Count #1", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
+////            if (FAIL) { return;} 
+////            T_Index = L1.size();
+////            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(L1.size() - 1));
+////            Scroll_to_Element("Scroll to Last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+////                if (FAIL) { return;}
+////        Element_Child_List_L1("Groups Count #2", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
+////            if (FAIL) { return;} 
+////
+////        int SC = 2;    
+////        while(T_Index < L1.size()) {
+////            T_Index = L1.size();
+////            SC++;
+////            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(L1.size() - 1));
+////            Scroll_to_Element("Scroll to last Group, L1.get(L1.size() - 1), ParentTest, "no_jira");
+////                if (FAIL) { return;}
+////            Element_Child_List_L1("Groups Count #" + SC, e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
+////                if (FAIL) { return;} 
+////        }   
+////        T_Index = -1;
+////        for (int j = 0; j < L1.size(); j++) {
+////            if(ALL_DATA){
+////                Element_Text("Group Name", L1, "L1", j, ParentTest, "no_jira");  
+////            }
+////            if(L1.get(j).getText().trim().equals(SECTOR)){
+////                T_Index = j;
+////            }
+////        }
+////        if(T_Index > -1){
+////            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(T_Index));  
+////            Scroll_to_Element("Scroll to Group " + SECTOR, L1.get(T_Index), ParentTest, "no_jira");
+////                if (FAIL) { return;}
+//////            Element_Click("Select Group " + SECTOR, L1, "L1", T_Index, ParentTest, "no_jira");
+////                if (FAIL) { return;} 
+////        } else{
+////            return;
+////        } 
+//        Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Thread.sleep(500); 
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
 //            if (FAIL) { return;} 
-//        Element_Child_List_L1("Groups Count #1", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
-//            if (FAIL) { return;} 
-//            T_Index = L1.size();
-//            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(L1.size() - 1));
-//            Scroll_to_Element("Scroll to Last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+//        Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", ParentTest, "no_jira"); 
 //                if (FAIL) { return;}
-//        Element_Child_List_L1("Groups Count #2", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
-//            if (FAIL) { return;} 
-//
-//        int SC = 2;    
-//        while(T_Index < L1.size()) {
-//            T_Index = L1.size();
-//            SC++;
-//            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(L1.size() - 1));
-//            Scroll_to_Element("Scroll to last Group, L1.get(L1.size() - 1), ParentTest, "no_jira");
-//                if (FAIL) { return;}
-//            Element_Child_List_L1("Groups Count #" + SC, e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
-//                if (FAIL) { return;} 
-//        }   
-//        T_Index = -1;
-//        for (int j = 0; j < L1.size(); j++) {
-//            if(ALL_DATA){
-//                Element_Text("Group Name", L1, "L1", j, ParentTest, "no_jira");  
-//            }
-//            if(L1.get(j).getText().trim().equals(SECTOR)){
-//                T_Index = j;
-//            }
-//        }
-//        if(T_Index > -1){
-//            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", L1.get(T_Index));  
-//            Scroll_to_Element("Scroll to Group " + SECTOR, L1.get(T_Index), ParentTest, "no_jira");
-//                if (FAIL) { return;}
-////            Element_Click("Select Group " + SECTOR, L1, "L1", T_Index, ParentTest, "no_jira");
-//                if (FAIL) { return;} 
-//        } else{
-//            return;
-//        } 
-        Element_By_Path_Click("Button 'Go to Menu' Click", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Thread.sleep(500); 
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", ParentTest, "no_jira"); 
-                if (FAIL) { return;}
-        // ========================================= Group Selection ^^^^
+//        // ========================================= Group Selection ^^^^
+
+
+        Navigate_to_URL("Navigate to Global Menu", url + "#/menu/sector/" + SectorID, ParentTest, "no_jira");    
         
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
@@ -208,7 +211,12 @@ class AP3_mm_items extends AP3_GUI{
         Thread.sleep(500);                  
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-        Thread.sleep(500);                   
+        Thread.sleep(500);   
+
+// NAvigate to menu directly ???
+//            Navigate_to_URL("Navigate to Sector > Global Menu", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Thread.sleep(500);                
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
         Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");        
@@ -377,7 +385,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}  
         Element_By_Path_Click("Click 'Add Modifier Group'", "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-        Element_By_Path_Click("Click 'Modifier Name' Input", "xpath", "//div[@class='v-input v-text-field v-select v-input--is-focused theme--light primary--text']", ParentTest, "no_jira"); 
+        Element_By_Path_Click("Click 'Modifier Name' Input", "xpath", "//i[@class='v-icon mdi mdi-menu-down theme--light error--text']", ParentTest, "no_jira"); 
             if (FAIL) { return;}                                                                                                     
         Element_E1_Find("Find 'Modifier Groups' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
             if (FAIL) { return;}             
