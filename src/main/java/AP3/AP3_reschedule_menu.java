@@ -54,13 +54,8 @@ class AP3_reschedule_menu extends AP3_GUI{
         List_L0("List of Scheduled Menus", "xpath", "//tbody/tr", ParentTest, "no_jira");
             if (FAIL) {return;}
         int expectedScheduledMenus = L0.size(); 
-        int expected_num_of_events = expectedScheduledMenus*10;
-        if (env.equals("ST")){
-            expected_num_of_events = expectedScheduledMenus*8;
-        } else if (env.equals("PR")) {
-            expected_num_of_events = expectedScheduledMenus*13;
-        }
-        for (int i = 0; i < 50; i++) {  //this will run the rescheduling of a menu 50 times
+
+        for (int i = 0; i < 20; i++) {  //this will run the rescheduling of a menu 20 times
             String startTime = startTimes[new Random().nextInt(startTimes.length)];
             String endTime = endTimes[new Random().nextInt(endTimes.length)];
             if (L0.isEmpty()) {
@@ -76,17 +71,17 @@ class AP3_reschedule_menu extends AP3_GUI{
                     if (FAIL) {return;}
                 Element_Click("Click > first menu on list", L0.get(0), ParentTest, "no_jira");
                     if (FAIL) {return;}
-                Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira");
+                Element_By_Path_Click("Click > 'Start Time'", "xpath", "//*[contains(@aria-label,'Start Time')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
-                Element_By_Path_Text_Enter("Enter Start Time", "css", "[aria-label='Start Time']", startTime, false, ParentTest, "no_jira");
+                Element_By_Path_Text_Enter("Enter Start Time", "xpath", "//*[contains(@aria-label,'Start Time')]", startTime, false, ParentTest, "no_jira");
                     if (FAIL) { return;}
-                Element_By_Path_Click("Click > 'End Time'", "css", "[aria-label='End Time']", ParentTest, "no_jira");
+                Element_By_Path_Click("Click > 'End Time'", "xpath", "//*[contains(@aria-label,'End Time')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
-                Element_By_Path_Text_Enter("Enter End Time", "css", "[aria-label='End Time']", endTime, false, ParentTest, "no_jira");
+                Element_By_Path_Text_Enter("Enter End Time", "xpath", "//*[contains(@aria-label,'End Time')]", endTime, false, ParentTest, "no_jira");
                     if (FAIL) { return;}
                 if (d1.findElement(By.cssSelector("[aria-label='Repeat']")).getAttribute("value").equals("")) {
                     Element_By_Path_Click("Click > 'Repeat' dd", "css", "[aria-label='Repeat']", ParentTest, "no_jira");
@@ -115,25 +110,7 @@ class AP3_reschedule_menu extends AP3_GUI{
                     if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for page to load", "xpath", "//*[contains(text(),'Schedule menu')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
-                Call_API("Call Calendar API", "Bearer " + AP3_TKN, BaseAPI + "/calendar/" + BrandID + "?nocache=false", true, ParentTest, "no_jira");
-                if(t.startsWith("{")){
-                    API_Response_Body = t;               
-                }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "?nocache=false"+ "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID + "?nocache=false", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-                    return;
-                }      
-                JSONObject json = new JSONObject(API_Response_Body);
-                JSONArray events = new JSONArray();
-                events = json.getJSONArray("events");
-                if (events.length() == expected_num_of_events) {
-                    _t++;
-                    _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                } else {
-                    _t++;
-                    _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                }
+
             } else {
                 List_L0("List of Scheduled Menus", "xpath", "//tbody/tr", ParentTest, "no_jira");
                     if (FAIL) {return;}
@@ -154,17 +131,17 @@ class AP3_reschedule_menu extends AP3_GUI{
                             if (FAIL) { return;} 
                     }
                 }
-                Element_By_Path_Click("Click > 'Start Time'", "css", "[aria-label='Start Time']", ParentTest, "no_jira");
+                Element_By_Path_Click("Click > 'Start Time'", "xpath", "//*[contains(@aria-label,'Start Time')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
-                Element_By_Path_Text_Enter("Enter Start Time", "css", "[aria-label='Start Time']", startTime, false, ParentTest, "no_jira");
+                Element_By_Path_Text_Enter("Enter Start Time", "xpath", "//*[contains(@aria-label,'Start Time')]", startTime, false, ParentTest, "no_jira");
                     if (FAIL) { return;}
-                Element_By_Path_Click("Click > 'End Time'", "css", "[aria-label='End Time']", ParentTest, "no_jira");
+                Element_By_Path_Click("Click > 'End Time'", "xpath", "//*[contains(@aria-label,'End Time')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
                 Wait_For_Element_By_Path_Presence("Wait for dropdown", "xpath", "//div[contains(@class,'v-select-list')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
-                Element_By_Path_Text_Enter("Enter End Time", "css", "[aria-label='End Time']", endTime, false, ParentTest, "no_jira");
+                Element_By_Path_Text_Enter("Enter End Time", "xpath", "//*[contains(@aria-label,'End Time')]", endTime, false, ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Element_By_Path_Click("Click > 'Save'", "xpath", "//*[contains(text(),'Save')]", ParentTest, "no_jira");
                     if (FAIL) {return;}
@@ -176,32 +153,17 @@ class AP3_reschedule_menu extends AP3_GUI{
             if (expectedScheduledMenus == 0 && L2.size() == 1) {
                 _t++;
                 _p++; EX += _t + "\t" + "Expected number of Scheduled Menus" + "\t" + "-" + "\t" + L2.size() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Expected number of Scheduled Menus", false, ParentTest.createNode(String.valueOf(L2.size())), new Date());
             } else if (L2.size() == expectedScheduledMenus) {                    
                 _t++;
                 _p++; EX += _t + "\t" + "Expected number of Scheduled Menus" + "\t" + "-" + "\t" + expectedScheduledMenus + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Expected number of Scheduled Menus", false, ParentTest.createNode(String.valueOf(L2.size())), new Date());
             } else {
                 _t++;
                 _f++; EX += _t + "\t" + "Expected number of Scheduled Menus" + "\t" + "-" + "\t" + expectedScheduledMenus + "\t" + "FAIL" + "\t" + "reschduled menu may have cause an unexpected duplication after " + i + " iterations" + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Expected number of Scheduled Menus", true, ParentTest.createNode(String.valueOf(L2.size())), new Date());
             }
-            Call_API("Call Calendar API", "Bearer " + AP3_TKN, BaseAPI + "/calendar/" + BrandID + "?nocache=false", true, ParentTest, "no_jira");
-            if(t.startsWith("{")){
-                API_Response_Body = t;               
-            }else{
-                EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/calendar/" + BrandID + "?nocache=false" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-                "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                Log_Html_Result("FAIL", "URL: " + BaseAPI + "/calendar/" + BrandID + "?nocache=false", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-                return;
-                }     
-            JSONObject json = new JSONObject(API_Response_Body);
-            JSONArray events = new JSONArray();
-            events = json.getJSONArray("events");
-            if (events.length() == expected_num_of_events) {
-                _t++;
-                _p++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            } else {
-                _t++;
-                _f++; EX += _t + "\t" + "Expected Number of events" + "\t" + "-" + "\t" + expected_num_of_events + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            }                
+              
         }           //------- AUT-850
     } catch (Exception ex){}   // =============================================  
     } 
