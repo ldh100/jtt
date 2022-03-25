@@ -2632,7 +2632,8 @@ js.executeScript(document.body.style.transform='scale(1, 1)');
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = JOB_Name + ", v" + Ver + ", Browser: " + BROWSER + HEADLESS +
-                    " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + (_p + _f +_w + _i) + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
+                    ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2719,8 +2720,8 @@ js.executeScript(document.body.style.transform='scale(1, 1)');
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
                     } catch (Exception ex){ // Exception ex
-                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
+//                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
                 return "Done"; 

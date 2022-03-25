@@ -3356,7 +3356,8 @@ public class An_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "Android " + app + " " + env + ", App v: " + appVersion + ", Device: " + device + " OS v:" + devOS +
-                        " - Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i + ". Scope: " + SCOPE + "\r\n" +
+                        " - Steps: " + _t + ", Pass: " + _p + ", Fail: " + _f + ", Warn: " + _w + ", Info: " + _i + ". Scope: " + SCOPE + 
+                        ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n" +
                         "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                         + EX;
                 

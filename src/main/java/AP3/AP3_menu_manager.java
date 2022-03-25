@@ -43,11 +43,6 @@ class AP3_menu_manager extends AP3_GUI{
     
     protected void run() { 
     try {
-    //        DH menu IDs; see https://teamideaworks.atlassian.net/browse/AUT-253
-    //        A3lvmE18ORC7zv1GkPG - Brand: PIZZA PIZZA, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
-    //        z03ykAm5JNszPA7Ne3X - Brand: Tim Hortons, Site: Sheridan College Davis B & C Wing, Unit: Sheridan College Davis C-Wing
-    //        NWEJgN87Q3Sw46JaQ1Q - Brand: PARAMOUNT,   Site: Fennel, Unit: Mohawk College
-
         String API_Respoce_Body = "";      
         String MENU_ID = "";      
         int PAGES;

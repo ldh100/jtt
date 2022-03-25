@@ -60,7 +60,7 @@ class WO_account_info extends WO_GUI {
         Element_By_Selector_Text_Enter("Enter Valid 'Email'", "id", "email", MOBILE_ID, false, ParentTest, "no_jira"); 
             if (FAIL) { return;}  
 
-        Element_By_Selector_Click("Click 'Country Selection' button", "id", "country-select-btn", ParentTest, "no_jira");
+        Element_By_Selector_Click("Click 'Country Selection' button", "id", "qa-country-select-btn", ParentTest, "no_jira");
           if (FAIL) { return;}
         if(COUNTRY.toLowerCase().startsWith("c")){
             Element_By_Selector_Click("Select/Click 'Country - Canada'", "id", "country-Canada", ParentTest, "no_jira");

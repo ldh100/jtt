@@ -2232,7 +2232,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "WO " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
+                    ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2320,8 +2321,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
                     } catch (IOException | InterruptedException ex){ // Exception ex
-                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
+//                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
                 return "Done"; 
@@ -2722,7 +2723,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             if(!LINK.isEmpty()){
                 ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
             }
-            ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
+            ArrayList<String> tabs = null;
+            for(int i = 0; i < 10; i++){
+                tabs = new ArrayList<>(d1.getWindowHandles());
+                if(tabs.size() > 1){
+                    break;
+                }else{
+                    Thread.sleep(500);
+                }
+            }
             d1.switchTo().window(tabs.get(1));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Target URL" + "\t" + LINK + "\t" + "PASS" + "\t" + " - " +

@@ -102,9 +102,13 @@ class WO_login extends WO_GUI {
 //        Element_Click("Select 1st Location in the found Locations list", L1.get(0),ParentTest, "no_jira"); 
 //            if (FAIL) { return; }  
 
-        Element_By_Selector_Text("Find 'Version' text", "xpath", "//div[contains(@class, 'footer-container')]//h6[@style='text-align: center;']", ParentTest, "no_jira"); 
-        Ver = t.substring(t.lastIndexOf(" "));
-
+//        Element_By_Selector_Text("Find 'Version' text", "xpath", "//div[contains(@class, 'footer-container')]//h6[@style='text-align: center;']", ParentTest, "no_jira"); 
+//        if(t != null && t.contains(" ")){
+//            Ver = t.substring(t.lastIndexOf(" "));
+//        } else{
+//            Ver = "No found";
+//        }
+            Ver = "No found";
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;
         EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
