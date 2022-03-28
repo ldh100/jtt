@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -93,7 +94,9 @@ import org.openqa.selenium.ie.ElementScrollBehavior;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 public class AP3_GUI extends javax.swing.JInternalFrame {
@@ -1067,6 +1070,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected List<String> COMP_IDS;
 
     private String SCOPE;
+    protected boolean _Run_on_Remote = false;  
     private boolean _Login = true;
     private boolean _Headless = false;
     private boolean _Mobile_view = false;
@@ -1979,6 +1983,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
                 if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                if(l.contains("_run_on_remote: ")) _remote.setSelected(Boolean.parseBoolean(value));
                 
                 if(l.contains("GROUP: ")) SECTOR = value;
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
@@ -2065,7 +2071,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             C += "_slack: " + _slack.isSelected() + "\r\n";
             C += "_zip_report: " + "true" + "\r\n";
             
-            C += "_headless: " + _headless.isSelected() + "\r\n";             
+            C += "_headless: " + _headless.isSelected() + "\r\n";  
+            C += "_run_on_remote: " + _remote.isSelected() + "\r\n";             
            
             C += "ADMIN_ID: " + txtADMIN_ID.getText() + "\r\n";
             C += "ADMIN_PW: " + txtADMIN_PW.getText()  + "\r\n";
@@ -2183,7 +2190,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
         Slack_Channel = txtSlackCh.getText();
         _Slack = _slack.isSelected();
-        _Headless = _headless.isSelected();             
+        _Headless = _headless.isSelected();   
+        _Run_on_Remote = _remote.isSelected();          
 
         _Site = _site.isSelected();
         _Site_new = _site_new.isSelected();
@@ -2313,6 +2321,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_slack: ")) _Slack = Boolean.parseBoolean(value); 
                 if(l.contains("_aws_alert: ")) _AWS_Alert = Boolean.parseBoolean(value);
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
+                if(l.contains("_run_on_remote: ")) _Run_on_Remote = Boolean.parseBoolean(value);
                 
                 if(l.contains("GROUP: ")) SECTOR = value;
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
@@ -2469,13 +2478,13 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
      //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Background Workers: Web Driver > Reports">
-    private String StartWebDriver() {
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+    protected String StartLocalWebDriver() {
         if(_Headless){
             HEADLESS = " - headless";           
         } else{
             HEADLESS = "";
         }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         try {
             txtLog.append( "= CWD: " + A.A.CWD + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2497,11 +2506,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                         ChromeOptions chrome_op = new ChromeOptions();
                         chrome_op.addArguments("--disable-web-security");
                         chrome_op.addArguments("--no-proxy-server");
-                        if(!_Mobile_view){
-                            chrome_op.addArguments("--start-maximized");
-                        } else{
-                            //chrome_op. >> Set Screen Dimension
-                        };
                         if(_Headless){
                             chrome_op.addArguments("--headless");
                         }
@@ -2514,7 +2518,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                         prefs.put("credentials_enable_service", false);
                         prefs.put("profile.password_manager_enabled", false);
                         chrome_op.setExperimentalOption("prefs", prefs);
-
                         d1 = new ChromeDriver(chrome_op);
                     break;
                 case "Edge":
@@ -2566,20 +2569,18 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                         d1 = new SafariDriver();     
                     break;
             }
-
             d1.manage().window().maximize();
             d1.manage().deleteAllCookies(); // =================================
-
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);        
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
-			.ignoring(NoSuchElementException.class);       
-            
+			.ignoring(NoSuchElementException.class); 
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);     
+           
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
-            return "= WabDriver Start > OK " + "\r\n";
+            return "= Local WebDriver Start > OK " + "\r\n";
         } catch (Exception ex) {
             F += "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
             if(d1 != null) {
@@ -2588,11 +2589,118 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             return "= WebDriver > ERROR: " + ex.getMessage() + "\r\n";
         }  
     }
+    protected String StartRemotelWebDriver() {
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        try { 
+            switch (BROWSER) {
+                case "Chrome":
+                        Map<String, Object> prefs = new HashMap<String, Object>();
+                        ChromeOptions chrome_op = new ChromeOptions();
+                        chrome_op.setCapability("browserVersion", "latest");
+                        if(A.A.WsOS.toLowerCase().contains("windows")){ 
+                            chrome_op.setCapability("platformName", "Windows 10");              
+                        }else{
+                            chrome_op.setCapability("platformName", "macOS 12");                
+                         }
+//                        prefs.put("username", "ospozito");
+//                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
+                        prefs.put("name", app + " Web Ordering");
+
+                        chrome_op.setCapability("sauce:options", prefs);
+                        URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
+                        d1 = new RemoteWebDriver(url, chrome_op);
+                    break;
+                case "Edge":
+//                    txtLog.append( "= Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
+//                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                        EdgeDriverService edgeServise = EdgeDriverService.createDefaultService();
+                        //edgeServise.SuppressInitialDiagnosticInformation = true;
+//                        service.seVerboseLogging = false;
+//                        service.UseSpecCompliantProtocol = false;
+                        EdgeOptions edge_op = new EdgeOptions();
+                       //edge_op.setPageLoadStrategy("normal");
+                        edge_op.setCapability( "disable-infobars", true);
+                        edge_op.setCapability( "disable-gpu", true);
+                        edge_op.setCapability("useAutomationExtension", false);
+//                                PageLoadStrategy = PageLoadStrategy.Default,
+//                                UnhandledPromptBehavior = UnhandledPromptBehavior.Dismiss
+                        if(_Headless){
+                            edge_op.setCapability( "headless", true);
+                        }
+                        
+                        d1 = new EdgeDriver(edgeServise, edge_op);
+                    break;
+                case "Firefox":
+                        FirefoxProfile profile = new FirefoxProfile();
+                        profile.setPreference("network.proxy.no_proxies_on", "localhost");
+                        profile.setPreference("javascript.enabled", true);
+
+//                        DesiredCapabilities capabilities = DesiredCapabilities.;
+//                        capabilities.setCapability("marionette", true);
+//                        capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+
+                        FirefoxOptions ff_op = new FirefoxOptions();
+                        //ff_op.merge(capabilities);
+                        //ff_op.addPreference("browser.link.open_newwindow", 3);
+                        //ff_op.addPreference("browser.link.open_newwindow.restriction", 0);
+
+                        d1 = new FirefoxDriver(ff_op);
+                    break;
+                case "IE11":
+                        InternetExplorerOptions ie_op = new InternetExplorerOptions();
+                        ie_op.ignoreZoomSettings(); // Not necessarily in case 100% zoom.
+                        ie_op.introduceFlakinessByIgnoringSecurityDomains(); // Necessary to skip protected  mode setup
+                        ie_op.elementScrollTo(ElementScrollBehavior.BOTTOM);
+                        ie_op.disableNativeEvents();
+                        d1 = new InternetExplorerDriver(ie_op);
+                    break;
+                case "Safari":
+                    SafariOptions safariOptions = new SafariOptions();
+                    safariOptions.setCapability("browserVersion", "15");
+                    if(A.A.WsOS.toLowerCase().contains("windows")){ 
+                        safariOptions.setCapability("platformName", "Windows 10");              
+                    }else{
+                        safariOptions.setCapability("platformName", "macOS 12");                
+                    }
+                    Map<String, Object> s_prefs = new HashMap<String, Object>();
+//                        prefs.put("username", "ospozito");
+//                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
+                    s_prefs.put("name", app + " Web Ordering");
+                    d1 = new SafariDriver();     
+                    break;
+            }
+
+            d1.manage().window().maximize();
+            d1.manage().deleteAllCookies(); // =================================
+            
+            d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);          
+            loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
+			.pollingEvery(Duration.ofMillis(200))  			
+			.ignoring(NoSuchElementException.class); 
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS); 
+             
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return "= Remote WebDriver Start > OK " + "\r\n";
+        } catch (Exception ex) {
+            F += "= Remote WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+            if(d1 != null) {
+                d1.quit();
+            }
+            return "= Remote WebDriver > ERROR: " + ex.getMessage() + "\r\n";
+        }  
+    }
+
     private void BW1_DoWork(Boolean GUI) { 
         BW1 = new SwingWorker() {             
             @Override
             protected String doInBackground() throws Exception { 
-                String DriverStart = StartWebDriver();
+                String DriverStart = "";
+                if(_Run_on_Remote){
+                    DriverStart = StartRemotelWebDriver();
+                } else{
+                    DriverStart = StartLocalWebDriver();
+                }
                 if(DriverStart.contains("OK")){
                     Current_Log_Update(GUI, "= " + BROWSER + " Driver Started in " + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\r\n");
                     sw1.reset();
