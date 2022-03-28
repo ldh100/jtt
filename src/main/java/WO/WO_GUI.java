@@ -1557,6 +1557,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
                 if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                if(l.contains("_run_on_remote: ")) _remote.setSelected(Boolean.parseBoolean(value));
+
                 
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_mobile: ")) _mobile.setSelected(Boolean.parseBoolean(value));
@@ -1724,7 +1726,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Slack_Channel = txtSlackCh.getText();
             _Slack = _slack.isSelected();
             _Headless = _headless.isSelected();
-            _Mobile= _mobile.isSelected();
+            _Mobile = _mobile.isSelected();
             _Run_on_Remote = _remote.isSelected();
             Zip_Report = true;
 
@@ -1850,7 +1852,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
                 if(l.contains("_mobile: ")) _Mobile = Boolean.parseBoolean(value);
                 if(l.contains("_run_on_remote: ")) _Run_on_Remote = Boolean.parseBoolean(value);
-
+                         
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
                 if(l.contains("SITE: ")) SITE = value;

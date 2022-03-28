@@ -430,7 +430,7 @@ class AP3_brand extends AP3_GUI{
                         Element_Click("Select Location Station", L2.get(L2.size() - 1), ParentTest, "no_jira");
                             if (FAIL) { return; }
                         Thread.sleep(500);
-                        Element_By_Path_Click("Open Menus drop-down", "xpath", "//*[text()='Menus']/parent::div", ParentTest, "no_jira");    
+                        Element_By_Path_Click("Click/Open 'Menus' drop-down", "xpath", "//*[text()='Menus']/parent::div", ParentTest, "no_jira");    
                             if (FAIL) { return; }
                         Thread.sleep(500);
                         Element_E1_Find("Find 'Menus' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
