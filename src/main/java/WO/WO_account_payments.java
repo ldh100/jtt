@@ -14,6 +14,7 @@ class WO_account_payments extends WO_GUI {
         AP3_TKN = a.AP3_TKN;
 
         New_ID = a.New_ID;
+        COUNTRY = a.COUNTRY;
         Site_ID = a.Site_ID;
 
         loadTimeout = a.loadTimeout;
@@ -24,25 +25,33 @@ class WO_account_payments extends WO_GUI {
     String paymentType = "";   
 
 
+
     protected void run() {   
     try {     
-        Call_API("Call /location/private config API", "Bearer " + AP3_TKN, BaseAPI + "/config/" + Site_ID + "?nocache=1", true, ParentTest, "no_jira" );      
-        for(String str : PAYMENT_TYPE)
-        if (API_Response_Body.contains(str)){          
-           paymentType = str;
-           API_Body_Contains("Get the Site Payment Type from API: " + paymentType, paymentType, true, ParentTest, "no_jira");
-           break;
+        if(COUNTRY.toLowerCase().startsWith("c")){
+            paymentType = "exact";
+        } else {
+            paymentType = "freedompay";
         }
-        if(paymentType.isEmpty()){
-             EX += _t + "No payment type setting "  + "\t" + "=====" + "\t" + "could not find the payment type" + "\t" + "PASS" + "\t" + " - " + "";
-             return;
-        } 
+//        Call_API("Call /location/private config API", "Bearer " + AP3_TKN, BaseAPI + "/config/" + Site_ID + "?nocache=1", true, ParentTest, "no_jira" );      
+//        for(String str : PAYMENT_TYPE)
+//        if (API_Response_Body.contains(str)){          
+//           paymentType = str;
+//           API_Body_Contains("Get the Site Payment Type from API: " + paymentType, paymentType, true, ParentTest, "no_jira");
+//           break;
+//        }
+//        if(paymentType.isEmpty()){
+//             EX += _t + "No payment type setting "  + "\t" + "=====" + "\t" + "could not find the payment type" + "\t" + "PASS" + "\t" + " - " + "";
+//             return;
+//        } 
 //        Element_By_Selector_Click("Open User 'Menu'", "xpath", "//i[@class='v-icon notranslate mdi mdi-menu theme--light']", ParentTest, "no_jira");                                     
 //            if (FAIL) { return;}     
         Element_By_Selector_Click("Open User 'Menu'", "id", "nav-menu-btn", ParentTest, "no_jira");                                     
             if (FAIL) { return;}          
-        Element_By_Selector_Click("Click Menu > 'My Account'", "xpath", "//h4[text()='My account']", ParentTest, "no_jira");                                     
-            if (FAIL) { return;}    
+//        Element_By_Selector_Click("Click Menu > 'My Account'", "xpath", "//h4[text()='My account']", ParentTest, "no_jira");                                     
+//            if (FAIL) { return;}  
+        Element_By_Selector_Click("Click Menu > 'My Account'", "id", "to-my-account", ParentTest, "no_jira");                                     
+            if (FAIL) { return;}   
         //Element_By_Selector_Text("Get 'Payment methods' tab text", "xpath", "//a[@href='/account-settings/payment-options']", ParentTest, "no_jira");  
 //        Element_By_Selector_Click("Click 'Payment methods' tab", "xpath", "//a[@href='/account-settings/payment-options']", ParentTest, "no_jira");
 //           if (FAIL) { return;} 
@@ -51,7 +60,7 @@ class WO_account_payments extends WO_GUI {
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}
         //Get Payment Cards >>> delete  existed
-        List_L1("Get Item List in 'Payment Cards' container / Count (including 'Add New Card)", "css", "[role='listitem']", ParentTest, "no_jira"); 
+        List_L1("Get Item List in 'Payment Cards' container / Count (including 'Add New Card')", "css", "[role='listitem']", ParentTest, "no_jira"); 
         for (int j = 0; j < (L1.size() - 1); j++) {
             Element_Text("Card > last 4 digit:", L1.get(j), ParentTest, "no_jira");     
             Element_By_Selector_Click("Click/Open Card details", "xpath", "//*[contains(@class, 'v-list-item__action')]", ParentTest, "no_jira");  
@@ -74,35 +83,35 @@ class WO_account_payments extends WO_GUI {
             Element_E1_Find("Determine the payment type (iframe > freedompay)","xpath", "//iframe[contains(@src, 'freedompay')]", ParentTest, "no_jira");    
             if(FAIL) {    // no freedompay iframe >>> exact 
                 paymentType = "exact";
-                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "xpath", "//h2[@class='mb-5 text-center']", ParentTest, "no_jira");
+                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "id", "name-on-card", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 _t++; _f++;
                 EX += _t + "\t" + "Validate Payment Type" + "\t" + "Expected by API return" + "\t" + paymentType + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("FAIL", "iframe[contains(@src, 'freedompay')] - Not found", false, ParentTest.createNode(_t + ". " + "Validate FE Payment Type - expected from API: freedompay"), new Date());
             }else{
                 paymentType = "freedompay";
-                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "xpath", "//h2[@class='mb-4 text-center']", ParentTest, "no_jira");
+                Wait_For_Element_By_Selector_Presence("Wait for 'Add New Card' fragment present", "id", "name-on-card", ParentTest, "no_jira");
                     if (FAIL) { return;}
                 _t++; _p++;
                 EX += _t + "\t" + "Validate Payment Type" + "\t" + "Expected by API return" + "\t" + paymentType + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("PASS", "iframe[contains(@src, 'freedompay')] - found", false, ParentTest.createNode(_t + ". " + "Validate FE Payment Type - expected from API: freedompay"), new Date());
             }
         }
-
+        Thread.sleep(500);
         switch (paymentType){
             case "exact":     
-                Element_By_Selector_Text_Enter("Enter Name on card", "id", "nameOnCard", "JTT " + New_ID, false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Name on card", "id", "name-on-card", "JTT " + New_ID, false, ParentTest, "no_jira");
                     if (FAIL) { return;} 
-                Element_By_Selector_Text_Enter("Enter Card Number", "id", "maskedCardNumber", "5500000000000004", false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Card Number", "id", "masked-card-number", "5500000000000004", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
-                Element_By_Selector_Text_Enter("Enter Expiration Date", "id", "expiryDate", "1223", false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Expiration Date", "id", "expiry-date", "1223", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
                 Element_By_Selector_Text_Enter("Enter CVV (SecurityCode)", "id" , "cvv", "123", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
-                Element_By_Selector_Text_Enter("Enter Canada Postal code", "id" , "zipcode", "L4L3C3", false, ParentTest, "no_jira");
+                Element_By_Selector_Text_Enter("Enter Canada Postal code", "id" , "postal-code", "L4L3C3", false, ParentTest, "no_jira");
                     if (FAIL) { return;}
 
-                Element_By_Selector_Click("Click 'Save' <Card> button", "id", "saveCardButton", ParentTest, "no_jira"); 
+                Element_By_Selector_Click("Click 'Save' <New Card> button", "id", "save-card-btn", ParentTest, "no_jira"); 
                     if (FAIL) { return;}
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
                     if (FAIL) { return;}  
@@ -119,7 +128,7 @@ class WO_account_payments extends WO_GUI {
                 Element_By_Selector_Text_Enter("Enter Name on Card", "className", "iframe-input", "JTT " + New_ID, false, ParentTest, "no_jira");
                     if (FAIL) { return;}    
              
-                Swith_to_Frame("switch iframe", "tagName", "iframe", ParentTest, "no_jira"); //Switch to iframe
+                Swith_to_Frame("Switch to Freedompay iframe", "tagName", "iframe", ParentTest, "no_jira"); //Switch to iframe
                     if (FAIL) { return;} 
                 Element_By_Selector_Text_Enter("Enter Card Number", "id", "CardNumber", "340000000000009",false, ParentTest, "no_jira");
                     if (FAIL) { return;} 

@@ -93,6 +93,7 @@ import javax.imageio.ImageIO;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class WO_GUI extends javax.swing.JInternalFrame {
@@ -129,7 +130,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _edit_item = new javax.swing.JCheckBox();
         _order_history = new javax.swing.JCheckBox();
         _place_delivery_order = new javax.swing.JCheckBox();
-        _password = new javax.swing.JCheckBox();
+        _forgot_password = new javax.swing.JCheckBox();
         _logout = new javax.swing.JCheckBox();
         lblSITES8 = new javax.swing.JLabel();
         _place_pickup_order = new javax.swing.JCheckBox();
@@ -143,6 +144,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _mplan = new javax.swing.JCheckBox();
         _account_password = new javax.swing.JCheckBox();
         _account_payments = new javax.swing.JCheckBox();
+        _support = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         cmbBrow = new javax.swing.JComboBox<>();
         btnRun = new javax.swing.JButton();
@@ -171,17 +173,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
@@ -195,12 +195,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             }
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
         });
 
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
 
-        lblBRANDS.setText("Selected Site - Brands");
+        lblBRANDS.setText("Selected Site > Brands");
         lblBRANDS.setName("lblBRANDS"); // NOI18N
 
         DV1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -249,7 +251,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtLog.setRows(5);
-        txtLog.setText("Start >");
         txtLog.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
@@ -355,6 +356,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 
         _order_status.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _order_status.setText("Order Status");
+        _order_status.setEnabled(false);
         _order_status.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _order_status.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _order_status.setRequestFocusEnabled(false);
@@ -377,11 +379,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _place_delivery_order.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _place_delivery_order.setRequestFocusEnabled(false);
 
-        _password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _password.setText("Reset Password");
-        _password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        _password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        _password.setRequestFocusEnabled(false);
+        _forgot_password.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _forgot_password.setText("Forgot Password > Reset");
+        _forgot_password.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _forgot_password.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _forgot_password.setRequestFocusEnabled(false);
 
         _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _logout.setSelected(true);
@@ -427,7 +429,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _promo.setRequestFocusEnabled(false);
 
         txtPromo.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        txtPromo.setText("None");
+        txtPromo.setText("compassunlimited");
 
         lblSITES12.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -455,39 +457,29 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         _account_payments.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _account_payments.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
+        _support.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        _support.setSelected(true);
+        _support.setText("Support/Support Desk");
+        _support.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        _support.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        _support.setRequestFocusEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(_explore_brand_menu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_edit_item, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_place_pickup_order, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_place_delivery_order, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_order_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_order_history, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_order_status, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lblSITES8)
-                        .addGap(33, 33, 33)
-                        .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMplan, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(_account_info, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -495,11 +487,37 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                             .addComponent(_account_payments, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(_new_user, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_password, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(_forgot_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(_support, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lblSITES8)
+                .addGap(33, 33, 33)
+                .addComponent(_promo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblSITES12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(_mplan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(txtPromo, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMplan, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -509,31 +527,33 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     .addComponent(_login, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(_new_user, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_account_info, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_account_info, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_explore_brand_menu, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_account_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_account_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(_edit_item, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_account_payments, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_account_payments, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_place_pickup_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addComponent(_place_delivery_order, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(_order_email, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(_order_history, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_forgot_password, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2)
                         .addComponent(_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(_order_status, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(_support, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES8)
@@ -697,7 +717,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(_mobile)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -739,7 +759,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(_remote, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -752,7 +773,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBRANDS, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -765,15 +787,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                                         .addComponent(lblSITES6))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(18, 18, 18)
                                         .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblBRANDS, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -784,27 +805,20 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblSITES)
                         .addGap(2, 2, 2)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(lblBRANDS))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSITES4)
                             .addComponent(lblSITES6))
@@ -813,8 +827,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                             .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblBRANDS)
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         pack();
@@ -929,6 +948,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected String platform = "CDL";
     protected String BaseAPI;
     protected String PROMO = "";
+    protected String MPLAN = "";
     protected boolean _New_user = false;
     protected boolean _Explore_brand = false;
     protected boolean _Account_payments = false;
@@ -941,9 +961,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     protected boolean _Place_pickup_order = false;
     protected boolean _Place_delivery_order = false;
     protected boolean _Order_email = false;
-    protected boolean _Password = false;       
+    protected boolean _Forgot_Password = false;       
     protected boolean _Logout = false;
     protected boolean _Promo = false;
+    protected boolean _Mplan = false;
+    protected boolean _Support = false;
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">       
@@ -1241,7 +1263,9 @@ public class WO_GUI extends javax.swing.JInternalFrame {
          
         CloseableHttpClient httpclient = HttpClients.createDefault();
         try {
-            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?web=true&extended=true&nocache=1"); 
+            //HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?web=true&extended=true&nocache=1"); 
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/group/" + DV1.getValueAt(DV1.getSelectedRow(), 3) + "?non_scan_go=true&nocache=1"); 
+
             ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
                 int status = response.getStatusLine().getStatusCode();
                 String Msg = response.getStatusLine().getReasonPhrase();
@@ -1533,6 +1557,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
                 if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                if(l.contains("_run_on_remote: ")) _remote.setSelected(Boolean.parseBoolean(value));
+
                 
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_mobile: ")) _mobile.setSelected(Boolean.parseBoolean(value));
@@ -1550,10 +1576,14 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_place_pickup_order: "))  _place_pickup_order.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_place_delivery_order: "))  _place_delivery_order.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_order_email: "))  _order_email.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("_password: "))  _password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_account_password: "))  _account_password.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("_forgot_password: "))  _forgot_password.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_logout: "))  _logout.setSelected(Boolean.parseBoolean(value)); 
+                if(l.contains("_support: "))  _support.setSelected(Boolean.parseBoolean(value)); 
                 if(l.contains("_promo: "))  _promo.setSelected(Boolean.parseBoolean(value));
-                if(l.contains("Promo: ")) txtPromo.setText(value);             
+                if(l.contains("Promo: ")) txtPromo.setText(value); 
+                if(l.contains("_mplan: "))  _mplan.setSelected(Boolean.parseBoolean(value));
+                if(l.contains("MPlan: ")) txtMplan.setText(value);            
             }  
             CONFIG = true;
             txtLog.append("= LOAD_CONFIG > OK" + "\r\n");
@@ -1612,10 +1642,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             C += "_place_pickup_order: " + _place_pickup_order.isSelected() + "\r\n";
             C += "_place_delivery_order: " + _place_delivery_order.isSelected() + "\r\n";
             C += "_order_email: " + _order_email.isSelected() + "\r\n";
-            C += "_password: " + _password.isSelected() + "\r\n";         
+            C += "_forgot_password: " + _forgot_password.isSelected() + "\r\n";         
             C += "_logout: " + _logout.isSelected() + "\r\n";
+            C += "_support: " + _support.isSelected() + "\r\n";
             C += "_promo: " + _promo.isSelected() + "\r\n";
-            C += "Promo: " + txtPromo.getText() + "\r\n";            
+            C += "Promo: " + txtPromo.getText() + "\r\n";  
+            C += "_mplan: " + _mplan.isSelected() + "\r\n";
+            C += "MPlan: " + txtMplan.getText() + "\r\n";             
         } catch (Exception ex)  {
             txtLog.append("=== SAVE_CONFIG > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -1693,7 +1726,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Slack_Channel = txtSlackCh.getText();
             _Slack = _slack.isSelected();
             _Headless = _headless.isSelected();
-            _Mobile= _mobile.isSelected();
+            _Mobile = _mobile.isSelected();
             _Run_on_Remote = _remote.isSelected();
             Zip_Report = true;
 
@@ -1714,8 +1747,10 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             _Place_delivery_order = _place_delivery_order.isSelected();
             _Order_email = _order_email.isSelected();
             _Promo = _promo.isSelected();
-            _Password = _password.isSelected();
+            _Forgot_Password = _forgot_password.isSelected();
             _Logout = _logout.isSelected();
+            _Support = _support.isSelected();
+            _Promo = _promo.isSelected();
             PROMO = txtPromo.getText();            
             
             
@@ -1817,7 +1852,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
                 if(l.contains("_mobile: ")) _Mobile = Boolean.parseBoolean(value);
                 if(l.contains("_run_on_remote: ")) _Run_on_Remote = Boolean.parseBoolean(value);
-
+                         
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
                 if(l.contains("SITE: ")) SITE = value;
@@ -1843,10 +1878,13 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_place_pickup_order: ")) _Place_pickup_order = Boolean.parseBoolean(value);
                 if(l.contains("_place_delivery_order: ")) _Place_delivery_order = Boolean.parseBoolean(value);
                 if(l.contains("_order_email: ")) _Order_email = Boolean.parseBoolean(value);
-                if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
-                if(l.contains("_password: ")) _Password = Boolean.parseBoolean(value);
+                if(l.contains("_forgot_password: ")) _Forgot_Password = Boolean.parseBoolean(value);
+                if(l.contains("_support: ")) _Support = Boolean.parseBoolean(value);
                 if(l.contains("_logout: ")) _Logout = Boolean.parseBoolean(value);
+                if(l.contains("_promo: ")) _Promo = Boolean.parseBoolean(value);
                 if(l.contains("Promo: ")) PROMO = value; 
+                if(l.contains("_mplan: ")) _Mplan = Boolean.parseBoolean(value);
+                if(l.contains("Promo: ")) MPLAN = value; 
             }            
             CONFIG = true;
             
@@ -2042,12 +2080,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             d1.manage().deleteAllCookies(); // =================================
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);        
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class); 
-            
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);     
+           
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return "= Local WebDriver Start > OK " + "\r\n";
         } catch (Exception ex) {
@@ -2063,14 +2101,17 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         try { 
             switch (BROWSER) {
                 case "Chrome":
+                        Map<String, Object> prefs = new HashMap<String, Object>();
                         ChromeOptions chrome_op = new ChromeOptions();
                         chrome_op.setCapability("browserVersion", "latest");
-                        chrome_op.setCapability("platformName", "Windows 10");
-                        Map<String, Object> prefs = new HashMap<String, Object>();
+                        if(A.A.WsOS.toLowerCase().contains("windows")){ 
+                            chrome_op.setCapability("platformName", "Windows 10");              
+                        }else{
+                            chrome_op.setCapability("platformName", "macOS 12");                
+                         }
 //                        prefs.put("username", "ospozito");
 //                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
                         prefs.put("name", app + " Web Ordering");
-                        prefs.put("screenResolution", "1920x1200");
 
                         chrome_op.setCapability("sauce:options", prefs);
                         URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
@@ -2121,8 +2162,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         d1 = new InternetExplorerDriver(ie_op);
                     break;
                 case "Safari":
-                        //To do on MAC machine // =====================================
-                        d1 = new SafariDriver();     
+                    SafariOptions safariOptions = new SafariOptions();
+                    safariOptions.setCapability("browserVersion", "15");
+                    if(A.A.WsOS.toLowerCase().contains("windows")){ 
+                        safariOptions.setCapability("platformName", "Windows 10");              
+                    }else{
+                        safariOptions.setCapability("platformName", "macOS 12");                
+                    }
+                    Map<String, Object> s_prefs = new HashMap<String, Object>();
+//                        prefs.put("username", "ospozito");
+//                        prefs.put("accessKey", "1b5dbec6-dd24-405c-84c6-81ce924f93bc");
+                    s_prefs.put("name", app + " Web Ordering");
+                    d1 = new SafariDriver();     
                     break;
             }
             if(_Mobile){
@@ -2135,12 +2186,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             d1.manage().deleteAllCookies(); // =================================
             
             d1.manage().timeouts().pageLoadTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);
-            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS);            
+            d1.manage().timeouts().setScriptTimeout((long) LoadTimeOut, TimeUnit.MILLISECONDS);          
             loadTimeout = new FluentWait(d1).withTimeout(Duration.ofMillis((long) LoadTimeOut))			
 			.pollingEvery(Duration.ofMillis(200))  			
 			.ignoring(NoSuchElementException.class); 
-            
+            d1.manage().timeouts().implicitlyWait(WaitForElement, TimeUnit.MILLISECONDS); 
+             
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return "= Remote WebDriver Start > OK " + "\r\n";
         } catch (Exception ex) {
@@ -2183,7 +2234,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "WO " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
+                    ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2271,8 +2323,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
                     } catch (IOException | InterruptedException ex){ // Exception ex
-                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
+//                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
                 return "Done"; 
@@ -2398,6 +2450,18 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Explore Brand > Menu, no Login: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         } 
+        if (_Forgot_Password) { 
+            SCOPE += ", Forgot Password";
+            ParentTest = HtmlReport.createTest("Forgot Password"); 
+            EX += " - " + "\t" + " === Login " + "\t" + " ===== " + "\t" + " == Forgot Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_forgot_password BR = new WO_forgot_password(WO_GUI.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            Ver = BR.Ver;
+            EX += " - " + "\t" + " === ^ Forgot Password " + "\t" + " ===== " + "\t" + " == ^ Forgot Password End " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Forgot Password: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
         if (true) { 
             SCOPE += ", Login";
             ParentTest = HtmlReport.createTest("Login"); 
@@ -2421,26 +2485,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             ParentTest.getModel().setName("Account Info: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
-        if (_Account_password) { 
-            SCOPE += ", Account Payments";
-            ParentTest = HtmlReport.createTest("Account Password"); 
-            EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account Settings Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            WO_account_password BR = new WO_account_password(WO_GUI.this);
-            BR.run(); // ====================================== 
-            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
-            EX += " - " + "\t" + " === ^ Account Password" + "\t" + " ===== " + "\t" + " == ^ Account Settings Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Account Password: " + BR._t + ", Failed: " + BR._f);
-            ParentTest.getModel().setEndTime(new Date());    
-        }
         if (_Account_payments) { 
-            SCOPE += ", Account Payments";
-            ParentTest = HtmlReport.createTest("Account Payments"); 
+            SCOPE += ", Payments";
+            ParentTest = HtmlReport.createTest("Payments"); 
             EX += " - " + "\t" + " === Account Settings" + "\t" + " ===== " + "\t" + " == Account Settings Payments Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             WO_account_payments BR = new WO_account_payments(WO_GUI.this);
             BR.run(); // ====================================== 
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Account Payments" + "\t" + " ===== " + "\t" + " == ^ Account Settings Payments End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-            ParentTest.getModel().setName("Account Payments: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Payments: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
 
@@ -2486,6 +2539,28 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
             EX += " - " + "\t" + " === ^ Order History" + "\t" + " ===== " + "\t" + " == ^ Order History End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest.getModel().setName("Order History: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
+        if (_Support) { 
+            SCOPE += ", Support";
+            ParentTest = HtmlReport.createTest("Order History"); 
+            EX += " - " + "\t" + " === Support" + "\t" + " ===== " + "\t" + " == Support Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_support BR = new WO_support(WO_GUI.this);
+            BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Supporty" + "\t" + " ===== " + "\t" + " == ^ Support End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Support: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());    
+        }
+        if (_Account_password) { 
+            SCOPE += ", Update Password";
+            ParentTest = HtmlReport.createTest("Update Password"); 
+            EX += " - " + "\t" + " === Account Password" + "\t" + " ===== " + "\t" + " == Account > Update Password Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            WO_account_password BR = new WO_account_password(WO_GUI.this);
+            BR.run(); // ====================================== 
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;
+            EX += " - " + "\t" + " === ^ Update Password" + "\t" + " ===== " + "\t" + " == ^ Update Password End" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest.getModel().setName("Update Password: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());    
         }
         if (_Logout) { 
@@ -2650,7 +2725,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             if(!LINK.isEmpty()){
                 ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
             }
-            ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
+            ArrayList<String> tabs = null;
+            for(int i = 0; i < 10; i++){
+                tabs = new ArrayList<>(d1.getWindowHandles());
+                if(tabs.size() > 1){
+                    break;
+                }else{
+                    Thread.sleep(500);
+                }
+            }
             d1.switchTo().window(tabs.get(1));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Target URL" + "\t" + LINK + "\t" + "PASS" + "\t" + " - " +
@@ -3963,11 +4046,11 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                     break;
             }
             if(A.A.WsOS.toLowerCase().contains("windows")){
-                e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.CONTROL, "a")); //select all text
                 e.sendKeys(Keys.chord(Keys.BACK_SPACE)); //delete it                  
             }else{
                 //e.clear();
-                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text in textbox
+                e.sendKeys(Keys.chord(Keys.COMMAND, "a")); //select all text
                 e.sendKeys(Keys.chord(Keys.DELETE)); //delete it                   
             }
 
@@ -5944,6 +6027,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _account_payments;
     private javax.swing.JCheckBox _edit_item;
     private javax.swing.JCheckBox _explore_brand_menu;
+    private javax.swing.JCheckBox _forgot_password;
     private javax.swing.JCheckBox _headless;
     private javax.swing.JCheckBox _login;
     private javax.swing.JCheckBox _logout;
@@ -5953,12 +6037,12 @@ public class WO_GUI extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox _order_email;
     private javax.swing.JCheckBox _order_history;
     private javax.swing.JCheckBox _order_status;
-    private javax.swing.JCheckBox _password;
     private javax.swing.JCheckBox _place_delivery_order;
     private javax.swing.JCheckBox _place_pickup_order;
     private javax.swing.JCheckBox _promo;
     private javax.swing.JCheckBox _remote;
     private javax.swing.JCheckBox _slack;
+    private javax.swing.JCheckBox _support;
     private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnFails;
     private javax.swing.JButton btnLog;

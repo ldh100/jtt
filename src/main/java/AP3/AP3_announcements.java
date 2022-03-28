@@ -53,7 +53,7 @@ class AP3_announcements extends AP3_GUI{
                     Element_Text("Announcement Data Row Text", L0.get(i), ParentTest, "no_jira");             
                 } 
             } else {
-                Element_Text("Announcement Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
+                Element_Text("Last Announcement Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
                 if (FAIL) { return;}        
             }       
         List_L1("Sortable Columns Count", "css", "[role='columnheader']", ParentTest, "no_jira");             
@@ -262,8 +262,10 @@ class AP3_announcements extends AP3_GUI{
                            // EX = no SITE
                         }   
                         
-                        Text_Found("Enable this announcement...", "Enable this announcement to see", ParentTest, "no_jira");
+                        Text_Found("Find 'Enable this announcement...'", "Enable this announcement to see", ParentTest, "no_jira");
                         if(t.equals("Not Found")){  
+                            Scroll_XY("Scroll down to get 'Position' Dropdown in view", 0, 500, ParentTest, "no_jira");
+                                if (FAIL) { return;}
                             Element_By_Path_Click("Announcement Position Dropdown Open", "xpath", "//input[@aria-label='Position']/parent::div/following-sibling::div//i", ParentTest, "no_jira");
                             // Element_By_Path_Click("Announcement Position Dropdown Open", "css", "[aria-label='Position']", ParentTest, "no_jira");
                                 if (FAIL) { return; }
@@ -271,13 +273,12 @@ class AP3_announcements extends AP3_GUI{
                                     if (FAIL) { return;}                          
                                 Element_Child_List_L1("Positions' Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                                     
                                     for (int j = 0; j < L1.size(); j++) {
-                                        Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");             
-                                        if (FAIL) { return;}                            
+                                        Element_Text("Available Position:", L1.get(j), ParentTest, "no_jira");                                      
                                     }
                                 Element_Click("Select 1st Available Position", L1.get(0),ParentTest, "no_jira");
                                     if (FAIL) { return;} 
                         }else{
-                            Find_Text("Find Notification text", "Enable this announcement to see", true,ParentTest, "no_jira");
+                            Find_Text("Find Notification text", "Enable this announcement to see", true, ParentTest, "no_jira");
 //                            Find_Text("Find 'Status' text", "Status", true, ParentTest, "no_jira");
 //                                if (FAIL) { return; }
 //                            Element_By_Path_Text("Find 'Status'", "xpath", "//input[@aria-label='Status']/parent::div", ParentTest, "no_jira"); 
@@ -298,15 +299,15 @@ class AP3_announcements extends AP3_GUI{
                             if (FAIL) { return;}                         
                         Element_Child_List_L1("textarea Count", L2.get(1), "tagName", "textarea", ParentTest, "no_jira");             
                             //if (FAIL) { return;}                          
-                            Element_Click("Click EN Description", L1.get(0),ParentTest, "no_jira");
-                                if (FAIL) { return;} 
-                            Element_Text_Enter("Enter EN Description", L1.get(0), "EN Description " + New_ID, ParentTest, "no_jira");
-                                if (FAIL) { return;}                                                  
-                            Element_Click("Click EN Sub Text", L1.get(1), ParentTest, "no_jira");
-                                if (FAIL) { return;} 
-                            Element_Text_Enter("Enter Sub Text", L1.get(1), "EN Sub Text " + New_ID, ParentTest, "no_jira");
-                                if (FAIL) { return;} 
-                            break;
+                        Element_Click("Click EN Description", L1.get(0),ParentTest, "no_jira");
+                            if (FAIL) { return;} 
+                        Element_Text_Enter("Enter EN Description", L1.get(0), "EN Description " + New_ID, ParentTest, "no_jira");
+                            if (FAIL) { return;}                                                  
+                        Element_Click("Click EN Sub Text", L1.get(1), ParentTest, "no_jira");
+                            if (FAIL) { return;} 
+                        Element_Text_Enter("Enter Sub Text", L1.get(1), "EN Sub Text " + New_ID, ParentTest, "no_jira");
+                            if (FAIL) { return;} 
+                        break;
                     case 2:  
                         Element_Child_Attribute("Sub-title " + i, L2.get(i), "xpath", ".//div[@class='H5-Primary-Left']", "textContent", ParentTest, "no_jira");         
                             if (FAIL) { return;}  

@@ -1,5 +1,7 @@
 package AP3;
 
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import org.json.JSONArray;
@@ -190,15 +192,15 @@ class AP3_brand extends AP3_GUI{
                     if (FAIL) { return;}
                 Wait_For_All_Elements_InVisibility("Wait for update...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
                     if (FAIL) { return;}
-                Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,  ParentTest, "no_jira" );
-                if(t.startsWith("{")){
-                    API_Response_Body = t;               
-                    API_Body_Contains("Location Group API - find Displayed Brand ID", API_Response_Body, BrandID,true, ParentTest, "no_jira"); 
-                }else{
-                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
-                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
-                }
+//                Call_API("Call /location/group/ API", "", BaseAPI + "/location/group/" + SiteID + "?nocache=1", true,  ParentTest, "no_jira" );
+//                if(t.startsWith("{")){
+//                    API_Response_Body = t;               
+//                    API_Body_Contains("Location Group API - find Displayed Brand ID", API_Response_Body, BrandID, true, ParentTest, "no_jira"); 
+//                }else{
+//                    EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/group/" + SiteID + "?nocache=1" + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
+//                    "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
+//                    Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/group/" + SiteID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
+//                }
             }
         }            
         Element_Child_List_L2("Stations List Column Count", L2.get(T_Index), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
@@ -233,12 +235,37 @@ class AP3_brand extends AP3_GUI{
                 if (FAIL) return;
             switch (CHOICE) { 
                 case "Station Information":   
-                    Element_By_Path_Attribute(" = Phone Preview Image", "tagName", "img", "src", ParentTest, "no_jira"); 
-                        if (FAIL) { return;}
+//                    Element_By_Path_Attribute(" = Phone Preview Image", "tagName", "img", "src", ParentTest, "no_jira"); 
+//                        if (FAIL) { return;}
                     Element_By_Path_Attribute(" = Phone Preview Brand Name", "xpath", "//span[contains(@class,'H5-Black-High-Emphasis-Left')]", "textContent",  ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Element_By_Path_Attribute(" = Phone Preview Location", "xpath", "//span[contains(@class,'H6-Black-Medium-Emphasis-Left')]", "textContent",  ParentTest, "no_jira"); 
                         if (FAIL) { return;}
+
+                    File tmp;
+                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
+                    if(tmp.exists()) {
+                        Element_By_Path_Text_Enter("Upload Brand Image file 1", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
+                            //if (FAIL) { return;}
+                    } else {
+                        _t++; 
+                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+                    }
+                    Thread.sleep(3000);
+                    //Element_By_Path_Click("Click 'Remove Image' icon", "className", "icon icon-remove", ParentTest, "no_jira"); 
+                    Element_By_Path_Click("Click 'Remove Image' icon", "xpath", "//*[contains(@class,'icon-remove')]", ParentTest, "no_jira"); 
+                        //if (FAIL) { return;} 
+
+                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
+                    if(tmp.exists()) {
+                        Element_By_Path_Text_Enter("Upload Menu Image file 2", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
+                            //if (FAIL) { return;}
+                    } else {
+                        _t++; 
+                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+                    }    
                     break;
                 case "Fee Setup":       
                     Find_Text("Find 'Enable Fee' text", "Enable Fee", true, ParentTest, "no_jira"); 
@@ -271,8 +298,8 @@ class AP3_brand extends AP3_GUI{
                         Element_By_Path_Click("Click 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']", ParentTest, "no_jira");                            
                         Element_By_Path_Text_Select_Copy("Get 'Cust per Slot' value", "css", "[aria-label='Customers Per Slot']", ParentTest, "no_jira"); 
                             
-                        Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true, ParentTest, "no_jira"); 
-                            if (FAIL) { return; }
+//                        Find_Text("Find 'ASAP pickup' text", "ASAP Pickup", true, ParentTest, "no_jira"); 
+//                            if (FAIL) { return; }
                         Element_By_Path_Attribute("Find 'DISABLE' text", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", "textContent", ParentTest, "no_jira"); 
                             if (FAIL) { return; }                                                             
                         Element_By_Path_Click("Click 'DISABLE'", "xpath", "//i[contains(@class, 'v-icon icon mdi mdi-cellphone-off theme--light')]/parent::div", ParentTest, "no_jira"); 
@@ -385,24 +412,25 @@ class AP3_brand extends AP3_GUI{
 
                     List_L2("Assign Menu 'Buttons' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
                         if (FAIL) { return; }
-                    Element_Click("Click 'IMPORT MENU'", L2.get(L2.size() - 1), ParentTest, "no_jira");    // index 1 > 2nd button - Import
+                    Scroll_XY("Scroll down to get 'IMPORT MENU' in view", 0, 500, ParentTest, "no_jira");
+                        if (FAIL) { return;} 
+                    Element_Click("Click 'IMPORT MENU' button", L2.get(L2.size() - 1), ParentTest, "no_jira");    // index 1 > 2nd button - Import
                         if (FAIL) { return; }
-                    Wait_For_Element_By_Path_Presence("Wait for 'Location Stations' list", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");
+                    Wait_For_Element_By_Path_Presence("Wait for 'Location Stations' drop-down", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");
                         if (FAIL) { return; }
-                    Element_By_Path_Click("Click/Open 'Location Stations' drop-down", "css", "[aria-label='Location Stations']", ParentTest, "no_jira");    // index 1 > 2nd button - Import
+                    Element_By_Path_Click("Click/Open 'Location Stations' drop-down", "xpath", "//*[text()='Location Stations']/parent::div", ParentTest, "no_jira");    // index 1 > 2nd button - Import
                         if (FAIL) { return; }
-
+                    Thread.sleep(500);
                     Element_E1_Find("Find 'Location Station' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
-                        if (FAIL) { return; }
-                    Element_Child_List_L2("Location Station Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                        if (FAIL) { return; }
-                    if (!L2.isEmpty()) {
+                    if (!FAIL) { 
+                        Element_Child_List_L2("Location Station Count", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+                    //if (!L2.isEmpty()) {
                         Element_Attribute("Last Location Station", L2.get(L2.size() - 1), "textContent", ParentTest, "no_jira");
                             if (FAIL) { return; }
                         Element_Click("Select Location Station", L2.get(L2.size() - 1), ParentTest, "no_jira");
                             if (FAIL) { return; }
                         Thread.sleep(500);
-                        Element_By_Path_Click("Open Menus drop-down", "css", "[aria-label='Menus']", ParentTest, "no_jira");    
+                        Element_By_Path_Click("Click/Open 'Menus' drop-down", "xpath", "//*[text()='Menus']/parent::div", ParentTest, "no_jira");    
                             if (FAIL) { return; }
                         Thread.sleep(500);
                         Element_E1_Find("Find 'Menus' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
@@ -419,7 +447,9 @@ class AP3_brand extends AP3_GUI{
                         _f++;
                         F += "Step: " + _t + " > " + "Brand > Assign Menu" + " > " + "Import Menu" + " > " + "No available 'Location Station'" + "\r\n";
                         EX += " - " + "\t" + "Brand > Assign Menus" + "\t" + "Import Menu" + "\t" + "No 'Location Station'" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        Log_Html_Result("FAIL", "Brand > Assign Menu > Import Menu", true, ParentTest.createNode(_t + ". " + "Import Menu > No available 'Location Station'"), new Date());
                     }
+
                     List_L2("Assign Menu 'Buttons' Count updated", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
                         if (FAIL) { return; }
                     Element_Click("ADD MENU Click", L2.get(L2.size() - 2), ParentTest, "no_jira");    // index 0 > 1st button - Add
@@ -446,6 +476,7 @@ class AP3_brand extends AP3_GUI{
                         _f++;
                         F += "Step: " + _t + " > " + "Brand > Assing Menu" + " > " + "Add" + " > " + "No Available Menus" + "\r\n";
                         EX += " - " + "\t" + "Add Station > Assign Menus" + "\t" + "Add" + "\t" + "No Available Menus" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+                        Log_Html_Result("FAIL", "Brand > Assign Menu > Add", true, ParentTest.createNode(_t + ". " + "Add Menu > No Available Menus"), new Date());
                     }
                     break;
                 case "Integration Type": 
@@ -632,8 +663,8 @@ class AP3_brand extends AP3_GUI{
                     New_To = hR + ":" + mR + "PM";
                     Time_Enter("Enter Sunday Closes Time", L1.get(0), "css", "[aria-label^='Closes']", New_To, ParentTest, "no_jira");             
                         if (FAIL) { return;}                                // ^^^ Enter Text within 1:00-4:59 PM
-                    Element_By_Path_Click("Click 'Sunday'  - activate 'Save'", "xpath", "//p[text()='Sunday']", ParentTest, "no_jira"); 
-                        if (FAIL) { return;}    //  Save not visible after time enter/not selection    - DEBUG                                                                                       
+                    Element_By_Path_Click("Click 'Sunday' - activate 'Save'", "xpath", "//p[text()='Sunday']", ParentTest, "no_jira"); 
+                        if (FAIL) { return;}                                                                                       
                     Element_By_Path_Click("Click 'SAVE'", "xpath", "//button[contains(@class, 'mt-4 v-btn theme--light primary rounded m-2')]", ParentTest, "no_jira"); 
                         if (FAIL) { return; } // Save
                     Wait_For_All_Elements_InVisibility("Wait for save...", "xpath", "//*[contains(@class, 'v-progress-circular')]", ParentTest, "no_jira"); 
@@ -740,7 +771,7 @@ class AP3_brand extends AP3_GUI{
                         Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + BrandID + "?nocache=1", false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
                         return;
                     }                
-                    Brand_API_Hours("Brand API - new Delivery Hours", API_Response_Body, "Delivery - day 0", New_From, New_To,true, ParentTest, "no_jira"); 
+                    Brand_API_Hours("Brand API - new Delivery Hours", API_Response_Body, "Delivery - day 0", New_From, New_To, true, ParentTest, "no_jira"); 
                         if (FAIL) { return;} // ^^ Check Brand API > Pickup / Delivery / others?                         ^^ "Delivery - day X"
 
                     // =================   Refresh Page after Save and Select Service Tab
@@ -759,7 +790,7 @@ class AP3_brand extends AP3_GUI{
                             if (FAIL) { return;}
                     }    
                 } 
-            } else if (Tab_Name.toLowerCase().contains("station alosure")) {  
+            } else if (Tab_Name.toLowerCase().contains("station closure")) {  
                 Element_By_Path_Click("Click 'Station Closure'", "xpath", "//div[contains(@class, 'v-tabs__div')][" + (i + 1) + "]", ParentTest, "no_jira"); 
                     if (FAIL) { return;}
                 Page_URL("Station Closure page URL", ParentTest, "no_jira"); 

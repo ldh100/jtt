@@ -1078,7 +1078,7 @@ Thread.sleep(5000);
             }
             Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Element_By_Path_Click("Save updated changes'", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
+            Element_By_Path_Click("Ckick 'Save' updated changes", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
                 if (FAIL) { return;} 
             Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
                 if (FAIL) { return;}       
@@ -1100,19 +1100,18 @@ Thread.sleep(20000);
          }//End of if cloned promo
          
          // Editing a promo for promo id to make a API call
-        Element_By_Path_Click("Edit promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'pencil')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click 'Edit' promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'pencil')]", ParentTest, "no_jira");
            if (FAIL) { return;} 
 Thread.sleep(2000);
         Page_URL("Created Promotion page URL", ParentTest, "no_jira"); 
         if(t.contains("/")){
-            P_ID = t.substring(t.lastIndexOf("/") + 1); 
-            
-            Promo_API(P_ID,"Original", Promo_type);
-            Promo_Location_API(P_ID,"Original", Promo_type);
+            P_ID = t.substring(t.lastIndexOf("/") + 1);        
+            Promo_API(P_ID, "Original", Promo_type);
+            Promo_Location_API(P_ID, "Original", Promo_type);
          }            
         Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update", false, ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Save updated changes'", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
+        Element_By_Path_Click("Ckick 'Save' updated changes'", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
             if (FAIL) { return;} 
         Thread.sleep(500);    
         Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
@@ -1120,7 +1119,7 @@ Thread.sleep(2000);
         Thread.sleep(500);   
         
         Promo_API(P_ID,"Edited", Promo_type); 
-        Promo_Location_API(P_ID,"Edited", Promo_type);
+        Promo_Location_API(P_ID, "Edited", Promo_type);
         
         Element_By_Path_Text_Enter("Enter Search for Created 'Automation Test Promo'", "css","input[aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
             if (FAIL) { return;}  

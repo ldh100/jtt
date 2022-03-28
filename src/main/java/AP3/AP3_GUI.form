@@ -98,7 +98,7 @@
             <Property name="autoResizeMode" type="int" value="0"/>
             <Property name="cellSelectionEnabled" type="boolean" value="true"/>
             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="b4" green="b4" id="Active Caption Border" palette="2" red="b4" type="palette"/>
+              <Color blue="9a" green="9a" id="Window Border" palette="2" red="9a" type="palette"/>
             </Property>
             <Property name="name" type="java.lang.String" value="DV1" noResource="true"/>
             <Property name="rowHeight" type="int" value="18"/>
@@ -239,7 +239,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="4" y="354" width="428" height="148"/>
+          <AbsoluteConstraints x="4" y="354" width="428" height="170"/>
         </Constraint>
       </Constraints>
 
@@ -272,12 +272,120 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="432" y="404" width="424" height="96"/>
+          <AbsoluteConstraints x="432" y="404" width="424" height="120"/>
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="false"/>
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="btnFails" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Component id="btnLog" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnSave_Opt" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="_remote" min="-2" pref="110" max="-2" attributes="0"/>
+                              <Component id="_headless" min="-2" pref="110" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnRun" min="-2" pref="90" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnExel" min="-2" pref="84" max="-2" attributes="0"/>
+                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                                  <Component id="lblSITES13" min="-2" pref="92" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="cmbEnv" min="-2" pref="116" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                                  <Component id="lblSITES14" min="-2" pref="92" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="cmbApp" min="-2" pref="108" max="-2" attributes="0"/>
+                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                                  <Component id="cmbBrow" min="-2" pref="90" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                          <Component id="lblSITES11" min="-2" pref="72" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblSITES16" min="-2" pref="76" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtSlackCh" min="-2" pref="196" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="_slack" min="-2" pref="110" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="80" pref="80" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblSITES16" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="txtSlackCh" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="_slack" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="2" attributes="0">
+                      <Component id="lblSITES11" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="lblSITES13" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="lblSITES14" alignment="2" min="-2" pref="16" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnExel" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="2" attributes="0">
+                          <Component id="cmbEnv" alignment="2" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="cmbApp" alignment="2" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="cmbBrow" alignment="2" min="-2" pref="20" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                  <Component id="btnFails" min="-2" pref="22" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Component id="_headless" min="-2" pref="14" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnLog" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="btnSave_Opt" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                              <Component id="_remote" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnRun" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="cmbBrow">
@@ -292,11 +400,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="332" y="40" width="90" height="20"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnRun">
           <Properties>
@@ -312,11 +415,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnRunMouseClicked"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="332" y="68" width="90" height="-1"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnLog">
           <Properties>
@@ -331,11 +429,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnLogMouseClicked"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="8" y="72" width="84" height="22"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnFails">
           <Properties>
@@ -351,11 +444,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFailsMouseClicked"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="8" y="40" width="84" height="22"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnExel">
           <Properties>
@@ -371,11 +459,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnExelMouseClicked"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="8" y="8" width="84" height="22"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnSave_Opt">
           <Properties>
@@ -391,11 +474,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSave_OptMouseClicked"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="96" y="72" width="116" height="22"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSITES11">
           <Properties>
@@ -406,11 +484,6 @@
             <Property name="text" type="java.lang.String" value="Browser:"/>
             <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="332" y="24" width="72" height="16"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSITES13">
           <Properties>
@@ -421,11 +494,6 @@
             <Property name="text" type="java.lang.String" value="Environment:"/>
             <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="100" y="24" width="92" height="16"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSITES14">
           <Properties>
@@ -436,11 +504,6 @@
             <Property name="text" type="java.lang.String" value="Application:"/>
             <Property name="alignmentX" type="float" value="0.5"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="224" y="24" width="92" height="16"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbEnv">
           <Properties>
@@ -457,11 +520,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="96" y="40" width="116" height="20"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbApp">
           <Properties>
@@ -478,11 +536,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="40" width="108" height="20"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_slack">
           <Properties>
@@ -493,11 +546,6 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="216" y="64" width="110" height="14"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JCheckBox" name="_headless">
           <Properties>
@@ -508,11 +556,6 @@
             <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="216" y="80" width="110" height="14"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lblSITES16">
           <Properties>
@@ -524,11 +567,6 @@
             <Property name="alignmentX" type="float" value="0.5"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="144" y="4" width="76" height="16"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtSlackCh">
           <Properties>
@@ -537,11 +575,16 @@
             </Property>
             <Property name="text" type="java.lang.String" value="#xtt_test"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="224" y="4" width="196" height="-1"/>
-            </Constraint>
-          </Constraints>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="_remote">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="10" style="0"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Remote &lt;&lt;&lt;"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="requestFocusEnabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -736,67 +779,75 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
               <Group type="102" attributes="0">
-                  <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="_sales_analytics" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_login" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_site" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_bulk_apply" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_brand" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_reschedule_menu" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_brand_closure" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_sales_reporting" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_menu_manager" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_mm_items" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_brand_config" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_mm_import" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_smart_analytics" alignment="1" pref="132" max="32767" attributes="0"/>
-                      <Component id="_export_menuset" alignment="1" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="_notifications" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_images" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_orders" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_resent_updates" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_sales_report_hidden" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_announcements" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_orders_report_hidden" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_promo" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_timeslots" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
-                              <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="_all_data" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="_site_new" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                              <Component id="_users" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="_password" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="_logout" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="_roles" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="_brand_new" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtSector" min="-2" pref="186" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Component id="lblSITES12" min="-2" pref="154" max="-2" attributes="0"/>
+                      <Component id="lblSITES15" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="_sales_analytics" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_login" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_site" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_brand" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_reschedule_menu" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_brand_closure" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_sales_reporting" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_menu_manager" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_mm_items" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_brand_config" alignment="1" pref="132" max="32767" attributes="0"/>
+                                      <Component id="_smart_analytics" alignment="1" pref="132" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="_export_menuset" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="txtComp" min="-2" pref="186" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="_notifications" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_images" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_orders" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_resent_updates" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_sales_report_hidden" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_announcements" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_orders_report_hidden" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_timeslots" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
+                                          <Component id="_group_management" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="_promo" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="_all_data" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                          <Component id="_site_new" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="_users" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                          <Component id="_password" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                          <Component id="_logout" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                          <Component id="_roles" alignment="1" min="-2" pref="138" max="-2" attributes="0"/>
+                                          <Component id="_brand_new" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="txtSector" min="-2" pref="186" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
+                                              <Component id="lblSITES12" min="-2" pref="154" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="txtComp" min="-2" pref="186" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                                      <Component id="lblSITES8" min="-2" pref="103" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
-                          <Component id="lblSITES8" min="-2" pref="103" max="-2" attributes="0"/>
+                          <Component id="_bulk_apply" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
+                          <Component id="_mm_import" alignment="0" min="-2" pref="132" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -857,24 +908,24 @@
                       <Component id="_orders_report_hidden" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="_mm_import" min="-2" pref="14" max="-2" attributes="0"/>
-                      <Component id="_sales_report_hidden" min="-2" pref="14" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="_sales_report_hidden" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      <Component id="_menu_manager" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                          <Component id="_menu_manager" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Component id="_bulk_apply" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="_mm_import" min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Component id="_export_menuset" min="-2" pref="14" max="-2" attributes="0"/>
-                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Component id="_mm_items" min="-2" pref="14" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Component id="lblSITES8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="txtSector" min="-2" max="-2" attributes="0"/>

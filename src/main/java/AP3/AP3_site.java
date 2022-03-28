@@ -1,5 +1,6 @@
 package AP3;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Date;
 import org.openqa.selenium.interactions.Actions;
@@ -360,26 +361,26 @@ class AP3_site extends AP3_GUI{
             } 
         // </editor-fold> 
           
-        // <editor-fold defaultstate="collapsed" desc="Training Video">
-        Element_By_Path_Click("Training Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}     
-        Thread.sleep(500);               
-        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Swith_to_Frame("Switch to Video Player", "tagName", "iframe", ParentTest, "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
-            if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-        Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent", ParentTest, "no_jira");
-            if (FAIL) { return;} 
-        Element_By_Path_Click("Play Click", "className", "play-icon", ParentTest, "no_jira"); 
-            if (FAIL) { return;}
-            Thread.sleep(1000);
-        Swith_to_Frame("Back to default frame", "defaultContent", "N/A", ParentTest, "no_jira");
-            if (FAIL) { return;}      
-        Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        // </editor-fold> 
+//        // <editor-fold defaultstate="collapsed" desc="Training Video">
+//        Element_By_Path_Click("Training Video Icon Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-help-circle')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}     
+//        Thread.sleep(500);               
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Swith_to_Frame("Switch to Video Player", "tagName", "iframe", ParentTest, "no_jira");// iframe src="https://player.vimeo.com/video/412472158"
+//            if (FAIL) { return;} 
+//        Wait_For_Element_By_Path_Presence("Wait for Player load", "className", "play-icon", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}  
+//        Element_By_Path_Attribute("Video Title", "xpath", "//header[contains(@class, 'vp-title-header')]", "textContent", ParentTest, "no_jira");
+//            if (FAIL) { return;} 
+//        Element_By_Path_Click("Play Click", "className", "play-icon", ParentTest, "no_jira"); 
+//            if (FAIL) { return;}
+//            Thread.sleep(1000);
+//        Swith_to_Frame("Back to default frame", "defaultContent", "N/A", ParentTest, "no_jira");
+//            if (FAIL) { return;}      
+//        Element_By_Path_Click("Video Player Close Click", "xpath", "//i[contains(@class, 'v-icon mdi mdi-close')]", ParentTest, "no_jira"); 
+//            if (FAIL) { return;} 
+//        // </editor-fold> 
 
         // <editor-fold defaultstate="collapsed" desc="Site Congiguration">
         Element_By_Path_Click("Click 'Configuration'", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira"); 
@@ -399,6 +400,31 @@ class AP3_site extends AP3_GUI{
                     Find_Text("Find 'Location Name' text", "Location Name", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Address' text", "Address", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Country' text", "Country", true, ParentTest, "no_jira"); 
+
+                    File tmp;
+                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
+                    if(tmp.exists()) {
+                        Element_By_Path_Text_Enter("Upload Brand Image file 1", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
+                            //if (FAIL) { return;}
+                    } else {
+                        _t++; 
+                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+                    }
+                    Thread.sleep(3000);
+                    //Element_By_Path_Click("Click 'Remove Image' icon", "className", "icon icon-remove", ParentTest, "no_jira"); 
+                    Element_By_Path_Click("Click 'Remove Image' icon", "xpath", "//*[contains(@class,'icon-remove')]", ParentTest, "no_jira"); 
+                        //if (FAIL) { return;} 
+
+                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
+                    if(tmp.exists()) {
+                        Element_By_Path_Text_Enter("Upload Menu Image file 2", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
+                            //if (FAIL) { return;}
+                    } else {
+                        _t++; 
+                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+                    }    
 
                     Find_Text("Find 'State' text", "State", true, ParentTest, "no_jira");                       
                     if(COUNTRY.toLowerCase().contains("ca")){
@@ -468,19 +494,19 @@ class AP3_site extends AP3_GUI{
         } 
         // </editor-fold> 
 
-        // <editor-fold defaultstate="collapsed" desc="Dropp-Off Locations - ALL">
-
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
-
-        Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Move_to_Element_By_Path("Move to 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
-            if (FAIL) { return;}
-            
+//        // <editor-fold defaultstate="collapsed" desc="Dropp-Off Locations - ALL">
+//
+//        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
+//
+//        Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move to 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//            
         // <editor-fold defaultstate="collapsed" desc="Create Drop-off Modal">
         Move_to_Element_By_Path("Move > 'Create Drop-off Location' button", "xpath", "//*[contains(text(),'CREATE DROP-OFF LOCATION')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -544,7 +570,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Country' field", "xpath", "(//input[@aria-label='Country'])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Wait_For_Element_By_Path_Presence("Wait for dd list of 'countries'", "xpath", "(//div[contains(text(),'United States')]//ancestor::div[contains(@class,'v-menu__content')])[1]", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for list of 'countries'", "xpath", "(//div[contains(text(),'United States')]//ancestor::div[contains(@class,'v-menu__content')])[1]", ParentTest, "no_jira");
             if (FAIL) { return;}
         List_L0("List of countries", "xpath", "(//div[contains(text(),'United States')]//ancestor::div[contains(@class,'v-menu__content')])[1]//a", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1385,19 +1411,14 @@ class AP3_site extends AP3_GUI{
             Element_Text("Get Location " + i, L1.get(i), ParentTest, "no_jira");
                 if (FAIL) { return;}
             if (!t.contains("No locations found") && t.contains(New_ID)) {
-                Move_to_Element("Move to Location " + i, L1.get(i), ParentTest, "no_jira"); 
-                //Scroll_to_Element("Scroll to Location " + i, L1.get(i), ParentTest, "no_jira");
-                //Move_to_Element_By_Path("Move to Location " + i, "xpath", "(//div[@id='drop-off-locations']//tbody/tr)[" + i + "]", ParentTest, "no_jira");            
-                //Element_Click("Move to Location " + i, L1.get(i), ParentTest, "no_jira");
-                    //if (FAIL) { return;}
+                Move_to_Element_By_Path("Move > Location  " + i + " in the filtered table", "xpath", "(//td[contains(text(),'" + New_ID + "')])[" + (i+1) + "]", ParentTest, "no_jira");
+                    if (FAIL) { return;}
                 Element_Child_Click("Click > 'delete icon'", L1.get(i), "xpath", ".//i[contains(@class,'mdi-delete')]", ParentTest, "np_jira");
                     //if (FAIL) { return;}
                 Element_E1_Find("Find 'Revome Location?' confirmation dialog", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
                     //if (FAIL) { return;}
                 Element_Child_Click("Click > 'Remove'", e1, "xpath", ".//*[contains(text(),'REMOVE')]", ParentTest, "np_jira");
                     //if (FAIL) { return;}
-//                Wait_For_Element_By_Path_InVisibility("Wait for 'Revome Location?' confirmation dialog to disappear", "xpath", "//div[@class='v-dialog v-dialog--active']", ParentTest, "no_jira");
-//                    if (FAIL) { return;}
             }   
         } 
   
@@ -1422,11 +1443,10 @@ class AP3_site extends AP3_GUI{
         List_L1("Get List of Locations - All", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
         // </editor-fold>       
-
-        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-
-        // </editor-fold>
-
+//
+//        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+//
+//        // </editor-fold>
 
         Navigate_to_URL("Navigate back to Station List", url + "#/sites/all", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1483,8 +1503,6 @@ class AP3_site extends AP3_GUI{
                             Element_Text("Required:", L1.get(j), ParentTest, "no_jira");             
                             if (FAIL) { return;}
                         }  
-                    //String ADDR = "87 Bordeaux Drive, Logan Township, NJ, USA";
-                    //String ADDR_Short = "87 Bordeaux Dr"; 
                     Element_Child_E2("Find 'Site detail' > 'Address' field", e1, "css", "[aria-label='Address']", ParentTest, "no_jira");    
                         if (FAIL) { return;}              
                     Element_Text_Enter("Enter new Site Name", e2, "87 Bordeaux Drive, Logan Township", ParentTest, "no_jira");
@@ -1591,9 +1609,11 @@ class AP3_site extends AP3_GUI{
 
                     Element_By_Path_Text_Enter("Enter Additional Instructions", "css", "input[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, ParentTest, "no_jira");
                         if (FAIL) { return;}     
-                    Find_Text("Find 'EN'", "EN" , true, ParentTest, "no_jira");
-                    Scroll_to_Element("Scroll to Meal plan ID", e, ParentTest, "no_jira");
-                        if (FAIL) { return;}
+                    Find_Text("Find 'EN'", "EN", true, ParentTest, "no_jira");
+                    Scroll_XY("Scroll up to make 'Tender Type' visible", 0, -100, ParentTest, "no_jira");
+                        if (FAIL) { return;} 
+//                    Move_to_Element_By_Path("Move up > scroll to 'Mealplan Access:' element", "xpath", "//div[contains(text(),'Mealplan Access')]", ParentTest, "no_jira");
+//                        if (FAIL) { return;}
                     Element_By_Path_Text_Enter("Enter Meal Plan Terminal ID", "css", "[aria-label='Meal Plan Terminal ID']", "401001", false, ParentTest, "no_jira");
                         if (FAIL) { return;}   
                     Element_By_Path_Text("Tender Type", "xpath", "//input[@placeholder='Please select Tender Type']/preceding-sibling::div", ParentTest, "no_jira");
@@ -1610,11 +1630,11 @@ class AP3_site extends AP3_GUI{
                     Element_Child_List_L1("Tax exempt options", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");     
                     T_Index = -1;
                     for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Available Tax exempt options :", L1.get(j), ParentTest, "no_jira");
-                            if(t.trim().equals("Yes")){
-                                T_Index = j;
-                            }
-                       }   
+                        Element_Text("Available Tax exempt options: ", L1.get(j), ParentTest, "no_jira");
+                        if(t.trim().equals("Yes")){
+                            T_Index = j;
+                        }
+                    }   
                     if(T_Index!= -1) {
                         Element_Click("Select 'Tax exempt'", L1.get(T_Index), ParentTest, "no_jira");
                             if (FAIL) { return;}  
@@ -1622,9 +1642,11 @@ class AP3_site extends AP3_GUI{
                     Find_Text("Find 'Add another tender type' text", "add another tender type", true, ParentTest, "no_jira");  
                     Element_Click("Click 'Add another tender type'", e, ParentTest, "no_url");
                         if (FAIL) { return;}
-                    Element_By_Path_Click("Cancel  another tender type", "xpath", "(//div[@class='flex display-flex align-center']//div[@class='flex xs1']//i[contains(@class,'close')])[2]", ParentTest, "no_jira");
-                        if (FAIL) { return;}                                                                                         
-
+                    Element_By_Path_Click("Cancel 'Add another tender type'", "xpath", "(//div[@class='flex display-flex align-center']//div[@class='flex xs1']//i[contains(@class,'close')])[2]", ParentTest, "no_jira");
+                        if (FAIL) { return;}   
+                                                                                      
+                    Scroll_XY("Scroll up to make 'Manage Meal Plan Domains' visible", 0, -100, ParentTest, "no_jira");
+                        if (FAIL) { return;} 
                     Find_Text("Find 'Manage Meal Plan Domains' text", "Manage Meal Plan Domains", true, ParentTest, "no_jira");    
                     Element_By_Path_Click("Click 'Manage Meal Plan Domains'", "xpath", "//div[contains(@class,'Primary-Left Domain') and contains(text(),'Manage Meal Plan Domains')]", ParentTest, "no_jira");
                         if (FAIL) { return;}
@@ -1758,9 +1780,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Element_By_Path_Click("Click > New Site > 'Cancel' button", "xpath", "//footer//*[contains(text(),'Cancel')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-
-        Element_By_Path_Click("New Site 'Cancel' Click", "xpath", "//*[contains(text(), 'Cancel')]", ParentTest, "no_jira");             
-            if (FAIL) { return;}         
+       
         Navigate_Back("Navigate Back","Add New Site page", "App Site page", ParentTest, "no_jira"); 
         Thread.sleep(500); 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");          
