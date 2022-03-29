@@ -1310,8 +1310,6 @@ public class An_GUI extends javax.swing.JInternalFrame {
         cmbApp.addItem("Boost"); 
         cmbApp.addItem("JJKitchen");
         cmbApp.addItem("Thrive");
-        cmbApp.addItem("Chrome C360");
-        cmbApp.addItem("Chrome WO");
         
         cmbEnv.addItem("Development");
         cmbEnv.addItem("Staging");

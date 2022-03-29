@@ -30,7 +30,6 @@ class AP3_orders_reporting_for_hidden_station extends AP3_GUI {
         BRAND = a.BRAND;
         SiteID = a.SiteID;
         Location = a.Location;
-        DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         COUNTRY = a.COUNTRY;
 

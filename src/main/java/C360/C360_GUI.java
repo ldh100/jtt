@@ -891,7 +891,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected String Location = "";
     protected String SectorID = "";
     protected String CompanyID = "";
-    protected String DH_MENU_ID = "";    
     protected String GL_MENU = "TIM HORTONS";
 
     // </editor-fold>

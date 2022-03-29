@@ -28,7 +28,6 @@ class AP3_sales_reporting_for_hidden_stations extends AP3_GUI {
         BRAND = a.BRAND;
         SiteID = a.SiteID;
         Location = a.Location;
-        DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         CompanyID = a.CompanyID;
 

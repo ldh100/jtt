@@ -38,7 +38,6 @@ class AP3_password extends AP3_GUI {
         BRAND = a.BRAND;
         SiteID = a.SiteID;
         Location = a.Location;
-        DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         
         AP3_TKN = a.AP3_TKN;
