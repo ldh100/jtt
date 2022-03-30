@@ -195,12 +195,10 @@ class AP3_export_menuset extends AP3_GUI{
         if (temp.exists()) {
             File_UnZip("Unzip Report File", destinationDir, MenuSetFile, ParentTest, "no_jira");
                 if (FAIL) { return;}          
-            File_Delete("Delete Report Zip File", destinationDir,MenuSetFile, ParentTest, "no_jira");
-               if (FAIL) { return;}  
-            readExcel(destinationDir, MenuSetName.trim() + ".xlsx",MenuSetName.trim());                   
-//Thread.sleep(3000);
-            File_Delete("Delete File after reading", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");
-                if (FAIL) { return;}                                                                
+            File_Delete("Delete Report Zip File", destinationDir, MenuSetFile, ParentTest, "no_jira");
+
+            readExcel(destinationDir, MenuSetName.trim() + ".xlsx", MenuSetName.trim());                   
+            File_Delete("Delete File after reading", destinationDir, MenuSetName.trim() + ".xlsx" , ParentTest, "no_jira");                                                              
         }  
 
         Navigate_Back("Navigate Back"," 'global menu' page"," 'View Global Menus of a group' page", ParentTest, "no_jira"); 
@@ -333,9 +331,11 @@ class AP3_export_menuset extends AP3_GUI{
             T_Index = -1;
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Menu Edit Option (index " + i + ")", L1.get(i),ParentTest,"no_jira");                      
-                if(t.contains("Enable")){ T_Index = i; }                    
+                if(t.contains("Enable")){ 
+                    T_Index = i; 
+                }                    
             } 
-            Element_By_Path_Attribute("Check if Export is disabled", "xpath", ".//div[@class='v-list--disabled']", "disabled", ParentTest, "no_jira");
+            Element_By_Path_Attribute("Check if 'Export' is disabled", "xpath", ".//div[@class='v-list--disabled']", "disabled", ParentTest, "no_jira");
                 if (FAIL) { return;}   
             Element_Click("Click Category 'Enable'", L1.get(T_Index),ParentTest, "no_jira");
                 if (FAIL) { return;}    
@@ -351,7 +351,7 @@ class AP3_export_menuset extends AP3_GUI{
             Element_By_Path_Attribute("Menu ID", "css", "[menu-id]", "textContent",ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
             Thread.sleep(3000); 
-            Refresh("Refresh",ParentTest, "no_jira");
+            Refresh("Refresh", ParentTest, "no_jira");
              
             flag = 2;       
             Thread.sleep(10000); // allow time to propage published updates
@@ -366,16 +366,16 @@ class AP3_export_menuset extends AP3_GUI{
             Thread.sleep(500);
             Element_By_Path_Click("Click 'Global mod Export'", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            //Thread.sleep(5000);  
+            Thread.sleep(5000);  
             String ModGrpPath = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();  
-            Path path = Paths.get(destinationDir + File.separator + ModGrpPath + File.separator + ".zip");
-            for(int i = 0; i < 20; i++){
-                if(Files.exists(path)){
-                    break;
-                }else{
-                    Thread.sleep(500);
-                }
-            }
+//            Path path = Paths.get(destinationDir + File.separator + ModGrpPath + ".zip");
+//            for(int i = 0; i < 20; i++){
+//                if(Files.exists(path)){
+//                    break;
+//                }else{
+//                    Thread.sleep(500);
+//                }
+//            }
   
             File_Find("Find Global mod export Zip File", destinationDir, ModGrpPath, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
@@ -383,7 +383,7 @@ class AP3_export_menuset extends AP3_GUI{
             File_UnZip("Unzip global mod export file ", destinationDir, t, ParentTest, "no_jira");
                 if (FAIL) { return;}          
             File_Delete("Delete Report Zip File", destinationDir,t, ParentTest, "no_jira");
-                if (FAIL) { return;}  
+
             ModGrpPath = GL_MENU.trim()+ "-global-modifier-groups.xlsx";
 
             readGlobalModExcel(destinationDir, ModGrpPath ,"Modifier Groups");              
@@ -391,7 +391,6 @@ class AP3_export_menuset extends AP3_GUI{
             Thread.sleep(3000);
 
             File_Delete("Delete Global Modifier File after reading", destinationDir, ModGrpPath , ParentTest, "no_jira");
-            if (FAIL) { return;}
         
        
         //Prerequisite for this test is that there cannot be any Global modifier group in the global menu to be selected 

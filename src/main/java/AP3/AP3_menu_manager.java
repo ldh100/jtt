@@ -834,6 +834,7 @@ class AP3_menu_manager extends AP3_GUI{
             Thread.sleep(500);
             Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;} 
+            Thread.sleep( 500);
             List_L0("Groups Count after Copy - Publish", "tagName", "tr", ParentTest, "no_jira");             
                 if (FAIL) { return;}
             Element_Text("Modifier Group Row Header", L0.get(0), ParentTest, "no_jira"); 
