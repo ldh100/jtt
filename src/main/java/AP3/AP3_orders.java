@@ -27,7 +27,6 @@ class AP3_orders extends AP3_GUI{
         BRAND = a.BRAND;
         SiteID = a.SiteID;
         Location = a.Location;
-        DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         
         AP3_TKN = a.AP3_TKN;
@@ -61,7 +60,6 @@ class AP3_orders extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Application Name (index " + i + ")", L1.get(i),  ParentTest, "no_jira");              
-                if (FAIL) { return;}
                 if(t.trim().startsWith(app)){ 
                     T_Index = i; 
                 }
@@ -104,7 +102,7 @@ class AP3_orders extends AP3_GUI{
         Find_Text("Find 'Order type'", "Order Type", true, ParentTest, "no_jira"); 
             
         String filebrand = BRAND.toLowerCase().replace(" ","-");
-        filebrand = "all-orders-" +filebrand+ "-undefined.pdf";
+        filebrand = "all-orders-" + filebrand + "-undefined.pdf";
         // Should be not here > expected nothing for today  //Once we add placing orders to our script the below export is required.
         Find_Text("Find 'Export' text", "Export", true, ParentTest, "no_jira");      
         Element_By_Path_Click("Click Export Button", "xpath", "//div[normalize-space()='Export']", ParentTest, "no_jira");
@@ -114,7 +112,7 @@ class AP3_orders extends AP3_GUI{
      
         File tmp = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator+ "pickup-orders-undefined.pdf");
         if (tmp.exists()) {
-            File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
+            File_Delete("PDF Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "pickup-orders-undefined.pdf", ParentTest, "no_jira") ;
         } else {
             _t++;
             _w++;
@@ -176,9 +174,8 @@ class AP3_orders extends AP3_GUI{
                 if(t.equalsIgnoreCase("No orders found")){
                     T_Index = -1;
                 }
-            }
-            //Execute only if orders present
-            if(T_Index != -1) {  
+            }            
+            if(T_Index != -1) {  //Execute only if orders present
                 //Export in CSV format
                Element_By_Path_Click("Select  CSV", "xpath", "(//div[@class='v-radio theme--light'])[1]", ParentTest, "no_jira"); 
                     if (FAIL) { return;}              
@@ -193,7 +190,7 @@ class AP3_orders extends AP3_GUI{
                     File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", "all-orders-undefined.csv",ParentTest, "no_jira");
                 } else {
                     _t++; _w++;
-                    EX += _t + "\t" + "File to delete does not exist" + "\t" + "all-orders-undefined.pdf  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    EX += _t + "\t" + "CSV File to delete does not exist" + "\t" + "all-orders-undefined.pdf  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 }
                          
                 List_Child_E1_By_Path("Find child 'td' element", L0.get(8), "tagName", "td", ParentTest, "no_jira"); 

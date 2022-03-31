@@ -284,6 +284,7 @@ class AP3_user extends AP3_GUI{
         Thread.sleep(500);           
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira" );
             if (FAIL) { return;} 
+        Thread.sleep(500); 
         Path path = Paths.get(System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv");
         for(int i = 0; i < 20; i++){
             if(Files.exists(path)){
@@ -292,12 +293,11 @@ class AP3_user extends AP3_GUI{
                 Thread.sleep(500);
             }
         }        
-        File_Find("Find User List File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", ParentTest, "no_jira" );
-            if (FAIL) { return;}
-        if(!"".equals(t)){
+        File_Find("Find 'Site Operators' CSV File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", ParentTest, "no_jira" );
+        if (!FAIL && !"".equals(t)) { 
             File_Read("Read File - User Count", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", "User_Count", TOT_USER, ParentTest, "no_jira" );
             //if (FAIL) { return;}
-            File_Delete("Delete User List File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", ParentTest, "no_jira" );
+            File_Delete("Delete 'Site Operators' CSV File", System.getProperty("user.home") + File.separator + "Downloads", "site-operators.csv", ParentTest, "no_jira" );
             //if (FAIL) { return;}
         }
         //</editor-fold>

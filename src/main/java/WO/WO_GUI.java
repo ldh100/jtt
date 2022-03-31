@@ -1056,6 +1056,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(!Load && evt.getStateChange() == 1) {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             app = cmbApp.getSelectedItem().toString();
+            if(cmbEnv.getSelectedItem().toString().contains("Staging")){
+                url = "https://staging.<APP>app.io/"; 
+            } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
+                url = "https://dev.<APP>app.io/";
+            } else{
+                url = "https://<APP>app.io/";
+            }
+            app = cmbApp.getSelectedItem().toString();
+            url = url.replace("<APP>", app.toLowerCase());
             GUI_Get_Sites();
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
@@ -1083,7 +1092,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 //        cmbApp.addItem("Rogers");
 //        cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
-        
+        cmbApp.addItem("Boost");   
+     
         cmbEnv.addItem("Development");         
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");
@@ -1101,15 +1111,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://staging.thriveapp.io/"; 
+            url = "https://staging.<APP>app.io/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.thriveapp.io/";
+            url = "https://dev.<APP>app.io/";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://thriveapp.io/";
+            url = "https://<APP>app.io/";
         }
         Get_AP3_TKN();
         GUI_Load_CONFIG();
@@ -1119,6 +1129,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
+        url = url.replace("<APP>", app.toLowerCase());
         GUI_Get_Sites();       
     }
 
@@ -1535,7 +1546,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }    
-        //String[] lines = C.split(System.getProperty("line.separator"));  
         String[] lines = C.split("\n");  
         String value;
         try{             
@@ -2114,8 +2124,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         prefs.put("name", app + " Web Ordering");
 
                         chrome_op.setCapability("sauce:options", prefs);
-                        URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
-                        d1 = new RemoteWebDriver(url, chrome_op);
+                        URL _url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
+                        d1 = new RemoteWebDriver(_url, chrome_op);
                     break;
                 case "Edge":
 //                    txtLog.append( "= Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");

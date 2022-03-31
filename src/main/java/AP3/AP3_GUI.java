@@ -1073,7 +1073,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected boolean _Run_on_Remote = false;  
     private boolean _Login = true;
     private boolean _Headless = false;
-    private boolean _Mobile_view = false;
     private boolean _Site = false;
     private boolean _Site_new = false;
     private boolean _Smart_analytics = false;
@@ -1099,8 +1098,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     private boolean _Password = false;
     private boolean _Roles = false;       
     private boolean _Logout = false;  
-    protected boolean _All_data = false; 
-    
+    protected boolean _All_data = false;     
     private boolean _Sales_report_hidden = false;       
     private boolean _Orders_report_hidden = false;
     private boolean _Brand_closure = false; 
@@ -1156,8 +1154,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected String BrandID = "";
     protected String Location = "";
     protected String SectorID = "";
-    protected String CompanyID = "";
-    protected String DH_MENU_ID = "";    
+    protected String CompanyID = "";  
     protected String GL_MENU = "";
     // </editor-fold>
      
@@ -1302,15 +1299,15 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://staging.cafe360.compassdigital.org/";
+            url = "https://staging.adminpanel.compassdigital.org/";
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "http://dev.cafe360.compassdigital.org/";
+            url = "http://dev.adminpanel.compassdigital.org/";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "http://cafe360.compassdigital.org/";
+            url = "http://adminpanel.compassdigital.org/";
         }    
         
         Get_AP3_TKN();
@@ -1990,7 +1987,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("DH_MENU_ID: ")) DH_MENU_ID = value;
                 
                 if(l.contains("ADMIN_ID: ")) txtADMIN_ID.setText(value);
                 if(l.contains("ADMIN_PW: ")) txtADMIN_PW.setText(value);
@@ -2186,7 +2182,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         MOBILE_PW = txtMOBILE_PW.getText();
         RUNNER_ID = txtRUNNER_ID.getText();
         RUNNER_PW = txtRUNNER_PW.getText();
-        DH_MENU_ID = "Not Used"; // like NWEJgN87Q3Sw46JaQ1Q, length > 18
 
         Slack_Channel = txtSlackCh.getText();
         _Slack = _slack.isSelected();
@@ -2327,7 +2322,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("GL_MENU: ")) GL_MENU = value;
                 if(l.contains("SITE: ")) SITE = value;
                 if(l.contains("BRAND: ")) BRAND = value;
-                if(l.contains("DH_MENU_ID: ")) DH_MENU_ID = value;
                 
                 if(l.contains("ADMIN_ID: ")) ADMIN_ID = value;
                 if(l.contains("ADMIN_PW: ")) ADMIN_PW = value;
@@ -2607,8 +2601,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                         prefs.put("name", app + " Web Ordering");
 
                         chrome_op.setCapability("sauce:options", prefs);
-                        URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
-                        d1 = new RemoteWebDriver(url, chrome_op);
+                        URL _url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
+                        d1 = new RemoteWebDriver(_url, chrome_op);
                     break;
                 case "Edge":
 //                    txtLog.append( "= Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
@@ -2717,22 +2711,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                 
                 Extent_Report_Config(); 
 
-                //((JavascriptExecutor) d1).executeScript("document.body.style.zoom='80%';");
-
-//String scaleX = "0.8";
-//String scaleY = "0.8";
-//String jss = "document.body.style.transform='scale(0.8, 0.8)'";
-//
-//JavascriptExecutor js = (JavascriptExecutor)d1;
-//js.executeScript(jss);
-/*
-If you want to zoom in, you need to specify a value greater than 1. For instance a value of 1.5 would meaning zooming in for 150%.
-For zooming out it the value should be between 0.0 to 1.
-The value 1 refers to the original page size i.e 100% zoom.
-So you can zoom in/out, test your thing and can get back to the the original page size by running the following code again:
-
-js.executeScript(document.body.style.transform='scale(1, 1)');
-*/
                 Execute(); // ======================================================================= 
 
                 DD = Duration.between(run_start, Instant.now());

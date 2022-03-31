@@ -68,12 +68,10 @@ class AP3_login extends AP3_GUI{
         Wait_For_Element_By_Path_Visibility("Wait for 'AP3 Welcome...' text", "xpath", "//*[contains(text(), 'Welcome to the CDL Admin Panel')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         Page_URL("AP3 Dashboard URL", ParentTest, "no_jira");             
-            if (FAIL) { return;}
         List_L0("Home screen Buttons Count", "xpath", "//button[@type='button']", ParentTest, "no_jira");             
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
                 Element_Text("Home screen Button " + i + " Text", L0.get(i), ParentTest, "no_jira");             
-                if (FAIL) { return;}
             } 
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
@@ -82,11 +80,12 @@ class AP3_login extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Drawer Item " + (i+1) + " Text", L0.get(i), "textContent", ParentTest, "no_jira");   
-                if (FAIL) { return;}
                 if(i == (L0.size()-1)){
                     Ver = t;
                 }
             } 
+        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 4, 0, ParentTest, "no_jira");             
+            if (FAIL) { return;}
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;
         EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
