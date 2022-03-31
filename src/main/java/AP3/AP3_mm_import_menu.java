@@ -138,7 +138,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);
-            List_L3("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L3("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (!L3.isEmpty()) { 
                     _t++;
                     _f++; EX += _t + "\t" + "Import Errors - Expected None" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -164,7 +164,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);
-            List_L3("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L3("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (!L3.isEmpty()) { 
                     _t++;
                     _f++; EX += _t + "\t" + "Import Errors - Expected None" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -183,12 +183,12 @@ class AP3_mm_import_menu extends AP3_GUI{
                 if (FAIL) { return;}
             Thread.sleep(500);  
             Find_Text("Find Import Errors Notification - Expected", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
-            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Expected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira"); 
             }
             Find_Text("Find Error: 'Imported category has \"Category ID\" set, but no matching category was found.'", "but no matching category was found.", true, ParentTest, "no_jira"); 
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(500);  
             
             //  ===========================  Import to other Menu with ID(s) removed and Price '>$200'  
@@ -201,12 +201,12 @@ class AP3_mm_import_menu extends AP3_GUI{
                 if (FAIL) { return;}
             Thread.sleep(500);  
             Find_Text("Find Import Errors Notification - Expected", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
-            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Expected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
                 Errors += t + "\n";
             }           
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
             
             //  ===========================  Import to other Menu with ID(s) removed   
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
@@ -219,7 +219,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);  
-            List_L3("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L3("Find import Errors list - Expected None", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (!L3.isEmpty()) { 
                     _t++;
                     _f++; EX += _t + "\t" + "Find import Errors list - Expected None" + "\t" + " - " + "\t" + "Found unexpected errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
@@ -249,7 +249,7 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
             Wait_For_Element_By_Path_InVisibility("Wait for 'progress'", "xpath", "//circle[@class='v-progress-circular__overlay']", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Thread.sleep(500);
-            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Attribute("Expected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
                     Errors += t + "\n";
@@ -292,12 +292,12 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
                 if (FAIL) { return;}
             Thread.sleep(500);
             Find_Text("Find Import Errors Notification - Expected", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
-            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Expected Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Expected Error (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");
                 Errors += t + "\n";
             }         
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
             Thread.sleep(500);
       
             Check_Error("Invalid \"Record Type\". Should be \"Category\", \"Item\", or \"Modifier Group\".");
@@ -308,8 +308,8 @@ Record Type	Category ID	Category Name	Category Chit #	Category Enabled  Item ID 
             Check_Error("\"Item Enabled\" is a required field");
             Check_Error("\"Calories\" must be a number.");
             Check_Error("\"Calories\" must be a whole number (no decimals).");
-            Check_Error("\"Category Chit #\" must be a number.");
-            Check_Error("\"Item Chit #\" must be a whole number (no decimals).");
+            Check_Error("\"Category Sequence On Ticket\" must be a number.");
+            Check_Error("\"Item Sequence On Ticket\" must be a whole number (no decimals).");
             Check_Error("\"Units\" must be a number.");
 
             Check_Error("\"Modifier Group ID\" is a required field");
