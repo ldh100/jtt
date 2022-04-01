@@ -53,7 +53,7 @@ class AP3_mm_import_mod extends AP3_GUI{
         _All_data = a._All_data;
         New_ID = a.New_ID;
         TZone = a.TZone;
-     } 
+    } 
     protected void run() { 
         try{
             Navigate_to_URL("Navigate to Global Modifiers", url + "#/menu/sector/" + SectorID + "/brand/company/" + CompanyID + "/globalmods", ParentTest, "no_jira");
@@ -64,7 +64,7 @@ class AP3_mm_import_mod extends AP3_GUI{
             Thread.sleep(500);
             Element_By_Path_Click("Click Global mod Export ", "xpath", "//div[contains(text(),'Export')]//i", ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(5000);
+            Thread.sleep(7000);
             Export_File_Name = GL_MENU.trim() + "-global-modifier-groups-" + LocalDate.now();
             //Path path = Paths.get(Download_Dir + File.separator + Export_File_Name + File.separator + ".zip");
 //            for(int i = 0; i < 20; i++){
@@ -120,23 +120,21 @@ class AP3_mm_import_mod extends AP3_GUI{
             } 
             Element_By_Path_Text_Enter("Upload xlsx file", "id", "globalModsImportInput", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}            
-            Thread.sleep(1000);
-            Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(1000);
-
-            Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@id='globalModsImportInput'][@type='file'][@accept='.xlsx']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
-                if (FAIL) { return;}
+//            Thread.sleep(1000);
+//            Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
+//                if (FAIL) { return;}
+//            Thread.sleep(1000);
+//
+//            Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@id='globalModsImportInput'][@type='file'][@accept='.xlsx']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
+//                if (FAIL) { return;}
 
             Thread.sleep(1000);
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             Thread.sleep(500);
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-                if (FAIL || L0.isEmpty()) { 
-                    return;
-                } 
+                if (FAIL) {return;} 
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");                         
                 }            
@@ -180,11 +178,11 @@ class AP3_mm_import_mod extends AP3_GUI{
             Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//input[@type='file']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(1000);
-            Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
-                if (FAIL) { return;}
-            Thread.sleep(1000);
+//            Element_By_Path_Click("Click > 'Publish'", "xpath", "//*[contains(text(),'publish')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Wait_For_Element_By_Path_Presence("Wait for publication", "xpath", "//*[contains(text(),'publish')]/parent::button[contains(@class,'disabled')]", ParentTest,"no_jira");
+//                if (FAIL) { return;}
+//            Thread.sleep(1000);
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");              
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;}  
@@ -224,9 +222,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 if (FAIL) { return;}
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-                if (FAIL || L0.isEmpty()) { 
-                    return;
-                } 
+                if (FAIL) {return;} 
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");                         
                 }
@@ -261,9 +257,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 if (FAIL) { return;}
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-                if (FAIL || L0.isEmpty()) { 
-                    return;
-                } 
+                if (FAIL) {return;} 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");            
                 if(L0.get(i).getAttribute("textContent").contains("Invalid \"Record Type\". Should be \"Modifier Group\" or \"Modifier\".")){
@@ -306,12 +300,10 @@ class AP3_mm_import_mod extends AP3_GUI{
                 return;
             } 
             Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
-              if (FAIL) { return;}
+               if (FAIL) { return;}
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-                if (FAIL || L0.isEmpty()) { 
-                    return;
-                } 
+                if (FAIL) {return;} 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");            
                     if (FAIL) { return;}
@@ -403,25 +395,26 @@ class AP3_mm_import_mod extends AP3_GUI{
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
             List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-                if (FAIL || L0.isEmpty()) { 
-                    return;
-                } 
+                if (FAIL) {return;} 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");            
                 if(L0.get(i).getAttribute("textContent").contains("Modifier \"Price\" must be a number from 0 to 200.")){
                     _t++;
                     _p++; EX += _t + "\t" + "Test Passed" + "\t" + " - " + "\t" + "Correct Error Found: " + L0.get(i).getAttribute("textContent") + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
-                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), false, ParentTest.createNode(_t + ". " + "Modifier \"Price\" must be a number from 0 to 200."),new Date());                       
+                    Log_Html_Result("PASS", L0.get(i).getAttribute("textContent"), false, ParentTest.createNode(_t + ". " + "Modifier 'Price' must be a number from 0 to 200."),new Date());                       
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Test Failed" + "\t" + " - " + "\t" + "Found incorrect errors" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", L0.get(i).getAttribute("textContent"), false, ParentTest.createNode(_t + ". " + "incorrect errors > Modifier 'Price' must be a number from 0 to 200."),new Date());                       
                 }
             }
             Thread.sleep(500);
             Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
 
-            File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");             
-            Delete_Test_Items(); // ==================        
+            File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");
+             
+            Delete_Test_Items(); // ==================  
+      
         } catch (Exception ex){
             String AAA = ex.getMessage(); _t++; _f++;
             EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";

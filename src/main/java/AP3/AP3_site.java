@@ -388,14 +388,13 @@ class AP3_site extends AP3_GUI{
         Thread.sleep(500);  
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-        List_L0("Site Configuration sections Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");             
+        List_L0("Site Configuration Groups Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");             
             if (FAIL) { return;} 
         for (int i = 0; i < L0.size(); i++) {
             switch (i) {
                 case 0:
                     Element_Text("Location Details section Name", L0.get(i), ParentTest, "no_jira");             
                     Element_Click("Location Details Click", L0.get(i), ParentTest, "no_jira");
-                        if (FAIL) { return;} 
                     Find_Text("Find 'Location Details' text", "Location Details", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Location Name' text", "Location Name", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Address' text", "Address", true, ParentTest, "no_jira"); 
@@ -437,23 +436,19 @@ class AP3_site extends AP3_GUI{
                     break;
                 case 1:
                     Element_Text("Payment section", L0.get(i), ParentTest, "no_jira");             
-                    Element_Click("Payment Info Click", L0.get(i), ParentTest, "no_jira");
-                        if (FAIL) { return;} 
+                    Element_Click("Click 'Payment Info'", L0.get(i), ParentTest, "no_jira");
                     Find_Text("Find 'Payment ID' text", "Payment ID", true, ParentTest, "no_jira");                       
                     Find_Text("Find 'Payment Type' text", "Payment Type", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'Refunds Accepted' text", "Refunds Accepted?", true, ParentTest, "no_jira"); 
                     break;
                 case 2:
-                    Element_Text("Mealplan section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
-                    Element_Click("Mealplan Info Click", L0.get(i), ParentTest, "no_jira");
-                        if (FAIL) { return;} 
+                    Element_Text("Mealplan section", L0.get(i), ParentTest, "no_jira");   
+                    Element_Click("Click 'Mealplan Info'", L0.get(i), ParentTest, "no_jira");
                     Find_Text("Find 'Meal Plan' text", "Meal Plan", true, ParentTest, "no_jira"); 
                       break;
                 case 3:
                     Element_Text("Loyalty section", L0.get(i), ParentTest, "no_jira");             
                     Element_Click("Loyalty Info Click", L0.get(i), ParentTest, "no_jira");
-                        if (FAIL) { return;} 
                     Find_Text("Find 'Loyalty Program' text", "Loyalty Program", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'not enabled' text", "Loyalty is not enabled for this brand", true, ParentTest, "no_jira"); 
                     Find_Text("Find 'to enable' text", "Would you like to enable Loyalty?", true, ParentTest, "no_jira"); 
@@ -464,29 +459,28 @@ class AP3_site extends AP3_GUI{
                 case 4:
                     Element_Text("Promotion section", L0.get(i), ParentTest, "no_jira");             
                     Element_Click("Click 'Promotion Info'", L0.get(i), ParentTest, "no_jira");
-                        if (FAIL) { return;} 
                     Find_Text("Find 'Promotions' text", "Promotions", true, ParentTest, "no_jira"); 
                     List_L1("Promotions Count", "tagName", "tr", ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
-                        for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Promotion Data Row", L1.get(j), ParentTest, "no_jira");             
-                        }
+                    for (int j = 0; j < L1.size(); j++) {
+                        Element_Text("Promotion Data Row", L1.get(j), ParentTest, "no_jira");             
+                    }
                 case 5:
                     Element_Text("KDS section", L0.get(i), ParentTest, "no_jira"); 
+                    Element_Click("Click 'KDS Configuration'", L0.get(i), ParentTest, "no_jira");
                     Find_Text("Find 'KDS Configuration' text", "KDS Configuration", true, ParentTest, "no_jira");             
-
                     break;
                 case 6:
-                    Element_Text("Delievery Drop-off section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
+                    Element_Text("Delievery Drop-off section", L0.get(i), ParentTest, "no_jira");              
+                    Element_Click("Click 'Delievery Drop-off Configuration'", L0.get(i), ParentTest, "no_jira");
                     break;
                 case 7:
                     Element_Text("APEX section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
+                    Element_Click("Click 'APEX Configuration'", L0.get(i), ParentTest, "no_jira");
                     break;
                 case 8:
                     Element_Text("Frictionless section", L0.get(i), ParentTest, "no_jira");             
-                        if (FAIL) { return;} 
+                    Element_Click("Click 'Frictionless'", L0.get(i), ParentTest, "no_jira");
+
                     break; 
                default:
                     break;
@@ -494,9 +488,8 @@ class AP3_site extends AP3_GUI{
         } 
         // </editor-fold> 
 
-//        // <editor-fold defaultstate="collapsed" desc="Dropp-Off Locations - ALL">
-//
-//        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
+       // <editor-fold defaultstate="collapsed" desc="Dropp-Off Locations - ALL">
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
 //
 //        Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
 //            if (FAIL) { return;}
@@ -506,10 +499,14 @@ class AP3_site extends AP3_GUI{
 //            if (FAIL) { return;}
 //        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
 //            if (FAIL) { return;}
-//            
+            
         // <editor-fold defaultstate="collapsed" desc="Create Drop-off Modal">
-        Move_to_Element_By_Path("Move > 'Create Drop-off Location' button", "xpath", "//*[contains(text(),'CREATE DROP-OFF LOCATION')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");
+                if (FAIL) { return;}
+        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
             if (FAIL) { return;}
+//        Move_to_Element_By_Path("Move > 'Create Drop-off Location' button", "xpath", "//*[contains(text(),'CREATE DROP-OFF LOCATION')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}
         Element_By_Path_Click("Click > 'Create Drop-off Location' button", "xpath", "//*[contains(text(),'CREATE DROP-OFF LOCATION')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Wait for 'Create Drop-off Location' dialog", "xpath", "//*[@class='v-dialog v-dialog--active']//*[contains(text(),'Create Drop-off Location')]", ParentTest, "no_jira");
@@ -547,7 +544,7 @@ class AP3_site extends AP3_GUI{
         // test Location Name Field - End
         
         // test Foodlocker toggle - Begin
-        Move_to_Element_By_Path("Move > 'APEX Foodlocker' toggle", "xpath", "//*[contains(text(),'Is this an APEX Foodlocker')]", ParentTest, "no_jira");
+        Move_to_Element_By_Path("Move > 'APEX Foodlocker' toggle", "xpath", "//*[contains(text(), 'Is this an APEX Foodlocker')]", ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_Element_By_Path_Presence("Check > 'Foodlocker' toggle is set to 'No' by default", "xpath", "(//*[@class='Option-Right-Selected-Blue-White'])[1]/div[contains(text(),'No')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -841,7 +838,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}             
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for 'Site' page load > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -948,7 +945,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for 'Site' page load > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1241,7 +1238,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for 'Site' page load > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1297,7 +1294,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for 'Site' page load > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1341,7 +1338,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for 'Site' page load > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1428,7 +1425,7 @@ class AP3_site extends AP3_GUI{
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Wait_For_Element_By_Path_Presence("Wait for page load", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
+        Wait_For_Element_By_Path_Presence("Wait for 'Site' page load > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
         Move_to_Element_By_Path("Move > 'Configuration' button", "xpath", "//*[contains(text(),'Configuration')]/parent::button", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -1443,17 +1440,14 @@ class AP3_site extends AP3_GUI{
         List_L1("Get List of Locations - All", "xpath", "(//tbody)[3]//tr", ParentTest, "no_jira");
             if (FAIL) { return;}
         // </editor-fold>       
-//
-//        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
-//
-//        // </editor-fold>
+
+        EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations End >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
 
         Navigate_to_URL("Navigate back to Station List", url + "#/sites/all", ParentTest, "no_jira");
             if (FAIL) { return;}
         Thread.sleep(500); 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}               
-    
+            if (FAIL) { return;}                   
             
         // <editor-fold defaultstate="collapsed" desc="New Site > Cancel">
         To_Top("Scroll to page Top", ParentTest, "no_jira");
