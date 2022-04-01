@@ -100,16 +100,16 @@ class payment extends AP3_API_GUI {
  
         //<editor-fold defaultstate="collapsed" desc="FP">        
         String Access_TKN = "";
-        JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
-                BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
-        if (json != null && json.has("access_token")) {
-            AAA = json.toString(4);
-            try {
-                Access_TKN = json.getString("access_token");
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
+            JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
+                    BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
+            if (json != null && json.has("access_token")) {
+                AAA = json.toString(4);
+                try {
+                    Access_TKN = json.getString("access_token");
+                } catch (Exception ex) {
+                    AAA = ex.getMessage();
+                }
             }
-        }
         
         Auth = "Bearer " + Access_TKN;
         JOB_Api_Call("Mobile User Freedompay Payment Method(s)", "GET",

@@ -4145,14 +4145,18 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             int YY = e.getLocation().y;
             if("Right".equals(DIRECTION)){ 
                 XX = XX + e.getSize().width + X;
+                YY = YY + Y;
             } else if ("Left".equals(DIRECTION)){ 
                 XX = XX + X; 
+                YY = YY + Y;
             }
             
             if("Bottom".equals(DIRECTION)){ 
                 YY = YY + e.getSize().height + Y;
+                XX = XX + X;
             } else if ("Top".equals(DIRECTION)){ 
                 YY = YY + Y; 
+                XX = XX + X;
             }            
             
             Actions action = new Actions(d1);

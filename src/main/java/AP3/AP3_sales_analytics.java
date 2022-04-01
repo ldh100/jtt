@@ -146,7 +146,7 @@ class AP3_sales_analytics extends AP3_GUI{
                 if (FAIL) { return;}
                 Element_By_Path_Click("Click > 'Search' field", "css", "[aria-label='Search Sites']", ParentTest,"no_jira");
                 if (FAIL) { return;}
-                Element_By_Path_Text_Enter("Search > '" +SITE+ "'", "css", "[aria-label='Search Sites']", SITE, false,ParentTest, "no_jira");
+                Element_By_Path_Text_Enter("Search > '" + SITE + "'", "css", "[aria-label='Search Sites']", SITE, false,ParentTest, "no_jira");
                 if (FAIL) { return;}
                 //get list of records
                 List_L0("Get list of records", "xpath", "//tbody/tr", ParentTest,"no_jira");
@@ -156,10 +156,10 @@ class AP3_sales_analytics extends AP3_GUI{
                     if (FAIL) { return;}
                 } 
                 if (!env.equals("PR")) {
-                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='" +SITE+ "']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" + SITE + "'", "xpath", "//span[text()='Volante Printer']/ancestor::tr//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 } else {
-                    Element_By_Path_Click("Click > 'Site' = '" +SITE+ "'", "xpath", "//td[text()='" +SITE+ "']",ParentTest, "no_jira");
+                    Element_By_Path_Click("Click > 'Site' = '" + SITE + "'", "xpath", "//td[text()='" +SITE+ "']",ParentTest, "no_jira");
                     if (FAIL) { return;}
                 }        
                 Wait_For_Element_By_Path_Presence("Wait (if needed) page to load", "xpath", "//div[@class='salesTransactions']", ParentTest, "no_jira");
@@ -168,14 +168,13 @@ class AP3_sales_analytics extends AP3_GUI{
                 // <editor-fold defaultstate="collapsed" desc="Order Types">  
                 EX += " - " + "\t" + " === " + "\t" + " =====  Order Types Begin" + "\t" + " == Order Types Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 Element_By_Path_Click("Click > 'Order Type' dd", "xpath", "//label[contains(text(),'Order Type')]/parent::div", ParentTest, "no_jira");
-                if (FAIL) { return;}
+                    if (FAIL) { return;}
                 Wait_For_Element_By_Path_Presence("Wait (if needed) for dd to appear", "xpath", "//*[@class='v-list v-list--dense theme--light']", ParentTest, "no_jira");
-                if (FAIL) { return;}
+                    if (FAIL) { return;}
                 List_L1("List of Order Types", "xpath", "(//*[@class='v-list v-list--dense theme--light'])[2]/div[@class='primary--text']", ParentTest,"no_jira");
-                if (FAIL) { return;}
+                    if (FAIL) { return;}
                 for (int i = 0; i < L1.size(); i++) {
                     Element_Child_Attribute("Get Order Types 'class' attribute", L1.get(i), "xpath", "//a", "class", ParentTest, "no_jira");
-                    if (FAIL) { return;}
                     if (t.contains("active")) {
                         _t++;
                         _p++; EX += _t + "\t" + "Check order type " +(i+1)+ " is active by default" + "\t" + "-" + "\t" + t + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n"; 
@@ -188,18 +187,18 @@ class AP3_sales_analytics extends AP3_GUI{
                 }
                 EX += " - " + "\t" + " === " + "\t" + " =====  Check Default Analytics" + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
                 Wait_For_Element_By_Path_Presence("Check 'Total Sales' is present", "xpath", "//span[contains(text(), '$" +sales_total+ "')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
+                        if (FAIL) { return;}
                 if (String.valueOf(avg_bill).length() == 3 && String.valueOf(avg_bill).contains(".0")) {
                     String formatted_avg_bill = String.valueOf(avg_bill).substring(0, 1);
                     Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
+                        if (FAIL) { return;}
                 } else if (String.valueOf(avg_bill).length() == 3) {
                    String formatted_avg_bill = String.valueOf(avg_bill) + "0"; 
                    Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +formatted_avg_bill+ "')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
+                        if (FAIL) { return;}
                 } else {
                     Wait_For_Element_By_Path_Presence("Check 'Average Bill' is present", "xpath", "//span[contains(text(), '$" +avg_bill+ "')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
+                        if (FAIL) { return;}
                 }
                 Wait_For_Element_By_Path_Presence("Check 'Total Transactions' is present", "xpath", "//span[contains(text(), '" +transactions_total+ "')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
@@ -210,11 +209,11 @@ class AP3_sales_analytics extends AP3_GUI{
                     _p++; EX += _t + "\t" + "Number of 'Top Selling Items'" + "\t" + "\t" + "Outout: " + L2.size() + " / Expected: " + top_items.length() + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  
                     Log_Html_Result("PASS", "Outout: " + L2.size() + " / Expected: " + top_items.length(), false, ParentTest.createNode(_t + ". " + "Number of 'Top Selling Items'"), new Date());
                     Element_E1_Find("Verify Top Item 1 is '" + top_items.getJSONObject(0).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[1]/td[text()='" +top_items.getJSONObject(0).getString("itemlabel")+ "']", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                        if (FAIL) { return;}
                     Element_E1_Find("Verify Top Item 2 is '" + top_items.getJSONObject(1).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[2]/td[text()='" +top_items.getJSONObject(1).getString("itemlabel")+ "']", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                        if (FAIL) { return;}
                     Element_E1_Find("Verify Top Item 3 is '" + top_items.getJSONObject(2).getString("itemlabel") + "'", "xpath", "((//tbody)[2]/tr)[3]/td[text()='" +top_items.getJSONObject(2).getString("itemlabel")+ "']", ParentTest, "no_jira");
-                    if (FAIL) { return;}
+                        if (FAIL) { return;}
                 } else {
                     _t++;
                     _f++; EX += _t + "\t" + "Number of 'Top Selling Items'" + "\t" +  "\t" + "Outout: " + L2.size() + " / Expected: " + top_items.length() + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";  

@@ -108,7 +108,7 @@ class AP3_mm_import_menu extends AP3_GUI{
             }
             Element_Click("Click 'Export'", L1.get(T_Index), ParentTest, "no_jira");
                 if (FAIL) { return;}
-            Thread.sleep(5000);            
+            Thread.sleep(7000);            
             Export_File_Name = MenuName + " - " +  LocalDate.now();
             //Path path = Paths.get(Download_Dir + File.separator + Export_File_Name + File.separator + ".zip");
 //            for(int i = 0; i < 20; i++){

@@ -314,10 +314,11 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Click("Select Unit (index " + i + ")", L1.get(i), ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            }        
-        Click_out_of_Element_By_Path("Filter drawer Close", "xpath", "//aside[contains(@class, 'v-navigation-drawer v-navigation-drawer--fixed v-navigation-drawer--open')]",  "Left", -100, 0, ParentTest, "no_jira");
-        if (FAIL) { return;} 
+                    if (FAIL) { return;} 
+            }   
+        Thread.sleep(1000);
+        Click_out_of_Element_By_Path("Filter drawer Close", "xpath", "//aside[contains(@class, 'v-navigation-drawer v-navigation-drawer--fixed v-navigation-drawer--open')]",  "Left", -100, -20, ParentTest, "no_jira");
+            if (FAIL) { return;} 
         Element_Child_List_L1("Selected Units count", e1,"xpath", "//span[contains(@class, 'v-chip__content')]", ParentTest, "no_jira");                                    
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
