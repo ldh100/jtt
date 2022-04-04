@@ -18,7 +18,7 @@ class WO_logout extends WO_GUI {
         Element_By_Selector_Click("Click 'Logout'", "id", "nav-log-out-btn", ParentTest, "no_jira");                                     
             if (FAIL) { return;}    
         Thread.sleep(500);    
-        Find_Text("Verify 'Login' page present after logout", "Log in", true, ParentTest, "no_jira"); // button id nav-log-in-btn
+        Find_Text("Verify 'Login' page present after logout", "Log in", true, ParentTest, "no_jira"); // button id qa-nav-log-in-btn
             if (FAIL) { return;}  
     } catch (Exception ex){
         String AAA = ex.getMessage(); _t++; _f++;

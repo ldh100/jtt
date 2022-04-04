@@ -104,13 +104,13 @@ class WO_place_order_pickup extends WO_GUI {
             if (FAIL) { return;}
 
         // check Basket
-        Element_By_Selector_Click("Click navigation > 'Basket'", "id", "nav-basket-btn", ParentTest, "no_jira");
+        Element_By_Selector_Click("Click navigation > 'Basket'", "id", "qa-nav-basket-btn", ParentTest, "no_jira");
             if (FAIL) { return;}
         //  to do details
         Element_By_Selector_Click("Click 'x' > Close 'Basket'", "id", "qa-close-basket-btn", ParentTest, "no_jira");
             if (FAIL) { return;}
 
-        Element_By_Selector_Click("Click 'Checkout'", "id", "prompt-to-checkout",  ParentTest, "no_jira");
+        Element_By_Selector_Click("Click 'Checkout'", "id", "qa-prompt-to-checkout",  ParentTest, "no_jira");
             if (FAIL) { return;}
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");                                                                                     
             if (FAIL) { return;}

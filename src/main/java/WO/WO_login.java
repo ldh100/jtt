@@ -22,7 +22,7 @@ class WO_login extends WO_GUI {
     try {    
         Navigate_to_URL("Navigate to " + url, url, ParentTest, "no_jira");              
             if (FAIL) { return;}              
-        Element_By_Selector_Click("Click navigation > 'Log in'", "id", "nav-log-in-btn", ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Click navigation > 'Log in'", "id", "qa-nav-log-in-btn", ParentTest, "no_jira"); 
             if (FAIL) { return;}
 
         if(_New_user) {
