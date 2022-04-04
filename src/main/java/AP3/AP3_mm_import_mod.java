@@ -133,17 +133,22 @@ class AP3_mm_import_mod extends AP3_GUI{
             Thread.sleep(1000);
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             Thread.sleep(500);
-            List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
-                if (FAIL) {return;} 
+            List_L0("Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+                if (FAIL) {return;}
+                if (L0.isEmpty()) {
+            File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira"); 
+            File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
+                if (FAIL) { return;}
+                }else{    
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");                         
                 }            
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
-            
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+                
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira"); 
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;}  
-
+                }
             //Validating if the import is successfull when the chit# field is empty   
 //            Excel_Edit = Excel_Convert_PLU(Download_Dir,Export_File_Name,"Modifier Groups");
 //            if(Excel_Edit.contains("Error")){
@@ -221,13 +226,13 @@ class AP3_mm_import_mod extends AP3_GUI{
             Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
-            List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL) {return;} 
                 for (int i = 0; i < L0.size(); i++) {
                     Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");                         
                 }
             Thread.sleep(500);
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__actions']//div[contains(text(),'Close')]", ParentTest, "no_jira");
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");             
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
                 if (FAIL) { return;}  
@@ -256,7 +261,7 @@ class AP3_mm_import_mod extends AP3_GUI{
             Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
-            List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL) {return;} 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");            
@@ -270,7 +275,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 }
             }
             Thread.sleep(500);
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");              
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
@@ -302,7 +307,7 @@ class AP3_mm_import_mod extends AP3_GUI{
             Element_By_Path_Text_Enter("Upload xlsx file", "xpath", "//div[@class='flex shrink']//input[@type='file']", Download_Dir + File.separator + Export_File_Name, false, ParentTest, "no_jira"); 
                if (FAIL) { return;}
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
-            List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL) {return;} 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");            
@@ -325,7 +330,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 }
             }
             Thread.sleep(500);
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");               
             File_Copy("Restore Exported File Copy", Download_Dir + File.separator + Backup_File_Name, Download_Dir + File.separator + Export_File_Name, ParentTest, "no_jira");
@@ -394,7 +399,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 if (FAIL) { return;}
             Find_Text("Find Import Errors Notification", "There were errors while trying to import from your excel sheet.", true, ParentTest, "no_jira");
             Thread.sleep(1000);
-            List_L0("Import Errors", "xpath", "//div[@class='v-dialog v-dialog--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
+            List_L0("Import Errors", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[@class='v-card__text']//li", ParentTest, "no_jira");             
                 if (FAIL) {return;} 
             for (int i = 0; i < L0.size(); i++) {
                 Element_Attribute("Errors List: (Index " + i + ") Text", L0.get(i), "textContent", ParentTest, "no_jira");            
@@ -409,7 +414,7 @@ class AP3_mm_import_mod extends AP3_GUI{
                 }
             }
             Thread.sleep(500);
-            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog v-dialog--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
+            Element_By_Path_Click("Close Import error dialog box", "xpath", "//div[@class='v-dialog__content v-dialog__content--active']//div[contains(text(),'Close')]", ParentTest, "no_jira");
 
             File_Delete("Delete " + Export_File_Name + " file", Download_Dir, Export_File_Name, ParentTest, "no_jira");
              
