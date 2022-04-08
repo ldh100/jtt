@@ -89,7 +89,7 @@ class order extends AP3_API_GUI{
             AAA = json.toString(4);
         } 
         
-//        Auth = "Bearer " + AP3_TKN;
+
 //        JOB_Api_Call("Mobile User All Orders - Brand '" + BRAND + "'", "GET", 
 //            BaseAPI + "/order/customer/" + Mobile_User_ID + "/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
 //        if(json != null){
@@ -97,6 +97,7 @@ class order extends AP3_API_GUI{
 //            AAA = json.toString(4);
 //        } 
 
+        Auth = "Bearer " + AP3_TKN;
         JOB_Api_Call("All Orders - Location/Brand '" + BRAND + "'", "GET", 
             BaseAPI + "/order/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
