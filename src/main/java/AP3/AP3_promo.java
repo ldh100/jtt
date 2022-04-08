@@ -60,14 +60,14 @@ class AP3_promo extends AP3_GUI{
         Thread.sleep(500); 
         Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");             
             if (FAIL) { return;}
-        Page_URL("Promo Management page URL", ParentTest, "no_jira"); 
-            if (FAIL) { return;} 
-        Thread.sleep(500);     
-//        Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
-//            if (FAIL) { return;}            
+//        Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
+//            if (FAIL) { return;}  //   ==== failed after 30 sec even no visible spinner !?
+//        Thread.sleep(500); 
+        Thread.sleep(5000); 
+
+        Page_URL("Promo Management page URL", ParentTest, "no_jira");       
         Wait_For_Element_By_Path_Presence("Wait for New Promotion", "xpath", "//div[contains(text(), 'New Promotion')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
-//Thread.sleep(20000); 
         Element_By_Path_Attribute("Page Title", "xpath", "//span[@class='titlePromo']", "textContent", ParentTest, "no_jira"); 
            if (FAIL) { return;}          
         Wait_For_Element_By_Path_Presence("Wait for Promotion Name","xpath" , "//th[contains(@aria-label, 'Promotion Name')]", ParentTest, "no_jira");
@@ -1053,7 +1053,7 @@ Thread.sleep(5000);
 //            if (FAIL) { return;}
 //            Element_By_Path_Text_Enter("Search for Cloned promo", "css","input[aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
 //            if (FAIL) { return;}
-//            Find_Text("Find 'Automation Test promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
+//            Find_Text("Find 'Automation Test Promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
 //                if (FAIL) { return;} 
             Element_By_Path_Text("Promo Name", "xpath", "//tbody/tr[2]/td[1]/span[1]", ParentTest, "no_jira");
                 if (FAIL) { return;}  
@@ -1072,10 +1072,10 @@ Thread.sleep(5000);
             Page_URL("Created Promotion page URL", ParentTest, "no_jira"); 
             if(t.contains("/")){
                 P_ID = t.substring(t.lastIndexOf("/") + 1); 
-                Promo_API(P_ID,"Cloned",Promo_type);
-                Promo_Location_API(P_ID,"Cloned",Promo_type);
+                Promo_API(P_ID, "Cloned", Promo_type);
+                Promo_Location_API(P_ID, "Cloned", Promo_type);
             }
-            Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update", false, ParentTest, "no_jira");
+            Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update 1", false, ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_By_Path_Click("Ckick 'Save' updated changes", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
                 if (FAIL) { return;} 
@@ -1108,7 +1108,7 @@ Thread.sleep(2000);
             Promo_API(P_ID, "Original", Promo_type);
             Promo_Location_API(P_ID, "Original", Promo_type);
          }            
-        Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update", false, ParentTest, "no_jira");
+        Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update 2", false, ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Click("Ckick 'Save' updated changes'", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
             if (FAIL) { return;} 
@@ -1160,19 +1160,19 @@ Thread.sleep(5000);
         } else {
             API_Body_Contains("Promo API - find Desc (" + Promo_action + " promo)", API_Response_Body, "Automation Test Promo " + Promo_type + " update", true, ParentTest, "no_jira");
         }
-        if(Promo_action.equalsIgnoreCase("original")||Promo_action.equalsIgnoreCase("edited")|| Promo_action.equalsIgnoreCase("cloned")) {
-            if(Promo_type.equalsIgnoreCase("bundle")) { 
-                API_Body_Contains("Promo API - find Status", API_Response_Body, "scheduled", true, ParentTest, "no_jira");
-            } else { 
-                API_Body_Contains("Promo API - find Status", API_Response_Body, "active", true, ParentTest, "no_jira");
-            }
-        } else {
-            API_Body_Contains("Promo API - find Status", API_Response_Body, "archived", true, ParentTest, "no_jira");
-        }
+//        if(Promo_action.equalsIgnoreCase("original")||Promo_action.equalsIgnoreCase("edited")|| Promo_action.equalsIgnoreCase("cloned")) {
+//            if(Promo_type.equalsIgnoreCase("bundle")) { 
+//                API_Body_Contains("Promo API - find Status", API_Response_Body, "scheduled", true, ParentTest, "no_jira");
+//            } else { 
+//                API_Body_Contains("Promo API - find Status", API_Response_Body, "active", true, ParentTest, "no_jira");
+//            }
+//        } else {
+//            API_Body_Contains("Promo API - find Status", API_Response_Body, "archived", true, ParentTest, "no_jira");
+//        }
         Promo_discount_verify();
         EX += "\n - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " == Promo API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
     } catch (Exception ex){}   // =============================================  
-    } //End of Promo_API
+    } 
     
     private void Promo_discount_verify() {
     try {    
@@ -1182,31 +1182,33 @@ Thread.sleep(5000);
         if(type.equalsIgnoreCase("LTO")) { 
             promo_items = json.getJSONObject("items").getJSONArray("main");}
         else { 
-            promo_items = json.getJSONObject("items").getJSONArray("additional");}
-            for (int i = 0; i < promo_items.length(); i++) {
-                JSONObject promo_item = promo_items.getJSONObject(i);
-                JSONObject discount = promo_item.getJSONObject("discount");
-                if(discount.has("amount_off"))  {
-                    float fpromo_amount = discount.getFloat("amount_off");           //getString("amount_off");
-                    _t++;
-                    if(fpromo_amount == 0.50)  { 
-                        _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Discount Amount: " +fpromo_amount + "\t" + "0.50" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Discount Amount: " +fpromo_amount, false, ParentTest.createNode(_t + ". " + "Discount Amount : Found-as expected"), new Date());
-                    } else {
-                        _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Discount Amount: " +fpromo_amount + "\t" + "0.50" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Discount Amount: " +fpromo_amount  , true, ParentTest.createNode(_t + ". " + "Discount Amount : Not Found - expected"), new Date()); 
-                    }
-                }  else if(discount.has("percent_off")) {
-                    int promo_amount = discount.getInt("percent_off");           //getString("amount_off");
-                    if(promo_amount == 50) { 
-                        _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Percent off : " +promo_amount + "\t" + "50%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("PASS", "Percent off : " +promo_amount, false, ParentTest.createNode(_t + ". " + "Percent off : Found-as expected"), new Date());
-                    } else {
-                        _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Percent off : " +promo_amount + "\t" + "50%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("FAIL", "Percent off : " +promo_amount  , true, ParentTest.createNode(_t + ". " + "Percent off : Not Found - expected"), new Date());
-                    }
-                }//End of percent off
-       }//End of for
+            promo_items = json.getJSONObject("items").getJSONArray("additional");
+        }
+
+        for (int i = 0; i < promo_items.length(); i++) {
+            JSONObject promo_item = promo_items.getJSONObject(i);
+            JSONObject discount = promo_item.getJSONObject("discount");
+            if(discount.has("amount_off"))  {
+                float fpromo_amount = discount.getFloat("amount_off");           //getString("amount_off");
+                _t++;
+                if(fpromo_amount == 0.50)  { 
+                    _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Discount Amount: " +fpromo_amount + "\t" + "0.50" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "Discount Amount: " +fpromo_amount, false, ParentTest.createNode(_t + ". " + "Discount Amount : Found-as expected"), new Date());
+                } else {
+                    _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Discount Amount: " +fpromo_amount + "\t" + "0.50" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Discount Amount: " +fpromo_amount  , true, ParentTest.createNode(_t + ". " + "Discount Amount : Not Found - expected"), new Date()); 
+                }
+            }  else if(discount.has("percent_off")) {
+                int promo_amount = discount.getInt("percent_off");           //getString("amount_off");
+                if(promo_amount == 50) { 
+                    _p++; EX += _t + "\t" + "Found-as expected" + "\t" + "Percent off : " +promo_amount + "\t" + "50%" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("PASS", "Percent off : " +promo_amount, false, ParentTest.createNode(_t + ". " + "Percent off : Found-as expected"), new Date());
+                } else {
+                    _f++; EX += _t + "\t" + "Not Found - expected" + "\t" + "Percent off : " +promo_amount + "\t" + "50%" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    Log_Html_Result("FAIL", "Percent off : " +promo_amount  , true, ParentTest.createNode(_t + ". " + "Percent off : Not Found - expected"), new Date());
+                }
+            }
+        }
     } catch (Exception ex){}   // =============================================  
     } 
     

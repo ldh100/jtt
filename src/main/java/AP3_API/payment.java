@@ -13,6 +13,8 @@ class payment extends AP3_API_GUI {
         BaseAPI = a.BaseAPI;
         Mobile_User_TKN = a.Mobile_User_TKN;
         Mobile_User_ID = a.Mobile_User_ID;
+        MOBILE_ID = a.MOBILE_ID;
+
         SiteID = a.SiteID;
         UnitID = a.UnitID;
         ParentTest = a.ParentTest;
@@ -98,7 +100,8 @@ class payment extends AP3_API_GUI {
         }
         //</editor-fold>
  
-        //<editor-fold defaultstate="collapsed" desc="FP">        
+        //<editor-fold defaultstate="collapsed" desc="FP">  
+        Auth = "Bearer " + Mobile_User_TKN;      
         String Access_TKN = "";
             JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
                     BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");

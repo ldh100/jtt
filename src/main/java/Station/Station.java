@@ -107,7 +107,6 @@ public class Station extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(850, 527));
         setName("Station"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
-        setPreferredSize(new java.awt.Dimension(850, 527));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -119,20 +118,20 @@ public class Station extends javax.swing.JInternalFrame {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -285,7 +284,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 476, 44, 22));
+        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 476, 50, 22));
 
         DV_Menus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Menus.setModel(new javax.swing.table.DefaultTableModel(
@@ -355,7 +354,7 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Env:");
         lblSITES13.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 484, 28, 16));
+        getContentPane().add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 28, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -546,7 +545,7 @@ public class Station extends javax.swing.JInternalFrame {
     protected String Auth = "";
     protected String EXACT_Payment_TKN = "";
     protected String FP_Payment_TKN = "";
-    protected String Last_SCart = "";
+    protected String Last_SCart_URL = "";
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
@@ -1770,7 +1769,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Pickup_ID = json.getString("id");
-                txtLog.append("== " + "New SCart ID:  \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                txtLog.append("== " + "New SCart (POST) ID:  \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1779,7 +1778,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         txtLog.append("\r\n- " + "Add Menu Item(s) to Pickup Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
@@ -1841,17 +1840,18 @@ public class Station extends javax.swing.JInternalFrame {
         }  
         
         if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
-            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...." + "\r\n");
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Pickup Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
+            JSONObject requestParams = new JSONObject(); 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
-            requestParams.put("email", Mobile_User_ID);
+            //requestParams.put("email", Mobile_User_ID);
+            requestParams.put("email", txtMobile_ID.getText().trim());
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/promo", Auth, BODY);        
             if(json != null){
                 try{
                     ShoppingCart_Delivery_ID = json.getString("id");
-                    txtLog.append("== " + "Apply Promo > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.append("== " + "Apply Promo (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
                     FAIL = true;
@@ -1860,7 +1860,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         } 
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         btnSCart.setEnabled(true);
         Report_Tax();
     }
@@ -1883,7 +1883,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "New SCart ID: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.append("== " + "New SCart (POST) ID: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1892,7 +1892,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
@@ -1942,7 +1942,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try{
                 ShoppingCart_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "Add Item > Updated SCart \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.append("== " + "Add Item {PUT) > Updated SCart \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1955,15 +1955,16 @@ public class Station extends javax.swing.JInternalFrame {
         if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
             txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
+            JSONObject requestParams = new JSONObject(); 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
-            requestParams.put("email", Mobile_User_ID);
+            //requestParams.put("email", Mobile_User_ID);
+            requestParams.put("email", txtMobile_ID.getText().trim());
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/promo", Auth, BODY);        
             if(json != null){
                 try{
                     ShoppingCart_Delivery_ID = json.getString("id");
-                    txtLog.append("== " + "Apply Promo > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                    txtLog.append("== " + "Apply Promo (PUT) > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
                     FAIL = true;
@@ -1974,7 +1975,7 @@ public class Station extends javax.swing.JInternalFrame {
             }        
         }   
         
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         btnSCart.setEnabled(true);
         Report_Tax();
     }
@@ -2026,8 +2027,8 @@ public class Station extends javax.swing.JInternalFrame {
         if(btnSCart.isEnabled()){
             txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
-            Api_Call("GET", Last_SCart, "", "");
-            String R = A.Func.SHOW_FILE(Last_SCart + "\r\n\r\n" + json.toString(4), "json");
+            Api_Call("GET", Last_SCart_URL, "", "");
+            String R = A.Func.SHOW_FILE(Last_SCart_URL + "\r\n\r\n" + json.toString(4), "json");
         }
     }  
     private void Set_Requested_Date(String TYPE){

@@ -1303,6 +1303,7 @@
               <Font name="Dialog" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="MM Bulk Apply"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="iconTextGap" type="int" value="1"/>
@@ -1318,6 +1319,7 @@
               <Font name="Dialog" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Images"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="iconTextGap" type="int" value="1"/>
@@ -1393,6 +1395,7 @@
               <Font name="Dialog" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Timeslots"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="11"/>
             <Property name="horizontalTextPosition" type="int" value="10"/>
             <Property name="iconTextGap" type="int" value="1"/>

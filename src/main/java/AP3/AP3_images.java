@@ -54,7 +54,7 @@ class AP3_images extends AP3_GUI{
                     if (FAIL) { return;}
                 Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
                     if (FAIL) { return;}
-                    Thread.sleep(500);    
+                Thread.sleep(500);    
                 if (d1.findElements(By.xpath("//*[contains(text(),'LEAVE')]")).size() > 0) {
                     d1.findElement(By.xpath("//*[contains(text(),'LEAVE')]")).click();
                 }
