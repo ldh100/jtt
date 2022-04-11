@@ -566,7 +566,7 @@ public class Station extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration">
+    // <editor-fold defaultstate="collapsed" desc="Variables Declarations">
     protected double combined_tax_rate = 0.0;
     protected double gst_tax_rate = 0.0;
     protected double qst_tax_rate = 0.0;
