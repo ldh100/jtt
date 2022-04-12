@@ -2774,6 +2774,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                             Previous_Toast_Msg = Toast_Msg;
                             if(     Toast_Msg.toLowerCase().contains("successfully") || 
                                     Toast_Msg.toLowerCase().contains(" has been") || 
+                                    Toast_Msg.toLowerCase().contains(" have been") || 
                                     Toast_Msg.toLowerCase().contains(" saved")) {
                                 _t++;
                                 _p++;
@@ -3895,7 +3896,9 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
  
         FAIL = false;
         try {
-            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", E);
+            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", E);  
+            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'})", E);
+
             Thread.sleep(500);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +

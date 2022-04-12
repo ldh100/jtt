@@ -278,7 +278,7 @@ Thread.sleep(10000);
         Find_Text("Find 'Select Items' text", "Select Items", true, ParentTest, "no_jira");
         Scroll_to_Element("Scroll to 'Select items'", e, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(3000);
+Thread.sleep(5000);
         Element_By_Path_Click("Click 'Select Items'", "xpath", "//div[contains(text(),'Select Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}                                                                                  
         Find_Text("Find Global menu & Group Sector", menu_group, true, ParentTest, "no_jira");
@@ -296,9 +296,9 @@ Thread.sleep(3000);
         Element_Click("Select Menu Category [0]" , L1.get(0), ParentTest, "no_jira");
             if (FAIL) { return;}
 Thread.sleep(5000);
-        Element_E2_Find("Find 'Category container'","xpath" , "//div[@class='v-expansion-panel__body']//div[@role='list']", ParentTest, "no_jira");
+        Element_E2_Find("Find 'Category container'", "xpath" , "//div[@class='v-expansion-panel__body']//div[@role='list']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_Child_List_L2("Category elements", e2,"xpath" , ".//div[@class='v-list__tile__title group ml-3']", ParentTest, "no_jira");
+        Element_Child_List_L2("Category elements", e2, "xpath" , ".//div[@class='v-list__tile__title group ml-3']", ParentTest, "no_jira");
             if (FAIL) { return;} 
         T_Index = -1;
         for (int i = 0; i < L2.size(); i++) {

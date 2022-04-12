@@ -242,30 +242,30 @@ class AP3_brand extends AP3_GUI{
                     Element_By_Path_Attribute(" = Phone Preview Location", "xpath", "//span[contains(@class,'H6-Black-Medium-Emphasis-Left')]", "textContent",  ParentTest, "no_jira"); 
                         if (FAIL) { return;}
 
-                    File tmp;
-                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
-                    if(tmp.exists()) {
-                        Element_By_Path_Text_Enter("Upload Brand Image file 1", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
-                            //if (FAIL) { return;}
-                    } else {
-                        _t++; 
-                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
-                    }
-                    Thread.sleep(3000);
-                    //Element_By_Path_Click("Click 'Remove Image' icon", "className", "icon icon-remove", ParentTest, "no_jira"); 
-                    Element_By_Path_Click("Click 'Remove Image' icon", "xpath", "//*[contains(@class,'icon-remove')]", ParentTest, "no_jira"); 
-                        //if (FAIL) { return;} 
-
-                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
-                    if(tmp.exists()) {
-                        Element_By_Path_Text_Enter("Upload Menu Image file 2", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
-                            //if (FAIL) { return;}
-                    } else {
-                        _t++; 
-                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
-                    }    
+//                    File tmp;
+//                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg");
+//                    if(tmp.exists()) {
+//                        Element_By_Path_Text_Enter("Upload Brand Image file 1", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "Ap3_image1-jpg.jpg", false, ParentTest, "no_jira"); 
+//                            //if (FAIL) { return;}
+//                    } else {
+//                        _t++; 
+//                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+//                    }
+//                    Thread.sleep(3000);
+//                    //Element_By_Path_Click("Click 'Remove Image' icon", "className", "icon icon-remove", ParentTest, "no_jira"); 
+//                    Element_By_Path_Click("Click 'Remove Image' icon", "xpath", "//*[contains(@class,'icon-remove')]", ParentTest, "no_jira"); 
+//                        //if (FAIL) { return;} 
+//
+//                    tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png");
+//                    if(tmp.exists()) {
+//                        Element_By_Path_Text_Enter("Upload Menu Image file 2", "xpath", "//input[@type='file']", System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest, "no_jira"); 
+//                            //if (FAIL) { return;}
+//                    } else {
+//                        _t++; 
+//                        _w++; EX += _t + "\t" + "File to upload does not exist" + "\t" + "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png" + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//                        Log_Html_Result("WARN", "File: " + System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_kds_image.png", false, ParentTest.createNode(_t + ". " + "File to upload does not exist"), new Date());
+//                    }    
                     break;
                 case "Fee Setup":       
                     Find_Text("Find 'Enable Fee' text", "Enable Fee", true, ParentTest, "no_jira"); 
@@ -412,7 +412,7 @@ class AP3_brand extends AP3_GUI{
 
                     List_L2("Assign Menu 'Buttons' Count", "xpath", "//button[@class='ml-0 pl-0 v-btn v-btn--flat theme--light']", ParentTest, "no_jira");
                         if (FAIL) { return; }
-                    Scroll_XY("Scroll down to get 'IMPORT MENU' in view", 0, 500, ParentTest, "no_jira");
+                    Scroll_to_Element("Scroll 'IMPORT MENU' button into view", L2.get(L2.size() - 1), ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Element_Click("Click 'IMPORT MENU' button", L2.get(L2.size() - 1), ParentTest, "no_jira");    // index 1 > 2nd button - Import
                         if (FAIL) { return; }
