@@ -202,12 +202,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         setVerifyInputWhenFocusTarget(false);
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 AP3_AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -273,7 +273,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV2.setGridColor(java.awt.SystemColor.windowBorder);;
+        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setRowHeight(18);
         DV2.getTableHeader().setReorderingAllowed(false);
@@ -846,6 +846,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
         _brand_config.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand_config.setText("Brand Config");
+        _brand_config.setEnabled(false);
         _brand_config.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand_config.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _brand_config.setIconTextGap(1);
@@ -4143,24 +4144,25 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
             int XX = e.getLocation().x;
             int YY = e.getLocation().y;
-            if("Right".equals(DIRECTION)){ 
-                XX = XX + e.getSize().width + X;
-                YY = YY + Y;
+            // INFO: When using the W3C Action commands, offsets are from the center of element
+           if("Right".equals(DIRECTION)){ 
+                XX = XX + e.getSize().width/2 + e.getSize().width + X;
+                YY = Y;
             } else if ("Left".equals(DIRECTION)){ 
-                XX = XX + X; 
+                XX = 0 - e.getSize().width/2 + X; 
                 YY = YY + Y;
             }
             
             if("Bottom".equals(DIRECTION)){ 
+                XX = XX + X;
                 YY = YY + e.getSize().height + Y;
-                XX = XX + X;
             } else if ("Top".equals(DIRECTION)){ 
-                YY = YY + Y; 
-                XX = XX + X;
+                XX = e.getSize().height + X;
+                YY = Y; 
             }            
-            
-            Actions action = new Actions(d1);
-            action.moveToElement(e, XX, YY).click().perform();
+
+            Actions action = new Actions(d1); 
+            action.moveToElement(e, XX, YY).click().build().perform();
             Thread.sleep(500);
             _p++; 
             EX += _t + "\t" + NAME + "\t" + BY + " > " + PATH + "\t" + "Click out " + DIRECTION + " of element successful" + "\t" + "PASS" + "\t" + " - " +
