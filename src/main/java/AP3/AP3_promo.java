@@ -250,20 +250,17 @@ class AP3_promo extends AP3_GUI{
         Promo_details("LTO");        
         Promo_scheduling(date, futuredate, "Custom");
         
-        To_Bottom("Scroll to Page Bottom", ParentTest, "no_jira");
-            if (FAIL) { return;}
-        
-Thread.sleep(10000);       
+        To_Bottom("Scroll to Page Bottom", ParentTest, "no_jira");       
+Thread.sleep(1000);       
         Element_By_Path_Click("Click 'Promotion type'", "xpath", "//div[@class='layout row wrap']//div[@class='v-input__icon v-input__icon--append']", ParentTest, "no_jira");
             if (FAIL) { return;}                                                                                    
         Element_E1_Find("Find 'Promotion Type'","css" , "div[class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
             if (FAIL) { return;}        
-        Element_Child_List_L1("Date elements", e1,"xpath" , ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
+        Element_Child_List_L1("Date elements", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
             if (FAIL) { return;}
         T_Index = -1;
         for (int i = 0; i < L1.size(); i++) {
-            Element_Text("Promotion type options : (index " + i + ")", L1.get(i),  ParentTest, "no_jira");              
-                if (FAIL) { return;}
+            Element_Text("Promotion type options: (index " + i + ")", L1.get(i),  ParentTest, "no_jira");              
             if(L1.get(i).getText().equalsIgnoreCase("Limited Time Offer")){ 
                 T_Index = i; 
             }
@@ -278,7 +275,7 @@ Thread.sleep(10000);
         Find_Text("Find 'Select Items' text", "Select Items", true, ParentTest, "no_jira");
         Scroll_to_Element("Scroll to 'Select items'", e, ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(5000);
+Thread.sleep(1000);
         Element_By_Path_Click("Click 'Select Items'", "xpath", "//div[contains(text(),'Select Items')]", ParentTest, "no_jira");
             if (FAIL) { return;}                                                                                  
         Find_Text("Find Global menu & Group Sector", menu_group, true, ParentTest, "no_jira");
@@ -291,19 +288,17 @@ Thread.sleep(5000);
         T_Index = -1;
         for (int i = 0; i < L1.size(); i++) {
             Element_Text("Menu Category : (index " + i + ")", L1.get(i),  ParentTest, "no_jira");              
-            if (FAIL) { return;}
         }        
         Element_Click("Select Menu Category [0]" , L1.get(0), ParentTest, "no_jira");
             if (FAIL) { return;}
-Thread.sleep(5000);
-        Element_E2_Find("Find 'Category container'", "xpath" , "//div[@class='v-expansion-panel__body']//div[@role='list']", ParentTest, "no_jira");
+Thread.sleep(1000);
+        Element_E2_Find("Find 'Category' container", "xpath" , "//div[@class='v-expansion-panel__body']//div[@role='list']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_Child_List_L2("Category elements", e2, "xpath" , ".//div[@class='v-list__tile__title group ml-3']", ParentTest, "no_jira");
+        Element_Child_List_L2("Category elements count", e2, "xpath" , ".//div[@class='v-list__tile__title group ml-3']", ParentTest, "no_jira");
             if (FAIL) { return;} 
         T_Index = -1;
         for (int i = 0; i < L2.size(); i++) {
-            Element_Text("Menu Category : (index " + i + ")", L2.get(i),  ParentTest, "no_jira");              
-            if (FAIL) { return;}
+            Element_Text("Menu Category: (index " + i + ")", L2.get(i),  ParentTest, "no_jira");              
         }
          
         Element_Click("Select "  , L2.get(0), ParentTest, "no_jira");
@@ -357,12 +352,11 @@ Thread.sleep(5000);
                 if (FAIL) { return;}
         }
         List_L0("List of Discount type box", "xpath", "//div[contains(text(),'No Discount')]", ParentTest, "no_jira");
-        if (FAIL) { return;} 
-        
+            if (FAIL) { return;}        
         Element_Click("Click 1st item Discount type", L0.get(2), ParentTest, "no_jira");
             if (FAIL) { return;}   
         
-        Element_E2_Find("Find 'Discount type dropdown'","xpath" , "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
+        Element_E2_Find("Find 'Discount type' dropdown","xpath" , "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
             if (FAIL) { return;}
         
         Element_Child_List_L2("Discount type", e2,"xpath" , ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
@@ -375,7 +369,7 @@ Thread.sleep(5000);
                 T_Index = i; 
             }
         }
-        Element_Click("Select : Discount Amount"  , L2.get(T_Index), ParentTest, "no_jira");
+        Element_Click("Select 'Discount Amount'"  , L2.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter discount amount", "xpath", "//div[contains(@class,'active')]//input[@type='number']", "0.50", false, ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -393,7 +387,7 @@ Thread.sleep(5000);
                 T_Index = i; 
             }
         }
-        Element_Click("Select : Discount Percentage"  , L2.get(T_Index), ParentTest, "no_jira");
+        Element_Click("Select 'Discount Percentage'"  , L2.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter discount percent", "xpath", "//div[contains(@class,'error--text')]//input[@type='number']", "50", false, ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -793,7 +787,7 @@ Thread.sleep(10000);
                 if (FAIL) { return;} 
             Scroll_to_Element("Scroll to 'Select items'", e, ParentTest, "no_jira");
                 if (FAIL) { return;}
- Thread.sleep(3000);
+ Thread.sleep(1000);
             Element_By_Path_Click("Click 'Select Items'", "xpath", "//div[contains(text(),'Select Items')]", ParentTest, "no_jira");
                 if (FAIL) { return;}                                                                                
             Find_Text("Find Global menu & Group Sector", menu_group, true, ParentTest, "no_jira");
@@ -806,7 +800,7 @@ Thread.sleep(10000);
                 if (FAIL) { return;}
             Element_Click("Select " , L1.get(0), ParentTest, "no_jira");
                 if (FAIL) { return;}
- Thread.sleep(5000);
+ Thread.sleep(1000);
             Element_E2_Find("Find 'Category container'","xpath" , "//div[@class='v-expansion-panel__body']//div[@role='list']", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Element_Child_List_L2("Category elements", e2,"xpath" , ".//div[@class='v-list__tile__title group ml-3']", ParentTest, "no_jira");
@@ -891,7 +885,7 @@ Thread.sleep(10000);
             if (FAIL) { return;}
 Thread.sleep(5000);
         Scroll_XY("Scroll to brand", 0, 500, ParentTest, "no_jira"); // ========== ?????
-      Element_By_Path_Click("Open Brand Dropdown", "xpath","//div[@class='flex xs5']//div[@class='v-input dropdown-always-active-label v-text-field v-text-field--enclosed v-text-field--outline v-select v-autocomplete theme--light']", ParentTest, "no_jira");
+        Element_By_Path_Click("Open Brand Dropdown", "xpath","//div[@class='flex xs5']//div[@class='v-input dropdown-always-active-label v-text-field v-text-field--enclosed v-text-field--outline v-select v-autocomplete theme--light']", ParentTest, "no_jira");
             if (FAIL) { return;}      
         String menu_group = GL_MENU.concat(" (").concat(SECTOR).concat(")");
         Element_By_Path_Text_Enter("Enter Brand", "xpath", "//input[@aria-label='Brands']", menu_group, false, ParentTest, "no_jira");
@@ -921,20 +915,22 @@ Thread.sleep(5000);
     } catch (Exception ex){}   // =============================================  
     } //End of Promo_details
     
-    private void Promo_scheduling(LocalDate startdate,LocalDate enddate,String Repeat_opt)  {  
+    private void Promo_scheduling(LocalDate startdate, LocalDate enddate, String Repeat_opt)  {  
     try {    
         DateTimeFormatter Dayofdate = DateTimeFormatter.ofPattern("d");
+
+        Element_E1_Find("Find 'Select Times' element", "xpath", "//*[contains(text(), 'Select Times')]", ParentTest, "no_jira");
+            if (FAIL) { return;}
+        Scroll_to_Element("Scroll to 'Select Times' element", e1, ParentTest, "no_jira");
+            if (FAIL) { return;}
         Find_Text("Find 'Promotion Schedule' text", "Promotion Schedule", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}
-        Scroll_to_Element("Scroll to promotion schedule", e, ParentTest, "no_jira");
-            if (FAIL) { return;}
         Element_By_Path_Click("Click Start date", "xpath", "//input[@aria-label='Start Date']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_E1_Find("Find Calendar element","xpath" , "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
+        Element_E1_Find("Find Calendar element", "xpath" , "//div[@class='v-menu__content theme--light menuable__content__active']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_Child_List_L1("Date elements", e1,"xpath" , "//div[@class='v-btn__content']", ParentTest, "no_jira");
+        Element_Child_List_L1("Date elements", e1, "xpath" , "//div[@class='v-btn__content']", ParentTest, "no_jira");
         T_Index = -1;
-        for(int i=0; i<= L1.size(); i++) {
+        for(int i = 0; i <= L1.size(); i++) {
             if(L1.get(i).getText().equals( Dayofdate.format(startdate))) {
                 T_Index = i; break;
             }            
@@ -948,7 +944,7 @@ Thread.sleep(5000);
         Element_Child_List_L1("Date elements", e1,"xpath" , "//div[@class='v-btn__content']", ParentTest, "no_jira");
             if (FAIL) { return;}
         T_Index = -1;
-        for(int i=0;i<=L1.size();i++) {           
+        for(int i = 0; i <= L1.size(); i++) {           
             if(L1.get(i).getText().equals(Dayofdate.format(enddate))) {
                 T_Index = i; 
                 break;
@@ -993,7 +989,6 @@ Thread.sleep(5000);
         T_Index = -1;
         for (int i = 0; i < L1.size(); i++) {
             Element_Text("Repeat options: (index " + i + ")", L1.get(i),  ParentTest, "no_jira");              
-                if (FAIL) { return;}
             if(L1.get(i).getText().equalsIgnoreCase(Repeat_opt)){ 
                 T_Index = i; 
             }
@@ -1009,7 +1004,7 @@ Thread.sleep(5000);
             Element_By_Path_Click("Click 'Friday'", "xpath", "//div[@class='v-item-group theme--light']//span[contains(text(),'F')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
         }
-        Find_Text("Find Schedule confirmation","Promotion will repeat" , true, ParentTest, "no_jira");
+        Find_Text("Find Schedule confirmation", "Promotion will repeat" , true, ParentTest, "no_jira");
     } catch (Exception ex){}   // =============================================  
     } //End of Promo_scheduling
     
@@ -1035,70 +1030,74 @@ Thread.sleep(5000);
         Element_By_Path_Text("Status of promo", "xpath", "//tbody/tr[1]/td[6]/span[1]/span[1]", ParentTest, "no_jira");
             if (FAIL) { return;}  
          
-         //Clone bundle promotion
-         if(Promo_type.equalsIgnoreCase("bundle")) {
-            Element_By_Path_Click("Clone promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'copy')]", ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Element_By_Path_Click("Confirm 'Clone promo' ", "xpath", "//div[normalize-space()='CLONE']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Wait_For_Element_By_Path_Presence("Wait for cloned promo..", "xpath", "//span[contains(text(),'Copy')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-//            Element_By_Path_Click("Clear search box", "xpath","//i[@class='v-icon v-icon--link mdi mdi-close theme--light']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//            Refresh("Refresh Page", ParentTest, "no_jira");
-//            Thread.sleep(20000);
-//            Element_By_Path_Click("Click search box", "xpath","input[aria-label='Search Promotions']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//            Element_By_Path_Input_Select_Clear("Clear search box", "xpath","input[aria-label='Search Promotions']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//            Element_By_Path_Text_Enter("Search for Cloned promo", "css","input[aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//            Find_Text("Find 'Automation Test Promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
+         //
+        
+
+//        // <editor-fold defaultstate="collapsed" desc="Clone bundle promotion">  
+//        if(Promo_type.equalsIgnoreCase("bundle")) {
+//            Element_By_Path_Click("Clone promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'copy')]", ParentTest, "no_jira");
 //                if (FAIL) { return;} 
-            Element_By_Path_Text("Promo Name", "xpath", "//tbody/tr[2]/td[1]/span[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-            Element_By_Path_Text("Type of promo", "xpath", "//tbody/tr[2]/td[2]/span[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-            Element_By_Path_Text("Brand Name", "xpath", "//tbody/tr[2]/td[3]/span[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-            Element_By_Path_Text("Schedule of promo", "xpath", "//tbody/tr[2]/td[5]/span[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-            Element_By_Path_Text("Status of promo", "xpath", "//tbody/tr[2]/td[6]/span[1]/span[1]", ParentTest, "no_jira");
-                if (FAIL) { return;}  
-            Element_By_Path_Click("Edit Cloned promo", "xpath", "//tbody/tr[2]/td[7]//i[contains(@class,'pencil')]", ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Wait_For_Element_By_Path_Presence("Wait for edit cloned promo..", "xpath", "//div[@class='H3-Primary-Left' and contains(normalize-space(),'Edit Promotion')]", ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Page_URL("Created Promotion page URL", ParentTest, "no_jira"); 
-            if(t.contains("/")){
-                P_ID = t.substring(t.lastIndexOf("/") + 1); 
-                Promo_API(P_ID, "Cloned", Promo_type);
-                Promo_Location_API(P_ID, "Cloned", Promo_type);
-            }
-            Element_By_Path_Text_Enter("Update Promotion text", "xpath", "//textarea[@aria-label='Promotion Description']", " update 1", false, ParentTest, "no_jira");
-                if (FAIL) { return;}
-            Element_By_Path_Click("Ckick 'Save' updated changes", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
-                if (FAIL) { return;}       
-Thread.sleep(5000);
-            Element_By_Path_Text_Enter("Search for Cloned promo", "xpath","//input[@aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
-                if (FAIL) { return;}  
-             
-            Find_Text("Find 'Cloned Automation Test promo'", "Automation Test Promo", true, ParentTest, "no_jira"); 
-             if (FAIL) { return;}  
-            Element_By_Path_Click("Delete Cloned promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'delete')]", ParentTest, "no_jira");
-                if (FAIL) { return;}               
-            Element_By_Path_Click("Confirm Delete cloned  promo", "xpath", "//div[normalize-space()='DELETE']", ParentTest, "no_jira");
-                if (FAIL) { return;}
-Thread.sleep(5000);
-            Refresh("Refresh Page", ParentTest, "no_jira");
-Thread.sleep(20000);
-            Element_By_Path_Text_Enter("Search for Original promo", "css","input[aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
-                if (FAIL) { return;}           
-         }//End of if cloned promo
+//            Element_By_Path_Click("Confirm 'Clone promo' ", "xpath", "//div[normalize-space()='CLONE']", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Wait_For_Element_By_Path_Presence("Wait for cloned promo..", "xpath", "//span[contains(text(),'Copy')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+////            Element_By_Path_Click("Clear search box", "xpath","//i[@class='v-icon v-icon--link mdi mdi-close theme--light']", ParentTest, "no_jira");
+////            if (FAIL) { return;}
+////            Refresh("Refresh Page", ParentTest, "no_jira");
+////            Thread.sleep(20000);
+////            Element_By_Path_Click("Click search box", "xpath","input[aria-label='Search Promotions']", ParentTest, "no_jira");
+////            if (FAIL) { return;}
+////            Element_By_Path_Input_Select_Clear("Clear search box", "xpath","input[aria-label='Search Promotions']", ParentTest, "no_jira");
+////            if (FAIL) { return;}
+////            Element_By_Path_Text_Enter("Search for Cloned promo", "css","input[aria-label='Search Promotions']" , "Copy - Automation Test Promo", false, ParentTest, "no_jira");
+////            if (FAIL) { return;}
+////            Find_Text("Find 'Automation Test Promo'", "Copy - Automation Test Promo", true, ParentTest, "no_jira"); 
+////                if (FAIL) { return;} 
+//            Element_By_Path_Text("Promo Name", "xpath", "//tbody/tr[2]/td[1]/span[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//            Element_By_Path_Text("Type of promo", "xpath", "//tbody/tr[2]/td[2]/span[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//            Element_By_Path_Text("Brand Name", "xpath", "//tbody/tr[2]/td[3]/span[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//            Element_By_Path_Text("Schedule of promo", "xpath", "//tbody/tr[2]/td[5]/span[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//            Element_By_Path_Text("Status of promo", "xpath", "//tbody/tr[2]/td[6]/span[1]/span[1]", ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//            Element_By_Path_Click("Edit Cloned promo", "xpath", "//tbody/tr[2]/td[7]//i[contains(@class,'pencil')]", ParentTest, "no_jira");
+//                if (FAIL) { return;} 
+//            Wait_For_Element_By_Path_Presence("Wait for edit cloned promo...", "xpath", "//div[@class='H3-Primary-Left' and contains(normalize-space(),'Edit Promotion')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Page_URL("Created Promotion page URL", ParentTest, "no_jira"); 
+//            if(t.contains("/")){
+//                P_ID = t.substring(t.lastIndexOf("/") + 1); 
+//                Promo_API(P_ID, "Cloned", Promo_type);
+//                Promo_Location_API(P_ID, "Cloned", Promo_type);
+//            }
+//            Element_By_Path_Text_Enter("Update Promotion Description", "xpath", "//textarea[@aria-label='Promotion Description']", " update 1", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//            Element_By_Path_Click("Ckick 'Save' updated changes", "xpath", "//div[normalize-space()='Save Changes']", ParentTest, "no_jira");
+//                if (FAIL) { return;} 
+//            Wait_For_All_Elements_InVisibility("Wait for data...", "className", "v-datatable__progress", ParentTest, "no_jira"); 
+//                if (FAIL) { return;}       
+//Thread.sleep(5000);
+//            Element_By_Path_Text_Enter("Search for Cloned Promo", "xpath","//input[@aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}  
+//             
+//            Find_Text("Find 'Cloned Automation Test promo'", "Automation Test Promo", true, ParentTest, "no_jira"); 
+//             if (FAIL) { return;}  
+//            Element_By_Path_Click("Delete Cloned promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'delete')]", ParentTest, "no_jira");
+//                if (FAIL) { return;}               
+//            Element_By_Path_Click("Confirm Delete cloned  promo", "xpath", "//div[normalize-space()='DELETE']", ParentTest, "no_jira");
+//                if (FAIL) { return;}
+//Thread.sleep(5000);
+//            Refresh("Refresh Page", ParentTest, "no_jira");
+//Thread.sleep(20000);
+//            Element_By_Path_Text_Enter("Search for Original promo", "css","input[aria-label='Search Promotions']" , "Automation Test Promo", false, ParentTest, "no_jira");
+//                if (FAIL) { return;}           
+//        }
+//        // </editor-fold> 
          
-         // Editing a promo for promo id to make a API call
+        // Editing a promo for promo id to make a API call 
         Element_By_Path_Click("Click 'Edit' promo", "xpath", "//tbody/tr[1]/td[7]//i[contains(@class,'pencil')]", ParentTest, "no_jira");
            if (FAIL) { return;} 
 Thread.sleep(2000);
@@ -1227,11 +1226,9 @@ Thread.sleep(5000);
             }
             if(Promo_action.equalsIgnoreCase("Original")||Promo_action.equalsIgnoreCase("Edited")|| Promo_action.equalsIgnoreCase("cloned"))  { 
                API_Body_Contains("Promo Location API - find Promo ID", API_Response_Body, P_ID, true, ParentTest, "no_jira");
-               API_Body_Contains("Promo Location API - find Promo name", API_Response_Body, "Automation Test Promo", true, ParentTest, "no_jira");
                API_Body_Contains("Promo Location API - find company ID", API_Response_Body, CompanyID, true, ParentTest, "no_jira");
             } else { 
                API_Body_Contains("Promo Location API - find Promo ID", API_Response_Body, P_ID, false, ParentTest, "no_jira");
-               API_Body_Contains("Promo Location API - find Promo name", API_Response_Body, "Automation Test Promo",false, ParentTest, "no_jira");
             }   
         } else {
             if(Promo_action.equalsIgnoreCase("Original")||Promo_action.equalsIgnoreCase("Edited")|| Promo_action.equalsIgnoreCase("cloned")) {
@@ -1245,7 +1242,6 @@ Thread.sleep(5000);
                     return;
                 }                
                 API_Body_Contains("Promo Location API - find Promo ID", API_Response_Body, P_ID, true, ParentTest, "no_jira");
-                API_Body_Contains("Promo Location API - find Promo name", API_Response_Body, "Automation Test Promo",true, ParentTest, "no_jira");
                 API_Body_Contains("Promo Location API - find company ID", API_Response_Body, CompanyID,true, ParentTest, "no_jira"); 
             }else {
                 Call_API("Call/Promo/Location API", "Bearer " + AP3_TKN, BaseAPI + "/promo/company/" + CompanyID + "/location/group/" + SiteID + "?nocache=1", true, ParentTest, "no_jira" );
@@ -1258,7 +1254,6 @@ Thread.sleep(5000);
                     return;
                 }    
                 API_Body_Contains("Promo Location API - find Promo ID", API_Response_Body,P_ID,  false, ParentTest, "no_jira");
-                API_Body_Contains("Promo Location API - find Promo name",  API_Response_Body, "Automation Test Promo", false, ParentTest, "no_jira");
             }       
         }
         EX += "\n - " + "\t" + " ====END====" + "\t" + " ===== " + "\t" + " == Promo Location API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";   

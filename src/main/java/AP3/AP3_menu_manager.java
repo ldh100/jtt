@@ -356,7 +356,7 @@ class AP3_menu_manager extends AP3_GUI{
 //                if (FAIL) { return;}
                     
             Element_By_Path_Click("Click on Modifier label", "xpath", "//div[normalize-space()='Modifiers']", ParentTest, "no_jira");
-             if (FAIL) { return;}
+                if (FAIL) { return;}
             
             //Clone the last modifier and verify API calls for unique ids
             //<editor-fold defaultstate="collapsed" desc="Clone modifier">   

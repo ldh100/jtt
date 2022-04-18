@@ -519,8 +519,10 @@ class AP3_site_new extends AP3_GUI{
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Wait_For_Element_By_Path_Presence("Wait for 'Station List' page load...", "xpath", "//div[contains(@class, 'v-card-custom v-card v-sheet theme--light')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}           
-          Location_Group_API(S_ID);
+            if (FAIL) { return;}  
+         
+        Location_Group_API(S_ID); // ======================
+
         Element_By_Path_Text("Site 'Station List' text", "xpath", "//div[contains(@class, 'H6-Selected')]", ParentTest, "no_jira");
             if (FAIL) { return;}             
         List_L0("New Sites Unit(s) Count", "xpath", "//div[contains(@class, 'v-card-custom v-card v-sheet theme--light')]", ParentTest, "no_jira");                                               
@@ -536,7 +538,7 @@ class AP3_site_new extends AP3_GUI{
                 }
             }   
         // </editor-fold>  
-if(true) return;
+//if(true) return;
         
         // <editor-fold defaultstate="collapsed" desc="Add Station">  
         Element_By_Path_Click("Button 'Add Station' click", "xpath", "//*[contains(text(), 'ADD STATION')]",ParentTest, "no_jira");             
