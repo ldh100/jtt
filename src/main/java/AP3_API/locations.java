@@ -93,6 +93,7 @@ class locations extends AP3_API_GUI {
         }
 
         Auth = "";                      // =============== AP3 Site Brands ===========================
+
         JOB_Api_Call("Location > /group/'SiteID'?nocache=true&extended=true", "GET",
                 BaseAPI + "/location/group/" + SiteID + "?nocache=true&extended=true", Auth, "", 200, ParentTest, "no_jira");
         BrandIDS = "";

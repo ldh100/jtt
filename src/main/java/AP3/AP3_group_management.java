@@ -627,7 +627,11 @@ Thread.sleep(5000);
         }
         // </editor-fold>  
         
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    }  
     }//End of run
     
     private void Verify_Location_API(String JDE_Category) throws Exception {

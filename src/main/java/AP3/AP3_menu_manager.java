@@ -169,8 +169,7 @@ class AP3_menu_manager extends AP3_GUI{
         if(T_Index > -1){
             Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
-            Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");   
-                if (FAIL) { return;}             
+            Find_Text("Fund 'Search...' text", "Search Global Menus", true, ParentTest, "no_jira");           
             Element_By_Path_Click("Search Menus Click", "xpath", "//label[contains(text(), 'Search Global Menus')]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}
             Thread.sleep(500); 
@@ -186,18 +185,13 @@ class AP3_menu_manager extends AP3_GUI{
 //                   Element_Attribute("Local Menu (Index " + j + ") Name", L1.get(j), "textContent", ParentTest, "no_jira"); 
 //                }                  
             
-            Find_Text("Find Global Menu", "Global Menu", true, ParentTest, "no_jira");   
-                if (FAIL) { return;}  
-            Find_Text("Find Local Menus", "Local Menus", true, ParentTest, "no_jira");   
-                if (FAIL) { return;}  
-            Find_Text("Find Global Modifier groups", "Global Modifier Groups", true, ParentTest, "no_jira");   
-                if (FAIL) { return;}  
-            Find_Text("Find Local Menus", "Local Menus", true, ParentTest, "no_jira");   
-                if (FAIL) { return;}  
+            Find_Text("Find 'Global Menu' text", "Global Menu", true, ParentTest, "no_jira");    
+            Find_Text("Find 'Global Modifier groups' text", "Global Modifier Groups", true, ParentTest, "no_jira");    
+            Find_Text("Find 'Local Menus' text", "Local Menus", true, ParentTest, "no_jira");    
             Text_Found("Find : No local menus matching your search criteria found", "No local menus matching your search criteria found", ParentTest, "no_jira");
                 if (FAIL) { return;}
             
-            Element_By_Path_Click("Click on Global Modifiers", "xpath", "//span[@id='global-mod-label']", ParentTest, "no_jira");
+            Element_By_Path_Click("Click on 'Global Modifiers'", "xpath", "//span[@id='global-mod-label']", ParentTest, "no_jira");
                 if (FAIL) { return;}
 //            List_Child_E1_By_Path("Find " + GL_MENU + " 'View Global Modifiers Groups' button", L2.get(T_Index), "xpath", ".//button[@type='button'][2]", ParentTest, "no_jira"); 
 //                if (FAIL) { return;} 
@@ -253,7 +247,6 @@ class AP3_menu_manager extends AP3_GUI{
                     if (FAIL) { return;} 
                 for (int i = 2; i < L0.size(); i++) {
                     List_TR_TDs("Modifier Group Row Data " + i, L0.get(i), ParentTest, "no_jira");   
-                        //if (FAIL) { return;}  
                 }                          
 
             // ================ New Group
@@ -764,9 +757,7 @@ class AP3_menu_manager extends AP3_GUI{
                     if (FAIL) { return;}                                                                           
                 Thread.sleep(500);
                 Wait_For_All_Elements_InVisibility("Wait 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
-                    if (FAIL) { return;} 
-//                Wait_For_Element_By_Path_Presence("WaitForElement for MM > Group page load", "xpath", "//ul[@class='v-breadcrumbs breadcrumbs v-breadcrumbs--large theme--light']", ParentTest, "no_jira"); 
-//                        if (FAIL) { return;}                    
+                    if (FAIL) { return;}                  
             }
                 
             // ======================== Group Copy >>>> 
@@ -939,7 +930,7 @@ class AP3_menu_manager extends AP3_GUI{
                 Element_Click("Click Navigation Page 2", L1.get(1), ParentTest, "no_jira");
                     if (FAIL) { return;}                
                 List_L2("Menus Count on the Page 2", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
-                if (FAIL) { return;}
+                    if (FAIL) { return;}
                 for (int i = 0; i < L2.size(); i++) { 
                     Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 
                 } 
@@ -949,7 +940,7 @@ class AP3_menu_manager extends AP3_GUI{
                     Element_Click("Click Navigation Page 3", L1.get(2), ParentTest, "no_jira");
                         if (FAIL) { return;}                
                     List_L2("Menus Count on the Page 3", "xpath", "//div[@class='layout hover align-baseline']", ParentTest, "no_jira");             
-                    if (FAIL) { return;}
+                        if (FAIL) { return;}
                     T_Index = 1;
                     for (int i = 0; i < L2.size(); i++) { 
                         Element_Attribute("Menu (Index " + i + ") Name", L2.get(i), "textContent", ParentTest, "no_jira"); 

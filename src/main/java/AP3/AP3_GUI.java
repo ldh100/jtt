@@ -1,5 +1,6 @@
 package AP3;
 
+import static A.A.Time_12_formatter;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -9,6 +10,9 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.google.common.base.Stopwatch;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -709,6 +713,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
         _brand_new.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         _brand_new.setText("Add Brand (not Prod)");
+        _brand_new.setEnabled(false);
         _brand_new.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _brand_new.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _brand_new.setIconTextGap(1);
@@ -1157,6 +1162,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
     protected String SectorID = "";
     protected String CompanyID = "";  
     protected String GL_MENU = "";
+
+    protected String NEW_SITE_ID = "";
     // </editor-fold>
      
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">  
@@ -2776,6 +2783,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
                             if(     Toast_Msg.toLowerCase().contains("successfully") || 
                                     Toast_Msg.toLowerCase().contains(" has been") || 
                                     Toast_Msg.toLowerCase().contains(" have been") || 
+                                    Toast_Msg.toLowerCase().contains("updated") || 
                                     Toast_Msg.toLowerCase().contains(" saved")) {
                                 _t++;
                                 _p++;
@@ -2975,9 +2983,17 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             AP3_site_new BR = new AP3.AP3_site_new(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time; 
-            SECTOR = BR.SECTOR;
+            NEW_SITE_ID = BR.NEW_SITE_ID;
             ParentTest.getModel().setName("New Site " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
+            if(!NEW_SITE_ID.isEmpty()){
+                ParentTest = HtmlReport.createTest("Delete New Site"); 
+                AP3_delete_record BR2 = new AP3.AP3_delete_record(AP3_GUI.this);
+                BR2.run("Site", NEW_SITE_ID); // ======================================
+                EX += BR2.EX; _t += BR2._t; _p += BR2._p; _f += BR2._f; _w += BR2._w; _i += BR2._i; F += BR2.F; r_time += BR2.r_time; 
+                ParentTest.getModel().setName("Delete New Site " + BR2._t + ", Failed: " + BR2._f);
+                ParentTest.getModel().setEndTime(new Date()); 
+            }
         }         
         
         if(_Brand){
@@ -3915,6 +3931,32 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
+    protected void Scroll_Element_UP(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
+        if(sw1.isRunning()){
+            sw1.reset();
+        }
+        _t++; sw1.start(); 
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs         
+ 
+        FAIL = false;
+        try {
+            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", E);  
+            Thread.sleep(500);
+            _p++; 
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move OK" + "\t" + "PASS" + "\t" + " - " +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("PASS", "Method: " + new Exception().getStackTrace()[0].getMethodName() + "<br />executeScript(\"arguments[0].scrollIntoView(true)", false, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+        } catch(Exception ex){
+            _f++; FAIL = true; err = ex.getMessage().trim();
+            if(err.contains("\n")) (err = err.substring(0, err.indexOf("\n"))).trim();
+            EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Move Failed" + "\t" + "FAIL" + "\t" + err +
+            "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";
+            F += "Step: " + _t + " > " + err + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + "<br />executeScript(\"arguments[0].scrollIntoView(true)", true, ParentTest.createNode(_t + ". " + NAME), API_SRART);
+        }
+        sw1.reset();
+    }
+
     protected void Move_to_Element(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
@@ -6068,6 +6110,95 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         } 
         sw1.reset();
     }
+    protected void JOB_Api_Call(String NAME, String Method, String EndPoint, String AUTH, String BODY, int ExpStatus, ExtentTest ParentTest, String JIRA) {
+        FAIL = false;
+        String Result = "?";
+        int status = 0;
+        String R_Time = "";
+        String ErrorMsg = "";
+        JSONObject json = null;
+        Date API_SRART = new Date(); //  ========== new to fix Extend Report time bugs
+        RequestSpecification request;
+        request = RestAssured.given();
+        if (!AUTH.isEmpty()) {
+            request.header("Authorization", AUTH);
+        }
+        request.header("Content-Type", "application/json");
+        request.header("Accept", "application/json");
+        try {
+            if (sw1.isRunning()) {
+                sw1.reset();
+            }
+            _t++;
+            sw1.start();
+            Response response = null;
+            switch (Method) {
+                case "GET":
+                    if (BODY.equals("Bolter")) {
+                        request.header("From", "Bolter/1.0");
+                    }
+                    response = request.get(EndPoint);
+                    break;
+                case "POST":
+                    request.body(BODY);
+                    response = request.post(EndPoint);
+                    break;
+                case "PATCH":
+                    request.body(BODY);
+                    response = request.patch(EndPoint);
+                    break;
+                case "DELETE":
+                    request.body(BODY);
+                    response = request.delete(EndPoint);
+                    break;
+                case "PUT":
+                    request.body(BODY);
+                    response = request.put(EndPoint);
+                    break;
+                case "OPTIONS":
+                    response = request.options(EndPoint);
+                    break;
+                default:
+                    break;
+            }
+            Result = response.getStatusLine();
+            status = response.getStatusCode();
+
+            if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
+                json = new JSONObject(response.asString());
+                if (json.has("error")) {
+                    ErrorMsg = "Error: " + json.getString("error") + "  ";
+                }
+            }
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            if (status == ExpStatus) {
+                _p++;
+                EX += _t + "\t" + NAME + "\t" + Method + " " + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + " - "
+                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")", false, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);                 
+            } else {
+                _f++;
+                FAIL = true;
+                EX += _t + "\t" + NAME + "\t" + Method + " " + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + " - "
+                        + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+                Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")"
+                        + " ", false, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+            }
+        } catch (Exception ex) {
+            R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
+            _f++;
+            FAIL = true;
+            err = ex.getMessage().trim();
+            if (err.contains("\n")) {
+                (err = err.substring(0, err.indexOf("\n"))).trim();
+            }
+            EX += _t + "\t" + NAME + "\t" + Method + " " + EndPoint + "\t" + Result + "\t" + "FAIL" + "\t" + err
+                    + "\t" + String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec" + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
+            Log_Html_Result("FAIL", "Error: " + err + " (" + R_Time + ")", false, ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+        }
+        r_time += Math.round(sw1.elapsed(TimeUnit.MILLISECONDS)) + ";";
+        sw1.reset();
+    }
     protected void API_Body_Contains(String NAME, String Response_Body, String VAL, boolean EXPECTED, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
@@ -6806,7 +6937,8 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
              default:
                  break;
             }            
-            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", e);
+            //((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView(true);", e);
+            ((JavascriptExecutor)d1).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'})", e);
             _p++;
             EX += _t + "\t" + NAME + "\t" + "Passed Element" + "\t" + "Scroll OK" + "\t" + "PASS" + "\t" + " - " +
             "\t" + String.format("%.2f", (double)(sw1.elapsed(TimeUnit.MILLISECONDS)) / (long)(1000)) + " sec" + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + JIRA + "\r\n";

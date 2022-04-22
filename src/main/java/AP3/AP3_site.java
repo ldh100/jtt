@@ -1501,12 +1501,12 @@ class AP3_site extends AP3_GUI{
                         if (FAIL) { return;}              
                     Element_Text_Enter("Enter new Site Name", e2, "87 Bordeaux Drive, Logan Township", ParentTest, "no_jira");
                         if (FAIL) { return;}  
-                    Thread.sleep(1000); 
+                    Thread.sleep(2000); 
                     Element_By_Path_Click("Select new Site Address", "xpath", "//*[contains(text(), '" + "Bordeaux Drive" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Thread.sleep(1000); 
                     Element_By_Path_Text("New Site Address", "xpath", "//*[@id='site-detail']//input[@aria-label='Address']", ParentTest, "no_jira"); 
-                        if (FAIL) { return;}
+                        //if (FAIL) { return;}
                     Element_By_Path_Text("New Site Country", "xpath", "//input[@aria-label='Country']/parent::div", ParentTest, "no_jira"); 
                         //if (FAIL) { return;} // OK
                     Element_By_Path_Text("New Site State", "xpath", "//input[@aria-label='State']/parent::div", ParentTest, "no_jira"); 
