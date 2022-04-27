@@ -12,7 +12,7 @@ class orders extends C360_API_main{
     String AAA = "";
     protected void run() { 
         
-        Auth = "";      
+        Auth = "";  //      
 //        JOB_Api_Call("Get Users", "GET", 
 //            BaseAPI + "/cafe360user", Auth, "", 200, ParentTest, "no_jira"); 
 //        if(json != null){
