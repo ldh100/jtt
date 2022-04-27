@@ -17,6 +17,7 @@ class cafe360user extends C360_API_main{
             BaseAPI + "/cafe360user", Auth, "", 200, ParentTest, "no_jira"); 
         if(json != null){
             AAA = json.toString(4);
-        }              
+        }        
+        // https://dev.cafe360.io/user-management/users?limit=10&page=1&sortBy=createdAt&sortOrder=DESC&search      
     }
 }

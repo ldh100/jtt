@@ -603,6 +603,18 @@ public class C360_API_main {
             ParentTest.getModel().setEndTime(new Date());
             C360_User_ID = BR.C360_User_ID;
             C360_User_TKN = BR.C360_User_TKN;
-        }        
+        }  
+        if (true) {
+            SCOPE += "Orders ";
+            EX += " - " + "\t" + "Orders" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Orders");
+            orders BR = new C360_API.orders(C360_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Orders - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+            C360_User_ID = BR.C360_User_ID;
+            C360_User_TKN = BR.C360_User_TKN;
+        }       
    }
 }

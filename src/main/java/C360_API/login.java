@@ -25,29 +25,37 @@ If you capture this cookie after the authentication phase, then you can reuse th
         switch (env) {
             case "DE":               
                 C360_Clien_ID = "Cafe 360 DEV";
-                C360_Redirect_URL = "https://dev.cafe360.compassdigital.org/home";
+                C360_Redirect_URL = "https://dev.cafe360.io/home";
                 break;
             case "ST":
                 C360_Clien_ID = "Cafe 360 Test";
-                C360_Redirect_URL = "https://staging.cafe360.compassdigital.org/home";
+                C360_Redirect_URL = "https://staging.cafe360.io/home";
                 break;
             case "PR":
                 C360_Clien_ID = "Cafe 360 Prod";
-                C360_Redirect_URL = "https://cafe360.compassdigital.org/home";
+                C360_Redirect_URL = "https://cafe360.io/home";
                 break; 
         }
 
         Auth = "";   
-        JOB_Api_Call("C360 SSO OAuth Login Redirect", "GET",      
+        JOB_Api_Call("C360 SSO OAuth /authorize?client_id", "GET",      
             "https://ssodev.compassmanager.com/oauth2.0/authorize?client_id=" + C360_Clien_ID +
                      "&response_type=code&redirect_uri=" + C360_Redirect_URL + "&response_type=code", Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
         }   
-        JOB_Api_Call("C360 SSO OAuth Login Redirect", "GET",      
-            BaseAPI + "?code=OC-139-cCVucy5kQNDTXzx1TVgKBvUgoX0S54P-", Auth, "", 200, ParentTest, "no_jira");
+
+        JOB_Api_Call("C360 SSO OAuth /login?service", "GET",      
+            "https://ssodev.compassmanager.com/login?service=" +
+                "https://ssodev.compassmanager.com/oauth2.0/callback/Authorize/client_id=" + C360_Clien_ID +
+                    "/redirect_uri=https://dev.cafe360.io/home/response_type/code/client_name=CasOAuthClient", Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
-        }        
+        } 
+//        JOB_Api_Call("C360 SSO OAuth Login Redirect", "GET",      
+//            BaseAPI + "?code=OC-139-cCVucy5kQNDTXzx1TVgKBvUgoX0S54P-", Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            AAA = json.toString(4);
+//        }        
     }
 }
