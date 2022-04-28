@@ -240,11 +240,11 @@ class AP3_site_new extends AP3_GUI{
                         if (FAIL) { return;}  
                     }
                       
-                     Element_By_Path_Text_Enter("Enter EN Additional Instructions", "css", "[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, ParentTest, "no_jira");
-                        if (FAIL) { return;} // ma-0 v-btn v-btn--flat v-btn--small theme--light
-                     Element_By_Path_Click("Click 'EN > FR'", "xpath", "//button[@class='ma-0 v-btn v-btn--flat v-btn--small theme--light']", ParentTest, "no_jira");
+                    Element_By_Path_Text_Enter("Enter EN Additional Instructions", "css", "[aria-label='Additional Instructions (en)']", "Do not use - test auto generated", false, ParentTest, "no_jira");
+                        if (FAIL) { return;} 
+                    Element_By_Path_Click("Click 'EN > FR'", "xpath", "//button[@class='ma-0 v-btn v-btn--flat v-btn--small theme--light']", ParentTest, "no_jira");
                         if (FAIL) { return;}                         
-                     Element_By_Path_Text_Enter("Enter FR Additional Instructions", "css", "[aria-label='Additional Instructions (fr)']", "Ne pas utiliser - test généré automatiquement", false, ParentTest, "no_jira");
+                    Element_By_Path_Text_Enter("Enter FR Additional Instructions", "css", "[aria-label='Additional Instructions (fr)']", "Ne pas utiliser - test généré automatiquement", false, ParentTest, "no_jira");
                         if (FAIL) { return;}     
                     Text_Found("Find meal plan terminal ID", "Meal Plan Terminal ID", ParentTest, "no_jira");
                         if (FAIL) { return;}
@@ -395,7 +395,6 @@ class AP3_site_new extends AP3_GUI{
                         if (FAIL) { return;} 
                         for (int j = 0; j < L1.size(); j++) {
                             Element_Text("Promotion Data Row", L1.get(j), ParentTest, "no_jira");             
-                            if (FAIL) { return;}
                         }     
                     Element_By_Path_Click("Create promo Click", "xpath", "//*[contains(text(), 'CREATE PROMO')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}                                                     

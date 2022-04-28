@@ -277,7 +277,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setRowHeight(18);
         DV2.getTableHeader().setReorderingAllowed(false);
@@ -696,7 +696,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         _password.setRequestFocusEnabled(false);
 
         _logout.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        _logout.setText("Feedback & Logout");
+        _logout.setText("Logout > Feedback ");
         _logout.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         _logout.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         _logout.setIconTextGap(1);
@@ -3235,12 +3235,12 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         
         // ======== Last Scope
         if(_Logout){ 
-            SCOPE += ", Feedback > Logout";
-            ParentTest = HtmlReport.createTest("Logout"); 
-            AP3_feedback_logout BR = new AP3.AP3_feedback_logout(AP3_GUI.this);
+            SCOPE += ", Logout > Feedback";
+            ParentTest = HtmlReport.createTest("Logout > Feedback"); 
+            AP3_logout_feedback BR = new AP3.AP3_logout_feedback(AP3_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; F += BR.F; r_time += BR.r_time;          
-            ParentTest.getModel().setName("Feedback > Logout: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setName("Logout > Feedback: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date()); 
         }         
     }

@@ -71,9 +71,10 @@ public class C360_API_main {
     protected String app = "C360";
     protected String env = "";
     protected String BaseAPI = "";
+    protected String SSO_BaseAPI = "";
+    protected String C360_Clien_ID = "";
+
     protected String BODY = "";
-
-
 
     protected int _t = 0; // Total
     protected int _p = 0; // Passed
@@ -206,15 +207,21 @@ public class C360_API_main {
             CONFIG = true;
             switch (env) {
                 case "ST":
-                    BaseAPI = "https://api.compassdigital.org/staging";
-                    break;
+                    BaseAPI = "https://staging.cafe360.io";
+                    SSO_BaseAPI = "https://ssodev.compassmanager.com";
+                    C360_Clien_ID = "Cafe 360 Test";
+                        break;
                 case "DE":
-                    BaseAPI = "https://api.compassdigital.org/dev";
+                    BaseAPI = "https://dev.cafe360.io";
+                    SSO_BaseAPI = "https://ssodev.compassmanager.com";
+                    C360_Clien_ID = "Cafe 360 DEV";
                     break;
                 default:
-                    BaseAPI = "https://api.compassdigital.org/v1";
-                    break;
-            }         
+                    BaseAPI = "https://cafe360.io";
+                    SSO_BaseAPI = "https://ssodev.compassmanager.com";
+                    C360_Clien_ID = "Cafe 360 Prod";
+                   break;
+            }       
 
             Current_Log_Update(true, "= JOB_Load_CONFIG > OK" + "\r\n");
             return "OK";
@@ -554,14 +561,14 @@ public class C360_API_main {
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("PASS", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")",
-                        ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);                
+                    ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);                
             } else {
                 _f++;
                 FAIL = true;
                 EX += _t + "\t" + NAME + "\t" + EndPoint + "\t" + ErrorMsg + Result + "\t" + "FAIL" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";
                 Log_Html_Result("FAIL", ErrorMsg + "Expected Status Code: " + ExpStatus + " > Actual: " + status + ", Result: " + Result + " (" + R_Time + ")",
-                        ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
+                    ParentTest.createNode(_t + ". " + NAME + " > " + Method + ": " + EndPoint), API_SRART);
             }
         } catch (Exception ex) {
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
@@ -596,14 +603,52 @@ public class C360_API_main {
             SCOPE += "Users ";
             EX += " - " + "\t" + "Users" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             ParentTest = HtmlReport.createTest("Users");
-            cafe360user BR = new C360_API.cafe360user(C360_API_main.this);
+            user BR = new C360_API.user(C360_API_main.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             ParentTest.getModel().setName("Users - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-            C360_User_ID = BR.C360_User_ID;
-            C360_User_TKN = BR.C360_User_TKN;
         }  
+        if (true) {
+            SCOPE += "Roles ";
+            EX += " - " + "\t" + "Roles" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Roles");
+            roles BR = new C360_API.roles(C360_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Roles - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }
+        if (true) {
+            SCOPE += "POSID Ranges";
+            EX += " - " + "\t" + "POSID Ranges" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("POSID Ranges");
+            posid_ranges BR = new C360_API.posid_ranges(C360_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("POSID Ranges - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }
+        if (true) {
+            SCOPE += "Concepts ";
+            EX += " - " + "\t" + "Roles" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Concepts");
+            concepts BR = new C360_API.concepts(C360_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Concepts - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }
+        if (true) {
+            SCOPE += "Menus ";
+            EX += " - " + "\t" + "Menus" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
+            ParentTest = HtmlReport.createTest("Menus");
+            menus BR = new C360_API.menus(C360_API_main.this);
+            BR.run(); // ======================================
+            EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
+            ParentTest.getModel().setName("Menus - Tot: " + BR._t + ", Failed: " + BR._f);
+            ParentTest.getModel().setEndTime(new Date());
+        }
         if (true) {
             SCOPE += "Orders ";
             EX += " - " + "\t" + "Orders" + "\t" + " " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
@@ -613,8 +658,6 @@ public class C360_API_main {
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i; r_time += BR.r_time;
             ParentTest.getModel().setName("Orders - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
-            C360_User_ID = BR.C360_User_ID;
-            C360_User_TKN = BR.C360_User_TKN;
         }       
    }
 }
