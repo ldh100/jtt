@@ -3070,7 +3070,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         //if (GUI && env.equals("PR")) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
         if (!GUI && env.equals("PR") && _f > 0) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
             String Msg = " === JTT cron - AP3 API Production test: " + _f + " failed";
-            String SEND = A.Func.Message_to_Slack("#qa_only", Msg, FAILED, true); // #xtt_test #qa_only
+            String SEND = A.Func.Message_to_Slack("#test-engineering", Msg, FAILED, true); // #qa_only #test-engineering
             //String XX = SEND;
         }
     }

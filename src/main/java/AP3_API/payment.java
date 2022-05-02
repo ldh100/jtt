@@ -137,7 +137,7 @@ class payment extends AP3_API_GUI {
                 FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "", 204, ParentTest, "no_jira");
         }        
         
-        Auth = "Bearer " + Access_TKN;          // ??? What if No FP Payments for this User, above failed? How to generaete 1st one? DEBUG
+        Auth = "Bearer " + Access_TKN;       
         requestParams = new JSONObject();
         if (env.equals("PR")) {
             requestParams.put("nameOnCard", A.A.C1_Name);
