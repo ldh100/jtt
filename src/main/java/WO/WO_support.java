@@ -42,7 +42,7 @@ class WO_support extends WO_GUI {
         Swith_to_Frame("Switch back from 'ifarme' to 'defaultContent'", "defaultContent", null, ParentTest, "no_jira");  
 
         To_Bottom("Scroll to page bottom > footer links", ParentTest, "no_jira"); // ============= 
-        Thread.sleep(100);
+        Thread.sleep(500);
         Element_By_Selector_Click("Click > 'Also Available > App Store'", "xpath", "//a[contains(@href, 'https://apps.apple.com/app')]", ParentTest, "no_jira");    
             if (FAIL) { return;} 
         Open_Switch_to_2nd_Tab("Switch to 2nd tab > 'App Store'", "", ParentTest, "no_jira");  

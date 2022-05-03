@@ -296,11 +296,18 @@ class order extends AP3_API_GUI{
             BaseAPI + "/order/" + Order_Pickup_ID + "/refund", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
-        }         
+        }   
+ 
+        if(DELIEVEY_TIMESLOTS.isEmpty()) {
+            EX += " - " + "\t" + "Delivery" + "\t" + "Timeslots" + "\t" + "Empty - Not Found" + "\t" + "WARN" + "\t" + " - "
+                    + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("WARN", "", ParentTest.createNode("Delivery Timeslots > Empty List - Not Found"), new Date());
+            return;
+        }
+  
         
         Auth = "Bearer " + Mobile_User_TKN;
         requested_date = new Date(Long.parseLong(DELIEVEY_TIMESLOTS.get(DELIEVEY_TIMESLOTS.size() - 1)) *1000L);
-        //requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
         Requested_Date = sdf.format(requested_date); 
         BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
                 "\"location_brand\":\"" + BrandID + "\"," + 

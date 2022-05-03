@@ -69,7 +69,7 @@ class WO_login extends WO_GUI {
 //            if (FAIL) { return;}          
         Element_By_Selector_Click("Open User 'Menu'", "id", "nav-menu-btn", ParentTest, "no_jira");                                     
             if (FAIL) { return;} 
-        Element_By_Selector_Click("Click 'Change Location'", "id", "search-location-btn", ParentTest, "no_jira");                                     
+        Element_By_Selector_Click("Click 'Change Location'", "id", "qa-search-location-btn", ParentTest, "no_jira");                                     
             if (FAIL) { return;} 
         Thread.sleep(1000);
         Element_E1_Find("Find 'Select Location' input", "xpath", "//input[@type='text']", ParentTest, "no_jira");

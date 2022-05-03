@@ -3091,7 +3091,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             if (AP3_User_ID.isEmpty()) {
                 EX += " - " + "\t" + "User API: " + "\t" + "AP3 Admin: " + ADMIN_ID + "\t" + "ID Not Found" + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "", ParentTest.createNode("Uaer API: AP3 Admin '" + ADMIN_ID + "' > " + "ID Not Found"), new Date());
+                Log_Html_Result("WARN", "", ParentTest.createNode("Userr API: AP3 Admin '" + ADMIN_ID + "' > " + "ID Not Found"), new Date());
                 FAIL = true;
                 return;
             }            
