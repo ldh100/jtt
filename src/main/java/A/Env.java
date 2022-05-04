@@ -1,6 +1,7 @@
 package A;
 
 import java.awt.Cursor;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,6 +13,17 @@ import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -52,12 +64,12 @@ public class Env extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Env"); // NOI18N
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -102,7 +114,7 @@ public class Env extends javax.swing.JInternalFrame {
         });
 
         cmbWhat.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus", "Promo" }));
+        cmbWhat.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sites", "Units", "Brands", "Menus", "Promo", "Sectors" }));
         cmbWhat.setMinimumSize(new java.awt.Dimension(113, 24));
         cmbWhat.setPreferredSize(new java.awt.Dimension(113, 24));
         cmbWhat.addItemListener(new java.awt.event.ItemListener() {
@@ -246,19 +258,59 @@ public class Env extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
-         LoadDB();
+        if(cmbEnv.getSelectedItem().toString().contains("Staging")){
+            BaseAPI = "https://api.compassdigital.org/staging";
+            env = "ST";
+            url = "https://staging.adminpanel.compassdigital.org/";
+        } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
+            BaseAPI = "https://api.compassdigital.org/dev";
+            env = "DE";
+            url = "http://dev.adminpanel.compassdigital.org/";
+        } else{
+            BaseAPI = "https://api.compassdigital.org/v1";
+            env = "PR";
+            url = "http://adminpanel.compassdigital.org/";
+        }  
+        Get_AP3_TKN();      
+        LoadDB();
     }//GEN-LAST:event_formAncestorAdded
     private void btnViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnViewMouseClicked
         PrintRow();
     }//GEN-LAST:event_btnViewMouseClicked
     private void cmbWhatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbWhatItemStateChanged
         if(evt.getStateChange() == 1) {
-            LoadDB();
+            if(cmbWhat.getSelectedItem().toString().equals("Sectors")) {
+                GetSectors();
+            } else if(cmbWhat.getSelectedItem().toString().equals("Companies")){
+                GetCompanies();
+            } else{
+                LoadDB();
+            }
         }
     }//GEN-LAST:event_cmbWhatItemStateChanged
     private void cmbEnvItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEnvItemStateChanged
         if(evt.getStateChange() == 1) {
-            LoadDB();
+            if(cmbEnv.getSelectedItem().toString().contains("Staging")){
+                BaseAPI = "https://api.compassdigital.org/staging";
+                env = "ST";
+                url = "https://staging.adminpanel.compassdigital.org/";
+            } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
+                BaseAPI = "https://api.compassdigital.org/dev";
+                env = "DE";
+                url = "http://dev.adminpanel.compassdigital.org/";
+            } else{
+                BaseAPI = "https://api.compassdigital.org/v1";
+                env = "PR";
+                url = "http://adminpanel.compassdigital.org/";
+            } 
+            Get_AP3_TKN();
+            if(cmbWhat.getSelectedItem().toString().equals("Sectors")) {
+                GetSectors();
+            } else if(cmbWhat.getSelectedItem().toString().equals("Companies")){
+                GetCompanies();
+            } else{
+                LoadDB();
+            }
         }
     }//GEN-LAST:event_cmbEnvItemStateChanged
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
@@ -270,7 +322,13 @@ public class Env extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLogMouseClicked
     private void cmbAppItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbAppItemStateChanged
         if(evt.getStateChange() == 1) {
-            LoadDB();
+            if(cmbWhat.getSelectedItem().toString().equals("Sectors")) {
+                //GetSectors();
+            } else if(cmbWhat.getSelectedItem().toString().equals("Companies")){
+                //GetCompanies();
+            } else{
+                LoadDB();
+            }
         }
     }//GEN-LAST:event_cmbAppItemStateChanged
     private void btnExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcelMouseClicked
@@ -299,6 +357,19 @@ public class Env extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnStatisticsMouseClicked
     
+    private void Get_AP3_TKN(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
+        try (Connection conn = DriverManager.getConnection(A.QA_BD_CON_STRING)) {
+            ResultSet rs = conn.createStatement().executeQuery("SELECT [ap_token] FROM [dbo].[env] WHERE [DESCRIPTION] = '" + cmbEnv.getSelectedItem() + "'");
+            rs.next();
+            AP3_TKN = rs.getString(1);
+            conn.close();
+        } catch (SQLException ex) {
+            txtLog.append( "= AP3_TKN > ERROR: " + ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        }
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
     private void LoadDB(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         String _where = "";
@@ -619,10 +690,101 @@ public class Env extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
   
-    
+    private void GetSectors(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+
+        String[] SitesColumnsName = {"Sector Name", "Id"}; 
+        DefaultTableModel SitesModel = new DefaultTableModel();
+        SitesModel.setColumnIdentifiers(SitesColumnsName);
+        DV1.setModel(SitesModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false); 
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl&nocache=false"); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                String Msg = response.getStatusLine().getReasonPhrase();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
+                }
+            };
+            String responseBody = httpclient.execute(httpget, responseHandler);
+            JSONObject json = new JSONObject(responseBody);
+            JSONArray Sectors = json.getJSONArray("sectors");     
+
+            for (int i = 0; i < Sectors.length(); i++) {
+                String sector = "";
+                String id = "null";
+                JSONObject object = Sectors.getJSONObject(i);
+                if(object.has("name")){
+                    sector = object.getString("name");   
+                } 
+                if(object.has("id")){
+                    id = object.getString("id");
+                } 
+                SitesModel.addRow(new Object[]{sector, id});
+            }
+            DV1.setModel(SitesModel);
+            DV1.setDefaultEditor(Object.class, null);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(350);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(550);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();   
+            txtLog.append("= " + 
+                    cmbEnv.getSelectedItem().toString() + " > " +
+                    cmbWhat.getSelectedItem().toString() + " > " +
+                    DV1.getRowCount() + 
+                    " records\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            if(DV1.getRowCount() > 0){
+                DV1.changeSelection(0, 0, false, false);
+                btnView.setEnabled(true);
+            }    
+
+        } catch (IOException | JSONException ex) {
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            }
+        } 
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+    private void GetCompanies(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.HAND_CURSOR));
+    }  
+  
+
     // <editor-fold defaultstate="collapsed" desc="Private Variables">    
     private String SQL = "";
     private String TBL = "";
+    private String BaseAPI = "";
+    private String url = "";
+    private String app = "";
+    private String appId = "";
+    private String env = "";
+    private String AP3_TKN = "";
     // </editor-fold>   
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">    
