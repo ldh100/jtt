@@ -1132,7 +1132,6 @@ class locations extends AP3_API_GUI {
         // Test Scenario 1: Positive flow to post new Sector/group
         BODY = "{"
                 + "\"name\":\"New Sector " + NewID + "/CA" + "\"" 
-
                 + "}";
         JOB_Api_Call("Location - POST New Sector/Group", "POST", 
                 BaseAPI + "/location/sector", Auth, BODY, 200, ParentTest, "no_jira");
@@ -1548,6 +1547,6 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
 //            }
 //        }        
 //        //</editor-fold>          
-// 
+ 
     }
 }

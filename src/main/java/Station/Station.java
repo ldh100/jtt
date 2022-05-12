@@ -630,8 +630,8 @@ public class Station extends javax.swing.JInternalFrame {
     protected String exate_gateway_password = "";
     //  "freedompay": {
     protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
-    protected String freedompay_terminal_id = "26241559005";
-    protected String freedompay_store_id = "16167424007";
+    protected String freedompay_terminal_id = "2479168011";
+    protected String freedompay_store_id = "1456207013";
     protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
     
     protected String ShoppingCart_Delivery_ID = "";

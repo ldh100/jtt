@@ -137,7 +137,7 @@ class order extends AP3_API_GUI{
         requestParams.put("requested_date", Requested_Date);
         requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
         JSONObject payment = new JSONObject();
-        payment.put("token", EXACT_Payment_TKN);
+        payment.put("token", FP_Payment_TKN); // EXACT_Payment_TKN  - no more EXACT
         requestParams.put("payment", payment); 
         BODY = requestParams.toString();  
         
@@ -320,7 +320,7 @@ class order extends AP3_API_GUI{
                     "\"name\":\"" + env + " JTT API Test Delivery" + "\"," +
                     "\"order_type\":\"delivery\"}," + 
                 "\"payment\":" + 
-                    "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
+                    "{\"token\":\"" + FP_Payment_TKN + "\"}," + // EXACT_Payment_TKN  - no more EXACT
                 "\"requested_date\":\"" + Requested_Date + "\"," +
                 "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
                 "\"}";   
