@@ -5,6 +5,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+//Freedom Pay Store ID: 1456207013/1471190011/1456216012
+//Freedom Pay Terminal ID: 2459269011
+
 class payment extends AP3_API_GUI {
 
     protected payment(AP3_API_GUI a) {
@@ -104,6 +107,7 @@ class payment extends AP3_API_GUI {
         Auth = "Bearer " + Mobile_User_TKN;   
         // https://api.compassdigital.org/staging/payment/9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO/clienttoken 
         //                                freedompay_id = 9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO  
+        //                                                9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO - Prod, store ID 1111. Term ID 1111
         String Access_TKN = "";
             JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
                     BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
