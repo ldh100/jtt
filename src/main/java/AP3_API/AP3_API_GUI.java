@@ -3388,7 +3388,6 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             task BR = new AP3_API.task(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time; FAILED += BR.FAILED;
-            r_time += BR.r_time;
             ParentTest.getModel().setName("Task - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }

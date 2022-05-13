@@ -1282,13 +1282,7 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
         if (json != null) {
             AAA = json.toString(4);
             try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
+//
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
@@ -1298,13 +1292,7 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
         if (json != null) {
             AAA = json.toString(4);
             try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
+//                
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
@@ -1314,33 +1302,12 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
                 BaseAPI + "/location/record/" + New_BrandID + "?dryrun=false", Auth, "", 200, ParentTest, "no_jira");     
         if (json != null) {
             AAA = json.toString(4);
-            try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
+
         }
         JOB_Api_Call("Location > New_BrandID should be Deleted", "GET",
                 BaseAPI + "/location/brand/" + New_BrandID + "?extended=true&nocache=1", Auth, "", 404, ParentTest, "no_jira");
         if (json != null) {
             AAA = json.toString(4);
-            try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
         }        
         //</editor-fold>    
         
@@ -1350,13 +1317,7 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
         if (json != null) {
             AAA = json.toString(4);
             try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
+//                
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
@@ -1366,13 +1327,7 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
         if (json != null) {
             AAA = json.toString(4);
             try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
+//                
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
@@ -1383,13 +1338,7 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
         if (json != null) {
             AAA = json.toString(4);
             try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
+//                
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
@@ -1399,13 +1348,7 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
         if (json != null) {
             AAA = json.toString(4);
             try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
+//                
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
@@ -1417,63 +1360,25 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
                 BaseAPI + "/location/record/" + New_SiteID + "?dryrun=true", Auth, "", 200, ParentTest, "no_jira");     
         if (json != null) {
             AAA = json.toString(4);
-            try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
         }
         JOB_Api_Call("Location > New_SiteID should Not be Deleted", "GET",
                 BaseAPI + "/location/group/" + New_SiteID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {
             AAA = json.toString(4);
-            try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
         }    
         
         JOB_Api_Call("Location/record - DELETE newly created New_SiteID > dryrun=false", "DELETE", 
                 BaseAPI + "/location/record/" + New_SiteID + "?dryrun=false", Auth, "", 200, ParentTest, "no_jira");     
         if (json != null) {
             AAA = json.toString(4);
-            try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
+
         }
         JOB_Api_Call("Location > New_SiteID should be Deleted", "GET",
                 BaseAPI + "/location/group/" + New_SiteID + "?extended=true&nocache=1", Auth, "", 404, ParentTest, "no_jira");
         if (json != null) {
             AAA = json.toString(4);
             try {
-//                if (json.has("timeslots")) {
-//                    JSONArray timeslots = json.getJSONArray("timeslots");
-//                    for (int i = 0; i < timeslots.length(); i++) {
-//                        JSONObject timeslot = timeslots.getJSONObject(i);
-//                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-//                    }
-//                }
+
             } catch (Exception ex) {
                 AAA = ex.getMessage();
             }
@@ -1485,66 +1390,25 @@ When user try to delete Site ->Business unit ->all station /Cascading data shoul
 //                BaseAPI + "/location/record/" + New_SectorID + "?dryrun=true", Auth, "", 200, ParentTest, "no_jira");     
 //        if (json != null) {
 //            AAA = json.toString(4);
-//            try {
-////                if (json.has("timeslots")) {
-////                    JSONArray timeslots = json.getJSONArray("timeslots");
-////                    for (int i = 0; i < timeslots.length(); i++) {
-////                        JSONObject timeslot = timeslots.getJSONObject(i);
-////                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-////                    }
-////                }
-//            } catch (Exception ex) {
-//                AAA = ex.getMessage();
-//            }
 //        }
 //        JOB_Api_Call("Location > New_SectorID should Not be Deleted", "GET",
 //                BaseAPI + "/location/group/" + New_SectorID + "?extended=true&nocache=1", Auth, "", 200, ParentTest, "no_jira");
 //        if (json != null) {
 //            AAA = json.toString(4);
-//            try {
-////                if (json.has("timeslots")) {
-////                    JSONArray timeslots = json.getJSONArray("timeslots");
-////                    for (int i = 0; i < timeslots.length(); i++) {
-////                        JSONObject timeslot = timeslots.getJSONObject(i);
-////                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-////                    }
-////                }
-//            } catch (Exception ex) {
-//                AAA = ex.getMessage();
-//            }
+
 //        }    
 //        
 //        JOB_Api_Call("Location/record - DELETE newly created New_SectorID > dryrun=false", "DELETE", 
 //                BaseAPI + "/location/record/" + New_SectorID + "?dryrun=false", Auth, "", 200, ParentTest, "no_jira");     
 //        if (json != null) {
 //            AAA = json.toString(4);
-//            try {
-////                if (json.has("timeslots")) {
-////                    JSONArray timeslots = json.getJSONArray("timeslots");
-////                    for (int i = 0; i < timeslots.length(); i++) {
-////                        JSONObject timeslot = timeslots.getJSONObject(i);
-////                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-////                    }
-////                }
-//            } catch (Exception ex) {
-//                AAA = ex.getMessage();
-//            }
+
 //        }
 //        JOB_Api_Call("Location > New_SectorID should be Deleted", "GET",
 //                BaseAPI + "/location/group/" + New_SectorID + "?extended=true&nocache=1", Auth, "", 404, ParentTest, "no_jira");
 //        if (json != null) {
 //            AAA = json.toString(4);
-//            try {
-////                if (json.has("timeslots")) {
-////                    JSONArray timeslots = json.getJSONArray("timeslots");
-////                    for (int i = 0; i < timeslots.length(); i++) {
-////                        JSONObject timeslot = timeslots.getJSONObject(i);
-////                        DELIEVEY_TIMESLOTS.add(timeslot.getNumber("id").toString());
-////                    }
-////                }
-//            } catch (Exception ex) {
-//                AAA = ex.getMessage();
-//            }
+
 //        }        
 //        //</editor-fold>          
  

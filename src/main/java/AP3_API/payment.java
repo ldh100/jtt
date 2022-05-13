@@ -5,8 +5,11 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-//Freedom Pay Store ID: 1456207013/1471190011/1456216012
+// In Staging and Development - for all Sites, brands
+//Freedom Pay Store ID: 1456207011 / 1471190011 / 1456216013
 //Freedom Pay Terminal ID: 2459269011
+
+// SID 1490800013
 
 class payment extends AP3_API_GUI {
 

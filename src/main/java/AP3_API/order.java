@@ -299,9 +299,9 @@ class order extends AP3_API_GUI{
         }   
  
         if(DELIEVEY_TIMESLOTS.isEmpty()) {
-            EX += " - " + "\t" + "Delivery" + "\t" + "Timeslots" + "\t" + "Empty - Not Found" + "\t" + "WARN" + "\t" + " - "
+            EX += " - " + "\t" + "Delivery" + "\t" + "Timeslots" + "\t" + "Empty - Cannot place Devilery Order" + "\t" + "WARN" + "\t" + " - "
                     + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("WARN", "", ParentTest.createNode("Delivery Timeslots > Empty List - Not Found"), new Date());
+            Log_Html_Result("WARN", "", ParentTest.createNode("Delivery Timeslots > Empty List - Cannot place Devilery Order"), new Date());
             return;
         }
   

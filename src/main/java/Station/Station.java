@@ -727,6 +727,7 @@ public class Station extends javax.swing.JInternalFrame {
            return;
         }   
         GetMenuTimeslots();
+        GetDeliveryTimeslots();
         GetItems();
         MenuLastRow = DV_Menus.getSelectedRow();  
         Validate_Place_Order();        
@@ -1649,11 +1650,11 @@ public class Station extends javax.swing.JInternalFrame {
             }
             Result = response.getStatusLine();
             status = response.getStatusCode();
-            if (status != 200 && status != 201) {
+//            if (status != 200 && status != 201) {
                 txtLog.append("Endpoint: " + EndPoint + "\r\n");
                 txtLog.append("Result: " + status + " - " + Result + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
-            }
+//            }
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
@@ -1701,65 +1702,65 @@ public class Station extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
             return;
         }
-        if(COUNTRY.toLowerCase().startsWith("c")){
-            if(TYPE.equals("P")){
-                New_Pickup_ShoppingCart(); 
-                if(FAIL) {
-                    Validate_Place_Order();
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                    return;
-                }
-                if(env.equals("PR")){
-                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
-                    Validate_Place_Order();
-                    return;
-                }else{                 
-                    EXACT();
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }                
-                    Place_Update_Pickup_Order(EXACT_Payment_TKN);
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }
-                }
-            }
-            if(TYPE.equals("D")){
-                New_Delivery_ShoppingCart(); 
-                if(FAIL) {
-                    Validate_Place_Order();
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                    return;
-                }
-                if(env.equals("PR")){
-                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-                    Validate_Place_Order();
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                    return;
-                }else{                
-                    EXACT();
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }                
-                    Place_Update_Delivery_Order(EXACT_Payment_TKN);
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }
-                }
-            }            
-        }
-        if(COUNTRY.toLowerCase().startsWith("u")){
+//        if(COUNTRY.toLowerCase().startsWith("c")){
+//            if(TYPE.equals("P")){
+//                New_Pickup_ShoppingCart(); 
+//                if(FAIL) {
+//                    Validate_Place_Order();
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                    return;
+//                }
+//                if(env.equals("PR")){
+//                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+//                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
+//                    Validate_Place_Order();
+//                    return;
+//                }else{                 
+//                    EXACT();
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }                
+//                    Place_Update_Pickup_Order(EXACT_Payment_TKN);
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }
+//                }
+//            }
+//            if(TYPE.equals("D")){
+//                New_Delivery_ShoppingCart(); 
+//                if(FAIL) {
+//                    Validate_Place_Order();
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                    return;
+//                }
+//                if(env.equals("PR")){
+//                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+//                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
+//                    Validate_Place_Order();
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                    return;
+//                }else{                
+//                    EXACT();
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }                
+//                    Place_Update_Delivery_Order(EXACT_Payment_TKN);
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }
+//                }
+//            }            
+//        }
+//        if(COUNTRY.toLowerCase().startsWith("u")){
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart();  
                 if(FAIL) {
@@ -1816,7 +1817,7 @@ public class Station extends javax.swing.JInternalFrame {
                     }
                 }
             } 
-        }
+        //}
         Validate_Place_Order();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
