@@ -67,6 +67,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     public AP3_API_GUI() {
         initComponents();
     }
+// AP3_API_PR 15 9 * * 1-5|15 11 * * 1-5|15 14 * * 1-5
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1173,7 +1174,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         sw1.start();
 
         try {
-            J += GUI_API_Get(BaseAPI + "", "Bearer " + AP3_TKN) + "\r\n";
+            J += GUI_API_Get(BaseAPI + "/location/sector?_provider=cdl", "Bearer " + AP3_TKN) + "\r\n";
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
@@ -2618,7 +2619,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         Log = "";
         String RES = "";
         JOB_Name = job_name;
-
+        txtLog.setText("");
         RES = JOB_Load_CONFIG(config);
         if (RES.contains("ERROR")) {
             Current_Log_Update(false, RES);
@@ -2694,11 +2695,11 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             switch (env) {
                 case "ST":
                     BaseAPI = "https://api.compassdigital.org/staging";
-                    FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+                    FP_URL = "https://cwallet.uat.freedompay.com"; 
                     break;
                 case "DE":
                     BaseAPI = "https://api.compassdigital.org/dev";
-                    FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+                    FP_URL = "https://cwallet.uat.freedompay.com"; 
                     break;
                 default:
                     BaseAPI = "https://api.compassdigital.org/v1";
@@ -2933,7 +2934,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception {
                 Extent_Report_Config();
                 NewID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                Execute(); // ========================== ===========================================cleanup lists >>>>
+                Execute(); // ========================== =========================================== cleanup lists >>>>
                 BolterBrandIDS = new ArrayList<>();
                 SECTOR_IDS = new ArrayList<>();
                 COMP_IDS = new ArrayList<>();
@@ -2958,12 +2959,14 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
 
             @Override
             protected void done() {
+                BW1 = null; 
                 try {
                     Summary = "";
-                    String statusMsg = (String) get();
-                    txtLog.append("" + statusMsg + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                    BW1 = null;
+                    if(GUI) {
+                        String statusMsg = (String) get();
+                        txtLog.append("" + statusMsg + "\r\n");
+                        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    }
                 } catch (InterruptedException | ExecutionException ex) {
                     Current_Log_Update(GUI, "- Execution ERROR: " + ex.getMessage() + "\r\n");
                     Summary = " Execution Error: " + ex.getMessage();
@@ -2972,8 +2975,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                     _f++;
                     EX += " - " + "\t" + "=== Fatal Execution Error ===" + "\t" + " >>> " + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - "
                         + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", ex.getMessage(), ParentTest.createNode("Fatal Execution Error"), API_SRART);                    
-                    
+                    Log_Html_Result("FAIL", ex.getMessage(), ParentTest.createNode("Fatal Execution Error"), API_SRART);                                        
                 }
                 BW1_Done(GUI); // ================================================================================ 
             }
@@ -3181,9 +3183,9 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             if (MENU_TIMESLOTS.isEmpty()) {
                 _t++;
                 _w++;
-                EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Timeslots" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
+                EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Pickup Timeslots" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "No Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Timeslots"), new Date());
+                Log_Html_Result("WARN", "No Pickup Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Pickup Timeslots"), new Date());
                 FAIL = true;
                 return;
             } else if (CATEGORIES_IDS.isEmpty()) {

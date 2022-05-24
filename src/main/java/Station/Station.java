@@ -1659,7 +1659,6 @@ public class Station extends javax.swing.JInternalFrame {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     txtLog.append("Error: " + json.getString("error") + "\r\n");
-
                 }
             }
         } catch (Exception ex) {

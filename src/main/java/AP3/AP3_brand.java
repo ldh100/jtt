@@ -123,6 +123,9 @@ class AP3_brand extends AP3_GUI{
                 if (FAIL) { return;}
             Element_Child_Attribute("Brand Unit", L0.get(i), "xpath", ".//h4[contains(@class, 'Brand-Unit')]", "textContent", ParentTest, "no_jira");   
                 if (FAIL) { return;}
+
+//  Check UNIT Configuration, JDE Env
+
             Element_Child_List_L1("Unit Stations Count", L0.get(i), "tagName", "tr", ParentTest, "no_jira");             
                 if (FAIL) { return;}
             for (int j = 2; j < L1.size(); j++) {  
@@ -130,14 +133,12 @@ class AP3_brand extends AP3_GUI{
                     if (FAIL) { continue;}
                 if(t.trim().startsWith(BRAND)){
                     T_Index = j;
-                    Element_Child_List_L2("Stations List Column Count", L1.get(j), "tagName", "td", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
+                    Element_Child_List_L2("Stations List Column Count", L1.get(j), "tagName", "td", ParentTest, "no_jira"); 
                     BRAND_TABLE_COL_COUNT = L2.size();
                     Element_Child_List_L2("Save Target Stations List", L0.get(i), "tagName", "tr", ParentTest, "no_jira"); // remember Brand List wheere BRAND found
                 }
             }
         }     
-//        Move_to_Element_By_Path("Scroll to Brand data row", "xpath", "//td[contains(text(), '" + BRAND.replace("'", "\'") + "')]", ParentTest, "no_jira");        
-//            if (FAIL) { return;} ///xPath doesn't work with "'" in find test
         Move_to_Element("Scroll to Brand data row", L2.get(T_Index), ParentTest, "no_jira");        
             if (FAIL) { return;} 
             
