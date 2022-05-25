@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
@@ -1618,7 +1619,7 @@ public class A extends javax.swing.JFrame {
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Name'");
             rs.next();
             C1_Name = new String(Base64.getDecoder().decode(rs.getString(1)));  
-            
+
             // clean-up Reports
 //            Statement st = conn.createStatement();
 //            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");

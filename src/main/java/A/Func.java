@@ -25,18 +25,13 @@ import javax.swing.table.TableCellRenderer;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.slack.api.Slack;
-import com.slack.api.SlackConfig;
 import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import com.slack.api.methods.MethodsClient;
 import com.slack.api.model.Attachment;
-import com.slack.api.model.Message;
-import com.slack.api.util.http.SlackHttpClient;
-import com.slack.api.webhook.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -472,7 +467,7 @@ public class Func {
                 .attachments(atts)
             );
             if (response.isOk()) {
-                return "message responce is OK";
+                return "Message responce is OK";
             } else {
                 return response.getError(); // e.g., "invalid_auth", "channel_not_found"
             }            

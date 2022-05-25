@@ -26,7 +26,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -2959,14 +2961,12 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
 
             @Override
             protected void done() {
-                BW1 = null; 
                 try {
                     Summary = "";
-                    if(GUI) {
                         String statusMsg = (String) get();
                         txtLog.append("" + statusMsg + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                    }
+                    BW1 = null;
                 } catch (InterruptedException | ExecutionException ex) {
                     Current_Log_Update(GUI, "- Execution ERROR: " + ex.getMessage() + "\r\n");
                     Summary = " Execution Error: " + ex.getMessage();
@@ -3071,11 +3071,21 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             }
         }
 
-        //if (GUI && env.equals("PR")) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
-        if (!GUI && env.equals("PR") && _f > 0) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
+        //if (GUI && env.equals("PR")) { // Send API Prod CRON (!GUI) failure to Slack - Setup independed
+        if (!GUI && env.equals("PR") && _f > 0 && !Log.contains("Execution ERROR")) { 
+            String SEND;
+            String XX;
             String Msg = " === JTT cron - AP3 API Production test: " + _f + " failed";
-            String SEND = A.Func.Message_to_Slack("#test-engineering", Msg, FAILED, true); // #qa_only #test-engineering
-            //String XX = SEND;
+            SEND = A.Func.Message_to_Slack("#test-engineering", Msg, FAILED, true); 
+//            XX = SEND;
+            if( 
+                LocalDate.now().getDayOfWeek().getValue() == 2 && 
+                LocalTime.now().isAfter(LocalTime.parse("15:45")) &&
+                LocalTime.now().isBefore(LocalTime.parse("16:15")) 
+            ){
+                SEND = A.Func.Message_to_Slack("#production-deploy", Msg, FAILED, true); 
+                XX = SEND;
+            }        
         }
     }
     //</editor-fold>    
