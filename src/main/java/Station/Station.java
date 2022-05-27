@@ -1157,6 +1157,8 @@ public class Station extends javax.swing.JInternalFrame {
                             }
                             if(br.has("is") && !br.getJSONObject("is").isNull("frictionless_supported")){
                                 FLess =  br.getJSONObject("is").getBoolean("frictionless_supported");
+                            }else{
+                                FLess = false;
                             }
                             BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id, FLess});
                         }
