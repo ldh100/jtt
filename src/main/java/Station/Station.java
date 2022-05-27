@@ -23,6 +23,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -50,6 +51,13 @@ import org.json.JSONObject;
     Production Site for BC 
     https://adminpanel.compassdigital.org/#/sites/Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d/site/PpzmrEBrveH1kX3Zrk3ytzrrB0O1XpSk3m973O9Xcw46vkWyKPtl8JGR17m2TEoDLA2YAETGOo/
     
+
+    Production :
+    Frictionless site Boost : Compass Group Canada   >> Brand : Vending Machine
+    Frictionless site Thrive : Compass group Canada. >> Brand : Avenue C
+    Staging :
+    Frictionless site Boost : Compass HQ >> Brand : test_brand
+    Frictionless site Thrive : CDL Head Office  >> Brand : Avenue
 */   
 public class Station extends javax.swing.JInternalFrame {
     public Station() {
@@ -111,12 +119,12 @@ public class Station extends javax.swing.JInternalFrame {
         setSize(new java.awt.Dimension(850, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -494,7 +502,7 @@ public class Station extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES)
                     .addComponent(lblMenus)
@@ -567,6 +575,7 @@ public class Station extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="Variables Declarations">
+    protected boolean FLess = false;
     protected double combined_tax_rate = 0.0;
     protected double gst_tax_rate = 0.0;
     protected double qst_tax_rate = 0.0;
@@ -674,8 +683,15 @@ public class Station extends javax.swing.JInternalFrame {
         }
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
+
         BrandLastRow = DV_Brands.getSelectedRow();  
-        
+        FLess  = Boolean.parseBoolean(String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 5))); 
+        if(FLess) {
+            btnPOrder.setText("Place FrLess Order");
+        } else {
+            btnPOrder.setText("Place Pickup Order");
+        }
+     
         GetBrandDropOffLocations(); // ===================================
         GetMenus();                 // ===================================  
         Validate_Place_Order();
@@ -1090,7 +1106,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.setModel(Model);
         lblMenus.setText("Click Brand to get Menu(s) ...");              
      
-        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID"}; 
+        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID", "FLess"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV_Brands.setModel(BrandsModel);
@@ -1139,7 +1155,10 @@ public class Station extends javax.swing.JInternalFrame {
                                     menu_ids += menu.getString("id") + ","; 
                                 }  
                             }
-                            BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id});
+                            if(br.has("is") && !br.getJSONObject("is").isNull("frictionless_supported")){
+                                FLess =  br.getJSONObject("is").getBoolean("frictionless_supported");
+                            }
+                            BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id, FLess});
                         }
                     }
                 }
@@ -1852,7 +1871,7 @@ public class Station extends javax.swing.JInternalFrame {
         FAIL = false;
         String CCC = "";
         btnSCart.setEnabled(false);
-        txtLog.append("\r\n- " + "New Pickup Shopping Cart ...." + "\r\n");
+        txtLog.append("\r\n- " + "New Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
 
         Auth = "Bearer " + Mobile_User_TKN; 
@@ -1877,7 +1896,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         } 
         Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
-        txtLog.append("\r\n- " + "Add Menu Item(s) to Pickup Shopping Cart ...." + "\r\n");
+        txtLog.append("\r\n- " + "Add Menu Item(s) to Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
 
@@ -1938,7 +1957,7 @@ public class Station extends javax.swing.JInternalFrame {
         }  
         
         if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
-            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Pickup Shopping Cart ...." + "\r\n");
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
@@ -2334,35 +2353,68 @@ public class Station extends javax.swing.JInternalFrame {
     }
     private void Place_Update_Pickup_Order(String Payment_TKN){
         FAIL = false;
-        txtLog.append("\r\n- " + "Place Pickup Order ...." + "\r\n");
+        txtLog.append("\r\n- " + "Place Order ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
-        Auth = "Bearer " + Mobile_User_TKN;                               
-        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
-        requestParams.put("location_brand", BrandID);
-        requestParams.put("customer", Mobile_User_ID);
-        requestParams.put("pickup_name", txtMSG.getText());
-        requestParams.put("pickup", Requested_Date);
-        requestParams.put("requested_date", Requested_Date);
-        requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
-        JSONObject payment = new JSONObject();
-        payment.put("token", Payment_TKN);
-        requestParams.put("payment", payment); 
-        BODY = requestParams.toString();       
+        Auth = "Bearer " + Mobile_User_TKN;  
+        if(!FLess)  {                           
+            requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+            requestParams.put("location_brand", BrandID);
+            requestParams.put("customer", Mobile_User_ID);
+            requestParams.put("pickup_name", txtMSG.getText());
+            requestParams.put("pickup", Requested_Date);
+            requestParams.put("requested_date", Requested_Date);
+            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+            JSONObject payment = new JSONObject();
+            payment.put("token", Payment_TKN);
+            requestParams.put("payment", payment); 
+
+            JSONObject details = new JSONObject();
+            details.put("order_type", "pickup");
+            requestParams.put("details", details); 
+        } else {
+            requestParams = new JSONObject();       //  Mobile User Place Frictionless Order  =================
+            requestParams.put("location_brand", BrandID);
+            requestParams.put("customer", Mobile_User_ID);
+            requestParams.put("pickup_name", txtMSG.getText());
+            requestParams.put("pickup", Requested_Date);
+
+
+            requestParams.put("requested_date", Requested_Date);
+            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+
+            JSONObject payment = new JSONObject();
+            payment.put("token", Payment_TKN);
+            requestParams.put("payment", payment); 
+
+// checkin_uuid > in menta
+// external_customer_id
+            JSONObject meta = new JSONObject();
+            meta.put("checkin_uuid", UUID.randomUUID().toString().replace("-", ""));
+            requestParams.put("meta", meta);
+
+            JSONObject details = new JSONObject();
+            details.put("name", "JTT Frictionless");
+            details.put("order_type", "frictionless");
+            //details.put("destination", cmbLoc.getSelectedItem().toString());
+            requestParams.put("details", details);
+        }
+        BODY = requestParams.toString();  
+     
         Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
         if(json != null && json.has("id")){
             Order_Pickup_ID = json.getString("id");
-            txtLog.append("== " + "New Pickup Order ID: "  + Order_Pickup_ID + "\r\n");
+            txtLog.append("== " + "New Order ID: "  + Order_Pickup_ID + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }else{
             FAIL = true; 
             return;
         }        
         
-        txtLog.append("\r\n- " + "Update Pickup Order > 'Ready' ...." + "\r\n");
+        txtLog.append("\r\n- " + "Update Order > 'Ready' ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Update Pickup Order  =================
+        requestParams = new JSONObject();   //  Update Order  =================
         JSONObject is = new JSONObject();      
         is.put("in_progress", true);
         is.put("ready", true);     
@@ -2372,11 +2424,11 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 Order_Pickup_ID = json.getString("id");
-                txtLog.append("== " + "Updated Pickup Order ID: "  + Order_Pickup_ID + "\r\n");
+                txtLog.append("== " + "Updated Order ID: "  + Order_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
-                txtLog.append("== " + "Update Pickup Order ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.append("== " + "Update Order ERROR: "  + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
         }   

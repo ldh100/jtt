@@ -404,7 +404,9 @@ public class Env extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnStatisticsMouseClicked
 
     private void btnApiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnApiMouseClicked
-        GET_API();
+        if(btnApi.isEnabled()){
+            GET_API();
+        }
     }//GEN-LAST:event_btnApiMouseClicked
     
     private void Get_AP3_TKN(){

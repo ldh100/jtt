@@ -3075,7 +3075,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         if (!GUI && env.equals("PR") && _f > 0 && !Log.contains("Execution ERROR")) { 
             String SEND;
             String XX;
-            String Msg = " === JTT cron - AP3 API Production test: " + _f + " failed";
+            String Msg = " === Job " + JOB_Name + ": " + _f + " failed"; //AP3 API Production test
             SEND = A.Func.Message_to_Slack("#test-engineering", Msg, FAILED, true); 
 //            XX = SEND;
             if( 
