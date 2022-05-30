@@ -55,6 +55,7 @@ import org.json.JSONObject;
     Production :
     Frictionless site Boost : Compass Group Canada   >> Brand : Vending Machine
     Frictionless site Thrive : Compass group Canada. >> Brand : Avenue C
+
     Staging :
     Frictionless site Boost : Compass HQ >> Brand : test_brand
     Frictionless site Thrive : CDL Head Office  >> Brand : Avenue

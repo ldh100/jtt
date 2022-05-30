@@ -7,18 +7,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import static java.time.ZoneOffset.UTC;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,8 +28,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.poi.hssf.model.ConvertAnchor;
-import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -317,7 +307,7 @@ public class Env extends javax.swing.JInternalFrame {
             if(cmbWhat.getSelectedItem().toString().equals("Sectors")) {
                 GetSectors();
             } else if(cmbWhat.getSelectedItem().toString().equals("JDE_Categories")){
-                btnApi.setEnabled(false);
+                //btnApi.setEnabled(false);
                 GetJDE();
             } else if(cmbWhat.getSelectedItem().toString().equals("Companies")){
                 GetCompanies();
@@ -937,8 +927,8 @@ public class Env extends javax.swing.JInternalFrame {
                 J += API_Get(BaseAPI + "/location/sector/" + ID + "?expanded=false", "Bearer " + AP3_TKN) + "\r\n";
 
             } else if(cmbWhat.getSelectedItem().toString().equals("JDE_Categories")){
-                ID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("Id").getModelIndex()));
-                J += API_Get(BaseAPI + "/config/" + ID, "Bearer " + AP3_TKN) + "\r\n"; //jde-configuration/
+                J += "\r\n========= JDE Configuration:" + "\r\n";
+                J += API_Get(BaseAPI + "/config/jde-configuration", "Bearer " + AP3_TKN) + "\r\n"; //jde-configuration/
 
             } else if(cmbWhat.getSelectedItem().toString().equals("Menus")){
                 ID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("menuId").getModelIndex()));
