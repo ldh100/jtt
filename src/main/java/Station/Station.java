@@ -577,6 +577,7 @@ public class Station extends javax.swing.JInternalFrame {
 
     // <editor-fold defaultstate="collapsed" desc="Variables Declarations">
     protected boolean FLess = false;
+    protected boolean SandG = false;
     protected double combined_tax_rate = 0.0;
     protected double gst_tax_rate = 0.0;
     protected double qst_tax_rate = 0.0;
@@ -689,6 +690,8 @@ public class Station extends javax.swing.JInternalFrame {
         FLess  = Boolean.parseBoolean(String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 5))); 
         if(FLess) {
             btnPOrder.setText("Place FrLess Order");
+        } else if(SandG) {
+            btnPOrder.setText("Place SandG Order");
         } else {
             btnPOrder.setText("Place Pickup Order");
         }
@@ -1107,7 +1110,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.setModel(Model);
         lblMenus.setText("Click Brand to get Menu(s) ...");              
      
-        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID", "FLess"}; 
+        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID", "FLess", "SandG"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV_Brands.setModel(BrandsModel);
@@ -1161,7 +1164,12 @@ public class Station extends javax.swing.JInternalFrame {
                             }else{
                                 FLess = false;
                             }
-                            BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id, FLess});
+                            if(br.has("is") && !br.getJSONObject("is").isNull("scan_and_go_supported")){
+                                SandG =  br.getJSONObject("is").getBoolean("scan_and_go_supported");
+                            }else{
+                                SandG = false;
+                            }
+                            BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id, FLess, SandG});
                         }
                     }
                 }
@@ -1194,7 +1202,7 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3)); 
 //            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
-//            GetDeliveryTimeslots();        // ============== comment to force only after Brand click / selection
+//            GetDeliveryTimeslots();     // ============== comment to force only after Brand click / selection
 //            GetMenus();                 // ============== comment to force only after Brand click / selection
         } else {
             BrandID = "null";
@@ -1851,8 +1859,9 @@ public class Station extends javax.swing.JInternalFrame {
         Mobile_User_ID = "";
         Mobile_User_TKN = "";
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = A.Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);      
-        
+        String Realm = A.Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);  
+
+       
         try {     // ============ Mobile User Authentication =====================================
             Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
@@ -1868,18 +1877,37 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
+
+//        try {     // ============ Mobile User Change Location =====================================
+//            Auth = "Bearer " + Mobile_User_TKN;
+//            BODY = "{\"meta\": {\"last_location\":\"" + SiteID + "\"}}"; 
+//            Api_Call("PUT", BaseAPI + "/user/" + Mobile_User_ID + "?lang=en", Auth, BODY);
+//            if(json != null){
+//                txtLog.append("== " + BaseAPI + "/user/" + Mobile_User_ID + "?lang=en" + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            }    
+//        } catch (Exception ex) {
+//            FAIL = true;
+//            txtLog.append(" > " + J + "\r\n"); 
+//            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        }     
     }                                    
 
     private void New_Pickup_ShoppingCart(){
         FAIL = false;
-        String CCC = "";
         btnSCart.setEnabled(false);
         txtLog.append("\r\n- " + "New Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-
+        String type = "pickup";
+        if(FLess)  {                           
+            type = "pickup";
+        } else if(SandG) {
+            type = "scan_and_go";
+        }
         Auth = "Bearer " + Mobile_User_TKN; 
         BODY = "{\"brand\":\"" + BrandID + "\"," +
-            "\"is\":{\"type\":\"pickup\"}," +
+            "\"is\":{\"type\":\"" + type + "\"}," +
             "\"mealSwipeTotal\":0.0," +
             "\"menu\":\"" + DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2).toString() + "\"," +  
             "\"showSingleTimeSlot\":false," +
@@ -2094,7 +2122,6 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         }   
-        
         Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         btnSCart.setEnabled(true);
         Report_Tax();
@@ -2140,10 +2167,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }
     private void Print_SCart() {
-    
-    // To see some other SCart    
-    //Last_SCart = "https://api.compassdigital.org/dev/shoppingcart/AXNLQg1DQ9tq3PjmKG3eT0J8z1mZ9otAovNdm2ERF9e1Mp1XDXcEW3jM7qwacNOQGDq";    
-
         if(btnSCart.isEnabled()){
             txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
@@ -2205,8 +2228,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 
         BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
-        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
-            
+        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {            
 //            JOB_Api_Call("Mobile User Delete Payment Method " + (Item_Index + 1), "DELETE",
 //                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(Item_Index), Auth, BODY, 200, ParentTest, "no_jira");
         }
@@ -2360,7 +2382,45 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
         Auth = "Bearer " + Mobile_User_TKN;  
-        if(!FLess)  {                           
+        if(FLess)  {                           
+            requestParams = new JSONObject();       //  Mobile User Place Frictionless Order  =================
+            requestParams.put("location_brand", BrandID);
+            requestParams.put("customer", Mobile_User_ID);
+            requestParams.put("pickup_name", txtMSG.getText());
+            requestParams.put("pickup", Requested_Date);
+            requestParams.put("requested_date", Requested_Date);
+            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+            JSONObject payment = new JSONObject();
+            payment.put("token", Payment_TKN);
+            requestParams.put("payment", payment); 
+
+            JSONObject meta = new JSONObject();
+            meta.put("checkin_uuid", UUID.randomUUID().toString().replace("-", ""));
+            requestParams.put("meta", meta);
+
+            JSONObject details = new JSONObject();
+            details.put("name", "JTT Frictionless");
+            details.put("order_type", "frictionless"); //  "order_type": "scan_and_go",     "scan_and_go_supported": true,
+            //details.put("destination", cmbLoc.getSelectedItem().toString());
+            requestParams.put("details", details); 
+        } else if(SandG) {
+            requestParams = new JSONObject();       //  Mobile User Place Scan and Go Order  =================
+            requestParams.put("location_brand", BrandID);
+            requestParams.put("customer", Mobile_User_ID);
+            requestParams.put("pickup_name", txtMSG.getText());
+            requestParams.put("pickup", Requested_Date);
+            requestParams.put("requested_date", Requested_Date);
+            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+            JSONObject payment = new JSONObject();
+            payment.put("token", Payment_TKN);
+            requestParams.put("payment", payment); 
+
+            JSONObject details = new JSONObject();
+            details.put("name", "JTT Scan&Go");
+            details.put("order_type", "scan_and_go"); //  "order_type": "scan_and_go",     "scan_and_go_supported": true,
+            //details.put("destination", cmbLoc.getSelectedItem().toString());
+            requestParams.put("details", details); 
+        } else {
             requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
             requestParams.put("location_brand", BrandID);
             requestParams.put("customer", Mobile_User_ID);
@@ -2375,32 +2435,6 @@ public class Station extends javax.swing.JInternalFrame {
             JSONObject details = new JSONObject();
             details.put("order_type", "pickup");
             requestParams.put("details", details); 
-        } else {
-            requestParams = new JSONObject();       //  Mobile User Place Frictionless Order  =================
-            requestParams.put("location_brand", BrandID);
-            requestParams.put("customer", Mobile_User_ID);
-            requestParams.put("pickup_name", txtMSG.getText());
-            requestParams.put("pickup", Requested_Date);
-
-
-            requestParams.put("requested_date", Requested_Date);
-            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
-
-            JSONObject payment = new JSONObject();
-            payment.put("token", Payment_TKN);
-            requestParams.put("payment", payment); 
-
-// checkin_uuid > in menta
-// external_customer_id
-            JSONObject meta = new JSONObject();
-            meta.put("checkin_uuid", UUID.randomUUID().toString().replace("-", ""));
-            requestParams.put("meta", meta);
-
-            JSONObject details = new JSONObject();
-            details.put("name", "JTT Frictionless");
-            details.put("order_type", "frictionless");
-            //details.put("destination", cmbLoc.getSelectedItem().toString());
-            requestParams.put("details", details);
         }
         BODY = requestParams.toString();  
      
@@ -2413,7 +2447,9 @@ public class Station extends javax.swing.JInternalFrame {
             FAIL = true; 
             return;
         }        
-        
+        if(FLess || SandG)  { 
+            return; // Skip Update status for Frictionless ???
+        }
         txtLog.append("\r\n- " + "Update Order > 'Ready' ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;

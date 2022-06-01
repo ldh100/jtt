@@ -6,8 +6,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // In Staging and Development - for all Sites, brands
+
 //Freedom Pay Store ID: 1456207011 / 1471190011 / 1456216013
 //Freedom Pay Terminal ID: 2459269011
+
+//Delelopment > Trive "University of mississauga"   <<< Working
+//"freedompay_store_id":"1471190011",
+//"freedompay_terminal_id":"2479168011"
 
 // SID 1490800013
 
