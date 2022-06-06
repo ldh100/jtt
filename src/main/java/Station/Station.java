@@ -61,6 +61,7 @@ import org.json.JSONObject;
     Frictionless site Thrive : CDL Head Office  >> Brand : Avenue
 */   
 public class Station extends javax.swing.JInternalFrame {
+    List<String> Payment_Tokens_FP = new ArrayList<>();
     public Station() {
         initComponents();
     }
@@ -688,6 +689,7 @@ public class Station extends javax.swing.JInternalFrame {
 
         BrandLastRow = DV_Brands.getSelectedRow();  
         FLess  = Boolean.parseBoolean(String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 5))); 
+        SandG  = Boolean.parseBoolean(String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 6))); 
         if(FLess) {
             btnPOrder.setText("Place FrLess Order");
         } else if(SandG) {
@@ -1708,7 +1710,7 @@ public class Station extends javax.swing.JInternalFrame {
             btnPOrder.setEnabled(true);
         }
         if(DV_Items.getSelectedRowCount() > 0 && DV_DTS.getSelectedRowCount() > 0){
-            btnPOrder.setEnabled(true);
+            //btnPOrder.setEnabled(true);
             if(cmbLoc.getItemCount() > 0 && cmbLoc.getSelectedItem().toString().trim() != ""){
                 btnDOrder.setEnabled(true);
             }
@@ -2283,6 +2285,28 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         }
+// =========================
+        Auth = "Bearer " + Access_TKN;
+        Api_Call("GET", FP_URL + "/TokenService/api/consumers/tokens", Auth, "");
+        if (json != null) {
+            String AAA = json.toString(4);
+            try {
+                if (json.has("data")) {
+                    JSONArray tokens = json.getJSONArray("data");
+                    for (int i = 0; i < tokens.length(); i++) {
+                        JSONObject p = tokens.getJSONObject(i);
+                        Payment_Tokens_FP.add(p.getString("token"));
+                    }
+                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }       
+
+        for (int i = 0; i < Payment_Tokens_FP.size(); i++) {
+            Api_Call("DELETE", FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "");
+        } 
+// ==========================
         
         Auth = "Bearer " + Access_TKN;
         requestParams = new JSONObject();
