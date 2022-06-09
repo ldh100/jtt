@@ -1,8 +1,5 @@
 package AP3_API;
 
-import static A.A.FAIL;
-import static A.A._f;
-import static A.A.err;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

@@ -110,11 +110,23 @@ class AP3_brand extends AP3_GUI{
             } else{
                 TZone = "NotFound";
             }
-            
+        Find_Text("Find 'Add Unit..' Text", "Add Business Unit", true, ParentTest, "no_jira");             
         Element_By_Path_Text("Site 'Station List' text", "xpath", "//div[contains(@class, 'H6-Selected')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
         Element_By_Path_Text("Site Configuration", "xpath", "//*[contains(text(), 'Configuration')]", ParentTest, "no_jira"); 
-            if (FAIL) { return;}     
+            if (FAIL) { return;}   
+
+        Element_By_Path_Click("Click/Open 1st shown Unit Configuration", "xpath", "//i[@class='v-icon mdi mdi-settings theme--light']", ParentTest, "no_jira"); 
+            if (FAIL) { return;}
+        Find_Text("Find 'Unit Name' input", "Business Unit Name", true, ParentTest, "no_jira");
+        Find_Text("Find 'Unit Number' input", "Business Unit Number", true, ParentTest, "no_jira");
+        if(env.equals("PR") & COUNTRY.equals("CA")){ // if Prod and CAN > JDE Environment selection
+            Find_Text("Verify 'JDE Environment' selection available - CA, Production", "JDE Environment", true, ParentTest, "no_jira");     
+        } else{                                      // if !Prod or !CAN > No JDE Environment selection
+            Find_Text("Verify No 'JDE Environment' selection available - ST/DEV", "JDE Environment", false, ParentTest, "no_jira");
+        }
+        Navigate_Back("Navigate Back", "Unit Configuration", "Unit page", ParentTest, "no_jira"); 
+
         List_L0("Sites Unit(s) Count", "xpath", "//div[contains(@class, 'v-card-custom v-card v-sheet theme--light')]", ParentTest, "no_jira");             
             if (FAIL) { return;}
         int BRAND_TABLE_COL_COUNT = 0;    
@@ -124,7 +136,6 @@ class AP3_brand extends AP3_GUI{
             Element_Child_Attribute("Brand Unit", L0.get(i), "xpath", ".//h4[contains(@class, 'Brand-Unit')]", "textContent", ParentTest, "no_jira");   
                 if (FAIL) { return;}
 
-//  Check UNIT Configuration, JDE Env
 
             Element_Child_List_L1("Unit Stations Count", L0.get(i), "tagName", "tr", ParentTest, "no_jira");             
                 if (FAIL) { return;}

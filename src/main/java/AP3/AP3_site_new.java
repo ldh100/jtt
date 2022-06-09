@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
 class AP3_site_new extends AP3_GUI{
     protected AP3_site_new (AP3_GUI a) {
@@ -82,9 +80,9 @@ class AP3_site_new extends AP3_GUI{
 
         Element_By_Path_Text_Enter("Enter new Site Name", "xpath", "(//*[@aria-label='Location Name'])[2]", "New Auto Site " + New_ID, false, ParentTest, "no_jira");
             if (FAIL) { return;} 
-        Find_Text("Find 'Cancel' text", "Cancel", true,ParentTest, "no_jira"); 
+        Find_Text("Find 'Cancel' text", "Cancel", true, ParentTest, "no_jira"); 
             if (FAIL) { return;}
-        Find_Text("Find 'Create Site' text", "Create Site", true,ParentTest, "no_jira"); 
+        Find_Text("Find 'Create Site' text", "Create Site", true, ParentTest, "no_jira"); 
             if (FAIL) { return;}                                                                    
         List_L0("Site Info Navigation Count", "xpath", "//div[contains(@class, 'SelectedLeft')]", ParentTest, "no_jira");             
             if (FAIL) { return;}  
@@ -268,7 +266,7 @@ class AP3_site_new extends AP3_GUI{
                     Element_Child_List_L1("Tax exempt options", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");     
                     T_Index = -1;
                     for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Available Tax exempt options :", L1.get(j), ParentTest, "no_jira");
+                        Element_Text("Available Tax exempt option " + j, L1.get(j), ParentTest, "no_jira");
                             if (FAIL) { return;}
                             if(t.trim().equals("Yes"))
                                 T_Index = j;
@@ -366,7 +364,7 @@ class AP3_site_new extends AP3_GUI{
                         if (FAIL) { return;}                                         
                     Element_Child_List_L1("Promo Types Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                            
                         for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Promo Type:", L1.get(j), ParentTest, "no_jira");             
+                            Element_Text("Fund Promo Type " + j, L1.get(j), ParentTest, "no_jira");             
                         }                       
                     Element_By_Path_Click("Select Promo Type %%", "xpath", "//*[contains(text(), '" + "Percentage off" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
@@ -387,7 +385,7 @@ class AP3_site_new extends AP3_GUI{
                     Element_By_Path_Click("Select Promo State 'Active'", "xpath", "//*[contains(text(), '" + "Active" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
 
-                    Element_By_Path_Click("Create promo 'Save Changes' Click", "xpath", "//*[contains(text(), 'save changes')]", ParentTest, "no_jira"); 
+                    Element_By_Path_Click("Click new promo 'Save Changes'", "xpath", "//*[contains(text(), 'save changes')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}  
                     Element_E1_Find("Find 'Promotion Detail' section", "id", "promotion-detail", ParentTest, "no_jira");
                         if (FAIL) { return;} 
@@ -407,7 +405,7 @@ class AP3_site_new extends AP3_GUI{
                         if (FAIL) { return;}                                         
                     Element_Child_List_L1("Promo Types Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");                              
                         for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Promo Type:", L1.get(j), ParentTest, "no_jira");             
+                            Element_Text("Fund Promo Type " + j, L1.get(j), ParentTest, "no_jira");             
                         }  
                     Element_By_Path_Click("Select Promo Type $$", "xpath", "//*[contains(text(), '" + "Amount off" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
@@ -425,13 +423,13 @@ class AP3_site_new extends AP3_GUI{
                     Element_By_Path_Click("Select Promo State 'Active'", "xpath", "//*[contains(text(), '" + "Active" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
 
-                    Element_By_Path_Click("Create promo 'Save Changes' Click", "xpath", "//*[contains(text(), 'save changes')]", ParentTest, "no_jira"); 
+                    Element_By_Path_Click("Click new promo 'Save Changes'", "xpath", "//*[contains(text(), 'save changes')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;} 
                     Element_E1_Find("Find 'Promotion Detail' section", "id", "promotion-detail", ParentTest, "no_jira");
                         if (FAIL) { return;} 
                     Element_Child_List_L1("Promo Count - Only 1 Active", e1, "tagName", "tr", ParentTest, "no_jira");           
                         for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Promotion Data Row", L1.get(j), ParentTest, "no_jira");             
+                            Element_Text("Promotion Data Row " + j, L1.get(j), ParentTest, "no_jira");             
                         }                                
                         break;
                 case 5:
@@ -511,16 +509,24 @@ class AP3_site_new extends AP3_GUI{
             if(t.contains("/")){
                 S_ID = t.substring(t.lastIndexOf("site/") + 5);
             }
-        Find_Text("Find 'Add Unit..' Text", "Add Business Unit",true,ParentTest, "no_jira");             
+        Find_Text("Find 'Add Unit..' Text", "Add Business Unit", true, ParentTest, "no_jira");             
         Element_By_Path_Click("Click 'Add Business Unit'", "xpath", "//button[contains(@class, 'v-btn v-btn--outline v-btn--depressed theme--light primary--text')]",ParentTest, "no_jira");             
             if (FAIL) { return;}
         Thread.sleep(1000);
-        Find_Text("Find 'Convert to...' Text", "Convert to Marketplace",true,ParentTest, "no_jira");             
+        Find_Text("Find 'Convert to...' Text", "Convert to Marketplace", true, ParentTest, "no_jira");             
             if (FAIL) { return;}
         Element_By_Path_Text_Enter("Enter new Unit Name", "css", "[aria-label='Business Unit Name']", "New Auto Unit " + New_ID, false, ParentTest, "no_jira");
             if (FAIL) { return;} 
         Element_By_Path_Text_Enter("Enter new Unit Number", "css", "[aria-label='Business Unit Number']", New_ID, false, ParentTest, "no_jira");
-            if (FAIL) { return;}     
+            if (FAIL) { return;}  
+
+        if(env.equals("PR") & COUNTRY.equals("CA")){ // if Prod and CAN > JDE Environment selection
+            Find_Text("Verify 'JDE Environment' selection available - CA, Production", "JDE Environment", true, ParentTest, "no_jira");     
+        } else{                                      // if !Prod or !CAN > No JDE Environment selection
+            Find_Text("Verify No 'JDE Environment' selection available - ST/DEV", "JDE Environment", false, ParentTest, "no_jira");
+        }
+
+
         Element_By_Path_Click("Button 'Save unit' Click", "xpath", "//div[contains(text(), 'Save Business Unit')]",ParentTest, "no_jira");             
             if (FAIL) { return;}   
         Thread.sleep(500);    
@@ -680,11 +686,11 @@ class AP3_site_new extends AP3_GUI{
                       _w++; 
                       EX += _t + "\t" + "File to upload does not exist" + "\t" + "File : Ap3_brand_image  " + "\t" + "-" + "\t" + "WARN" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     }  
-                    Element_By_Path_Click("Station Location Description Click", "xpath", "//label[contains(text(), 'Location Description')]", ParentTest, "no_jira"); 
+                    Element_By_Path_Click("Click on 'Station Location Description'", "xpath", "//label[contains(text(), 'Location Description')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}
                     Element_By_Path_Text_Enter("Enter Station Location Description", "css", "[aria-label='Station Location Description']", "Attic " + New_ID, false, ParentTest, "no_jira"); 
                         if (FAIL) { return;}      
-                    Element_By_Path_Click("Location [Cost Centre] Click", "xpath", "//*[contains(text(), 'Location [Cost Centre]')]", ParentTest, "no_jira"); 
+                    Element_By_Path_Click("Click on 'Location [Cost Centre]'", "xpath", "//*[contains(text(), 'Location [Cost Centre]')]", ParentTest, "no_jira"); 
                         if (FAIL) { return;}  
                         
                     Element_E1_Find("Find 'Cost Centre' list", "xpath", "//div[contains(@class, 'v-menu__content theme--light menuable__content__active')]", ParentTest, "no_jira");
