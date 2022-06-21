@@ -17,7 +17,7 @@ class DL_login extends DL_GUI {
         Page_URL("Foodbuy Login page URL", ParentTest, "no_jira");         
 //        Element_By_Path_Text("Forgot Password Text", "xpath", "//*[contains(text(), 'Forgot your Password?')]", ParentTest, "no_jira");  
 //            if (FAIL) { return;}
-        Element_By_Path_Text("Button 'Sign in' Text", "xpath", "//*[contains(text(), 'Sign in')]", ParentTest, "no_jira");   
+        Element_By_Path_Text("Button 'Sign in' Text", "xpath", " //*[contains(text(), 'login')]", ParentTest, "no_jira");   
         Element_By_Path_Click("Click 'USERNAME' input", "id", "username", ParentTest, "no_jira");  
             if (FAIL) { return;}  
             
