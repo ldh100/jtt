@@ -526,7 +526,6 @@ class AP3_site_new extends AP3_GUI{
             Find_Text("Verify No 'JDE Environment' selection available - ST/DEV", "JDE Environment", false, ParentTest, "no_jira");
         }
 
-
         Element_By_Path_Click("Button 'Save unit' Click", "xpath", "//div[contains(text(), 'Save Business Unit')]",ParentTest, "no_jira");             
             if (FAIL) { return;}   
         Thread.sleep(500);    
