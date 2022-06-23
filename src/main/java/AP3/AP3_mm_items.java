@@ -301,6 +301,7 @@ class AP3_mm_items extends AP3_GUI{
         // ======= Add Modifier >>>
         Scroll_to_WebElement("Scroll to 'Add Modifier Group' button",  "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, Ver);
             if (FAIL) { return;}  
+        Thread.sleep(1000); 
         Element_By_Path_Click("Click 'Add Modifier Group'", "xpath", "//*[contains(text(), 'Add modifier group')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
         Element_By_Path_Click("Click 'Modifier Name' Input", "xpath", "//i[@class='v-icon mdi mdi-menu-down theme--light error--text']", ParentTest, "no_jira"); 
@@ -326,6 +327,7 @@ class AP3_mm_items extends AP3_GUI{
         // Images >>>>
         Scroll_to_WebElement("Scroll to 'Item Image' tab", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, Ver);
             if (FAIL) { return;}  
+        Thread.sleep(1000); 
         Element_By_Path_Click("Click 'Item Image' tab", "xpath", "//div[contains(text(), 'Item Image')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Find_Text("Find 'Add Image' text", "Add Image", true, ParentTest, "no_jira");
@@ -885,6 +887,7 @@ class AP3_mm_items extends AP3_GUI{
             EX += " - " + "\t" + " === Add new modifier to a group" + "\t" + " ===== " + "\t" + " == >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";
             Scroll_to_WebElement("Scroll to 'ADD MODIFIER' button",  "xpath", "//*[contains(text(), 'Add MODIFIER')]", ParentTest, Ver);
                 if (FAIL) { return;} 
+            Thread.sleep(1000); 
             Element_By_Path_Click("Click > ADD MODIFIER", "xpath", "//*[contains(text(),'Add MODIFIER')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             List_L1("Modifiers (+new) Count", "xpath", "//div[@class='layout modifier row wrap align-center']", ParentTest, "no_jira");
