@@ -127,14 +127,14 @@ class AP3_site_new extends AP3_GUI{
                         if (FAIL) { return;}
                     T_Index = 0;
                     for (int k = 0; k < L1.size(); k++) {
-                        Element_Text("Sector " + k + " Name", L1.get(k),  ParentTest, "no_jira");              
+                        Element_Text("Sector " + k + " Name: " + L1.get(k).getText().trim(), L1.get(k),  ParentTest, "no_jira");              
 //                        if(t.trim().startsWith(SECTOR)){  // "Chartwells")){ 
 //                            T_Index = k; 
 //                        }
                     }
                     Element_Text("1st available Sector Name", L1.get(0),  ParentTest, "no_jira");        
                     SITE_SECTOR = t;
-                    Element_Click("Select 1st available Sector", L1.get(0), ParentTest, "no_jira"); // Select "Chartwells"
+                    Element_Click("Select 1st available Sector: " + L1.get(0).getText().trim(), L1.get(0), ParentTest, "no_jira"); // Select "Chartwells"
                         if (FAIL) { return;}
 //                    Element_By_Path_Text("New Site Country", "xpath", "//input[@aria-label='Country']/parent::div", ParentTest, "no_jira"); 
 //                        if (FAIL) { return;} // Not OK
@@ -150,7 +150,7 @@ class AP3_site_new extends AP3_GUI{
                     List_L1("Available Products Count", "className", "App-Container", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
                         for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Product Name " + j, L1.get(j), ParentTest, "no_jira");
+                            Element_Text("Product " + j + " Name: " + L1.get(j).getText().trim(), L1.get(j), ParentTest, "no_jira");
                             Element_Child_Attribute("Product Image " + j, L1.get(j), "xpath", ".//div[contains(@class,'v-image__image v-image__image--cover')]", "style", ParentTest, "no_jira");             
                             if(t == null ? app == null : t.equals(app)){
                                 Element_Click("New Site Select Product " + app, L1.get(j), ParentTest, "no_jira"); 
@@ -206,8 +206,7 @@ class AP3_site_new extends AP3_GUI{
                     Thread.sleep(500);// 
                     Element_Child_List_L1("Plan Types Count", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");     
                         for (int j = 0; j < L1.size(); j++) {
-                            Element_Text("Available Meal Plan " + j, L1.get(j), ParentTest, "no_jira");             
-                            if (FAIL) { return;}
+                            Element_Text("Available Meal Plan " + j + " > " + L1.get(j).getText().trim(), L1.get(j), ParentTest, "no_jira");             
                         }   
                     Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Transact Premise" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
@@ -604,7 +603,7 @@ class AP3_site_new extends AP3_GUI{
                     }
                     T_Index = -1;
                     for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Group Name " + j, L1.get(j), ParentTest, "no_jira");
+                        Element_Text("Group " + j + " Name: " + L1.get(j).getText().trim(), L1.get(j), ParentTest, "no_jira");
                         if (L1.get(j).getText().trim().contains(SECTOR)) {
                             T_Index = j;
                         }
@@ -636,7 +635,7 @@ class AP3_site_new extends AP3_GUI{
                     T_Index = L1.size();
                     Scroll_to_Element("Scroll to last Menu", L1.get(L1.size() - 1), ParentTest, "no_jira");
                         if (FAIL) { return;}
-                    Element_Child_List_L1("Global Menus #2", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
+                    Element_Child_List_L1("Global Menus Count #2", e1,"xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
                         if (FAIL) { return;} 
 
                     SC = 2;    
@@ -645,12 +644,12 @@ class AP3_site_new extends AP3_GUI{
                         SC++;
                         Scroll_to_Element("Scroll to last Menu", L1.get(L1.size() - 1), ParentTest, "no_jira");
                             if (FAIL) { return;}
-                        Element_Child_List_L1("Global Menu #" + SC, e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
+                        Element_Child_List_L1("Global Menu Count #" + SC, e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");             
                             if (FAIL) { return;} 
                     }   
                     T_Index = -1;
                     for (int j = 0; j < L1.size(); j++) {
-                        Element_Text("Global Menu Name", L1.get(j), ParentTest, "no_jira");  
+                        Element_Text("Global Menu " + j + " Name: " + L1.get(j).getText().trim(), L1.get(j), ParentTest, "no_jira");  
                             if (FAIL) { return;} 
                         if(L1.get(j).getText().trim().equals(GL_MENU)){
                             T_Index = j;
@@ -666,6 +665,7 @@ class AP3_site_new extends AP3_GUI{
                         _f++;
                         EX += " - " + "\t" + SECTOR + " Global Menu List" + "\t" + GL_MENU + "\t" + "Not Found" + "\t" + "FAIL" + "\t" + GL_MENU + " Not found";
                         EX += "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + " - " + "\r\n";
+                        Log_Html_Result("FAIL", SECTOR + " Global Menu List" + " > " + GL_MENU + " - " + "Not Found", true, ParentTest.createNode(_t + ". " + " 'Menu Assignation' dropdown > " + SECTOR + " Global Menu List" + " > " + GL_MENU + " - " + "Not Found"), new Date());                 
                         return;
                     } 
                     Thread.sleep(500);
@@ -808,7 +808,6 @@ class AP3_site_new extends AP3_GUI{
                         
                     Element_Click("Click 'IMPORT MENU'", L3.get(1), ParentTest, "no_jira"); // index 1 > 2nd button - Import
                         if (FAIL) { return;} 
-                    //Thread.sleep(1000);
                     Wait_For_Element_By_Path_Presence("Wait for Import options...", "css", "[aria-label='Location Stations']", ParentTest, "no_jira"); 
                         if (FAIL) { return;}  
 //                    Element_By_Path_Click("Open Location Station drop-down", "css", "[aria-label='Location Stations']", ParentTest, "no_jira"); 
