@@ -23,22 +23,31 @@ class datalake extends AP3_API_GUI{
     private String sql = "";
     protected void run() {  
 
-        String DATE = ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT );
+        String DATE = ZonedDateTime.now( ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT );
         sql = "SELECT * FROM datalake.orders WHERE date_created <= '" + DATE + "' LIMIT 10";
         
         Auth = "Bearer " + "fgsgsdgsdfggsfdgsdfgsdfgf";        
         BODY = "{\"query\":\"" + sql + "\"}";  
-        JOB_Api_Call("Datalake SQL > Invalid Token", "POST", 
+        JOB_Api_Call("Datalake Valid SQL > Invalid Token", "POST", 
             BaseAPI + "/datalake/sql", Auth, BODY, 401, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
         }
         
         Auth = "Bearer " + AP3_TKN;        
-        JOB_Api_Call("Datalake SQL > Valid Token", "POST", 
+        JOB_Api_Call("Datalake Valid SQL > Valid Token", "POST", 
             BaseAPI + "/datalake/sql", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
         }
+        Auth = "Bearer " + AP3_TKN;     
+        sql = "SELECT * FROM datalake.not_found_table WHERE date_created <= '" + DATE + "' LIMIT 10";
+        BODY = "{\"query\":\"" + sql + "\"}";    
+        JOB_Api_Call("Datalake InValid SQL > Valid Token", "POST", 
+            BaseAPI + "/datalake/sql", Auth, BODY, 400, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }
+
     }
 }

@@ -210,8 +210,6 @@ class AP3_site_new extends AP3_GUI{
                         }   
                     Element_By_Path_Click("Select Meal Plan", "xpath", "//*[contains(text(), '" + "Transact Premise" + "')]", ParentTest, "no_jira");
                         if (FAIL) { return;}  
-//                    Element_By_Path_Text_Enter("Enter Plan Name", "css", "[aria-label='Plan Name']", "BLACKBOARD", false, ParentTest, "no_jira");
-//                        if (FAIL) { return;}
                     Element_By_Path_Text("Meal Plan Name", "css", "[aria-label='Plan Name']",ParentTest, "no_jira");
                     Element_By_Path_Text_Enter("Enter Host", "css", "input[aria-label='Host']", "20.62.183.69", false, ParentTest, "no_jira");
                         if (FAIL) { return;}
