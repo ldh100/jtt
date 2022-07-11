@@ -586,6 +586,7 @@ class AP3_site_new extends AP3_GUI{
                         if (FAIL) { return; }
                     T_Index = L1.size();
                     Scroll_Element_UP("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                    //Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
                         if (FAIL) { return; }
                     Element_Child_List_L1("Groups Count #2", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
                         if (FAIL) { return; }
@@ -595,6 +596,7 @@ class AP3_site_new extends AP3_GUI{
                         T_Index = L1.size();
                         SC++;
                         Scroll_Element_UP("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                        //Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
                             if (FAIL) { return; }
                         Element_Child_List_L1("Groups Count #" + SC, e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
                             if (FAIL) { return; }
@@ -676,7 +678,7 @@ class AP3_site_new extends AP3_GUI{
                         
                     File tmp = new File(System.getProperty("user.dir") + File.separator + "FilesToUpload" + File.separator + "AP3_brand_image.png");
                     if(tmp.exists()) {
-                        Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+File.separator+ "FilesToUpload" +File.separator+ "AP3_brand_image.png", false, ParentTest, "no_jira"); 
+                        Element_By_Path_Text_Enter("Upload Brand Image", "xpath", "//div[@id='toc-information']//input[@type='file']", System.getProperty("user.dir")+ File.separator+ "FilesToUpload" + File.separator+ "AP3_brand_image.png", false, ParentTest, "no_jira"); 
                             if (FAIL) { return;}
                     } else {
                       _t++; 
@@ -1649,7 +1651,7 @@ class AP3_site_new extends AP3_GUI{
     private void Location_brand_API(String B_ID, int flag) {
     try {    
         EX += "\n - " + "\t" + " === START ====" + "\t" + " == " + "\t" + " == Location Brand API Verification Start ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n";
-        
+        Thread.sleep(2000);
         Call_API("Call Location Brand API", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + B_ID, true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
@@ -1665,13 +1667,13 @@ class AP3_site_new extends AP3_GUI{
             if(meta.getBoolean("has_kds") && flag == 1)  {//Print pass type of kds is cdl
                 _t++;
                 _p++; 
-                EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "CDL" + "\t" + "CDL" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                EX += _t + "\t" + "Type of KDS Found - as expected" + "\t" + "CDL" + "\t" + "CDL" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                 Log_Html_Result("PASS", "Type of KDS (CDL )Found-as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (CDL) Found-as expected"), new Date());                   
             } else {//Fail expected false. but Cdl true & has kds is false
                 _t++;
                 _f++; 
-                EX += _t + "\t" + "Type of KDS Not Found as expected" + "\t" + "CDL" + "\t" + "Not CDL" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (CDL) - Not Found but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (CDL) - Not Found but expected"), new Date());
+                EX += _t + "\t" + "Type of KDS Not Found but expected" + "\t" + "CDL" + "\t" + "Not CDL" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Type of KDS (CDL) - Not Found but expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (CDL) - Not Found but expected"), new Date());
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("nextep")) {
@@ -1679,42 +1681,40 @@ class AP3_site_new extends AP3_GUI{
                 _t++;
                 _p++; 
                 EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Nextep" + "\t" + "Nextep" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Type of KDS (Nextep) - Found -as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Nextep) - Found as expected"), new Date());
+                Log_Html_Result("PASS", "Type of KDS (Nextep) Found - as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Nextep) - Found as expected"), new Date());
             } else {//FAIL   Has kds and nextep is true.
                 _t++;
                 _f++; 
-                EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Nextep" + "\t" + "Not Nextep" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (Nextep) - Not Found but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (Nextep) - Not Found but expected"), new Date()); 
+                EX += _t + "\t" + "Type of KDS Not Found but expected " + "\t" + "Nextep" + "\t" + "Not Nextep" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Type of KDS (Nextep) - Not Found but expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Nextep) - Not Found but expected"), new Date()); 
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("volante") ) {
             if(!meta.getBoolean("has_kds") && flag == 3) {//Print type of KDS is volante
                 _t++;
                 _p++; 
-                EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Volante" + "\t" + "Volante" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Type of KDS (Volante) - Found -as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Volante) - Found as expected"), new Date());
+                EX += _t + "\t" + "Type of KDS Found - as expected" + "\t" + "Volante" + "\t" + "Volante" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Type of KDS (Volante) Found - as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Volante) - Found as expected"), new Date());
             } else {//FAIL   Has kds and volante is true.
                 _t++;
                 _f++; 
-                EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Volante" + "\t" + "Not Volante" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (Volante) - Not Found but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (Volante) - Not Found but expected"), new Date()); 
+                EX += _t + "\t" + "Type of KDS Not Found but expected " + "\t" + "Volante" + "\t" + "Not Volante" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Type of KDS (Volante) - Not Found but expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Volante) - Not Found but expected"), new Date()); 
             }
         }
         if(meta.getJSONObject("type_of_kds").getBoolean("agilysys")) {
             if(!meta.getBoolean("has_kds") && flag == 4)  {//Print type of KDS is agilysys
                 _t++;
                 _p++; 
-                EX += _t + "\t" + "Type of KDS Found-as expected" + "\t" + "Agilysys" + "\t" + "Agilysys" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("PASS", "Type of KDS (Agilysys) - Found -as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Agilysys) - Found as expected"), new Date());
+                EX += _t + "\t" + "Type of KDS Found - as expected" + "\t" + "Agilysys" + "\t" + "Agilysys" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("PASS", "Type of KDS (Agilysys) Found - as expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Agilysys) - Found as expected"), new Date());
             } else {//FAIL   Has kds and agilysys is true.
                 _t++;
-                _f++; EX += _t + "\t" + "Type of KDS Not Found as expected " + "\t" + "Agilysys" + "\t" + "Not Agilysys" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("FAIL", "Type of KDS (Agilysys) - Not Found -but expected", true, ParentTest.createNode(_t + ". " + "Type of KDS (Agilysys) - Not Found but expected"), new Date());                 
+                _f++; EX += _t + "\t" + "Type of KDS Not Found but expected " + "\t" + "Agilysys" + "\t" + "Not Agilysys" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                Log_Html_Result("FAIL", "Type of KDS (Agilysys) Not Found but expected", false, ParentTest.createNode(_t + ". " + "Type of KDS (Agilysys) - Not Found but expected"), new Date());                 
             }
         }
          
-        // Verify customer phone number request at checkout
-
         boolean check = false;
         /* Verify if brand is hidden */
         meta = json.getJSONObject("is");
@@ -1735,24 +1735,24 @@ class AP3_site_new extends AP3_GUI{
         /*                      Verify if scan and go is supported 
                                 flag = 1 / Scan and go not supported
                                 flag = 2 / Scan and go supported                 */
-        if(!meta.getBoolean("scan_and_go_supported") && flag==1) { //print pass scan and go not supported 
-            _t++;
-            _p++; EX += _t + "\t" + "Scan & Go Not enabled - expected" + "\t" + "Scan & Go Not Enabled" + "\t" + "Scan & Go Not Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Scan & Go Not enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
-        } else if(!meta.getBoolean("scan_and_go_supported") && flag==2)  { //Print Fail (expected scan and go supported   but not supported )
-            _t++;
-            _f++; EX += _t + "\t" + "Scan & Go enabled - Expected" + "\t" + "Scan & Go - Not enabled" + "\t" + "Scan & Go - enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Scan & Go enabled - expected", true, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
-        
-        } else if(meta.getBoolean("scan_and_go_supported") && flag==1) { // Print Fail (expected scan and go not supported but supported)
-            _t++;
-            _f++; EX += _t + "\t" + "Scan & Go Not enabled - Expected" + "\t" + "Scan & Go - enabled" + "\t" + "Scan & Go - Not enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Scan & Go Not enabled - expected", true, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
-        } else if(meta.getBoolean("scan_and_go_supported")  && flag==2)  { //Print pass scan and go supported
-            _t++;
-            _p++; EX += _t + "\t" + "Scan & Go Enabled - expected" + "\t" + "Scan & Go - enabled" + "\t" + "Scan & Go - enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("PASS", "Scan & Go Enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Enabled - expected"), new Date());
-        }      
+//        if(!meta.getBoolean("scan_and_go_supported") && flag==1) { //print pass scan and go not supported 
+//            _t++;
+//            _p++; EX += _t + "\t" + "Scan & Go Not enabled - expected" + "\t" + "Scan & Go Not Enabled" + "\t" + "Scan & Go Not Enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", "Scan & Go Not enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
+//        } else if(!meta.getBoolean("scan_and_go_supported") && flag==2)  { //Print Fail (expected scan and go supported   but not supported )
+//            _t++;
+//            _f++; EX += _t + "\t" + "Scan & Go enabled - Expected" + "\t" + "Scan & Go - Not enabled" + "\t" + "Scan & Go - enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", "Scan & Go enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
+//        
+//        } else if(meta.getBoolean("scan_and_go_supported") && flag==1) { // Print Fail (expected scan and go not supported but supported)
+//            _t++;
+//            _f++; EX += _t + "\t" + "Scan & Go Not enabled - Expected" + "\t" + "Scan & Go - enabled" + "\t" + "Scan & Go - Not enabled" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//            Log_Html_Result("FAIL", "Scan & Go Not enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Not enabled - expected"), new Date());
+//        } else if(meta.getBoolean("scan_and_go_supported")  && flag==2)  { //Print pass scan and go supported
+//            _t++;
+//            _p++; EX += _t + "\t" + "Scan & Go Enabled - expected" + "\t" + "Scan & Go - enabled" + "\t" + "Scan & Go - enabled" + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+//            Log_Html_Result("PASS", "Scan & Go Enabled - expected", false, ParentTest.createNode(_t + ". " + "Scan & Go Enabled - expected"), new Date());
+//        }      
         
         /*                     Verify if Brand Image  is saved  
                                flag = 1 / Brand Image is saved
@@ -2142,7 +2142,7 @@ class AP3_site_new extends AP3_GUI{
         Call_API("Call Location Brand API", "Bearer " + AP3_TKN, BaseAPI + "/location/brand/" + B_ID, true, ParentTest,  "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
-        }else{
+        } else {
             EX += _t + "\t == " + "API Responce Error" + "\t" + BaseAPI + "/location/brand/" + B_ID + "\t" + " - " + "\t" + "FAIL" + "\t" + " - " +
             "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n"; 
             Log_Html_Result("FAIL", "URL: " + BaseAPI + "/location/brand/" + B_ID, false, ParentTest.createNode(_t + ". " + "API Responce Error"), new Date());
@@ -2158,7 +2158,7 @@ class AP3_site_new extends AP3_GUI{
            _t++;
            _f++; 
            EX += _t + "\t" + "Public Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Public Api call response is different after Refresh", true, ParentTest.createNode(_t + ". " + "Verify Public config - after refresh"), new Date());
+           Log_Html_Result("FAIL", "Public Api call response is different after Refresh", false, ParentTest.createNode(_t + ". " + "Verify Public config - after refresh"), new Date());
         }
         
         if(Private_response_Before.equals(Private_response_After))  { // Print Pass 
@@ -2170,7 +2170,7 @@ class AP3_site_new extends AP3_GUI{
             _t++;
             _f++; 
             EX += _t + "\t" + "Private Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Private Api call response different after Refresh", true, ParentTest.createNode(_t + ". " + "Verify Private config - after refresh"), new Date());  
+            Log_Html_Result("FAIL", "Private Api call response different after Refresh", false, ParentTest.createNode(_t + ". " + "Verify Private config - after refresh"), new Date());  
         }
         
         if(Brand_response_Before.equals(Brand_response_After))  { // Print Pass 
@@ -2180,7 +2180,7 @@ class AP3_site_new extends AP3_GUI{
         } else {
             _t++;
             _f++; EX += _t + "\t" + "Brand Api call response different after Refresh" + "\t" + "Unequal API response" + "\t" + "Unequal API response" + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("FAIL", "Brand Api call response different after Refresh", true, ParentTest.createNode(_t + ". " + "Verify Brand config - after refresh"), new Date());
+            Log_Html_Result("FAIL", "Brand Api call response different after Refresh", false, ParentTest.createNode(_t + ". " + "Verify Brand config - after refresh"), new Date());
         }
         EX += " - " + "\t" + " ===END====" + "\t" + " ===== " + "\t" + " ==  API Verification on Refresh END ==" + "\t" + " - " + "\t" + " - " + "\t" + " -" + "\t" + " - " + "\r\n\n";  
     } catch (Exception ex){
