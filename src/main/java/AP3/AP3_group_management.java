@@ -383,7 +383,7 @@ class AP3_group_management extends AP3_GUI{
                 // API Call to verify JDE     
                 Verify_JDE_Count(JDE_count);
                 JDE_id = Verify_JDE_API("Artisan Deli");
-                Verify_Sector_JDE_API(G_ID,JDE_id);
+                Verify_Sector_JDE_API(G_ID, JDE_id);
 
                 Wait_For_Element_By_Path_Visibility("Wait for global menu button", "xpath", "//div[@class='v-btn__content'][normalize-space()='Global Menu']", ParentTest, "no_jira");
                 
@@ -627,7 +627,11 @@ Thread.sleep(5000);
         }
         // </editor-fold>  
         
-    } catch (Exception ex){}   // =============================================  
+    } catch (Exception ex){
+        String AAA = ex.getMessage(); _t++; _f++;
+        EX += " - " + "\t" + "Run() Exeption:" + "\t" + "Error:" + "\t" + AAA + "\t" + "FAIL" + "\t" + " - " + "\t" + " - " + "\r\n";
+        Log_Html_Result("FAIL", "Error: " + AAA, false, ParentTest.createNode(_t + ". Run() Exeption: " + AAA), new Date());
+    }  
     }//End of run
     
     private void Verify_Location_API(String JDE_Category) throws Exception {
@@ -740,7 +744,7 @@ Thread.sleep(5000);
        try{
         EX += "\n - " + "\t" + " ===START====" + "\t" + " ===== " + "\t" + " == JDE API Verification==" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n\n";
        
-        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" +G_ID+ "?nocache=1", true, ParentTest, "no_jira" );
+        Call_API("Call /Sector/ API ", "Bearer " + AP3_TKN, BaseAPI + "/location/sector/" + G_ID + "?nocache=1", true, ParentTest, "no_jira" );
         if(t.startsWith("{")){
             API_Response_Body = t;               
         } else {
@@ -755,7 +759,7 @@ Thread.sleep(5000);
         JSONObject company = new JSONObject();
         for(int i = 0; i < JDE_companies.length(); i++) {
             company = JDE_companies.getJSONObject(i);
-            if(company.getString("name").equals("Automation GM " +New_ID) && !(JDE_id.equals("second"))) {
+            if(company.getString("name").equals("Automation GM " + New_ID) && !(JDE_id.equals("second"))) {
                 if(company.getJSONObject("meta").getString("jde_category").equals(JDE_id)) {
                  //Print Pass new created group has JDE category assigned
                     _t++; _p++;
@@ -769,11 +773,11 @@ Thread.sleep(5000);
                 }
             }
           
-            if(company.getString("name").equals("Automation GM 2 " +New_ID) && JDE_id.equals("second"))  {
+            if(company.getString("name").equals("Automation GM 2 " + New_ID) && JDE_id.equals("second"))  {
                 if(!(company.getJSONObject("meta").has("jde_category")) && (company.has("meta"))) {
                     _t++; 
                     _p++;
-                    EX += _t + "\t" + "Global Menu created without JDE Category" + "\t" + "GM name: Automation GM 2 " +New_ID + "\t" + "-"  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
+                    EX += _t + "\t" + "Global Menu created without JDE Category" + "\t" + "GM name: Automation GM 2 " + New_ID + "\t" + "-"  + "\t" + "PASS" + "\t" + " - " + "\t" + " - " + "\t" + LocalDateTime.now().format(A.A.Time_12_formatter) + "\t" + "no_jira" + "\r\n";
                     Log_Html_Result("PASS", "Global Menu created without JDE Category ", false, ParentTest.createNode(_t + ". " + "JDE Category optional when Global menu created"), new Date());
                 } 
             }

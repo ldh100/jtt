@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
@@ -109,6 +110,10 @@ public class A extends javax.swing.JFrame {
         Menu_WO_DE = new javax.swing.JMenu();
         Menu_WO_ST = new javax.swing.JMenu();
         Menu_WO_PR = new javax.swing.JMenu();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        Menu_WO_DE1 = new javax.swing.JMenu();
+        Menu_WO_DE2 = new javax.swing.JMenu();
+        Menu_WO_DE3 = new javax.swing.JMenu();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         Menu_Devices = new javax.swing.JMenu();
         Menu_UI_Viewer = new javax.swing.JMenu();
@@ -295,7 +300,7 @@ public class A extends javax.swing.JFrame {
         Menu_WO_.setText("Web Order");
         Menu_WO_.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
-        Menu_WO_DE.setText("- Development (https://dev.thriveapp.io/");
+        Menu_WO_DE.setText("- Thrive Development (https://dev.thriveapp.io/");
         Menu_WO_DE.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_WO_DE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -304,7 +309,7 @@ public class A extends javax.swing.JFrame {
         });
         Menu_WO_.add(Menu_WO_DE);
 
-        Menu_WO_ST.setText("- Staging (https://staging.thriveapp.io/)");
+        Menu_WO_ST.setText("- Thrive Staging (https://staging.thriveapp.io/)");
         Menu_WO_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_WO_ST.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -313,7 +318,7 @@ public class A extends javax.swing.JFrame {
         });
         Menu_WO_.add(Menu_WO_ST);
 
-        Menu_WO_PR.setText("- Production (https://thriveapp.io/)");
+        Menu_WO_PR.setText("- Thrive Production (https://thriveapp.io/)");
         Menu_WO_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_WO_PR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -321,6 +326,34 @@ public class A extends javax.swing.JFrame {
             }
         });
         Menu_WO_.add(Menu_WO_PR);
+        Menu_WO_.add(jSeparator5);
+
+        Menu_WO_DE1.setText("- Boost Development (https://dev.boostapp.io/)");
+        Menu_WO_DE1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_WO_DE1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_WO_DE1MouseClicked(evt);
+            }
+        });
+        Menu_WO_.add(Menu_WO_DE1);
+
+        Menu_WO_DE2.setText("- Boost Staging (https://staging.boostapp.io/)");
+        Menu_WO_DE2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_WO_DE2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_WO_DE2MouseClicked(evt);
+            }
+        });
+        Menu_WO_.add(Menu_WO_DE2);
+
+        Menu_WO_DE3.setText("- Boost Production (https://boostapp.io/)");
+        Menu_WO_DE3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_WO_DE3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Menu_WO_DE3MouseClicked(evt);
+            }
+        });
+        Menu_WO_.add(Menu_WO_DE3);
 
         Menu_Tools.add(Menu_WO_);
         Menu_Tools.add(jSeparator2);
@@ -328,6 +361,7 @@ public class A extends javax.swing.JFrame {
         Menu_Devices.setBorder(null);
         Menu_Devices.setText("Mobile Devices");
         Menu_Devices.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        Menu_Devices.setPreferredSize(new java.awt.Dimension(106, 18));
         Menu_Devices.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Menu_DevicesMouseClicked(evt);
@@ -964,6 +998,33 @@ public class A extends javax.swing.JFrame {
         MenuBar.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
         Menu_SL.setEnabled(true); 
     }//GEN-LAST:event_Menu_SLMouseClicked
+
+    private void Menu_WO_DE1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_DE1MouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://dev.boostapp.io/"));
+        }
+        catch (IOException ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_WO_DE1MouseClicked
+
+    private void Menu_WO_DE2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_DE2MouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://staging.boostapp.io/"));
+        }
+        catch (IOException ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_WO_DE2MouseClicked
+
+    private void Menu_WO_DE3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_WO_DE3MouseClicked
+        try {
+            java.awt.Desktop.getDesktop().browse(URI.create("https://boostapp.io/"));
+        }
+        catch (IOException ex) {
+            // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Menu_WO_DE3MouseClicked
     //</editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Package Functions/Methods">      
@@ -1558,7 +1619,7 @@ public class A extends javax.swing.JFrame {
             rs = conn.createStatement().executeQuery("SELECT [_value] FROM[dbo].[keys] WHERE [_key] = 'C1_Name'");
             rs.next();
             C1_Name = new String(Base64.getDecoder().decode(rs.getString(1)));  
-            
+
             // clean-up Reports
 //            Statement st = conn.createStatement();
 //            int d = st.executeUpdate("DELETE FROM [dbo].[aw_result] WHERE [Date] < '" + simpleDateFormat.format(dtpDel.getDate()) + "'");
@@ -1696,6 +1757,9 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JMenu Menu_WO;
     private javax.swing.JMenu Menu_WO_;
     private javax.swing.JMenu Menu_WO_DE;
+    private javax.swing.JMenu Menu_WO_DE1;
+    private javax.swing.JMenu Menu_WO_DE2;
+    private javax.swing.JMenu Menu_WO_DE3;
     private javax.swing.JMenu Menu_WO_PR;
     private javax.swing.JMenu Menu_WO_ST;
     private javax.swing.JMenu Menu_Web_Tools;
@@ -1703,6 +1767,7 @@ public class A extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>   
 }

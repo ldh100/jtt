@@ -89,14 +89,15 @@ class order extends AP3_API_GUI{
             AAA = json.toString(4);
         } 
         
-        Auth = "Bearer " + AP3_TKN;
-        JOB_Api_Call("Mobile User All Orders - Brand '" + BRAND + "'", "GET", 
-            BaseAPI + "/order/customer/" + Mobile_User_ID + "/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            // Info Found Orders Count
-            AAA = json.toString(4);
-        } 
 
+//        JOB_Api_Call("Mobile User All Orders - Brand '" + BRAND + "'", "GET", 
+//            BaseAPI + "/order/customer/" + Mobile_User_ID + "/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            // Info Found Orders Count
+//            AAA = json.toString(4);
+//        } 
+
+        Auth = "Bearer " + AP3_TKN;
         JOB_Api_Call("All Orders - Location/Brand '" + BRAND + "'", "GET", 
             BaseAPI + "/order/location/brand/" + BrandID, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
@@ -136,7 +137,7 @@ class order extends AP3_API_GUI{
         requestParams.put("requested_date", Requested_Date);
         requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
         JSONObject payment = new JSONObject();
-        payment.put("token", EXACT_Payment_TKN);
+        payment.put("token", FP_Payment_TKN); // EXACT_Payment_TKN  - no more EXACT
         requestParams.put("payment", payment); 
         BODY = requestParams.toString();  
         
@@ -295,11 +296,18 @@ class order extends AP3_API_GUI{
             BaseAPI + "/order/" + Order_Pickup_ID + "/refund", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
-        }         
+        }   
+ 
+        if(DELIEVEY_TIMESLOTS.isEmpty()) {
+            EX += " - " + "\t" + "Delivery" + "\t" + "Timeslots" + "\t" + "Empty - Cannot place Devilery Order" + "\t" + "WARN" + "\t" + " - "
+                    + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
+            Log_Html_Result("WARN", "", ParentTest.createNode("Delivery Timeslots > Empty List - Cannot place Devilery Order"), new Date());
+            return;
+        }
+  
         
         Auth = "Bearer " + Mobile_User_TKN;
         requested_date = new Date(Long.parseLong(DELIEVEY_TIMESLOTS.get(DELIEVEY_TIMESLOTS.size() - 1)) *1000L);
-        //requested_date = new Date(Long.parseLong(BRAND_TIMESLOTS.get(0)) * 1000L);
         Requested_Date = sdf.format(requested_date); 
         BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
                 "\"location_brand\":\"" + BrandID + "\"," + 
@@ -312,7 +320,7 @@ class order extends AP3_API_GUI{
                     "\"name\":\"" + env + " JTT API Test Delivery" + "\"," +
                     "\"order_type\":\"delivery\"}," + 
                 "\"payment\":" + 
-                    "{\"token\":\"" + EXACT_Payment_TKN + "\"}," +
+                    "{\"token\":\"" + FP_Payment_TKN + "\"}," + // EXACT_Payment_TKN  - no more EXACT
                 "\"requested_date\":\"" + Requested_Date + "\"," +
                 "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
                 "\"}";   

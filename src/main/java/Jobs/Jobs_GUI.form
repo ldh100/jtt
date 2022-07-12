@@ -73,7 +73,7 @@
             </Property>
             <Property name="autoResizeMode" type="int" value="3"/>
             <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="b4" green="b4" id="Active Caption Border" palette="2" red="b4" type="palette"/>
+              <Color blue="9a" green="9a" id="Window Border" palette="2" red="9a" type="palette"/>
             </Property>
             <Property name="name" type="java.lang.String" value="DV1" noResource="true"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
@@ -252,7 +252,7 @@
     <Component class="javax.swing.JTextField" name="txtCheckValue">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="698" y="49" width="156" height="-1"/>
+          <AbsoluteConstraints x="700" y="50" width="156" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

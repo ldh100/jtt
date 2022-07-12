@@ -1056,6 +1056,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(!Load && evt.getStateChange() == 1) {
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             app = cmbApp.getSelectedItem().toString();
+            if(cmbEnv.getSelectedItem().toString().contains("Staging")){
+                url = "https://staging.<APP>app.io/"; 
+            } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
+                url = "https://dev.<APP>app.io/";
+            } else{
+                url = "https://<APP>app.io/";
+            }
+            app = cmbApp.getSelectedItem().toString();
+            url = url.replace("<APP>", app.toLowerCase());
             GUI_Get_Sites();
             cmbApp.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
         }
@@ -1083,7 +1092,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
 //        cmbApp.addItem("Rogers");
 //        cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
-        
+        cmbApp.addItem("Boost");   
+     
         cmbEnv.addItem("Development");         
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");
@@ -1101,15 +1111,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
             env = "ST";
-            url = "https://staging.thriveapp.io/"; 
+            url = "https://staging.<APP>app.io/"; 
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
             env = "DE";
-            url = "https://dev.thriveapp.io/";
+            url = "https://dev.<APP>app.io/";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
             env = "PR";
-            url = "https://thriveapp.io/";
+            url = "https://<APP>app.io/";
         }
         Get_AP3_TKN();
         GUI_Load_CONFIG();
@@ -1119,6 +1129,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Load = false;
         }
         app = cmbApp.getSelectedItem().toString();
+        url = url.replace("<APP>", app.toLowerCase());
         GUI_Get_Sites();       
     }
 
@@ -1535,7 +1546,6 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }    
-        //String[] lines = C.split(System.getProperty("line.separator"));  
         String[] lines = C.split("\n");  
         String value;
         try{             
@@ -1557,6 +1567,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("SlackCh: ")) txtSlackCh.setText(value);
                 if(l.contains("_slack: ")) _slack.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
+                if(l.contains("_run_on_remote: ")) _remote.setSelected(Boolean.parseBoolean(value));
+
                 
                 if(l.contains("_headless: ")) _headless.setSelected(Boolean.parseBoolean(value));
                 if(l.contains("_mobile: ")) _mobile.setSelected(Boolean.parseBoolean(value));
@@ -1724,7 +1736,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             Slack_Channel = txtSlackCh.getText();
             _Slack = _slack.isSelected();
             _Headless = _headless.isSelected();
-            _Mobile= _mobile.isSelected();
+            _Mobile = _mobile.isSelected();
             _Run_on_Remote = _remote.isSelected();
             Zip_Report = true;
 
@@ -1850,7 +1862,7 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 if(l.contains("_headless: ")) _Headless = Boolean.parseBoolean(value);
                 if(l.contains("_mobile: ")) _Mobile = Boolean.parseBoolean(value);
                 if(l.contains("_run_on_remote: ")) _Run_on_Remote = Boolean.parseBoolean(value);
-
+                         
                 if(l.contains("_zip_report: ")) Zip_Report = Boolean.parseBoolean(value);
                 
                 if(l.contains("SITE: ")) SITE = value;
@@ -2112,8 +2124,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                         prefs.put("name", app + " Web Ordering");
 
                         chrome_op.setCapability("sauce:options", prefs);
-                        URL url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
-                        d1 = new RemoteWebDriver(url, chrome_op);
+                        URL _url = new URL("https://ospozito:1b5dbec6-dd24-405c-84c6-81ce924f93bc@ondemand.us-west-1.saucelabs.com:443/wd/hub");
+                        d1 = new RemoteWebDriver(_url, chrome_op);
                     break;
                 case "Edge":
 //                    txtLog.append( "= Edge Driver:" + System.getProperty("webdriver.edge.driver") + "\r\n");
@@ -2232,7 +2244,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = "WO " + env + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + 
+                    ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -2320,8 +2333,8 @@ public class WO_GUI extends javax.swing.JInternalFrame {
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
                     } catch (IOException | InterruptedException ex){ // Exception ex
-                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
+//                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
                 return "Done"; 
@@ -2722,7 +2735,15 @@ public class WO_GUI extends javax.swing.JInternalFrame {
             if(!LINK.isEmpty()){
                 ((JavascriptExecutor) d1).executeScript("window.open(arguments[0])", LINK);
             }
-            ArrayList<String> tabs = new ArrayList<>(d1.getWindowHandles());
+            ArrayList<String> tabs = null;
+            for(int i = 0; i < 10; i++){
+                tabs = new ArrayList<>(d1.getWindowHandles());
+                if(tabs.size() > 1){
+                    break;
+                }else{
+                    Thread.sleep(500);
+                }
+            }
             d1.switchTo().window(tabs.get(1));
             _p++; 
             EX += _t + "\t" + NAME + "\t" + "Target URL" + "\t" + LINK + "\t" + "PASS" + "\t" + " - " +

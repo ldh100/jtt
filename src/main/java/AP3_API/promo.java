@@ -1,8 +1,5 @@
 package AP3_API;
 
-import static A.A.FAIL;
-import static A.A._f;
-import static A.A.err;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -497,9 +494,9 @@ class promo extends AP3_API_GUI {
                     }
                 }
             } else {
-                EX += " - " + "\t" + "Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least two Items required  to create BOGO/Bundle promotions" + "\t" + "Found only -->" + ITEMS_IDS.size() + "\t" + " - "
+                EX += " - " + "\t" + "Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least two Items required  to create BOGO/Bundle promotions" + "\t" + "Found only --> " + ITEMS_IDS.size() + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("At least two Items required  to create BOGO/Bundle promotions", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating BOGO & Bundle as those promotions required at least two Item Id's.\t" + "  >>> No Timeslots"), new Date());
+                Log_Html_Result("At least two Items required  to create BOGO/Bundle promotions", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating BOGO & Bundle as those promotions required at least two Item Id's.\t" + "  >>> Found only --> " + ITEMS_IDS.size()), new Date());
                 FAIL = true;
             }
             // Test Scenario 4: Negative flow to POST/ADD new promotion without valid promo label
@@ -847,7 +844,7 @@ class promo extends AP3_API_GUI {
         } else {
             EX += " - " + "\t" + "Promotions - Error while creating promotion, as no Item ID found to add promotion.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least one Item required to create promotion" + "\t" + "No Item ID found" + "\t" + " - "
                     + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("At least one Item required to create promotion", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating promotions as no Item ID's found to add\t" + "  >>> No Timeslots"), new Date());
+            Log_Html_Result("At least one Item required to create promotion", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating promotions as no Item ID's found to add\t" + "  >>> No Item ID found"), new Date());
             FAIL = true;
         }
         //</editor-fold>
@@ -1256,9 +1253,9 @@ class promo extends AP3_API_GUI {
                 JOB_Api_Call("Promotion - PUT Positive flow to update newly added - Bundle", "PUT", 
                         BaseAPI + "/promo/" + PROMOTION_IDS.get(2), Auth, BODY, 200, ParentTest, "no_jira");
             } else {
-                EX += " - " + "\t" + "Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least two Items required  to create BOGO/Bundle promotions" + "\t" + "Found only -->" + ITEMS_IDS.size() + "\t" + " - "
+                EX += " - " + "\t" + "Promotions - Error while creating BOGO & Bundle as promotions required at least two Item Id's.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least two Items required  to create BOGO/Bundle promotions" + "\t" + "Found only --> " + ITEMS_IDS.size() + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("At least two Items required  to create BOGO/Bundle promotions", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating BOGO & Bundle as those promotions required at least two Item Id's.\t" + "  >>> No Timeslots"), new Date());
+                Log_Html_Result("At least two Items required  to create BOGO/Bundle promotions", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating BOGO & Bundle as those promotions required at least two Item Id's.\t" + "  >>> Found only --> " + ITEMS_IDS.size()), new Date());
                 FAIL = true;
             }
             // Test Scenario 5: Negative flow to update newly added promotion without valid promo label
@@ -1627,7 +1624,7 @@ class promo extends AP3_API_GUI {
         } else {
             EX += " - " + "\t" + "Promotions - Error while creating promotion, as no Item ID found to add promotion.\t" + "Err- Not suficiant Items/Data" + "\t" + "At least one Item required to create promotion" + "\t" + "No Item ID found" + "\t" + " - "
                     + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-            Log_Html_Result("At least one Item required to create promotion", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating promotions as no Item ID's found to add\t" + "  >>> No Timeslots"), new Date());
+            Log_Html_Result("At least one Item required to create promotion", "Err- Not suficiant Items/Data", ParentTest.createNode("Promotions - Error while creating promotions as no Item ID's found to add\t" + "  >>> No No Item ID found"), new Date());
             FAIL = true;
         }
         //</editor-fold>

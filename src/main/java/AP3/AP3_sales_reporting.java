@@ -28,7 +28,6 @@ class AP3_sales_reporting extends AP3_GUI{
         BRAND = a.BRAND;
         SiteID = a.SiteID;
         Location = a.Location;
-        DH_MENU_ID = a.DH_MENU_ID;
         SECTOR = a.SECTOR;
         CompanyID = a.CompanyID;
         
@@ -87,7 +86,6 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
                 Element_Text("Sites Data Row Text", L0.get(i), ParentTest, "no_jira");            
-                if (FAIL) { return;}
             }        
         List_L1("Sortable Columns Count", "css", "[role='columnheader']", ParentTest, "no_jira");            
             if (FAIL) { return;}
@@ -111,8 +109,9 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Rows per page Value (index " + i + ")", L1.get(i),  ParentTest, "no_jira");             
-                if (FAIL) { return;}
-                if(t.trim().startsWith("All")){ T_Index = i; }
+                if(t.trim().startsWith("All")){ 
+                    T_Index = i; 
+                }
             }
         Element_Click("Click 'All'", L1.get(T_Index), ParentTest, "no_jira");
             if (FAIL) { return;}    
@@ -138,12 +137,12 @@ class AP3_sales_reporting extends AP3_GUI{
             
         Element_By_Path_Text("Search Prompt", "xpath", "//*[contains(text(), 'Search Sites')]", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", false, ParentTest, "no_jira");
-            if (FAIL) { return;}
-        Find_Text("Find 'Not Found' notification", "No matching records found", true, ParentTest, "no_jira"); 
-            if (FAIL) { return;}
-        Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  ParentTest, "no_jira");
-            if (FAIL) { return;}            
+//        Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", "Not Existing Site", false, ParentTest, "no_jira");
+//            if (FAIL) { return;}
+//        Find_Text("Find 'Not Found' notification", "No matching records found", true, ParentTest, "no_jira"); 
+//            if (FAIL) { return;}
+//        Element_By_Path_Input_Select_Clear("Site Search Clear", "xpath", "//input[contains(@aria-label, 'Search ')]",  ParentTest, "no_jira");
+//            if (FAIL) { return;}            
         Element_By_Path_Text_Enter("Enter Search Site Name", "css", "[aria-label='Search Sites']", SITE, false, ParentTest, "no_jira");
             if (FAIL) { return;}   
         Element_By_Path_Text("Pagination", "xpath", "//div[contains(@class, 'v-datatable__actions__pagination')]", ParentTest, "no_jira");
@@ -152,7 +151,6 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L0.size(); i++) {
                 Element_Text("Sites Data Row Text", L0.get(i), ParentTest, "no_jira");            
-                if (FAIL) { return;}
             } 
         Element_By_Path_Click("EOD Report Click", "xpath", "//button[contains(@class, 'Subtitle-1-Primary-Left v-btn')]", ParentTest, "no_jira");
             if (FAIL) { return;}             
@@ -162,7 +160,6 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}     
             for (int i = 0; i < L1.size(); i++) {
                 Element_Text("Unit Name (index " + i + ")", L1.get(i),  ParentTest, "no_jira");        
-                if (FAIL) { return;}
         }                       
         Element_By_Path_Text("Download...", "xpath", "//div[contains(@class, 'v-card__title H4-Secondary-Center')]", ParentTest, "no_jira");
             if (FAIL) { return;}
@@ -184,7 +181,7 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}   
         Element_By_Path_Attribute("Page Title", "xpath", "//div[contains(@class, 'H3-Primary')]", "textContent", ParentTest, "no_jira");
             if (FAIL) { return;}    
-        Element_By_Path_Click("Click 'Report Date' open", "xpath", "//input[@aria-label='Report Date']", ParentTest, "no_jira");
+        Element_By_Path_Click("Click/open 'Report Date' selector", "xpath", "//input[@aria-label='Report Date']", ParentTest, "no_jira");
             if (FAIL) { return;} 
 
         // ============== Default Date
@@ -234,7 +231,7 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}            
         Element_By_Path_Click("Click 'Export'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", ParentTest, "no_jira");
             if (FAIL) { return;}    
-        Thread.sleep(500);          
+Thread.sleep(2000);          
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}         
         File_Find("Find Report File", System.getProperty("user.home") + File.separator + "Downloads", SITE, ParentTest, "no_jira");
@@ -315,10 +312,13 @@ class AP3_sales_reporting extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Click("Select Unit (index " + i + ")", L1.get(i), ParentTest, "no_jira");
-                if (FAIL) { return;} 
-            }        
-        Click_out_of_Element_By_Path("Filter drawer Close", "xpath", "//aside[contains(@class, 'v-navigation-drawer v-navigation-drawer--fixed v-navigation-drawer--open')]",  "Left", -100, 0, ParentTest, "no_jira");
-        if (FAIL) { return;} 
+                    if (FAIL) { return;} 
+            }   
+        Thread.sleep(1000);
+        Click_out_of_Element_By_Path("Filter drawer Close", "xpath", "//aside[contains(@class, 'v-navigation-drawer v-navigation-drawer--fixed v-navigation-drawer--open')]", "Left", -120, 50, ParentTest, "no_jira");
+            if (FAIL) { return;} 
+//        Element_By_Path_Click("Filter drawer Close - click outside", "xpath", "//div[contains(@class, 'H3-Primary')]", ParentTest, "no_jira");
+//           if (FAIL) { return;} 
         Element_Child_List_L1("Selected Units count", e1,"xpath", "//span[contains(@class, 'v-chip__content')]", ParentTest, "no_jira");                                    
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
@@ -328,11 +328,10 @@ class AP3_sales_reporting extends AP3_GUI{
             
         Element_By_Path_Click("Click 'Export'", "xpath", "//button[contains(@class, 'v-btn theme--light primary')]", ParentTest, "no_jira");
             if (FAIL) { return;}       
-        Thread.sleep(500);       
+Thread.sleep(2000);       
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira");
             if (FAIL) { return;}         
         File_Find("Find Report File", System.getProperty("user.home") + File.separator + "Downloads", SITE, ParentTest, "no_jira");
-            if (FAIL) { return;} 
             if(!"".equals(t)){
                 File_Delete("Delete Report File", System.getProperty("user.home") + File.separator + "Downloads", t, ParentTest, "no_jira");
                     if (FAIL) { return;}                 

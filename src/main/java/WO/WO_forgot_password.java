@@ -16,7 +16,7 @@ class WO_forgot_password extends WO_GUI {
     try {
         Navigate_to_URL("Navigate to " + url, url, ParentTest, "no_jira");              
             if (FAIL) { return;}               
-        Element_By_Selector_Click("Click 'Log in'", "id", "nav-log-in-btn", ParentTest, "no_jira"); 
+        Element_By_Selector_Click("Click 'Log in'", "id", "qa-nav-log-in-btn", ParentTest, "no_jira"); 
             if (FAIL) { return;}
         Element_By_Selector_Click("Click 'Forgot Password'", "id", "to-forgot-password", ParentTest, "no_jira"); 
             if (FAIL) { return;}

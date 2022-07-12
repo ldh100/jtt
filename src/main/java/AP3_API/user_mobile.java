@@ -42,7 +42,7 @@ class user_mobile extends AP3_API_GUI{
 
         Auth = "Bearer " + Mobile_User_TKN;
         String SECRET = "APA91bH5sCRipn3EPZNZFyyY552jisUoO1ZJDcDYpiHxLYvlTVqWRrXGsqqRsBBRjIpenEOo0EfSOECXotgSeN8yLS1_zG86EbLJl7DFxOYL1I2JfeD43xE4m20esSva7SDrb4rtmfYH";
-        BODY = "{\"fcm_token\":\'" + SECRET + "\"}";  
+        BODY = "{\"fcm_token\":\"" + SECRET + "\"}";  
         JOB_Api_Call("Mobile User > /secret/fcm_token", "POST", 
             BaseAPI + "/user/" + Mobile_User_ID + "/secret/fcm_token", Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
@@ -54,6 +54,14 @@ class user_mobile extends AP3_API_GUI{
         if(json != null){
             AAA = json.toString(4);
             if(json.has("fcm_token")) FCM_TKN = json.getString("fcm_token");
+        } 
+
+        // Was missed before, without that Payment Call may fail  ===================
+        BODY = "{\"meta\": {\"last_location\":\"" + SiteID + "\"}}"; 
+        JOB_Api_Call("Mobile User > Change Location, lang=en", "PUT", 
+            BaseAPI + "/user/" + Mobile_User_ID + "?lang=en", Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
         } 
         
         JOB_Api_Call("Mobile User > /permissions", "GET", 

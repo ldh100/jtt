@@ -25,18 +25,13 @@ import javax.swing.table.TableCellRenderer;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import com.slack.api.Slack;
-import com.slack.api.SlackConfig;
 import com.slack.api.methods.response.chat.ChatPostMessageResponse;
 import com.slack.api.methods.MethodsClient;
 import com.slack.api.model.Attachment;
-import com.slack.api.model.Message;
-import com.slack.api.util.http.SlackHttpClient;
-import com.slack.api.webhook.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,20 +81,20 @@ public class Func {
 
     public static String App_ID(String APP, String ENV) {
        switch (APP.toLowerCase()) {
-            case "chrome c360":
-                if(ENV.equals("DE")) 
-                    return "https://dev.cafe360.compassdigital.org/";
-                if(ENV.equals("ST")) 
-                    return "https://dev.cafe360.compassdigital.org/";
-                if(ENV.equals("PR")) 
-                    return "https://dev.cafe360.compassdigital.org/";
-            case "chrome wo":
-                if(ENV.equals("DE")) 
-                    return "https://dev.thriveapp.io";
-                if(ENV.equals("ST")) 
-                    return "https://staging.thriveapp.io";
-                if(ENV.equals("PR")) 
-                    return "https://thriveapp.io";
+//            case "chrome c360":
+//                if(ENV.equals("DE")) 
+//                    return "https://dev.cafe360.compassdigital.org/";
+//                if(ENV.equals("ST")) 
+//                    return "https://dev.cafe360.compassdigital.org/";
+//                if(ENV.equals("PR")) 
+//                    return "https://dev.cafe360.compassdigital.org/";
+//            case "chrome wo":
+//                if(ENV.equals("DE")) 
+//                    return "https://dev.thriveapp.io";
+//                if(ENV.equals("ST")) 
+//                    return "https://staging.thriveapp.io";
+//                if(ENV.equals("PR")) 
+//                    return "https://thriveapp.io";
             case "boost":
                 if(ENV.equals("DE")) 
                     return "014B6RP683C2QL7X00oDS86lrKOO14twGXQwzDARCgympJ42Q5SD1LWZ2gppTOGd4eov2GcePXaa59Zquma";
@@ -472,7 +467,7 @@ public class Func {
                 .attachments(atts)
             );
             if (response.isOk()) {
-                return "message responce is OK";
+                return "Message responce is OK";
             } else {
                 return response.getError(); // e.g., "invalid_auth", "channel_not_found"
             }            

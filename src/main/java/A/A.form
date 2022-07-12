@@ -200,7 +200,7 @@
               <SubComponents>
                 <Menu class="javax.swing.JMenu" name="Menu_WO_DE">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="- Development (https://dev.thriveapp.io/"/>
+                    <Property name="text" type="java.lang.String" value="- Thrive Development (https://dev.thriveapp.io/"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
@@ -211,7 +211,7 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="Menu_WO_ST">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="- Staging (https://staging.thriveapp.io/)"/>
+                    <Property name="text" type="java.lang.String" value="- Thrive Staging (https://staging.thriveapp.io/)"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
@@ -222,13 +222,48 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="Menu_WO_PR">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="- Production (https://thriveapp.io/)"/>
+                    <Property name="text" type="java.lang.String" value="- Thrive Production (https://thriveapp.io/)"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_PRMouseClicked"/>
+                  </Events>
+                </Menu>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator5">
+                </MenuItem>
+                <Menu class="javax.swing.JMenu" name="Menu_WO_DE1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Boost Development (https://dev.boostapp.io/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_DE1MouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_WO_DE2">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Boost Staging (https://staging.boostapp.io/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_DE2MouseClicked"/>
+                  </Events>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="Menu_WO_DE3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="- Boost Production (https://boostapp.io/)"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Dialog" size="12" style="0"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="Menu_WO_DE3MouseClicked"/>
                   </Events>
                 </Menu>
               </SubComponents>
@@ -243,6 +278,9 @@
                 <Property name="text" type="java.lang.String" value="Mobile Devices"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="12" style="0"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[106, 18]"/>
                 </Property>
               </Properties>
               <Events>

@@ -5,6 +5,17 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+// In Staging and Development - for all Sites, brands
+
+//Freedom Pay Store ID: 1456207011 / 1471190011 / 1456216013
+//Freedom Pay Terminal ID: 2459269011
+
+//Delelopment > Trive "University of mississauga"   <<< Working
+//"freedompay_store_id":"1471190011",
+//"freedompay_terminal_id":"2479168011"
+
+// SID 1490800013
+
 class payment extends AP3_API_GUI {
 
     protected payment(AP3_API_GUI a) {
@@ -13,6 +24,8 @@ class payment extends AP3_API_GUI {
         BaseAPI = a.BaseAPI;
         Mobile_User_TKN = a.Mobile_User_TKN;
         Mobile_User_ID = a.Mobile_User_ID;
+        MOBILE_ID = a.MOBILE_ID;
+
         SiteID = a.SiteID;
         UnitID = a.UnitID;
         ParentTest = a.ParentTest;
@@ -33,83 +46,87 @@ class payment extends AP3_API_GUI {
     String AAA = "";
     protected void run() {
 
-        //<editor-fold defaultstate="collapsed" desc="EXACT">
-        Auth = "Bearer " + Mobile_User_TKN;
-        JOB_Api_Call("Mobile User EXACT Payment Method(s)", "GET",
-                BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
-        if (json != null) {
-            AAA = json.toString(4);
-            try {
-                if (json.has("payment_methods")) {
-                    JSONArray payment_methods = json.getJSONArray("payment_methods");
-                    for (int i = 0; i < payment_methods.length(); i++) {
-                        JSONObject p = payment_methods.getJSONObject(i);
-                        Payment_Tokens_EXACT.add(p.getString("token"));
-                    }
-                    Mobile_User_PProvider = payment_methods.getJSONObject(0).getString("type");
-                    Card_Type = payment_methods.getJSONObject(0).getString("card_type");
-                    Card_Last4 = payment_methods.getJSONObject(0).getString("last4");
-                    Card_Name = payment_methods.getJSONObject(0).getString("cardholder_name");
-                    Card_Method_TKN = payment_methods.getJSONObject(0).getString("token");
-                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
-        }
-
-        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
-        for (int i = 0; i < Payment_Tokens_EXACT.size(); i++) {
-            JOB_Api_Call("Mobile User Delete EXACT Payment Method " + (i + 1), "DELETE",
-                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Tokens_EXACT.get(i), Auth, BODY, 200, ParentTest, "no_jira");
-        }
-
-        Auth = "Bearer " + Mobile_User_TKN;
-        requestParams = new JSONObject();
-        JSONObject options = new JSONObject();
-        if (env.equals("PR")) {
-            requestParams.put("cardholder_name", A.A.C1_Name);
-            requestParams.put("cc_expiry", A.A.C1_Exp);
-            requestParams.put("cc_number", A.A.C1_Num);       // Mastercard
-            requestParams.put("cc_verification_str2", A.A.C1_Cvv);
-            requestParams.put("postal_code", A.A.C1_Zip);
-            options.put("exact_gateway_id", "A39014-01"); //exact_gateway_id);           <<< BCIT
-            options.put("exact_gateway_password", "b2XTVsc4"); //exact_gateway_password);
-        } else {
-            requestParams.put("cardholder_name", "JTT API Automation");
-            requestParams.put("cc_expiry", "1224");
-            requestParams.put("cc_number", "5555555555554444"); // Mastercard
-            requestParams.put("cc_verification_str2", "123");
-            requestParams.put("postal_code", "L3L3C4");
-            options.put("exact_gateway_id", exact_gateway_id);
-            options.put("exact_gateway_password", exact_gateway_password);
-        }
-        requestParams.put("options", options);
-        
-        BODY = requestParams.toString();
-        JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST",
-                BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
-        if (json != null && json.has("token")) {
-            AAA = json.toString(4);
-            try {
-                EXACT_Payment_TKN = json.getString("token");
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
-        }
-        //</editor-fold>
+//        //<editor-fold defaultstate="collapsed" desc="EXACT">
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        JOB_Api_Call("Mobile User EXACT Payment Method(s)", "GET",
+//                BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "", 200, ParentTest, "no_jira");
+//        if (json != null) {
+//            AAA = json.toString(4);
+//            try {
+//                if (json.has("payment_methods")) {
+//                    JSONArray payment_methods = json.getJSONArray("payment_methods");
+//                    for (int i = 0; i < payment_methods.length(); i++) {
+//                        JSONObject p = payment_methods.getJSONObject(i);
+//                        Payment_Tokens_EXACT.add(p.getString("token"));
+//                    }
+//                    Mobile_User_PProvider = payment_methods.getJSONObject(0).getString("type");
+//                    Card_Type = payment_methods.getJSONObject(0).getString("card_type");
+//                    Card_Last4 = payment_methods.getJSONObject(0).getString("last4");
+//                    Card_Name = payment_methods.getJSONObject(0).getString("cardholder_name");
+//                    Card_Method_TKN = payment_methods.getJSONObject(0).getString("token");
+//                }
+//            } catch (Exception ex) {
+//                AAA = ex.getMessage();
+//            }
+//        }
+//
+//        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
+//        for (int i = 0; i < Payment_Tokens_EXACT.size(); i++) {
+//            JOB_Api_Call("Mobile User Delete EXACT Payment Method " + (i + 1), "DELETE",
+//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Tokens_EXACT.get(i), Auth, BODY, 200, ParentTest, "no_jira");
+//        }
+//
+//        Auth = "Bearer " + Mobile_User_TKN;
+//        requestParams = new JSONObject();
+//        JSONObject options = new JSONObject();
+//        if (env.equals("PR")) {
+//            requestParams.put("cardholder_name", A.A.C1_Name);
+//            requestParams.put("cc_expiry", A.A.C1_Exp);
+//            requestParams.put("cc_number", A.A.C1_Num);       // Mastercard
+//            requestParams.put("cc_verification_str2", A.A.C1_Cvv);
+//            requestParams.put("postal_code", A.A.C1_Zip);
+//            options.put("exact_gateway_id", "A39014-01"); //exact_gateway_id);           <<< BCIT
+//            options.put("exact_gateway_password", "b2XTVsc4"); //exact_gateway_password);
+//        } else {
+//            requestParams.put("cardholder_name", "JTT API Automation");
+//            requestParams.put("cc_expiry", "1224");
+//            requestParams.put("cc_number", "5555555555554444"); // Mastercard
+//            requestParams.put("cc_verification_str2", "123");
+//            requestParams.put("postal_code", "L3L3C4");
+//            options.put("exact_gateway_id", exact_gateway_id);
+//            options.put("exact_gateway_password", exact_gateway_password);
+//        }
+//        requestParams.put("options", options);
+//        
+//        BODY = requestParams.toString();
+//        JOB_Api_Call("New Card - Generate Mobile User Payment Token (exact)", "POST",
+//                BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY, 200, ParentTest, "no_jira");
+//        if (json != null && json.has("token")) {
+//            AAA = json.toString(4);
+//            try {
+//                EXACT_Payment_TKN = json.getString("token");
+//            } catch (Exception ex) {
+//                AAA = ex.getMessage();
+//            }
+//        }
+//        //</editor-fold>
  
-        //<editor-fold defaultstate="collapsed" desc="FP">        
+        //<editor-fold defaultstate="collapsed" desc="FP">  
+        Auth = "Bearer " + Mobile_User_TKN;   
+        // https://api.compassdigital.org/staging/payment/9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO/clienttoken 
+        //                                freedompay_id = 9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO  
+        //                                                9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO - Prod, store ID 1111. Term ID 1111
         String Access_TKN = "";
-        JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
-                BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
-        if (json != null && json.has("access_token")) {
-            AAA = json.toString(4);
-            try {
-                Access_TKN = json.getString("access_token");
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
+            JOB_Api_Call("Get Mobile User Freedompay Client Token", "GET",
+                    BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "", 200, ParentTest, "no_jira");
+            if (json != null && json.has("access_token")) {
+                AAA = json.toString(4);
+                try {
+                    Access_TKN = json.getString("access_token");
+                } catch (Exception ex) {
+                    AAA = ex.getMessage();
+                }
             }
-        }
         
         Auth = "Bearer " + Access_TKN;
         JOB_Api_Call("Mobile User Freedompay Payment Method(s)", "GET",
@@ -134,7 +151,7 @@ class payment extends AP3_API_GUI {
                 FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "", 204, ParentTest, "no_jira");
         }        
         
-        Auth = "Bearer " + Access_TKN;          // ??? What if No FP Payments for this User, above failed? How to generaete 1st one? DEBUG
+        Auth = "Bearer " + Access_TKN;       
         requestParams = new JSONObject();
         if (env.equals("PR")) {
             requestParams.put("nameOnCard", A.A.C1_Name);

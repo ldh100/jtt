@@ -26,7 +26,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -67,6 +69,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     public AP3_API_GUI() {
         initComponents();
     }
+// AP3_API_PR 15 9 * * 1-5|15 11 * * 1-5|15 14 * * 1-5
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -676,6 +679,8 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     protected String GL_MENU = "";
     protected String GL_MENU_ID = "";
     
+    protected String MEALPLAN = "";
+    protected String MEALPLAN_TYPE = "";
     protected String MEALPLAN_ID = "";
     protected String MEALPLAN_TENDER = "";
     
@@ -715,8 +720,8 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
     protected String exate_gateway_password = "";
 //  "freedompay": {
     protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
-    protected String freedompay_terminal_id = "26241559005";
-    protected String freedompay_store_id = "16167424007";
+    protected String freedompay_terminal_id = "2479168011";
+    protected String freedompay_store_id = "1456207013";
     protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
     protected String VF_URL = "https://api.voucherify.io/v1/";
     protected String VF_TKN = "";
@@ -1171,7 +1176,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         sw1.start();
 
         try {
-            J += GUI_API_Get(BaseAPI + "", "Bearer " + AP3_TKN) + "\r\n";
+            J += GUI_API_Get(BaseAPI + "/location/sector?_provider=cdl", "Bearer " + AP3_TKN) + "\r\n";
         } catch (IOException | JSONException ex) {
             J += BaseAPI + "/location/sector?_provider=cdl" + " > " + ex.getMessage() + "\r\n";
             txtLog.append("- Exception: " + ex.getMessage() + "\r\n");
@@ -2616,7 +2621,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         Log = "";
         String RES = "";
         JOB_Name = job_name;
-
+        txtLog.setText("");
         RES = JOB_Load_CONFIG(config);
         if (RES.contains("ERROR")) {
             Current_Log_Update(false, RES);
@@ -2692,11 +2697,11 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             switch (env) {
                 case "ST":
                     BaseAPI = "https://api.compassdigital.org/staging";
-                    FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+                    FP_URL = "https://cwallet.uat.freedompay.com"; 
                     break;
                 case "DE":
                     BaseAPI = "https://api.compassdigital.org/dev";
-                    FP_URL = "https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
+                    FP_URL = "https://cwallet.uat.freedompay.com"; 
                     break;
                 default:
                     BaseAPI = "https://api.compassdigital.org/v1";
@@ -2931,7 +2936,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             protected String doInBackground() throws Exception {
                 Extent_Report_Config();
                 NewID = "9" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMddHHmm"));
-                Execute(); // ========================== ===========================================cleanup lists >>>>
+                Execute(); // ========================== =========================================== cleanup lists >>>>
                 BolterBrandIDS = new ArrayList<>();
                 SECTOR_IDS = new ArrayList<>();
                 COMP_IDS = new ArrayList<>();
@@ -2958,9 +2963,9 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             protected void done() {
                 try {
                     Summary = "";
-                    String statusMsg = (String) get();
-                    txtLog.append("" + statusMsg + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                        String statusMsg = (String) get();
+                        txtLog.append("" + statusMsg + "\r\n");
+                        txtLog.setCaretPosition(txtLog.getDocument().getLength());
                     BW1 = null;
                 } catch (InterruptedException | ExecutionException ex) {
                     Current_Log_Update(GUI, "- Execution ERROR: " + ex.getMessage() + "\r\n");
@@ -2970,8 +2975,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                     _f++;
                     EX += " - " + "\t" + "=== Fatal Execution Error ===" + "\t" + " >>> " + "\t" + ex.getMessage() + "\t" + "FAIL" + "\t" + " - "
                         + "\t" + " - " + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + "no_jira" + "\r\n";
-                    Log_Html_Result("FAIL", ex.getMessage(), ParentTest.createNode("Fatal Execution Error"), API_SRART);                    
-                    
+                    Log_Html_Result("FAIL", ex.getMessage(), ParentTest.createNode("Fatal Execution Error"), API_SRART);                                        
                 }
                 BW1_Done(GUI); // ================================================================================ 
             }
@@ -3067,11 +3071,21 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             }
         }
 
-        //if (GUI && env.equals("PR")) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
-        if (!GUI && env.equals("PR") && _f > 0) { // Send API Prod CRON (!GUI) failure to QA_ONLY Slack - Setup independed
-            String Msg = " === JTT cron - AP3 API Production test: " + _f + " failed";
-            String SEND = A.Func.Message_to_Slack("#qa_only", Msg, FAILED, true); // #xtt_test #qa_only
-            //String XX = SEND;
+        //if (GUI && env.equals("PR")) { // Send API Prod CRON (!GUI) failure to Slack - Setup independed
+        if (!GUI && env.equals("PR") && _f > 0 && !Log.contains("Execution ERROR")) { 
+            String SEND;
+            String XX;
+            String Msg = " === Job " + JOB_Name + ": " + _f + " failed"; //AP3 API Production test
+            SEND = A.Func.Message_to_Slack("#test-engineering", Msg, FAILED, true); 
+//            XX = SEND;
+            if( 
+                LocalDate.now().getDayOfWeek().getValue() == 2 && 
+                LocalTime.now().isAfter(LocalTime.parse("15:45")) &&
+                LocalTime.now().isBefore(LocalTime.parse("16:15")) 
+            ){
+                SEND = A.Func.Message_to_Slack("#production-deploy", Msg, FAILED, true); 
+                XX = SEND;
+            }        
         }
     }
     //</editor-fold>    
@@ -3091,7 +3105,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             if (AP3_User_ID.isEmpty()) {
                 EX += " - " + "\t" + "User API: " + "\t" + "AP3 Admin: " + ADMIN_ID + "\t" + "ID Not Found" + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "", ParentTest.createNode("Uaer API: AP3 Admin '" + ADMIN_ID + "' > " + "ID Not Found"), new Date());
+                Log_Html_Result("WARN", "", ParentTest.createNode("Userr API: AP3 Admin '" + ADMIN_ID + "' > " + "ID Not Found"), new Date());
                 FAIL = true;
                 return;
             }            
@@ -3179,9 +3193,9 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             if (MENU_TIMESLOTS.isEmpty()) {
                 _t++;
                 _w++;
-                EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Timeslots" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
+                EX += " - " + "\t" + "Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "No Pickup Timeslots" + "\t" + " - " + "\t" + "WARN" + "\t" + " - "
                         + "\t" + " - " + "\t" + " - " + "\t" + "no_jira" + "\r\n";
-                Log_Html_Result("WARN", "No Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Timeslots"), new Date());
+                Log_Html_Result("WARN", "No Pickup Timeslots", ParentTest.createNode("Brand: " + BRAND + " > Menu: " + MENU_IDS.get(MENU_IDS.size() - 1) + "\t" + "  >>> No Pickup Timeslots"), new Date());
                 FAIL = true;
                 return;
             } else if (CATEGORIES_IDS.isEmpty()) {
@@ -3386,7 +3400,6 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
             task BR = new AP3_API.task(AP3_API_GUI.this);
             BR.run(); // ======================================
             EX += BR.EX; _t += BR._t; _p += BR._p; _f += BR._f; _w += BR._w; _i += BR._i;  r_time += BR.r_time; FAILED += BR.FAILED;
-            r_time += BR.r_time;
             ParentTest.getModel().setName("Task - Tot: " + BR._t + ", Failed: " + BR._f);
             ParentTest.getModel().setEndTime(new Date());
         }

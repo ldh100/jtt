@@ -27,9 +27,6 @@ class config extends AP3_API_GUI {
         MEALPLAN_TENDER = "";
 
         Auth = "Bearer " + AP3_TKN;   // =============== config(s) ===================================
-//        JOB_Api_Call("config > /'AppID'", "GET", BaseAPI + "/config/" + AppID, Auth, "", 200, ParentTest, "no_jira");
-//        JOB_Api_Call("Public config > /'AppID'", "GET", BaseAPI + "/config/public/" + AppID, "", "", 200, ParentTest, "no_jira");
-
         JOB_Api_Call("Config > /'SiteID'", "GET",
                 BaseAPI + "/config/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         if (json != null) {

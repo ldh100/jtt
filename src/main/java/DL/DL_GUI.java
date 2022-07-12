@@ -2099,8 +2099,8 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
                     } catch (IOException | InterruptedException ex){ // Exception ex
-                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
+//                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
                 return "Done"; 
@@ -2137,7 +2137,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
             String QA_USER = "";    // Next QA User from S3 DV_QA table
             Boolean IsMember=false;
             Boolean IsMemberSwitch=false;
-            for (int i = 630; i < 690; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
+            for (int i = 60; i < 62; i++) {   // Custom Test range selection from DV_QA table >>>> i = (# in the table - 1)  <<<< !!!!!
                 System.out.println(i);
            // for (int i = 0; i < DV_QA.getRowCount(); i++) {    // All Tests from S3 DV_QA table
                 if(QA_USER.equals(DV_QA.getValueAt(i, 1).toString()) && !Login_OK){
@@ -2146,16 +2146,6 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                 IsMemberSwitch=false;
                 ParentTest = HtmlReport.createTest("User: " + DV_QA.getValueAt(i, 1) + " Test# " + (i + 1));  // (i+1) = # in the table
                 QA_USER = DV_QA.getValueAt(i, 1).toString();
-                if (i == 1) {
-                    Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
-                    if (t.equalsIgnoreCase("Not Found")) {
-                        IsMember = false;
-                    } else {
-                        IsMember = true;
-                        SelectMember(DV_QA.getValueAt(i, 5).toString());
-                        IsMemberSwitch=true;
-                    }
-                }
                 System.out.println(DV_QA.getValueAt(i, 5).toString());
                 if (!QA_USER.equals(DL_UserID)) {  // ======  Clear Cookies and Login with New QA User ===========
                     DL_UserID = QA_USER;                // ======  Use last QA User from S3 for the next in the loop ====
@@ -2173,21 +2163,36 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                         F += BR.F;
                         r_time += BR.r_time;
                         Login_OK = BR.Login_OK;
-                        Wait_For_Element_By_Path_Presence("Wait for Member to display", "xpath", "//h1[contains(text(),'My Members')]", ParentTest, "no_jira");
-                        Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
-                        if (t.equalsIgnoreCase("Not Found")) {
-                            IsMember = false;
-                        } else {
-                            IsMember = true;
-                            SelectMember(DV_QA.getValueAt(i, 5).toString());
-                            IsMemberSwitch=true;
-                        }
+//                        Wait_For_Element_By_Path_Presence("Wait for Member to display", "xpath", "//h1[contains(text(),'My Members')]", ParentTest, "no_jira");
+//                        Text_Found("Check member is Displayed ", "My Members", ParentTest, "no_jira");
+//                        if (t.equalsIgnoreCase("Not Found")) {
+//                            IsMember = false;
+//                        } else {
+//                            IsMember = true;
+//                            SelectMember(DV_QA.getValueAt(i, 5).toString());
+//                            IsMemberSwitch=true;
+//                        }
                     } else {
                         Login_OK = false;
                     }
                 }
                 if (!Login_OK) {
                     continue;      // Go to next Test
+                }
+           
+                if (i == 60) {
+              Wait_For_Element_By_Path_Presence("Ismember login or Normal Login", "xpath", "(//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-text jss')])[1]", ParentTest, "no_jira");
+            if (FAIL) {
+                //return;
+            }      
+              Element_E1_Find("Ismember login or Normal Login", "xpath", "(//button[contains(@class,'MuiButtonBase-root MuiButton-root MuiButton-text jss')])[1]", ParentTest, "no_jira");
+                    if (!e1.isEnabled()) {
+                        IsMember = false;
+                    } else {
+                        IsMember = true;
+                        SelectMember(DV_QA.getValueAt(i, 5).toString());
+                        IsMemberSwitch=true;
+                    }
                 }
                 if(!IsMemberSwitch && IsMember)
                 {
@@ -2513,7 +2518,7 @@ public class DL_GUI extends javax.swing.JInternalFrame {
         
             
          
-
+                Thread.sleep(3000);
 
                 Wait_For_Element_By_Path_Presence("Wait for Chevron", "xpath", "//span[contains(text(),'keyboard_arrow_down')]", ParentTest, "no_jira");
                 if (FAIL) {
@@ -2540,9 +2545,9 @@ public class DL_GUI extends javax.swing.JInternalFrame {
                
                 if (p) {
                     Move_to_Element_By_Path("Scroll to Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
-                    if (FAIL) {
-                        return;
-                    }
+//                    if (FAIL) {
+//                        return;
+//                    }
                     Thread.sleep(2000);
                     Element_By_Path_Click("Click on a Member", "xpath", "//p[text()=\"" + Member.replaceAll("'", "\\\'") + "\"]", ParentTest, "no_jira");
                     if (FAIL) {

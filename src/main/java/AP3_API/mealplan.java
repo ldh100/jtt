@@ -21,7 +21,8 @@ class mealplan extends AP3_API_GUI{
         
         ParentTest = a.ParentTest;
     }
-    private String AAA = "";
+    JSONObject requestParams = null;
+    String AAA = "";
     protected void run() {
         Auth = "Bearer " + Mobile_User_TKN;
         JOB_Api_Call("Get MealPlan by ID", "GET", 
@@ -58,7 +59,17 @@ class mealplan extends AP3_API_GUI{
 
         //POST/mealplan/{id}/verify : Send verification email to user linking a mealplan
 
-        //PUT/mealplan/{id}/verify : Verify email address using provided payload
+        //PUT/mealplan/{id}/verify : Verify email address using provided payload 
+//        JSONObject email = new JSONObject();
+//        email.put("email", Mobile_User_ID);
+//        BODY = requestParams.toString();
+//        JOB_Api_Call("MealPlan Verify email", "PUT", 
+//            BaseAPI + "/mealplan/" + MEALPLAN_ID + "/verify", "", BODY, 200, ParentTest, "no_jira");
+//        if (json != null) {
+//            AAA = json.toString(4);
+//        }
+
+       // k4k9gd1BJ1Fv7qR5Nm31fzP06M8vzdIGWO8kz9kmHywllA2RgmCJpBk4Ea9AIlv9BvB37kHaM686aQANseDLlgNLrmCmoMroAKvYuN40vQgMYrUgNqJrYLkpuRmWeqZwGZfmLLq74q5NtJawML74BoFeX1pNNa8LSvKYzM
 
         //POST/mealplan/{id}/authorize : Authorize transaction
     }

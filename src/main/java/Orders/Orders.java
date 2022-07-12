@@ -1020,6 +1020,10 @@ public class Orders extends javax.swing.JInternalFrame {
                 JSONArray OR = json.getJSONArray("orders");
                 if (!OR.isEmpty()) {
                     for (int i = 0; i < OR.length(); i++) {
+                        _Promo = "None";
+                        _Name = "?";
+                        _Payment = "?";
+                        _Amount = "?";
                         JSONObject or = OR.getJSONObject(i);
                         if(or.has("meta") && or.getJSONObject("meta").has("transaction") && or.getJSONObject("meta").getJSONObject("transaction").has("amount")){
                             _Amount = or.getJSONObject("meta").getJSONObject("transaction").getNumber("amount").toString();

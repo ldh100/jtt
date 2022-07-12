@@ -15,9 +15,14 @@ class reports extends AP3_API_GUI{
         BrandIDS = a.BrandIDS;
         ParentTest = a.ParentTest;
     }
-    protected void run() {      
-        Auth = "Bearer " + AP3_TKN;   // =============== AP3 Sales Reporting EOD ========================
-        JOB_Api_Call("Sales EOD Report - Default > /'SiteID'", "GET", 
+    protected void run() {  
+        Date _Start; 
+        Date _End;   
+        String Start; 
+        String End; 
+        Auth = "Bearer " + AP3_TKN;   
+
+        JOB_Api_Call("Sales EOD Report - Default > /'SiteID'", "GET", // =============== AP3 Sales Reporting EOD ========================
             BaseAPI + "/report/eod/group/" + SiteID, Auth, "", 200, ParentTest, "no_jira");
         String From = ""; 
         Date Yesterday = new DateTime(new Date()).minusDays(1).toDate();
@@ -29,23 +34,34 @@ class reports extends AP3_API_GUI{
             boolean XXX = true;
             //
         }
-        String Start = ""; 
-        String End = ""; 
-        Date _Start = new DateTime(new Date()).minusDays(31).toDate();
-        Date _End = new DateTime(new Date()).minusDays(1).toDate();
+
+//        _Start = new DateTime(new Date()).minusMonths(6).toDate();  // Added 31 March 2022
+//        _End = new DateTime(new Date()).minusDays(1).toDate();
+//        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
+//        End = new SimpleDateFormat("yyyy-MM-dd").format(_End); 
+//        JOB_Api_Call("Report Analytics Group > /'SiteID/bills?month?6 Month'", "GET", 
+//            BaseAPI + "/report/analytics/group/" + SiteID + "/bills&time_frame=month&start_date=" + Start + "&end_date=" + End, Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            boolean XXX = true;
+//            //
+//        }
+
+        _Start = new DateTime(new Date()).minusDays(31).toDate();
+        _End = new DateTime(new Date()).minusDays(1).toDate();
         Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
         End = new SimpleDateFormat("yyyy-MM-dd").format(_End); 
-        JOB_Api_Call("Report Analytics > /'SiteID/all_brands/week/30 days'", "GET", 
+        JOB_Api_Call("Report Analytics Combined > /'SiteID/all_brands?week?30 days'", "GET", 
             BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + BrandIDS + "&time_frame=week&start_date=" + Start + "&end_date=" + End, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             boolean XXX = true;
             //
-        }  
-        Date _Start1 = new DateTime(new Date()).minusDays(8).toDate();
-        Date _End1 = new DateTime(new Date()).minusDays(1).toDate();
-        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start1); 
-        End = new SimpleDateFormat("yyyy-MM-dd").format(_End1); 
-        JOB_Api_Call("Report Analytics > /'SiteID/brand/day/7 days'", "GET", 
+        } 
+ 
+        _Start = new DateTime(new Date()).minusDays(8).toDate();
+        _End = new DateTime(new Date()).minusDays(1).toDate();
+        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
+        End = new SimpleDateFormat("yyyy-MM-dd").format(_End); 
+        JOB_Api_Call("Report Analytics Combined > /'SiteID/brand?day?7 days'", "GET", 
             BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_id=" + BrandID + "&time_frame=day&start_date=" + Start + "&end_date=" + End, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             boolean XXX = true;

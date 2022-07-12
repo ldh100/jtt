@@ -53,7 +53,7 @@ class AP3_announcements extends AP3_GUI{
                     Element_Text("Announcement Data Row Text", L0.get(i), ParentTest, "no_jira");             
                 } 
             } else {
-                Element_Text("Announcement Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
+                Element_Text("Last Announcement Data Row Text", L0.get(L0.size()- 1), ParentTest, "no_jira");             
                 if (FAIL) { return;}        
             }       
         List_L1("Sortable Columns Count", "css", "[role='columnheader']", ParentTest, "no_jira");             

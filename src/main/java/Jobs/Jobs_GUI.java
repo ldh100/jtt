@@ -232,7 +232,7 @@ public class Jobs_GUI extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel1.setText("Job Configuration, Data Setup:");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 104, 178, -1));
-        getContentPane().add(txtCheckValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(698, 49, 156, -1));
+        getContentPane().add(txtCheckValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 156, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);

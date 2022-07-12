@@ -9,6 +9,8 @@ class shoppingcart extends AP3_API_GUI{
         env = a.env;
         BaseAPI = a.BaseAPI;
         Mobile_User_TKN = a.Mobile_User_TKN;
+        Mobile_User_ID = a.Mobile_User_ID;
+        MOBILE_ID = a.MOBILE_ID;
 
         BrandID = a.BrandID;
         MENU_IDS = a.MENU_IDS;
@@ -80,8 +82,8 @@ class shoppingcart extends AP3_API_GUI{
         }  
         
         BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
-            "\"quantity\":2," +
-            "\"price\":{\"amount\":0.05}}]}"; 
+               "\"quantity\":2," +
+               "\"price\":{\"amount\":0.05}}]}"; 
         JOB_Api_Call("Add Last Menu Item to Delivery ShoppingCart", "PUT",           // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
@@ -93,24 +95,24 @@ class shoppingcart extends AP3_API_GUI{
             }
         }        
         
-        BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
-            "\"quantity\":1}]}"; 
-        JOB_Api_Call("Patch Last Menu Item: Quantity 2 > 1", "PATCH",       // ===========================
-            BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");  
-        if(json != null){
-            try{
-                ShoppingCart_Delivery_ID = json.getString("id");
-                AAA = json.toString(4);
-            } catch (Exception ex){
-                AAA = ex.getMessage();
-            }
-        }
+//        BODY = "{\"items\":[{\"id\":\"" + ITEMS_IDS.get(ITEMS_IDS.size() - 1) + "\"," +
+//               "\"quantity\":1}]}"; 
+//        JOB_Api_Call("Patch Last Menu Item: Quantity 2 > 1", "PATCH",       // ===========================
+//            BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");  
+//        if(json != null){
+//            try{
+//                ShoppingCart_Delivery_ID = json.getString("id");
+//                AAA = json.toString(4);
+//            } catch (Exception ex){
+//                AAA = ex.getMessage();
+//            }
+//        }
         
         JSONObject requestParams = new JSONObject();
         requestParams.put("code", "compassunlimited");
-        requestParams.put("email", Mobile_User_ID);
+        requestParams.put("email", MOBILE_ID);
         BODY = requestParams.toString();
-        JOB_Api_Call("Add Promo Code to Delivery ShoppingCart1", "PUT",           // ===========================
+        JOB_Api_Call("Add Promo Code to Delivery ShoppingCart", "PUT",           // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/promo", Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){
             try{
@@ -121,7 +123,7 @@ class shoppingcart extends AP3_API_GUI{
             }
         }
         
-        JOB_Api_Call("Get Delivery ShoppingCart after Patch Item", "GET",                 // ===========================
+        JOB_Api_Call("Get Delivery ShoppingCart after PATCH Item, PUT Promo", "GET",                 // ===========================
             BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");        
         if(json != null){
             try{

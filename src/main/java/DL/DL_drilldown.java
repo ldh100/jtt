@@ -17,13 +17,13 @@ class DL_drilldown extends DL_GUI {
 
     protected void run() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
             SelectMember();
             List_L0("Get the tabs Count", "xpath", "//span[contains(@class, 'MuiTab-wrapper')]", ParentTest, "no_jira");
             for (int j = 0; j < L0.size(); j++) {
                 Element_Text("Tabs name", L0.get(j), ParentTest, "no_jira");
             }
-            Thread.sleep(2000);
+            Thread.sleep(5000);
             Element_By_Path_Click("Click on 'Drilldown' tab'", "xpath", "(//button[contains(@class, 'MuiButtonBase-root MuiTab-root')])[2]", ParentTest, "no_jira");
                 if (FAIL) { return; }
                 Thread.sleep(2000);
@@ -37,12 +37,15 @@ class DL_drilldown extends DL_GUI {
                 Element_Click("Select the Section", L2.get(i), ParentTest, "no_jira");
                     if (FAIL) { return; }
             }
-            Thread.sleep(10000);
+            Thread.sleep(18000);
             Element_By_Path_Click("Click on the Sector (Org level 1)", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[1]", ParentTest, "no_jira");
+            Thread.sleep(2000);
             Element_By_Path_Click("Select the Customer/Locations", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[6]", ParentTest, "no_jira");
                 if (FAIL) { return; }
+            Thread.sleep(5000);    
             Element_By_Path_Click("Click on 'Export to CSV' button", "xpath", "(//span[contains(text(),'Export CSV')])/..", ParentTest, "no_jira");
                 if (FAIL) { return; }
+            Thread.sleep(4000);
             Element_By_Path_Click("Click on 'Categories/Items' tab'", "xpath", "//span[contains(text(),'Categories/Items')]", ParentTest, "no_jira");
                 if (FAIL) { return; }
             List_L2("Sections in tab2", "xpath", "(//div[contains(@class,'MuiGrid-root jss')])[7]//button", ParentTest, "no_jira");
@@ -57,8 +60,10 @@ class DL_drilldown extends DL_GUI {
             Thread.sleep(25000);
             Element_By_Path_Click("Select the Categories/Items", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[4]", ParentTest, "no_jira");
                 if (FAIL) { return; }
+            Thread.sleep(2000);    
             Element_By_Path_Click("Click on 'Export to CSV' button", "xpath", "(//span[contains(text(),'Export CSV')])/..", ParentTest, "no_jira");
                 if (FAIL) { return; }
+             Thread.sleep(4000);    
             Element_By_Path_Click("Click on 'Manufacturer' tab'", "xpath", "//span[contains(text(),'Manufacturer')]", ParentTest, "no_jira");
                 if (FAIL) { return; }
             List_L2("Section in tab3", "xpath", "(//div[contains(@class,'MuiGrid-root jss')])[7]//button", ParentTest, "no_jira");
@@ -74,6 +79,7 @@ class DL_drilldown extends DL_GUI {
             Thread.sleep(20000);
             Element_By_Path_Click("Click on 'Export to CSV' button", "xpath", "(//span[contains(text(),'Export CSV')])/..", ParentTest, "no_jira");
                 if (FAIL) { return; }
+             Thread.sleep(4000);    
             Element_By_Path_Click("Click on 'Distributors' tab'", "xpath", "//span[contains(text(),'Distributors')]", ParentTest, "no_jira");
                 if (FAIL) { return; }
             List_L2("Section in tab4", "xpath", "(//div[contains(@class,'MuiGrid-root jss')])[7]//button", ParentTest, "no_jira");
@@ -82,12 +88,13 @@ class DL_drilldown extends DL_GUI {
                 Element_Click("Select the Section", L2.get(i), ParentTest, "no_jira");
                     if (FAIL) { return; }
             }
-            Thread.sleep(1000);
+            Thread.sleep(5000);
             Element_By_Path_Click("Select the Distributor", "xpath", "(//button[contains(@class,'MuiTypography-root MuiLink-root MuiLink-underlineNone')])[3]", ParentTest, "no_jira");
                 if (FAIL) { return; }
             Thread.sleep(20000);
             Element_By_Path_Click("Click on 'Export to CSV' button", "xpath", "(//span[contains(text(),'Export CSV')])/..", ParentTest, "no_jira");
                 if (FAIL) { return; }
+             Thread.sleep(4000);    
         } catch (Exception ex) {
             // =============
         }

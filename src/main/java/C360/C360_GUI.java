@@ -891,7 +891,6 @@ public class C360_GUI extends javax.swing.JInternalFrame {
     protected String Location = "";
     protected String SectorID = "";
     protected String CompanyID = "";
-    protected String DH_MENU_ID = "";    
     protected String GL_MENU = "TIM HORTONS";
 
     // </editor-fold>
@@ -1770,7 +1769,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                 Current_Log_Update(GUI, "========   " + "Execution step-by-step log..." + "   ========" + "\r\n");
                 
                 EX = JOB_Name + ", v" + Ver + ", Browser: " + BROWSER  + HEADLESS +
-                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE + "\r\n" +
+                    " - Steps: " + _t + ", Passed: " + _p + ", Warnings: " + _w + ", Failed: " + _f + ". Scope: " + SCOPE  + 
+                    ". Dur: " + DD.toHours() + ":" + (DD.toMinutes() % 60) + ":" + (DD.getSeconds() % 60) + "\r\n" +
                     "#\tTC\tTarget/Element/Input\tExpected/Output\tResult\tComment/Error\tResp\tTime\tJIRA\r\n"
                     + EX;
                 
@@ -1858,8 +1858,8 @@ public class C360_GUI extends javax.swing.JInternalFrame {
                             Thread.sleep(2000); //  pause till new alert expected ???? 
                         }
                     } catch (IOException | InterruptedException ex){ // Exception ex
-                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
+//                        txtLog.append( "= BW2: " + ex.getMessage() + "\r\n");
+//                        txtLog.setCaretPosition(txtLog.getDocument().getLength());                         
                     }
                 }
                 return "Done"; 

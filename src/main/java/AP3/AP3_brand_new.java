@@ -49,13 +49,13 @@ class AP3_brand_new extends AP3_GUI {
     private boolean flag = false;
     protected void run(boolean NEW_SITE) {
     try{    
-        Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
-            if (FAIL) { return; }
-        Thread.sleep(500);
-        Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", ParentTest, "no_jira");
-            if (FAIL) { return; }
-        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");
-            if (FAIL) { return; }
+//        Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
+//            if (FAIL) { return; }
+//        Thread.sleep(500);
+//        Element_By_Path_Click("Drawer > Dashboard Click", "xpath", "//*[contains(text(), 'Dashboard')]", ParentTest, "no_jira");
+//            if (FAIL) { return; }
+//        Move_out_of_Element_By_Path("Close Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", "Right", 2, 0, ParentTest, "no_jira");
+//            if (FAIL) { return; }
         Move_to_Element_By_Path("Open Dashboard Drawer", "xpath", "//aside[contains(@class, 'navigation-drawer')]", ParentTest, "no_jira");
             if (FAIL) { return; }
         Thread.sleep(500);
@@ -138,6 +138,7 @@ class AP3_brand_new extends AP3_GUI {
             EX += " - " + "\t" + "-" + "\t" + "-" + "\t" + "-" + "\t" + "" + "\t" + " - " + "\t" + " - " + "\r\n";
             
             EX += " - " + "\t" + "Delivery Details - Add a Location in Site Config" + "\t" + "Delivery Details - Add a Location in Site Config" + "\t" + "Delivery Details - Add a Location in Site Config" + "\t" + "" + "\t" + " - " + "\t" + " - " + "\r\n";
+            
             Element_By_Path_Click("Click > 'SITE CONFIGURATION' button", "xpath", "//*[contains(text(),'SITE CONFIGURATION')]", ParentTest, "no_jira");
                 if (FAIL) { return;}
             Wait_For_Element_By_Path_Presence("Wait for 'Configuration' page to load", "xpath", "//form[@class='v-form settings']", ParentTest, "no_jira");
@@ -244,16 +245,16 @@ class AP3_brand_new extends AP3_GUI {
                     Element_Child_List_L1("Groups Count #1", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
                         if (FAIL) { return; }
                     T_Index = L1.size();
-                    Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                    Scroll_Element_UP("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
                         if (FAIL) { return; }
                     Element_Child_List_L1("Groups Count #2", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
-                     if (FAIL) { return; }
+                        if (FAIL) { return; }
 
                     int SC = 2;
                     while (T_Index < L1.size()) {
                         T_Index = L1.size();
                         SC++;
-                        Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                        Scroll_Element_UP("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
                             if (FAIL) { return; }
                         Element_Child_List_L1("Groups Count #" + SC, e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
                             if (FAIL) { return; }
@@ -435,15 +436,6 @@ class AP3_brand_new extends AP3_GUI {
                     Element_By_Path_Click("Customers Per Slot Click", "css", "[aria-label='Customers Per Slot']", ParentTest, "no_jira");
                         if (FAIL) { return; }
                     Element_By_Path_Text_Enter("Enter Customers Per Slot", "css", "[aria-label='Customers Per Slot']", "2", false, ParentTest, "no_jira");
-                        if (FAIL) { return; }
-
-                    List_Child_E1_By_Path("Find 'ASAP Pickup' checkbox", L2.get(i), "xpath", ".//input[@role='checkbox']", ParentTest, "no_jira");
-                        if (FAIL) { return; }
-                    Element_Click("ASAP Pickup checkbox Click", e1, ParentTest, "no_jira");
-                        if (FAIL) { return; }
-                    Element_By_Path_Click("Input 'ASAP Pickup theshold' Click", "css", "[aria-label='ASAP time threshold']", ParentTest, "no_jira");
-                        if (FAIL) { return; }
-                    Element_By_Path_Text_Enter("Enter ASAP time threshold", "css", "[aria-label='ASAP time threshold']", "2", false, ParentTest, "no_jira");
                         if (FAIL) { return; }
                     break;
                 case "Delivery Details":

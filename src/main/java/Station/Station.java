@@ -23,6 +23,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
@@ -50,8 +51,17 @@ import org.json.JSONObject;
     Production Site for BC 
     https://adminpanel.compassdigital.org/#/sites/Ym7By6oy1dTOBE5P880jTamr9022GqCD7BB2y1vOIlgk1B16Y7hzOGjMXNMoh1oQRojae9T8JqBXJ8llt9d/site/PpzmrEBrveH1kX3Zrk3ytzrrB0O1XpSk3m973O9Xcw46vkWyKPtl8JGR17m2TEoDLA2YAETGOo/
     
+
+    Production :
+    Frictionless site Boost : Compass Group Canada   >> Brand : Vending Machine
+    Frictionless site Thrive : Compass group Canada. >> Brand : Avenue C
+
+    Staging :
+    Frictionless site Boost : Compass HQ >> Brand : test_brand
+    Frictionless site Thrive : CDL Head Office  >> Brand : Avenue
 */   
 public class Station extends javax.swing.JInternalFrame {
+    List<String> Payment_Tokens_FP = new ArrayList<>();
     public Station() {
         initComponents();
     }
@@ -103,44 +113,43 @@ public class Station extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Site > Station > Menu >>> loading, please wait ... ... ... ...");
-        setMaximumSize(new java.awt.Dimension(850, 527));
-        setMinimumSize(new java.awt.Dimension(850, 527));
+        setMaximumSize(new java.awt.Dimension(850, 532));
+        setMinimumSize(new java.awt.Dimension(850, 532));
         setName("Station"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
-        setPreferredSize(new java.awt.Dimension(850, 527));
+        setRequestFocusEnabled(false);
+        setSize(new java.awt.Dimension(850, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 4, 360, -1));
 
         DV_Sites.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV_Sites.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -166,8 +175,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV_Sites);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 376, 228));
-
         DV_Brands.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Brands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,8 +199,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV_Brands);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 248, 376, 112));
-
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -202,8 +207,6 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 360, 376, 140));
 
         DV_MTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_MTS.setModel(new javax.swing.table.DefaultTableModel(
@@ -222,12 +225,9 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(DV_MTS);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 188, 84, 172));
-
         lblMenus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblMenus.setText("Click Brand to get Menu(s) ...");
         lblMenus.setAlignmentX(0.5F);
-        getContentPane().add(lblMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 4, 372, -1));
 
         DV_Items.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Items.setModel(new javax.swing.table.DefaultTableModel(
@@ -251,8 +251,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(DV_Items);
 
-        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 88, 384, 160));
-
         DV_Mods.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Mods.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -275,8 +273,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane7.setViewportView(DV_Mods);
 
-        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 248, 384, 112));
-
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -285,7 +281,6 @@ public class Station extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
-        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 476, 44, 22));
 
         DV_Menus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Menus.setModel(new javax.swing.table.DefaultTableModel(
@@ -310,8 +305,6 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(DV_Menus);
 
-        getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 384, 68));
-
         DV_DTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_DTS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -330,15 +323,11 @@ public class Station extends javax.swing.JInternalFrame {
         DV_DTS.getTableHeader().setReorderingAllowed(false);
         jScrollPane9.setViewportView(DV_DTS);
 
-        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 20, 84, 148));
-
         lblMTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblMTS.setText("Pickup TSlots");
-        getContentPane().add(lblMTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 172, 84, 16));
 
         lblBTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblBTS.setText("Delivery TSlots");
-        getContentPane().add(lblBTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 4, 80, -1));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -349,13 +338,11 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 476, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Env:");
         lblSITES13.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(536, 484, 28, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -363,13 +350,11 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 480, 120, 20));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("App:");
         lblSITES14.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 480, 28, 16));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -377,42 +362,35 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
-        getContentPane().add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 480, 112, 20));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES4.setText("Mobile User E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 364, 108, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_ID.setText("App_User@?.?");
-        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 379, 176, 20));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("Mobile User Password");
         lblSITES6.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 400, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_PW.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_PW.setText("password");
-        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 416, 176, 20));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES7.setText("Your custom text in Order 'PickupName'");
         lblSITES7.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 440, 240, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBDOFF.setText("Drop Off Locations");
         lblBDOFF.setAlignmentX(0.5F);
-        getContentPane().add(lblBDOFF, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 400, 112, -1));
 
         btnDOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnDOrder.setText("Place Delivery Order");
@@ -423,7 +401,6 @@ public class Station extends javax.swing.JInternalFrame {
                 btnDOrderMouseClicked(evt);
             }
         });
-        getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 412, 132, 24));
 
         btnPOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnPOrder.setText("Place Pickup Order");
@@ -434,20 +411,16 @@ public class Station extends javax.swing.JInternalFrame {
                 btnPOrderMouseClicked(evt);
             }
         });
-        getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 380, 132, 24));
 
         cmbLoc.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        getContentPane().add(cmbLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 416, 136, 20));
 
         txtMSG.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMSG.setText("JTT  > Station > Order");
-        getContentPane().add(txtMSG, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 456, 276, -1));
 
         lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES8.setText("Promo Code");
         lblSITES8.setAlignmentX(0.5F);
-        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 364, -1, -1));
 
         btnSCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSCart.setText("Last Updated SCart");
@@ -459,17 +432,153 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSCartMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 448, 136, 22));
 
         cmbPROMO.setEditable(true);
         cmbPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbPROMO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "compassunlimited", "boostper8", "promo100" }));
-        getContentPane().add(cmbPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 380, 136, 20));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(lblBTS, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSITES6)
+                    .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSITES8)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBDOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(lblSITES7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSITES)
+                    .addComponent(lblMenus)
+                    .addComponent(lblBTS))
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)
+                        .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSITES4)
+                                .addGap(1, 1, 1)
+                                .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(lblSITES6)
+                                .addGap(2, 2, 2)
+                                .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSITES8)
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cmbPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(lblBDOFF)
+                                        .addGap(2, 2, 2)
+                                        .addComponent(cmbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(4, 4, 4)
+                                .addComponent(lblSITES7)
+                                .addGap(2, 2, 2)
+                                .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // <editor-fold defaultstate="collapsed" desc="Form Variables Declaration">
+    // <editor-fold defaultstate="collapsed" desc="Variables Declarations">
+    protected boolean FLess = false;
+    protected boolean SandG = false;
     protected double combined_tax_rate = 0.0;
     protected double gst_tax_rate = 0.0;
     protected double qst_tax_rate = 0.0;
@@ -533,8 +642,8 @@ public class Station extends javax.swing.JInternalFrame {
     protected String exate_gateway_password = "";
     //  "freedompay": {
     protected String freedompay_id = "9PGDGvzvrKfJ366ZBz09h2e0pr13RMSA9wAmerk4C1gJ3v15mO";
-    protected String freedompay_terminal_id = "26241559005";
-    protected String freedompay_store_id = "16167424007";
+    protected String freedompay_terminal_id = "2479168011";
+    protected String freedompay_store_id = "1456207013";
     protected String FP_URL = ""; //https://cwallet.uat.freedompay.com"; // https://cwallet.freedompay.com
     
     protected String ShoppingCart_Delivery_ID = "";
@@ -546,7 +655,7 @@ public class Station extends javax.swing.JInternalFrame {
     protected String Auth = "";
     protected String EXACT_Payment_TKN = "";
     protected String FP_Payment_TKN = "";
-    protected String Last_SCart = "";
+    protected String Last_SCart_URL = "";
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
@@ -577,8 +686,18 @@ public class Station extends javax.swing.JInternalFrame {
         }
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
+
         BrandLastRow = DV_Brands.getSelectedRow();  
-        
+        FLess  = Boolean.parseBoolean(String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 5))); 
+        SandG  = Boolean.parseBoolean(String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 6))); 
+        if(FLess) {
+            btnPOrder.setText("Place FrLess Order");
+        } else if(SandG) {
+            btnPOrder.setText("Place SandG Order");
+        } else {
+            btnPOrder.setText("Place Pickup Order");
+        }
+     
         GetBrandDropOffLocations(); // ===================================
         GetMenus();                 // ===================================  
         Validate_Place_Order();
@@ -630,6 +749,7 @@ public class Station extends javax.swing.JInternalFrame {
            return;
         }   
         GetMenuTimeslots();
+        GetDeliveryTimeslots();
         GetItems();
         MenuLastRow = DV_Menus.getSelectedRow();  
         Validate_Place_Order();        
@@ -992,7 +1112,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.setModel(Model);
         lblMenus.setText("Click Brand to get Menu(s) ...");              
      
-        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID"}; 
+        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID", "FLess", "SandG"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV_Brands.setModel(BrandsModel);
@@ -1041,7 +1161,17 @@ public class Station extends javax.swing.JInternalFrame {
                                     menu_ids += menu.getString("id") + ","; 
                                 }  
                             }
-                            BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id});
+                            if(br.has("is") && !br.getJSONObject("is").isNull("frictionless_supported")){
+                                FLess =  br.getJSONObject("is").getBoolean("frictionless_supported");
+                            }else{
+                                FLess = false;
+                            }
+                            if(br.has("is") && !br.getJSONObject("is").isNull("scan_and_go_supported")){
+                                SandG =  br.getJSONObject("is").getBoolean("scan_and_go_supported");
+                            }else{
+                                SandG = false;
+                            }
+                            BrandsModel.addRow(new Object[]{brand, location, menu_ids, id, unit_id, FLess, SandG});
                         }
                     }
                 }
@@ -1074,7 +1204,7 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3)); 
 //            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
-//            GetDeliveryTimeslots();        // ============== comment to force only after Brand click / selection
+//            GetDeliveryTimeslots();     // ============== comment to force only after Brand click / selection
 //            GetMenus();                 // ============== comment to force only after Brand click / selection
         } else {
             BrandID = "null";
@@ -1552,16 +1682,15 @@ public class Station extends javax.swing.JInternalFrame {
             }
             Result = response.getStatusLine();
             status = response.getStatusCode();
-            if (status != 200 && status != 201) {
+//            if (status != 200 && status != 201) {
                 txtLog.append("Endpoint: " + EndPoint + "\r\n");
                 txtLog.append("Result: " + status + " - " + Result + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
-            }
+//            }
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     txtLog.append("Error: " + json.getString("error") + "\r\n");
-
                 }
             }
         } catch (Exception ex) {
@@ -1581,7 +1710,7 @@ public class Station extends javax.swing.JInternalFrame {
             btnPOrder.setEnabled(true);
         }
         if(DV_Items.getSelectedRowCount() > 0 && DV_DTS.getSelectedRowCount() > 0){
-            btnPOrder.setEnabled(true);
+            //btnPOrder.setEnabled(true);
             if(cmbLoc.getItemCount() > 0 && cmbLoc.getSelectedItem().toString().trim() != ""){
                 btnDOrder.setEnabled(true);
             }
@@ -1604,65 +1733,65 @@ public class Station extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
             return;
         }
-        if(COUNTRY.toLowerCase().startsWith("c")){
-            if(TYPE.equals("P")){
-                New_Pickup_ShoppingCart(); 
-                if(FAIL) {
-                    Validate_Place_Order();
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                    return;
-                }
-                if(env.equals("PR")){
-                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
-                    Validate_Place_Order();
-                    return;
-                }else{                 
-                    EXACT();
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }                
-                    Place_Update_Pickup_Order(EXACT_Payment_TKN);
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }
-                }
-            }
-            if(TYPE.equals("D")){
-                New_Delivery_ShoppingCart(); 
-                if(FAIL) {
-                    Validate_Place_Order();
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                    return;
-                }
-                if(env.equals("PR")){
-                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-                    Validate_Place_Order();
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                    return;
-                }else{                
-                    EXACT();
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }                
-                    Place_Update_Delivery_Order(EXACT_Payment_TKN);
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }
-                }
-            }            
-        }
-        if(COUNTRY.toLowerCase().startsWith("u")){
+//        if(COUNTRY.toLowerCase().startsWith("c")){
+//            if(TYPE.equals("P")){
+//                New_Pickup_ShoppingCart(); 
+//                if(FAIL) {
+//                    Validate_Place_Order();
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                    return;
+//                }
+//                if(env.equals("PR")){
+//                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+//                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
+//                    Validate_Place_Order();
+//                    return;
+//                }else{                 
+//                    EXACT();
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }                
+//                    Place_Update_Pickup_Order(EXACT_Payment_TKN);
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }
+//                }
+//            }
+//            if(TYPE.equals("D")){
+//                New_Delivery_ShoppingCart(); 
+//                if(FAIL) {
+//                    Validate_Place_Order();
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                    return;
+//                }
+//                if(env.equals("PR")){
+//                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
+//                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
+//                    Validate_Place_Order();
+//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                    return;
+//                }else{                
+//                    EXACT();
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }                
+//                    Place_Update_Delivery_Order(EXACT_Payment_TKN);
+//                    if(FAIL) {
+//                        Validate_Place_Order();
+//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+//                        return;
+//                    }
+//                }
+//            }            
+//        }
+//        if(COUNTRY.toLowerCase().startsWith("u")){
             if(TYPE.equals("P")){
                 New_Pickup_ShoppingCart();  
                 if(FAIL) {
@@ -1719,7 +1848,7 @@ public class Station extends javax.swing.JInternalFrame {
                     }
                 }
             } 
-        }
+        //}
         Validate_Place_Order();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
@@ -1732,8 +1861,9 @@ public class Station extends javax.swing.JInternalFrame {
         Mobile_User_ID = "";
         Mobile_User_TKN = "";
         String UserAuth = Base64.getEncoder().encodeToString((txtMobile_ID.getText().trim() + ":" + txtMobile_PW.getText().trim()).getBytes());
-        String Realm = A.Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);      
-        
+        String Realm = A.Func.Realm_ID(cmbApp.getSelectedItem().toString(), env);  
+
+       
         try {     // ============ Mobile User Authentication =====================================
             Api_Call("GET", BaseAPI + "/user/auth" + "?realm=" + Realm, "Basic " + UserAuth, "");
             J += BaseAPI + "/user/auth?realm=" + Realm + "\r\n" + json.toString(4);
@@ -1749,18 +1879,37 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
+
+//        try {     // ============ Mobile User Change Location =====================================
+//            Auth = "Bearer " + Mobile_User_TKN;
+//            BODY = "{\"meta\": {\"last_location\":\"" + SiteID + "\"}}"; 
+//            Api_Call("PUT", BaseAPI + "/user/" + Mobile_User_ID + "?lang=en", Auth, BODY);
+//            if(json != null){
+//                txtLog.append("== " + BaseAPI + "/user/" + Mobile_User_ID + "?lang=en" + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            }    
+//        } catch (Exception ex) {
+//            FAIL = true;
+//            txtLog.append(" > " + J + "\r\n"); 
+//            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
+//            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//        }     
     }                                    
 
     private void New_Pickup_ShoppingCart(){
         FAIL = false;
-        String CCC = "";
         btnSCart.setEnabled(false);
-        txtLog.append("\r\n- " + "New Pickup Shopping Cart ...." + "\r\n");
+        txtLog.append("\r\n- " + "New Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
-
+        String type = "pickup";
+        if(FLess)  {                           
+            type = "pickup";
+        } else if(SandG) {
+            type = "scan_and_go";
+        }
         Auth = "Bearer " + Mobile_User_TKN; 
         BODY = "{\"brand\":\"" + BrandID + "\"," +
-            "\"is\":{\"type\":\"pickup\"}," +
+            "\"is\":{\"type\":\"" + type + "\"}," +
             "\"mealSwipeTotal\":0.0," +
             "\"menu\":\"" + DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2).toString() + "\"," +  
             "\"showSingleTimeSlot\":false," +
@@ -1770,7 +1919,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Pickup_ID = json.getString("id");
-                txtLog.append("== " + "New SCart ID:  \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                txtLog.append("== " + "New SCart (POST) ID:  \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1779,8 +1928,8 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
-        txtLog.append("\r\n- " + "Add Menu Item(s) to Pickup Shopping Cart ...." + "\r\n");
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
+        txtLog.append("\r\n- " + "Add Menu Item(s) to Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
 
@@ -1841,17 +1990,18 @@ public class Station extends javax.swing.JInternalFrame {
         }  
         
         if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
-            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...." + "\r\n");
+            txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
+            JSONObject requestParams = new JSONObject(); 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
-            requestParams.put("email", Mobile_User_ID);
+            //requestParams.put("email", Mobile_User_ID);
+            requestParams.put("email", txtMobile_ID.getText().trim());
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/promo", Auth, BODY);        
             if(json != null){
                 try{
                     ShoppingCart_Delivery_ID = json.getString("id");
-                    txtLog.append("== " + "Apply Promo > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.append("== " + "Apply Promo (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
                     FAIL = true;
@@ -1860,7 +2010,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         } 
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         btnSCart.setEnabled(true);
         Report_Tax();
     }
@@ -1883,7 +2033,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "New SCart ID: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.append("== " + "New SCart (POST) ID: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1892,7 +2042,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         } 
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         txtLog.append("\r\n- " + "Add Menu Item(s) to Delivery Shopping Cart ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());  
         
@@ -1942,7 +2092,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try{
                 ShoppingCart_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "Add Item > Updated SCart \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
+                txtLog.append("== " + "Add Item {PUT) > Updated SCart \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
@@ -1955,15 +2105,16 @@ public class Station extends javax.swing.JInternalFrame {
         if(!cmbPROMO.getSelectedItem().toString().isEmpty() && !cmbPROMO.getSelectedItem().toString().toLowerCase().equals("none")){   
             txtLog.append("\r\n- " + "Add Promo " + cmbPROMO.getSelectedItem().toString() + " to Delivery Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            JSONObject requestParams = new JSONObject(); // "Add Promo Code to Delivery ShoppingCart1", 
+            JSONObject requestParams = new JSONObject(); 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
-            requestParams.put("email", Mobile_User_ID);
+            //requestParams.put("email", Mobile_User_ID);
+            requestParams.put("email", txtMobile_ID.getText().trim());
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/promo", Auth, BODY);        
             if(json != null){
                 try{
                     ShoppingCart_Delivery_ID = json.getString("id");
-                    txtLog.append("== " + "Apply Promo > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
+                    txtLog.append("== " + "Apply Promo (PUT) > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
                     FAIL = true;
@@ -1973,8 +2124,7 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         }   
-        
-        Last_SCart = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
+        Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         btnSCart.setEnabled(true);
         Report_Tax();
     }
@@ -2019,15 +2169,11 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }
     private void Print_SCart() {
-    
-    // To see some other SCart    
-    //Last_SCart = "https://api.compassdigital.org/dev/shoppingcart/AXNLQg1DQ9tq3PjmKG3eT0J8z1mZ9otAovNdm2ERF9e1Mp1XDXcEW3jM7qwacNOQGDq";    
-
         if(btnSCart.isEnabled()){
             txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
-            Api_Call("GET", Last_SCart, "", "");
-            String R = A.Func.SHOW_FILE(Last_SCart + "\r\n\r\n" + json.toString(4), "json");
+            Api_Call("GET", Last_SCart_URL, "", "");
+            String R = A.Func.SHOW_FILE(Last_SCart_URL + "\r\n\r\n" + json.toString(4), "json");
         }
     }  
     private void Set_Requested_Date(String TYPE){
@@ -2084,8 +2230,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
                 
         BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
-        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {
-            
+        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {            
 //            JOB_Api_Call("Mobile User Delete Payment Method " + (Item_Index + 1), "DELETE",
 //                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(Item_Index), Auth, BODY, 200, ParentTest, "no_jira");
         }
@@ -2140,6 +2285,28 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
         }
+// =========================
+        Auth = "Bearer " + Access_TKN;
+        Api_Call("GET", FP_URL + "/TokenService/api/consumers/tokens", Auth, "");
+        if (json != null) {
+            String AAA = json.toString(4);
+            try {
+                if (json.has("data")) {
+                    JSONArray tokens = json.getJSONArray("data");
+                    for (int i = 0; i < tokens.length(); i++) {
+                        JSONObject p = tokens.getJSONObject(i);
+                        Payment_Tokens_FP.add(p.getString("token"));
+                    }
+                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }       
+
+        for (int i = 0; i < Payment_Tokens_FP.size(); i++) {
+            Api_Call("DELETE", FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "");
+        } 
+// ==========================
         
         Auth = "Bearer " + Access_TKN;
         requestParams = new JSONObject();
@@ -2235,35 +2402,82 @@ public class Station extends javax.swing.JInternalFrame {
     }
     private void Place_Update_Pickup_Order(String Payment_TKN){
         FAIL = false;
-        txtLog.append("\r\n- " + "Place Pickup Order ...." + "\r\n");
+        txtLog.append("\r\n- " + "Place Order ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         
-        Auth = "Bearer " + Mobile_User_TKN;                               
-        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
-        requestParams.put("location_brand", BrandID);
-        requestParams.put("customer", Mobile_User_ID);
-        requestParams.put("pickup_name", txtMSG.getText());
-        requestParams.put("pickup", Requested_Date);
-        requestParams.put("requested_date", Requested_Date);
-        requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
-        JSONObject payment = new JSONObject();
-        payment.put("token", Payment_TKN);
-        requestParams.put("payment", payment); 
-        BODY = requestParams.toString();       
+        Auth = "Bearer " + Mobile_User_TKN;  
+        if(FLess)  {                           
+            requestParams = new JSONObject();       //  Mobile User Place Frictionless Order  =================
+            requestParams.put("location_brand", BrandID);
+            requestParams.put("customer", Mobile_User_ID);
+            requestParams.put("pickup_name", txtMSG.getText());
+            requestParams.put("pickup", Requested_Date);
+            requestParams.put("requested_date", Requested_Date);
+            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+            JSONObject payment = new JSONObject();
+            payment.put("token", Payment_TKN);
+            requestParams.put("payment", payment); 
+
+            JSONObject meta = new JSONObject();
+            meta.put("checkin_uuid", UUID.randomUUID().toString().replace("-", ""));
+            requestParams.put("meta", meta);
+
+            JSONObject details = new JSONObject();
+            details.put("name", "JTT Frictionless");
+            details.put("order_type", "frictionless"); //  "order_type": "scan_and_go",     "scan_and_go_supported": true,
+            //details.put("destination", cmbLoc.getSelectedItem().toString());
+            requestParams.put("details", details); 
+        } else if(SandG) {
+            requestParams = new JSONObject();       //  Mobile User Place Scan and Go Order  =================
+            requestParams.put("location_brand", BrandID);
+            requestParams.put("customer", Mobile_User_ID);
+            requestParams.put("pickup_name", txtMSG.getText());
+            requestParams.put("pickup", Requested_Date);
+            requestParams.put("requested_date", Requested_Date);
+            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+            JSONObject payment = new JSONObject();
+            payment.put("token", Payment_TKN);
+            requestParams.put("payment", payment); 
+
+            JSONObject details = new JSONObject();
+            details.put("name", "JTT Scan&Go");
+            details.put("order_type", "scan_and_go"); //  "order_type": "scan_and_go",     "scan_and_go_supported": true,
+            //details.put("destination", cmbLoc.getSelectedItem().toString());
+            requestParams.put("details", details); 
+        } else {
+            requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+            requestParams.put("location_brand", BrandID);
+            requestParams.put("customer", Mobile_User_ID);
+            requestParams.put("pickup_name", txtMSG.getText());
+            requestParams.put("pickup", Requested_Date);
+            requestParams.put("requested_date", Requested_Date);
+            requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
+            JSONObject payment = new JSONObject();
+            payment.put("token", Payment_TKN);
+            requestParams.put("payment", payment); 
+
+            JSONObject details = new JSONObject();
+            details.put("order_type", "pickup");
+            requestParams.put("details", details); 
+        }
+        BODY = requestParams.toString();  
+     
         Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
         if(json != null && json.has("id")){
             Order_Pickup_ID = json.getString("id");
-            txtLog.append("== " + "New Pickup Order ID: "  + Order_Pickup_ID + "\r\n");
+            txtLog.append("== " + "New Order ID: "  + Order_Pickup_ID + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }else{
             FAIL = true; 
             return;
         }        
-        
-        txtLog.append("\r\n- " + "Update Pickup Order > 'Ready' ...." + "\r\n");
+        if(FLess || SandG)  { 
+            return; // Skip Update status for Frictionless ???
+        }
+        txtLog.append("\r\n- " + "Update Order > 'Ready' ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Update Pickup Order  =================
+        requestParams = new JSONObject();   //  Update Order  =================
         JSONObject is = new JSONObject();      
         is.put("in_progress", true);
         is.put("ready", true);     
@@ -2273,11 +2487,11 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 Order_Pickup_ID = json.getString("id");
-                txtLog.append("== " + "Updated Pickup Order ID: "  + Order_Pickup_ID + "\r\n");
+                txtLog.append("== " + "Updated Order ID: "  + Order_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
                 FAIL = true;
-                txtLog.append("== " + "Update Pickup Order ERROR: "  + ex.getMessage() + "\r\n");
+                txtLog.append("== " + "Update Order ERROR: "  + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
         }   

@@ -49,8 +49,11 @@ class user_ap3 extends AP3_API_GUI{
 //            AAA = json.toString(4);
 //        }  
       
-        JOB_Api_Call("AP3 User > /realm", "GET", 
-            BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2000", Auth, "", 200, ParentTest, "no_jira");
+        JOB_Api_Call("AP3 Users - realm AP3", "GET", 
+            BaseAPI + "/user/realm/" + Realm + "?nocache=1&max=2500", Auth, "", 200, ParentTest, "no_jira");
+
+        JOB_Api_Call("AP3 Runners - realm Bolter", "GET", 
+            BaseAPI + "/user/realm/" + "weK3E0K4vduLKk86YgvRCzd0z5DaLeu3ggAy" + "?nocache=1&max=2500", Auth, "", 200, ParentTest, "no_jira");
 
         JOB_Api_Call("AP3 User > /permissions", "GET", 
             BaseAPI + "/user/" + AP3_User_ID + "/permissions" + "?nocache=1", Auth, "", 200, ParentTest, "no_jira");
