@@ -9,11 +9,11 @@
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="V1/Zephyr - QA-XXX Execution"/>
+    <Property name="title" type="java.lang.String" value="Production V1 Menus updata\u005ce" containsInvalidXMLChars="true"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[860, 532]"/>
     </Property>
-    <Property name="name" type="java.lang.String" value="JIRA" noResource="true"/>
+    <Property name="name" type="java.lang.String" value="V1" noResource="true"/>
     <Property name="normalBounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
       <Rectangle value="[0, 0, 104, 0]"/>
     </Property>
@@ -41,6 +41,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblMetrics">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="12" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Target Sectors : Name, ID"/>
         <Property name="alignmentX" type="float" value="0.5"/>
       </Properties>
@@ -153,6 +156,9 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblMetrics1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="12" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Snack Modifiers: PLU, Name"/>
         <Property name="alignmentX" type="float" value="0.5"/>
       </Properties>
@@ -198,6 +204,9 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblMetrics2">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="12" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Beverage Modifiers: PLU, Name"/>
         <Property name="alignmentX" type="float" value="0.5"/>
       </Properties>
