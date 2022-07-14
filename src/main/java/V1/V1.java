@@ -5,14 +5,15 @@
  */
 package V1;
 
-
-
-import static A.A.F_COUNT;
-import javax.crypto.spec.SecretKeySpec;
-import javax.xml.bind.DatatypeConverter;
-import java.security.Key;
-import io.jsonwebtoken.*;
-import java.util.Date; 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 /**
  *
@@ -77,7 +78,7 @@ public class V1 extends javax.swing.JInternalFrame {
         txtModsS.setColumns(20);
         txtModsS.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtModsS.setRows(5);
-        txtModsS.setText("7000029\tWhole Fruit\n7000030\tSnickers Bar 1.8oz\n7000031\tM&m Peanut 1.74oz\n7000032\tReese Peanut Butter Cups 1.5oz\n7000033\tDoritos Nacho Cheese 1.75oz\n7000034\tMiss Vickie's Jalapeno\n7000035\tTwix 1.79oz\n7000036\tLays Plain 1.5oz\n7000037\tNature Valley Crunchy Oats 'N Honey 1.49oz\n7000038\tBar Nutri Grain Strawberry 1.3oz\n7000039\tChip Baked Lays BBQ 1.5oz\n7000040\tBar Kind Caramel Almond & Sea Salt 1.4oz\n7000041\tSahale Honey Glazed Almonds 1.5oz\n7000042\tOrchard Valley Keto Crunchy Trail Mix 1.85oz\n7000043\tChip Terra Blue Potato Chips 1oz\n7000044\tCheez Its Whole Grain 1oz\n7000045\tBar Kind Dark Chocolate Nuts/Sea Salt 1.4oz\n7000046\tRX Bar Blueberry 1.83oz\n7000047\tNutri Grain Bar Apple Cinnamon 1.3oz\n7000048\tMiss Vickie's Bbq 1 3/8oz\n7000049\tM&m Plain 1.69oz\n7000050\tSun Harvest Cheddar 1.5oz\n7000051\tMiss Vickie's Sea Salt Vin 1 3/8oz\n7000052\tHershey Milk Chocolate\n7000053\tNabisco Belvita Blueberry 1.76oz\n7000054\tSmartfood White Cheddar Popcorn .625oz\n7000055\tSahale Dry Roasted Almonds 1.5oz\n7000056\tOrchard Valley Harvest Omega-3 Mix 2oz\n7000057\tFSTG Multigrain Tortilla Chips 1.5oz\n7000058\tBaked Lays Plain 1.125oz");
+        txtModsS.setText("700029\tWhole Fruit\n700030\tSnickers Bar 1.8oz\n700031\tM&m Peanut 1.74oz\n700032\tReese Peanut Butter Cups 1.5oz\n700033\tDoritos Nacho Cheese 1.75oz\n700034\tMiss Vickie's Jalapeno\n700035\tTwix 1.79oz\n700036\tLays Plain 1.5oz\n700037\tNature Valley Crunchy Oats 'N Honey 1.49oz\n700038\tBar Nutri Grain Strawberry 1.3oz\n700039\tChip Baked Lays BBQ 1.5oz\n700040\tBar Kind Caramel Almond & Sea Salt 1.4oz\n700041\tSahale Honey Glazed Almonds 1.5oz\n700042\tOrchard Valley Keto Crunchy Trail Mix 1.85oz\n700043\tChip Terra Blue Potato Chips 1oz\n700044\tCheez Its Whole Grain 1oz\n700045\tBar Kind Dark Chocolate Nuts/Sea Salt 1.4oz\n700046\tRX Bar Blueberry 1.83oz\n700047\tNutri Grain Bar Apple Cinnamon 1.3oz\n700048\tMiss Vickie's Bbq 1 3/8oz\n700049\tM&m Plain 1.69oz\n700050\tSun Harvest Cheddar 1.5oz\n700051\tMiss Vickie's Sea Salt Vin 1 3/8oz\n700052\tHershey Milk Chocolate\n700053\tNabisco Belvita Blueberry 1.76oz\n700054\tSmartfood White Cheddar Popcorn .625oz\n700055\tSahale Dry Roasted Almonds 1.5oz\n700056\tOrchard Valley Harvest Omega-3 Mix 2oz\n700057\tFSTG Multigrain Tortilla Chips 1.5oz\n700058\tBaked Lays Plain 1.125oz");
         txtModsS.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtModsS.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtModsS.setMinimumSize(new java.awt.Dimension(50, 19));
@@ -105,7 +106,7 @@ public class V1 extends javax.swing.JInternalFrame {
         txtModsB.setColumns(20);
         txtModsB.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
         txtModsB.setRows(5);
-        txtModsB.setText("7000000\tClassic Coke 20oz\n7000001\tDiet Coke 20oz\n7000002\tCoke Zero 20oz\n7000003\tPepsi 20oz\n7000004\tDiet Pepsi 20oz\n7000005\tMountain Dew 20oz\n7000006\tDiet Mountain Dew 20oz\n7000007\tSprite 20oz\n7000008\tDiet Sprite 20oz\n7000009\tAquafina 20oz\n7000010\tDasani 20oz\n7000011\tSmartwater 20oz\n7000012\tLifewater 20oz\n7000013\tVitamin Water Power C\n7000014\tVitamin Water Zero Sugar Squeezed\n7000015\tMonster Energy 16oz\n7000016\tMonster Zero Ultra 16oz\n7000017\tPure Leaf Diet Tea\n7000018\tPure Leaf Sweet Tea\n7000019\tGatorade Fruit Punch\n7000020\tGatorade Zero Glacier\n7000021\tStarbucks Cold Brew\n7000022\tStarbucks Frappuccino Vanilla\n7000023\tBubly Lime\n7000024\tBubly Grapefruit\n7000025\tBubly Cherry\n7000026\tBubly Orange\n7000027\tBubly Lemon\n7000028\tBubly Blackberry");
+        txtModsB.setText("700000\tClassic Coke 20oz\n700001\tDiet Coke 20oz\n700002\tCoke Zero 20oz\n700003\tPepsi 20oz\n700004\tDiet Pepsi 20oz\n700005\tMountain Dew 20oz\n700006\tDiet Mountain Dew 20oz\n700007\tSprite 20oz\n700008\tDiet Sprite 20oz\n700009\tAquafina 20oz\n700010\tDasani 20oz\n700011\tSmartwater 20oz\n700012\tLifewater 20oz\n700013\tVitamin Water Power C\n700014\tVitamin Water Zero Sugar Squeezed\n700015\tMonster Energy 16oz\n700016\tMonster Zero Ultra 16oz\n700017\tPure Leaf Diet Tea\n700018\tPure Leaf Sweet Tea\n700019\tGatorade Fruit Punch\n700020\tGatorade Zero Glacier\n700021\tStarbucks Cold Brew\n700022\tStarbucks Frappuccino Vanilla\n700023\tBubly Lime\n700024\tBubly Grapefruit\n700025\tBubly Cherry\n700026\tBubly Orange\n700027\tBubly Lemon\n700028\tBubly Black Cherry");
         txtModsB.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtModsB.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtModsB.setMinimumSize(new java.awt.Dimension(50, 19));
@@ -244,8 +245,22 @@ public class V1 extends javax.swing.JInternalFrame {
         env = "PR";
     }
 
-    private void Get_V1_Menus(){
+    private void Get_V1_Menus(String EndPoint, String AUTH){
+        String AJ = "";
+        try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+            HttpGet httpget = new HttpGet(EndPoint);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                if (status >= 200 && status < 500) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(response.getEntity()) : null;
+                } else {
+                    throw new ClientProtocolException("\r\n" + "== ERROR > " + status + " - " + response.getStatusLine().getReasonPhrase());
+                }
+            };
+            json = new JSONObject(httpclient.execute(httpget, responseHandler));
 
+        }
     }
 
 
