@@ -570,7 +570,7 @@ public class V1 extends javax.swing.JInternalFrame {
                     JSONObject group = groups.getJSONObject(i);
                     if(group.has("label") && group.getJSONObject("label").has("en")){
                         G_line = "=== Group: " + group.getJSONObject("label").getString("en");
-                        G_line += "      gID:" + group.getString("id");
+                        G_line += "      ID " + group.getString("id");
                         listmodel.addElement(G_line);
                         if(group.has("items")){
                             items = group.getJSONArray("items");
