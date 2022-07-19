@@ -2343,7 +2343,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
 
                 if(l.contains("_site: ")) _Site = Boolean.parseBoolean(value);
                 if(l.contains("_site_new: ")) _Site_new = Boolean.parseBoolean(value);
-                if(l.contains("_smart_analytics : ")) _Smart_analytics = Boolean.parseBoolean(value);
+                if(l.contains("_smart_analytics: ")) _Smart_analytics = Boolean.parseBoolean(value);
                 if(l.contains("_brand_new: ")) _Brand_new = Boolean.parseBoolean(value);
                 if(l.contains("_brand: ")) _Brand = Boolean.parseBoolean(value);
                 if(l.contains("_brand_closure: ")) _Brand_closure = Boolean.parseBoolean(value);
@@ -3956,7 +3956,6 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     }
-
     protected void Move_to_Element(String NAME, WebElement E, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();
@@ -3983,6 +3982,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
         }
         sw1.reset();
     } 
+    
     protected void Click_out_of_Element(String NAME, WebElement E, String DIRECTION, int X, int Y, ExtentTest ParentTest, String JIRA) throws Exception {
         if(sw1.isRunning()){
             sw1.reset();

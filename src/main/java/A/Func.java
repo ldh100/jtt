@@ -499,6 +499,72 @@ public class Func {
             return "= File to Slack: " + Path + " > ERROR: " + ex.getMessage() + "\r\n";
         }
     }
-
+   
+    //<editor-fold defaultstate="collapsed" desc="JWT">    
+    //    private void Z_JWT(){
+    //        try{
+    //            SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+    //            long nowMillis = System.currentTimeMillis();
+    //            Date now = new Date(nowMillis);
+    //            String Z_Base_URL = "https://prod-api.zephyr4jiracloud.com/connect/"; 
+    //            String id = "5a68ac8fd57c332a76e1a9c9"; // oleg.spozito@compassdigital.io
+    //            String A_Key = "amlyYTo4YWU2N2I0MC0xNThhLTQzYWQtYjEyMi0wMGMwMTc2MjZiMjMgNWE2OGFjOGZkNTdjMzMyYTc2ZTFhOWM5IFVTRVJfREVGQVVMVF9OQU1F";
+    //            String S_Key = "bl-AwwkFeqRNcbPrL91ypPsNj-whyXxdwOeBcJRBlRc";
+    //
+    //            
+    //            String subject = "subject";
+    //            String issuer = "issuer";
+    //            
+    //
+    //            
+    //            //We will sign our JWT with our ApiKey secret
+    //            byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(S_Key);
+    //            Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+    //
+    //            //Let's set the JWT Claims
+    //            JwtBuilder builder = Jwts.builder().setId(id)
+    //                                        .setIssuedAt(now)
+    //                                        .setSubject(subject)
+    //                                        .setIssuer(issuer)
+    //                                        .signWith(signatureAlgorithm, signingKey);
+    //            long expMillis = nowMillis + 600000;
+    //            Date exp = new Date(expMillis);
+    //            builder.setExpiration(exp);
+    //
+    //            //Builds the JWT and serializes it to a compact, URL-safe string
+    //            String JWT = builder.compact();  
+    //            ParseJWT(JWT);
+    //        } catch(Exception ex){
+    //            txtLog.append("Z_JWT: " + ex.getMessage() + "\r\n"); 
+    //            txtLog.setCaretPosition(txtLog.getDocument().getLength());               
+    //        }
+    //    }
+    //    private void ParseJWT(String jwt) {
+    //        //This line will throw an exception if it is not a signed JWS (as expected)
+    //        try {
+    //            Claims claims = Jwts.parser()         
+    //                .setSigningKey(DatatypeConverter.parseBase64Binary("QH827PyS_3vJ25hK6YhKCx3OKOCXEtc3B9F6wP_x1Pc"))
+    //                .parseClaimsJws(jwt).getBody();
+    //             System.out.println("ID: " + claims.getId());
+    //             System.out.println("Subject: " + claims.getSubject());
+    //             System.out.println("Issuer: " + claims.getIssuer());
+    //             System.out.println("Expiration: " + claims.getExpiration());
+    //        } catch(Exception ex){
+    //            txtLog.append("ParseJWT: " + ex.getMessage() + "\r\n"); 
+    //            txtLog.setCaretPosition(txtLog.getDocument().getLength());             
+    //        }         
+    //     }    
+    //    static String getQSH(String qstring)
+    //    {
+    //        System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
+    //        StringBuilder hash = new StringBuilder();
+    //        byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(qstring), 0, Encoding.UTF8.GetByteCount(qstring));
+    //        foreach (byte theByte in crypto)
+    //        {
+    //            hash.Append(theByte.ToString("x2"));
+    //        }
+    //        return hash.ToString();
+    //    }
+     //</editor-fold>
 
 }

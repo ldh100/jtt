@@ -55,6 +55,7 @@ public class V1 extends javax.swing.JInternalFrame {
         lblMetrics5 = new javax.swing.JLabel();
         txtTKN = new javax.swing.JTextField();
         txtUSER = new javax.swing.JTextField();
+        chkDev = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -65,12 +66,12 @@ public class V1 extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -201,6 +202,14 @@ public class V1 extends javax.swing.JInternalFrame {
         txtUSER.setText("UserID ?");
         txtUSER.setDragEnabled(false);
 
+        chkDev.setText("Development");
+        chkDev.setRequestFocusEnabled(false);
+        chkDev.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chkDevMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,19 +219,20 @@ public class V1 extends javax.swing.JInternalFrame {
                 .addComponent(lblMetrics3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116)
                 .addComponent(lblMetrics, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(lblMetrics5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                        .addContainerGap()
+                        .addComponent(lblMetrics4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblMetrics4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                        .addContainerGap()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -237,50 +247,48 @@ public class V1 extends javax.swing.JInternalFrame {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMod1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(160, 160, 160)
-                                .addComponent(lblMetrics2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtMod2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(lblMetrics1))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(chkV1_Only))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtMod1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(lblMetrics2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMod2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(chkDev)
+                                .addGap(33, 33, 33)
+                                .addComponent(chkV1_Only))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(170, 170, 170)
+                                .addComponent(lblMetrics1))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblMetrics3)
                     .addComponent(lblMetrics)
                     .addComponent(lblMetrics5))
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(lblMetrics4)
-                        .addGap(5, 5, 5)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(2, 2, 2)
+                            .addComponent(lblMetrics4)
+                            .addGap(2, 2, 2)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane8))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,12 +309,16 @@ public class V1 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMod2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(chkV1_Only)
+                                    .addComponent(chkDev)))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addComponent(lblMetrics1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(chkV1_Only)
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -321,7 +333,7 @@ public class V1 extends javax.swing.JInternalFrame {
     private String err = "";
     private String FAILED = "";
     private JSONObject json;
-    private JSONObject MenuJSONObject;
+    private JSONObject putMenu;
     private JSONArray companies;
     private JSONArray menus;
     private JSONArray groups;
@@ -332,7 +344,7 @@ public class V1 extends javax.swing.JInternalFrame {
     private JSONArray Mods1;
     private JSONArray Mods2;
 
-    private final String BaseAPI = "https://api.compassdigital.org/v1";
+    private String BaseAPI = "https://api.compassdigital.org/v1";
     private String AP3_TKN = "";
     private String AP3_User_ID = "";
 
@@ -347,92 +359,22 @@ public class V1 extends javax.swing.JInternalFrame {
             return;
         }
         Publish_Menu();
-
     }//GEN-LAST:event_btnRunMouseClicked
-    
-//<editor-fold defaultstate="collapsed" desc="JWT">    
-//    private void Z_JWT(){
-//        try{
-//            SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-//            long nowMillis = System.currentTimeMillis();
-//            Date now = new Date(nowMillis);
-//            String Z_Base_URL = "https://prod-api.zephyr4jiracloud.com/connect/"; 
-//            String id = "5a68ac8fd57c332a76e1a9c9"; // oleg.spozito@compassdigital.io
-//            String A_Key = "amlyYTo4YWU2N2I0MC0xNThhLTQzYWQtYjEyMi0wMGMwMTc2MjZiMjMgNWE2OGFjOGZkNTdjMzMyYTc2ZTFhOWM5IFVTRVJfREVGQVVMVF9OQU1F";
-//            String S_Key = "bl-AwwkFeqRNcbPrL91ypPsNj-whyXxdwOeBcJRBlRc";
-//
-//            
-//            String subject = "subject";
-//            String issuer = "issuer";
-//            
-//
-//            
-//            //We will sign our JWT with our ApiKey secret
-//            byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(S_Key);
-//            Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-//
-//            //Let's set the JWT Claims
-//            JwtBuilder builder = Jwts.builder().setId(id)
-//                                        .setIssuedAt(now)
-//                                        .setSubject(subject)
-//                                        .setIssuer(issuer)
-//                                        .signWith(signatureAlgorithm, signingKey);
-//            long expMillis = nowMillis + 600000;
-//            Date exp = new Date(expMillis);
-//            builder.setExpiration(exp);
-//
-//            //Builds the JWT and serializes it to a compact, URL-safe string
-//            String JWT = builder.compact();  
-//            ParseJWT(JWT);
-//        } catch(Exception ex){
-//            txtLog.append("Z_JWT: " + ex.getMessage() + "\r\n"); 
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());               
-//        }
-//    }
-//    private void ParseJWT(String jwt) {
-//        //This line will throw an exception if it is not a signed JWS (as expected)
-//        try {
-//            Claims claims = Jwts.parser()         
-//                .setSigningKey(DatatypeConverter.parseBase64Binary("QH827PyS_3vJ25hK6YhKCx3OKOCXEtc3B9F6wP_x1Pc"))
-//                .parseClaimsJws(jwt).getBody();
-//             System.out.println("ID: " + claims.getId());
-//             System.out.println("Subject: " + claims.getSubject());
-//             System.out.println("Issuer: " + claims.getIssuer());
-//             System.out.println("Expiration: " + claims.getExpiration());
-//        } catch(Exception ex){
-//            txtLog.append("ParseJWT: " + ex.getMessage() + "\r\n"); 
-//            txtLog.setCaretPosition(txtLog.getDocument().getLength());             
-//        }         
-//     }    
-//    static String getQSH(String qstring)
-//    {
-//        System.Security.Cryptography.SHA256Managed crypt = new System.Security.Cryptography.SHA256Managed();
-//        StringBuilder hash = new StringBuilder();
-//        byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(qstring), 0, Encoding.UTF8.GetByteCount(qstring));
-//        foreach (byte theByte in crypto)
-//        {
-//            hash.Append(theByte.ToString("x2"));
-//        }
-//        return hash.ToString();
-//    }
-     //</editor-fold>
  
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String R = A.Func.SHOW_FILE(txtLog.getText(), "json");
     }//GEN-LAST:event_btnLogMouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
-        Get_AP3_TKN_and_UserID();
-        txtLog.setText("");
-        txtLog.append("\r\n==== Please select Sector" + "\r\n\r\n");
+        Load_Env();
     }//GEN-LAST:event_formAncestorAdded
 
     private void listSectorValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSectorValueChanged
-            Get_Comp();
+        Get_Comp();
     }//GEN-LAST:event_listSectorValueChanged
 
     private void listCompaniesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCompaniesValueChanged
-            Get_Company_Menus();
+        Get_Company_Menus();
     }//GEN-LAST:event_listCompaniesValueChanged
 
     private void listMenusValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMenusValueChanged
@@ -442,7 +384,59 @@ public class V1 extends javax.swing.JInternalFrame {
     private void listItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listItemsValueChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listItemsValueChanged
-    
+
+    private void chkDevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkDevMouseClicked
+        Load_Env();
+    }//GEN-LAST:event_chkDevMouseClicked
+    private void Load_Env(){
+        DefaultListModel<String> listmodel = new DefaultListModel<>();
+        listSector.setModel(listmodel);
+        if(chkDev.isSelected()){
+            chkV1_Only.setSelected(false);
+            chkV1_Only.setEnabled(true);
+            BaseAPI = "https://api.compassdigital.org/dev";
+
+            Get_AP3_TKN_and_UserID();
+
+            Api_Call("GET", BaseAPI + "/location/sector?_provider=cdl", "Bearer " + AP3_TKN, "");
+            try{
+                String M_line = "";
+                if(json != null && json.has("sectors")){
+                    JSONArray sectors = json.getJSONArray("sectors");
+                    for(int i = 0; i < sectors.length(); i++){
+                        JSONObject sector = sectors.getJSONObject(i);
+                        if(sector.has("name")){
+                            M_line = sector.getString("name");
+                            M_line += "      ID: " + sector.getString("id");
+                            listmodel.addElement(M_line);  
+                        }
+                    }
+                    txtLog.setText("");
+                    txtLog.append("\r\n==== Please select Sector (Development)" + "\r\n\r\n");
+                } else{
+                    txtLog.setText("");
+                    txtLog.append("\r\n==== No Sectors Found" + "\r\n\r\n");
+                }
+            } catch(Exception ex){
+                txtLog.setText("");
+                txtLog.append(ex.getMessage() + "\r\n");
+            }
+        }else{
+            chkV1_Only.setSelected(true);
+            chkV1_Only.setEnabled(false);
+            BaseAPI = "https://api.compassdigital.org/v1";
+
+            Get_AP3_TKN_and_UserID();
+
+            listmodel.addElement("Pilot Sector/US ID: AXqLKdPK53uozRZKgkjOh0GOOXoBJAH1klp4QymZUvBPDBkarLSEqeewez5Kf3D1O1D2vBh83EXQ"); 
+            listmodel.addElement("Eurest Internal Brands/US  ID: 41pwNJPNRWC25LjpaORKI9Y11rAgE0uqYzXvPaGzfKZ4qDY0adc4GzWmvEqaCXQ0qDQmeQCrkr5G"); 
+            txtLog.setText("");
+            txtLog.append("\r\n==== Please select Sector (Production!)" + "\r\n\r\n");
+        }
+        listSector.setModel(listmodel);
+    }
+
+
     private void Get_AP3_TKN_and_UserID(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
         String Auth = "Basic " + Base64.getEncoder().encodeToString(("oleg.spozito@compassdigital.io" + ":" + "Password1").getBytes());
@@ -580,7 +574,7 @@ public class V1 extends javax.swing.JInternalFrame {
         //SectorID = "41pwNJPNRWC25LjpaORKI9Y11rAgE0uqYzXvPaGzfKZ4qDY0adc4GzWmvEqaCXQ0qDQmeQCrkr5G";
         if(listCompanies.getSelectedIndex() < 0){
             txtLog.setText("");
-            txtLog.append("==== Please Select Company" + "\r\n\r\n");
+            txtLog.append("\r\n==== Please Select Company" + "\r\n\r\n");
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }else{
@@ -633,7 +627,7 @@ public class V1 extends javax.swing.JInternalFrame {
         //SectorID = "41pwNJPNRWC25LjpaORKI9Y11rAgE0uqYzXvPaGzfKZ4qDY0adc4GzWmvEqaCXQ0qDQmeQCrkr5G";
         if(listMenus.getSelectedIndex() < 0){
             txtLog.setText("");
-            txtLog.append("==== Please Select Company" + "\r\n\r\n");
+            txtLog.append("\r\n==== Please Select Company" + "\r\n\r\n");
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }else{
@@ -646,7 +640,7 @@ public class V1 extends javax.swing.JInternalFrame {
             String G_line = "";
             String I_line = "";
             if(json != null && json.has("groups")){
-                MenuJSONObject = json;
+                putMenu = json;
                 txtLog.append(json.toString(4) + "\r\n"); 
                 groups = json.getJSONArray("groups");
                 for(int i = 0; i < groups.length(); i++){
@@ -716,85 +710,100 @@ public class V1 extends javax.swing.JInternalFrame {
         String Date_Modified = sdf.format(_ee); 
 
         try {
-            // <editor-fold defaultstate="collapsed" desc="=== Beverages Oblect ">
-            lines = txtMods1.getText().split("\n"); 
-            for (String l : lines){
-                mod = new JSONObject();
+            // <editor-fold defaultstate="collapsed" desc="=== 1st Mods Oblect ">
+            if(!txtMod1.getText().trim().isEmpty()){
+                lines = txtMods1.getText().split("\n"); 
+                for (String l : lines){
+                    mod = new JSONObject();
+                    tempObj = new JSONObject();
+                    tempObj.put("disabled", false);
+                    mod.put("is", tempObj);
+
+                    tempObj = new JSONObject();
+                    tempObj.put("plu", l.substring(0, l.indexOf("\t")).trim());
+                    mod.put("meta", tempObj);
+
+                    tempObj = new JSONObject();
+                    tempObj.put("en", l.substring(l.indexOf("\t")).trim());
+                    mod.put("label", tempObj);
+
+                    tempObj = new JSONObject();
+                    tempObj.put("amount", 0);
+                    mod.put("price", tempObj);
+
+                    Mods1.put(mod); 
+                }
                 tempObj = new JSONObject();
                 tempObj.put("disabled", false);
-                mod.put("is", tempObj);
-
+                ModGr1.put("is", tempObj);
+                ModGr1.put("unique_name", "");
                 tempObj = new JSONObject();
-                tempObj.put("plu", l.substring(0, l.indexOf("\t")).trim());
-                mod.put("meta", tempObj);
-
-                tempObj = new JSONObject();
-                tempObj.put("en", l.substring(l.indexOf("\t")).trim());
-                mod.put("label", tempObj);
-
-                tempObj = new JSONObject();
-                tempObj.put("amount", 0);
-                mod.put("price", tempObj);
-
-                Mods1.put(mod); 
+                tempObj.put("en", txtMod1.getText().trim());
+                ModGr1.put("label", tempObj);
+                ModGr1.put("items", Mods1);
             }
-            tempObj = new JSONObject();
-            tempObj.put("disabled", false);
-            ModGr1.put("is", tempObj);
-            ModGr1.put("unique_name", "");
-            tempObj = new JSONObject();
-            tempObj.put("en", "Beverages");
-            ModGr1.put("label", tempObj);
-            ModGr1.put("items", Mods1);
             // </editor-fold> 
 
-            // <editor-fold defaultstate="collapsed" desc="=== Snacks Oblect ">
-            lines = txtMods2.getText().split("\n"); 
-            for (String l : lines){
-                mod = new JSONObject();
+            // <editor-fold defaultstate="collapsed" desc="=== 2nd Mods Oblect ">
+            if(!txtMod2.getText().trim().isEmpty()){
+                lines = txtMods2.getText().split("\n"); 
+                for (String l : lines){
+                    mod = new JSONObject();
+                    tempObj = new JSONObject();
+                    tempObj.put("disabled", false);
+                    mod.put("is", tempObj);
+
+                    tempObj = new JSONObject();
+                    tempObj.put("plu", l.substring(0, l.indexOf("\t")).trim());
+                    mod.put("meta", tempObj);
+
+                    tempObj = new JSONObject();
+                    tempObj.put("en", l.substring(l.indexOf("\t")).trim());
+                    mod.put("label", tempObj);
+
+                    tempObj = new JSONObject();
+                    tempObj.put("amount", 0);
+                    mod.put("price", tempObj);
+
+                    Mods2.put(mod); 
+                }
                 tempObj = new JSONObject();
                 tempObj.put("disabled", false);
-                mod.put("is", tempObj);
-
+                ModGr2.put("is", tempObj);
+                ModGr2.put("unique_name", "");
                 tempObj = new JSONObject();
-                tempObj.put("plu", l.substring(0, l.indexOf("\t")).trim());
-                mod.put("meta", tempObj);
-
-                tempObj = new JSONObject();
-                tempObj.put("en", l.substring(l.indexOf("\t")).trim());
-                mod.put("label", tempObj);
-
-                tempObj = new JSONObject();
-                tempObj.put("amount", 0);
-                mod.put("price", tempObj);
-
-                Mods2.put(mod); 
+                tempObj.put("en", txtMod2.getText().trim());
+                ModGr2.put("label", tempObj);
+                ModGr2.put("items", Mods2);
             }
-            tempObj = new JSONObject();
-            tempObj.put("disabled", false);
-            ModGr2.put("is", tempObj);
-            ModGr2.put("unique_name", "");
-            tempObj = new JSONObject();
-            tempObj.put("en", "Beverages");
-            ModGr2.put("label", tempObj);
-            ModGr2.put("items", Mods2);
             // </editor-fold> 
 
-            // <editor-fold defaultstate="collapsed" desc="=== Create PUT Json fron GGET">
-            // Creates new, doesn't replace - DEBUG
-//            MenuJSONObject.put("modified", Date_Modified);
-//            MenuJSONObject.put("published", Date_Modified); 
-//            MenuJSONObject.put("last_modified_user", AP3_User_ID);
+            // <editor-fold defaultstate="collapsed" desc="=== Create PUT Json from Full GET">
+            // === Update LastUser, modified and published dates
+            // for each existing item check/remove ModX, add options AmoS/Ietms
+            if(putMenu.has("date") && putMenu.getJSONObject("date").has("modified")){
+                putMenu.getJSONObject("date").remove("modified");
+                putMenu.getJSONObject("date").put("modified", Date_Modified);
+            }
+            if(putMenu.has("date") && putMenu.getJSONObject("date").has("published")){
+                putMenu.getJSONObject("date").remove("published");
+                putMenu.getJSONObject("date").put("published", Date_Modified);
+            }
+            if(putMenu.has("meta") && putMenu.getJSONObject("meta").has("last_modified_user")){
+                putMenu.getJSONObject("meta").remove("last_modified_user");
+                putMenu.getJSONObject("meta").put("last_modified_user", AP3_User_ID);
+            }
+
  
             txtLog.setText("");
-            txtLog.append("== MenuJSONObject >> \r\n" + MenuJSONObject.toString(4) + "\r\n\r\n");
+            txtLog.append("== MenuJSONObject >> \r\n" + putMenu.toString(4) + "\r\n\r\n");
 
            // </editor-fold> 
 
             // <editor-fold defaultstate="collapsed" desc="=== Compress PUT Json ">
 //            ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
 //            GZIPOutputStream gzipOutStream = new GZIPOutputStream(byteOutStream);
-//            gzipOutStream.write(MenuJSONObject.toString().getBytes());
+//            gzipOutStream.write(putMenu.toString().getBytes());
 //            IOUtils.closeQuietly(gzipOutStream);
 //            byte[] bytes = byteOutStream.toByteArray();
 //            gzipped = Base64.getEncoder().encodeToString(bytes);
@@ -820,6 +829,7 @@ public class V1 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
+    private javax.swing.JCheckBox chkDev;
     private javax.swing.JCheckBox chkV1_Only;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

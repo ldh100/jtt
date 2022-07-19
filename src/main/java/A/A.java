@@ -537,7 +537,7 @@ public class A extends javax.swing.JFrame {
         MenuBar.add(Menu_API);
 
         Menu_JIRA.setBorder(null);
-        Menu_JIRA.setText("JIRA");
+        Menu_JIRA.setText("V1");
         Menu_JIRA.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_JIRA.setName("JIRA"); // NOI18N
         Menu_JIRA.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1447,7 +1447,7 @@ public class A extends javax.swing.JFrame {
                 return;
             }
         }
-        JIRA.JIRA jira = new JIRA.JIRA();
+        V1.V1 jira = new V1.V1();
         this.DesktopPane.add(jira);
         int Y;
         int X;
