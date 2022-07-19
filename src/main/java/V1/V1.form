@@ -448,7 +448,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtMod1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Beverage"/>
+        <Property name="text" type="java.lang.String" value="Beverages"/>
         <Property name="dragEnabled" type="boolean" value="false"/>
       </Properties>
     </Component>

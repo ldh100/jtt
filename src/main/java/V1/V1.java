@@ -181,7 +181,7 @@ public class V1 extends javax.swing.JInternalFrame {
         txtMod2.setText("Snacks");
         txtMod2.setDragEnabled(false);
 
-        txtMod1.setText("Beverage");
+        txtMod1.setText("Beverages");
         txtMod1.setDragEnabled(false);
 
         listItems.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -330,15 +330,16 @@ public class V1 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Variables ">
     private String err = "";
     private String FAILED = "";
     private JSONObject json;
-    private JSONObject putMenu;
+
     private JSONArray companies;
     private JSONArray menus;
     private JSONArray groups;
     private JSONArray items;
-
+    private JSONObject putMenu;
     private JSONObject ModGr1;
     private JSONObject ModGr2;
     private JSONArray Mods1;
@@ -354,6 +355,8 @@ public class V1 extends javax.swing.JInternalFrame {
     private String ItemID = "";
 
     private String AAA = "";
+    // </editor-fold> 
+
     private void btnRunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRunMouseClicked
         if(!btnRun.isEnabled()){
             return;
@@ -388,6 +391,7 @@ public class V1 extends javax.swing.JInternalFrame {
     private void chkDevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkDevMouseClicked
         Load_Env();
     }//GEN-LAST:event_chkDevMouseClicked
+
     private void Load_Env(){
         DefaultListModel<String> listmodel = new DefaultListModel<>();
         listSector.setModel(listmodel);
@@ -435,8 +439,6 @@ public class V1 extends javax.swing.JInternalFrame {
         }
         listSector.setModel(listmodel);
     }
-
-
     private void Get_AP3_TKN_and_UserID(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
         String Auth = "Basic " + Base64.getEncoder().encodeToString(("oleg.spozito@compassdigital.io" + ":" + "Password1").getBytes());
@@ -690,7 +692,9 @@ public class V1 extends javax.swing.JInternalFrame {
         //txtLog.append("\r\n === Menu Json >>>\r\n " + json.toString(4) + "\r\n\r\n");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+
     private void Publish_Menu(){
+        txtLog.setText("");
         String putMenuID = "";
         String gzipped = "";
         String[] lines;
@@ -736,10 +740,13 @@ public class V1 extends javax.swing.JInternalFrame {
                 tempObj = new JSONObject();
                 tempObj.put("disabled", false);
                 ModGr1.put("is", tempObj);
-                ModGr1.put("unique_name", "");
+
+                //ModGr1.put("unique_name", "");
+
                 tempObj = new JSONObject();
                 tempObj.put("en", txtMod1.getText().trim());
                 ModGr1.put("label", tempObj);
+
                 ModGr1.put("items", Mods1);
             }
             // </editor-fold> 
@@ -770,17 +777,20 @@ public class V1 extends javax.swing.JInternalFrame {
                 tempObj = new JSONObject();
                 tempObj.put("disabled", false);
                 ModGr2.put("is", tempObj);
-                ModGr2.put("unique_name", "");
+
+                //ModGr2.put("unique_name", "");
+
                 tempObj = new JSONObject();
                 tempObj.put("en", txtMod2.getText().trim());
                 ModGr2.put("label", tempObj);
+
                 ModGr2.put("items", Mods2);
             }
             // </editor-fold> 
 
             // <editor-fold defaultstate="collapsed" desc="=== Create PUT Json from Full GET">
+
             // === Update LastUser, modified and published dates
-            // for each existing item check/remove ModX, add options AmoS/Ietms
             if(putMenu.has("date") && putMenu.getJSONObject("date").has("modified")){
                 putMenu.getJSONObject("date").remove("modified");
                 putMenu.getJSONObject("date").put("modified", Date_Modified);
@@ -794,7 +804,43 @@ public class V1 extends javax.swing.JInternalFrame {
                 putMenu.getJSONObject("meta").put("last_modified_user", AP3_User_ID);
             }
 
- 
+            // for each existing groups > item check/remove ModX, add options new ModX/Items
+            if(putMenu.has("groups")){
+            JSONArray options = new JSONArray(); 
+                groups = json.getJSONArray("groups");
+                for(int i = 0; i < groups.length(); i++){
+                    JSONObject group = groups.getJSONObject(i);
+                    if(group.has("items")){
+                        items = group.getJSONArray("items");
+                        for(int j = 0; j < items.length(); j++){
+                            JSONObject item = items.getJSONObject(j);
+                            if(item.has("options")){
+                                options = item.getJSONArray("options");
+                                for(int k = 0; k < options.length(); k++){
+                                    JSONObject option = options.getJSONObject(k);
+                                    if(option.getJSONObject("label").getString("en").equals(txtMod1.getText().trim())){
+                                        options.remove(k);
+                                    }
+                                }
+                                options = item.getJSONArray("options");
+                                for(int k = 0; k < options.length(); k++){
+                                    JSONObject option = options.getJSONObject(k);
+                                    if(option.getJSONObject("label").getString("en").equals(txtMod2.getText().trim())){
+                                        options.remove(k);
+                                    }
+                                }
+                                // add Mod1/2 to existing options
+                                options.put(ModGr1);
+                                options.put(ModGr2); 
+                            }else{
+                                // add options object and Mod1/2 to new options
+                                txtLog.append("\r\n===" + "No Optins" + "\r\n");
+                            }
+                        }
+                    }
+                }
+            }
+
             txtLog.setText("");
             txtLog.append("== MenuJSONObject >> \r\n" + putMenu.toString(4) + "\r\n\r\n");
 
@@ -823,7 +869,6 @@ public class V1 extends javax.swing.JInternalFrame {
         }
 
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
     // Variables declaration - do not modify//GEN-BEGIN:variables
