@@ -60,7 +60,7 @@ public class V1 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Production V1 Menus updata\\e");
+        setTitle("Production V1 Menus, Development All Menus - all Items > Modifiers insersion");
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("V1"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
@@ -424,6 +424,7 @@ public class V1 extends javax.swing.JInternalFrame {
             } catch(Exception ex){
                 txtLog.setText("");
                 txtLog.append(ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(0);
             }
         }else{
             chkV1_Only.setSelected(true);
@@ -438,7 +439,7 @@ public class V1 extends javax.swing.JInternalFrame {
             txtLog.append("\r\n==== Please select Sector (Production!)" + "\r\n\r\n");
         }
         listSector.setModel(listmodel);
-        lblS.setText("Sercors: " + listSector.getModel().getSize());
+        lblS.setText("Sectors/Groups: " + listSector.getModel().getSize());
     }
     private void Get_AP3_TKN_and_UserID(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
@@ -457,6 +458,7 @@ public class V1 extends javax.swing.JInternalFrame {
             } catch (Exception ex){
                 txtLog.setText("");
                 txtLog.append(json.toString(4) + "\r\n\r\n");
+                txtLog.setCaretPosition(0);
             }
         }
         AAA = Get_UUID();
@@ -524,6 +526,7 @@ public class V1 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));  
         txtLog.setText("");
         txtLog.append("Get_Companies/Global Menus @" + new Date() + "\r\n\r\n");
+        txtLog.setCaretPosition(0);
 
         DefaultListModel<String> listmodel = new DefaultListModel<String>();
         listCompanies.setModel(listmodel);
@@ -547,6 +550,8 @@ public class V1 extends javax.swing.JInternalFrame {
                 txtLog.setText("");
                 txtLog.append("\r\n==== Selected Sector > Total Global Mnenus/Companies: " + companies.length() + "\r\n");
                 txtLog.append("\r\n==== Please Select Company");
+                txtLog.setCaretPosition(0);
+
                 for(int i = 0; i < companies.length(); i++){
                     JSONObject copmpany = companies.getJSONObject(i);
                     if(copmpany.has("name")){ // && !menu.has("location_brand")){
@@ -560,10 +565,12 @@ public class V1 extends javax.swing.JInternalFrame {
             } else{
                 txtLog.setText("");
                 txtLog.append(json.toString(4) + "\r\n\r\n");
+                txtLog.setCaretPosition(0);
             }
         } catch(Exception ex){
             txtLog.setText("");
             txtLog.append(ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(0);
         }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
@@ -571,6 +578,7 @@ public class V1 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         txtLog.setText("");
         txtLog.append("Get Menus @" + new Date() + "\r\n\r\n");
+        txtLog.setCaretPosition(0);
 
         DefaultListModel<String> listmodel = new DefaultListModel<String>();
         listMenus.setModel(listmodel);
@@ -579,6 +587,7 @@ public class V1 extends javax.swing.JInternalFrame {
         if(listCompanies.getSelectedIndex() < 0){
             txtLog.setText("");
             txtLog.append("\r\n==== Please Select Company" + "\r\n\r\n");
+            txtLog.setCaretPosition(0);
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }else{
@@ -617,10 +626,12 @@ public class V1 extends javax.swing.JInternalFrame {
             }else{
                 txtLog.setText("");
                 txtLog.append(json.toString(4));
+                txtLog.setCaretPosition(0);
             }
         } catch(Exception ex){
             txtLog.setText("");
             txtLog.append(ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(0);
         }
         //txtLog.append("\r\n === Menu Json >>>\r\n " + json.toString(4) + "\r\n\r\n");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -629,6 +640,8 @@ public class V1 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         txtLog.setText("");
         txtLog.append("Get Items @" + new Date() + "\r\n\r\n");
+        txtLog.setCaretPosition(0);
+
         int tot_items = 0;
         DefaultListModel<String> listmodel = new DefaultListModel<String>();
         listItems.setModel(listmodel);
@@ -637,6 +650,7 @@ public class V1 extends javax.swing.JInternalFrame {
         if(listMenus.getSelectedIndex() < 0){
             txtLog.setText("");
             txtLog.append("\r\n==== Please Select Company" + "\r\n\r\n");
+            txtLog.setCaretPosition(0);
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
         }else{
@@ -677,10 +691,12 @@ public class V1 extends javax.swing.JInternalFrame {
             }else{
                 txtLog.setText("");
                 txtLog.append(json.toString(4));
+                txtLog.setCaretPosition(0);
             }
         } catch(Exception ex){
             txtLog.setText("");
             txtLog.append(ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(0);
         }
         //txtLog.append("\r\n === Menu Json >>>\r\n " + json.toString(4) + "\r\n\r\n");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
@@ -834,8 +850,8 @@ public class V1 extends javax.swing.JInternalFrame {
             }
 
             txtLog.setText("");
-            txtLog.append("== Publish > PUT Body un-zipped >> \r\n" + putMenu.toString(4) + "\r\n\r\n");
-
+            txtLog.append("== Publish > PUT Body un-zipped >> \r\n\r\n" + putMenu.toString(4) + "\r\n\r\n");
+            txtLog.setCaretPosition(0);
            // </editor-fold> 
 
             // <editor-fold defaultstate="collapsed" desc="=== Compress PUT Json ">
@@ -859,6 +875,7 @@ public class V1 extends javax.swing.JInternalFrame {
         } catch(Exception ex){
             txtLog.setText("");
             txtLog.append(ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(0);
         }
 
     }

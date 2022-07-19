@@ -9,7 +9,7 @@
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Production V1 Menus updata\u005ce" containsInvalidXMLChars="true"/>
+    <Property name="title" type="java.lang.String" value="Production V1 Menus, Development All Menus - all Items &gt; Modifiers insersion"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[860, 532]"/>
     </Property>
