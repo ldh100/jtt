@@ -28,7 +28,7 @@ public class V1 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblMetrics = new javax.swing.JLabel();
+        lblM = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLog = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -39,20 +39,20 @@ public class V1 extends javax.swing.JInternalFrame {
         lblMetrics2 = new javax.swing.JLabel();
         btnLog = new javax.swing.JButton();
         btnRun = new javax.swing.JButton();
-        lblMetrics3 = new javax.swing.JLabel();
+        lblS = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         listSector = new javax.swing.JList<>();
         jScrollPane7 = new javax.swing.JScrollPane();
         listCompanies = new javax.swing.JList<>();
         jScrollPane8 = new javax.swing.JScrollPane();
         listMenus = new javax.swing.JList<>();
-        lblMetrics4 = new javax.swing.JLabel();
+        lblC = new javax.swing.JLabel();
         chkV1_Only = new javax.swing.JCheckBox();
         txtMod2 = new javax.swing.JTextField();
         txtMod1 = new javax.swing.JTextField();
         jScrollPane9 = new javax.swing.JScrollPane();
         listItems = new javax.swing.JList<>();
-        lblMetrics5 = new javax.swing.JLabel();
+        lblI = new javax.swing.JLabel();
         txtTKN = new javax.swing.JTextField();
         txtUSER = new javax.swing.JTextField();
         chkDev = new javax.swing.JCheckBox();
@@ -75,9 +75,9 @@ public class V1 extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMetrics.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblMetrics.setText("Company > Global V1 Menus: Name, ID");
-        lblMetrics.setAlignmentX(0.5F);
+        lblM.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblM.setText("Company > Global V1 Menus: Name, ID");
+        lblM.setAlignmentX(0.5F);
 
         txtLog.setEditable(false);
         txtLog.setColumns(20);
@@ -136,9 +136,9 @@ public class V1 extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMetrics3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblMetrics3.setText("Target Sectors: Name, ID");
-        lblMetrics3.setAlignmentX(0.5F);
+        lblS.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblS.setText("Target Sectors: Name, ID");
+        lblS.setAlignmentX(0.5F);
 
         listSector.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         listSector.setModel(new javax.swing.AbstractListModel<String>() {
@@ -169,9 +169,9 @@ public class V1 extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(listMenus);
 
-        lblMetrics4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblMetrics4.setText("Selected Sector > Companies: Name, ID");
-        lblMetrics4.setAlignmentX(0.5F);
+        lblC.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblC.setText("Selected Sector > Companies: Name, ID");
+        lblC.setAlignmentX(0.5F);
 
         chkV1_Only.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         chkV1_Only.setSelected(true);
@@ -192,9 +192,9 @@ public class V1 extends javax.swing.JInternalFrame {
         });
         jScrollPane9.setViewportView(listItems);
 
-        lblMetrics5.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        lblMetrics5.setText("Selected Menu > Items: Name, ID");
-        lblMetrics5.setAlignmentX(0.5F);
+        lblI.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblI.setText("Selected Menu > Items: Name, ID");
+        lblI.setAlignmentX(0.5F);
 
         txtTKN.setText("TKN ?");
         txtTKN.setDragEnabled(false);
@@ -216,16 +216,16 @@ public class V1 extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(lblMetrics3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblS, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116)
-                .addComponent(lblMetrics, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblM, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(lblMetrics5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblI, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblMetrics4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblC, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -274,16 +274,16 @@ public class V1 extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMetrics3)
-                    .addComponent(lblMetrics)
-                    .addComponent(lblMetrics5))
+                    .addComponent(lblS)
+                    .addComponent(lblM)
+                    .addComponent(lblI))
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(2, 2, 2)
-                            .addComponent(lblMetrics4)
+                            .addComponent(lblC)
                             .addGap(2, 2, 2)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane8))
@@ -438,6 +438,7 @@ public class V1 extends javax.swing.JInternalFrame {
             txtLog.append("\r\n==== Please select Sector (Production!)" + "\r\n\r\n");
         }
         listSector.setModel(listmodel);
+        lblS.setText("Sercors: " + listSector.getModel().getSize());
     }
     private void Get_AP3_TKN_and_UserID(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));         
@@ -555,6 +556,7 @@ public class V1 extends javax.swing.JInternalFrame {
                     }
                 }
                 listCompanies.setModel(listmodel);
+                lblC.setText("Companies: " + listCompanies.getModel().getSize());
             } else{
                 txtLog.setText("");
                 txtLog.append(json.toString(4) + "\r\n\r\n");
@@ -607,6 +609,11 @@ public class V1 extends javax.swing.JInternalFrame {
                     }
                 }
                 listMenus.setModel(listmodel);
+                if(chkV1_Only.isSelected()){
+                    lblM.setText("v1 Menus: " + listMenus.getModel().getSize());
+                }else{
+                    lblM.setText("All (v1,2) Menus: " + listMenus.getModel().getSize());
+                }
             }else{
                 txtLog.setText("");
                 txtLog.append(json.toString(4));
@@ -622,7 +629,7 @@ public class V1 extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         txtLog.setText("");
         txtLog.append("Get Items @" + new Date() + "\r\n\r\n");
-
+        int tot_items = 0;
         DefaultListModel<String> listmodel = new DefaultListModel<String>();
         listItems.setModel(listmodel);
 
@@ -653,6 +660,7 @@ public class V1 extends javax.swing.JInternalFrame {
                         listmodel.addElement(G_line);
                         if(group.has("items")){
                             items = group.getJSONArray("items");
+                            tot_items += items.length();
                             for(int j = 0; j < items.length(); j++){
                                 JSONObject item = items.getJSONObject(j);
                                 if(item.has("label") && item.getJSONObject("label").has("en")){
@@ -662,25 +670,10 @@ public class V1 extends javax.swing.JInternalFrame {
                                 }
                             }
                             listItems.setModel(listmodel);
+                            lblI.setText("Total Items: " + tot_items);
                         }
                     }
                 }
-            }else{
-                txtLog.setText("");
-                txtLog.append(json.toString(4));
-            }
-
-            if(json != null && json.has("items")){
-                items = json.getJSONArray("items");
-                for(int i = 0; i < items.length(); i++){
-                    JSONObject item = items.getJSONObject(i);
-                    if(item.has("label") && item.getJSONObject("label").has("en")){
-                        I_line = item.getJSONObject("label").getString("en");
-                        I_line += "      ID: " + item.getString("id");
-                        listmodel.addElement(I_line);
-                    }
-                }
-                listMenus.setModel(listmodel);
             }else{
                 txtLog.setText("");
                 txtLog.append(json.toString(4));
@@ -829,7 +822,6 @@ public class V1 extends javax.swing.JInternalFrame {
                                         options.remove(k);
                                     }
                                 }
-                                // add Mod1/2 to existing options
                                 options.put(ModGr1);
                                 options.put(ModGr2); 
                             }else{
@@ -842,7 +834,7 @@ public class V1 extends javax.swing.JInternalFrame {
             }
 
             txtLog.setText("");
-            txtLog.append("== MenuJSONObject >> \r\n" + putMenu.toString(4) + "\r\n\r\n");
+            txtLog.append("== Publish > PUT Body un-zipped >> \r\n" + putMenu.toString(4) + "\r\n\r\n");
 
            // </editor-fold> 
 
@@ -857,12 +849,13 @@ public class V1 extends javax.swing.JInternalFrame {
 
 //            txtLog.setText("");
 //            txtLog.append("== gzipped >> \r\n" + gzipped + "\r\n\r\n");
-//
-//            // === Publish Menu
+
+            // === Publish Menu
+            putMenuID = putMenu.getString("id");
 //            Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
-//
-//            // === Report result
-//
+
+            // === Report result
+
         } catch(Exception ex){
             txtLog.setText("");
             txtLog.append(ex.getMessage() + "\r\n");
@@ -883,12 +876,12 @@ public class V1 extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JLabel lblMetrics;
+    private javax.swing.JLabel lblC;
+    private javax.swing.JLabel lblI;
+    private javax.swing.JLabel lblM;
     private javax.swing.JLabel lblMetrics1;
     private javax.swing.JLabel lblMetrics2;
-    private javax.swing.JLabel lblMetrics3;
-    private javax.swing.JLabel lblMetrics4;
-    private javax.swing.JLabel lblMetrics5;
+    private javax.swing.JLabel lblS;
     private javax.swing.JList<String> listCompanies;
     private javax.swing.JList<String> listItems;
     private javax.swing.JList<String> listMenus;
