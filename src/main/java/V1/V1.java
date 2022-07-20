@@ -864,12 +864,14 @@ public class V1 extends javax.swing.JInternalFrame {
             putMenuID = putMenu.getString("id");
             Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
 
-            // === Report result
-//            if(json != null){
-//                txtLog.setText("");
-//                txtLog.append("== Publish > Result Json >> \r\n\r\n" + json.toString(4) + "\r\n\r\n");
-//                txtLog.setCaretPosition(0);
-//            }
+            Get_Full_Menu(); // refresh PUT Menu after PUT/Publish
+
+            // === Report result from last Get_Full_Menu()
+            if(json != null){
+                txtLog.setText("");
+                txtLog.append("== Publish > Result Json >> \r\n\r\n" + json.toString(4) + "\r\n\r\n");
+                txtLog.setCaretPosition(0);
+            }
 
         } catch(Exception ex){
             txtLog.setText("");
