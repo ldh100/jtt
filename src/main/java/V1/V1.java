@@ -47,7 +47,7 @@ public class V1 extends javax.swing.JInternalFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         listMenus = new javax.swing.JList<>();
         lblC = new javax.swing.JLabel();
-        chkV1_Only = new javax.swing.JCheckBox();
+        chkRemore_Only = new javax.swing.JCheckBox();
         txtMod2 = new javax.swing.JTextField();
         txtMod1 = new javax.swing.JTextField();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -60,7 +60,7 @@ public class V1 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Production V1 Menus, Development All Menus - all Items > Modifiers insersion");
+        setTitle("Production, Development v1 Menus only - all Items > Modifiers update");
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("V1"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
@@ -173,10 +173,9 @@ public class V1 extends javax.swing.JInternalFrame {
         lblC.setText("Selected Sector > Companies: Name, ID");
         lblC.setAlignmentX(0.5F);
 
-        chkV1_Only.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        chkV1_Only.setSelected(true);
-        chkV1_Only.setText("Only v1 Menus");
-        chkV1_Only.setFocusPainted(false);
+        chkRemore_Only.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        chkRemore_Only.setText("Only Remove");
+        chkRemore_Only.setFocusPainted(false);
 
         txtMod2.setText("Snacks");
         txtMod2.setDragEnabled(false);
@@ -202,6 +201,7 @@ public class V1 extends javax.swing.JInternalFrame {
         txtUSER.setText("UserID ?");
         txtUSER.setDragEnabled(false);
 
+        chkDev.setSelected(true);
         chkDev.setText("Development");
         chkDev.setRequestFocusEnabled(false);
         chkDev.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -263,7 +263,7 @@ public class V1 extends javax.swing.JInternalFrame {
                                 .addGap(2, 2, 2)
                                 .addComponent(chkDev)
                                 .addGap(33, 33, 33)
-                                .addComponent(chkV1_Only))
+                                .addComponent(chkRemore_Only))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(170, 170, 170)
                                 .addComponent(lblMetrics1))
@@ -311,7 +311,7 @@ public class V1 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(115, 115, 115)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(chkV1_Only)
+                                    .addComponent(chkRemore_Only)
                                     .addComponent(chkDev)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
@@ -399,8 +399,6 @@ public class V1 extends javax.swing.JInternalFrame {
         DefaultListModel<String> listmodel = new DefaultListModel<>();
         listSector.setModel(listmodel);
         if(chkDev.isSelected()){
-            chkV1_Only.setSelected(false);
-            chkV1_Only.setEnabled(true);
             BaseAPI = "https://api.compassdigital.org/dev";
 
             Get_AP3_TKN_and_UserID();
@@ -430,8 +428,6 @@ public class V1 extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(0);
             }
         }else{
-            chkV1_Only.setSelected(true);
-            chkV1_Only.setEnabled(false);
             BaseAPI = "https://api.compassdigital.org/v1";
 
             Get_AP3_TKN_and_UserID();
@@ -608,23 +604,15 @@ public class V1 extends javax.swing.JInternalFrame {
                     if(menu.has("label") && menu.getJSONObject("label").has("en") && !menu.has("location_brand")){
                         M_line = menu.getJSONObject("label").getString("en");
                         M_line += "      ID: " + menu.getString("id");
-                        if(!chkV1_Only.isSelected()){
-                            listmodel.addElement(M_line);
-                        } else {
-                            if(menu.has("meta") && menu.getJSONObject("meta").has("version") && menu.getJSONObject("meta").getNumber("version").equals(2)){
-                                //listmodel.addElement(I_line);
-                            } else{
-                                listmodel.addElement(M_line); // v1 menu
-                            }
+                        if(menu.has("meta") && menu.getJSONObject("meta").has("version") && menu.getJSONObject("meta").getNumber("version").equals(2)){
+                            //listmodel.addElement(I_line);
+                        } else{
+                            listmodel.addElement(M_line); // v1 menu
                         }
                     }
                 }
                 listMenus.setModel(listmodel);
-                if(chkV1_Only.isSelected()){
-                    lblM.setText("v1 Menus: " + listMenus.getModel().getSize());
-                }else{
-                    lblM.setText("All (v1,2) Menus: " + listMenus.getModel().getSize());
-                }
+                lblM.setText("v1 Menus: " + listMenus.getModel().getSize());
             }else{
                 txtLog.setText("");
                 txtLog.append(json.toString(4));
@@ -840,8 +828,10 @@ public class V1 extends javax.swing.JInternalFrame {
                                         options.remove(k);
                                     }
                                 }
-                                options.put(ModGr1);
-                                options.put(ModGr2); 
+                                if(!chkRemore_Only.isSelected()){
+                                    options.put(ModGr1);
+                                    options.put(ModGr2); 
+                                }
                             }else{
                                 // add options object and Mod1/2 to new options
                                 txtLog.append("\r\n===" + "No Optins" + "\r\n");
@@ -890,7 +880,7 @@ public class V1 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JCheckBox chkDev;
-    private javax.swing.JCheckBox chkV1_Only;
+    private javax.swing.JCheckBox chkRemore_Only;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
