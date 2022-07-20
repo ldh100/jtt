@@ -370,6 +370,9 @@ public class V1 extends javax.swing.JInternalFrame {
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         Load_Env();
+        if(!A.A.UserID.equals("oleg.spozito")){
+            btnRun.setEnabled(false);
+        }
     }//GEN-LAST:event_formAncestorAdded
 
     private void listSectorValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSectorValueChanged
@@ -548,7 +551,6 @@ public class V1 extends javax.swing.JInternalFrame {
             if(json != null && json.has("companies")){
                 companies = json.getJSONArray("companies");
                 txtLog.setText("");
-                txtLog.append("\r\n==== Selected Sector > Total Global Mnenus/Companies: " + companies.length() + "\r\n");
                 txtLog.append("\r\n==== Please Select Company");
                 txtLog.setCaretPosition(0);
 
@@ -649,7 +651,7 @@ public class V1 extends javax.swing.JInternalFrame {
         //SectorID = "41pwNJPNRWC25LjpaORKI9Y11rAgE0uqYzXvPaGzfKZ4qDY0adc4GzWmvEqaCXQ0qDQmeQCrkr5G";
         if(listMenus.getSelectedIndex() < 0){
             txtLog.setText("");
-            txtLog.append("\r\n==== Please Select Company" + "\r\n\r\n");
+            txtLog.append("\r\n==== Please Select Menu" + "\r\n\r\n");
             txtLog.setCaretPosition(0);
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
@@ -852,25 +854,28 @@ public class V1 extends javax.swing.JInternalFrame {
             txtLog.setText("");
             txtLog.append("== Publish > PUT Body un-zipped >> \r\n\r\n" + putMenu.toString(4) + "\r\n\r\n");
             txtLog.setCaretPosition(0);
-           // </editor-fold> 
-
-            // <editor-fold defaultstate="collapsed" desc="=== Compress PUT Json ">
-//            ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
-//            GZIPOutputStream gzipOutStream = new GZIPOutputStream(byteOutStream);
-//            gzipOutStream.write(putMenu.toString().getBytes());
-//            IOUtils.closeQuietly(gzipOutStream);
-//            byte[] bytes = byteOutStream.toByteArray();
-//            gzipped = Base64.getEncoder().encodeToString(bytes);
             // </editor-fold> 
+
+            ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
+            GZIPOutputStream gzipOutStream = new GZIPOutputStream(byteOutStream);
+            gzipOutStream.write(putMenu.toString().getBytes());
+            IOUtils.closeQuietly(gzipOutStream);
+            byte[] bytes = byteOutStream.toByteArray();
+            gzipped = Base64.getEncoder().encodeToString(bytes);
 
 //            txtLog.setText("");
 //            txtLog.append("== gzipped >> \r\n" + gzipped + "\r\n\r\n");
 
             // === Publish Menu
             putMenuID = putMenu.getString("id");
-//            Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
+            Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
 
             // === Report result
+            if(json != null){
+                txtLog.setText("");
+                txtLog.append("== Publish > Result Json >> \r\n\r\n" + json.toString(4) + "\r\n\r\n");
+                txtLog.setCaretPosition(0);
+            }
 
         } catch(Exception ex){
             txtLog.setText("");
