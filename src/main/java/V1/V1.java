@@ -47,7 +47,7 @@ public class V1 extends javax.swing.JInternalFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         listMenus = new javax.swing.JList<>();
         lblC = new javax.swing.JLabel();
-        chkRemore_Only = new javax.swing.JCheckBox();
+        chkRemove = new javax.swing.JCheckBox();
         txtMod2 = new javax.swing.JTextField();
         txtMod1 = new javax.swing.JTextField();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -173,9 +173,9 @@ public class V1 extends javax.swing.JInternalFrame {
         lblC.setText("Selected Sector > Companies: Name, ID");
         lblC.setAlignmentX(0.5F);
 
-        chkRemore_Only.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        chkRemore_Only.setText("Only Remove");
-        chkRemore_Only.setFocusPainted(false);
+        chkRemove.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        chkRemove.setText("Remove Existing");
+        chkRemove.setFocusPainted(false);
 
         txtMod2.setText("Snacks");
         txtMod2.setDragEnabled(false);
@@ -263,7 +263,7 @@ public class V1 extends javax.swing.JInternalFrame {
                                 .addGap(2, 2, 2)
                                 .addComponent(chkDev)
                                 .addGap(33, 33, 33)
-                                .addComponent(chkRemore_Only))
+                                .addComponent(chkRemove))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(170, 170, 170)
                                 .addComponent(lblMetrics1))
@@ -311,7 +311,7 @@ public class V1 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(115, 115, 115)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(chkRemore_Only)
+                                    .addComponent(chkRemove)
                                     .addComponent(chkDev)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
@@ -370,7 +370,9 @@ public class V1 extends javax.swing.JInternalFrame {
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         Load_Env();
-        if(!A.A.UserID.equals("oleg.spozito")){
+        if(A.A.UserID.equals("oleg.spozito") || A.A.UserID.equals("roya.jacob")){
+            btnRun.setEnabled(true);
+        } else{
             btnRun.setEnabled(false);
         }
     }//GEN-LAST:event_formAncestorAdded
@@ -815,23 +817,25 @@ public class V1 extends javax.swing.JInternalFrame {
                             JSONObject item = items.getJSONObject(j);
                             if(item.has("options")){
                                 options = item.getJSONArray("options");
-                                for(int k = 0; k < options.length(); k++){
-                                    JSONObject option = options.getJSONObject(k);
-                                    if(option.getJSONObject("label").getString("en").equals(txtMod1.getText().trim())){
-                                        options.remove(k);
+                                if(chkRemove.isSelected()){ 
+                                    for(int k = 0; k < options.length(); k++){
+                                        JSONObject option = options.getJSONObject(k);
+                                        if(option.getJSONObject("label").getString("en").equals(txtMod1.getText().trim())){
+                                            options.remove(k);
+                                        }
                                     }
-                                }
-                                options = item.getJSONArray("options");
-                                for(int k = 0; k < options.length(); k++){
-                                    JSONObject option = options.getJSONObject(k);
-                                    if(option.getJSONObject("label").getString("en").equals(txtMod2.getText().trim())){
-                                        options.remove(k);
+                                    options = item.getJSONArray("options");
+
+                                    for(int k = 0; k < options.length(); k++){
+                                        JSONObject option = options.getJSONObject(k);
+                                        if(option.getJSONObject("label").getString("en").equals(txtMod2.getText().trim())){
+                                            options.remove(k);
+                                        }
                                     }
+                                    options = item.getJSONArray("options");
                                 }
-                                if(!chkRemore_Only.isSelected()){
-                                    options.put(ModGr1);
-                                    options.put(ModGr2); 
-                                }
+                                options.put(ModGr1);
+                                options.put(ModGr2); 
                             }else{
                                 // add options object and Mod1/2 to new options
                                 txtLog.append("\r\n===" + "No Optins" + "\r\n");
@@ -861,11 +865,11 @@ public class V1 extends javax.swing.JInternalFrame {
             Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
 
             // === Report result
-            if(json != null){
-                txtLog.setText("");
-                txtLog.append("== Publish > Result Json >> \r\n\r\n" + json.toString(4) + "\r\n\r\n");
-                txtLog.setCaretPosition(0);
-            }
+//            if(json != null){
+//                txtLog.setText("");
+//                txtLog.append("== Publish > Result Json >> \r\n\r\n" + json.toString(4) + "\r\n\r\n");
+//                txtLog.setCaretPosition(0);
+//            }
 
         } catch(Exception ex){
             txtLog.setText("");
@@ -880,7 +884,7 @@ public class V1 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRun;
     private javax.swing.JCheckBox chkDev;
-    private javax.swing.JCheckBox chkRemore_Only;
+    private javax.swing.JCheckBox chkRemove;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
