@@ -370,7 +370,7 @@ public class V1 extends javax.swing.JInternalFrame {
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
         Load_Env();
-        if(A.A.UserID.equals("oleg.spozito") || A.A.UserID.equals("roya.jacob")){
+        if(A.A.UserID.equals("oleg.spozito") || A.A.UserID.equals("roya.jacob") || A.A.UserID.equals("alex.koss")){
             btnRun.setEnabled(true);
         } else{
             btnRun.setEnabled(false);
@@ -695,6 +695,7 @@ public class V1 extends javax.swing.JInternalFrame {
     }
 
     private void Publish_Menu(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         txtLog.setText("");
         String putMenuID = "";
         String gzipped = "";
@@ -878,7 +879,7 @@ public class V1 extends javax.swing.JInternalFrame {
             txtLog.append(ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(0);
         }
-
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">
