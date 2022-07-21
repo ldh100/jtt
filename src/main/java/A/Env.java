@@ -1014,7 +1014,7 @@ public class Env extends javax.swing.JInternalFrame {
                 J += "\r\n========= JDE Configuration:" + "\r\n";
                 J += API_Get(BaseAPI + "/config/jde-configuration", "Bearer " + AP3_TKN) + "\r\n"; //jde-configuration/
 
-            } else if(cmbWhat.getSelectedItem().toString().equals("Local Menus")){
+            } else if(cmbWhat.getSelectedItem().toString().equals("Menus")){
                 ID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("menuId").getModelIndex()));
                 J += API_Get(BaseAPI + "/menu/" + ID + "?extended=true&nocache=1", "") + "\r\n";
 

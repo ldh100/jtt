@@ -66,12 +66,12 @@ public class V1 extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -184,9 +184,9 @@ public class V1 extends javax.swing.JInternalFrame {
         txtMod1.setDragEnabled(false);
 
         listItems.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        listItems.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listItemsValueChanged(evt);
+        listItems.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listItemsMouseClicked(evt);
             }
         });
         jScrollPane9.setViewportView(listItems);
@@ -195,9 +195,11 @@ public class V1 extends javax.swing.JInternalFrame {
         lblI.setText("Selected Menu > Items: Name, ID");
         lblI.setAlignmentX(0.5F);
 
+        txtTKN.setEditable(false);
         txtTKN.setText("TKN ?");
         txtTKN.setDragEnabled(false);
 
+        txtUSER.setEditable(false);
         txtUSER.setText("UserID ?");
         txtUSER.setDragEnabled(false);
 
@@ -305,7 +307,7 @@ public class V1 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)
+                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtMod2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -319,7 +321,7 @@ public class V1 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(7, 7, 7)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
@@ -344,6 +346,7 @@ public class V1 extends javax.swing.JInternalFrame {
     private JSONObject ModGr2;
     private JSONArray Mods1;
     private JSONArray Mods2;
+    private JSONArray newOptions = new JSONArray();
 
     private String BaseAPI = "https://api.compassdigital.org/v1";
     private String AP3_TKN = "";
@@ -389,13 +392,13 @@ public class V1 extends javax.swing.JInternalFrame {
         Get_Full_Menu();
     }//GEN-LAST:event_listMenusValueChanged
 
-    private void listItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listItemsValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listItemsValueChanged
-
     private void chkDevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chkDevMouseClicked
         Load_Env();
     }//GEN-LAST:event_chkDevMouseClicked
+
+    private void listItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listItemsMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listItemsMouseClicked
 
     private void Load_Env(){
         DefaultListModel<String> listmodel = new DefaultListModel<>();
@@ -808,48 +811,62 @@ public class V1 extends javax.swing.JInternalFrame {
 
             // for each existing groups > item check/remove ModX, add options new ModX/Items
             if(putMenu.has("groups")){
-            JSONArray options = new JSONArray(); 
+                JSONArray options = new JSONArray(); 
                 groups = json.getJSONArray("groups");
                 for(int i = 0; i < groups.length(); i++){
                     JSONObject group = groups.getJSONObject(i);
-                    if(group.has("items")){
+                    if(group.has("items")){ // && group.getString("id")equals(SelectedGroupID))
                         items = group.getJSONArray("items");
                         for(int j = 0; j < items.length(); j++){
                             JSONObject item = items.getJSONObject(j);
                             if(item.has("options")){
+                                newOptions = new JSONArray();
                                 options = item.getJSONArray("options");
+
                                 if(chkRemove.isSelected()){ 
                                     for(int k = 0; k < options.length(); k++){
                                         JSONObject option = options.getJSONObject(k);
-                                        if(option.getJSONObject("label").getString("en").equals(txtMod1.getText().trim())){
-                                            options.remove(k);
+                                        if(!option.getJSONObject("label").getString("en").equals(txtMod1.getText().trim())
+                                            && !option.getJSONObject("label").getString("en").equals(txtMod2.getText().trim())){
+                                            newOptions.put(option);
                                         }
                                     }
+                                    item.remove("options");
+                                    item.put("options", newOptions);
                                     options = item.getJSONArray("options");
 
-                                    for(int k = 0; k < options.length(); k++){
-                                        JSONObject option = options.getJSONObject(k);
-                                        if(option.getJSONObject("label").getString("en").equals(txtMod2.getText().trim())){
-                                            options.remove(k);
-                                        }
-                                    }
-                                    options = item.getJSONArray("options");
+//                                    for(int k = 0; k < options.length(); k++){
+//                                        JSONObject option = options.getJSONObject(k);
+//                                        if(option.getJSONObject("label").getString("en").equals(txtMod1.getText().trim())
+//                                            || option.getJSONObject("label").getString("en").equals(txtMod2.getText().trim())){
+//                                            options.remove(k);
+//                                            k++;
+//                                        }
+//                                    }
+                                    //options = item.getJSONArray("options");
                                 }
+
                                 options.put(ModGr1);
                                 options.put(ModGr2); 
-                            }else{
-                                // add options object and Mod1/2 to new options
-                                txtLog.append("\r\n===" + "No Optins" + "\r\n");
                             }
                         }
                     }
                 }
             }
 
-            txtLog.setText("");
+            txtLog.setText(""); 
+            //txtLog.append("== Publish > PUT Body un-zipped >> \r\n\r\n" + newOptions.toString(4) + "\r\n\r\n");
             txtLog.append("== Publish > PUT Body un-zipped >> \r\n\r\n" + putMenu.toString(4) + "\r\n\r\n");
             txtLog.setCaretPosition(0);
             // </editor-fold> 
+
+            // Check putMenu JSON Size
+//            double l = 100;
+            //if(putMenu.length() < l) {
+//            if(putMenu.toString().length() < l) {
+//                return;
+//            }
+            //
 
             ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
             GZIPOutputStream gzipOutStream = new GZIPOutputStream(byteOutStream);
@@ -857,9 +874,6 @@ public class V1 extends javax.swing.JInternalFrame {
             IOUtils.closeQuietly(gzipOutStream);
             byte[] bytes = byteOutStream.toByteArray();
             gzipped = Base64.getEncoder().encodeToString(bytes);
-
-//            txtLog.setText("");
-//            txtLog.append("== gzipped >> \r\n" + gzipped + "\r\n\r\n");
 
             // === Publish Menu
             putMenuID = putMenu.getString("id");
