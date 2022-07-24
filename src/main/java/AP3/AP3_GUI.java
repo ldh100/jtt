@@ -103,6 +103,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+
 public class AP3_GUI extends javax.swing.JInternalFrame {
     public AP3_GUI() {
         initComponents();
