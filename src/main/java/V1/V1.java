@@ -1213,8 +1213,12 @@ public class V1 extends javax.swing.JInternalFrame {
                                     item.put("options", newOptions);
                                     options = item.getJSONArray("options");
                                 }
-                                options.put(ModGr1);
-                                options.put(ModGr2); 
+                                if(!ModGr1.isEmpty()){
+                                    options.put(ModGr1);
+                                }
+                                if(!ModGr2.isEmpty()){
+                                    options.put(ModGr2);
+                                } 
                             }
                         }
                     }
