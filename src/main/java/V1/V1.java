@@ -75,7 +75,7 @@ public class V1 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Production, Development v1 Menus only - all Items > Modifiers update");
+        setTitle("Global Menus (v1 only) - Items > Modifiers update");
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("V1"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
@@ -264,17 +264,13 @@ public class V1 extends javax.swing.JInternalFrame {
                         .addComponent(lblI, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblM, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createSequentialGroup()
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(lblC, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblC, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
@@ -297,6 +293,9 @@ public class V1 extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtMod2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,23 +303,18 @@ public class V1 extends javax.swing.JInternalFrame {
                         .addComponent(lblMetrics1))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(chkRemove))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(chkByCategory))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6)
-                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkRemove)
+                            .addComponent(chkByCategory)
+                            .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,25 +361,23 @@ public class V1 extends javax.swing.JInternalFrame {
                                 .addComponent(lblMetrics1)))
                         .addGap(2, 2, 2)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
-                        .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(chkRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)
-                        .addComponent(chkByCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chkRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
+                                .addGap(40, 40, 40)
                                 .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(2, 2, 2)
+                                .addComponent(chkByCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
         );
 
         pack();
@@ -694,7 +686,7 @@ public class V1 extends javax.swing.JInternalFrame {
         String CategoryName = "";
         if(chkByCategory.isSelected()){
             CategoryName = listItems.getSelectedValue().toString();
-            CategoryName = CategoryName.substring(0, CategoryName.lastIndexOf("ID:")).trim();
+            CategoryName = ", " + CategoryName.substring(CategoryName.indexOf("== ") + 3, CategoryName.lastIndexOf("ID:")).trim();
         }
         String Done = "Done: " + 
             DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" +
@@ -704,7 +696,7 @@ public class V1 extends javax.swing.JInternalFrame {
         String Scope = env + " Sector: " + SectorName +  ", Company: " + CompanyName + ", Menu: " + MenuName + CategoryName;
         String LOG = 
                 Scope + "\r\n\r\n" 
-                + "Remove existing Mod Groups " + txtMod1.getText() + " " + txtMod2.getText() + ": " + chkRemove.isSelected() + "\r\n"
+                + "Remove existing Mod Groups < " + txtMod1.getText() + " " + txtMod2.getText() + " > : " + chkRemove.isSelected() + "\r\n"
                 + "Update by selected Category: " + chkByCategory.isSelected() + "\r\n\r\n"
 
                 + "   === Original Menu (GET) size: " 
@@ -1213,6 +1205,7 @@ public class V1 extends javax.swing.JInternalFrame {
                                     item.put("options", newOptions);
                                     options = item.getJSONArray("options");
                                 }
+
                                 if(!ModGr1.isEmpty()){
                                     options.put(ModGr1);
                                 }
@@ -1248,21 +1241,25 @@ public class V1 extends javax.swing.JInternalFrame {
             String CategoryName = "";
             if(chkByCategory.isSelected()){
                 CategoryName = listItems.getSelectedValue().toString();
-                CategoryName = CategoryName.substring(0, CategoryName.lastIndexOf("ID:")).trim();
+                CategoryName = "\r\n" + "   " + CategoryName.substring(CategoryName.indexOf("== ") + 3, CategoryName.lastIndexOf("ID:")).trim();
             }
             Object[] options = {"Yes", "No"};
             int reply = JOptionPane.showOptionDialog(this,
-                "Are you sure to update " + env + " Sector: " + SectorName +  ", Company: " + CompanyName + ", Menu: " + MenuName + CategoryName + "?\r\n\r\n"
+                "Are you sure to update in " + cmbEnv.getSelectedItem().toString() + "? >>\r\n" +
+                    "\r\n" + "   Sector: " + SectorName + 
+                    "\r\n" + "   Company: " + CompanyName + 
+                    "\r\n" + "   Menu: " + MenuName + 
+                    CategoryName + "\r\n\r\n"
 
                 + "   === Original Menu (GET) size: " 
                 + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" +"\r\n"
                 + "   === Updated Menu (PUT) size: " 
                 + DEC_FORMAT.format((double) PutMenu_Size / (1024*1024)) + " " + "MB" +"\r\n\r\n"
 
-                + "Remove existing Mod Groups " + txtMod1.getText() + " " + txtMod2.getText() + ": " + chkRemove.isSelected() + "\r\n"
+                + "Remove existing Mod Groups < " + txtMod1.getText() + " " + txtMod2.getText() + " > : " + chkRemove.isSelected() + "\r\n"
                 + "Update by selected Category: " + chkByCategory.isSelected() + "\r\n\r\n" +
 
-                "Menu Gategoris with the same name(s) as requested Mod Groups excluded from the update",
+                "Menu Categories with the same name(s) as requested Mod Groups excluded from the update\r\n",
 
                 "Menu - update Modifiers",
                 JOptionPane.YES_NO_OPTION,
