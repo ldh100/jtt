@@ -250,7 +250,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         LoadREP();
     }//GEN-LAST:event_formAncestorAdded
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if(DV1.getSelectedColumn()== 5){
+        if(DV1.getSelectedColumn() == 5){
             DV1.changeSelection(DV1.getSelectedRow(), 0, false, false);            
         }
         Summary();
@@ -388,6 +388,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("WO") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("API") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("Android") ||
+            DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("V1 Menus") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("iOS")) {
                 btnReport.setEnabled(true);
         } else {
@@ -434,7 +435,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             txtLog.append("=== " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        if (!"".equals(EXX.trim()) && EXX.startsWith("Menu_API_Backup")){
+        if (!"".equals(EXX.trim()) && EXX.startsWith("{") && EXX.endsWith("}")){
             A.Func.SHOW_FILE(EXX, "json");
             setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             return;
