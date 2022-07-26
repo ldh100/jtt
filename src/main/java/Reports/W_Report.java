@@ -441,7 +441,7 @@ public class W_Report extends javax.swing.JInternalFrame {
             return;
         } 
 
-        if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
+        if ("".equals(EXX.trim()) || "None".equals(EXX.trim()) || EXX.startsWith("{")){
             setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             txtLog.append("=== Report > Not Excel" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
