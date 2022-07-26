@@ -41,7 +41,7 @@ public class V1_History extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
         setIconifiable(true);
-        setTitle("Environmet(s)");
+        setTitle("Global Menus = Items > Modifiers up date: History / Restore from Backup");
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Env"); // NOI18N
