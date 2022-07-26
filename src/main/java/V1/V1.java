@@ -13,6 +13,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.zip.GZIPOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -367,17 +371,16 @@ public class V1 extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(chkRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(chkByCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(chkByCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
 
         pack();
@@ -437,8 +440,8 @@ public class V1 extends javax.swing.JInternalFrame {
                     + "=== Update Menu PUT Json:\r\n"
                     + putMenu.toString(4));
         txtLog.setCaretPosition(0);
-        String R = A.Func.SHOW_FILE(txtLog.getText(), "json");
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+        SHOW_FILE(txtLog.getText(), "V1_Log", "json");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnLogMouseClicked
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
@@ -489,7 +492,6 @@ public class V1 extends javax.swing.JInternalFrame {
                 listItems.clearSelection();
                 return;
             }
-
         }else{
             listItems.clearSelection();
         }
@@ -570,7 +572,6 @@ public class V1 extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(0);
             }
         }
-        AAA = Get_UUID();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
     private String Get_UUID(){
@@ -774,7 +775,7 @@ public class V1 extends javax.swing.JInternalFrame {
             _insert.setString(15, env);
             _insert.setString(16, LOG); 
             _insert.setString(17, Done);
-            _insert.setString(18, "None");
+            _insert.setString(18, getMenu.toString()); //putMenu );
             int row = _insert.executeUpdate();
             conn.close();
         }  catch (SQLException ex) {
@@ -783,6 +784,18 @@ public class V1 extends javax.swing.JInternalFrame {
         }
     }
 
+    private void SHOW_FILE(String BODY, String Name, String EXT){
+        File aLog = null;
+        try {
+            String userDesktop = System.getProperty("user.home") + File.separator + "Desktop"; 
+            aLog = new File(userDesktop + File.separator + Name + "." + EXT);
+            Files.write(Paths.get(aLog.getPath()), BODY.getBytes());
+            java.awt.Desktop.getDesktop().open(aLog);
+        }
+        catch (IOException ex) {
+            System.out.println("\r\n= Show " + Name + "." + EXT + " > ERROR: " + ex.getMessage() + "\r\n");
+        }
+    }
     private void CHECK_Allow(){
         if(ALLOW){
             if(listMenus.getSelectedIndex() > -1 ){
@@ -1036,8 +1049,7 @@ public class V1 extends javax.swing.JInternalFrame {
             String G_line = "";
             String I_line = "";
             if(json != null && json.has("groups")){
-                getMenu = json;
-                putMenu = json;
+                getMenu = new JSONObject(json.toMap());
                 //txtLog.append(json.toString(4) + "\r\n"); 
                 groups = json.getJSONArray("groups");
                 for(int i = 0; i < groups.length(); i++){
@@ -1066,7 +1078,6 @@ public class V1 extends javax.swing.JInternalFrame {
                 if(chkByCategory.isSelected()){
                     txtLog.append("\r\n==== Please Select Menu Category to update" + "\r\n\r\n");
                 }else{
-                    //txtLog.append(json.toString(4));
                     CHECK_Allow();
                 }                         
                 txtLog.setCaretPosition(0);
@@ -1098,6 +1109,7 @@ public class V1 extends javax.swing.JInternalFrame {
         Mods2 = new JSONArray();
         ModGr1 = new JSONObject();
         ModGr2 = new JSONObject();
+        JSONArray newGroups = new JSONArray();
 
         JSONObject mod;
         JSONObject tempObj;
@@ -1108,7 +1120,10 @@ public class V1 extends javax.swing.JInternalFrame {
         String Date_Modified = sdf.format(_ee); 
 
         try {
-            GetMenu_Size = putMenu.toString().getBytes().length; 
+            GetMenu_Size = getMenu.toString().getBytes().length; 
+            txtLog.append("\r\n== Select Menu GET Json size: >> " + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" + "\r\n");
+
+            putMenu = new JSONObject(getMenu.toMap());
 
             // <editor-fold defaultstate="collapsed" desc="=== 1st Mods Oblect ">
             if(!txtMod1.getText().trim().isEmpty()){
@@ -1185,7 +1200,6 @@ public class V1 extends javax.swing.JInternalFrame {
             // </editor-fold> 
 
             // <editor-fold defaultstate="collapsed" desc="=== Create PUT Json from Full GET">
-
             // === Update LastUser, modified and published dates
             if(putMenu.has("date") && putMenu.getJSONObject("date").has("modified")){
                 putMenu.getJSONObject("date").remove("modified");
@@ -1207,10 +1221,11 @@ public class V1 extends javax.swing.JInternalFrame {
                 for(int i = 0; i < groups.length(); i++){
                     JSONObject group = groups.getJSONObject(i);
 
-                    boolean Include_Group = true;
+                    boolean Update_Group = true;
                     String GR_Name = group.getJSONObject("label").getString("en").trim();
                     if(GR_Name.equals(txtMod1.getText().trim()) || GR_Name.equals(txtMod2.getText().trim())) {
-                        Include_Group = false;
+                        Update_Group = false;
+                        newGroups.put(group);
                     }
 
                     if(chkByCategory.isSelected()){
@@ -1218,14 +1233,20 @@ public class V1 extends javax.swing.JInternalFrame {
                         CategoryName = listItems.getSelectedValue().toString();
                         CategoryName = CategoryName.substring(CategoryName.indexOf("== Category: ") + 13, CategoryName.lastIndexOf("ID:")).trim();
                         if(!GR_Name.equals(CategoryName)) {
-                            Include_Group = false;
+                            Update_Group = false;
+                            newGroups.put(group);
                         }
                     }
 
-                    if(group.has("items") && Include_Group){ 
+                    if(group.has("items") && Update_Group){ 
                         items = group.getJSONArray("items");
                         for(int j = 0; j < items.length(); j++){
                             JSONObject item = items.getJSONObject(j);
+
+                            if(!item.has("options")){            // =====  got some Items without "options" object at all
+                                item.put("options", new JSONArray());
+                                options = item.getJSONArray("options");
+                            }
                             if(item.has("options")){
                                 newOptions = new JSONArray();
                                 options = item.getJSONArray("options");
@@ -1251,21 +1272,20 @@ public class V1 extends javax.swing.JInternalFrame {
                                 } 
                             }
                         }
+                        newGroups.put(group); 
                     }
                 }
+                putMenu.remove("groups");
+                putMenu.put("groups", newGroups);
+                String X = "";
             }
             // </editor-fold> 
-
-
-            txtLog.append("\r\n== Select GET Menu Json size: >> " + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" + "\r\n");
             
             PutMenu_Size = putMenu.toString().getBytes().length; 
             txtLog.append("\r\n== Prepared PUT Menu Json size: >> " + DEC_FORMAT.format((double) PutMenu_Size / (1024*1024)) + " " + "MB" + "\r\n\r\n");
 
-//            txtLog.append("== Publish > PUT Body un-zipped >> \r\n\r\n" + putMenu.toString(4) + "\r\n\r\n");
-//            txtLog.setCaretPosition(0);  
 
-            // <editor-fold defaultstate="collapsed" desc="=== Warning / COnfirmation ">
+            // <editor-fold defaultstate="collapsed" desc="=== Warning / Confirmation ">
             String SectorName = listSector.getSelectedValue().toString();
             SectorName = SectorName.substring(0, SectorName.lastIndexOf("ID:")).trim();
 
@@ -1305,6 +1325,8 @@ public class V1 extends javax.swing.JInternalFrame {
                 options,
                 "No"); 
             if (reply == 1){
+                txtLog.append("== Prepared PUT Json >> \r\n" + putMenu.toString(4) + "\r\n");
+                txtLog.setCaretPosition(0);
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
                 return;
             }
@@ -1322,7 +1344,6 @@ public class V1 extends javax.swing.JInternalFrame {
             Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
 
             DB_LOG();
-            //Get_Full_Menu();                          // refresh PUT Menu after PUT/Publish
 
             if(json != null){
                 txtLog.setText("");
