@@ -4,13 +4,17 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import java.awt.Cursor;
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.Base64;
+import java.util.zip.GZIPOutputStream;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 
 
@@ -37,8 +41,6 @@ public class V1_History extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setTitle("Environmet(s)");
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(858, 527));
@@ -110,22 +112,22 @@ public class V1_History extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAPI, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAPI, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                .addGap(2, 2, 2))
         );
 
         getAccessibleContext().setAccessibleName("Env");
@@ -145,6 +147,7 @@ public class V1_History extends javax.swing.JInternalFrame {
     private String BKP_Json;
     private JSONObject json;
     private JSONObject GET_Json;
+    private DecimalFormat DEC_FORMAT = new DecimalFormat("#.##");
     // </editor-fold>   
 
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
@@ -179,20 +182,20 @@ public class V1_History extends javax.swing.JInternalFrame {
 
     private void btnAPIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAPIMouseClicked
         txtLog.setText("");
-        txtLog.append("=== Restore PUT API - not ready yet");
+        txtLog.append("== Restore PUT API - not ready yet");
 
         if(!ALLOW){
-            txtLog.append("=== Sorry, you are not allowed to run this function");
+            txtLog.append("\r\n====== Sorry, you are not allowed to run this function ======\r\n");
             txtLog.setCaretPosition(0);
             return;
         }
-
         txtLog.setCaretPosition(0);
         if(btnAPI.isEnabled()){
             Get_AP3_TKN_and_UserID();
-            GET_BKP_Json();
+            if(GET_BKP_Json()){
+                Restore();
+            }
         }
-
     }//GEN-LAST:event_btnAPIMouseClicked
 
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
@@ -249,9 +252,9 @@ public class V1_History extends javax.swing.JInternalFrame {
             DV1.setModel(dm);
              
             DV1.getColumnModel().getColumn(0).setPreferredWidth(60);
-            DV1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(80);
             DV1.getColumnModel().getColumn(2).setPreferredWidth(60);
-            DV1.getColumnModel().getColumn(3).setPreferredWidth(800);
+            DV1.getColumnModel().getColumn(3).setPreferredWidth(640);
 
             txtLog.append("= " +  DV1.getRowCount() +  " records\r\n");
             txtLog.setCaretPosition(0); 
@@ -260,24 +263,55 @@ public class V1_History extends javax.swing.JInternalFrame {
             txtLog.append("=== Load Data > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
+        if(DV1.getSelectedRowCount() < 1){
+            btnAPI.setEnabled(false);
+        }else{
+            btnAPI.setEnabled(true);
+        }
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));        
     }  
-    private void GET_BKP_Json(){
+    private boolean GET_BKP_Json(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));    
         String qID = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 0)).trim(); 
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery("SELECT [Excel] FROM [dbo].[aw_result] WHERE [qID] = '" + qID + "'");
             rs.next();
             BKP_Json = rs.getString(1);
-            GET_Json = new JSONObject(BKP_Json);
             conn.close();
+            GET_Json = new JSONObject(BKP_Json);
+
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return true;
         } catch (Exception ex) {
             txtLog.append( "\r\n = GET_BKP_Json > ERROR: " + ex.getMessage() + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            txtLog.setCaretPosition(0); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return false;
         }
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }
+    private void Restore(){
+        double GetMenu_Size = GET_Json.toString().getBytes().length; 
+        txtLog.append("\r\n== Select Menu GET Json size: >> " + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" + "\r\n");
+        try {
+            ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
+            GZIPOutputStream gzipOutStream = new GZIPOutputStream(byteOutStream);
+            gzipOutStream.write(GET_Json.toString().getBytes());
+            IOUtils.closeQuietly(gzipOutStream);
+            byte[] bytes = byteOutStream.toByteArray();
+            String gzipped = Base64.getEncoder().encodeToString(bytes);
 
+            // === Publish Menu
+            String putMenuID = GET_Json.getString("id");
+            txtLog.append( "\r\n== Target Menu ID: " + putMenuID + "\r\n");
+
+            Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
+
+        } catch(Exception ex){
+            txtLog.setText("");
+            txtLog.append(ex.getMessage() + "\r\n");
+            txtLog.setCaretPosition(0);
+        }
+    }
 
     private void Api_Call(String Method, String EndPoint, String AUTH, String BODY) {
         String Result = "?";
