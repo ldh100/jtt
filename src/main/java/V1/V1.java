@@ -373,14 +373,12 @@ public class V1 extends javax.swing.JInternalFrame {
                             .addComponent(chkRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(2, 2, 2)
                         .addComponent(chkByCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnRun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 4, Short.MAX_VALUE))))
         );
 
         pack();
@@ -457,7 +455,7 @@ public class V1 extends javax.swing.JInternalFrame {
 
         if (CONFIG) {
             Load = true;
-            Load_Env();            //cmbEnv.setSelectedItem(app);
+            Load_Env();            
             Load = false;
         }
 
@@ -705,7 +703,7 @@ public class V1 extends javax.swing.JInternalFrame {
             " > " + DEC_FORMAT.format((double) PutMenu_Size / (1024*1024)) + " " + "MB";
 
 
-        String Scope = env + " Sector: " + SectorName +  ", Company: " + CompanyName + ", Menu: " + MenuName + CategoryName;
+        String Scope = "Sector: " + SectorName +  ", Company: " + CompanyName + ", Menu: " + MenuName + CategoryName;
         String LOG = 
                 Scope + "\r\n\r\n" 
                 + "Remove existing Mod Groups < " + txtMod1.getText() + " " + txtMod2.getText() + " > : " + chkRemove.isSelected() + "\r\n"
