@@ -433,12 +433,10 @@ public class V1 extends javax.swing.JInternalFrame {
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         txtLog.setText("");
-        txtLog.append("=== Original Full Menu GET Json:\r\n" 
-                    + getMenu.toString(4) + "\r\n\r\n"
-                    + "=== Update Menu PUT Json:\r\n"
-                    + putMenu.toString(4));
+        txtLog.append("=== Please see generated log files: PUT_Json.json, and GET_Json.json ===");
         txtLog.setCaretPosition(0);
-        SHOW_FILE(txtLog.getText(), "V1_Log", "json");
+        SHOW_FILE(getMenu.toString(4), "PUT_Json", "json");
+        SHOW_FILE(putMenu.toString(4), "GET_Json", "json");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_btnLogMouseClicked
 
