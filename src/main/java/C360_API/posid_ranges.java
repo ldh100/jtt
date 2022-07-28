@@ -6,6 +6,13 @@ class posid_ranges extends C360_API_main{
         BaseAPI = a.BaseAPI;
         NewID = a.NewID;
         ParentTest = a.ParentTest;        
+
+        Order_IDS = a.Order_IDS; 
+        Concepts_IDS = a.Concepts_IDS; 
+        ConceptGraoups_IDS = a.ConceptGraoups_IDS; 
+        PRanges_IDS = a.PRanges_IDS; 
+        User_IDS = a.User_IDS; 
+        User_IDS = a.User_IDS;
     }
     String AAA = "";
     protected void run() { 
