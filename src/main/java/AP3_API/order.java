@@ -2,6 +2,7 @@ package AP3_API;
 
 import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 import org.json.JSONArray;
@@ -45,6 +46,10 @@ class order extends AP3_API_GUI{
         BaseAPI = a.BaseAPI;
         Mobile_User_ID = a.Mobile_User_ID;
         Mobile_User_TKN = a.Mobile_User_TKN;
+
+        RUNNER_ID = a.RUNNER_ID;
+        RUNNER_PW = a.RUNNER_PW;
+        Bolter_Site_ID = a.Bolter_Site_ID;
         
         SITE = a.SITE;
         SiteID = a.SiteID;
@@ -70,14 +75,16 @@ class order extends AP3_API_GUI{
         FP_Payment_TKN = a.FP_Payment_TKN;
     }
     JSONObject requestParams = null;
+    JSONObject Task = null;
     String AAA = "";
     String Requested_Date = "";
     Date requested_date;
+    long START;
     
     protected void run() {  
-        if (!env.equals("PR")) {
-            PLACE_ORDERS();
-        }
+//        if (!env.equals("PR")) {
+//            PLACE_ORDERS();
+//        }
         
         Auth = "Bearer " + Mobile_User_TKN;
         long m1 = System.currentTimeMillis();                     
@@ -118,8 +125,13 @@ class order extends AP3_API_GUI{
             // Info Found Orders Count
             AAA = json.toString(4);
         } 
-                   
+
+        if (!env.equals("PR")) {
+            PLACE_ORDERS();
+            DELIVERY_TASK();
+        }                   
     }
+
     private void PLACE_ORDERS(){
         Auth = "Bearer " + Mobile_User_TKN;
 
@@ -330,9 +342,25 @@ class order extends AP3_API_GUI{
         if(json != null && json.has("id")){
             Order_Delivery_ID = json.getString("id");
         }               
-        
+//        Auth = "Bearer " + AP3_TKN;
+//        requestParams = new JSONObject();   //  ADMIN User Update Delivery Order  =================
+//        JSONObject isD = new JSONObject();      
+//        isD.put("in_progress", true);
+//        isD.put("ready", true);
+//        //is.put("out_for_delivery", true);        
+//        requestParams.put("is", isD); 
+//        BODY = requestParams.toString();
+//        
+//        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
+//            BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+//        if(json != null){           
+//            AAA = json.toString(4);  // Check actual update
+//        }         
+    }
+
+    private void DELIVERY_TASK(){
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Mobile User Update Delivery Order  =================
+        requestParams = new JSONObject();   //  ADMIN User Update Delivery Order  =================
         JSONObject isD = new JSONObject();      
         isD.put("in_progress", true);
         isD.put("ready", true);
@@ -340,10 +368,45 @@ class order extends AP3_API_GUI{
         requestParams.put("is", isD); 
         BODY = requestParams.toString();
         
-        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
+        JOB_Api_Call("KDS > Update Delivery Order Status - ready", "PATCH", 
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
             AAA = json.toString(4);  // Check actual update
-        }         
+        } 
+
+        Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
+        JOB_Api_Call("Bolter Authentication > /user/auth?realm=bolter", "GET", 
+            BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 200, ParentTest, "no_jira");
+        if(json != null){
+            if(json.has("user")) Bolter_User_ID = json.getString("user"); 
+            if(json.has("token")) Bolter_User_TKN = json.getString("token");  
+            if(json.has("profile")){    
+                Bolter_Site_ID = json.getJSONObject("profile").getString("location_group"); 
+            }else{
+                if(json.has("error")){
+                    Bolter_Site_ID = "Not Found";
+                }
+            } 
+        }
+
+        Task = new JSONObject();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.setTimeZone(TimeZone.getTimeZone("UTC"));
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        START = cal.getTimeInMillis(); 
+
+        Auth = "Bearer " + Bolter_User_TKN;           
+        JOB_Api_Call("Task > 'SiteID' ?created today", "GET",  
+            BaseAPI + "/task/location/group/" + SiteID + "?created=" + START, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+            if(json.has("tasks")){
+                JSONArray tasks = json.getJSONArray("tasks");
+            }
+        }  
     }
 }

@@ -1,5 +1,6 @@
 package AP3_API;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -7,25 +8,35 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
+import org.json.JSONObject;
 
 class task extends AP3_API_GUI{
     protected task(AP3_API_GUI a) {
         app = a.app;
         env = a.env;
+        ParentTest = a.ParentTest; 
         BaseAPI = a.BaseAPI;
+
         SiteID = a.SiteID;
+        BrandID = a.BrandID;
+
         Bolter_User_ID = a.Bolter_User_ID;
         Bolter_User_TKN = a.Bolter_User_TKN;
         Bolter_Site_ID = a.Bolter_Site_ID;
         BolterBrandIDS = a.BolterBrandIDS;        
         Market_Brand_ID = a.Market_Brand_ID;
-        ParentTest = a.ParentTest;
-        
+
+        Mobile_User_ID = a.Mobile_User_ID;        
         Order_Delivery_ID = a.Order_Delivery_ID;
         ShoppingCart_Delivery_ID = a.ShoppingCart_Delivery_ID;
     }
+    JSONObject requestParams = null;
     String AAA = "";
+    String action_time = "";
+    String Task_ID = "";
+    long START;
     protected void run() {                                                       
         // 1628827200000 - today start midnight
         Calendar cal = Calendar.getInstance();
@@ -35,7 +46,7 @@ class task extends AP3_API_GUI{
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        long START = cal.getTimeInMillis(); 
+        START = cal.getTimeInMillis(); 
         
         Auth = "";   // ========================================== 
         JOB_Api_Call("Task > 'MarketPlace Brand ID' (hardcoded in JOB config)", "GET",  // ================   Hard Coded for now ======================================================
@@ -44,8 +55,7 @@ class task extends AP3_API_GUI{
             AAA = json.toString(4);
         }  
         
-        Auth = "Bearer " + Bolter_User_TKN;   
-        
+        Auth = "Bearer " + Bolter_User_TKN;           
         JOB_Api_Call("Task > 'SiteID' ?created today", "GET",  
             BaseAPI + "/task/location/group/" + SiteID + "?created=" + START, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
@@ -65,6 +75,50 @@ class task extends AP3_API_GUI{
 //            AAA = json.toString(4);
 //        }
         if(!env.equals("PR")){
+
+// Create new Task POST
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        action_time = sdf.format(new Date(System.currentTimeMillis()));        
+
+        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+        requestParams.put("order_id", Order_Delivery_ID);
+        requestParams.put("shoppingcart_id", ShoppingCart_Delivery_ID);
+        requestParams.put("customer_id", Mobile_User_ID);
+        requestParams.put("location_id", BrandID);
+        requestParams.put("location_type", "brand");
+
+        JSONObject order = new JSONObject();
+        order.put("order_id", Order_Delivery_ID);
+        order.put("customer_id", Mobile_User_ID);
+        //order.put("customer", new JSONObject());
+        //order.put("order_details", new JSONObject());
+        order.put("delivery_instructions", "New Task Test Instructions");
+        requestParams.put("order", order);
+
+        JSONObject dropoff_details = new JSONObject();
+        dropoff_details.put("location_id", BrandID); 
+//        dropoff_details.put("latitude", 0); 
+//        dropoff_details.put("longitude", 0); 
+//        dropoff_details.put("address", ""); 
+        dropoff_details.put("action_time", action_time); 
+        requestParams.put("dropoff_details", dropoff_details); 
+
+        requestParams.put("status", "accepted");
+        //requestParams.put("meta", new JSONObject());
+        requestParams.put("type", "bolter");
+
+        BODY = requestParams.toString();  
+
+        JOB_Api_Call("Create New Task", "POST",  
+            BaseAPI + "/task", Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }
+// Get task By ID GET
+// Up[date Task PATCH
+// Delete Task DELETE
+
             JOB_Api_Call("task/order > 'OrderID' (no _query)", "GET",  
                 BaseAPI + "/task/order/" + Order_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");
             if(json != null){

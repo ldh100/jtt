@@ -121,12 +121,12 @@ public class Station extends javax.swing.JInternalFrame {
         setSize(new java.awt.Dimension(850, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -163,7 +163,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Sites.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Sites.setCellSelectionEnabled(true);
-        DV_Sites.setGridColor(java.awt.SystemColor.windowBorder);
+        DV_Sites.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_Sites.setName("DV_Sites"); // NOI18N
         DV_Sites.setRowHeight(18);
         DV_Sites.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -186,7 +186,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Brands.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Brands.setCellSelectionEnabled(true);
-        DV_Brands.setGridColor(java.awt.SystemColor.windowBorder);
+        DV_Brands.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_Brands.setName("DV_Brands"); // NOI18N
         DV_Brands.setOpaque(false);
         DV_Brands.setRowHeight(18);
@@ -219,7 +219,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_MTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_MTS.setCellSelectionEnabled(true);
-        DV_MTS.setGridColor(java.awt.SystemColor.windowBorder);
+        DV_MTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
         DV_MTS.setRowHeight(18);
         DV_MTS.getTableHeader().setReorderingAllowed(false);
@@ -239,7 +239,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Items.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Items.setGridColor(java.awt.SystemColor.windowBorder);
+        DV_Items.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_Items.setName("DV_Items"); // NOI18N
         DV_Items.setOpaque(false);
         DV_Items.setRowHeight(18);
@@ -261,7 +261,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Mods.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Mods.setGridColor(java.awt.SystemColor.windowBorder);
+        DV_Mods.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_Mods.setName("DV_Mods"); // NOI18N
         DV_Mods.setOpaque(false);
         DV_Mods.setRowHeight(18);
@@ -293,7 +293,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Menus.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Menus.setCellSelectionEnabled(true);
-        DV_Menus.setGridColor(java.awt.SystemColor.windowBorder);
+        DV_Menus.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_Menus.setName("DV_Menus"); // NOI18N
         DV_Menus.setOpaque(false);
         DV_Menus.setRowHeight(18);
@@ -316,7 +316,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_DTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_DTS.setCellSelectionEnabled(true);
-        DV_DTS.setGridColor(java.awt.SystemColor.windowBorder);
+        DV_DTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
         DV_DTS.setName("DV_DTS"); // NOI18N
         DV_DTS.setRowHeight(18);
         DV_DTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -557,15 +557,15 @@ public class Station extends javax.swing.JInternalFrame {
                                         .addComponent(cmbPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, 0)
                                         .addComponent(lblBDOFF)
-                                        .addGap(2, 2, 2)
+                                        .addGap(0, 0, 0)
                                         .addComponent(cmbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(8, 8, 8)
                                         .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(4, 4, 4)
-                                .addComponent(lblSITES7)
                                 .addGap(2, 2, 2)
+                                .addComponent(lblSITES7)
+                                .addGap(0, 0, 0)
                                 .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2366,8 +2366,14 @@ public class Station extends javax.swing.JInternalFrame {
         } else{
             FAIL = true;
             return;
-        }              
-        
+        } 
+  
+        try {
+            Thread.sleep(2000);    // maybe to fast to update right after creation >>  Could not send push notifications       
+        } catch (Exception e) {
+        }
+           
+
         txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + AP3_TKN;
@@ -2388,17 +2394,17 @@ public class Station extends javax.swing.JInternalFrame {
         
         BODY = requestParams.toString();
         Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
-        if(json != null){
-            try {
-                Order_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            } catch (Exception ex){
-                FAIL = true;
-                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            }
-        }   
+//        if(json != null){
+//            try {
+//                Order_Delivery_ID = json.getString("id");
+//                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            } catch (Exception ex){
+//                FAIL = true;
+//                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            }
+//        }   
     }
     private void Place_Update_Pickup_Order(String Payment_TKN){
         FAIL = false;
