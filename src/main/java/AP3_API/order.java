@@ -360,15 +360,27 @@ class order extends AP3_API_GUI{
 
     private void DELIVERY_TASK(){
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  ADMIN User Update Delivery Order  =================
-        JSONObject isD = new JSONObject();      
-        isD.put("in_progress", true);
-        isD.put("ready", true);
-        //is.put("out_for_delivery", true);        
+        JSONObject isD;
+        requestParams = new JSONObject();   //  KDS User Update Delivery Order  =================
+        isD = new JSONObject();      
+        isD.put("in_progress", true);   
         requestParams.put("is", isD); 
         BODY = requestParams.toString();
         
-        JOB_Api_Call("KDS > Update Delivery Order Status - ready", "PATCH", 
+        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress", "PATCH", 
+            BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+        if(json != null){           
+            AAA = json.toString(4);  // Check actual update
+        } 
+
+        requestParams = new JSONObject();   //  KDS User Update Delivery Order  =================
+        isD = new JSONObject();      
+        isD.put("ready", true);
+        isD.put("out_for_delivery", true);        
+        requestParams.put("is", isD); 
+        BODY = requestParams.toString();
+        
+        JOB_Api_Call("KDS - Update Delivery Order Status > ready, out_for_delivery", "PATCH", 
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
             AAA = json.toString(4);  // Check actual update
@@ -406,6 +418,15 @@ class order extends AP3_API_GUI{
             AAA = json.toString(4);
             if(json.has("tasks")){
                 JSONArray tasks = json.getJSONArray("tasks");
+                for(int i = 0; i < tasks.length(); i++){
+                    Task = tasks.getJSONObject(i);
+                    JOB_Api_Call("Task " + (i+1) + " > Order", "GET",  
+                        BaseAPI + "/task/order/" + Task.getString("order_id"), Auth, "", 200, ParentTest, "no_jira");
+                    if(json != null){
+                        AAA = json.toString(4);
+
+                    }
+                }
             }
         }  
     }

@@ -163,7 +163,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Sites.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Sites.setCellSelectionEnabled(true);
-        DV_Sites.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Sites.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Sites.setName("DV_Sites"); // NOI18N
         DV_Sites.setRowHeight(18);
         DV_Sites.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -186,7 +186,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Brands.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Brands.setCellSelectionEnabled(true);
-        DV_Brands.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Brands.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Brands.setName("DV_Brands"); // NOI18N
         DV_Brands.setOpaque(false);
         DV_Brands.setRowHeight(18);
@@ -219,7 +219,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_MTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_MTS.setCellSelectionEnabled(true);
-        DV_MTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_MTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
         DV_MTS.setRowHeight(18);
         DV_MTS.getTableHeader().setReorderingAllowed(false);
@@ -239,7 +239,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Items.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Items.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Items.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Items.setName("DV_Items"); // NOI18N
         DV_Items.setOpaque(false);
         DV_Items.setRowHeight(18);
@@ -261,7 +261,7 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_Mods.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_Mods.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Mods.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Mods.setName("DV_Mods"); // NOI18N
         DV_Mods.setOpaque(false);
         DV_Mods.setRowHeight(18);
@@ -293,7 +293,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_Menus.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_Menus.setCellSelectionEnabled(true);
-        DV_Menus.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_Menus.setGridColor(java.awt.SystemColor.windowBorder);
         DV_Menus.setName("DV_Menus"); // NOI18N
         DV_Menus.setOpaque(false);
         DV_Menus.setRowHeight(18);
@@ -316,7 +316,7 @@ public class Station extends javax.swing.JInternalFrame {
         ));
         DV_DTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV_DTS.setCellSelectionEnabled(true);
-        DV_DTS.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV_DTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_DTS.setName("DV_DTS"); // NOI18N
         DV_DTS.setRowHeight(18);
         DV_DTS.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -579,6 +579,7 @@ public class Station extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Variables Declarations">
     protected boolean FLess = false;
     protected boolean SandG = false;
+
     protected double combined_tax_rate = 0.0;
     protected double gst_tax_rate = 0.0;
     protected double qst_tax_rate = 0.0;
@@ -2337,75 +2338,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }
 
-    private void Place_Update_Delivery_Order(String Payment_TKN){
-        FAIL = false;
-        txtLog.append("\r\n- " + "Place Delivery Order ...." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        Auth = "Bearer " + Mobile_User_TKN;
-
-        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
-                "\"location_brand\":\"" + BrandID + "\"," + 
-                "\"customer\":\"" + Mobile_User_ID + "\"," +  
-                "\"details\":" +                                   
-                    "{\"contact_number\":\"4165551234\"," +
-                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
-                    "\"duration\":\"" + "00:05:00" + "\"," +
-                    "\"instructions\":\"" + "Discard this Order" + "\"," +
-                    "\"name\":\"" + txtMSG.getText() + "\"," +
-                    "\"order_type\":\"delivery\"}," + 
-                "\"payment\":" + 
-                    "{\"token\":\"" + Payment_TKN + "\"}," +
-                "\"requested_date\":\"" + Requested_Date + "\"," +
-                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
-                "\"}";        
-        Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
-        if(json != null && json.has("id")){
-            Order_Delivery_ID = json.getString("id");
-            txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        } else{
-            FAIL = true;
-            return;
-        } 
-  
-        try {
-            Thread.sleep(2000);    // maybe to fast to update right after creation >>  Could not send push notifications       
-        } catch (Exception e) {
-        }
-           
-
-        txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
-        
-        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date = new Date();
-        date.setTime(date.getTime() + 20000); // now + 20 sec
-        String requested_date = dateFormat.format(date);
-
-        JSONObject is = new JSONObject(); 
-        is.put("in_progress", true);
-        is.put("ready", true);     
-        requestParams.put("is", is); 
-        requestParams.put("requested_date", requested_date); 
-        
-        BODY = requestParams.toString();
-        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
-//        if(json != null){
-//            try {
-//                Order_Delivery_ID = json.getString("id");
-//                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
-//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//            } catch (Exception ex){
-//                FAIL = true;
-//                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n");
-//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-//            }
-//        }   
-    }
     private void Place_Update_Pickup_Order(String Payment_TKN){
         FAIL = false;
         txtLog.append("\r\n- " + "Place Order ...." + "\r\n");
@@ -2501,6 +2433,87 @@ public class Station extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
         }   
+    }
+
+    private void Place_Update_Delivery_Order(String Payment_TKN){
+        FAIL = false;
+        txtLog.append("\r\n- " + "Place Delivery Order ...." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Auth = "Bearer " + Mobile_User_TKN;
+
+        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+                "\"location_brand\":\"" + BrandID + "\"," + 
+                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+                "\"details\":" +                                   
+                    "{\"contact_number\":\"4165551234\"," +
+                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
+                    "\"duration\":\"" + "00:05:00" + "\"," +
+                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+                    "\"name\":\"" + txtMSG.getText() + "\"," +
+                    "\"order_type\":\"delivery\"}," + 
+                "\"payment\":" + 
+                    "{\"token\":\"" + Payment_TKN + "\"}," +
+                "\"requested_date\":\"" + Requested_Date + "\"," +
+                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+                "\"}";        
+        Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
+        if(json != null && json.has("id")){
+            Order_Delivery_ID = json.getString("id");
+            txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } else{
+            FAIL = true;
+            return;
+        } 
+  
+        try {
+            Thread.sleep(2000);    // maybe to fast to update right after creation >>  Could not send push notifications       
+        } catch (Exception e) {
+        }
+           
+
+
+        Auth = "Bearer " + AP3_TKN;
+        requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
+        JSONObject is;
+        
+        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 60000); // now + 1 min
+        String requested_date = dateFormat.format(date);
+
+        txtLog.append("\r\n- " + "Update Delivery Order > in_progess" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        is = new JSONObject(); 
+        is.put("in_progess", true);     
+        requestParams.put("is", is); 
+        requestParams.put("requested_date", requested_date); 
+        
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
+
+        txtLog.append("\r\n- " + "Update Delivery Order > ready, out_for_delivery" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        is = new JSONObject(); 
+        is.put("ready", true);     
+        is.put("out_for_delivery", true);  
+        requestParams.put("is", is); 
+        
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
+//        if(json != null){
+//            try {
+//                Order_Delivery_ID = json.getString("id");
+//                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            } catch (Exception ex){
+//                FAIL = true;
+//                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            }
+//        }   
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  
