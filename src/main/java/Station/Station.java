@@ -218,7 +218,6 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_MTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_MTS.setCellSelectionEnabled(true);
         DV_MTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
         DV_MTS.setRowHeight(18);
@@ -477,8 +476,9 @@ public class Station extends javax.swing.JInternalFrame {
                         .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES8)
                     .addGroup(layout.createSequentialGroup()
@@ -504,7 +504,7 @@ public class Station extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES)
                     .addComponent(lblMenus)
@@ -540,15 +540,8 @@ public class Station extends javax.swing.JInternalFrame {
                                 .addComponent(lblSITES6)
                                 .addGap(2, 2, 2)
                                 .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblSITES8)
                                 .addGap(2, 2, 2)
@@ -566,11 +559,14 @@ public class Station extends javax.swing.JInternalFrame {
                                 .addGap(2, 2, 2)
                                 .addComponent(lblSITES7)
                                 .addGap(0, 0, 0)
-                                .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         pack();
@@ -1353,6 +1349,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- Load Menu (Pickup) Timeslots ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String MenuID = String.valueOf(DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2));
+
         String[] BrandsColumnsName = {"Time", "epoch"}; 
         DefaultTableModel MTS_Model = new DefaultTableModel();
         MTS_Model.setColumnIdentifiers(BrandsColumnsName);
@@ -2196,6 +2193,9 @@ public class Station extends javax.swing.JInternalFrame {
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             Date requested_date = new Date(TimeSlot *1000L);
             Requested_Date = sdf.format(requested_date);
+
+//2022-08-05T03:50:00.000Z wrong
+//2022-08-04T22:00:00.000Z OK  4 hour ahead of local time 6:00
             
             txtLog.append("== " + "Requested UTC Date: " + Requested_Date + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -2456,7 +2456,7 @@ public class Station extends javax.swing.JInternalFrame {
                 "\"requested_date\":\"" + Requested_Date + "\"," +
                 "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
                 "\"}";        
-        Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
+        Api_Call("POST",  BaseAPI + "/order?lang=en", Auth, BODY);
         if(json != null && json.has("id")){
             Order_Delivery_ID = json.getString("id");
             txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
