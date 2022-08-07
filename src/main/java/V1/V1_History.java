@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.zip.GZIPOutputStream;
 import javax.swing.JOptionPane;
@@ -310,10 +311,10 @@ public class V1_History extends javax.swing.JInternalFrame {
                     Values[j + 1][i] = DV1.getModel().getValueAt(j, i).toString();
                 }
             }
-
+            String Report_Date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMM_HH-mm"));
             String SheetName = " == " + cmbEnv.getSelectedItem().toString() + " > " + 
                     "GL Menus - Update Mods Jobs" + " > " + DV1.getRowCount();
-            Func.fExcel(rows + 1, cols, Values, "Mods Jobs", SheetName, 0, 0, null, " ", " ", true);
+            Func.fExcel(rows + 1, cols, Values, "ModsJobs_" + Report_Date, SheetName, 0, 0, null, " ", " ", true);
         } catch (Exception ex) {
             txtLog.append("= Excel > ERROR: " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

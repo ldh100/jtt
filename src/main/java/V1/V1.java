@@ -1030,6 +1030,7 @@ public class V1 extends javax.swing.JInternalFrame {
 
         int tot_items = 0;
         int tot_cats = 0;
+
         DefaultListModel<String> listmodel = new DefaultListModel<String>();
         listItems.setModel(listmodel);
 
@@ -1054,8 +1055,8 @@ public class V1 extends javax.swing.JInternalFrame {
                 getMenu = new JSONObject(json.toMap());
                 //txtLog.append(json.toString(4) + "\r\n"); 
                 groups = json.getJSONArray("groups");
+                tot_cats = groups.length();
                 for(int i = 0; i < groups.length(); i++){
-                    tot_cats += groups.length();
                     JSONObject group = groups.getJSONObject(i);
                     if(group.has("label") && group.getJSONObject("label").has("en")){
                         G_line = "== Category: " + group.getJSONObject("label").getString("en");
@@ -1308,7 +1309,8 @@ public class V1 extends javax.swing.JInternalFrame {
                     "\r\n" + "   Sector: " + SectorName + 
                     "\r\n" + "   Company: " + CompanyName + 
                     "\r\n" + "   Menu: " + MenuName + 
-                    CategoryName + "\r\n\r\n"
+                    CategoryName + "\r\n\r\n" +
+                    "  >>>>>> Check V1_History (Env " + cmbEnv.getSelectedItem().toString() + ") for ^^ 'already done' <<<<<<" + "\r\n\r\n"
 
                 + "   === Original Menu (GET) size: " 
                 + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" +"\r\n"
