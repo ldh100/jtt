@@ -436,13 +436,13 @@ class order extends AP3_API_GUI{
         JOB_Api_Call("Task > 'SiteID' ?created today", "GET",  
             BaseAPI + "/task/location/group/" + SiteID + "?created=" + START, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
-            AAA = json.toString(4);
             if(json.has("tasks")){
                 JSONArray tasks = json.getJSONArray("tasks");
                 for(int i = 0; i < tasks.length(); i++){
-                    Task = tasks.getJSONObject(i);
+                    Task = tasks.getJSONObject(i); 
                     if(Task.getString("order_id").equals(Order_Delivery_ID)){
                         TASK_GET = new JSONObject(Task.toMap());
+                        AAA = TASK_GET.toString(4);
                     } 
                     JOB_Api_Call("Task " + (i+1) + " > Order", "GET",  
                         BaseAPI + "/task/order/" + Task.getString("order_id"), Auth, "", 200, ParentTest, "no_jira");
@@ -452,7 +452,7 @@ class order extends AP3_API_GUI{
                 }
             }
         }
-        // TASK PATCH > inprogress
+        // TASK PATCH > in progress
 
         //  TAsk PATCH > complete
     }
