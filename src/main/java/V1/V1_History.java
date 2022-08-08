@@ -365,7 +365,7 @@ public class V1_History extends javax.swing.JInternalFrame {
             DV1.getColumnModel().getColumn(3).setPreferredWidth(600);
             DV1.getColumnModel().getColumn(4).setPreferredWidth(35);
 
-            txtLog.append("= " + env + " > " + DV1.getRowCount() +  " records @" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMM_HH-mm")) + "\r\n");
+            txtLog.append("= " + env + " > " + DV1.getRowCount() +  " records @" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM hh:mm a")) + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             conn.close();
         } catch (SQLException ex) {
