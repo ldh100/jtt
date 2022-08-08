@@ -261,17 +261,18 @@ public class V1_History extends javax.swing.JInternalFrame {
                 if (reply == 1){
                     txtLog.append("== Backup GET Json >> \r\n" + GET_Json.toString(4) + "\r\n");
                     txtLog.setCaretPosition(0);
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+                    
                     return;
                 }
                 // </editor-fold> 
-                
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));                
                 Get_AP3_TKN_and_UserID();
                 Restore();
                 DB_LOG();
 
                 txtLog.append("\r\n====== Restore task completed. Please check Reports ======\r\n");
                 txtLog.setCaretPosition(0); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
            }
         }
     }//GEN-LAST:event_btnAPIMouseClicked
