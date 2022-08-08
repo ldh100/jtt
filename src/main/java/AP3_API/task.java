@@ -76,48 +76,48 @@ class task extends AP3_API_GUI{
 //        }
         if(!env.equals("PR")){
 
-// Create new Task POST
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        action_time = sdf.format(new Date(System.currentTimeMillis()));        
-
-        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
-        requestParams.put("order_id", Order_Delivery_ID);
-        requestParams.put("shoppingcart_id", ShoppingCart_Delivery_ID);
-        requestParams.put("customer_id", Mobile_User_ID);
-        requestParams.put("location_id", BrandID);
-        requestParams.put("location_type", "brand");
-
-        JSONObject order = new JSONObject();
-        order.put("order_id", Order_Delivery_ID);
-        order.put("customer_id", Mobile_User_ID);
-        //order.put("customer", new JSONObject());
-        //order.put("order_details", new JSONObject());
-        order.put("delivery_instructions", "New Task Test Instructions");
-        requestParams.put("order", order);
-
-        JSONObject dropoff_details = new JSONObject();
-        dropoff_details.put("location_id", BrandID); 
-//        dropoff_details.put("latitude", 0); 
-//        dropoff_details.put("longitude", 0); 
-//        dropoff_details.put("address", ""); 
-        dropoff_details.put("action_time", action_time); 
-        requestParams.put("dropoff_details", dropoff_details); 
-
-        requestParams.put("status", "accepted");
-        //requestParams.put("meta", new JSONObject());
-        requestParams.put("type", "bolter");
-
-        BODY = requestParams.toString();  
-
-        JOB_Api_Call("Create New Task", "POST",  
-            BaseAPI + "/task", Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            AAA = json.toString(4);
-        }
-// Get task By ID GET
-// Up[date Task PATCH
-// Delete Task DELETE
+//// Create new Task POST
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+//        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+//        action_time = sdf.format(new Date(System.currentTimeMillis()));        
+//
+//        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+//        requestParams.put("order_id", Order_Delivery_ID);
+//        requestParams.put("shoppingcart_id", ShoppingCart_Delivery_ID);
+//        requestParams.put("customer_id", Mobile_User_ID);
+//        requestParams.put("location_id", BrandID);
+//        requestParams.put("location_type", "brand");
+//
+//        JSONObject order = new JSONObject();
+//        order.put("order_id", Order_Delivery_ID);
+//        order.put("customer_id", Mobile_User_ID);
+//        //order.put("customer", new JSONObject());
+//        //order.put("order_details", new JSONObject());
+//        order.put("delivery_instructions", "New Task Test Instructions");
+//        requestParams.put("order", order);
+//
+//        JSONObject dropoff_details = new JSONObject();
+//        dropoff_details.put("location_id", BrandID); 
+////        dropoff_details.put("latitude", 0); 
+////        dropoff_details.put("longitude", 0); 
+////        dropoff_details.put("address", ""); 
+//        dropoff_details.put("action_time", action_time); 
+//        requestParams.put("dropoff_details", dropoff_details); 
+//
+//        requestParams.put("status", "accepted");
+//        //requestParams.put("meta", new JSONObject());
+//        requestParams.put("type", "bolter");
+//
+//        BODY = requestParams.toString();  
+//
+//        JOB_Api_Call("Create New Task", "POST",  
+//            BaseAPI + "/task", Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            AAA = json.toString(4);
+//        }
+//// Get task By ID GET
+//// Up[date Task PATCH
+//// Delete Task DELETE
 
             JOB_Api_Call("task/order > 'OrderID' (no _query)", "GET",  
                 BaseAPI + "/task/order/" + Order_Delivery_ID, Auth, "", 200, ParentTest, "no_jira");

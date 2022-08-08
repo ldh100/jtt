@@ -1,6 +1,10 @@
 package AP3_API;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
@@ -364,19 +368,28 @@ class order extends AP3_API_GUI{
 
         Auth = "Bearer " + AP3_TKN;
         JSONObject isD;
-        requestParams = new JSONObject();   //  KDS User Update Delivery Order  =================
+
+        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 10000); // now + 10 sec
+        String requested_date = dateFormat.format(date);
+
+        requestParams = new JSONObject();   //  KDS User Update Delivery Order in_progress =================
         isD = new JSONObject();      
         isD.put("in_progress", true);   
         requestParams.put("is", isD); 
+        requestParams.put("requested_date", requested_date);        
         BODY = requestParams.toString();
         
-        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress", "PATCH", 
+        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress, requested date NOW + 10 sec", "PATCH", 
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
             AAA = json.toString(4);  // Check actual update
         } 
 
-        requestParams = new JSONObject();   //  KDS User Update Delivery Order  =================
+        requestParams = new JSONObject();   //  KDS User Update Delivery Order ready, out_for_delivery =================
         isD = new JSONObject();      
         isD.put("ready", true);
         isD.put("out_for_delivery", true);        
@@ -402,6 +415,11 @@ class order extends AP3_API_GUI{
                     Bolter_Site_ID = "Not Found";
                 }
             } 
+        }
+        
+        try {
+            Thread.sleep(10000); // wait for task creationg      
+        } catch (Exception e) {
         }
 
         Task = new JSONObject();

@@ -2193,9 +2193,6 @@ public class Station extends javax.swing.JInternalFrame {
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
             Date requested_date = new Date(TimeSlot *1000L);
             Requested_Date = sdf.format(requested_date);
-
-//2022-08-05T03:50:00.000Z wrong
-//2022-08-04T22:00:00.000Z OK  4 hour ahead of local time 6:00
             
             txtLog.append("== " + "Requested UTC Date: " + Requested_Date + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
