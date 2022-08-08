@@ -9,7 +9,7 @@
     </Property>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="iconifiable" type="boolean" value="true"/>
-    <Property name="title" type="java.lang.String" value="Global Menus = Items &gt; Modifiers up date: History / Restore from Backup"/>
+    <Property name="title" type="java.lang.String" value="Global Menus &gt; Items &gt; Modifiers update: History / Restore from Backup"/>
     <Property name="doubleBuffered" type="boolean" value="true"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[858, 527]"/>
