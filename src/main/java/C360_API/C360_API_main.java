@@ -561,6 +561,7 @@ public class C360_API_main {
                 json = new JSONObject(response.asString());
                 if (json.has("message")) {
                     ErrorMsg = "Error Message: " + json.getJSONObject("message").toString() + " ";
+                    //ErrorMsg = "Error Message: " + json.getString("message") + " ";
                 } else if(json.has("error")){
                     ErrorMsg = "Error: " + json.getString("error") + ". ";
                 }

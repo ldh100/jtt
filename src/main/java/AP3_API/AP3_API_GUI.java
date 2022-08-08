@@ -3518,7 +3518,8 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                     ErrorMsg = "Error: " + json.getString("error") + "  ";
                 }
                 if (json.has("message")) {
-                    ErrorMsg = "Error Message: " + json.getJSONObject("message").toString() + " ";
+                    //ErrorMsg = "Error Message: " + json.getJSONObject("message").toString() + " ";
+                    ErrorMsg = "Error Message: " + json.getString("message") + " ";
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
