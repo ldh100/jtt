@@ -9,6 +9,7 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -80,6 +81,7 @@ class order extends AP3_API_GUI{
     }
     JSONObject requestParams = null;
     JSONObject Task = null;
+    String TaskID = "";
     String AAA = "";
     String Requested_Date = "";
     Date requested_date;
@@ -373,7 +375,7 @@ class order extends AP3_API_GUI{
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = new Date();
-        date.setTime(date.getTime() + 10000); // now + 10 sec
+        date.setTime(date.getTime() + 5000); // now + 5 sec
         String requested_date = dateFormat.format(date);
 
         requestParams = new JSONObject();   //  KDS User Update Delivery Order in_progress =================
@@ -418,7 +420,7 @@ class order extends AP3_API_GUI{
         }
         
         try {
-            Thread.sleep(10000); // wait for task creationg      
+            Thread.sleep(10000); // wait for task creation      
         } catch (Exception e) {
         }
 
@@ -440,8 +442,9 @@ class order extends AP3_API_GUI{
                 JSONArray tasks = json.getJSONArray("tasks");
                 for(int i = 0; i < tasks.length(); i++){
                     Task = tasks.getJSONObject(i); 
-                    if(Task.getString("order_id").equals(Order_Delivery_ID)){
+                    if(Task.getString("order_id").equals(Order_Delivery_ID) && Task.getString("status").equals("ready")){
                         TASK_GET = new JSONObject(Task.toMap());
+                        TaskID = Task.getString("id");
                         AAA = TASK_GET.toString(4);
                     } 
                     JOB_Api_Call("Task " + (i+1) + " > Order", "GET",  
@@ -452,8 +455,50 @@ class order extends AP3_API_GUI{
                 }
             }
         }
+
+        TASK_PATCH = new JSONObject(TASK_GET.toMap());
         // TASK PATCH > in progress
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        TASK_PATCH.put("assignee", Bolter_User_ID);
+        TASK_PATCH.put("started", sdf.format(new DateTime(new Date()).toDate()));
+        TASK_PATCH = new JSONObject(TASK_GET.toMap());
+        if(TASK_PATCH.has("modified")){
+            TASK_PATCH.remove("modified");
+            TASK_PATCH.put("modified", sdf.format(new DateTime(new Date()).toDate()));
+        }
+        TASK_PATCH.remove("status");
+        TASK_PATCH.put("status", "out_for_delivery");
+        BODY = TASK_PATCH.toString();
+        JOB_Api_Call("Task Started > out_for_delivery", "PATCH",  
+            BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }
+        try {
+            Thread.sleep(1000); // wait for task PATCH update      
+        } catch (Exception e) {
+        }
 
         //  TAsk PATCH > complete
+        TASK_PATCH.put("completed", sdf.format(new DateTime(new Date()).toDate()));
+        TASK_PATCH = new JSONObject(TASK_GET.toMap());
+        if(TASK_PATCH.has("modified")){
+            TASK_PATCH.remove("modified");
+            TASK_PATCH.put("modified", sdf.format(new DateTime(new Date()).toDate()));
+        }
+        TASK_PATCH.remove("status");
+        TASK_PATCH.put("status", "delivered");
+        BODY = TASK_PATCH.toString();
+        JOB_Api_Call("Task Completed > delivered", "PATCH",  
+            BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }
+        try {
+            Thread.sleep(1000); // wait for task PATCH update      
+        } catch (Exception e) {
+        }
     }
 }

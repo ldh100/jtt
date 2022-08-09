@@ -50,10 +50,11 @@ public class V1_History extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
         setIconifiable(true);
+        setResizable(true);
         setTitle("Global Menus > Items > Modifiers update: History / Restore from Backup");
         setDoubleBuffered(true);
         setMinimumSize(new java.awt.Dimension(858, 527));
-        setName("Env"); // NOI18N
+        setName("V1_History"); // NOI18N
         addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -73,7 +74,7 @@ public class V1_History extends javax.swing.JInternalFrame {
 
             }
         ));
-        DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
+        DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV1.setGridColor(java.awt.SystemColor.windowBorder);
         DV1.setName("DV1"); // NOI18N
         DV1.setRowHeight(18);
@@ -150,13 +151,13 @@ public class V1_History extends javax.swing.JInternalFrame {
                                 .addComponent(cmbEnv, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAPI, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 917, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 973, Short.MAX_VALUE))
                 .addGap(2, 2, 2))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,7 +334,7 @@ public class V1_History extends javax.swing.JInternalFrame {
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
-        SQL = "SELECT [qID], [Date], [Time], [summary], [env], [user_id] FROM[dbo].[aw_result] " +
+        SQL = "SELECT [qID], [Date], [Time], [summary], [Status], [user_id], [env] FROM[dbo].[aw_result] " +
                     "WHERE [app] = 'V1 Menus - Mods update' AND [env] = '" + env + "' ORDER BY [qID] DESC";         
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
             ResultSet rs = conn.createStatement().executeQuery(SQL);
@@ -359,11 +360,13 @@ public class V1_History extends javax.swing.JInternalFrame {
             }
             DV1.setModel(dm);
              
-            DV1.getColumnModel().getColumn(0).setPreferredWidth(60);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(40);
             DV1.getColumnModel().getColumn(1).setPreferredWidth(80);
             DV1.getColumnModel().getColumn(2).setPreferredWidth(60);
             DV1.getColumnModel().getColumn(3).setPreferredWidth(600);
-            DV1.getColumnModel().getColumn(4).setPreferredWidth(35);
+            DV1.getColumnModel().getColumn(4).setPreferredWidth(165);
+            DV1.getColumnModel().getColumn(5).setPreferredWidth(120);
+            DV1.getColumnModel().getColumn(6).setPreferredWidth(40);
 
             txtLog.append("= " + env + " > " + DV1.getRowCount() +  " records @" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM hh:mm a")) + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 

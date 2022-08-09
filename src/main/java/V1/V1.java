@@ -1228,12 +1228,12 @@ public class V1 extends javax.swing.JInternalFrame {
                     String GR_Name = group.getJSONObject("label").getString("en").trim();
                     if(GR_Name.equals(txtMod1.getText().trim()) || GR_Name.equals(txtMod2.getText().trim())) {
                         Update_Group = false;
-                        newGroups.put(group);
+                        //newGroups.put(group);
                     }
 
                     if(chkByCategory.isSelected()){
                         String CategoryName = ""; 
-                        CategoryName = listItems.getSelectedValue().toString();
+                        CategoryName = listItems.getSelectedValue();
                         CategoryName = CategoryName.substring(CategoryName.indexOf("== Category: ") + 13, CategoryName.lastIndexOf("ID:")).trim();
                         if(!GR_Name.equals(CategoryName)) {
                             Update_Group = false;
