@@ -1140,9 +1140,6 @@ public class V1 extends javax.swing.JInternalFrame {
             
             putMenu = new JSONObject(getMenu.toMap());
 
-            System.out.println("= getMenu:" + getMenu.toString().getBytes().length); // ===== DEBUG
-            System.out.println("= putMenu Before:" + putMenu.toString().getBytes().length); // ===== DEBUG
-
             // <editor-fold defaultstate="collapsed" desc="=== 1st Mods Oblect ">
             if(!txtMod1.getText().trim().isEmpty()){
                 lines = txtMods1.getText().split("\n"); 
@@ -1283,7 +1280,6 @@ public class V1 extends javax.swing.JInternalFrame {
                                     item.put("options", newOptions);
                                     options = item.getJSONArray("options");
                                 }
-                                System.out.println("= options size:" + options.toString().getBytes().length); // ===== DEBUG
 
                                 if(!ModGr1.isEmpty()){
                                     options.put(ModGr1);
@@ -1298,7 +1294,6 @@ public class V1 extends javax.swing.JInternalFrame {
                 }
                 putMenu.remove("groups");
                 putMenu.put("groups", newGroups);
-                System.out.println("= putMenu After:" + putMenu.toString().getBytes().length); // ===== DEBUG
                 String X = "";
             }
             // </editor-fold> 
