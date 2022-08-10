@@ -385,7 +385,7 @@ class order extends AP3_API_GUI{
         requestParams.put("requested_date", requested_date);        
         BODY = requestParams.toString();
         
-        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress, requested date NOW + 10 sec", "PATCH", 
+        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress, requested date NOW + 10 sec", "PATCH", // ===================================
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
             AAA = json.toString(4);  // Check actual update
@@ -471,7 +471,7 @@ class order extends AP3_API_GUI{
         TASK_PATCH.remove("status");
         TASK_PATCH.put("status", "out_for_delivery");
         BODY = TASK_PATCH.toString();
-        JOB_Api_Call("Task Started > out_for_delivery", "PATCH",  
+        JOB_Api_Call("Task Started > out_for_delivery", "PATCH",  // ===================================
             BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
@@ -491,7 +491,7 @@ class order extends AP3_API_GUI{
         TASK_PATCH.remove("status");
         TASK_PATCH.put("status", "delivered");
         BODY = TASK_PATCH.toString();
-        JOB_Api_Call("Task Completed > delivered", "PATCH",  
+        JOB_Api_Call("Task Completed > delivered", "PATCH",  // ===================================
             BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);

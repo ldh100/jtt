@@ -216,7 +216,7 @@ public class V1_History extends javax.swing.JInternalFrame {
 
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
         if(DV1.getSelectedRows().length > 0){
-            env = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 4)).trim();
+            env = String.valueOf(DV1.getValueAt(DV1.getSelectedRow(), 6)).trim();
             if(env.equals("ST")){
                 BaseAPI = "https://api.compassdigital.org/staging";
                 _ENV = "Staging";

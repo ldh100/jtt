@@ -487,15 +487,17 @@ public class V1 extends javax.swing.JInternalFrame {
             String GR = listItems.getSelectedValue().toString();
             if(!GR.startsWith("==")) {
                 listItems.clearSelection();
+                btnRun.setEnabled(false);
                 return;
             }
-            String GR_Name = GR.substring(GR.indexOf(": ") + 2, GR.lastIndexOf("ID:")).trim();
-            if(GR_Name.equals(txtMod1.getText().trim()) || GR_Name.equals(txtMod2.getText().trim())) {
-                listItems.clearSelection();
-                return;
-            }
+//            String GR_Name = GR.substring(GR.indexOf(": ") + 2, GR.lastIndexOf("ID:")).trim();
+//            if(GR_Name.equals(txtMod1.getText().trim()) || GR_Name.equals(txtMod2.getText().trim())) {
+//                listItems.clearSelection();
+//                return;
+//            }
         }else{
             listItems.clearSelection();
+            btnRun.setEnabled(false);
         }
         CHECK_Allow();
     }//GEN-LAST:event_listItemsMouseClicked
@@ -1101,13 +1103,25 @@ public class V1 extends javax.swing.JInternalFrame {
     }
 
     private void Publish_Menu(){
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         txtLog.setText("");
+
+        String GR1 = listItems.getSelectedValue();
+        String GR1_Name = GR1.substring(GR1.indexOf(": ") + 2, GR1.lastIndexOf("ID:")).trim();
+        if(GR1_Name.equals(txtMod1.getText().trim()) || GR1_Name.equals(txtMod2.getText().trim())) {
+            listItems.clearSelection();
+            btnRun.setEnabled(false);
+            txtLog.append("\r\n\r\n== Category '" + GR1_Name + "' Items should not be updated" + 
+            "\r\n== with '" + txtMod1.getText().trim() + "' and '" + txtMod2.getText().trim() + "' Modifiers" +
+            "\r\n\r\n" + "     Please select another Categoty");
+            return;
+        }
+
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
         String putMenuID = "";
         String gzipped = "";
         String[] lines;
 
-        // === Create Berage and Snacks object arrays
+        // === Create Beverage and Snacks object arrays
         Mods1 = new JSONArray();
         Mods2 = new JSONArray();
         ModGr1 = new JSONObject();
