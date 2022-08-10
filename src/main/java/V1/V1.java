@@ -395,17 +395,12 @@ public class V1 extends javax.swing.JInternalFrame {
 
     private JSONArray companies;
     private JSONArray menus;
-    private JSONArray groups;
-    private JSONArray items;
+//    private JSONArray groups;
+//    private JSONArray items;
 
     private JSONObject getMenu;
     private JSONObject putMenu;
 
-    private JSONObject ModGr1;
-    private JSONObject ModGr2;
-    private JSONArray Mods1;
-    private JSONArray Mods2;
-    private JSONArray newOptions;
 
     private DecimalFormat DEC_FORMAT = new DecimalFormat("#.##");
     private double PutMenu_Size = 0;
@@ -435,10 +430,10 @@ public class V1 extends javax.swing.JInternalFrame {
         txtLog.setText("");
         if(getMenu!= null && !getMenu.isEmpty() && putMenu!= null && !putMenu.isEmpty()){
             txtLog.setText("");
-            txtLog.append("=== Please see generated log files: PUT_Json.json, and GET_Json.json ===");
+            txtLog.append("    Please see generated log files: \r\n\r\n    GET_Json.json, PUT_Json.json");
             txtLog.setCaretPosition(0);
-            SHOW_FILE(getMenu.toString(4), "PUT_Json", "json");
-            SHOW_FILE(putMenu.toString(4), "GET_Json", "json");
+            SHOW_FILE(getMenu.toString(4), "GET_Json", "json");
+            SHOW_FILE(putMenu.toString(4), "PUT_Json", "json");
         }else{
             SHOW_FILE(txtLog.getText(), "V1_Log", "json");
         }
@@ -471,15 +466,21 @@ public class V1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formAncestorAdded
 
     private void listSectorValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listSectorValueChanged
-        Get_Comp();
+        if (!evt.getValueIsAdjusting()) {
+            Get_Comp();
+        }
     }//GEN-LAST:event_listSectorValueChanged
 
     private void listCompaniesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCompaniesValueChanged
-        Get_Company_Menus();
+        if (!evt.getValueIsAdjusting()) {
+            Get_Company_Menus();
+        }        
     }//GEN-LAST:event_listCompaniesValueChanged
 
     private void listMenusValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMenusValueChanged
-        Get_Full_Menu();
+        if (!evt.getValueIsAdjusting()) {
+            Get_Full_Menu();
+        }
     }//GEN-LAST:event_listMenusValueChanged
 
     private void listItemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listItemsMouseClicked
@@ -797,7 +798,7 @@ public class V1 extends javax.swing.JInternalFrame {
             java.awt.Desktop.getDesktop().open(aLog);
         }
         catch (IOException ex) {
-            System.out.println("\r\n= Show " + Name + "." + EXT + " > ERROR: " + ex.getMessage() + "\r\n");
+            System.out.println("= Show " + Name + "." + EXT + " > ERROR: " + ex.getMessage() + "\r\n");
         }
     }
     private void CHECK_Allow(){
@@ -1056,7 +1057,7 @@ public class V1 extends javax.swing.JInternalFrame {
             if(json != null && json.has("groups")){
                 getMenu = new JSONObject(json.toMap());
                 //txtLog.append(json.toString(4) + "\r\n"); 
-                groups = json.getJSONArray("groups");
+                JSONArray groups = json.getJSONArray("groups");
                 tot_cats = groups.length();
                 for(int i = 0; i < groups.length(); i++){
                     JSONObject group = groups.getJSONObject(i);
@@ -1065,7 +1066,7 @@ public class V1 extends javax.swing.JInternalFrame {
                         G_line += "                            ID: " + group.getString("id");
                         listmodel.addElement(G_line);
                         if(group.has("items")){
-                            items = group.getJSONArray("items");
+                            JSONArray items = group.getJSONArray("items");
                             tot_items += items.length();
                             for(int j = 0; j < items.length(); j++){
                                 JSONObject item = items.getJSONObject(j);
@@ -1104,7 +1105,6 @@ public class V1 extends javax.swing.JInternalFrame {
 
     private void Publish_Menu(){
         txtLog.setText("");
-
         String GR1 = listItems.getSelectedValue();
         String GR1_Name = GR1.substring(GR1.indexOf(": ") + 2, GR1.lastIndexOf("ID:")).trim();
         if(GR1_Name.equals(txtMod1.getText().trim()) || GR1_Name.equals(txtMod2.getText().trim())) {
@@ -1122,14 +1122,12 @@ public class V1 extends javax.swing.JInternalFrame {
         String[] lines;
 
         // === Create Beverage and Snacks object arrays
-        Mods1 = new JSONArray();
-        Mods2 = new JSONArray();
-        ModGr1 = new JSONObject();
-        ModGr2 = new JSONObject();
+        JSONArray Mods1 = new JSONArray();
+        JSONArray Mods2 = new JSONArray();
+        JSONObject ModGr1 = new JSONObject();
+        JSONObject ModGr2 = new JSONObject();
         JSONArray newGroups = new JSONArray();
 
-        JSONObject mod;
-        JSONObject tempObj;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -1139,14 +1137,18 @@ public class V1 extends javax.swing.JInternalFrame {
         try {
             GetMenu_Size = getMenu.toString().getBytes().length; 
             txtLog.append("\r\n== Select Menu GET Json size: >> " + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" + "\r\n");
-
+            
             putMenu = new JSONObject(getMenu.toMap());
+
+            System.out.println("= getMenu:" + getMenu.toString().getBytes().length); // ===== DEBUG
+            System.out.println("= putMenu Before:" + putMenu.toString().getBytes().length); // ===== DEBUG
 
             // <editor-fold defaultstate="collapsed" desc="=== 1st Mods Oblect ">
             if(!txtMod1.getText().trim().isEmpty()){
                 lines = txtMods1.getText().split("\n"); 
+                JSONObject tempObj;
                 for (String l : lines){
-                    mod = new JSONObject();
+                    JSONObject mod = new JSONObject();
                     tempObj = new JSONObject();
                     tempObj.put("disabled", false);
                     mod.put("is", tempObj);
@@ -1182,8 +1184,9 @@ public class V1 extends javax.swing.JInternalFrame {
             // <editor-fold defaultstate="collapsed" desc="=== 2nd Mods Oblect ">
             if(!txtMod2.getText().trim().isEmpty()){
                 lines = txtMods2.getText().split("\n"); 
+                JSONObject tempObj;
                 for (String l : lines){
-                    mod = new JSONObject();
+                    JSONObject mod = new JSONObject();
                     tempObj = new JSONObject();
                     tempObj.put("disabled", false);
                     mod.put("is", tempObj);
@@ -1233,8 +1236,7 @@ public class V1 extends javax.swing.JInternalFrame {
 
             // for each existing groups > item check/remove ModX, add options new ModX/Items
             if(putMenu.has("groups")){
-                JSONArray options = new JSONArray(); 
-                groups = json.getJSONArray("groups");
+                JSONArray groups = putMenu.getJSONArray("groups");
                 for(int i = 0; i < groups.length(); i++){
                     JSONObject group = groups.getJSONObject(i);
 
@@ -1256,16 +1258,17 @@ public class V1 extends javax.swing.JInternalFrame {
                     }
 
                     if(group.has("items") && Update_Group){ 
-                        items = group.getJSONArray("items");
+                        JSONArray options = new JSONArray();
+                        JSONArray items = group.getJSONArray("items");
                         for(int j = 0; j < items.length(); j++){
                             JSONObject item = items.getJSONObject(j);
 
                             if(!item.has("options")){            // =====  got some Items without "options" object at all
                                 item.put("options", new JSONArray());
-                                options = item.getJSONArray("options");
+                                //options = item.getJSONArray("options");
                             }
                             if(item.has("options")){
-                                newOptions = new JSONArray();
+                                JSONArray newOptions = new JSONArray();
                                 options = item.getJSONArray("options");
 
                                 if(chkRemove.isSelected()){ 
@@ -1280,6 +1283,7 @@ public class V1 extends javax.swing.JInternalFrame {
                                     item.put("options", newOptions);
                                     options = item.getJSONArray("options");
                                 }
+                                System.out.println("= options size:" + options.toString().getBytes().length); // ===== DEBUG
 
                                 if(!ModGr1.isEmpty()){
                                     options.put(ModGr1);
@@ -1294,6 +1298,7 @@ public class V1 extends javax.swing.JInternalFrame {
                 }
                 putMenu.remove("groups");
                 putMenu.put("groups", newGroups);
+                System.out.println("= putMenu After:" + putMenu.toString().getBytes().length); // ===== DEBUG
                 String X = "";
             }
             // </editor-fold> 

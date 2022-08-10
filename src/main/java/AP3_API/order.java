@@ -435,7 +435,7 @@ class order extends AP3_API_GUI{
         START = cal.getTimeInMillis(); 
 
         Auth = "Bearer " + Bolter_User_TKN;           
-        JOB_Api_Call("Task > 'SiteID' ?created today", "GET",  
+        JOB_Api_Call("Bolter Task > 'SiteID' ?created today", "GET",  
             BaseAPI + "/task/location/group/" + SiteID + "?created=" + START, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             if(json.has("tasks")){
@@ -471,7 +471,7 @@ class order extends AP3_API_GUI{
         TASK_PATCH.remove("status");
         TASK_PATCH.put("status", "out_for_delivery");
         BODY = TASK_PATCH.toString();
-        JOB_Api_Call("Task Started > out_for_delivery", "PATCH",  // ===================================
+        JOB_Api_Call("Bolter Task Started > out_for_delivery", "PATCH",  // ===================================
             BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);
@@ -491,7 +491,7 @@ class order extends AP3_API_GUI{
         TASK_PATCH.remove("status");
         TASK_PATCH.put("status", "delivered");
         BODY = TASK_PATCH.toString();
-        JOB_Api_Call("Task Completed > delivered", "PATCH",  // ===================================
+        JOB_Api_Call("Bolter Task Completed > delivered", "PATCH",  // ===================================
             BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
         if(json != null){
             AAA = json.toString(4);

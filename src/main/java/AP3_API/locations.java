@@ -442,7 +442,7 @@ class locations extends AP3_API_GUI {
                     + "]"
                 + "}";
         JOB_Api_Call("Location - PATCH add multigroup(Thrive) to newly created group/site with multigroup(Boost)", "PATCH", 
-                BaseAPI + "/location/multigroup/Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6", Auth, BODY, 200, ParentTest, "no_jira");
+                BaseAPI + "/location/multigroup/Roj5NWl4mXtl2dZ8yJLKF9Rq5Eow59FJaNGB6", Auth, BODY, 400, ParentTest, "no_jira");
 
         // Test Scenario 3: Positive flow to Update > Patch Drop-off location under newly created group/site.
         //if(!env.equals("PR")){
