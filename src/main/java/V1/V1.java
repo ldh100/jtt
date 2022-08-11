@@ -402,7 +402,7 @@ public class V1 extends javax.swing.JInternalFrame {
     private JSONObject putMenu;
 
 
-    private DecimalFormat DEC_FORMAT = new DecimalFormat("#.##");
+    private DecimalFormat DEC_FORMAT = new DecimalFormat("#.###");
     private double PutMenu_Size = 0;
     private double GetMenu_Size = 0;
 
@@ -430,7 +430,7 @@ public class V1 extends javax.swing.JInternalFrame {
         txtLog.setText("");
         if(getMenu!= null && !getMenu.isEmpty() && putMenu!= null && !putMenu.isEmpty()){
             txtLog.setText("");
-            txtLog.append("    Please see generated log files: \r\n\r\n    GET_Json.json, PUT_Json.json");
+            txtLog.append("\r\n\r\n    Please see generated log files: \r\n\r\n    GET_Json.json, PUT_Json.json");
             txtLog.setCaretPosition(0);
             SHOW_FILE(getMenu.toString(4), "GET_Json", "json");
             SHOW_FILE(putMenu.toString(4), "PUT_Json", "json");
@@ -702,7 +702,7 @@ public class V1 extends javax.swing.JInternalFrame {
 
         String CategoryName = "";
         if(chkByCategory.isSelected()){
-            CategoryName = listItems.getSelectedValue().toString();
+            CategoryName = listItems.getSelectedValue();
             CategoryName = ", " + CategoryName.substring(CategoryName.indexOf("== ") + 3, CategoryName.lastIndexOf("ID:")).trim();
         }
         String Done = "Done: " + 
@@ -1037,7 +1037,6 @@ public class V1 extends javax.swing.JInternalFrame {
         DefaultListModel<String> listmodel = new DefaultListModel<String>();
         listItems.setModel(listmodel);
 
-        //SectorID = "41pwNJPNRWC25LjpaORKI9Y11rAgE0uqYzXvPaGzfKZ4qDY0adc4GzWmvEqaCXQ0qDQmeQCrkr5G";
         if(listMenus.getSelectedIndex() < 0){
             txtLog.setText("");
             txtLog.append("\r\n==== Please Select Menu" + "\r\n\r\n");
@@ -1068,14 +1067,14 @@ public class V1 extends javax.swing.JInternalFrame {
                         if(group.has("items")){
                             JSONArray items = group.getJSONArray("items");
                             tot_items += items.length();
-                            for(int j = 0; j < items.length(); j++){
-                                JSONObject item = items.getJSONObject(j);
-                                if(item.has("label") && item.getJSONObject("label").has("en")){
-                                    I_line = item.getJSONObject("label").getString("en");
-                                    I_line += "                            ID: " + item.getString("id");
-                                    listmodel.addElement(I_line);
-                                }
-                            }
+//                            for(int j = 0; j < items.length(); j++){
+//                                JSONObject item = items.getJSONObject(j);
+//                                if(item.has("label") && item.getJSONObject("label").has("en")){
+//                                    I_line = item.getJSONObject("label").getString("en");
+//                                    I_line += "                            ID: " + item.getString("id");
+//                                    listmodel.addElement(I_line);
+//                                }
+//                            }
                             listItems.setModel(listmodel);
                         }
                     }
@@ -1105,15 +1104,17 @@ public class V1 extends javax.swing.JInternalFrame {
 
     private void Publish_Menu(){
         txtLog.setText("");
-        String GR1 = listItems.getSelectedValue();
-        String GR1_Name = GR1.substring(GR1.indexOf(": ") + 2, GR1.lastIndexOf("ID:")).trim();
-        if(GR1_Name.equals(txtMod1.getText().trim()) || GR1_Name.equals(txtMod2.getText().trim())) {
-            listItems.clearSelection();
-            btnRun.setEnabled(false);
-            txtLog.append("\r\n\r\n== Category '" + GR1_Name + "' Items should not be updated" + 
-            "\r\n== with '" + txtMod1.getText().trim() + "' and '" + txtMod2.getText().trim() + "' Modifiers" +
-            "\r\n\r\n" + "     Please select another Categoty");
-            return;
+        if(chkByCategory.isSelected()){
+            String GR1 = listItems.getSelectedValue();
+            String GR1_Name = GR1.substring(GR1.indexOf(": ") + 2, GR1.lastIndexOf("ID:")).trim();
+            if(GR1_Name.equals(txtMod1.getText().trim()) || GR1_Name.equals(txtMod2.getText().trim())) {
+                listItems.clearSelection();
+                btnRun.setEnabled(false);
+                txtLog.append("\r\n\r\n== Category '" + GR1_Name + "' Items should not be updated" + 
+                "\r\n== with '" + txtMod1.getText().trim() + "' and '" + txtMod2.getText().trim() + "' Modifiers" +
+                "\r\n\r\n" + "     Please select another Categoty");
+                return;
+            }
         }
 
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR)); 
@@ -1136,7 +1137,7 @@ public class V1 extends javax.swing.JInternalFrame {
 
         try {
             GetMenu_Size = getMenu.toString().getBytes().length; 
-            txtLog.append("\r\n== Select Menu GET Json size: >> " + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" + "\r\n");
+            txtLog.append("\r\n== Selected Menu GET Json size: >> " + DEC_FORMAT.format((double) GetMenu_Size / (1024*1024)) + " " + "MB" + "\r\n");
             
             putMenu = new JSONObject(getMenu.toMap());
 
@@ -1343,13 +1344,19 @@ public class V1 extends javax.swing.JInternalFrame {
                 options,
                 "No"); 
             if (reply == 1){
-                txtLog.append("== Prepared PUT Json >> \r\n" + putMenu.toString(4) + "\r\n");
+                txtLog.append("== Update Canceled > Prepared PUT Json >> \r\n" + putMenu.toString(4) + "\r\n");
+                txtLog.setText("");
+                txtLog.append("\r\n\r\n   === Update Canceled"
+                            + "\r\n\r\n   === Prepared Update Menu (PUT Json) size: " + DEC_FORMAT.format((double) PutMenu_Size / (1024*1024)) + " " + "MB"
+                            + "\r\n\r\n   === Click '< Log' to see:" 
+                                + "\r\n       original 'GET_Json.json' and prepared 'PUT_Json.json' files");
                 txtLog.setCaretPosition(0);
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
                 return;
             }
-            // </editor-fold> 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
 
+            // </editor-fold> 
             ByteArrayOutputStream byteOutStream = new ByteArrayOutputStream();
             GZIPOutputStream gzipOutStream = new GZIPOutputStream(byteOutStream);
             gzipOutStream.write(putMenu.toString().getBytes());
@@ -1358,16 +1365,32 @@ public class V1 extends javax.swing.JInternalFrame {
             gzipped = Base64.getEncoder().encodeToString(bytes);
 
             // === Publish Menu
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             putMenuID = putMenu.getString("id");
             Api_Call("PUT", BaseAPI + "/menu/" + putMenuID, "Bearer " + AP3_TKN, gzipped);
-
-            DB_LOG();
-
             if(json != null){
                 txtLog.setText("");
-                txtLog.append("\r\n== Publish > PUT Json >> \r\n\r\n" + putMenu.toString(4) + "\r\n\r\n");
+                txtLog.append("\r\n\r\n   === Update/Publish complete"
+                            + "\r\n\r\n   === Update Menu (PUT Json) size: " + DEC_FORMAT.format((double) PutMenu_Size / (1024*1024)) + " " + "MB"
+                            + "\r\n\r\n   === Click '< Log' to see:" 
+                                + "\r\n       original 'GET_Json.json' and applied 'PUT_Json.json' files");
                 txtLog.setCaretPosition(0);
             }
+
+            // === Refresh getMenu after Modifiers Update ???
+//            Api_Call("GET", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", "Bearer " + AP3_TKN, "");
+//            if(json != null){
+//                getMenu = new JSONObject(json.toMap());
+//            }
+            // === Get menu sise after Modifiers Update ???
+            Api_Call("GET", BaseAPI + "/menu/" + MenuID + "?nocache=true&extended=true&show_unlinked=false", "Bearer " + AP3_TKN, "");
+            if(json != null){
+                PutMenu_Size = json.toString().getBytes().length; 
+            }
+
+
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+            DB_LOG();  // =================================================
 
         } catch(Exception ex){
             txtLog.setText("");
