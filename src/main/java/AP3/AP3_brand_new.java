@@ -246,6 +246,7 @@ class AP3_brand_new extends AP3_GUI {
                         if (FAIL) { return; }
                     T_Index = L1.size();
                     Scroll_Element_UP("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                    //Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
                         if (FAIL) { return; }
                     Element_Child_List_L1("Groups Count #2", e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
                         if (FAIL) { return; }
@@ -255,6 +256,7 @@ class AP3_brand_new extends AP3_GUI {
                         T_Index = L1.size();
                         SC++;
                         Scroll_Element_UP("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
+                        //Scroll_to_Element("Scroll to last Group", L1.get(L1.size() - 1), ParentTest, "no_jira");
                             if (FAIL) { return; }
                         Element_Child_List_L1("Groups Count #" + SC, e1, "xpath", ".//div[@class='v-list__tile__title']", ParentTest, "no_jira");
                             if (FAIL) { return; }

@@ -1,9 +1,15 @@
 package AP3_API;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Base64;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -45,6 +51,10 @@ class order extends AP3_API_GUI{
         BaseAPI = a.BaseAPI;
         Mobile_User_ID = a.Mobile_User_ID;
         Mobile_User_TKN = a.Mobile_User_TKN;
+
+        RUNNER_ID = a.RUNNER_ID;
+        RUNNER_PW = a.RUNNER_PW;
+        Bolter_Site_ID = a.Bolter_Site_ID;
         
         SITE = a.SITE;
         SiteID = a.SiteID;
@@ -70,14 +80,17 @@ class order extends AP3_API_GUI{
         FP_Payment_TKN = a.FP_Payment_TKN;
     }
     JSONObject requestParams = null;
+    JSONObject Task = null;
+    String TaskID = "";
     String AAA = "";
     String Requested_Date = "";
     Date requested_date;
+    long START;
     
     protected void run() {  
-        if (!env.equals("PR")) {
-            PLACE_ORDERS();
-        }
+//        if (!env.equals("PR")) {
+//            PLACE_ORDERS();
+//        }
         
         Auth = "Bearer " + Mobile_User_TKN;
         long m1 = System.currentTimeMillis();                     
@@ -118,8 +131,13 @@ class order extends AP3_API_GUI{
             // Info Found Orders Count
             AAA = json.toString(4);
         } 
-                   
+
+        if (!env.equals("PR")) {
+            PLACE_ORDERS();
+            DELIVERY_TASK();
+        }                   
     }
+
     private void PLACE_ORDERS(){
         Auth = "Bearer " + Mobile_User_TKN;
 
@@ -330,20 +348,157 @@ class order extends AP3_API_GUI{
         if(json != null && json.has("id")){
             Order_Delivery_ID = json.getString("id");
         }               
-        
+//        Auth = "Bearer " + AP3_TKN;
+//        requestParams = new JSONObject();   //  ADMIN User Update Delivery Order  =================
+//        JSONObject isD = new JSONObject();      
+//        isD.put("in_progress", true);
+//        isD.put("ready", true);
+//        //is.put("out_for_delivery", true);        
+//        requestParams.put("is", isD); 
+//        BODY = requestParams.toString();
+//        
+//        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
+//            BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+//        if(json != null){           
+//            AAA = json.toString(4);  // Check actual update
+//        }         
+    }
+
+    private void DELIVERY_TASK(){
+        JSONObject TASK_GET = new JSONObject();
+        JSONObject TASK_PATCH = new JSONObject();
+
         Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Mobile User Update Delivery Order  =================
-        JSONObject isD = new JSONObject();      
-        isD.put("in_progress", true);
-        isD.put("ready", true);
-        //is.put("out_for_delivery", true);        
+        JSONObject isD;
+
+        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 5000); // now + 5 sec
+        String requested_date = dateFormat.format(date);
+
+        requestParams = new JSONObject();   //  KDS User Update Delivery Order in_progress =================
+        isD = new JSONObject();      
+        isD.put("in_progress", true);   
         requestParams.put("is", isD); 
+        requestParams.put("requested_date", requested_date);        
         BODY = requestParams.toString();
         
-        JOB_Api_Call("Update Delivery Order Status - ready", "PATCH", 
+        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress, requested date NOW + 10 sec", "PATCH", // ===================================
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
             AAA = json.toString(4);  // Check actual update
-        }         
+        } 
+
+        requestParams = new JSONObject();   //  KDS User Update Delivery Order ready, out_for_delivery =================
+        isD = new JSONObject();      
+        isD.put("ready", true);
+        isD.put("out_for_delivery", true);        
+        requestParams.put("is", isD); 
+        BODY = requestParams.toString();
+        
+        JOB_Api_Call("KDS - Update Delivery Order Status > ready, out_for_delivery", "PATCH", 
+            BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
+        if(json != null){           
+            AAA = json.toString(4);  // Check actual update
+        } 
+
+        Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
+        JOB_Api_Call("Bolter Authentication > /user/auth?realm=bolter", "GET", 
+            BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 200, ParentTest, "no_jira");
+        if(json != null){
+            if(json.has("user")) Bolter_User_ID = json.getString("user"); 
+            if(json.has("token")) Bolter_User_TKN = json.getString("token");  
+            if(json.has("profile")){    
+                Bolter_Site_ID = json.getJSONObject("profile").getString("location_group"); 
+            }else{
+                if(json.has("error")){
+                    Bolter_Site_ID = "Not Found";
+                }
+            } 
+        }
+        
+        try {
+            Thread.sleep(10000); // wait for task creation      
+        } catch (Exception e) {
+        }
+
+        Task = new JSONObject();
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.setTimeZone(TimeZone.getTimeZone("UTC"));
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        START = cal.getTimeInMillis(); 
+
+        Auth = "Bearer " + Bolter_User_TKN;           
+        JOB_Api_Call("Bolter Task > 'SiteID' ?created today", "GET",  
+            BaseAPI + "/task/location/group/" + SiteID + "?created=" + START, Auth, "", 200, ParentTest, "no_jira");
+        if(json != null){
+            if(json.has("tasks")){
+                JSONArray tasks = json.getJSONArray("tasks");
+                for(int i = 0; i < tasks.length(); i++){
+                    Task = tasks.getJSONObject(i); 
+                    if(Task.getString("order_id").equals(Order_Delivery_ID) && Task.getString("status").equals("ready")){
+                        TASK_GET = new JSONObject(Task.toMap());
+                        TaskID = Task.getString("id");
+                        AAA = TASK_GET.toString(4);
+                    } 
+                    JOB_Api_Call("Task " + (i+1) + " > Order", "GET",  
+                        BaseAPI + "/task/order/" + Task.getString("order_id"), Auth, "", 200, ParentTest, "no_jira");
+                    if(json != null){
+                        AAA = json.toString(4);
+                    }
+                }
+            }
+        }
+
+        TASK_PATCH = new JSONObject(TASK_GET.toMap());
+        // TASK PATCH > in progress
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        TASK_PATCH.put("assignee", Bolter_User_ID);
+        TASK_PATCH.put("started", sdf.format(new DateTime(new Date()).toDate()));
+        TASK_PATCH = new JSONObject(TASK_GET.toMap());
+        if(TASK_PATCH.has("modified")){
+            TASK_PATCH.remove("modified");
+            TASK_PATCH.put("modified", sdf.format(new DateTime(new Date()).toDate()));
+        }
+        TASK_PATCH.remove("status");
+        TASK_PATCH.put("status", "out_for_delivery");
+        BODY = TASK_PATCH.toString();
+        JOB_Api_Call("Bolter Task Started > out_for_delivery", "PATCH",  // ===================================
+            BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }
+        try {
+            Thread.sleep(1000); // wait for task PATCH update      
+        } catch (Exception e) {
+        }
+
+        //  TAsk PATCH > complete
+        TASK_PATCH.put("completed", sdf.format(new DateTime(new Date()).toDate()));
+        TASK_PATCH = new JSONObject(TASK_GET.toMap());
+        if(TASK_PATCH.has("modified")){
+            TASK_PATCH.remove("modified");
+            TASK_PATCH.put("modified", sdf.format(new DateTime(new Date()).toDate()));
+        }
+        TASK_PATCH.remove("status");
+        TASK_PATCH.put("status", "delivered");
+        BODY = TASK_PATCH.toString();
+        JOB_Api_Call("Bolter Task Completed > delivered", "PATCH",  // ===================================
+            BaseAPI + "/task/" + TaskID, Auth, BODY, 200, ParentTest, "no_jira");
+        if(json != null){
+            AAA = json.toString(4);
+        }
+        try {
+            Thread.sleep(1000); // wait for task PATCH update      
+        } catch (Exception e) {
+        }
     }
 }

@@ -121,12 +121,12 @@ public class Station extends javax.swing.JInternalFrame {
         setSize(new java.awt.Dimension(850, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -218,7 +218,6 @@ public class Station extends javax.swing.JInternalFrame {
             }
         ));
         DV_MTS.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV_MTS.setCellSelectionEnabled(true);
         DV_MTS.setGridColor(java.awt.SystemColor.windowBorder);
         DV_MTS.setName("DV_MTS"); // NOI18N
         DV_MTS.setRowHeight(18);
@@ -477,8 +476,9 @@ public class Station extends javax.swing.JInternalFrame {
                         .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES8)
                     .addGroup(layout.createSequentialGroup()
@@ -504,7 +504,7 @@ public class Station extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSITES)
                     .addComponent(lblMenus)
@@ -540,15 +540,8 @@ public class Station extends javax.swing.JInternalFrame {
                                 .addComponent(lblSITES6)
                                 .addGap(2, 2, 2)
                                 .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(4, 4, 4)
-                                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblSITES8)
                                 .addGap(2, 2, 2)
@@ -557,20 +550,23 @@ public class Station extends javax.swing.JInternalFrame {
                                         .addComponent(cmbPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, 0)
                                         .addComponent(lblBDOFF)
-                                        .addGap(2, 2, 2)
+                                        .addGap(0, 0, 0)
                                         .addComponent(cmbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(8, 8, 8)
                                         .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(4, 4, 4)
-                                .addComponent(lblSITES7)
                                 .addGap(2, 2, 2)
-                                .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                .addComponent(lblSITES7)
+                                .addGap(0, 0, 0)
+                                .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
 
         pack();
@@ -579,6 +575,7 @@ public class Station extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Variables Declarations">
     protected boolean FLess = false;
     protected boolean SandG = false;
+
     protected double combined_tax_rate = 0.0;
     protected double gst_tax_rate = 0.0;
     protected double qst_tax_rate = 0.0;
@@ -1352,6 +1349,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.append("\r\n- Load Menu (Pickup) Timeslots ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         String MenuID = String.valueOf(DV_Menus.getValueAt(DV_Menus.getSelectedRow(), 2));
+
         String[] BrandsColumnsName = {"Time", "epoch"}; 
         DefaultTableModel MTS_Model = new DefaultTableModel();
         MTS_Model.setColumnIdentifiers(BrandsColumnsName);
@@ -2337,69 +2335,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }
 
-    private void Place_Update_Delivery_Order(String Payment_TKN){
-        FAIL = false;
-        txtLog.append("\r\n- " + "Place Delivery Order ...." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        Auth = "Bearer " + Mobile_User_TKN;
-
-        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
-                "\"location_brand\":\"" + BrandID + "\"," + 
-                "\"customer\":\"" + Mobile_User_ID + "\"," +  
-                "\"details\":" +                                   
-                    "{\"contact_number\":\"4165551234\"," +
-                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
-                    "\"duration\":\"" + "00:05:00" + "\"," +
-                    "\"instructions\":\"" + "Discard this Order" + "\"," +
-                    "\"name\":\"" + txtMSG.getText() + "\"," +
-                    "\"order_type\":\"delivery\"}," + 
-                "\"payment\":" + 
-                    "{\"token\":\"" + Payment_TKN + "\"}," +
-                "\"requested_date\":\"" + Requested_Date + "\"," +
-                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
-                "\"}";        
-        Api_Call("POST",  BaseAPI + "/order", Auth, BODY);
-        if(json != null && json.has("id")){
-            Order_Delivery_ID = json.getString("id");
-            txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
-            txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        } else{
-            FAIL = true;
-            return;
-        }              
-        
-        txtLog.append("\r\n- " + "Update Delivery Order > 'Ready' ...." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        Auth = "Bearer " + AP3_TKN;
-        requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
-        
-        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date = new Date();
-        date.setTime(date.getTime() + 20000); // now + 20 sec
-        String requested_date = dateFormat.format(date);
-
-        JSONObject is = new JSONObject(); 
-        is.put("in_progress", true);
-        is.put("ready", true);     
-        requestParams.put("is", is); 
-        requestParams.put("requested_date", requested_date); 
-        
-        BODY = requestParams.toString();
-        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
-        if(json != null){
-            try {
-                Order_Delivery_ID = json.getString("id");
-                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            } catch (Exception ex){
-                FAIL = true;
-                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            }
-        }   
-    }
     private void Place_Update_Pickup_Order(String Payment_TKN){
         FAIL = false;
         txtLog.append("\r\n- " + "Place Order ...." + "\r\n");
@@ -2495,6 +2430,87 @@ public class Station extends javax.swing.JInternalFrame {
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
         }   
+    }
+
+    private void Place_Update_Delivery_Order(String Payment_TKN){
+        FAIL = false;
+        txtLog.append("\r\n- " + "Place Delivery Order ...." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        Auth = "Bearer " + Mobile_User_TKN;
+
+        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+                "\"location_brand\":\"" + BrandID + "\"," + 
+                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+                "\"details\":" +                                   
+                    "{\"contact_number\":\"4165551234\"," +
+                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
+                    "\"duration\":\"" + "00:05:00" + "\"," +
+                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+                    "\"name\":\"" + txtMSG.getText() + "\"," +
+                    "\"order_type\":\"delivery\"}," + 
+                "\"payment\":" + 
+                    "{\"token\":\"" + Payment_TKN + "\"}," +
+                "\"requested_date\":\"" + Requested_Date + "\"," +
+                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+                "\"}";        
+        Api_Call("POST",  BaseAPI + "/order?lang=en", Auth, BODY);
+        if(json != null && json.has("id")){
+            Order_Delivery_ID = json.getString("id");
+            txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        } else{
+            FAIL = true;
+            return;
+        } 
+  
+        try {
+            Thread.sleep(2000);    // maybe to fast to update right after creation >>  Could not send push notifications       
+        } catch (Exception e) {
+        }
+           
+
+
+        Auth = "Bearer " + AP3_TKN;
+        requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================
+        JSONObject is;
+        
+        ZoneOffset offset = OffsetDateTime.now(ZoneId.of(TimeZone.getDefault().getID())).getOffset();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = new Date();
+        date.setTime(date.getTime() + 60000); // now + 1 min
+        String requested_date = dateFormat.format(date);
+
+        txtLog.append("\r\n- " + "Update Delivery Order > in_progess" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        is = new JSONObject(); 
+        is.put("in_progess", true);     
+        requestParams.put("is", is); 
+        requestParams.put("requested_date", requested_date); 
+        
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
+
+        txtLog.append("\r\n- " + "Update Delivery Order > ready, out_for_delivery" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+        is = new JSONObject(); 
+        is.put("ready", true);     
+        is.put("out_for_delivery", true);  
+        requestParams.put("is", is); 
+        
+        BODY = requestParams.toString();
+        Api_Call("PATCH",  BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY); 
+//        if(json != null){
+//            try {
+//                Order_Delivery_ID = json.getString("id");
+//                txtLog.append("== " + "Updated Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            } catch (Exception ex){
+//                FAIL = true;
+//                txtLog.append("== " + "Update Delivery Order ERROR: "  + ex.getMessage() + "\r\n");
+//                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+//            }
+//        }   
     }
 
     // <editor-fold defaultstate="collapsed" desc="GUI Components Declaration - do not modify">  

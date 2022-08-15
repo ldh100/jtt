@@ -135,32 +135,31 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(860, 532));
         setName("API"); // NOI18N
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
-        setPreferredSize(new java.awt.Dimension(860, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameClosed(evt);
             }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -365,7 +364,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         ));
         DV1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV1.setCellSelectionEnabled(true);
-        DV1.setGridColor(java.awt.SystemColor.windowBorder);
+        DV1.setGridColor(java.awt.SystemColor.windowBorder);;
         DV1.setName("DV1"); // NOI18N
         DV1.setOpaque(false);
         DV1.setRowHeight(18);
@@ -391,7 +390,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         DV2.setCellSelectionEnabled(true);
-        DV2.setGridColor(java.awt.SystemColor.windowBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);;
         DV2.setName("DV2"); // NOI18N
         DV2.setOpaque(false);
         DV2.setRowHeight(18);
@@ -3517,6 +3516,10 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
                     ErrorMsg = "Error: " + json.getString("error") + "  ";
+                }
+                if (json.has("message")) {
+                    //ErrorMsg = "Error Message: " + json.getJSONObject("message").toString() + " ";
+                    ErrorMsg = "Error Message: " + json.getString("message") + " ";
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";

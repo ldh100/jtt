@@ -49,7 +49,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         lblSITES = new javax.swing.JLabel();
         btnDel = new javax.swing.JButton();
         btnDelOld = new javax.swing.JButton();
-        btnExcel = new javax.swing.JButton();
+        btnReport = new javax.swing.JButton();
         btnLog = new javax.swing.JButton();
         btnRef = new javax.swing.JButton();
         cmbF_App = new javax.swing.JComboBox<>();
@@ -135,12 +135,12 @@ public class W_Report extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExcel.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnExcel.setText("View Report");
-        btnExcel.setPreferredSize(new java.awt.Dimension(113, 25));
-        btnExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnReport.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        btnReport.setText("View Report");
+        btnReport.setPreferredSize(new java.awt.Dimension(113, 25));
+        btnReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnExcelMouseClicked(evt);
+                btnReportMouseClicked(evt);
             }
         });
 
@@ -209,7 +209,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                                 .addComponent(btnDelOld, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cmbF_User, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cmbF_App, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExcel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(btnReport, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(2, 2, 2))
         );
         layout.setVerticalGroup(
@@ -235,7 +235,7 @@ public class W_Report extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmbF_App, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(btnExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,7 +250,7 @@ public class W_Report extends javax.swing.JInternalFrame {
         LoadREP();
     }//GEN-LAST:event_formAncestorAdded
     private void DV1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DV1MouseClicked
-        if(DV1.getSelectedColumn()== 5){
+        if(DV1.getSelectedColumn() == 5){
             DV1.changeSelection(DV1.getSelectedRow(), 0, false, false);            
         }
         Summary();
@@ -317,11 +317,11 @@ public class W_Report extends javax.swing.JInternalFrame {
         LoadFilters();
         LoadDB();
     }//GEN-LAST:event_btnDelOldMouseClicked
-    private void btnExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExcelMouseClicked
-        btnExcel.setEnabled(false);
+    private void btnReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportMouseClicked
+        btnReport.setEnabled(false);
         Report(true);
-        btnExcel.setEnabled(true);
-    }//GEN-LAST:event_btnExcelMouseClicked
+        btnReport.setEnabled(true);
+    }//GEN-LAST:event_btnReportMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
         String EXX;
         try (Connection conn = DriverManager.getConnection(A.A.QA_BD_CON_STRING)) {
@@ -388,10 +388,11 @@ public class W_Report extends javax.swing.JInternalFrame {
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("WO") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("API") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("Android") ||
+            DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("V1 Menus") ||
             DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("app").getModelIndex()).toString().startsWith("iOS")) {
-                btnExcel.setEnabled(true);
+                btnReport.setEnabled(true);
         } else {
-            btnExcel.setEnabled(false);
+            btnReport.setEnabled(false);
         }        
         String utcTimeString = DV1.getValueAt(DV1.getSelectedRow(), DV1.getColumn("cDate").getModelIndex()).toString();
         DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -434,7 +435,13 @@ public class W_Report extends javax.swing.JInternalFrame {
             txtLog.append("=== " + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }
-        if ("".equals(EXX.trim()) || "None".equals(EXX.trim())){
+        if (!"".equals(EXX.trim()) && EXX.startsWith("{") && EXX.endsWith("}")){
+            A.Func.SHOW_FILE(EXX, "json");
+            setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            return;
+        } 
+
+        if ("".equals(EXX.trim()) || "None".equals(EXX.trim()) || EXX.startsWith("{")){
             setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
             txtLog.append("=== Report > Not Excel" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -616,9 +623,9 @@ public class W_Report extends javax.swing.JInternalFrame {
     private javax.swing.JTable DV1;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnDelOld;
-    private javax.swing.JButton btnExcel;
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnRef;
+    private javax.swing.JButton btnReport;
     private javax.swing.JComboBox<String> cmbF_App;
     private javax.swing.JComboBox<String> cmbF_User;
     private com.toedter.calendar.JDateChooser dtpDel;

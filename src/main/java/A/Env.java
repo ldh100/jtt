@@ -72,12 +72,12 @@ public class Env extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(858, 527));
         setName("Env"); // NOI18N
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -306,6 +306,9 @@ public class Env extends javax.swing.JInternalFrame {
             btnApi.setEnabled(true);
             if(cmbWhat.getSelectedItem().toString().equals("Sectors")) {
                 GetSectors();
+            } else if(cmbWhat.getSelectedItem().toString().equals("Global Menus")){
+                //btnApi.setEnabled(false);
+                GetGL_Menus();
             } else if(cmbWhat.getSelectedItem().toString().equals("JDE_Categories")){
                 //btnApi.setEnabled(false);
                 GetJDE();
@@ -915,6 +918,87 @@ public class Env extends javax.swing.JInternalFrame {
         lblDate.setText("@" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM hh:mm a")) + " <<");
         this.setCursor(Cursor.getPredefinedCursor (Cursor.HAND_CURSOR));
     }  
+    private void GetGL_Menus(){
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
+
+        String[] SitesColumnsName = {"Sector Name", "Id"}; 
+        DefaultTableModel SitesModel = new DefaultTableModel();
+        SitesModel.setColumnIdentifiers(SitesColumnsName);
+        DV1.setModel(SitesModel);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(DV1.getModel());
+        DV1.setRowSorter(sorter);
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);  
+        sorter.setSortable(0, false); 
+
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        try {
+            HttpGet httpget = new HttpGet(BaseAPI + "/location/sector?_provider=cdl&nocache=false"); 
+            httpget.setHeader("Authorization",  "Bearer " + AP3_TKN);
+            ResponseHandler<String> responseHandler = (final HttpResponse response) -> {
+                int status = response.getStatusLine().getStatusCode();
+                String Msg = response.getStatusLine().getReasonPhrase();
+                if (status >= 200 && status < 300) {
+                    HttpEntity entity = response.getEntity();
+                    return entity != null ? EntityUtils.toString(entity) : null;
+                } else {
+                    throw new ClientProtocolException("Response: " + status + " - " + Msg);
+                }
+            };
+            String responseBody = httpclient.execute(httpget, responseHandler);
+            JSONObject json = new JSONObject(responseBody);
+            JSONArray Sectors = json.getJSONArray("sectors");     
+
+            for (int i = 0; i < Sectors.length(); i++) {
+                String sector = "";
+                String id = "null";
+                JSONObject object = Sectors.getJSONObject(i);
+                if(object.has("name")){
+                    sector = object.getString("name");   
+                } 
+                if(object.has("id")){
+                    id = object.getString("id");
+                } 
+                //SitesModel.addRow(new Object[]{sector, id});
+            }
+
+            DV1.setModel(SitesModel);
+            DV1.setDefaultEditor(Object.class, null);
+            DV1.getColumnModel().getColumn(0).setPreferredWidth(350);
+            DV1.getColumnModel().getColumn(1).setPreferredWidth(550);
+            
+            sorter.setSortable(0, true); 
+            sorter.sort();   
+            txtLog.append("= " + 
+                    cmbEnv.getSelectedItem().toString() + " > " +
+                    cmbWhat.getSelectedItem().toString() + " > " +
+                    DV1.getRowCount() + 
+                    " records\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            if(DV1.getRowCount() > 0){
+                DV1.changeSelection(0, 0, false, false);
+                btnView.setEnabled(true);
+            }    
+
+        } catch (IOException | JSONException ex) {
+            txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+            txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+            this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+        } finally {
+            try {
+                httpclient.close();
+            } catch (IOException ex) {
+                txtLog.append("- Exception: " + ex.getMessage() + "\r\n");  
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());  
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+            }
+        } 
+        lblDate.setText("@" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM hh:mm a")) + " <<");
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+    }
+
 
     private void GET_API(){
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
