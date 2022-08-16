@@ -61,7 +61,9 @@ class AP3_password extends AP3_GUI {
         Element_By_Path_Click("Click Reset Password", "xpath", "//div[@class='v-btn__content']", ParentTest, "no_jira"); 
             if (FAIL) { return;}   
         Thread.sleep(500); 
-        Element_By_Path_Text ("Unregistered email Error Message... Text", "xpath", "//*[contains(text(), 'Could not reset your password, contact support.')]", ParentTest, "no_jira"); 
+        //Element_By_Path_Text ("Unregistered email Error Message... Text", "xpath", "//*[contains(text(), 'Could not reset your password, contact support.')]", ParentTest, "no_jira"); 
+        Element_By_Path_Text ("Unregistered email Error Message... Text", "xpath", "//*[contains(text(), 'Something happened while')]", ParentTest, "no_jira"); 
+
         if(env.equals("PR")){
             return;
         }
@@ -85,7 +87,8 @@ class AP3_password extends AP3_GUI {
             if (FAIL) { return;}
         Swith_to_Frame("Swith to 'password reset' iframe", "xpath", "//iframe[@id='html_msg_body']", ParentTest, "no_jira");
             if (FAIL) { return;}
-        Element_By_Path_Click("Click on the 'reset password' > 'here'", "xpath","//a[contains(text(),'here')]", ParentTest, "no_jira");
+        //Element_By_Path_Click("Click on the 'reset password' > 'here'", "xpath","//a[contains(text(),'here')]", ParentTest, "no_jira");
+        Element_By_Path_Click("Click on the 'reset password'", "xpath","//a[contains(text(),'Reset your')]", ParentTest, "no_jira");
             if (FAIL) { return;}
 
         Set<String> tabs  = d1.getWindowHandles();
