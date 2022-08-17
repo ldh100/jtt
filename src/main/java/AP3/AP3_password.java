@@ -62,8 +62,8 @@ class AP3_password extends AP3_GUI {
             if (FAIL) { return;}   
         Thread.sleep(500); 
         //Element_By_Path_Text ("Unregistered email Error Message... Text", "xpath", "//*[contains(text(), 'Could not reset your password, contact support.')]", ParentTest, "no_jira"); 
-        Element_By_Path_Text ("Unregistered email Error Message... Text", "xpath", "//*[contains(text(), 'Something happened while')]", ParentTest, "no_jira"); 
-
+        //Element_By_Path_Text ("Unregistered email Error Message... Text", "xpath", "//*[contains(text(), 'Something happened while')]", ParentTest, "no_jira"); 
+        Element_By_Path_Text("Unregistered email Error Message... Text", "xpath","//div[@class='v-messages__message']", ParentTest, "no_jira");
         if(env.equals("PR")){
             return;
         }

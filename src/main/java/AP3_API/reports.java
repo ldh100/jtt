@@ -46,16 +46,16 @@ class reports extends AP3_API_GUI{
 //            //
 //        }
 
-        _Start = new DateTime(new Date()).minusDays(31).toDate();
-        _End = new DateTime(new Date()).minusDays(1).toDate();
-        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
-        End = new SimpleDateFormat("yyyy-MM-dd").format(_End); 
-        JOB_Api_Call("Report Analytics Combined > /'SiteID/all_brands?week?30 days'", "GET", 
-            BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + BrandIDS + "&time_frame=week&start_date=" + Start + "&end_date=" + End, Auth, "", 200, ParentTest, "no_jira");
-        if(json != null){
-            boolean XXX = true;
-            //
-        } 
+//        _Start = new DateTime(new Date()).minusDays(31).toDate();
+//        _End = new DateTime(new Date()).minusDays(1).toDate();
+//        Start = new SimpleDateFormat("yyyy-MM-dd").format(_Start); 
+//        End = new SimpleDateFormat("yyyy-MM-dd").format(_End); 
+//        JOB_Api_Call("Report Analytics Combined > /'SiteID/all_brands?week?30 days'", "GET", 
+//            BaseAPI + "/report/analytics/combined/group/" + SiteID + "?brand_ids=" + BrandIDS + "&time_frame=week&start_date=" + Start + "&end_date=" + End, Auth, "", 200, ParentTest, "no_jira");
+//        if(json != null){
+//            boolean XXX = true;
+//            //
+//        } 
  
         _Start = new DateTime(new Date()).minusDays(8).toDate();
         _End = new DateTime(new Date()).minusDays(1).toDate();
