@@ -32,7 +32,11 @@ class menus extends AP3_API_GUI{
     private List<String> GL_MENU_IDS = new ArrayList<>(); 
     
     String AAA = "";
-    protected void run() {             
+    protected void run() {    
+        Auth = "Bearer " + AP3_TKN;   // =============== AP3 Sector Global menus ===================
+        JOB_Api_Call("Sector/Global Menus > /'SectorID'", "GET", 
+            BaseAPI + "/menu/sector/" + SectorID, Auth, "", 200, ParentTest, "no_jira");
+         
         Auth = "Bearer " + AP3_TKN;   // =============== AP3 Company/Global menus ===================
         JOB_Api_Call("Company / Global Menus > /'CompID'", "GET", 
             BaseAPI + "/menu/company/" + CompanyID, Auth, "", 200, ParentTest, "no_jira");
@@ -302,7 +306,6 @@ class menus extends AP3_API_GUI{
 
     //</editor-fold>        
       
-
     //<editor-fold defaultstate="collapsed" desc=" Menu item  (*Does not work*) "> 
 
     //POST//menu/item : Post/Create a new menu item : 

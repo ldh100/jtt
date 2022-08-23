@@ -40,7 +40,7 @@ class datalake extends AP3_API_GUI{
         if(json != null){
             AAA = json.toString(4);
         }
-        Auth = "Bearer " + AP3_TKN;     
+ 
         sql = "SELECT * FROM datalake.not_found_table WHERE date_created <= '" + DATE + "' LIMIT 10";
         BODY = "{\"query\":\"" + sql + "\"}";    
         JOB_Api_Call("Datalake InValid SQL > Valid Token", "POST", 

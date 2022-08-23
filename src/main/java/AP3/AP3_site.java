@@ -490,15 +490,6 @@ class AP3_site extends AP3_GUI{
 
        // <editor-fold defaultstate="collapsed" desc="Dropp-Off Locations - ALL">
         EX += " - " + "\t" + " === " + "\t" + " ===== " + "\t" + " == Delivery Drop-off Locations Begin >>" + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\t" + " - " + "\r\n";        
-//
-//        Wait_For_Element_By_Path_Presence("Check 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Move_to_Element_By_Path("Move to 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Element_By_Path_Click("Click 'Delivery Drop-off Locations' in list of sections", "xpath", "//div[@class='v-list__tile__content']/*[contains(text(),'Delivery Drop-off')]", ParentTest, "no_jira");
-//            if (FAIL) { return;}
-//        Wait_For_Element_By_Path_Presence("Wait for presence of 'Delivery Drop-off Locations' sections", "xpath", "//*[@class='H5-Primary-Left' and text()='Delivery Drop-off Locations']", ParentTest, "no_jira");
-//            if (FAIL) { return;}
             
         // <editor-fold defaultstate="collapsed" desc="Create Drop-off Modal">
         Element_By_Path_Click("Click > 'Delivery Drop-off Locations' in list of sections", "xpath", "//*[@class='v-list tocStyle theme--light']//*[contains(text(),'Delivery Drop-off Locations')]", ParentTest, "no_jira");

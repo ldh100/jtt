@@ -21,11 +21,14 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.SwingWorker;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class C360_API_main {   
@@ -98,6 +101,13 @@ public class C360_API_main {
     protected double p_90 = 0;
     private Duration DD;
     private String Report_File = "";
+
+    protected List<String> Order_IDS = new ArrayList<>();
+    protected List<String> Concepts_IDS = new ArrayList<>();
+    protected List<String> ConceptGraoups_IDS = new ArrayList<>();
+    protected List<String> PRanges_IDS = new ArrayList<>();
+    protected List<String> User_IDS = new ArrayList<>();
+    protected List<String> Roles_IDS = new ArrayList<>();
     // </editor-fold>  
     
     //<editor-fold defaultstate="collapsed" desc="Extend HTML Report Methods">
@@ -207,17 +217,17 @@ public class C360_API_main {
             CONFIG = true;
             switch (env) {
                 case "ST":
-                    BaseAPI = "https://staging.cafe360.io";
+                    BaseAPI = "https://staging.api.cafe360.io";
                     SSO_BaseAPI = "https://ssodev.compassmanager.com";
                     C360_Clien_ID = "Cafe 360 Test";
                         break;
                 case "DE":
-                    BaseAPI = "https://dev.cafe360.io";
+                    BaseAPI = "https://dev.api.cafe360.io";
                     SSO_BaseAPI = "https://ssodev.compassmanager.com";
                     C360_Clien_ID = "Cafe 360 DEV";
                     break;
                 default:
-                    BaseAPI = "https://cafe360.io";
+                    BaseAPI = "https://api.cafe360.io";
                     SSO_BaseAPI = "https://ssodev.compassmanager.com";
                     C360_Clien_ID = "Cafe 360 Prod";
                    break;
@@ -550,7 +560,8 @@ public class C360_API_main {
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("message")) {
-                    ErrorMsg = "Error Message: " + json.getString("message") + ". ";
+                    ErrorMsg = "Error Message: " + json.getJSONObject("message").toString() + " ";
+                    //ErrorMsg = "Error Message: " + json.getString("message") + " ";
                 } else if(json.has("error")){
                     ErrorMsg = "Error: " + json.getString("error") + ". ";
                 }
