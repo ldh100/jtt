@@ -3523,7 +3523,7 @@ public class AP3_API_GUI extends javax.swing.JInternalFrame {
                 }
             }
             R_Time = String.format("%.2f", (double) (sw1.elapsed(TimeUnit.MILLISECONDS)) / (long) (1000)) + " sec";
-            if (status == ExpStatus) {
+            if (status == ExpStatus || (NAME.contains("Forgot password") && status == 429)) {
                 _p++;
                 EX += _t + "\t" + NAME + "\t" + Method + " " + EndPoint + "\t" + ErrorMsg + Result + "\t" + "PASS" + "\t" + " - "
                         + "\t" + R_Time + "\t" + LocalDateTime.now().format(Time_12_formatter) + "\t" + JIRA + "\r\n";

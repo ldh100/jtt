@@ -121,18 +121,18 @@ class user_mobile extends AP3_API_GUI{
  
         }
         
-        BODY = "{\"email\":\"" + MOBILE_ID + "\"," +            //  Mobile User Forgot Password ================
+        BODY = "{\"email\":\"" + MOBILE_ID + "\"," +    //  Mobile User Forgot Password, 429 > Too many attempts, try again later ================
                 "\"type\":\"" + "forgot_password" + "\"}";
         JOB_Api_Call("Mobile User - Forgot password", "POST", 
             BaseAPI + "/user/forgotpassword?realm=" + Realm, Auth, BODY, 200, ParentTest, "no_jira");          
 
-        BODY = "{\"name\":" +                                    //  New Mobile User > Email Exists  =================
+        BODY = "{\"name\":" +                          //  New Mobile User > Email Exists, now 409 Account cannot be created  =================
                     "{\"first\":\"Oleg\",\"last\":\"Spozito\"}," + 
-                "\"email\":\"" + Mobile_User_ID + "\"," +
-                "\"phone\":" + "1" + NewID + "," +
+                "\"email\":\"" + MOBILE_ID + "\"," +
+                "\"phone\":" + "9055551234," +
                 "\"realm\":\"" + Realm + "\"," +
                 "\"password\":\"" + "Zxtsaq9ppnppvbyi11f0nk" + "\"}";
-        JOB_Api_Call("Mobile Create New User > Email Already Exists", "POST", 
+        JOB_Api_Call("Mobile Create New User > Email Already Exists, Account cannot be created", "POST", 
             BaseAPI + "/user", Auth, BODY, 409, ParentTest, "no_jira"); 
         
         JOB_Api_Call("Mobile User - Location > /group/'SiteID'?include_brands_config=true", "GET",

@@ -1392,6 +1392,13 @@ public class V1 extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
             DB_LOG();  // =================================================
 
+            // === Refresh Current Menu after Modifiers Update ???
+//            String X = txtLog.getText();
+//            Get_Full_Menu();
+//            txtLog.setText(X + "\r\n\r\n\r\n>>>>> Please Select Next Menu Category to update <<<<<");
+//
+//            txtLog.setCaretPosition(0);
+
         } catch(Exception ex){
             txtLog.setText("");
             txtLog.append(ex.getMessage() + "\r\n");
