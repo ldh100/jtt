@@ -385,7 +385,7 @@ class order extends AP3_API_GUI{
         requestParams.put("requested_date", requested_date);        
         BODY = requestParams.toString();
         
-        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress, requested date NOW + 10 sec", "PATCH", // ===================================
+        JOB_Api_Call("KDS - Update Delivery Order Status > in_progress, requested date NOW + 5 sec", "PATCH", // ===================================
             BaseAPI + "/order/" + Order_Delivery_ID, Auth, BODY, 200, ParentTest, "no_jira");        
         if(json != null){           
             AAA = json.toString(4);  // Check actual update
@@ -434,8 +434,12 @@ class order extends AP3_API_GUI{
         cal.set(Calendar.MILLISECOND, 0);
         START = cal.getTimeInMillis(); 
 
-        Auth = "Bearer " + Bolter_User_TKN;           
-        JOB_Api_Call("Bolter Task > 'SiteID' ?created today", "GET",  
+// ✅ Set date to Nearest Midnight in the Past  == JS ==
+//    const d1 = new Date();
+//    d1.setHours(0, 0, 0, 0);
+
+        Auth = "Bearer " + Bolter_User_TKN;       
+        JOB_Api_Call("Bolter Task > 'SiteID' ?created today", "GET",  // 81NDOePO6pCwEaym2Ey8UNaWl9MqB5sjlBZYj3yQfAoRDAPOLZTJvr9E6266hXO4RAkKXgCMB7
             BaseAPI + "/task/location/group/" + SiteID + "?created=" + START, Auth, "", 200, ParentTest, "no_jira");
         if(json != null){
             if(json.has("tasks")){
@@ -481,7 +485,7 @@ class order extends AP3_API_GUI{
         } catch (Exception e) {
         }
 
-        //  TAsk PATCH > complete
+        //  Task PATCH > complete
         TASK_PATCH.put("completed", sdf.format(new DateTime(new Date()).toDate()));
         TASK_PATCH = new JSONObject(TASK_GET.toMap());
         if(TASK_PATCH.has("modified")){
