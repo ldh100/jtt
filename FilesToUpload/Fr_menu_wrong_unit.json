@@ -1,0 +1,53 @@
+{
+    "OperationNo": "3939593939",
+    "Market": {
+        "MarketID": 3939593939,
+        "AccountName": "UofH",
+        "LocationName": "UofH",
+        "MarketName": "Market Next",
+        "Kiosks": [
+            {
+                "Kiosk": "3939593939"
+            }
+        ],
+        "ProductCatalog": [
+            {
+                "ProductName": "Dragon Roll Imitation ",
+                "Price": 9.49,
+                "TaxRate": 0.0825,
+                "Barcodes": [
+                    {
+                        "BarCode": "23012913885"
+                    }
+                ]
+            },
+            {
+                "ProductName": "Tiger Roll Tempura Shrimp",
+                "Price": 10.99,
+                "TaxRate": 0.0825,
+                "Barcodes": [
+                    {
+                        "BarCode": "23012914431"
+                    }
+                ]
+            },
+            {
+                "ProductName": "California Roll",
+                "Price": 5.99,
+                "TaxRate": 0.0825,
+                "Barcodes": [
+                    {
+                        "BarCode": "23012913601"
+                    }
+                ]
+            }
+        ]
+    },
+    "Message": {
+        "Name": "Market",
+        "Vendor": "Seed",
+        "Created": "2022-08-19T18:00:00.000",
+        "Version": "1.0.0",
+        "Mode": "FULL"
+    }
+}
