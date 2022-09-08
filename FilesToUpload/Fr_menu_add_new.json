@@ -1,0 +1,43 @@
+{
+    "OperationNo": "3939393939",
+    "Market": {
+        "MarketID": 3939393939,
+        "AccountName": "UofH",
+        "LocationName": "UofH",
+        "MarketName": "Market Next",
+        "Kiosks": [
+            {
+                "Kiosk": "3939393939"
+            }
+        ],
+        "ProductCatalog": [
+            {
+                "ProductName": "Spicy California Roll",
+                "Price": 6.49,
+                "TaxRate": 0.0825,
+                "Barcodes": [
+                    {
+                        "BarCode": "23012914318"
+                    }
+                ]
+            },
+            {
+                "ProductName": "Imitation Crab",
+                "Price": 8.99,
+                "TaxRate": 0.0825,
+                "Barcodes": [
+                    {
+                        "BarCode": "23012913816"
+                    }
+                ]
+            }
+        ]
+    },
+    "Message": {
+        "Name": "Market",
+        "Vendor": "Seed",
+        "Created": "2022-08-19T18:00:00.000",
+        "Version": "1.0.0",
+        "Mode": "FULL"
+    }
+}
