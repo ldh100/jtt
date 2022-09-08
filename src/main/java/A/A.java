@@ -174,7 +174,7 @@ public class A extends javax.swing.JFrame {
         Menu_C360_.setText("Cafe 360");
         Menu_C360_.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
-        Menu_C360_DE.setText("- Development (dev.cafe360.compassdigital.org)");
+        Menu_C360_DE.setText("- Development");
         Menu_C360_DE.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_C360_DE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -183,7 +183,7 @@ public class A extends javax.swing.JFrame {
         });
         Menu_C360_.add(Menu_C360_DE);
 
-        Menu_C360_ST.setText("- Staging (staging.cafe360.compassdigital.org)");
+        Menu_C360_ST.setText("- Staging");
         Menu_C360_ST.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_C360_ST.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -192,7 +192,7 @@ public class A extends javax.swing.JFrame {
         });
         Menu_C360_.add(Menu_C360_ST);
 
-        Menu_C360_PR.setText("- Production (cafe360.compassdigital.org)");
+        Menu_C360_PR.setText("- Production");
         Menu_C360_PR.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Menu_C360_PR.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -879,7 +879,7 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_UI_ViewerMouseClicked
     private void Menu_C360_DEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_C360_DEMouseClicked
         try {
-            java.awt.Desktop.getDesktop().browse(URI.create("http://dev.cafe360.compassdigital.org/"));
+            java.awt.Desktop.getDesktop().browse(URI.create("http://dev.cafe360.io")); //"http://dev.cafe360.compassdigital.org/"
         }
         catch (IOException ex) {
             // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
@@ -887,7 +887,7 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_C360_DEMouseClicked
     private void Menu_C360_STMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_C360_STMouseClicked
         try {
-            java.awt.Desktop.getDesktop().browse(URI.create("http://staging.cafe360.compassdigital.org/"));
+            java.awt.Desktop.getDesktop().browse(URI.create("http://staging.cafe360.io"));
         }
         catch (IOException ex) {
             // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);
@@ -895,7 +895,7 @@ public class A extends javax.swing.JFrame {
     }//GEN-LAST:event_Menu_C360_STMouseClicked
     private void Menu_C360_PRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Menu_C360_PRMouseClicked
         try {
-            java.awt.Desktop.getDesktop().browse(URI.create("http://cafe360.compassdigital.org/"));
+            java.awt.Desktop.getDesktop().browse(URI.create("http://cafe360.io"));
         }
         catch (IOException ex) {
             // Logger.getLogger(A.class.getName()).log(Level.SEVERE, null, ex);

@@ -23,11 +23,11 @@ class user_bolter extends AP3_API_GUI{
     String AAA = "";
     protected void run() {  
         Auth = "Basic " + Base64.getEncoder().encodeToString(("WrongID" + ":" + RUNNER_PW).getBytes());
-        JOB_Api_Call("Bolter Authentication - Wrong ID> /user/auth?realm=bolter", "GET", 
+        JOB_Api_Call("Bolter Authentication - Wrong ID > /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 401, ParentTest, "no_jira");
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + "WrongPW").getBytes());
-        JOB_Api_Call("Bolter Authentication - Wrong PW> /user/auth?realm=bolter", "GET", 
+        JOB_Api_Call("Bolter Authentication - Wrong PW > /user/auth?realm=bolter", "GET", 
             BaseAPI + "/user/auth" + "?realm=" + "bolter", Auth, "Bolter", 401, ParentTest, "no_jira");
         
         Auth = "Basic " + Base64.getEncoder().encodeToString((RUNNER_ID + ":" + RUNNER_PW).getBytes());
@@ -44,7 +44,7 @@ class user_bolter extends AP3_API_GUI{
                 }
             } 
         } 
-        if(Bolter_Site_ID != "Not Found") { 
+        if(!Bolter_Site_ID.equals("Not Found")) { 
             BolterBrandIDS = new ArrayList<>();
             JOB_Api_Call("Bolter Brands > /location/group/'BolterSiteID'", "GET", 
                 BaseAPI + "/location/group/" + Bolter_Site_ID, Auth, "", 200, ParentTest, "no_jira");  // + "?nocache=true&extended=true"      

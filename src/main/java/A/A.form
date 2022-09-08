@@ -28,7 +28,7 @@
               <SubComponents>
                 <Menu class="javax.swing.JMenu" name="Menu_C360_DE">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="- Development (dev.cafe360.compassdigital.org)"/>
+                    <Property name="text" type="java.lang.String" value="- Development"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
@@ -39,7 +39,7 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="Menu_C360_ST">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="- Staging (staging.cafe360.compassdigital.org)"/>
+                    <Property name="text" type="java.lang.String" value="- Staging"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
@@ -50,7 +50,7 @@
                 </Menu>
                 <Menu class="javax.swing.JMenu" name="Menu_C360_PR">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="- Production (cafe360.compassdigital.org)"/>
+                    <Property name="text" type="java.lang.String" value="- Production"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Dialog" size="12" style="0"/>
                     </Property>
