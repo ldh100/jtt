@@ -1700,7 +1700,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
             if(env.equals("PR") && (!SITE.equals("QA University") || total > 0.02)){
-                txtLog.append("\r\n=== Plase Order in Prod - restricted to:" +
+                txtLog.append("\r\n=== Place Order in Prod - restricted to:" +
                 "\r\n=== Site - only 'QA University', Total <= $0.02" + 
                 "\r\n=== Check 'Last Updated SCart' >>>" + "\r\n");
 
@@ -1731,7 +1731,7 @@ public class Station extends javax.swing.JInternalFrame {
                 return;
             }
             if(env.equals("PR") && (!SITE.equals("QA University") || total > 0.02)){
-                txtLog.append("\r\n=== Plase Order in Prod - restricted to:" +
+                txtLog.append("\r\n=== Place Order in Prod - restricted to:" +
                 "\r\n=== Site - only 'QA University', Total <= $0.02" + 
                 "\r\n=== Check 'Last Updated SCart' >>>" + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                    
