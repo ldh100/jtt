@@ -108,6 +108,8 @@ public class Station extends javax.swing.JInternalFrame {
         lblSITES8 = new javax.swing.JLabel();
         btnSCart = new javax.swing.JButton();
         cmbPROMO = new javax.swing.JComboBox<>();
+        chkBadge = new javax.swing.JCheckBox();
+        chkMPlan = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -121,12 +123,12 @@ public class Station extends javax.swing.JInternalFrame {
         setSize(new java.awt.Dimension(850, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -146,10 +148,12 @@ public class Station extends javax.swing.JInternalFrame {
             public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSITES.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblSITES.setText("Sites");
         lblSITES.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 360, -1));
 
         DV_Sites.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         DV_Sites.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -175,6 +179,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(DV_Sites);
 
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 18, 376, 228));
+
         DV_Brands.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Brands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -199,6 +205,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(DV_Brands);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 246, 376, 112));
+
         txtLog.setEditable(false);
         txtLog.setColumns(20);
         txtLog.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
@@ -207,6 +215,8 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setMargin(new java.awt.Insets(1, 1, 1, 1));
         txtLog.setMinimumSize(new java.awt.Dimension(50, 19));
         jScrollPane1.setViewportView(txtLog);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 358, 376, 140));
 
         DV_MTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_MTS.setModel(new javax.swing.table.DefaultTableModel(
@@ -224,9 +234,12 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.getTableHeader().setReorderingAllowed(false);
         jScrollPane4.setViewportView(DV_MTS);
 
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 186, 84, 172));
+
         lblMenus.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblMenus.setText("Click Brand to get Menu(s) ...");
         lblMenus.setAlignmentX(0.5F);
+        getContentPane().add(lblMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 2, 372, -1));
 
         DV_Items.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Items.setModel(new javax.swing.table.DefaultTableModel(
@@ -250,6 +263,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane6.setViewportView(DV_Items);
 
+        getContentPane().add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 86, 384, 160));
+
         DV_Mods.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Mods.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,6 +287,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane7.setViewportView(DV_Mods);
 
+        getContentPane().add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 248, 384, 110));
+
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnLog.setText(" < Log");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
@@ -280,6 +297,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnLogMouseClicked(evt);
             }
         });
+        getContentPane().add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 474, 50, 22));
 
         DV_Menus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_Menus.setModel(new javax.swing.table.DefaultTableModel(
@@ -304,6 +322,8 @@ public class Station extends javax.swing.JInternalFrame {
         });
         jScrollPane8.setViewportView(DV_Menus);
 
+        getContentPane().add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 18, 384, 68));
+
         DV_DTS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         DV_DTS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -322,11 +342,15 @@ public class Station extends javax.swing.JInternalFrame {
         DV_DTS.getTableHeader().setReorderingAllowed(false);
         jScrollPane9.setViewportView(DV_DTS);
 
+        getContentPane().add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 18, 84, 148));
+
         lblMTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblMTS.setText("Pickup TSlots");
+        getContentPane().add(lblMTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 170, 84, 16));
 
         lblBTS.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         lblBTS.setText("Delivery TSlots");
+        getContentPane().add(lblBTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(764, 2, 80, -1));
 
         btnSave_Opt.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSave_Opt.setText("Save Setup");
@@ -337,11 +361,13 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSave_OptMouseClicked(evt);
             }
         });
+        getContentPane().add(btnSave_Opt, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 474, 76, 22));
 
         lblSITES13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES13.setText("Env:");
         lblSITES13.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES13, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 477, 28, 16));
 
         cmbEnv.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbEnv.addItemListener(new java.awt.event.ItemListener() {
@@ -349,11 +375,13 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbEnvItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbEnv, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 475, 120, 20));
 
         lblSITES14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblSITES14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES14.setText("App:");
         lblSITES14.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES14, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 477, 28, 16));
 
         cmbApp.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         cmbApp.addItemListener(new java.awt.event.ItemListener() {
@@ -361,35 +389,42 @@ public class Station extends javax.swing.JInternalFrame {
                 cmbAppItemStateChanged(evt);
             }
         });
+        getContentPane().add(cmbApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 475, 112, 20));
 
         lblSITES4.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES4.setText("Mobile User E-mail:");
         lblSITES4.setToolTipText("");
         lblSITES4.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES4, new org.netbeans.lib.awtextra.AbsoluteConstraints(388, 362, 108, -1));
 
         txtMobile_ID.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_ID.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_ID.setText("App_User@?.?");
+        getContentPane().add(txtMobile_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 377, 176, 20));
 
         lblSITES6.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES6.setText("Mobile User Password");
         lblSITES6.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES6, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 398, -1, -1));
 
         txtMobile_PW.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMobile_PW.setForeground(new java.awt.Color(204, 0, 51));
         txtMobile_PW.setText("password");
+        getContentPane().add(txtMobile_PW, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 414, 176, 20));
 
         lblSITES7.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES7.setText("Your custom text in Order 'PickupName'");
         lblSITES7.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES7, new org.netbeans.lib.awtextra.AbsoluteConstraints(572, 436, 240, -1));
 
         lblBDOFF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblBDOFF.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblBDOFF.setText("Drop Off Locations");
         lblBDOFF.setAlignmentX(0.5F);
+        getContentPane().add(lblBDOFF, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 398, 112, -1));
 
         btnDOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnDOrder.setText("Place Delivery Order");
@@ -400,6 +435,7 @@ public class Station extends javax.swing.JInternalFrame {
                 btnDOrderMouseClicked(evt);
             }
         });
+        getContentPane().add(btnDOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 410, 132, 24));
 
         btnPOrder.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnPOrder.setText("Place Pickup Order");
@@ -410,16 +446,20 @@ public class Station extends javax.swing.JInternalFrame {
                 btnPOrderMouseClicked(evt);
             }
         });
+        getContentPane().add(btnPOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 378, 132, 24));
 
         cmbLoc.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        getContentPane().add(cmbLoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 412, 136, 20));
 
         txtMSG.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         txtMSG.setText("JTT  > Station > Order");
+        getContentPane().add(txtMSG, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 450, 276, -1));
 
         lblSITES8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         lblSITES8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSITES8.setText("Promo Code");
         lblSITES8.setAlignmentX(0.5F);
+        getContentPane().add(lblSITES8, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 362, -1, -1));
 
         btnSCart.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         btnSCart.setText("Last Updated SCart");
@@ -431,143 +471,32 @@ public class Station extends javax.swing.JInternalFrame {
                 btnSCartMouseClicked(evt);
             }
         });
+        getContentPane().add(btnSCart, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 440, 136, 22));
 
         cmbPROMO.setEditable(true);
         cmbPROMO.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
         cmbPROMO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "compassunlimited", "boostper8", "promo100" }));
+        getContentPane().add(cmbPROMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(568, 378, 136, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(lblSITES, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(lblMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(lblBTS, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblSITES4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSITES6)
-                    .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES8)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblBDOFF, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(lblSITES7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSITES)
-                    .addComponent(lblMenus)
-                    .addComponent(lblBTS))
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4)
-                        .addComponent(lblMTS, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSITES4)
-                                .addGap(1, 1, 1)
-                                .addComponent(txtMobile_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(1, 1, 1)
-                                .addComponent(lblSITES6)
-                                .addGap(2, 2, 2)
-                                .addComponent(txtMobile_PW, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSCart, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSITES8)
-                                .addGap(2, 2, 2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cmbPROMO, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(lblBDOFF)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(cmbLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnPOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(8, 8, 8)
-                                        .addComponent(btnDOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(2, 2, 2)
-                                .addComponent(lblSITES7)
-                                .addGap(0, 0, 0)
-                                .addComponent(txtMSG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSave_Opt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSITES13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbEnv, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSITES14, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbApp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-        );
+        chkBadge.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        chkBadge.setText("Badge");
+        chkBadge.setEnabled(false);
+        chkBadge.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        chkBadge.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        chkBadge.setIconTextGap(1);
+        chkBadge.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        chkBadge.setRequestFocusEnabled(false);
+        getContentPane().add(chkBadge, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, -1, 16));
+
+        chkMPlan.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        chkMPlan.setText("MPlan");
+        chkMPlan.setEnabled(false);
+        chkMPlan.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        chkMPlan.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        chkMPlan.setIconTextGap(1);
+        chkMPlan.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        chkMPlan.setRequestFocusEnabled(false);
+        getContentPane().add(chkMPlan, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 360, -1, 16));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -653,6 +582,11 @@ public class Station extends javax.swing.JInternalFrame {
     protected String EXACT_Payment_TKN = "";
     protected String FP_Payment_TKN = "";
     protected String Last_SCart_URL = "";
+
+    protected String MPlan_ID = "";
+    protected String Badge_ID = "";
+    protected String Tender = "";
+    protected String badge_pay_system_key = "";
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="GUI Components Actions">        
@@ -1035,7 +969,12 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n");   
             txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         }         
-        
+
+        lblSITES.setText(app + " Sites (" + DV_Sites.getRowCount() + " found)");
+        txtLog.append(app + " > " + DV_Sites.getRowCount() + " Site(s) found" + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
+      
         if (DV_Sites.getRowCount() > 0) {
             DV_Sites.changeSelection(0, 0, false, false);
             if (CONFIG && !"".equals(SITE.trim())) {
@@ -1049,11 +988,10 @@ public class Station extends javax.swing.JInternalFrame {
             SITE = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 0));   
             COUNTRY = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 3));
             SiteID = String.valueOf(DV_Sites.getValueAt(DV_Sites.getSelectedRow(), 4));  
+        } else{
+            return;
         }
-        lblSITES.setText(app + " Sites (" + DV_Sites.getRowCount() + " found)");
-        txtLog.append(app + " > " + DV_Sites.getRowCount() + " Site(s) found" + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));
+
         cmbLoc.removeAllItems();
         Get_Site_Config();
         GetBrands(); 
@@ -1063,10 +1001,13 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n- Get Site Config ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+        chkBadge.setEnabled(false);  
+        chkMPlan.setEnabled(false);  
         
         Auth = "Bearer " + AP3_TKN; 
         Api_Call("GET", BaseAPI + "/config/" + SiteID, Auth, "");
         PProvider = "Neither FP nor EXACT";
+        badge_pay_system_key = "";
         if (json != null) {
             try {
                 JSONObject p = json.getJSONObject("payment");
@@ -1075,6 +1016,10 @@ public class Station extends javax.swing.JInternalFrame {
                     freedompay_id = p.getJSONObject("freedompay").getString("id");
                     freedompay_terminal_id = p.getJSONObject("freedompay").getString("freedompay_terminal_id");
                     freedompay_store_id = p.getJSONObject("freedompay").getString("freedompay_store_id");
+                    //Badge_ID = json.getJSONObject("badge_pay").getString("id");   /// < in public config, this is private
+                    if(p.getJSONObject("freedompay").has("badge_pay_system_key")){
+                        badge_pay_system_key = p.getJSONObject("freedompay").getString("badge_pay_system_key");
+                    }
                 } else if (p.has("exact")) {
                     PProvider = "Exact";
                     exact_gateway_password = p.getJSONObject("exact").getString("exact_gateway_password");
@@ -1083,6 +1028,22 @@ public class Station extends javax.swing.JInternalFrame {
                 }
                 txtLog.append("" + SITE + " > Payment Provider: " + PProvider + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+
+                if(!badge_pay_system_key.isEmpty()) { 
+                    Api_Call("GET", BaseAPI + "/config/public/" + SiteID, "", "");
+                    if(json.has("badge_pay")) {
+                        Badge_ID = json.getJSONObject("badge_pay").getString("id");
+                        chkBadge.setEnabled(true);                     
+                    }
+                }
+//                if (json.has("mealplan") && !json.getJSONArray("mealplan").isEmpty()) {
+//                    MPlan_ID = json.getJSONArray("mealplan").get(0).getString("id");
+//                    if(json.getJSONObject("mealplan").has("tenders")){
+//                        Tender = json.getJSONObject("mealplan").getJSONObject("tenders").getString("id");
+//                    }
+//                    chkMPlan.setEnabled(true);
+//                }
+
             } catch (Exception ex) {
                 txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());    
@@ -1109,7 +1070,7 @@ public class Station extends javax.swing.JInternalFrame {
         DV_MTS.setModel(Model);
         lblMenus.setText("Click Brand to get Menu(s) ...");              
      
-        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID", "FLess", "SandG"}; 
+        String[] BrandsColumnsName = {"Brand / Station","Location","menu_ids", "Brand Id", "Unit ID", "FLess", "SandG", "DBalance"}; 
         DefaultTableModel BrandsModel = new DefaultTableModel();
         BrandsModel.setColumnIdentifiers(BrandsColumnsName);
         DV_Brands.setModel(BrandsModel);
@@ -1731,122 +1692,67 @@ public class Station extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
             return;
         }
-//        if(COUNTRY.toLowerCase().startsWith("c")){
-//            if(TYPE.equals("P")){
-//                New_Pickup_ShoppingCart(); 
-//                if(FAIL) {
-//                    Validate_Place_Order();
-//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-//                    return;
-//                }
-//                if(env.equals("PR")){
-//                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
-//                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));  
-//                    Validate_Place_Order();
-//                    return;
-//                }else{                 
-//                    EXACT();
-//                    if(FAIL) {
-//                        Validate_Place_Order();
-//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-//                        return;
-//                    }                
-//                    Place_Update_Pickup_Order(EXACT_Payment_TKN);
-//                    if(FAIL) {
-//                        Validate_Place_Order();
-//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-//                        return;
-//                    }
-//                }
-//            }
-//            if(TYPE.equals("D")){
-//                New_Delivery_ShoppingCart(); 
-//                if(FAIL) {
-//                    Validate_Place_Order();
-//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-//                    return;
-//                }
-//                if(env.equals("PR")){
-//                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
-//                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                     
-//                    Validate_Place_Order();
-//                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-//                    return;
-//                }else{                
-//                    EXACT();
-//                    if(FAIL) {
-//                        Validate_Place_Order();
-//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-//                        return;
-//                    }                
-//                    Place_Update_Delivery_Order(EXACT_Payment_TKN);
-//                    if(FAIL) {
-//                        Validate_Place_Order();
-//                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-//                        return;
-//                    }
-//                }
-//            }            
-//        }
-//        if(COUNTRY.toLowerCase().startsWith("u")){
-            if(TYPE.equals("P")){
-                New_Pickup_ShoppingCart();  
+        if(TYPE.equals("P")){
+            New_Pickup_ShoppingCart();  
+            if(FAIL) {
+                Validate_Place_Order();
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                return;
+            }
+            if(env.equals("PR") && (!SITE.equals("QA University") || total > 0.02)){
+                txtLog.append("\r\n=== Plase Order in Prod - restricted to:" +
+                "\r\n=== Site - only 'QA University', Total <= $0.02" + 
+                "\r\n=== Check 'Last Updated SCart' >>>" + "\r\n");
+
+                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                Validate_Place_Order();
+                return;
+            }else{                
+                FP();
                 if(FAIL) {
                     Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
-                }
-                if(env.equals("PR")){
-                    txtLog.append("\r\n=== Place Order In Production is Not Supported. \r\n=== Shopping Cart created." + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                }                
+                Place_Update_Pickup_Order(FP_Payment_TKN);
+                if(FAIL) {
                     Validate_Place_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
-                }else{                
-                    FP();
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }                
-                    Place_Update_Pickup_Order(FP_Payment_TKN);
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }
                 }
             }
-            if(TYPE.equals("D")){
-                New_Delivery_ShoppingCart();   
+        }
+        if(TYPE.equals("D")){
+            New_Delivery_ShoppingCart();   
+            if(FAIL) {
+                Validate_Place_Order();
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                return;
+            }
+            if(env.equals("PR") && (!SITE.equals("QA University") || total > 0.02)){
+                txtLog.append("\r\n=== Plase Order in Prod - restricted to:" +
+                "\r\n=== Site - only 'QA University', Total <= $0.02" + 
+                "\r\n=== Check 'Last Updated SCart' >>>" + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());                    
+                this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                Validate_Place_Order();
+                return;
+            }else{
+                FP();
+                if(FAIL) {
+                    Validate_Place_Order();
+                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
+                    return;
+                }                   
+                Place_Update_Delivery_Order(FP_Payment_TKN);
                 if(FAIL) {
                     Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                     return;
                 }
-                if(env.equals("PR")){
-                    txtLog.append("\r\n=== Place Order In Production not supported. Shopping Cart created." + "\r\n");
-                    txtLog.setCaretPosition(txtLog.getDocument().getLength());                    
-                    this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                    Validate_Place_Order();
-                    return;
-                }else{
-                    FP();
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }                   
-                    Place_Update_Delivery_Order(FP_Payment_TKN);
-                    if(FAIL) {
-                        Validate_Place_Order();
-                        this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
-                        return;
-                    }
-                }
-            } 
-        //}
+            }
+        } 
         Validate_Place_Order();
         this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR)); 
     } 
@@ -1973,6 +1879,7 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             return;
         }
+
         Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID, Auth, BODY);
         if(json != null){
             try{
@@ -1998,7 +1905,7 @@ public class Station extends javax.swing.JInternalFrame {
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/promo", Auth, BODY);        
             if(json != null){
                 try{
-                    ShoppingCart_Delivery_ID = json.getString("id");
+                    ShoppingCart_Pickup_ID = json.getString("id");
                     txtLog.append("== " + "Apply Promo (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
@@ -2008,6 +1915,29 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         } 
+        if(chkBadge.isSelected()) {
+            txtLog.append("\r\n- " + "Change Shopping Cart Payment to Badge_Pay ...." + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            JSONObject requestParams = new JSONObject(); 
+            JSONObject BPay = new JSONObject();
+            BPay.put("id", Badge_ID);
+            BPay.put("tender", "oWglgN3NZdSJ3dd5laoyFjeErWyW0eh8QoBQLr93s7L12YPXmoHa8"); //O49w9E3E5zUWR22dBNvzuZBylwMw7BHJEpoE4m4kFa4p5dgoZwCv7"); /// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            requestParams.put("badge_pay", BPay);
+            requestParams.put("email", txtMobile_ID.getText().trim());
+            BODY = requestParams.toString();
+            Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/paymentmethod", Auth, BODY);        
+            if(json != null){
+                try{
+                    ShoppingCart_Pickup_ID = json.getString("id");
+                    txtLog.append("== " + "Change Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                } catch (Exception ex){
+                    FAIL = true;
+                    txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                }
+            }  
+        }
         Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         btnSCart.setEnabled(true);
         Report_Tax();
@@ -2168,7 +2098,7 @@ public class Station extends javax.swing.JInternalFrame {
     }
     private void Print_SCart() {
         if(btnSCart.isEnabled()){
-            txtLog.append("\r\n- " + "Print Last Update Shopping Cart ...." + "\r\n");
+            txtLog.append("\r\n\r\n- " + "Print Last Update Shopping Cart ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());            
             Api_Call("GET", Last_SCart_URL, "", "");
             String R = A.Func.SHOW_FILE(Last_SCart_URL + "\r\n\r\n" + json.toString(4), "json");
@@ -2203,67 +2133,6 @@ public class Station extends javax.swing.JInternalFrame {
         }
     }
 
-    private void Delete_User_Payments(){
-        txtLog.append("\r\n- Delete_Payments..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        List<String> Payment_Methods_IDS = new ArrayList<>();
-        Auth = "Bearer " + Mobile_User_TKN;
-        Api_Call("GET", BaseAPI + "/payment/method" + "?user_id=" + Mobile_User_ID, Auth, "");
-        if (json != null) {
-            try {
-                if (json.has("payment_methods")) {
-                    JSONArray payment_methods = json.getJSONArray("payment_methods");
-                    for (int i = 0; i < payment_methods.length(); i++) {
-                        JSONObject p = payment_methods.getJSONObject(i);
-                        Payment_Methods_IDS.add(p.getString("token"));
-                    }
-                }
-
-            } catch (Exception ex) {
-                txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
-                txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-            }
-        }
-        txtLog.append("Mobile User Payments: " + Payment_Methods_IDS.size() + " found" + "\r\n"); 
-        txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
-                
-        BODY = "{\"user\":\"" + Mobile_User_ID + "\"}";
-        for (int i = 0; i < Payment_Methods_IDS.size(); i++) {            
-//            JOB_Api_Call("Mobile User Delete Payment Method " + (Item_Index + 1), "DELETE",
-//                    BaseAPI + "/payment/" + exact_id + "/method/" + Payment_Methods_IDS.get(Item_Index), Auth, BODY, 200, ParentTest, "no_jira");
-        }
-    }
-    private void EXACT(){
-        FAIL = false;
-        txtLog.append("\r\n- Exact API(s)..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-        
-        EXACT_Payment_TKN = "";
-        Auth = "Bearer " + Mobile_User_TKN;
-        JSONObject requestParams = new JSONObject();
-        requestParams.put("cardholder_name", "JTT API Automation");
-        requestParams.put("cc_expiry", "1224");
-        requestParams.put("cc_number", "5555555555554444"); // Mastercard
-        requestParams.put("cc_verification_str2", "123");
-        requestParams.put("postal_code", "L3L3C4");
-        JSONObject options = new JSONObject();
-        options.put("exact_gateway_id", exact_gateway_id);
-        options.put("exact_gateway_password", exact_gateway_password);
-        requestParams.put("options", options);
-        BODY = requestParams.toString();
-
-        Api_Call("POST", BaseAPI + "/payment/" + exact_id + "/paymenttoken", Auth, BODY);
-        if (json != null && json.has("token")) {
-            try {
-                EXACT_Payment_TKN = json.getString("token");
-            } catch (Exception ex) {
-                FAIL = true;
-                String AAAA = ex.getMessage();
-            }
-        }
-        txtLog.append("=== EXACT_Payment_TKN: " + EXACT_Payment_TKN + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-    }
     private void FP(){
         FAIL = false;
         txtLog.append("\r\n- Freedompay API(s)..." + "\r\n");
@@ -2305,20 +2174,35 @@ public class Station extends javax.swing.JInternalFrame {
             Api_Call("DELETE", FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "");
         } 
 // ==========================
-        
+
         Auth = "Bearer " + Access_TKN;
         requestParams = new JSONObject();
-        requestParams.put("nameOnCard", "JTT API Automation");
-        requestParams.put("cardNumber", "4111111111111111"); // Visa
-        requestParams.put("CVV", "123");
-        requestParams.put("avsVerificationRequired", true);
-        requestParams.put("cvvVerificationRequired", true);
-        JSONObject billingAddress = new JSONObject();
-            billingAddress.put("postalCode", "L3L3C4");
-        requestParams.put("billingAddress", billingAddress); 
-        requestParams.put("isPreferred", true);
-        requestParams.put("expiryMonth", 12);
-        requestParams.put("expiryYear", 2024);
+        if(env.equals("PR")){
+            requestParams.put("nameOnCard", A.A.C1_Name);
+            requestParams.put("cardNumber", A.A.C1_Num); // Visa
+            requestParams.put("CVV", A.A.C1_Cvv);
+            requestParams.put("avsVerificationRequired", true);
+            requestParams.put("cvvVerificationRequired", true);
+            JSONObject billingAddress = new JSONObject();
+                billingAddress.put("postalCode", A.A.C1_Zip);
+            requestParams.put("billingAddress", billingAddress); 
+            requestParams.put("isPreferred", true);
+            requestParams.put("expiryMonth", A.A.C1_Exp.substring(0,2));
+            requestParams.put("expiryYear", "20" + A.A.C1_Exp.substring(2));
+        } else{
+            requestParams.put("nameOnCard", "JTT API Automation");
+            requestParams.put("cardNumber", "4111111111111111"); // Visa
+            requestParams.put("CVV", "123");
+            requestParams.put("avsVerificationRequired", true);
+            requestParams.put("cvvVerificationRequired", true);
+            JSONObject billingAddress = new JSONObject();
+                billingAddress.put("postalCode", "L3L3C4");
+            requestParams.put("billingAddress", billingAddress); 
+            requestParams.put("isPreferred", true);
+            requestParams.put("expiryMonth", 12);
+            requestParams.put("expiryYear", 2024);
+    }
+
 
         BODY = requestParams.toString();
         Api_Call("POST", FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY);
@@ -2350,7 +2234,11 @@ public class Station extends javax.swing.JInternalFrame {
             requestParams.put("requested_date", Requested_Date);
             requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
             JSONObject payment = new JSONObject();
-            payment.put("token", Payment_TKN);
+            if(chkBadge.isSelected()){
+                payment.put("token",Payment_TKN); // "B583B9C123EEFA95BC2A58E471E1E712");   /// Badge specific ????
+            }else{
+                payment.put("token", Payment_TKN);
+            }
             requestParams.put("payment", payment); 
 
             JSONObject meta = new JSONObject();
@@ -2371,7 +2259,11 @@ public class Station extends javax.swing.JInternalFrame {
             requestParams.put("requested_date", Requested_Date);
             requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
             JSONObject payment = new JSONObject();
-            payment.put("token", Payment_TKN);
+            if(chkBadge.isSelected()){
+                payment.put("token", Payment_TKN); // "B583B9C123EEFA95BC2A58E471E1E712");   /// Badge specific ????
+            }else{
+                payment.put("token", Payment_TKN);
+            }
             requestParams.put("payment", payment); 
 
             JSONObject details = new JSONObject();
@@ -2388,7 +2280,11 @@ public class Station extends javax.swing.JInternalFrame {
             requestParams.put("requested_date", Requested_Date);
             requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
             JSONObject payment = new JSONObject();
-            payment.put("token", Payment_TKN);
+            if(chkBadge.isSelected()){
+                payment.put("token", Payment_TKN); // "B583B9C123EEFA95BC2A58E471E1E712");   /// Badge specific ????
+            }else{
+                payment.put("token", Payment_TKN); // 
+            }
             requestParams.put("payment", payment); 
 
             JSONObject details = new JSONObject();
@@ -2527,6 +2423,8 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPOrder;
     private javax.swing.JButton btnSCart;
     private javax.swing.JButton btnSave_Opt;
+    private javax.swing.JCheckBox chkBadge;
+    private javax.swing.JCheckBox chkMPlan;
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbEnv;
     private javax.swing.JComboBox<String> cmbLoc;

@@ -279,7 +279,7 @@ public class AP3_GUI extends javax.swing.JInternalFrame {
             }
         ));
         DV2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        DV2.setGridColor(java.awt.SystemColor.activeCaptionBorder);
+        DV2.setGridColor(java.awt.SystemColor.windowBorder);
         DV2.setName("DV2"); // NOI18N
         DV2.setRowHeight(18);
         DV2.getTableHeader().setReorderingAllowed(false);
