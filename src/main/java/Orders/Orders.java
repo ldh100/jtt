@@ -1040,9 +1040,15 @@ public class Orders extends javax.swing.JInternalFrame {
                         if(or.has("payment") && or.getJSONObject("payment").has("digital_wallet_pay")){
                             _Payment = or.getJSONObject("payment").getString("digital_wallet_pay");
                         }                        
+                        if(or.has("payment") && or.getJSONObject("payment").has("badge_pay")){
+                            if(or.getJSONObject("payment").getJSONObject("badge_pay").has("tender")){
+                                _Payment = "Badge Pay";
+                            }
+                        } 
                         if(or.has("mealplan") && or.getJSONObject("mealplan").has("name")){
                             _Payment = "MPlan " + or.getJSONObject("mealplan").getString("name");
-                        }                         
+                        }  
+                      
                         if(or.has("meta") && or.getJSONObject("meta").has("promo")){
                             _Promo = or.getJSONObject("meta").getJSONObject("promo").getString("code");
                         }

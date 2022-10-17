@@ -585,7 +585,8 @@ public class Station extends javax.swing.JInternalFrame {
 
     protected String MPlan_ID = "";
     protected String Badge_ID = "";
-    protected String Tender = "";
+    protected String Tender = ""; // "8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazRaXlSjvqvegpY7urP";
+    protected String Program_Name = "";
     protected String badge_pay_system_key = "";
     // </editor-fold>
     
@@ -1016,16 +1017,10 @@ public class Station extends javax.swing.JInternalFrame {
                     freedompay_id = p.getJSONObject("freedompay").getString("id");
                     freedompay_terminal_id = p.getJSONObject("freedompay").getString("freedompay_terminal_id");
                     freedompay_store_id = p.getJSONObject("freedompay").getString("freedompay_store_id");
-                    //Badge_ID = json.getJSONObject("badge_pay").getString("id");   /// < in public config, this is private
                     if(p.getJSONObject("freedompay").has("badge_pay_system_key")){
                         badge_pay_system_key = p.getJSONObject("freedompay").getString("badge_pay_system_key");
                     }
-                } else if (p.has("exact")) {
-                    PProvider = "Exact";
-                    exact_gateway_password = p.getJSONObject("exact").getString("exact_gateway_password");
-                    exact_gateway_id = p.getJSONObject("exact").getString("exact_gateway_id");
-                    exact_id = p.getJSONObject("exact").getString("id");
-                }
+                } 
                 txtLog.append("" + SITE + " > Payment Provider: " + PProvider + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
 
@@ -1033,6 +1028,7 @@ public class Station extends javax.swing.JInternalFrame {
                     Api_Call("GET", BaseAPI + "/config/public/" + SiteID, "", "");
                     if(json.has("badge_pay")) {
                         Badge_ID = json.getJSONObject("badge_pay").getString("id");
+                        Program_Name = json.getJSONObject("badge_pay").getString("name");
                         chkBadge.setEnabled(true);                     
                     }
                 }
@@ -1692,6 +1688,9 @@ public class Station extends javax.swing.JInternalFrame {
             this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
             return;
         }
+        if(chkBadge.isSelected()){
+            FP_Badge();
+        }
         if(TYPE.equals("P")){
             New_Pickup_ShoppingCart();  
             if(FAIL) {
@@ -1708,8 +1707,10 @@ public class Station extends javax.swing.JInternalFrame {
                 this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
                 Validate_Place_Order();
                 return;
-            }else{                
-                FP();
+            }else{      
+                if(!chkBadge.isSelected()){                       
+                    FP();
+                }
                 if(FAIL) {
                     Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
@@ -1739,7 +1740,9 @@ public class Station extends javax.swing.JInternalFrame {
                 Validate_Place_Order();
                 return;
             }else{
-                FP();
+                if(!chkBadge.isSelected()){                       
+                    FP();
+                }
                 if(FAIL) {
                     Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
@@ -1823,6 +1826,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Pickup_ID = json.getString("id");
+                total = json.getJSONObject("total").getDouble("amount");
                 txtLog.append("== " + "New SCart (POST) ID:  \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
@@ -1884,6 +1888,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try{
                 ShoppingCart_Pickup_ID = json.getString("id");
+                total = json.getJSONObject("total").getDouble("amount");
                 txtLog.append("== " + "Updated Shopping Cart: \r\n"  + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
@@ -1906,6 +1911,7 @@ public class Station extends javax.swing.JInternalFrame {
             if(json != null){
                 try{
                     ShoppingCart_Pickup_ID = json.getString("id");
+                    total = json.getJSONObject("total").getDouble("amount"); // "total": {"amount": 0.01},
                     txtLog.append("== " + "Apply Promo (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
@@ -1919,16 +1925,18 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("\r\n- " + "Change Shopping Cart Payment to Badge_Pay ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); 
-            JSONObject BPay = new JSONObject();
-            BPay.put("id", Badge_ID);
-            BPay.put("tender", "oWglgN3NZdSJ3dd5laoyFjeErWyW0eh8QoBQLr93s7L12YPXmoHa8"); //O49w9E3E5zUWR22dBNvzuZBylwMw7BHJEpoE4m4kFa4p5dgoZwCv7"); /// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            requestParams.put("badge_pay", BPay);
+            JSONObject BadgePay = new JSONObject();
+                BadgePay.put("id", Badge_ID);
+                BadgePay.put("tender", Tender); // '8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazRaXlSjvqvegpY7urP',
+                BadgePay.put("total", total);
+            requestParams.put("badge_pay", BadgePay);
             requestParams.put("email", txtMobile_ID.getText().trim());
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/paymentmethod", Auth, BODY);        
             if(json != null){
                 try{
                     ShoppingCart_Pickup_ID = json.getString("id");
+                    total = json.getJSONObject("total").getDouble("amount");
                     txtLog.append("== " + "Change Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
@@ -1961,6 +1969,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try {
                 ShoppingCart_Delivery_ID = json.getString("id");
+                total = json.getJSONObject("total").getDouble("amount");
                 txtLog.append("== " + "New SCart (POST) ID: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
@@ -2020,6 +2029,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(json != null){
             try{
                 ShoppingCart_Delivery_ID = json.getString("id");
+                total = json.getJSONObject("total").getDouble("amount");
                 txtLog.append("== " + "Add Item {PUT) > Updated SCart \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             } catch (Exception ex){
@@ -2042,6 +2052,7 @@ public class Station extends javax.swing.JInternalFrame {
             if(json != null){
                 try{
                     ShoppingCart_Delivery_ID = json.getString("id");
+                    total = json.getJSONObject("total").getDouble("amount");
                     txtLog.append("== " + "Apply Promo (PUT) > Updated SCart ID: "  + ShoppingCart_Delivery_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
@@ -2052,6 +2063,31 @@ public class Station extends javax.swing.JInternalFrame {
                 }
             }        
         }   
+        if(chkBadge.isSelected()) {
+            txtLog.append("\r\n- " + "Change Shopping Cart Payment to Badge_Pay ...." + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            JSONObject requestParams = new JSONObject(); 
+            JSONObject BadgePay = new JSONObject();
+                BadgePay.put("id", Badge_ID);
+                BadgePay.put("tender", "8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazoeAgHjJW7aaZQOsqk");
+                BadgePay.put("total", total);
+            requestParams.put("badge_pay", BadgePay);
+            requestParams.put("email", txtMobile_ID.getText().trim());
+            BODY = requestParams.toString();
+            Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/paymentmethod", Auth, BODY);        
+            if(json != null){
+                try{
+                    ShoppingCart_Delivery_ID = json.getString("id");
+                    total = json.getJSONObject("total").getDouble("amount");
+                    txtLog.append("== " + "Change Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                } catch (Exception ex){
+                    FAIL = true;
+                    txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                }
+            }  
+        }
         Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         btnSCart.setEnabled(true);
         Report_Tax();
@@ -2218,6 +2254,47 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }
     }
+    private void FP_Badge(){
+        FAIL = false;
+        txtLog.append("\r\n- Freedompay Badge API(s)..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+        
+        Auth = "Bearer " + Mobile_User_TKN;
+        Tender = "";
+        Program_Name = "";
+        Api_Call("GET", BaseAPI + "/payment/" + Badge_ID + "/badgepay", Auth, "");
+        if (json != null) {
+            try{
+                if (json.has("tenders")) {
+                    JSONArray tenders = json.getJSONArray("tenders");
+                    if(!tenders.isEmpty()){
+                        JSONObject tender = tenders.getJSONObject(0);
+                        Tender = tender.getString("id");
+                        Program_Name = tender.getString("name");
+                        txtLog.append("=== FP_Badge Tender: " + Tender + "\r\n");
+                        txtLog.append("=== FP_Badge Program Name: " + Program_Name + "\r\n");
+                        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    }
+                } 
+            } catch (Exception ex) {
+                FAIL = true;
+                txtLog.append("FP_Badge get Tender Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+// GET
+//https://api.compassdigital.org/dev/payment/<Badge_ID>/badgepay
+//{
+//    "tenders": [
+//        {
+//            "balance": 45.66,
+//            "id": "8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazoeAgHjJW7aaZQOsqk",
+//            "name": "Employee Pay Program 1"
+//        }
+//    ]
+//}
+
+    }
 
     private void Place_Update_Pickup_Order(String Payment_TKN){
         FAIL = false;
@@ -2235,7 +2312,12 @@ public class Station extends javax.swing.JInternalFrame {
             requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
             JSONObject payment = new JSONObject();
             if(chkBadge.isSelected()){
-                payment.put("token",Payment_TKN); // "B583B9C123EEFA95BC2A58E471E1E712");   /// Badge specific ????
+                JSONObject badge_pay = new JSONObject();
+                    badge_pay.put("id", Badge_ID);
+                    badge_pay.put("tender", Tender);
+                    badge_pay.put("total", total);
+                    badge_pay.put("name", Program_Name);
+                payment.put("badge_pay", badge_pay);
             }else{
                 payment.put("token", Payment_TKN);
             }
@@ -2247,8 +2329,7 @@ public class Station extends javax.swing.JInternalFrame {
 
             JSONObject details = new JSONObject();
             details.put("name", "JTT Frictionless");
-            details.put("order_type", "frictionless"); //  "order_type": "scan_and_go",     "scan_and_go_supported": true,
-            //details.put("destination", cmbLoc.getSelectedItem().toString());
+            details.put("order_type", "frictionless"); 
             requestParams.put("details", details); 
         } else if(SandG) {
             requestParams = new JSONObject();       //  Mobile User Place Scan and Go Order  =================
@@ -2260,7 +2341,12 @@ public class Station extends javax.swing.JInternalFrame {
             requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
             JSONObject payment = new JSONObject();
             if(chkBadge.isSelected()){
-                payment.put("token", Payment_TKN); // "B583B9C123EEFA95BC2A58E471E1E712");   /// Badge specific ????
+                JSONObject badge_pay = new JSONObject();
+                    badge_pay.put("id", Badge_ID);
+                    badge_pay.put("tender", Tender);
+                    badge_pay.put("total", total);
+                    badge_pay.put("name", Program_Name);
+                payment.put("badge_pay", badge_pay);
             }else{
                 payment.put("token", Payment_TKN);
             }
@@ -2281,9 +2367,14 @@ public class Station extends javax.swing.JInternalFrame {
             requestParams.put("shoppingcart", ShoppingCart_Pickup_ID);
             JSONObject payment = new JSONObject();
             if(chkBadge.isSelected()){
-                payment.put("token", Payment_TKN); // "B583B9C123EEFA95BC2A58E471E1E712");   /// Badge specific ????
+                JSONObject badge_pay = new JSONObject();
+                    badge_pay.put("id", Badge_ID);
+                    badge_pay.put("tender", Tender);
+                    badge_pay.put("total", total);
+                    badge_pay.put("name", Program_Name);
+                payment.put("badge_pay", badge_pay);
             }else{
-                payment.put("token", Payment_TKN); // 
+                payment.put("token", Payment_TKN);
             }
             requestParams.put("payment", payment); 
 
@@ -2334,21 +2425,52 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + Mobile_User_TKN;
 
-        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
-                "\"location_brand\":\"" + BrandID + "\"," + 
-                "\"customer\":\"" + Mobile_User_ID + "\"," +  
-                "\"details\":" +                                   
-                    "{\"contact_number\":\"4165551234\"," +
-                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
-                    "\"duration\":\"" + "00:05:00" + "\"," +
-                    "\"instructions\":\"" + "Discard this Order" + "\"," +
-                    "\"name\":\"" + txtMSG.getText() + "\"," +
-                    "\"order_type\":\"delivery\"}," + 
-                "\"payment\":" + 
-                    "{\"token\":\"" + Payment_TKN + "\"}," +
-                "\"requested_date\":\"" + Requested_Date + "\"," +
-                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
-                "\"}";        
+//        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
+//                "\"location_brand\":\"" + BrandID + "\"," + 
+//                "\"customer\":\"" + Mobile_User_ID + "\"," +  
+//                "\"details\":" +                                   
+//                    "{\"contact_number\":\"4165551234\"," +
+//                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
+//                    "\"duration\":\"" + "00:05:00" + "\"," +
+//                    "\"instructions\":\"" + "Discard this Order" + "\"," +
+//                    "\"name\":\"" + txtMSG.getText() + "\"," +
+//                    "\"order_type\":\"delivery\"}," + 
+//                "\"payment\":" + 
+//                    "{\"token\":\"" + Payment_TKN + "\"}," +
+//                "\"requested_date\":\"" + Requested_Date + "\"," +
+//                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
+//                "\"}";   
+
+        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+        requestParams.put("location_brand", BrandID);
+        requestParams.put("customer", Mobile_User_ID);
+        requestParams.put("requested_date", Requested_Date);
+        requestParams.put("shoppingcart", ShoppingCart_Delivery_ID);
+
+        JSONObject payment = new JSONObject();
+        if(chkBadge.isSelected()){
+            JSONObject badge_pay = new JSONObject();
+                badge_pay.put("id", Badge_ID);
+                badge_pay.put("tender", Tender);
+                badge_pay.put("total", total);
+                badge_pay.put("name", Program_Name);
+            payment.put("badge_pay", badge_pay);
+        }else{
+            payment.put("token", Payment_TKN);
+        }
+        requestParams.put("payment", payment); 
+
+        JSONObject details = new JSONObject();
+            details.put("order_type", "delivery");
+            details.put("contact_number", "4165551234");
+            details.put("destination", cmbLoc.getSelectedItem().toString());
+            details.put("duration", "00:05:00");
+            details.put("instructions", "Discard this Order");
+            details.put("name", txtMSG.getText());
+        requestParams.put("details", details); 
+
+        BODY = requestParams.toString(); 
+     
         Api_Call("POST",  BaseAPI + "/order?lang=en", Auth, BODY);
         if(json != null && json.has("id")){
             Order_Delivery_ID = json.getString("id");
