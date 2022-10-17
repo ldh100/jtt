@@ -25,9 +25,8 @@ or the email will go to
 frictionlesssupport@mailsac.com
 
 Patel, Keyur
-So all email for dispute will got to ”
-frictionlesssupport@mailsac.com" right ?
-Dev , staging and prod
+So all email for dispute will got to ”frictionlesssupport@mailsac.com" right ?
+Dev, staging and prod
 
 Tokariev, Sviatoslav
 yes
@@ -88,10 +87,6 @@ class order extends AP3_API_GUI{
     long START;
     
     protected void run() {  
-//        if (!env.equals("PR")) {
-//            PLACE_ORDERS();
-//        }
-        
         Auth = "Bearer " + Mobile_User_TKN;
         long m1 = System.currentTimeMillis();                     
         long m7 = System.currentTimeMillis() - (60*60*24*7*1000); // - 7 days

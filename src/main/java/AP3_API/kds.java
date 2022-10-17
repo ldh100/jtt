@@ -53,18 +53,18 @@ class kds extends AP3_API_GUI{
             AAA = json.toString(4);
         }
 
-//        requestParams = new JSONObject();   //  KDS Device Authentication VALID =================
-//        serial_number = new JSONObject();
-//        serial_number.put("serial_number", "DMPR8EUGG5YL"); // KDS_Serial_Number >> Error: serial_number is missing or invalid.
-//        requestParams.put("is", serial_number); 
-//        BODY = requestParams.toString();         
-//        JOB_Api_Call("KDS Devices > /kds/device/auth/ > Valid", "POST", 
-//            BaseAPI + "/kds/device/auth", "", BODY, 400, ParentTest, "no_jira");
-//        if(json != null){
-//            String DEVICES = "units";
-//            // KDS_Serial_Number ????
-//            AAA = json.toString(4);
-//        }
+        requestParams = new JSONObject();   //  KDS Device Authentication VALID =================
+        serial_number = new JSONObject();
+        serial_number.put("serial_number", "DMPR8EUGG5YL"); // KDS_Serial_Number >> Error: serial_number is missing or invalid.
+        requestParams.put("is", serial_number); 
+        BODY = requestParams.toString();         
+        JOB_Api_Call("KDS Devices > /kds/device/auth/ > Valid", "POST", 
+            BaseAPI + "/kds/device/auth", "", BODY, 400, ParentTest, "no_jira");
+        if(json != null){
+            String DEVICES = "units";
+            // KDS_Serial_Number ????
+            AAA = json.toString(4);
+        }
         
         //JOB_WS_Call("WebSocket > KDS Get Orders", "wss://ws.compassdigital.org", ParentTest, "no_jira");        
 
