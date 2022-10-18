@@ -968,8 +968,8 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;}
             for (int i = 0; i < L1.size(); i++) {
                 Element_Attribute("Menu Set (Index " + i + ")", L1.get(i), "textContent", ParentTest, "no_jira");  
-            }               
-
+            }  
+            
         Element_Click("Click 1st Menu Set", L1.get(0), ParentTest, "no_jira"); 
             if (FAIL) { return;}    
             
