@@ -957,7 +957,7 @@ class AP3_menu_manager extends AP3_GUI{
             if (FAIL) { return;} 
         Thread.sleep(500);        
         To_Top("Scroll to page Top", ParentTest, "no_jira");        
-        Thread.sleep(500);
+        Thread.sleep(1500);
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
         Thread.sleep(500); 
@@ -972,10 +972,15 @@ class AP3_menu_manager extends AP3_GUI{
             
         Element_Click("Click 1st Menu Set", L1.get(0), ParentTest, "no_jira"); 
             if (FAIL) { return;}    
+            
         Thread.sleep(500);                 
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}                         
-
+         Element_By_Path_Click("click first category", "xpath", "//div[@class='flex xs12 list-item no-icon']//div[@class='layout align-center']", ParentTest, "no_jira");
+            if (FAIL) { return;}  
+            Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
+            if (FAIL) { return;} 
+             Thread.sleep(1500);   
         // Bulk update  DEBUG, Hide inactive test steps 
         Element_E1_Find("Find 'Bulk' container", "xpath", "//div[@class='layout justify-left align-center']", ParentTest, "no_jira");
             if (FAIL) { return;}

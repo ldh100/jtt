@@ -172,17 +172,17 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;} 
         Thread.sleep(1000);
         Element_By_Path_Attribute("Find 'No Categories...'", "xpath", "//*[contains(text(), 'No categories found')]", "textContent", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-
+            if (FAIL) { return;}    
+        Thread.sleep(6000);
         Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");        
             if (FAIL) { return;}   
-        Thread.sleep(500);
+        Thread.sleep(1000);
         Element_By_Path_Click("Click 'EDIT MENU'", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Thread.sleep(500); 
+        Thread.sleep(6000); 
         Wait_For_All_Elements_InVisibility("Wait for 'EDIT'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}    
-        //Thread.sleep(2000);
+        Thread.sleep(2000);
         Wait_For_Element_By_Path_Presence("Wait for Menu List page", "css", "[menu-id]", ParentTest, "no_jira"); 
                 if (FAIL) { return;}  
         List_L2("Published Menus ID Count", "css", "[menu-id]", ParentTest, "no_jira");             
@@ -230,7 +230,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}    
         Thread.sleep(500); 
         To_Bottom("Scroll to page Bottom", ParentTest, "no_jira"); 
-        Thread.sleep(500);
+        Thread.sleep(5000);
         Wait_For_Element_By_Path_Presence("Wait for 'Category Sequence On Ticket' Presence", "css", "[aria-label='Sequence On Ticket']", ParentTest, Ver);
             if (FAIL) { return;}    
         Element_By_Path_Click("Click 'New Category Sequence On Ticket'", "css", "[aria-label='Sequence On Ticket']", ParentTest, "no_jira");
