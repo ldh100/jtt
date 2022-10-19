@@ -147,7 +147,7 @@ class AP3_mm_items extends AP3_GUI{
             if (FAIL) { return;}          
         Element_By_Path_Click("Click 'ADD MENU SET'", "xpath", "//*[contains(text(), 'add menu set')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Thread.sleep(2000); 
+        Thread.sleep(500); 
         List_L0("Menus + 1 Added Count", "xpath", "//div[@class='flex xs12 list-item list-item-large']", ParentTest, "no_jira");             
             if (FAIL) { return;} 
         List_Child_E1_By_Path("Find New Menu Set Name input", L0.get((L0.size() - 1)), "xpath", ".//input[@type='text']", ParentTest, "no_jira"); 
@@ -162,7 +162,7 @@ class AP3_mm_items extends AP3_GUI{
         Thread.sleep(500);
         Wait_For_All_Elements_InVisibility("Wait for 'PUBLISH' result...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
-        Thread.sleep(2000);
+        Thread.sleep(500);
         Element_By_Path_Attribute("Find 'Last/Editing...' text", "xpath", "//span[@class='v-chip__content']", "textContent", ParentTest, "no_jira"); 
             if (FAIL) { return;}  
         Element_By_Path_Click("Added Menu Set Name Click", "xpath", "//*[contains(text(), 'Added " + New_ID + "')]", ParentTest, "no_jira"); 
@@ -170,10 +170,10 @@ class AP3_mm_items extends AP3_GUI{
         Thread.sleep(500);                
         Wait_For_All_Elements_InVisibility("Wait for 'progress'...", "xpath", "//*[contains(@class, 'progress')]", ParentTest, "no_jira"); 
             if (FAIL) { return;} 
-        Thread.sleep(1000);
+        Thread.sleep(500);
         Element_By_Path_Attribute("Find 'No Categories...'", "xpath", "//*[contains(text(), 'No categories found')]", "textContent", ParentTest, "no_jira"); 
-            if (FAIL) { return;}  
-
+            if (FAIL) { return;}    
+        Thread.sleep(500);
         Move_to_Element_By_Path("Scroll to 'EDIT MENU' button", "xpath", "//*[contains(text(), 'EDIT MENU')]", ParentTest, "no_jira");        
             if (FAIL) { return;}   
         Thread.sleep(500);
