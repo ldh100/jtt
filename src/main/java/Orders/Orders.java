@@ -996,7 +996,7 @@ public class Orders extends javax.swing.JInternalFrame {
         String _Promo = "None";
         String _Name = "?";
         String _Payment = "?";
-        String _Amount = "?";
+        String _Amount = "0";
         
         String[] SitesColumnsName = {"Env", "App", "Site", "Destination", "Req_Date", "Amount", "PickupName", "Promo", "Payment", "Service","SCartID", "OrderID", "Modified_Date"}; 
         DefaultTableModel dm = new DefaultTableModel();
@@ -1027,10 +1027,14 @@ public class Orders extends javax.swing.JInternalFrame {
                         JSONObject or = OR.getJSONObject(i);
                         if(or.has("meta") && or.getJSONObject("meta").has("transaction") && or.getJSONObject("meta").getJSONObject("transaction").has("amount")){
                             _Amount = or.getJSONObject("meta").getJSONObject("transaction").getNumber("amount").toString();
+                        }else{
+                            if(or.has("meta") && or.getJSONObject("meta").has("shoppingcart") && or.getJSONObject("meta").getJSONObject("shoppingcart").has("total")){
+                                _Amount = or.getJSONObject("meta").getJSONObject("shoppingcart").getJSONObject("total").getNumber("amount").toString();
+                            }
                         }
 
                         if(or.has("payment") && or.getJSONObject("payment").has("credit_card") && 
-                           or.getJSONObject("payment").getJSONObject("credit_card").has("card_type")){
+                            or.getJSONObject("payment").getJSONObject("credit_card").has("card_type")){
                             String Last4 = " x????";
                             if(or.getJSONObject("payment").getJSONObject("credit_card").has("last4")){
                                 Last4 = " x" + or.getJSONObject("payment").getJSONObject("credit_card").getString("last4");

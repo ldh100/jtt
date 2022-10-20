@@ -583,10 +583,14 @@ public class Station extends javax.swing.JInternalFrame {
     protected String FP_Payment_TKN = "";
     protected String Last_SCart_URL = "";
 
+    protected String Last4 = "";
+    protected String Card_Type = "";
+
     protected String MPlan_ID = "";
     protected String Badge_ID = "";
-    protected String Tender = ""; // "8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazRaXlSjvqvegpY7urP";
+    protected String Tender = ""; 
     protected String Program_Name = "";
+    protected String Balance = "";
     protected String badge_pay_system_key = "";
     // </editor-fold>
     
@@ -727,19 +731,20 @@ public class Station extends javax.swing.JInternalFrame {
     private void Load_Form(){
         Load = true;
         cmbApp.addItem("Boost");
-        cmbApp.addItem("Canteen");
-        cmbApp.addItem("JJKitchen");
-        cmbApp.addItem("Nourish");
-        cmbApp.addItem("Rogers");
-        cmbApp.addItem("Tacit");
         cmbApp.addItem("Thrive");
+        cmbApp.addItem("JJKitchen");
+//        cmbApp.addItem("Nourish");
+//        cmbApp.addItem("Rogers");
+        cmbApp.addItem("Canteen");
+        cmbApp.addItem("Tacit");
+ 
         
         cmbEnv.addItem("Development"); 
         cmbEnv.addItem("Staging");
         cmbEnv.addItem("Production");  
         
-        cmbEnv.setSelectedIndex(1); // Staging
-        cmbApp.setSelectedIndex(0); // Boost  
+        cmbEnv.setSelectedIndex(0); // Dev 0, Staging 1, Prof 2
+        cmbApp.setSelectedIndex(1); // Boost 0, Thrive 1 
 
         Load = false;
         LOAD_ENV();
@@ -1637,15 +1642,13 @@ public class Station extends javax.swing.JInternalFrame {
             }
             Result = response.getStatusLine();
             status = response.getStatusCode();
-//            if (status != 200 && status != 201) {
                 txtLog.append("Endpoint: " + EndPoint + "\r\n");
                 txtLog.append("Result: " + status + " - " + Result + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());                
-//            }
             if (response.asString().startsWith("{") && response.asString().endsWith("}")) {
                 json = new JSONObject(response.asString());
                 if (json.has("error")) {
-                    txtLog.append("Error: " + json.getString("error") + "\r\n");
+                    txtLog.append("Error: " + json.getNumber("code") + " " + json.getString("error") + "\r\n");
                 }
             }
         } catch (Exception ex) {
@@ -1690,6 +1693,8 @@ public class Station extends javax.swing.JInternalFrame {
         }
         if(chkBadge.isSelected()){
             FP_Badge();
+        }else{                    
+            FP();
         }
         if(TYPE.equals("P")){
             New_Pickup_ShoppingCart();  
@@ -1708,9 +1713,6 @@ public class Station extends javax.swing.JInternalFrame {
                 Validate_Place_Order();
                 return;
             }else{      
-                if(!chkBadge.isSelected()){                       
-                    FP();
-                }
                 if(FAIL) {
                     Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
@@ -1740,9 +1742,6 @@ public class Station extends javax.swing.JInternalFrame {
                 Validate_Place_Order();
                 return;
             }else{
-                if(!chkBadge.isSelected()){                       
-                    FP();
-                }
                 if(FAIL) {
                     Validate_Place_Order();
                     this.setCursor(Cursor.getPredefinedCursor (Cursor.DEFAULT_CURSOR));            
@@ -1801,7 +1800,139 @@ public class Station extends javax.swing.JInternalFrame {
 //            txtLog.append("\r\n- Exception: " + ex.getMessage() + "\r\n"); 
 //            txtLog.setCaretPosition(txtLog.getDocument().getLength());
 //        }     
-    }                                    
+    }    
+                                
+    private void FP(){
+        FAIL = false;
+        txtLog.append("\r\n- Freedompay API(s)..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+        FP_Payment_TKN = "";
+        String Access_TKN = "";
+        
+        Auth = "Bearer " + Mobile_User_TKN;
+        Api_Call("GET", BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "");
+        if (json != null && json.has("access_token")) {
+            try {
+                Access_TKN = json.getString("access_token");
+            } catch (Exception ex) {
+                FAIL = true;
+                txtLog.append("FP_Client_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                return;
+            }
+        }
+// =========================
+        Auth = "Bearer " + Access_TKN;
+        Api_Call("GET", FP_URL + "/TokenService/api/consumers/tokens", Auth, "");
+        if (json != null) {
+            String AAA = json.toString(4);
+            try {
+                if (json.has("data")) {
+                    JSONArray tokens = json.getJSONArray("data");
+                    for (int i = 0; i < tokens.length(); i++) {
+                        JSONObject p = tokens.getJSONObject(i);
+                        Payment_Tokens_FP.add(p.getString("token"));
+                    }
+                }
+            } catch (Exception ex) {
+                AAA = ex.getMessage();
+            }
+        }       
+
+        for (int i = 0; i < Payment_Tokens_FP.size(); i++) {
+            Api_Call("DELETE", FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "");
+        } 
+// ==========================
+
+        Auth = "Bearer " + Access_TKN;
+        requestParams = new JSONObject();
+        if(env.equals("PR")){
+            Last4 = A.A.C1_Num.substring(A.A.C1_Num.length() - 4);
+            Card_Type = "Mastercard";
+            requestParams.put("nameOnCard", A.A.C1_Name);
+            requestParams.put("cardNumber", A.A.C1_Num); // Mastercard
+            requestParams.put("CVV", A.A.C1_Cvv);
+            requestParams.put("avsVerificationRequired", true);
+            requestParams.put("cvvVerificationRequired", true);
+            JSONObject billingAddress = new JSONObject();
+                billingAddress.put("postalCode", A.A.C1_Zip);
+            requestParams.put("billingAddress", billingAddress); 
+            requestParams.put("isPreferred", true);
+            requestParams.put("expiryMonth", A.A.C1_Exp.substring(0,2));
+            requestParams.put("expiryYear", "20" + A.A.C1_Exp.substring(2));
+        } else{
+            Last4 = "1111";
+            Card_Type = "Visa";
+            requestParams.put("nameOnCard", "JTT API Automation");
+            requestParams.put("cardNumber", "4111111111111111"); // Visa
+            requestParams.put("CVV", "123");
+            requestParams.put("avsVerificationRequired", true);
+            requestParams.put("cvvVerificationRequired", true);
+            JSONObject billingAddress = new JSONObject();
+                billingAddress.put("postalCode", "L3L3C4");
+            requestParams.put("billingAddress", billingAddress); 
+            requestParams.put("isPreferred", true);
+            requestParams.put("expiryMonth", 12);
+            requestParams.put("expiryYear", 2024);
+        }
+
+        BODY = requestParams.toString();
+        Api_Call("POST", FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY);
+        if (json != null) {
+            try {
+                FP_Payment_TKN = json.getString("token");
+                txtLog.append("=== FP_Payment_TKN: " + FP_Payment_TKN + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            } catch (Exception ex) {
+                FAIL = true;
+                txtLog.append("FP_Payment_TKN Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+    }
+    private void FP_Badge(){
+        FAIL = false;
+        txtLog.append("\r\n- Freedompay Badge API(s)..." + "\r\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
+        
+        Auth = "Bearer " + Mobile_User_TKN;
+        Tender = "";
+        Program_Name = "";
+        Api_Call("GET", BaseAPI + "/payment/" + Badge_ID + "/badgepay", Auth, "");
+        if (json != null) {
+            try{
+                if (json.has("tenders")) {
+                    JSONArray tenders = json.getJSONArray("tenders");
+                    if(!tenders.isEmpty()){
+                        JSONObject tender = tenders.getJSONObject(0);
+                        Tender = tender.getString("id");
+                        Program_Name = tender.getString("name");
+                        Balance = tender.getNumber("balance").toString();
+                        txtLog.append("=== FP_Badge Tender: " + Tender + "\r\n");
+                        txtLog.append("=== FP_Badge Program Name: " + Program_Name + "\r\n");
+                        txtLog.append("=== FP_Badge Balance: $" + Balance + "\r\n");
+                        txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                    }
+                } 
+            } catch (Exception ex) {
+                FAIL = true;
+                txtLog.append("FP_Badge get Tender Error: " + ex.getMessage() + "\r\n");
+                txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            }
+        }
+// GET
+//https://api.compassdigital.org/dev/payment/<Badge_ID>/badgepay
+//{
+//    "tenders": [
+//        {
+//            "balance": 45.66,
+//            "id": "8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazoeAgHjJW7aaZQOsqk",
+//            "name": "Employee Pay Program 1"
+//        }
+//    ]
+//}
+
+    }
 
     private void New_Pickup_ShoppingCart(){
         FAIL = false;
@@ -1904,14 +2035,13 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); 
             requestParams.put("code", cmbPROMO.getSelectedItem().toString());
-            //requestParams.put("email", Mobile_User_ID);
             requestParams.put("email", txtMobile_ID.getText().trim());
             BODY = requestParams.toString();
             Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/promo", Auth, BODY);        
             if(json != null){
                 try{
                     ShoppingCart_Pickup_ID = json.getString("id");
-                    total = json.getJSONObject("total").getDouble("amount"); // "total": {"amount": 0.01},
+                    total = json.getJSONObject("total").getDouble("amount"); 
                     txtLog.append("== " + "Apply Promo (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
@@ -1922,7 +2052,7 @@ public class Station extends javax.swing.JInternalFrame {
             }        
         } 
         if(chkBadge.isSelected()) {
-            txtLog.append("\r\n- " + "Change Shopping Cart Payment to Badge_Pay ...." + "\r\n");
+            txtLog.append("\r\n- " + "Put Shopping Cart Payment > Badge_Pay ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); 
             JSONObject BadgePay = new JSONObject();
@@ -1937,7 +2067,7 @@ public class Station extends javax.swing.JInternalFrame {
                 try{
                     ShoppingCart_Pickup_ID = json.getString("id");
                     total = json.getJSONObject("total").getDouble("amount");
-                    txtLog.append("== " + "Change Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.append("== " + "Set Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
                     FAIL = true;
@@ -1945,6 +2075,30 @@ public class Station extends javax.swing.JInternalFrame {
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 }
             }  
+        }else {
+            txtLog.append("\r\n- " + "Put Shopping Cart Payment > Credit Card ...." + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            JSONObject requestParams = new JSONObject(); 
+            JSONObject credit_card = new JSONObject();
+                credit_card.put("last4", Last4);
+                credit_card.put("card_type", Card_Type);
+                credit_card.put("total", total);
+            requestParams.put("credit_card", credit_card);
+            requestParams.put("email", txtMobile_ID.getText().trim());
+            BODY = requestParams.toString();
+            Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "/paymentmethod", Auth, BODY);        
+            if(json != null){
+                try{
+                    ShoppingCart_Pickup_ID = json.getString("id");
+                    total = json.getJSONObject("total").getDouble("amount");
+                    txtLog.append("== " + "Set Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                } catch (Exception ex){
+                    FAIL = true;
+                    txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                }
+            }
         }
         Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID;
         btnSCart.setEnabled(true);
@@ -2064,12 +2218,12 @@ public class Station extends javax.swing.JInternalFrame {
             }        
         }   
         if(chkBadge.isSelected()) {
-            txtLog.append("\r\n- " + "Change Shopping Cart Payment to Badge_Pay ...." + "\r\n");
+            txtLog.append("\r\n- " + "Put Shopping Cart Payment > Badge_Pay ...." + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
             JSONObject requestParams = new JSONObject(); 
             JSONObject BadgePay = new JSONObject();
                 BadgePay.put("id", Badge_ID);
-                BadgePay.put("tender", "8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazoeAgHjJW7aaZQOsqk");
+                BadgePay.put("tender", Tender);
                 BadgePay.put("total", total);
             requestParams.put("badge_pay", BadgePay);
             requestParams.put("email", txtMobile_ID.getText().trim());
@@ -2079,7 +2233,7 @@ public class Station extends javax.swing.JInternalFrame {
                 try{
                     ShoppingCart_Delivery_ID = json.getString("id");
                     total = json.getJSONObject("total").getDouble("amount");
-                    txtLog.append("== " + "Change Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.append("== " + "Set Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "\r\n");
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 } catch (Exception ex){
                     FAIL = true;
@@ -2087,6 +2241,30 @@ public class Station extends javax.swing.JInternalFrame {
                     txtLog.setCaretPosition(txtLog.getDocument().getLength());
                 }
             }  
+        } else {
+            txtLog.append("\r\n- " + "Put Shopping Cart Payment > Credit Card ...." + "\r\n");
+            txtLog.setCaretPosition(txtLog.getDocument().getLength());
+            JSONObject requestParams = new JSONObject(); 
+            JSONObject credit_card = new JSONObject();
+                credit_card.put("last4", Last4);
+                credit_card.put("card_type", Card_Type);
+                credit_card.put("total", total);
+            requestParams.put("credit_card", credit_card);
+            requestParams.put("email", txtMobile_ID.getText().trim());
+            BODY = requestParams.toString();
+            Api_Call("PUT", BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID + "/paymentmethod", Auth, BODY);        
+            if(json != null){
+                try{
+                    ShoppingCart_Delivery_ID = json.getString("id");
+                    total = json.getJSONObject("total").getDouble("amount");
+                    txtLog.append("== " + "Set Payment (PUT) > Updated SCart: \r\n" + BaseAPI + "/shoppingcart/" + ShoppingCart_Pickup_ID + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                } catch (Exception ex){
+                    FAIL = true;
+                    txtLog.append("== " + "Update SCart ERROR: "  + ex.getMessage() + "\r\n");
+                    txtLog.setCaretPosition(txtLog.getDocument().getLength());
+                }
+            }
         }
         Last_SCart_URL = BaseAPI + "/shoppingcart/" + ShoppingCart_Delivery_ID;
         btnSCart.setEnabled(true);
@@ -2167,133 +2345,6 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("== " + "Requested Date ERROR: "  + ex.getMessage() + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength());
         }
-    }
-
-    private void FP(){
-        FAIL = false;
-        txtLog.append("\r\n- Freedompay API(s)..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        FP_Payment_TKN = "";
-        String Access_TKN = "";
-        
-        Auth = "Bearer " + Mobile_User_TKN;
-        Api_Call("GET", BaseAPI + "/payment/" + freedompay_id + "/clienttoken", Auth, "");
-        if (json != null && json.has("access_token")) {
-            try {
-                Access_TKN = json.getString("access_token");
-            } catch (Exception ex) {
-                FAIL = true;
-                txtLog.append("FP_Client_TKN Error: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                return;
-            }
-        }
-// =========================
-        Auth = "Bearer " + Access_TKN;
-        Api_Call("GET", FP_URL + "/TokenService/api/consumers/tokens", Auth, "");
-        if (json != null) {
-            String AAA = json.toString(4);
-            try {
-                if (json.has("data")) {
-                    JSONArray tokens = json.getJSONArray("data");
-                    for (int i = 0; i < tokens.length(); i++) {
-                        JSONObject p = tokens.getJSONObject(i);
-                        Payment_Tokens_FP.add(p.getString("token"));
-                    }
-                }
-            } catch (Exception ex) {
-                AAA = ex.getMessage();
-            }
-        }       
-
-        for (int i = 0; i < Payment_Tokens_FP.size(); i++) {
-            Api_Call("DELETE", FP_URL + "/TokenService/api/consumers/tokens/" + Payment_Tokens_FP.get(i), Auth, "");
-        } 
-// ==========================
-
-        Auth = "Bearer " + Access_TKN;
-        requestParams = new JSONObject();
-        if(env.equals("PR")){
-            requestParams.put("nameOnCard", A.A.C1_Name);
-            requestParams.put("cardNumber", A.A.C1_Num); // Visa
-            requestParams.put("CVV", A.A.C1_Cvv);
-            requestParams.put("avsVerificationRequired", true);
-            requestParams.put("cvvVerificationRequired", true);
-            JSONObject billingAddress = new JSONObject();
-                billingAddress.put("postalCode", A.A.C1_Zip);
-            requestParams.put("billingAddress", billingAddress); 
-            requestParams.put("isPreferred", true);
-            requestParams.put("expiryMonth", A.A.C1_Exp.substring(0,2));
-            requestParams.put("expiryYear", "20" + A.A.C1_Exp.substring(2));
-        } else{
-            requestParams.put("nameOnCard", "JTT API Automation");
-            requestParams.put("cardNumber", "4111111111111111"); // Visa
-            requestParams.put("CVV", "123");
-            requestParams.put("avsVerificationRequired", true);
-            requestParams.put("cvvVerificationRequired", true);
-            JSONObject billingAddress = new JSONObject();
-                billingAddress.put("postalCode", "L3L3C4");
-            requestParams.put("billingAddress", billingAddress); 
-            requestParams.put("isPreferred", true);
-            requestParams.put("expiryMonth", 12);
-            requestParams.put("expiryYear", 2024);
-    }
-
-
-        BODY = requestParams.toString();
-        Api_Call("POST", FP_URL + "/TokenService/api/consumers/tokens", Auth, BODY);
-        if (json != null) {
-            try {
-                FP_Payment_TKN = json.getString("token");
-                txtLog.append("=== FP_Payment_TKN: " + FP_Payment_TKN + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            } catch (Exception ex) {
-                FAIL = true;
-                txtLog.append("FP_Payment_TKN Error: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            }
-        }
-    }
-    private void FP_Badge(){
-        FAIL = false;
-        txtLog.append("\r\n- Freedompay Badge API(s)..." + "\r\n");
-        txtLog.setCaretPosition(txtLog.getDocument().getLength());   
-        
-        Auth = "Bearer " + Mobile_User_TKN;
-        Tender = "";
-        Program_Name = "";
-        Api_Call("GET", BaseAPI + "/payment/" + Badge_ID + "/badgepay", Auth, "");
-        if (json != null) {
-            try{
-                if (json.has("tenders")) {
-                    JSONArray tenders = json.getJSONArray("tenders");
-                    if(!tenders.isEmpty()){
-                        JSONObject tender = tenders.getJSONObject(0);
-                        Tender = tender.getString("id");
-                        Program_Name = tender.getString("name");
-                        txtLog.append("=== FP_Badge Tender: " + Tender + "\r\n");
-                        txtLog.append("=== FP_Badge Program Name: " + Program_Name + "\r\n");
-                        txtLog.setCaretPosition(txtLog.getDocument().getLength());
-                    }
-                } 
-            } catch (Exception ex) {
-                FAIL = true;
-                txtLog.append("FP_Badge get Tender Error: " + ex.getMessage() + "\r\n");
-                txtLog.setCaretPosition(txtLog.getDocument().getLength());
-            }
-        }
-// GET
-//https://api.compassdigital.org/dev/payment/<Badge_ID>/badgepay
-//{
-//    "tenders": [
-//        {
-//            "balance": 45.66,
-//            "id": "8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazoeAgHjJW7aaZQOsqk",
-//            "name": "Employee Pay Program 1"
-//        }
-//    ]
-//}
-
     }
 
     private void Place_Update_Pickup_Order(String Payment_TKN){
@@ -2418,7 +2469,6 @@ public class Station extends javax.swing.JInternalFrame {
             }
         }   
     }
-
     private void Place_Update_Delivery_Order(String Payment_TKN){
         FAIL = false;
         txtLog.append("\r\n- " + "Place Delivery Order ...." + "\r\n");
@@ -2441,7 +2491,7 @@ public class Station extends javax.swing.JInternalFrame {
 //                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
 //                "\"}";   
 
-        requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
+        requestParams = new JSONObject();       //  Mobile User Place Delivery Order  =================
         requestParams.put("location_brand", BrandID);
         requestParams.put("customer", Mobile_User_ID);
         requestParams.put("requested_date", Requested_Date);
@@ -2486,7 +2536,6 @@ public class Station extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
            
-
 
         Auth = "Bearer " + AP3_TKN;
         requestParams = new JSONObject();   //  Update Delivery Order > Status and requested_date =================

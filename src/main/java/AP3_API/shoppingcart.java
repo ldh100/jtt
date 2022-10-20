@@ -55,7 +55,6 @@ class shoppingcart extends AP3_API_GUI{
                         Item_Index = items.getJSONObject(i).getString("_index");                         
                     }
                 }
-
             } catch (Exception ex){
                 AAA = ex.getMessage();
             }
