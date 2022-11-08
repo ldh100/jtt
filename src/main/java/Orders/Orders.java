@@ -1023,7 +1023,7 @@ public class Orders extends javax.swing.JInternalFrame {
                         _Promo = "None";
                         _Name = "?";
                         _Payment = "?";
-                        _Amount = "?";
+                        _Amount = "0";
                         JSONObject or = OR.getJSONObject(i);
                         if(or.has("meta") && or.getJSONObject("meta").has("transaction") && or.getJSONObject("meta").getJSONObject("transaction").has("amount")){
                             _Amount = or.getJSONObject("meta").getJSONObject("transaction").getNumber("amount").toString();

@@ -123,12 +123,12 @@ public class Station extends javax.swing.JInternalFrame {
         setSize(new java.awt.Dimension(850, 532));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -554,6 +554,7 @@ public class Station extends javax.swing.JInternalFrame {
     protected String env = "";
     protected String SITE = "";
     protected String SiteID = "";
+    protected String UnitID = ""; // Location for marketplace orders
     protected String GROUP = "";
     protected String BRAND = "";
     protected String BrandID = "";
@@ -588,7 +589,7 @@ public class Station extends javax.swing.JInternalFrame {
 
     protected String MPlan_ID = "";
     protected String Badge_ID = "";
-    protected String Tender = ""; 
+    protected String Tender_ID = ""; 
     protected String Program_Name = "";
     protected String Balance = "";
     protected String badge_pay_system_key = "";
@@ -622,6 +623,7 @@ public class Station extends javax.swing.JInternalFrame {
         }
         BRAND = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 0));
         BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3));
+        UnitID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 4));
 
         BrandLastRow = DV_Brands.getSelectedRow();  
         FLess  = Boolean.parseBoolean(String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 5))); 
@@ -1007,9 +1009,12 @@ public class Station extends javax.swing.JInternalFrame {
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));
         txtLog.append("\r\n- Get Site Config ..." + "\r\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
+ 
+        chkBadge.setSelected(false);  
+        chkMPlan.setSelected(false);  
         chkBadge.setEnabled(false);  
         chkMPlan.setEnabled(false);  
-        
+       
         Auth = "Bearer " + AP3_TKN; 
         Api_Call("GET", BaseAPI + "/config/" + SiteID, Auth, "");
         PProvider = "Neither FP nor EXACT";
@@ -1040,7 +1045,7 @@ public class Station extends javax.swing.JInternalFrame {
 //                if (json.has("mealplan") && !json.getJSONArray("mealplan").isEmpty()) {
 //                    MPlan_ID = json.getJSONArray("mealplan").get(0).getString("id");
 //                    if(json.getJSONObject("mealplan").has("tenders")){
-//                        Tender = json.getJSONObject("mealplan").getJSONObject("tenders").getString("id");
+//                        Tender_ID = json.getJSONObject("mealplan").getJSONObject("tenders").getString("id");
 //                    }
 //                    chkMPlan.setEnabled(true);
 //                }
@@ -1162,11 +1167,13 @@ public class Station extends javax.swing.JInternalFrame {
             txtLog.append("" + SITE + " > " + DV_Brands.getRowCount() + " Station(s) found" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
             BrandID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 3)); 
+            UnitID = String.valueOf(DV_Brands.getValueAt(DV_Brands.getSelectedRow(), 4)); 
 //            GetBrandDropOffLocations(); // ============== comment to force only after Brand click / selection
 //            GetDeliveryTimeslots();     // ============== comment to force only after Brand click / selection
 //            GetMenus();                 // ============== comment to force only after Brand click / selection
         } else {
             BrandID = "null";
+            UnitID = "null";
             txtLog.append("" + SITE + " > " + "0 Station(s) found" + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
         }  
@@ -1896,7 +1903,7 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());   
         
         Auth = "Bearer " + Mobile_User_TKN;
-        Tender = "";
+        Tender_ID = "";
         Program_Name = "";
         Api_Call("GET", BaseAPI + "/payment/" + Badge_ID + "/badgepay", Auth, "");
         if (json != null) {
@@ -1905,10 +1912,10 @@ public class Station extends javax.swing.JInternalFrame {
                     JSONArray tenders = json.getJSONArray("tenders");
                     if(!tenders.isEmpty()){
                         JSONObject tender = tenders.getJSONObject(0);
-                        Tender = tender.getString("id");
+                        Tender_ID = tender.getString("id");
                         Program_Name = tender.getString("name");
                         Balance = tender.getNumber("balance").toString();
-                        txtLog.append("=== FP_Badge Tender: " + Tender + "\r\n");
+                        txtLog.append("=== FP_Badge Tender_ID: " + Tender_ID + "\r\n");
                         txtLog.append("=== FP_Badge Program Name: " + Program_Name + "\r\n");
                         txtLog.append("=== FP_Badge Balance: $" + Balance + "\r\n");
                         txtLog.setCaretPosition(txtLog.getDocument().getLength());
@@ -1916,7 +1923,7 @@ public class Station extends javax.swing.JInternalFrame {
                 } 
             } catch (Exception ex) {
                 FAIL = true;
-                txtLog.append("FP_Badge get Tender Error: " + ex.getMessage() + "\r\n");
+                txtLog.append("FP_Badge get Tender_ID Error: " + ex.getMessage() + "\r\n");
                 txtLog.setCaretPosition(txtLog.getDocument().getLength());
             }
         }
@@ -2057,7 +2064,7 @@ public class Station extends javax.swing.JInternalFrame {
             JSONObject requestParams = new JSONObject(); 
             JSONObject BadgePay = new JSONObject();
                 BadgePay.put("id", Badge_ID);
-                BadgePay.put("tender", Tender); // '8P5p5rYrgRfBEkkLr5YGSN27jJlJg2HJzgazRaXlSjvqvegpY7urP',
+                BadgePay.put("tender", Tender_ID); 
                 BadgePay.put("total", total);
             requestParams.put("badge_pay", BadgePay);
             requestParams.put("email", txtMobile_ID.getText().trim());
@@ -2223,8 +2230,8 @@ public class Station extends javax.swing.JInternalFrame {
             JSONObject requestParams = new JSONObject(); 
             JSONObject BadgePay = new JSONObject();
                 BadgePay.put("id", Badge_ID);
-                BadgePay.put("tender", Tender);
-                BadgePay.put("total", total);
+                BadgePay.put("tender", Tender_ID);
+                //BadgePay.put("total", total);
             requestParams.put("badge_pay", BadgePay);
             requestParams.put("email", txtMobile_ID.getText().trim());
             BODY = requestParams.toString();
@@ -2356,6 +2363,7 @@ public class Station extends javax.swing.JInternalFrame {
         if(FLess)  {                           
             requestParams = new JSONObject();       //  Mobile User Place Frictionless Order  =================
             requestParams.put("location_brand", BrandID);
+            requestParams.put("location", UnitID);
             requestParams.put("customer", Mobile_User_ID);
             requestParams.put("pickup_name", txtMSG.getText());
             requestParams.put("pickup", Requested_Date);
@@ -2365,8 +2373,8 @@ public class Station extends javax.swing.JInternalFrame {
             if(chkBadge.isSelected()){
                 JSONObject badge_pay = new JSONObject();
                     badge_pay.put("id", Badge_ID);
-                    badge_pay.put("tender", Tender);
-                    badge_pay.put("total", total);
+                    badge_pay.put("tender", Tender_ID);
+                    //badge_pay.put("total", total);
                     badge_pay.put("name", Program_Name);
                 payment.put("badge_pay", badge_pay);
             }else{
@@ -2385,6 +2393,7 @@ public class Station extends javax.swing.JInternalFrame {
         } else if(SandG) {
             requestParams = new JSONObject();       //  Mobile User Place Scan and Go Order  =================
             requestParams.put("location_brand", BrandID);
+            requestParams.put("location", UnitID);
             requestParams.put("customer", Mobile_User_ID);
             requestParams.put("pickup_name", txtMSG.getText());
             requestParams.put("pickup", Requested_Date);
@@ -2394,8 +2403,8 @@ public class Station extends javax.swing.JInternalFrame {
             if(chkBadge.isSelected()){
                 JSONObject badge_pay = new JSONObject();
                     badge_pay.put("id", Badge_ID);
-                    badge_pay.put("tender", Tender);
-                    badge_pay.put("total", total);
+                    badge_pay.put("tender", Tender_ID);
+                    //badge_pay.put("total", total);
                     badge_pay.put("name", Program_Name);
                 payment.put("badge_pay", badge_pay);
             }else{
@@ -2411,6 +2420,7 @@ public class Station extends javax.swing.JInternalFrame {
         } else {
             requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
             requestParams.put("location_brand", BrandID);
+            requestParams.put("location", UnitID);
             requestParams.put("customer", Mobile_User_ID);
             requestParams.put("pickup_name", txtMSG.getText());
             requestParams.put("pickup", Requested_Date);
@@ -2420,8 +2430,8 @@ public class Station extends javax.swing.JInternalFrame {
             if(chkBadge.isSelected()){
                 JSONObject badge_pay = new JSONObject();
                     badge_pay.put("id", Badge_ID);
-                    badge_pay.put("tender", Tender);
-                    badge_pay.put("total", total);
+                    badge_pay.put("tender", Tender_ID);
+                    //badge_pay.put("total", total);
                     badge_pay.put("name", Program_Name);
                 payment.put("badge_pay", badge_pay);
             }else{
@@ -2493,6 +2503,7 @@ public class Station extends javax.swing.JInternalFrame {
 
         requestParams = new JSONObject();       //  Mobile User Place Delivery Order  =================
         requestParams.put("location_brand", BrandID);
+        requestParams.put("location", UnitID);
         requestParams.put("customer", Mobile_User_ID);
         requestParams.put("requested_date", Requested_Date);
         requestParams.put("shoppingcart", ShoppingCart_Delivery_ID);
@@ -2501,8 +2512,8 @@ public class Station extends javax.swing.JInternalFrame {
         if(chkBadge.isSelected()){
             JSONObject badge_pay = new JSONObject();
                 badge_pay.put("id", Badge_ID);
-                badge_pay.put("tender", Tender);
-                badge_pay.put("total", total);
+                badge_pay.put("tender", Tender_ID);
+                //badge_pay.put("total", total);
                 badge_pay.put("name", Program_Name);
             payment.put("badge_pay", badge_pay);
         }else{
