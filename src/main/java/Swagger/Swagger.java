@@ -20,6 +20,7 @@ import org.json.JSONObject;
 public class Swagger extends javax.swing.JInternalFrame {
     
     private String BaseAPI;
+    private String c360_BaseAPI;
     private String TKN;
     private String env;
     
@@ -50,12 +51,12 @@ public class Swagger extends javax.swing.JInternalFrame {
         setNormalBounds(new java.awt.Rectangle(0, 0, 104, 0));
         setVisible(true);
         addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 formAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
@@ -89,7 +90,7 @@ public class Swagger extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 20, 672, 484));
 
         btnLog.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        btnLog.setText(" < Open -> default text editor");
+        btnLog.setText(" > Open in default editor");
         btnLog.setMargin(new java.awt.Insets(2, 4, 2, 4));
         btnLog.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,7 +114,7 @@ public class Swagger extends javax.swing.JInternalFrame {
 
         jList_Tagets.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jList_Tagets.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "announcement", "calendar", "config", "datalake", "file", "itemcatalog", "kds", "location", "logger", "loyalty", "mealplan", "menu", "message", "notification", "order", "partner", "payment", "promo", "report", "shoppingcart", "task", "user", "vendor", "vote" };
+            String[] strings = { "c360 search", "announcement", "calendar", "config", "datalake", "file", "itemcatalog", "kds", "location", "logger", "loyalty", "mealplan", "menu", "message", "notification", "order", "partner", "payment", "promo", "report", "shoppingcart", "task", "user", "vendor", "vote" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -165,7 +166,7 @@ public class Swagger extends javax.swing.JInternalFrame {
         RUN();    
     }//GEN-LAST:event_btnRunMouseClicked
     private void btnLogMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogMouseClicked
-        String R = A.Func.SHOW_FILE(txtLog.getText(), "txt");
+        String R = A.Func.SHOW_FILE(txtLog.getText(), "json");
         if(!R.equals("OK")){
             txtLog.append(R + "\r\n");
             txtLog.setCaretPosition(txtLog.getDocument().getLength()); 
@@ -205,12 +206,15 @@ public class Swagger extends javax.swing.JInternalFrame {
     private void LoadEnv(){
         if(cmbEnv.getSelectedItem().toString().contains("Staging")){
             BaseAPI = "https://api.compassdigital.org/staging";
+            c360_BaseAPI = "https://stg.api.cafe360.io/v1";
             env = "ST";
         } else if (cmbEnv.getSelectedItem().toString().contains("Dev")){
             BaseAPI = "https://api.compassdigital.org/dev";
+            c360_BaseAPI = "https://dev.api.cafe360.io/v1";
             env = "DE";
         } else{
             BaseAPI = "https://api.compassdigital.org/v1";
+            c360_BaseAPI = "https://api.cafe360.io/v1";
             env = "PR";
         }  
         Get_TKN();
@@ -220,7 +224,13 @@ public class Swagger extends javax.swing.JInternalFrame {
         txtLog.setVisible(false);
         this.setCursor(Cursor.getPredefinedCursor (Cursor.WAIT_CURSOR));        
         try {
-            txtLog.append(GUI_API_Get(BaseAPI + "/" + jList_Tagets.getSelectedValue() + "/swagger.json", "Bearer " + TKN));             
+            if(jList_Tagets.getSelectedValue().startsWith("c360")){
+                // https://dev.api.cafe360.io/v1/search/swagger/json 
+                String s = jList_Tagets.getSelectedValue();
+                txtLog.append(GUI_API_Get(c360_BaseAPI + "/" + s.substring(s.indexOf(" ")).trim() + "/swagger/json", "Bearer " + TKN)); 
+            }else{
+                txtLog.append(GUI_API_Get(BaseAPI + "/" + jList_Tagets.getSelectedValue() + "/swagger.json", "Bearer " + TKN)); 
+            }       
         } catch (IOException | JSONException ex) {
             txtLog.append(BaseAPI + "/" + jList_Tagets.getSelectedValue() + " > " + ex.getMessage());  
         }  
