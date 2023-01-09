@@ -110,6 +110,7 @@ public class Station extends javax.swing.JInternalFrame {
         cmbPROMO = new javax.swing.JComboBox<>();
         chkBadge = new javax.swing.JCheckBox();
         chkMPlan = new javax.swing.JCheckBox();
+        chkFR = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -497,6 +498,15 @@ public class Station extends javax.swing.JInternalFrame {
         chkMPlan.setMargin(new java.awt.Insets(0, 0, 0, 0));
         chkMPlan.setRequestFocusEnabled(false);
         getContentPane().add(chkMPlan, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 360, -1, 16));
+
+        chkFR.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        chkFR.setText("French");
+        chkFR.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        chkFR.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        chkFR.setIconTextGap(1);
+        chkFR.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        chkFR.setRequestFocusEnabled(false);
+        getContentPane().add(chkFR, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, 16));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2384,6 +2394,16 @@ public class Station extends javax.swing.JInternalFrame {
 
             JSONObject meta = new JSONObject();
             meta.put("checkin_uuid", UUID.randomUUID().toString().replace("-", ""));
+            if(chkFR.isSelected()){
+                meta.put("language", "fr");
+                //{
+                //  ...order,
+                //  meta: {
+                //      ...meta,
+                //      language: 'fr'
+                //   }
+                //}
+            }
             requestParams.put("meta", meta);
 
             JSONObject details = new JSONObject();
@@ -2417,6 +2437,12 @@ public class Station extends javax.swing.JInternalFrame {
             details.put("order_type", "scan_and_go"); //  "order_type": "scan_and_go",     "scan_and_go_supported": true,
             //details.put("destination", cmbLoc.getSelectedItem().toString());
             requestParams.put("details", details); 
+           
+            if(chkFR.isSelected()){
+                JSONObject meta = new JSONObject();
+                meta.put("language", "fr");
+                requestParams.put("meta", meta);  
+            }
         } else {
             requestParams = new JSONObject();       //  Mobile User Place Pickup Order  =================
             requestParams.put("location_brand", BrandID);
@@ -2442,6 +2468,12 @@ public class Station extends javax.swing.JInternalFrame {
             JSONObject details = new JSONObject();
             details.put("order_type", "pickup");
             requestParams.put("details", details); 
+
+            if(chkFR.isSelected()){
+                JSONObject meta = new JSONObject();
+                meta.put("language", "fr");
+                requestParams.put("meta", meta);  
+            }
         }
         BODY = requestParams.toString();  
      
@@ -2606,6 +2638,7 @@ public class Station extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSCart;
     private javax.swing.JButton btnSave_Opt;
     private javax.swing.JCheckBox chkBadge;
+    private javax.swing.JCheckBox chkFR;
     private javax.swing.JCheckBox chkMPlan;
     private javax.swing.JComboBox<String> cmbApp;
     private javax.swing.JComboBox<String> cmbEnv;
