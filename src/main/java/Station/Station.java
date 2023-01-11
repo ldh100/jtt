@@ -2396,13 +2396,6 @@ public class Station extends javax.swing.JInternalFrame {
             meta.put("checkin_uuid", UUID.randomUUID().toString().replace("-", ""));
             if(chkFR.isSelected()){
                 meta.put("language", "fr");
-                //{
-                //  ...order,
-                //  meta: {
-                //      ...meta,
-                //      language: 'fr'
-                //   }
-                //}
             }
             requestParams.put("meta", meta);
 
@@ -2517,21 +2510,6 @@ public class Station extends javax.swing.JInternalFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
         Auth = "Bearer " + Mobile_User_TKN;
 
-//        BODY = "{" +                                                //  Mobile User Place Delivery Order  =================
-//                "\"location_brand\":\"" + BrandID + "\"," + 
-//                "\"customer\":\"" + Mobile_User_ID + "\"," +  
-//                "\"details\":" +                                   
-//                    "{\"contact_number\":\"4165551234\"," +
-//                    "\"destination\":\"" + cmbLoc.getSelectedItem().toString() + "\"," +
-//                    "\"duration\":\"" + "00:05:00" + "\"," +
-//                    "\"instructions\":\"" + "Discard this Order" + "\"," +
-//                    "\"name\":\"" + txtMSG.getText() + "\"," +
-//                    "\"order_type\":\"delivery\"}," + 
-//                "\"payment\":" + 
-//                    "{\"token\":\"" + Payment_TKN + "\"}," +
-//                "\"requested_date\":\"" + Requested_Date + "\"," +
-//                "\"shoppingcart\":\"" + ShoppingCart_Delivery_ID + 
-//                "\"}";   
 
         requestParams = new JSONObject();       //  Mobile User Place Delivery Order  =================
         requestParams.put("location_brand", BrandID);
@@ -2561,10 +2539,15 @@ public class Station extends javax.swing.JInternalFrame {
             details.put("instructions", "Discard this Order");
             details.put("name", txtMSG.getText());
         requestParams.put("details", details); 
+        if(chkFR.isSelected()){
+            JSONObject meta = new JSONObject();
+            meta.put("language", "fr");
+            requestParams.put("meta", meta);  
+        }
 
         BODY = requestParams.toString(); 
      
-        Api_Call("POST",  BaseAPI + "/order?lang=en", Auth, BODY);
+        Api_Call("POST",  BaseAPI + "/order", Auth, BODY); //"/order?lang=en", Auth, BODY);
         if(json != null && json.has("id")){
             Order_Delivery_ID = json.getString("id");
             txtLog.append("== " + "New Delivery Order ID: "  + Order_Delivery_ID + "\r\n");
